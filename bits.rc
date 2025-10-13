@@ -1,0 +1,9 @@
+[bits]
+  organisation=KEY4HEP
+
+[KEY4HEP]
+  pkg_prefix=VO_KEY4HEP
+  sw_dir=../sw
+  repo_dir=.
+  search_path=bits,general,simulation,hepmc,analysis,ml
+  
