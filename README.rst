@@ -84,7 +84,7 @@ Available architecture/containers::
 
 To use alternative GCC tolchain (other than one defined in gcc-toolchain recipe), override definitions in another defaults file ::
 
-  $ cat defaults-gcc33.sh
+  $ cat defaults-gcc13.sh
 package: defaults-gcc13
 version: v1
 overrides:
@@ -95,7 +95,7 @@ overrides:
 
 Now you can specify second defaults option on the command line::
 
-  $ bits build --defaults lcg --defaults gcc33 LCG
+  $ bits build --defaults lcg --defaults gcc13 LCG
 
 
 Pre-requisites
