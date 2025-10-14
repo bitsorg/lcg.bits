@@ -1,8 +1,8 @@
 [bits]
-  organisation=KEY4HEP
+  organisation=LCG
 
-[KEY4HEP]
-  pkg_prefix=VO_KEY4HEP
+[LCG]
+  pkg_prefix=VO_LCG
   sw_dir=../sw
   repo_dir=.
   search_path=bits,general,simulation,hepmc,analysis,ml
