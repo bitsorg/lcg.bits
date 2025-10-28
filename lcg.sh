@@ -4,4 +4,6 @@ tag: "v1.0"
 requires:
   - ROOT
   - GEANT4
----       
+  - dd4hep
+  - java
+---

@@ -1,10 +1,14 @@
 package: defaults-dev3
 version: v1
-env:
-  MACOSX_DEPLOYMENT_TARGET: '14.0'
 disable:
   - MySQL
 overrides:
   ROOT:
+    tag: 'master'
+  hepmc3:
+    tag: 'master'
+  DD4Hep:
+    tag: 'master'
+  Gaudi:
     tag: 'master'
 ---
