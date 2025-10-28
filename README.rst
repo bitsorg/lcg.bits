@@ -127,3 +127,17 @@ To run the documentation locally, you can use::
     pip install -e .[docs]
     cd docs
     mkdocs serve
+
+Building LCG Stacks
+===================
+
+
+```
+bits build --defaults dev3::gcc13 LCG
+bits build --defaults dev3::gcc13 LCG
+bits build --defaults dev3::gcc13::cuda CUDA
+bits build --defaults dev4::gcc13::cuda CUDA
+bits build --defaults dev3::gcc13::swan SWAN
+bits build --defaults dev3::gcc13::lhcb LHCB
+bits build --defaults dev4::gcc13::lhcb::dev4lhcb LHCB
+```

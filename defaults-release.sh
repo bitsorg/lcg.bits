@@ -6,4 +6,9 @@ env:
   CMAKE_BUILD_TYPE: "RELWITHDEBINFO"
   MACOSX_DEPLOYMENT_TARGET: '14.0'
   ENABLE_IPO: 'OFF'
----
+overrides:
+  bits-recipe-tools:
+    tag: 0.0.7
+  java:
+    tag: 8u392
+  ---
