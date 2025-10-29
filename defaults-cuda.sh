@@ -1,9 +1,9 @@
-package: defaults-dev3cuda
+package: defaults-cuda
 version: v1
 disable:
   - Geant4
-  - DD4hep
-  - acts
+  - DD4Hep
   - Gaudi
-  - Garfield++
+#  - acts
+#  - Garfield++
 ---

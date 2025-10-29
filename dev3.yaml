@@ -1,0 +1,8 @@
+ROOT:
+  tag: 'master'
+hepmc3:
+  tag: 'master'
+DD4Hep:
+  tag: 'master'
+Gaudi:
+  tag: 'master'

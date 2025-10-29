@@ -2,15 +2,33 @@ package: LHCB
 version: "%(tag_basename)s"
 tag: "v1.0"
 requires:
-  # - LCG # lhcb does not want all the packages from the LCG build
-  - DD4hep
+requires:
+  - "GCC-Toolchain:(?!osx)"
+  - rangev3
+  - boost
+  - ROOT
+  - GSL
+  - fmt
+  - HepPDT
+  - CLHEP
+  - TBB
+  - xercesc
+  - CppUnit
+  - Catch2
+  - cppgsl
+  - Python-modules-list
   - lcgenv
-  - GitCondDB
-  - ipyparallel
-  - superchic
   - rivet
-  - xgboost
   - pythia6
-  # - more packages
+#  - GitCondDB
+#  - ipyparallel
+#  - superchic
+#  - xgboost
+#  - more packages
+  
+build_requires:
+  - bits-recipe-tools
+  - CMake
+
 
 ---
