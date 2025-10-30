@@ -1,5 +1,6 @@
 ROOT:
   tag: 'master'
+  source: 'https://github.com/root-project/root'
 hepmc3:
   tag: 'master'
 DD4Hep:

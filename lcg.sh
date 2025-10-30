@@ -5,5 +5,10 @@ requires:
   - ROOT
   - GEANT4
   - DD4Hep
-# - java
+  - JDK
+build_requires:
+  - bits-recipe-tools
 ---
+##############################
+. $(bits-include MetaRecipe)
+##############################

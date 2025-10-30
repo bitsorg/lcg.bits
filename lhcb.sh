@@ -18,7 +18,7 @@ requires:
   - cppgsl
   - Python-modules-list
   - lcgenv
-  - rivet
+# - Rivet
   - pythia6
 #  - GitCondDB
 #  - ipyparallel
@@ -29,6 +29,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - CMake
-
-
 ---
+##############################
+. $(bits-include MetaRecipe)
+##############################
