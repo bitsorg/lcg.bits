@@ -1,3 +1,4 @@
+
 package: defaults-dev4
 version: v1
 env:
@@ -10,6 +11,10 @@ dev4: &override
   ROOT:
     tag: 'v6-36-00-patches'
 
+disable:
+  - Gaudi
+    
 overrides:
   [*base, *override]    
+
 ---
