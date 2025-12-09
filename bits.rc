@@ -5,5 +5,5 @@
   pkg_prefix=VO_LCG
   sw_dir=../sw
   repo_dir=.
-  search_path=bits,general,simulation,hepmc,analysis,ml
+  search_path=common
   
