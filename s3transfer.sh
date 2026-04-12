@@ -1,0 +1,22 @@
+package: s3transfer
+description: s3transfer Python package
+version: "0.10.3"
+tag: "0.10.3"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/s3transfer-0.10.3.tar.gz
+requires:
+  - Python
+  - setuptools
+  - botocore
+  # optional:
+  # - awscrt
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

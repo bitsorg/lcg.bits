@@ -1,0 +1,61 @@
+--- Makefile.orig	2019-07-19 14:05:24.678536549 +0200
++++ Makefile	2019-07-19 14:20:46.664148428 +0200
+@@ -12,6 +12,7 @@
+ DEBUG = 
+ # DEBUG = 1
+ 
++CFLAGS = -I$(GSL_HOME)/include
+ FFLAGS = -g -fno-bounds-check
+ FFLAGS = -O3 -fno-bounds-check -funroll-loops
+ # -fopenmp
+@@ -37,7 +38,7 @@
+ FPCHECK = trapfpe.c
+ FPCHECK =
+ 
+-EXTRALIBS= -lgsl -lgslcblas
++EXTRALIBS= -L$(GSL_HOME)/lib -lgsl -lgslcblas
+ EXTRADEPS = couplingandmasses.h
+ FRMD = ./form
+ # Makefile
+@@ -121,7 +122,7 @@
+ 	cd $(LT) ; make ; make install ; cd -
+ 
+ gsl_random.o: gsl_random.c
+-	gcc $(FFLAGS) -c gsl_random.c
++	gcc $(FFLAGS) $(CFLAGS) -c gsl_random.c
+ 
+ main.o: main.F  $(EXTRADEPS)
+ 	$(F77) -fPIC -I$(LT)/include -c main.F
+@@ -208,9 +209,9 @@
+ 	$(F77) -fPIC -I$(LT)/include -c userroutines.F
+ 
+ EFT.o: EFT.f $(EXTRADEPS)\
+-	$(FRMD)/h2e2mu_ME_BSM-CPE-opt.f  $(FRMD)/h2e2mu_ME_BSM-CPO-opt.f $(FRMD)/h2e2mu_ME_BSM-full-opt.f\
+-	$(FRMD)/h4e_ME_BSM-CPE-opt.f     $(FRMD)/h4e_ME_BSM-CPO-opt.f     $(FRMD)/h4e_ME_BSM-full-opt.f
+-	$(F77)-fPIC -c EFT.f 
++	$(FRMD)/h2e2mu_ME_BSM-CPE-opt.f  $(FRMD)/h2e2mu_ME_BSM-CPO-opt.f $(FRMD)/h2e2mu_ME_BSM-full-opt.f \
++	$(FRMD)/h4e_ME_BSM-CPE-opt.f     $(FRMD)/h4e_ME_BSM-CPO-opt.f     $(FRMD)/h4e_ME_BSM-full-opt.f 
++	$(F77) -fPIC -c EFT.f 
+ 
+ libHto4l.a: $(OBJECTS) $(LTL)libooptools.a
+ 	ar cr libHto4l.a $(OBJECTS)
+--- LoopTools-2.10/makefile-lxplus.orig	2020-07-27 15:09:02.556212301 +0200
++++ LoopTools-2.10/makefile-lxplus	2020-07-27 15:09:37.263593288 +0200
+@@ -9,7 +9,7 @@
+ NOUNDERSCORE = 0
+ 
+ FC = gfortran
+-FFLAGS =  -O1 -g -ffixed-line-length-none     -fno-range-check  $(DEF)QUAD=0 $(DEF)U77EXT=0
++FFLAGS =  -O1 -g -ffixed-line-length-none -std=legacy -fno-range-check  $(DEF)QUAD=0 $(DEF)U77EXT=0
+ 
+ CC = gcc
+ CFLAGS = -O3 -g -fomit-frame-pointer -ffast-math -Wall -m64   -DNOUNDERSCORE=$(NOUNDERSCORE) -DBIGENDIAN=0
+@@ -21,7 +21,7 @@
+ MCC = mcc
+ MCFLAGS =   -b64
+ 
+-LDFLAGS = -lpthread -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/4.4.7/../../.. -lgfortranbegin -lgfortran -lm -lgcc_s -lgcc_s -m64
++LDFLAGS = -lpthread -lgfortranbegin -lgfortran -lm -lgcc_s -lgcc_s -m64
+ 
+ AR = ar
+ RANLIB = ranlib

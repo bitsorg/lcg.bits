@@ -1,0 +1,14 @@
+--- ./tensorflow_probability/python/__init__.py~	2024-11-08 16:06:08.000000000 +0100
++++ ./tensorflow_probability/python/__init__.py	2025-02-20 14:20:58.356987403 +0100
+@@ -49,2 +49,2 @@
+-  import distutils.version
+-
++#  import distutils.version
++  from looseversion import LooseVersion
+@@ -57,2 +57,4 @@
+-  if (distutils.version.LooseVersion(tf.__version__) <
+-      distutils.version.LooseVersion(required_tensorflow_version)):
++#  if (distutils.version.LooseVersion(tf.__version__) <
++#      distutils.version.LooseVersion(required_tensorflow_version)):
++  if (LooseVersion(tf.__version__) <
++      LooseVersion(required_tensorflow_version)):

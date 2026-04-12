@@ -1,0 +1,54 @@
+--- configure.orig	2020-07-27 16:36:13.887626224 +0200
++++ configure	2020-07-27 16:37:23.487440766 +0200
+@@ -148,14 +148,14 @@
+ 
+ set -- `eval $CONF_FC --version -c | sed '/^$/d;s/(.*)//;q' 2>&1`
+ case "$1,$2,$3" in
+-GNU,Fortran,[123].*)
++GNU,Fortran,[123][.].*)
+   eval setflags FFLAGS "\
+ ${FFLAGS-${CONF_DEBUG:--O1} ${CONF_DEBUG:+-Wall}} \
+ $CONF_ARCH $CONF_AS $CONF_BITS -ffixed-line-length-none -fno-range-check \
+ $CONF_STATIC \
+ $CONF_LDFLAGS"
+   ;;
+-GNU,Fortran,4.*)
++GNU,Fortran,[4-9][.].*)
+   eval setflags FFLAGS "\
+ ${FFLAGS-${CONF_DEBUG:--O3} ${CONF_DEBUG:+-Wall -Wno-unused-dummy-argument -Wtabs -ffpe-trap=invalid,overflow,zero}} \
+ $CONF_ARCH $CONF_AS $CONF_BITS -ffixed-line-length-none -fno-range-check \
+@@ -166,7 +166,7 @@
+ GNU,Fortran,*)
+   eval setflags FFLAGS "\
+ ${FFLAGS-${CONF_DEBUG:--O3} ${CONF_DEBUG:+-Wall -Wno-unused-dummy-argument -Wno-tabs -Wno-conversion -ffpe-trap=invalid,overflow,zero}} \
+-$CONF_ARCH $CONF_AS $CONF_BITS -ffixed-line-length-none -fno-range-check \
++$CONF_ARCH $CONF_AS $CONF_BITS -ffixed-line-length-none -fno-range-check -std=legacy -fPIC \
+ ${CONF_QUAD:+-freal-8-real-$CONF_QUADSIZE} \
+ ${CONF_STATIC:-$CONF_STATIC_GFORTRAN} ${CONF_STATIC_EXT:+-static-libgfortran -static-libgcc} \
+ $CONF_LDFLAGS"
+@@ -257,7 +257,11 @@
+ _EOF_
+ 
+ for CONF_BITS in ${CONF_BITS:--m64 -m32} ; do
+-  eval $CONF_CC$CONF_CFLAGS $CONF_BITS -c $test-c.c 1>&2 || continue
++  if test "$CONF_MACH" = "aarch64"; then
++    eval $CONF_CC$CONF_CFLAGS -c $test-c.c 1>&2 || continue
++  else    
++    eval $CONF_CC$CONF_CFLAGS $CONF_BITS -c $test-c.c 1>&2 || continue
++  fi
+   eval $CONF_FC$CONF_FFLAGS -o $test$CONF_EXE $test.f $test-c.o 1>&2 && break
+ done
+ 
+@@ -274,8 +278,10 @@
+   exit 1 ;;
+ esac
+ 
+-CONF_CFLAGS+=" $CONF_BITS"
+-CONF_CXXFLAGS+=" $CONF_BITS"
++if test "$CONF_MACH" != "aarch64"; then 
++  CONF_CFLAGS+=" $CONF_BITS"
++  CONF_CXXFLAGS+=" $CONF_BITS"
++fi
+ 
+ test "$CONF_OS$CONF_BITS" = "Linux-m64" && CONF_LIBDIRSUFFIX=64
+ 

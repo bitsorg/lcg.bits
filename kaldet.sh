@@ -1,0 +1,21 @@
+package: kaldet
+description: kaldet Key4hep framework package
+version: "HEAD"
+tag: "HEAD"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/kaldet-HEAD.tar.gz
+requires:
+  - ilcutil
+  - marlin
+  - kaltest
+  - ROOT
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################

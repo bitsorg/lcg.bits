@@ -1,0 +1,72 @@
+--- src/OutputPolicyHepMC3.h.orig	2021-11-10 15:18:55.098612398 +0100
++++ src/OutputPolicyHepMC3.h	2021-11-10 15:22:16.063552647 +0100
+@@ -29,7 +29,10 @@
+   HepMC3::WriterAscii* _writer = 0;
+   HepMC3::GenEvent _event;
+ 
+-protected:
++// 10.11.2021 temporary workaround provided by Andrii Verbitskii switching from private to public 
++// // to deal with compilation problem with gcc11
++//
++public:
+   // --------------  test observables
+   template <typename T>
+   struct Stat {
+--- src/OutputPolicyHepMC.h.orig	2021-11-10 15:18:50.264565749 +0100
++++ src/OutputPolicyHepMC.h	2021-11-10 15:22:00.510402269 +0100
+@@ -34,7 +34,10 @@
+ 	     HepMC::GenEvent> hepevt;
+   HepMC::IO_GenEvent* ascii_out;
+ 
+- protected:
++// 10.11.2021 temporary workaround provided by Andrii Verbitskii switching from private to public 
++// to deal with compilation problem with gcc11
++
++ public:
+   // --------------  test observables
+   template <typename T>
+   struct Stat {
+--- ./src/CRMCtrapfpe.c.orig	2021-11-12 12:40:17.530267183 +0100
++++ ./src/CRMCtrapfpe.c	2021-11-12 12:43:16.609006757 +0100
+@@ -1,9 +1,9 @@
+ #ifndef __INCLUDE_TRAPFE_H_
+ #define __INCLUDE_TRAPFE_H_
+ 
+-// skip compilation on MacOSX platform
++// skip compilation on MacOSX or ARM platform
+ #ifndef __APPLE__
+-
++#ifndef __aarch64__
+ //
+ // from: http://www.fortran-2000.com/ArnaudRecipes/CompilerTricks.html
+ //
+@@ -36,5 +36,6 @@
+ }
+ 
+ #endif
++#endif
+ 
+ #endif
+--- CMakeLists.txt.org	2021-12-22 19:02:05.884053043 +0100
++++ CMakeLists.txt	2021-12-22 19:07:01.117328791 +0100
+@@ -185,1 +185,1 @@
+-FIND_PACKAGE (HepMC3 COMPONENTS HepMC3)
++FIND_PACKAGE (HepMC3)
+@@ -507,6 +507,8 @@
+   src/epos.incsem
+   DESTINATION include/crmc)
+ INSTALL (FILES ${CRMC_HEADERS} DESTINATION include/crmc)
++FILE(GLOB all_headers ${CMAKE_SOURCE_DIR}/src/*.h ${CMAKE_BINARY_DIR}/src/*.h)
++INSTALL (FILES ${all_headers} DESTINATION include/crmc) 
+ 
+ # enable dashboard scripting
+ include (CTest)
+--- CMakeLists.txt~	2025-08-15 13:53:22.305368626 +0200
++++ CMakeLists.txt	2025-08-15 16:07:30.893719234 +0200
+@@ -171,5 +171,5 @@
+ # SET(Boost_DEBUG TRUE)
+ FIND_PACKAGE (Boost 1.35 REQUIRED
+-  COMPONENTS filesystem iostreams system program_options)
++  COMPONENTS filesystem iostreams program_options)
+ 
+ FIND_PACKAGE (HepMC COMPONENTS HepMC HepMCfio)

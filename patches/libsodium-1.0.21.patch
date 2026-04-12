@@ -1,0 +1,14 @@
+--- ./src/libsodium/crypto_ipcrypt/ipcrypt_armcrypto.c~	2026-01-08 18:06:24.008944327 +0100
++++ ./src/libsodium/crypto_ipcrypt/ipcrypt_armcrypto.c	2026-01-08 18:06:24.008944327 +0100
+@@ -40,1 +40,1 @@
+-        vreinterpretq_u64_u8(vextq_s8(vdupq_n_s8(0), vreinterpretq_s8_u64(a), 16 - (b)))
++        vreinterpretq_u64_u8(vextq_u8(vdupq_n_u8(0), vreinterpretq_u8_u64(a), 16 - (b)))
+@@ -352,4 +352,4 @@
+-    const BlockVec shl     = vshlq_n_u8(vreinterpretq_u8_u64(v), 1);
+-    const BlockVec msb     = vshrq_n_u8(vreinterpretq_u8_u64(v), 7);
+-    const BlockVec zero    = vdupq_n_u8(0);
+-    const BlockVec carries = vextq_u8(vreinterpretq_u8_u64(msb), zero, 1);
++    const uint8x16_t shl     = vshlq_n_u8(vreinterpretq_u8_u64(v), 1);
++    const uint8x16_t msb     = vshrq_n_u8(vreinterpretq_u8_u64(v), 7);
++    const uint8x16_t zero    = vdupq_n_u8(0);
++    const uint8x16_t carries = vextq_u8(msb, zero, 1);

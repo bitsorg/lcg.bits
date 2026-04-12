@@ -1,0 +1,24 @@
+package: mctester
+description: mctester Monte Carlo event generator
+version: "1.25.1"
+tag: "1.25.1"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MC-TESTER-1.25.1.tar.gz
+requires:
+  - ROOT
+build_requires:
+  - bits-recipe-tools
+license: TODO
+patches:
+  - mctester-1.25.1.patch
+---
+#!/bin/bash -e
+##############################
+. $(bits-include AutoToolsRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
+  ./configure --prefix=$INSTALLROOT --with-root=${ROOT_ROOT}/bin "CFLAGS=-O2 -g0" "CXXFLAGS=-O2 -g0" "FFLAGS=-O2 -g0"
+}

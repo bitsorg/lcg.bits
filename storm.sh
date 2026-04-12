@@ -1,0 +1,20 @@
+package: storm
+description: storm Python package
+version: "0.23"
+tag: "0.23"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/storm-0.23.tar.bz2
+requires:
+  - Python
+  - setuptools
+  - six
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

@@ -1,0 +1,38 @@
+package: cepgen
+description: cepgen Monte Carlo event generator
+version: "1.2.5patch2"
+tag: "1.2.5patch2"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/cepgen-1.2.5patch2.tar.gz
+requires:
+  - apfel
+  - Boost
+  - lhapdf
+  - pythia6
+  - delphes
+  - pythia8
+  - GSL
+  - HepMC
+  - hepmc3
+  - tbb
+  - vdt
+  - photos++
+  - tauola++
+  - Python
+  - jsonmcpp
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  cmake $SOURCEDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_VERBOSE_MAKEFILE=ON
+}

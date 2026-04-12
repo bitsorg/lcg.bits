@@ -1,0 +1,23 @@
+--- demos/unsupported/xmform/xmform.c.orig	2020-11-04 20:43:20.000000000 +0100
++++ demos/unsupported/xmform/xmform.c	2020-11-04 20:44:34.000000000 +0100
+@@ -58,6 +58,7 @@
+ static void FillItPlease();
+ static void NearlyEvenSpread();
+ static Widget AddStem() ;
++void* calloc (size_t num, size_t size);
+ 
+ int main(argc, argv) 
+ int argc; char **argv;
+--- lib/Xm/TextF.c.orig	2020-11-04 19:19:09.000000000 +0100
++++ lib/Xm/TextF.c	2020-11-04 19:27:24.000000000 +0100
+@@ -91,6 +91,10 @@
+  * the other missing functions as _Xmwc... routines.  The new functions are
+  * added static to this file.
+  */
++
++wchar_t *_Xwcscpy( wchar_t *dest, const wchar_t *src );
++size_t _Xwcslen( const wchar_t *str );
++
+ #define wcslen(c) _Xwcslen(c)
+ #define wcscpy(d,s) _Xwcscpy(d,s)
+ #define wcsncpy(d,s,l) _Xwcsncpy(d,s,l)

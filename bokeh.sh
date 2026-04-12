@@ -1,0 +1,31 @@
+package: bokeh
+description: bokeh Python package
+version: "3.1.1"
+tag: "3.1.1"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/bokeh-3.1.1.tar.gz
+requires:
+  - Python
+  - pip
+  - setuptools
+  - PyYAML
+  - python_dateutil
+  - Jinja2
+  - numpy
+  - pillow
+  - packaging
+  - tornado
+  - typing_extensions
+  - xyzservices
+  - contourpy
+  - pandas
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

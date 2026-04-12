@@ -1,0 +1,11 @@
+--- CMakeLists.txt.orig	2021-04-19 18:24:03.000000000 +0200
++++ CMakeLists.txt	2021-04-19 18:23:32.000000000 +0200
+@@ -124,6 +124,7 @@
+   add_definitions(-DOS_FREEBSD)
+ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+   add_definitions(-DOS_MACOSX)
++  set(CMAKE_MACOSX_RPATH 1)
+ endif()
+ 
+ function(transform_sources_list INPUT_FILE OUTPUT_FILE)
+

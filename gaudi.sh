@@ -1,29 +1,31 @@
 package: Gaudi
-version: "%(tag_basename)s"
-tag: "v40r0"
-source: https://gitlab.cern.ch/gaudi/Gaudi.git
+description: Gaudi software framework for HEP data processing applications
+version: "master"
+tag: "master"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/Gaudi-master.tar.gz
 requires:
-  - "GCC-Toolchain:(?!osx)"
-  - rangev3
-  - boost
+  - Boost
+  - Python
   - ROOT
-  - GSL
-  - fmt
-  - HepPDT
-  - CLHEP
-  - TBB
-  - xercesc
-  - CppUnit
-  - Catch2
+  - clhep
+  - AIDA
+  - XercesC
+  - rangev3
   - cppgsl
-  - Python-modules-list
-  
+  - xenv
+  - six
+  - fmt
+  - pytest
+  - PyYAML
+  - jsonmcpp
+  - HepPDT
+  - Catch2
+  - networkx
+  - pytest_cov
 build_requires:
   - bits-recipe-tools
-  - CMake
-  
-prefer_system: (?!slc5)
-prefer_system_check:
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
@@ -31,37 +33,12 @@ prefer_system_check:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Prepare() {
-    rsync -av --delete --delete-excluded $SOURCEDIR/ ./
-}
-
 function Configure() {
-  mkdir build && cd build
-  cmake .. -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-	   -DRANGEV3_INCLUDE_DIR=$RANGEV3_ROOT/include \
-	   -DCPPGSL_INCLUDE_DIR=$CPPGSL_ROOT/include \
-	   -DCPPUNIT_INCLUDE_DIR=$CPPUNIT_ROOT/include -DCPPUNIT_LIBRARY=$CPPUNIT_ROOT/lib/libcppunit.so \
-           -DGAUDI_USE_HEPPDT=OFF \
-           -DGAUDI_USE_AIDA=OFF \
-           -DGAUDI_USE_DOXYGEN=OFF \
-           -DGAUDI_USE_GPERFTOOLS=FALSE \
-           -DCMAKE_FIND_FRAMEWORK=LAST \
-           -DBoost_NO_BOOST_CMAKE=FALSE \
-           -DCMAKE_CXX_STANDARD=20
-
-}
-
-function Make() {
-   cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
-}
-
-function MakeInstall() {
-    cmake --install .    
-}
-
-function PostInstall() {
-cat >> "$MODULEFILE" <<EoF
-  prepend-path PYTHONPATH \$PKG_ROOT/python
-  prepend-path ROOT_INCLUDE_PATH \$PKG_ROOT/include
-EoF
+  cmake $SOURCEDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_COMPILER=$CXX \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DCMAKE_FIND_FRAMEWORK=LAST \
+    -DGAUDI_USE_DOXYGEN=OFF
 }

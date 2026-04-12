@@ -1,0 +1,343 @@
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/CMakeLists.txt epos4.0.3ATLAS/CMakeLists.txt
+--- CMakeLists.txt	2025-02-12 20:21:08.000000001 +0100
++++ CMakeLists.txt	2025-12-03 14:37:56.000000001 +0100
+@@ -17,6 +17,9 @@
+ include("GNUInstallDirs")
+ 
+ option(INTERNAL_USE "internal use" FALSE)
++option(COMPILE_LIBRARY "Compile a library in addition to the executable" OFF)
++set(CMAKE_POSITION_INDEPENDENT_CODE ON)
++
+ 
+ # @ONLY : Restrict variable replacement to references of the form @VAR@. This is useful for configuring scripts that use ${VAR} syntax.
+ configure_file(scripts/epos.in scripts/epos @ONLY)
+@@ -324,6 +327,28 @@
+   target_link_libraries(Xepos PUBLIC PHSD EB_WRAPPER)
+ endif()
+ 
++if (COMPILE_LIBRARY)
++  add_library(epos SHARED ${OBJECT_LIST})
++  set_target_properties(epos PROPERTIES LINK_FLAGS "-Wl,--no-relax")
++  set_target_properties(epos PROPERTIES ENABLE_EXPORTS ON)
++  set_target_properties(epos PROPERTIES POSITION_INDEPENDENT_CODE ON)
++
++  if(WITH_HepMC3)
++    target_link_libraries(epos PUBLIC ZLIB::ZLIB)  
++    target_link_libraries(epos PUBLIC HepMC3::HepMC3)  
++  endif()
++  if(WITH_ROOT)
++    target_link_libraries(epos PUBLIC ROOT::Tree ROOT::Hist ROOT::Physics)  
++  endif()
++  if(WITH_FASTJET)
++    target_link_libraries(epos PUBLIC FastJet::FastJet)  
++  endif()
++  if(WITH_EB)
++    target_link_libraries(epos PUBLIC PHSD EB_WRAPPER)
++  endif()
++endif()
++
++
+ 
+ ####################################################################################
+ ####################################################################################
+@@ -380,6 +405,9 @@
+ # installation
+ ####################################################################################
+ ####################################################################################
++if (COMPILE_LIBRARY)
++  install(TARGETS epos DESTINATION ${CMAKE_INSTALL_LIBDIR})
++endif()
+ install(TARGETS Xepos DESTINATION ${CMAKE_INSTALL_BINDIR})
+ install(FILES ${CMAKE_BINARY_DIR}/scripts/epos
+   DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT config
+@@ -392,8 +420,22 @@
+ if(EXISTS ${CMAKE_SOURCE_DIR}/banner.txt)
+ install(FILES ${CMAKE_SOURCE_DIR}/banner.txt DESTINATION ${CMAKE_INSTALL_DATADIR})
+ endif()
++
++# Define where to extract
++set(EXTRACT_DIR ${CMAKE_BINARY_DIR}/extracted)
++file(MAKE_DIRECTORY ${EXTRACT_DIR})
++file(COPY ${CMAKE_SOURCE_DIR}/src/KWt/eos4f.eos.gz DESTINATION ${EXTRACT_DIR})
++execute_process(
++    COMMAND  gunzip -f eos4f.eos.gz
++    WORKING_DIRECTORY ${EXTRACT_DIR}
++)
++
++# Collect extracted files
++install(DIRECTORY ${EXTRACT_DIR}/ DESTINATION ${CMAKE_INSTALL_DATADIR}/src/KWt
++  FILES_MATCHING PATTERN "*.eos")
++# Install the other data files
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/KWt/ DESTINATION ${CMAKE_INSTALL_DATADIR}/src/KWt
+-  FILES_MATCHING PATTERN "*.dt" PATTERN "*.eos.gz" PATTERN "*.eos")
++  FILES_MATCHING PATTERN "*.dt" PATTERN "*.eos")
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/KWn/ DESTINATION ${CMAKE_INSTALL_DATADIR}/src/KWn
+   FILES_MATCHING PATTERN "*.i")
+ install(DIRECTORY ${CMAKE_SOURCE_DIR}/srcext/UR/ DESTINATION ${CMAKE_INSTALL_DATADIR}/srcext/UR
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/CMakeModules/FindFastJet.cmake epos4.0.3ATLAS/CMakeModules/FindFastJet.cmake
+--- CMakeModules/FindFastJet.cmake	2025-02-12 20:21:08.000000001 +0100
++++ CMakeModules/FindFastJet.cmake	2025-12-03 14:37:56.000000001 +0100
+@@ -9,10 +9,10 @@
+ #  FASTJET_LIBRARY_DIRS (not cached)
+ 
+ find_path(FASTJET_INCLUDE_DIR fastjet/version.hh
+-          HINTS /usr/include /usr/local/include $ENV{FASTSYS}/include ${FASTSYS}/include)
++          HINTS /usr/include /usr/local/include $ENV{FASTSYS}/include ${FASTSYS}/include ${FASTJET_DIR}/include)
+ 
+ find_library(FASTJET_LIBRARY NAMES fastjet
+-             HINTS /usr/local/lib /usr/lib /usr/lib64 $ENV{FASTSYS}/lib ${FASTSYS}/lib)
++             HINTS /usr/local/lib /usr/lib /usr/lib64 $ENV{FASTSYS}/lib ${FASTSYS}/lib ${FASTJET_DIR}/lib ${FASTJET_DIR}/lib64)
+ 
+ # handle the QUIETLY and REQUIRED arguments and set FASTJET_FOUND to TRUE if
+ # all listed variables are TRUE
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/Dockerfile epos4.0.3ATLAS/Dockerfile
+--- Dockerfile	1970-01-01 01:00:00.000000000 +0100
++++ Dockerfile	2025-12-03 14:37:56.000000001 +0100
+@@ -0,0 +1,12 @@
++FROM fedora:latest
++
++LABEL org.opencontainers.image.authors="damien.vintache@cnrs.fr"
++
++# fastjet is available using averbyts/HEPrpms (see https://github.com/andriish/HEPrpms)
++# requires dnf-plugins-core
++RUN dnf -y install gcc-gfortran cmake HepMC3 HepMC3-devel root root-genvector root-mathmore zlib-devel dnf-plugins-core
++RUN dnf -y copr enable averbyts/HEPrpms && \
++    dnf -y install fastjet-devel fastjet && \
++    dnf clean all
++
++
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/.gitlab-ci.yml epos4.0.3ATLAS/.gitlab-ci.yml
+--- .gitlab-ci.yml	1970-01-01 01:00:00.000000000 +0100
++++ .gitlab-ci.yml	2025-12-03 14:37:56.000000001 +0100
+@@ -0,0 +1,43 @@
++image: fedora:40
++
++stages:
++  - build-image
++  - build
++  - test
++
++
++build-docker-image:
++  stage: build-image
++  image:
++    name: gcr.io/kaniko-project/executor:v1.9.0-debug
++    entrypoint: [""]
++  script:
++    - /kaniko/executor
++      --context "${CI_PROJECT_DIR}"
++      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
++      --destination "${CI_REGISTRY_IMAGE}/fedora"
++
++
++build-epos:
++  stage: build
++  image: gitlab-registry.in2p3.fr/epos_users/epos4.0.3/fedora
++  script:
++    - cmake -S . -B BUILD -DCOMPILE_OPTION=BASIC -DCMAKE_INSTALL_PREFIX=INSTALL -DCMAKE_CXX_FLAGS="-Wpedantic -Wall -Wextra" -DCOMPILE_LIBRARY=ON
++    - cmake --build BUILD -j 4  --verbose 
++    - cmake --install BUILD 
++    - cmake --build BUILD --target clean 
++  artifacts:
++    paths:
++      - BUILD
++      - INSTALL
++    expire_in: 1 day
++    
++
++test-basic:
++  image: gitlab-registry.in2p3.fr/epos_users/epos4.0.3/fedora
++  stage: test
++  script:
++    - ctest --test-dir BUILD -R proton_proton_scattering_no_hydro --output-on-failure
++    - ctest --test-dir BUILD -R proton_proton_scattering_with_hydro --output-on-failure	
++
++
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/interfaces/EposHepmc.cpp epos4.0.3ATLAS/interfaces/EposHepmc.cpp
+--- interfaces/EposHepmc.cpp	2025-02-12 20:21:08.000000001 +0100
++++ interfaces/EposHepmc.cpp	2025-12-03 14:37:56.000000001 +0100
+@@ -12,19 +12,14 @@
+ #include "HepMC3/WriterAscii.h"
+ #include "HepMC3/Units.h"
+ #include "HepMC3/Version.h"
++#include "HepMC3/WriterGZ.h"
+ #include <cmath>
+ #include <cstdlib>
+ #include <fstream>
+ #include <iostream>
+ #include <vector>
+ 
+-
+-#if defined HEPMC3_USE_COMPRESSION && defined HEPMC3_Z_SUPPORT
+-#include "HepMC3/WriterGZ.h"
+-HepMC3::WriterGZ<HepMC3::WriterAscii> *writer;
+-#else
+-HepMC3::WriterAscii *writer;
+-#endif
++std::shared_ptr<HepMC3::Writer> writer;
+ 
+ std::shared_ptr<HepMC3::GenRunInfo> run;
+ 
+@@ -92,15 +87,14 @@
+     option_filename.replace(found_suffix, suffix.length(), ".optns");
+   struct HepMC3::GenRunInfo::ToolInfo config={option_filename,"1.0",std::string("configuration file")};
+   run->tools().push_back(config);
+-
++  if (!writer) {
+ #if defined HEPMC3_USE_COMPRESSION && defined HEPMC3_Z_SUPPORT
+   std::string hepmc_gz_filename = hepmc_filename + ".gz";
+-  writer = new HepMC3::WriterGZ<HepMC3::WriterAscii>(hepmc_gz_filename, run);
++  writer = std::make_shared< HepMC3::WriterGZ<HepMC3::WriterAscii> >(hepmc_gz_filename, run);
+ #else
+-  writer = new HepMC3::WriterAscii(filename, run);
++  writer = std::make_shared<HepMC3::WriterAscii>(filename, run);
+ #endif
+-
+-  // writer = new HepMC3::WriterAscii(filename);
++  }
+   if (!writer) {
+     std::cout << " FAILED!!!! " << std::endl;
+   }
+@@ -908,5 +902,4 @@
+ void closehepmc_() {
+   std::cout << "***HepMC file close***" << std::endl;
+   writer->close();
+-  delete writer;
+ }
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/scripts/epos+.in epos4.0.3ATLAS/scripts/epos+.in
+--- scripts/epos+.in	2025-02-12 20:21:10.000000001 +0100
++++ scripts/epos+.in	2025-12-03 14:37:56.000000001 +0100
+@@ -17,7 +17,7 @@
+ # check if the following environement variables have been defined
+ if [ -z ${EPO} ]; then
+     export EPO=@CMAKE_SOURCE_DIR@/
+-       echo "For compatibility reason with older versions, EPO has to be defined by default as the EPOS source directory: " $EPO
++    echo "For compatibility reason with older versions, EPO has to be defined by default as the EPOS source directory: " $EPO
+ fi
+ 
+ if [ -z ${DAT} ]; then
+@@ -105,16 +105,12 @@
+ 
+ if [ "$2" = "q" ]; then
+     XXepos=@CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_BINDIR@/Xepos
+-    EPX=$EPO
++    EPX=$DAT
+ else
+     XXepos="./Xepos"
+     ls -l X*
+ fi
+ 
+-echo "EPX ===>  ${EPX}  <==="
+-
+-if [ ! "$2" = "q" ];then gunzip -c ${EPX}/src/KWt/eos4f.eos.gz > z-eos4f.eos; fi
+-
+ #---------------------------------------------------------------------
+ clinput=$1'.clinput'
+  echo "fill $clinput"
+@@ -223,8 +219,6 @@
+ rm -f ${CHK}$1.copy
+ rm -f ${CHK}$1.dataR
+ 
+-if [ ! "$2" = "q" ];then rm -f z-eos4f.eos; fi
+-
+ if [ -s ${CHK}$1.see ]; then
+ rm -f ${CHK}$1.see
+ fi
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/scripts/epos.in epos4.0.3ATLAS/scripts/epos.in
+--- scripts/epos.in	2025-02-12 20:21:10.000000001 +0100
++++ scripts/epos.in	2025-12-03 14:37:56.000000001 +0100
+@@ -204,8 +204,6 @@
+ rm -f ${CHK}z-${one}.copyDo2 
+ rm -f ${CHK}z-${one}.log 
+ 
+-gunzip -c ${SRC}/KWt/eos4f.eos.gz > z-eos4f.eos
+-
+ seedj=111111111
+ seedi=222222222    
+ seedspo=`date  '+%N'`
+@@ -224,7 +222,7 @@
+  echo "!!!beginoptns spherio !No longer used." >> $clinput
+  echo "!!!...                !See version < 3118  " >> $clinput
+  echo "!!!endoptns spherio   !if needed again         " >> $clinput
+- echo "fname pathep $EPO" >> $clinput
++ echo "fname pathep ${DAT}" >> $clinput
+  echo "!-------HQ--------" >> $clinput
+  echo "fname user1  ${SRCEXT}/HQt/" >> $clinput
+  echo "fname user2  ${HTO}z-${one}.hq" >> $clinput
+@@ -246,10 +244,10 @@
+  echo "fname partab ${SRCEXT}/YK/ptl6.data" >> $clinput
+  echo "fname dectab ${SRCEXT}/YK/dky6.data" >> $clinput
+  echo "fname hpf    ${SRCEXT}/UR/tables.dat " >> $clinput
+- echo "!fqgsjet dat   ${EPO}${SRC}qgsjet/qgsjet.dat !No longer used." >> $clinput
+- echo "!fqgsjet ncs   ${EPO}${SRC}qgsjet/qgsjet.ncs !No longer used." >> $clinput
+- echo "!fqgsjetII dat   ${EPO}${SRC}qgsjetII/qgsdat-II-03 !No longer used." >> $clinput
+- echo "!fqgsjetII ncs   ${EPO}${SRC}qgsjetII/sectnu-II-03 !No longer used." >> $clinput
++ echo "!fqgsjet dat   ${SRC}qgsjet/qgsjet.dat !No longer used." >> $clinput
++ echo "!fqgsjet ncs   ${SRC}qgsjet/qgsjet.ncs !No longer used." >> $clinput
++ echo "!fqgsjetII dat   ${SRC}qgsjetII/qgsdat-II-03 !No longer used." >> $clinput
++ echo "!fqgsjetII ncs   ${SRC}qgsjetII/sectnu-II-03 !No longer used." >> $clinput
+  echo "nodecay 1220" >> $clinput
+  echo "nodecay -1220" >> $clinput
+  echo "nodecay 120" >> $clinput
+@@ -270,10 +268,10 @@
+  echo "stopprogram" >> $clinput
+ # to use gdb, type "epos ..." as usually, then in gdb type "run", then "z-clinput"  
+ #gdb ${OBJ}epos$EPOVSN/bin/Xepos 
+-time @CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_BINDIR@/Xepos -n <<EOF
++time @CMAKE_INSTALL_PREFIX@/@CMAKE_INSTALL_BINDIR@/Xepos <<EOF
+ $clinput
+ EOF
+-rm $clinput
++#rm $clinput
+ if [ -s ${CHK}z-${one}.data ]; then
+   echo "###############################################################"
+   echo "      output written to ${CHK}z-${one}.data"
+@@ -320,8 +318,6 @@
+ rm -f ${HTO}z-${one}.ztr
+ rm -f ${CHK}z-${one}.dataR
+ 
+-rm -f z-eos4f.eos
+-
+ if [ ! "$tmp" = "-" ]; then
+ rm -v $tmp 
+ fi
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/src/KW/bas.f epos4.0.3ATLAS/src/KW/bas.f
+--- src/KW/bas.f	2025-02-12 20:21:08.000000001 +0100
++++ src/KW/bas.f	2025-12-03 14:37:56.000000001 +0100
+@@ -428,9 +428,13 @@
+       cotid(2)=iutime(4)
+ c     to read input from different file name given as argument
+       j=-1
+-      call utword(line,i,j,0)
+-      fnjob=line(i:j)
+-      nfnjob=j-i+1
++      if (nfnjob .eq. 0) then
++         call utword(line,i,j,0)
++         fnjob=line(i:j)
++         nfnjob=j-i+1
++      else
++         write(*,*)'The file ',trim(fnjob),' will be used as input'
++      endif
+ 
+ c added 2/9/2022 PBG
+       call hqinitransfer
+diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/src/KW/eos.f epos4.0.3ATLAS/src/KW/eos.f
+--- src/KW/eos.f	2025-02-12 20:21:08.000000001 +0100
++++ src/KW/eos.f	2025-12-03 14:37:56.000000001 +0100
+@@ -41,11 +41,11 @@
+ c---------------------------------------------------------------------
+ #include "aaa.h"
+ #include "ho.h"
+-      if(ioeos.eq.22)then     ! x3ff
+-        fn3f='z-eos4f.eos'
+-        fn3g=fnnx(1:nfnnx)//'src/KWt/eos1f.eos'
+-        if(ieostabm.eq.1)call tctabm !make table1
+-        if(ieostabm.eq.2)call eostabm !make table2
++      if(ioeos.eq.22)then       ! x3ff
++         fn3f=fnnx(1:nfnnx)//'src/KWt/eos4f.eos'
++         fn3g=fnnx(1:nfnnx)//'src/KWt/eos1f.eos'
++         if(ieostabm.eq.1)call tctabm !make table1
++         if(ieostabm.eq.2)call eostabm !make table2
+       endif
+       !here nothing needed for other ioeos
+       call seteostype(ioeos) !just to allow code in YK only for 22

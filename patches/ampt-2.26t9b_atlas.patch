@@ -1,0 +1,78 @@
+SPI-1475 : https://sft.its.cern.ch/jira/browse/SPI-1475
+--- amptsub.f.orig	2019-10-29 08:51:03.895947161 +0100
++++ amptsub.f	2019-10-29 08:51:50.895949095 +0100
+@@ -3829,12 +3829,12 @@
+ c      PRINT *, ' number of projectile strings = ', IHNT2(1)
+ c      PRINT *, ' number of target strings = ', IHNT2(3)
+ c      PRINT *, ' number of independent strings = ', NSG
+-      PRINT *, ' in HJANA1 '
+-      PRINT *, ' total number of partons = ', nsubp / IW
+-      PRINT *, ' total number of gluons = ', nsubg / IW
++c      PRINT *, ' in HJANA1 '
++c      PRINT *, ' total number of partons = ', nsubp / IW
++c      PRINT *, ' total number of gluons = ', nsubg / IW
+ c      PRINT *, ' number of projectile strings = ', IHNT2(1)
+ c      PRINT *, ' number of target strings = ', IHNT2(3)
+-      PRINT *, ' number of independent strings = ', NISG / IW
++c      PRINT *, ' number of independent strings = ', NISG / IW
+ cbzdbg2/16/99end
+       END IF
+ c
+@@ -4453,12 +4453,12 @@
+ c      PRINT *, ' number of projectile strings = ', IHNT2(1)
+ c      PRINT *, ' number of target strings = ', IHNT2(3)
+ c      PRINT *, ' number of independent strings = ', NSG
+-      PRINT *, ' in HJANA2 '
+-      PRINT *, ' total number of partons = ', nsubp / IW
+-      PRINT *, ' total number of gluons = ', nsubg / IW
++c      PRINT *, ' in HJANA2 '
++c      PRINT *, ' total number of partons = ', nsubp / IW
++c      PRINT *, ' total number of gluons = ', nsubg / IW
+ c      PRINT *, ' number of projectile strings = ', IHNT2(1)
+ c      PRINT *, ' number of target strings = ', IHNT2(3)
+-      PRINT *, ' number of independent strings = ', NISG / IW
++c      PRINT *, ' number of independent strings = ', NISG / IW
+       END IF
+ 
+       CALL HJAN2A
+--- hijing1.383_ampt.f.orig	2019-10-29 08:50:18.723945303 +0100
++++ hijing1.383_ampt.f	2019-10-29 08:53:36.775953450 +0100
+@@ -1973,6 +1973,7 @@
+         SUBROUTINE HIJSET(EFRM,FRAME,PROJ,TARG,IAP,IZP,IAT,IZT)
+         CHARACTER FRAME*4,PROJ*4,TARG*4,EFRAME*4
+         DOUBLE PRECISION  DD1,DD2,DD3,DD4
++        COMMON/RNDF77/NSEED
+         COMMON/HSTRNG/NFP(300,15),PP(300,15),NFT(300,15),PT(300,15)
+ cc      SAVE /HSTRNG/
+         COMMON/hjcrdn/YP(3,300),YT(3,300)
+@@ -1986,6 +1987,7 @@
+         EXTERNAL FNKICK,FNKC2,FNSTRU,FNSTRM,FNSTRS
+         SAVE   
+ 
++        CALL SRAND(NSEED)
+         CALL TITLE
+         IHNT2(1)=IAP
+         IHNT2(2)=IZP
+--- main.f.orig	2019-10-29 08:50:50.947946629 +0100
++++ main.f	2019-10-29 08:52:29.567950686 +0100
+@@ -142,8 +142,8 @@
+       if(ihjsed.eq.11) then
+          PRINT *,
+      1 '# Read in NSEED in HIJING at run time (e.g. 20030819):'
+-      endif
+-      READ (*, *) nseedr
++         READ (*, *) nseedr
++      endif      
+       if(ihjsed.eq.11) then
+          nseed=nseedr
+       endif
+--- Makefile.orig	2019-10-29 08:50:12.575945050 +0100
++++ Makefile	2019-10-29 08:53:44.659953775 +0100
+@@ -1,6 +1,6 @@
+ OBJ=main.o amptsub.o art1f.o \
+ hijing1.383_ampt.o hipyset1.35.o zpc.o linana.o
+-F77=f77
++F77=${FC}
+ 
+ ampt: $(OBJ)
+ 	$(F77) -o ampt -O $(OBJ)

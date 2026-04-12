@@ -1,0 +1,23 @@
+package: HepMC
+description: HepMC Monte Carlo event record (version 2)
+version: "2.06.09.alice"
+tag: "2.06.09.alice"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC-2.06.09.alice).tar.gz
+build_requires:
+  - bits-recipe-tools
+license: LGPL-2.1-only
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  cmake $SOURCEDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -Dmomentum:STRING=MEV \
+    -Dlength:STRING=MM \
+    -DCMAKE_BUILD_TYPE=Release
+}

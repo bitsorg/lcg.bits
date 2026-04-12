@@ -1,0 +1,88 @@
+--- JHUGenerator/makefile.orig	2015-08-20 12:51:55.000000001 +0200
++++ JHUGenerator/makefile	2015-08-20 12:52:35.000000001 +0200
+@@ -1,13 +1,13 @@
+-Here = $(PWD)
++
+ Makefile=makefile
+-ModuleDir = $(Here)/modules
+-ObjectDir = $(Here)/objects
+-PDFDir = $(Here)/pdfs
+-VegasDir = $(Here)/vegas
++ModuleDir = modules
++ObjectDir = objects
++PDFDir = pdfs
++VegasDir = vegas
+ 
+ # compiler options, Comp='ifort' or 'gfort'
+ Opt  = Yes
+-Comp = gfort
++Comp = gfortran
+ 
+ # link pdfs via LHA library ('Yes' or 'No')
+ UseLHAPDF=No
+@@ -20,7 +20,7 @@
+ 
+ 
+ 
+-ifeq ($(Comp),gfort)
++ifeq ($(Comp),gfortran)
+  ifeq ($(Opt),Yes)
+     OptOpts  = -O3
+  else
+@@ -31,7 +31,7 @@
+  else
+     LHAPDFflags = -DuseLHAPDF=0
+  endif 
+- fcomp = f95 $(OptOpts) -ffree-line-length-none -I$(VegasDir) -I$(ModuleDir) -J$(ModuleDir) $(LHAPDFflags) -Dcompiler=2 
++ fcomp = gfortran $(OptOpts) -ffree-line-length-none -I$(VegasDir) -I$(ModuleDir) -J$(ModuleDir) $(LHAPDFflags) -Dcompiler=2 
+ endif
+ 
+ 
+--- JHUGenMELA/makefile.orig	2015-08-20 12:52:50.000000001 +0200
++++ JHUGenMELA/makefile	2015-08-20 12:53:10.000000001 +0200
+@@ -1,11 +1,12 @@
+-Comp = gfort
++/Comp = gfortran
++/Flibs = -lgfortran
+ 
+ ifeq ($(Comp),ifort)
+ fcomp = ifort -fpp -O2 -vec-report0 -Dcompiler=1
+ # fcomp = ifort -fpp -O0 -vec-report0 -Dcompiler=1
+ endif
+-ifeq ($(Comp),gfort)
+-fcomp = f95 -O3 -ffree-line-length-none -Dcompiler=2
++ifeq ($(Comp),gfortran)
++fcomp = gfortran -O3 -ffree-line-length-none -Dcompiler=2
+ endif
+ 
+ ccomp = gcc
+@@ -37,7 +38,7 @@
+ 	$(fcomp) -o testF testprogram.F90 -lm NNPDFDriver.o mod_Higgs_MatEl.o mod_Zprime_MatEl.o mod_Graviton_MatEl.o mod_HiggsJ_MatEl.o mod_HiggsJJ_MatEl.o mod_VHiggs_MatEl.o mod_TTBH_MatEl.o $(MCFM_Obj)
+ 	@echo " "
+ 	@echo " compiling and linking testprogram.c with gcc"
+-	$(ccomp) -o testC testprogram.c NNPDFDriver.o mod_Higgs_MatEl.o mod_Zprime_MatEl.o mod_Graviton_MatEl.o mod_TTBH_MatEl.o  -lm -lgfortran
++	$(ccomp) -o testC testprogram.c NNPDFDriver.o mod_Higgs_MatEl.o mod_Zprime_MatEl.o mod_Graviton_MatEl.o mod_TTBH_MatEl.o  -lm $(Flibs) -Wno-implicit-function-declaration
+ 	@echo " "
+ 
+ 
+--- JHUGenerator/pdfs/Cteq61Pdf.f.orig	2015-08-20 13:10:49.000000001 +0200
++++ JHUGenerator/pdfs/Cteq61Pdf.f	2015-08-20 13:12:46.000000001 +0200
+@@ -134,6 +134,7 @@
+      > / 'cteq6m', 'cteq6d', 'cteq6l', 'cteq6l','ctq61.'/
+       Data Isetold, Isetmin0, Isetmin1, Isetmax1 /-987,1,100,140/
+       Data Isetmin2,Isetmax2 /200,240/
++      CHARACTER(LEN=255) jhu_home
+       save
+ 
+ C             If data file not initialized, do so.
+@@ -153,7 +154,8 @@
+             Print *, 'Invalid Iset number in SetCtq6 :', Iset
+             Stop
+          Endif
+-         Open(IU, File='pdfs/'//Tablefile
++         CALL getenv('JHU_HOME',jhu_home)
++         Open(IU, File=TRIM(jhu_home)//'/pdfs/'//Tablefile
+      .            ,Status='OLD', Err=100)
+  21      Call ReadTbl (IU)
+          Close (IU)
+

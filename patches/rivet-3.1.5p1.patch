@@ -1,0 +1,26 @@
+--- src/Tools/binreloc.c.orig	2021-11-25 12:27:09.227238580 +0100
++++ src/Tools/binreloc.c	2021-11-25 12:28:54.956199723 +0100
+@@ -215,7 +215,10 @@
+ 			break;
+ 
+ 		/* Sanity check. */
+-		if (strstr (line, " r-xp ") == NULL || strchr (line, '/') == NULL)
++                /* With binutils > 2.30 (const void *) "" is placed in "r--p" area of memory
++                   In general, for the mechanism of detection it doesn't really matter where your symbol is,
++                   therefore, check for strstr (line, " r-xp ") == NULL is removed */
++		if (strchr (line, '/') == NULL)
+ 			continue;
+ 
+ 		/* Parse line. */
+
+--- configure.ac.orig   2022-03-17 11:00:16.000000000 +0100
++++ configure.ac        2022-03-17 11:00:33.000000000 +0100
+@@ -215,7 +215,7 @@
+   if test "$fjmajor" -lt 3; then
+     AC_MSG_ERROR([FastJet version 3.0.0 or later is required])
+   fi
+-  FASTJETLIBADD="$($FJCONFIG --plugins --shared --libs | sed 's/\S*\/gcc\/\S*//g')"
++  FASTJETLIBADD="$($FJCONFIG --plugins --shared --libs)"
+ else
+   FASTJETLIBADD="-L$FASTJETLIBPATH -l$FASTJETLIBNAME"
+   FASTJETLIBADD="$FASTJETLIBADD -lSISConePlugin -lsiscone -lsiscone_spherical"

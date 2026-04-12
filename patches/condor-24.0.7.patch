@@ -1,0 +1,10 @@
+--- externals/bundles/boost/1.66.0/CMakeLists.txt~	2025-04-22 02:30:19.000000000 +0200
++++ externals/bundles/boost/1.66.0/CMakeLists.txt	2025-06-04 17:57:35.974978411 +0200
+@@ -53,5 +53,6 @@
+ 		endif()
+ 		if (WITH_PYTHON_BINDINGS)
+-			set (BOOST_COMPONENTS python ${BOOST_COMPONENTS})
++                  find_package(Python3 REQUIRED)
++                  set (BOOST_COMPONENTS python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR} ${BOOST_COMPONENTS})
+ 		endif()
+ 

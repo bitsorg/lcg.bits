@@ -1,0 +1,32 @@
+package: ipython
+description: ipython Python package
+version: "8.32.0"
+tag: "8.32.0"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/ipython-8.32.0.tar.gz
+requires:
+  - Python
+  - pip
+  - setuptools
+  - ptyprocess
+  - six
+  - pickleshare
+  - pexpect
+  - traitlets
+  - simplegeneric
+  - prompt_toolkit
+  - pygments
+  - ipython_genutils
+  - backcall
+  - jedi
+  - decorator
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

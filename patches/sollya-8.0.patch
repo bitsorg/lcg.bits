@@ -1,0 +1,22 @@
+--- signalhandling.h.orig	2025-04-28 05:25:15.911394565 +0200
++++ signalhandling.h	2025-04-28 05:25:50.673742170 +0200
+@@ -61,7 +61,7 @@
+ void initSignalHandler(int nointeract);
+ void blockSignals(int nointeract);
+ void initSignalHandlerCounted(int nointeract);
+-void blockSignalsCounted();
++void blockSignalsCounted(int nointeract);
+ void deferSignalHandling();
+ void resumeSignalHandling();
+ 
+--- execute.h.orig	2025-04-28 05:22:12.089527636 +0200
++++ execute.h	2025-04-28 05:22:42.791846908 +0200
+@@ -80,7 +80,7 @@
+ #include "general.h"
+ #include "expression.h"
+ 
+-extern int miniyyparse();
++extern int miniyyparse(void *myScanner);
+ extern void startBuffer(char *str);
+ extern void endBuffer(void);
+ 

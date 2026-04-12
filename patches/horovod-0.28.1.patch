@@ -1,0 +1,64 @@
+--- ./horovod/torch/CMakeLists.txt
++++ ./horovod/torch/CMakeLists.txt
+@@ -63,7 +63,9 @@ list(APPEND PYTORCH_LINKER_LIBS ${Pytorch_LIBRARIES})
+ parse_version(${Pytorch_VERSION} VERSION_DEC)
+ add_definitions(-DPYTORCH_VERSION=${VERSION_DEC} -DTORCH_API_INCLUDE_EXTENSION_H=1)
+ set(Pytorch_CXX11 ${Pytorch_CXX11} PARENT_SCOPE)
+-if(NOT Pytorch_VERSION VERSION_LESS "1.5.0")
++if(NOT Pytorch_VERSION VERSION_LESS "2.1.0")
++    set(CMAKE_CXX_STANDARD 17)
++elseif(NOT Pytorch_VERSION VERSION_LESS "1.5.0")
+     set(CMAKE_CXX_STANDARD 14)
+ endif()
+ 
+--- ./third_party/gloo/gloo/rendezvous/store.cc~ 2024-08-06 07:59:47.256033927 +0200
++++ ./third_party/gloo/gloo/rendezvous/store.cc	2024-08-06 08:02:38.150109322 +0200
+@@ -14 +14 @@
+-constexpr std::chrono::milliseconds Store::kDefaultTimeout;
++  //constexpr std::chrono::milliseconds Store::kDefaultTimeout;
+--- horovod/common/common.h.orig	2024-08-22 10:31:08.704793124 +0200
++++ horovod/common/common.h	2024-08-22 10:31:30.491136676 +0200
+@@ -21,6 +21,7 @@
+ #include <functional>
+ #include <memory>
+ #include <string>
++#include <stdexcept>
+ #include <unordered_map>
+ #include <unordered_set>
+ 
+--- horovod/common/group_table.h.orig	2024-08-22 10:40:32.211053455 +0200
++++ horovod/common/group_table.h	2024-08-22 10:41:07.450616048 +0200
+@@ -17,6 +17,7 @@
+ #include <queue>
+ #include <unordered_map>
+ #include <vector>
++#include <string>
+ 
+ #ifndef HOROVOD_GROUP_TABLE_H
+ #define HOROVOD_GROUP_TABLE_H
+
+--- third_party/flatbuffers/include/flatbuffers/stl_emulation.h.orig	2024-08-22 11:13:49.591774435 +0200
++++ third_party/flatbuffers/include/flatbuffers/stl_emulation.h	2024-08-22 11:14:47.148625303 +0200
+@@ -625,7 +625,7 @@
+  private:
+   // This is a naive implementation with 'count_' member even if (Extent != dynamic_extent).
+   pointer const data_;
+-  const size_type count_;
++  size_type count_;
+ };
+ 
+  #if !defined(FLATBUFFERS_SPAN_MINIMAL)
+--- ./horovod/runner/js_run.py~	2023-06-12 11:26:34.000000000 +0200
++++ ./horovod/runner/js_run.py	2025-01-30 14:25:41.697498282 +0100
+@@ -23 +23,2 @@
+-from distutils.spawn import find_executable
++#from distutils.spawn import find_executable
++from shutil import which as find_executable
+--- third_party/gloo/gloo/types.h~	2023-06-12 11:27:14.000000000 +0200
++++ third_party/gloo/gloo/types.h	2025-05-16 13:48:24.646861204 +0200
+@@ -6,4 +6,5 @@
+ 
+ #include <iostream>
++#include <cstdint>
+ 
+ #ifdef __CUDA_ARCH__

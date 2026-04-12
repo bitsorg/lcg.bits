@@ -1,0 +1,27 @@
+package: openapi_core
+description: openapi_core Python package
+version: "0.19.4"
+tag: "0.19.4"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_core-0.19.4.tar.gz
+requires:
+  - Python
+  - pip
+  - jsonschema_path
+  - jsonschema
+  - more_itertools
+  - openapi_schema_validator
+  - openapi_spec_validator
+  - parse
+  - werkzeug
+  - isodate
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

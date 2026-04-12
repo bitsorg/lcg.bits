@@ -1,0 +1,9 @@
+--- absl/copts/AbseilConfigureCopts.cmake~	2025-04-22 13:07:58
++++ absl/copts/AbseilConfigureCopts.cmake	2025-04-22 13:07:37
+@@ -43,5 +43,5 @@
+     string(REPLACE "X86_64" "X64" _arch_uppercase ${_arch_uppercase})
+     foreach(_flag IN LISTS ABSL_RANDOM_HWAES_${_arch_uppercase}_FLAGS)
+-      list(APPEND ABSL_RANDOM_RANDEN_COPTS "-Xarch_${_arch}" "${_flag}")
++      list(APPEND ABSL_RANDOM_RANDEN_COPTS "SHELL:-Xarch_${_arch} ${_flag}")
+     endforeach()
+   endforeach()

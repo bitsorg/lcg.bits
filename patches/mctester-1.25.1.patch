@@ -1,0 +1,30 @@
+--- HepMC3Event/Makefile.orig	2021-05-17 14:16:37.000000000 +0200
++++ HepMC3Event/Makefile	2021-05-17 14:18:56.000000000 +0200
+@@ -29,6 +29,7 @@
+ 
+ HEPEVENT_INC=-I../include/
+ HEPMC3_INC=-I$(HEPMC3LOCATION)/include
++HEPMC3_LIB=-L$(HEPMC3LOCATION)/lib -L$(HEPMC3LOCATION)/lib64 -lHepMC3
+ 
+ ROOT_CINT=$(ROOTBIN)/rootcint
+ 
+@@ -48,7 +49,7 @@
+ 	$(HEPMC3_INC) $(CLHEP_INC) $(HEPEVENT_INC) $(LIB_HDR)
+ 
+ $(LIB): $(LIB_OBJ)
+-	$(LD)  $(SOFLAGS) -o $(LIB) $(LIB_OBJ) -L$(ROOTLIBPATH) -lCore $(LCINT) -L$(CURDIR)/../lib -lHEPEvent
++	$(LD)  $(SOFLAGS) -o $(LIB) $(LIB_OBJ) -L$(ROOTLIBPATH) -lCore $(LCINT) $(HEPMC3_LIB) -L$(CURDIR)/../lib -lHEPEvent
+ 
+ $(LIB_A): $(LIB_OBJ)
+ 	ar cr $(LIB_A) $(LIB_OBJ)
+--- platform/make.inc.in.orig	2021-05-06 00:31:22.000000000 +0200
++++ platform/make.inc.in	2021-08-07 11:03:52.000000000 +0200
+@@ -24,7 +24,7 @@
+ CPPFLAGS=  -P -traditional-cpp
+ 
+ CXX     = @CXX@
+-CXXFLAGS= @CXXFLAGS@ -fPIC -Wall -fno-exceptions
++CXXFLAGS= @CXXFLAGS@ -fPIC -Wall
+ 
+ ROOTCFLAGS  = @ROOTCFLAGS@
+ ROOTGLIBS   = @ROOTGLIBS@

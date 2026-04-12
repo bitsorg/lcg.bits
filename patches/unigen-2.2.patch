@@ -1,0 +1,157 @@
+Index: base/src/UPIDConverter.cxx
+===================================================================
+--- base/src/UPIDConverter.cxx	(revision 89)
++++ base/src/UPIDConverter.cxx	(working copy)
+@@ -85,12 +85,12 @@
+   }
+ 
+   const std::string unigenBase = gSystem->Getenv("UNIGEN");
+-  const char* fullFileName = (unigenBase + dataFileName).c_str();
++  const std::string fullFileName = unigenBase + dataFileName;
+   std::ifstream fin;
+-  fin.open(fullFileName);
++  fin.open(fullFileName.c_str());
+   if (!fin) {
+     Error("LoadConversionTable",
+-          "Failed to open conversion-table file %s", fullFileName);
++          "Failed to open conversion-table file %s", fullFileName.c_str());
+     return;
+   }
+ 
+Index: config/Makelib
+===================================================================
+--- config/Makelib	(revision 89)
++++ config/Makelib	(working copy)
+@@ -3,7 +3,7 @@
+ 
+ 
+ # Default target
+-all : obj dict lib
++all : lib
+ 
+ 
+ # ----- Rules for source compilation ----------
+@@ -20,7 +20,14 @@
+ 
+ $(TARGET)Dict.cxx : $(incl) include/$(TARGET)LinkDef.h
+ 	@echo 'Generating dictionary' $@ '...'
++ifneq ($(strip $(RLIBMAP)),)
++  # ROOTv5
+ 	@rootcint -f $@ -c $(INCDIR) $^
++else
++  #ROOT v6
++	@rootcling -f $@ -rmf $(TOPDIR)/lib/lib$(TARGET).rootmap -rml lib$(TARGET) -s lib$(TARGET) $(INCDIR) $^
++	@mv lib$(TARGET)_rdict.pcm $(TOPDIR)/lib/lib$(TARGET)_rdict.pcm
++endif
+ # -----------------------------------------------
+ 
+ 
+@@ -43,7 +50,7 @@
+ 
+ 
+ # ----------- Dictionary compilation ------------
+-$(TARGET)Dict.o : $(TARGET)Dict.cxx $(TARGET)Dict.h
++$(TARGET)Dict.o : $(TARGET)Dict.cxx
+ 	@echo 'Compiling '$(TARGET)'Dict.cxx ...'
+ 	@$(CXX) $(CXXFLAGS) -I. -c $(TARGET)Dict.cxx -o $@
+ # -----------------------------------------------
+@@ -96,6 +103,7 @@
+ 	@rm -f $(TOPDIR)/lib/lib$(TARGET).so
+ 	@rm -f $(TOPDIR)/lib/lib$(TARGET).a
+ 	@rm -f $(TOPDIR)/lib/lib$(TARGET).rootmap
++	@rm -f $(TOPDIR)/lib/lib$(TARGET)_rdict.pcm
+ 
+ htmldoc :
+ 	@echo 'Building class documentation...'
+@@ -106,8 +114,11 @@
+ install_lib : lib
+ 	@echo 'Installing library ...'
+ 	mkdir -p -m 0755 $(DESTDIR)/lib
++	mkdir -p -m 0755 $(DESTDIR)/include/unigen
+ 	install -m 0755 $(TOPDIR)/lib/lib$(TARGET).so $(DESTDIR)/lib
+-ifneq ($(strip $(RLIBMAP)),)
+ 	install -m 0644 $(TOPDIR)/lib/lib$(TARGET).rootmap $(DESTDIR)/lib
++ifeq ($(strip $(RLIBMAP)),)
++	install -m 0644 $(TOPDIR)/lib/lib$(TARGET)_rdict.pcm $(DESTDIR)/lib
+ endif
++	install -m 0644 include/*.h $(DESTDIR)/include/unigen
+ 
+Index: converters/urqmd2u.cpp
+===================================================================
+--- converters/urqmd2u.cpp	(revision 89)
++++ converters/urqmd2u.cpp	(working copy)
+@@ -75,7 +75,6 @@
+   char *inpfile;
+   char *outfile;
+   char c;
+-  int nevents;
+   string dust;
+ 
+   URun *ru = 0;
+@@ -83,7 +82,7 @@
+   int filetype, eos, aproj, zproj, atarg, ztarg, nr;
+   double beta, b, bmin, bmax, sigma, elab, plab, sqrts, time, dtime;
+ 
+-  if (argc != 4) {
++  if (argc < 3 || argc > 4) {
+     cout << "usage:   " << argv[0] << " inpfile outfile nevents\n";
+     cout << "example: " << argv[0] << " ftn14 ftn14.root 10\n";
+     exit(0);
+@@ -91,7 +90,7 @@
+ 
+   inpfile = argv[1];
+   outfile = argv[2];
+-  nevents = atoi(argv[3]);
++  const int nevents = (argc == 4) ? atoi(argv[3]) : 1e8;
+ 
+   int nout=0;
+   in.open(inpfile);
+@@ -123,13 +122,15 @@
+     in.ignore(777,'\n'); // ignore the rest of the line
+ 
+     comment.clear();
+-    // read 3 lines of options and 4 lines of params
+-    for (int i=0; i<7; i++) {
+-      getline(in,line); 
+-      comment.append(line);
+-      comment.append("\n");
++    // read options and parameters
++    while (true) {
++      getline(in, line); 
++      if (TString(line).BeginsWith("op") || TString(line).BeginsWith("pa")) {
++        comment.append(line);
++        comment.append("\n");
++      } else
++        break;
+     }
+-    in.ignore(777,'\n'); 
+ 
+     ev->Clear();
+     ev->SetEventNr(nr);
+@@ -186,9 +187,15 @@
+   double m = 0.938271998;
+   double ecm = sqrts/2; // energy per nucleon in cm
+   double pcm = sqrt(ecm*ecm-m*m); // momentum per nucleon in cm
+-  double gamma = 1.0/sqrt(1-beta*beta); 
+-  double pproj = gamma*(+pcm-beta*ecm);
+-  double ptarg = gamma*(-pcm-beta*ecm);
++  double pproj = 0.0;
++  double ptarg = 0.0;
++  if (fabs(beta) < 1e-8) { // we are in CM
++    pproj = pcm;
++    ptarg = -pcm;
++  } else {
++    pproj = plab;
++    ptarg = 0.0;
++  }
+   ru = new URun(generator.data(), comment.data(), 
+ 		aproj, zproj, pproj, 
+ 		atarg, ztarg, ptarg, 
+@@ -196,7 +203,6 @@
+   ru->Write();
+   fi->Write();
+   fi->Close();
+-  return nout;
+   return 0;
+ }
+ /*****************************************************************************/

@@ -1,0 +1,9 @@
+--- CMake/HighFiveTargetDeps.cmake~	2024-12-03 15:31:35.000000000 +0100
++++ CMake/HighFiveTargetDeps.cmake	2025-08-15 16:05:23.149664013 +0200
+@@ -53,5 +53,5 @@
+       set(Boost_NO_BOOST_CMAKE TRUE)
+     endif()
+-    find_package(Boost REQUIRED COMPONENTS system serialization)
++    find_package(Boost REQUIRED COMPONENTS serialization)
+     # Dont use imported targets yet, not avail before cmake 3.5
+     target_include_directories(libdeps SYSTEM INTERFACE ${Boost_INCLUDE_DIR})

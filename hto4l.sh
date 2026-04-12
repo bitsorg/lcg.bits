@@ -1,0 +1,25 @@
+package: hto4l
+description: hto4l Monte Carlo event generator
+version: "2.02"
+tag: "2.02"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Hto4l-v2.02.tar.bz2
+requires:
+  - GSL
+build_requires:
+  - bits-recipe-tools
+license: TODO
+patches:
+  - hto4l-2.02.patch
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Make() {
+  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
+  make ${JOBS:+-j $JOBS} GSL_HOME=${GSL_ROOT}
+  cmake -E make_directory $INSTALLROOT/bin COMMAND cmake
+}

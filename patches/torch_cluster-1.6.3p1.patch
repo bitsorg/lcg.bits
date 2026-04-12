@@ -1,0 +1,53 @@
+--- CMakeLists.txt~	2024-04-29 15:46:08.000000000 +0200
++++ CMakeLists.txt	2024-06-13 13:32:18.675588864 +0200
+@@ -12,0 +13 @@
++  add_definitions(WITH_MY_CUSTOM_DEF)
+@@ -34,0 +36,2 @@
++include(GNUInstallDirs)
++
+@@ -36 +39 @@
+-  "$<BUILD_INTERFACE:${HEADERS}>"
++  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/csrc>
+@@ -39 +41,0 @@
+-include(GNUInstallDirs)
+--- CMakeLists.txt~	2024-06-13 13:35:08.661414483 +0200
++++ CMakeLists.txt	2024-06-13 13:36:48.080066000 +0200
+@@ -38 +38 @@
+-target_include_directories(${PROJECT_NAME} INTERFACE
++target_include_directories(${PROJECT_NAME} PUBLIC
+--- setup.py~	2024-04-29 15:46:08.000000000 +0200
++++ setup.py	2024-06-13 13:57:57.615083102 +0200
+@@ -49 +49,2 @@
+-            extra_compile_args['cxx'] += ['-Wno-sign-compare']
++            pass
++            #extra_compile_args['cxx'] += ['-Wno-sign-compare']
+@@ -100 +101 @@
+-            include_dirs=[extensions_dir],
++            include_dirs=[os.path.join(os.getcwd(), extensions_dir)],
+--- setup.py~	2024-06-14 11:33:38.000000000 +0200
++++ setup.py	2024-06-14 11:38:31.649725217 +0200
+@@ -11,2 +11,6 @@
+-from torch.utils.cpp_extension import (CUDA_HOME, BuildExtension, CppExtension,
+-                                       CUDAExtension)
++from torch.utils.cpp_extension import (
++    CUDA_HOME,
++    BuildExtension,
++    CppExtension,
++    CUDAExtension,
++)
+@@ -20 +23,0 @@
+-
+@@ -49,2 +52 @@
+-            pass
+-            #extra_compile_args['cxx'] += ['-Wno-sign-compare']
++            extra_compile_args['cxx'] += ['-Wno-sign-compare']
+@@ -76,2 +77,0 @@
+-            extra_compile_args['nvcc'] = nvcc_flags
+-
+@@ -85,0 +86,2 @@
++            extra_compile_args['nvcc'] = nvcc_flags
++
+@@ -148,2 +150 @@
+-        'build_ext':
+-        BuildExtension.with_options(no_python_abi_suffix=True, use_ninja=False)
++        'build_ext': BuildExtension.with_options(no_python_abi_suffix=True)

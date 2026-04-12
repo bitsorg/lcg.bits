@@ -1,0 +1,11 @@
+--- cpp-peglib/peglib.h.orig	2026-03-12 16:30:06.586258345 +0100
++++ cpp-peglib/peglib.h	2026-03-12 16:30:34.139489250 +0100
+@@ -448,7 +448,7 @@
+ 
+ namespace udl {
+ 
+-inline constexpr unsigned int operator"" _(const char *s, size_t l) {
++inline constexpr unsigned int operator""_(const char *s, size_t l) {
+   return str2tag_core(s, l, 0);
+ }
+ 

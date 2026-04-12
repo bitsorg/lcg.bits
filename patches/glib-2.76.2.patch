@@ -1,0 +1,10 @@
+--- ./gio/gdbus-2.0/codegen/utils.py~	2023-04-21 16:46:05.000000000 +0200
++++ ./gio/gdbus-2.0/codegen/utils.py	2024-06-26 16:22:51.035198607 +0200
+@@ -22 +22,2 @@
+-import distutils.version
++#import distutils.version
++from looseversion import LooseVersion
+@@ -165 +166,2 @@
+-    return (distutils.version.LooseVersion(v), key[1])
++#    return (distutils.version.LooseVersion(v), key[1])
++    return (LooseVersion(v), key[1]) 

@@ -1,0 +1,24 @@
+package: ipywidgets
+description: ipywidgets Python package
+version: "8.1.7"
+tag: "8.1.7"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/ipywidgets-8.1.7.tar.gz
+requires:
+  - Python
+  - setuptools
+  - ipython
+  - widgetsnbextension
+  - traitlets
+  - ipykernel
+  - nbformat
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

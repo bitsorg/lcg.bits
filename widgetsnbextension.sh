@@ -1,0 +1,25 @@
+package: widgetsnbextension
+description: widgetsnbextension Python package
+version: "4.0.14"
+tag: "4.0.14"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/widgetsnbextension-4.0.14.tar.gz
+requires:
+  - Python
+  - setuptools
+  - notebook
+  - jupyter_core
+  - ipython_genutils
+  - traitlets
+  - decorator
+  - tornado
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

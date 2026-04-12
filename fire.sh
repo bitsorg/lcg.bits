@@ -1,0 +1,21 @@
+package: fire
+description: fire Python package
+version: "0.7.1"
+tag: "0.7.1"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/fire-0.7.1.tar.gz
+requires:
+  - Python
+  - pip
+  - six
+  - termcolor
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

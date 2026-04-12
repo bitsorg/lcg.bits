@@ -1,0 +1,30 @@
+package: apfel
+description: apfel Monte Carlo event generator
+version: "3.0.4"
+tag: "3.0.4"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/apfel-3.0.4.tar.gz
+requires:
+  - lhapdf
+  - swig
+  - Python
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  cmake $SOURCEDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DAPFEL_ENABLE_PYTHON=ON \
+    -DAPFEL_ENABLE_TESTS=ON \
+    -DAPFEL_ENABLE_LHAPDF=ON \
+    -DAPFEL_DOWNLOAD_PDFS=ON \
+    -DAPFEL_Python_SITEARCH=autoprefix
+}

@@ -1,0 +1,13 @@
+--- Makefile.orig	2013-05-05 20:57:02.000000000 +0200
++++ Makefile	2013-05-05 20:57:41.000000000 +0200
+@@ -83,7 +83,7 @@
+ 	  cp -rf config.mk include/ lib/ $(INSTALL_DIR)  && \
+ 	  cd $(INSTALL_DIR)/lib               && \
+ 	  ls -1 archive/*.a | xargs -n 1 ln -sf    && \
+-	  cd $$_topdir && \
+-	  mkdir -p $(SHARE_DIR) && \
+-	  cp -rf README configure Makearchive.subdir Makefile Makeshared.subdir data doc src pretauola examples/ $(SHARE_DIR) ; \
++	  cd $$_topdir ; \
++#	  mkdir -p $(SHARE_DIR) && \
++#	  cp -rf README configure Makearchive.subdir Makefile Makeshared.subdir data doc src pretauola examples/ $(SHARE_DIR) ; \
+ 	fi

@@ -1,0 +1,26 @@
+--- ./pythran/config.py~	2024-10-27 09:11:03.000000000 +0100
++++ ./pythran/config.py	2025-02-27 16:10:43.614016816 +0100
+@@ -313,2 +313,2 @@
+-    import distutils.ccompiler
+-    import distutils.sysconfig
++    import setuptools._distutils.ccompiler
++    import sysconfig
+@@ -369,2 +369,2 @@
+-    compiler_obj = distutils.ccompiler.new_compiler()
+-    distutils.sysconfig.customize_compiler(compiler_obj)
++    compiler_obj = setuptools._distutils.ccompiler.new_compiler()
++    sysconfig.customize_compiler(compiler_obj)
+@@ -387 +387 @@
+-            cflags.append('-I' + distutils.sysconfig.get_python_inc())
++            cflags.append('-I' + sysconfig.get_python_inc())
+@@ -401 +401 @@
+-            libs = distutils.sysconfig.get_config_var('LIBS')
++            libs = sysconfig.get_config_var('LIBS')
+@@ -404,2 +404,2 @@
+-            libdir = distutils.sysconfig.get_config_var('LIBDIR')
+-            pylib = distutils.sysconfig.get_config_var('LDLIBRARY')
++            libdir = sysconfig.get_config_var('LIBDIR')
++            pylib = sysconfig.get_config_var('LDLIBRARY')
+@@ -410 +410 @@
+-                               + distutils.sysconfig.get_config_var('VERSION'))
++                               + sysconfig.get_config_var('VERSION'))

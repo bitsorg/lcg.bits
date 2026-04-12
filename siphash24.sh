@@ -1,0 +1,19 @@
+package: siphash24
+description: siphash24 Python package
+version: "unknown"
+tag: "unknown"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/siphash24-unknown.tar.gz
+requires:
+  - Python
+  - pip
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

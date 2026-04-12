@@ -1,0 +1,31 @@
+1From 272ccd677457efa8047f77433e5ff6832159624b Mon Sep 17 00:00:00 2001
+From: Andre Sailer <andre.philippe.sailer@cern.ch>
+Date: Tue, 16 Sep 2025 09:46:04 +0200
+Subject: [PATCH] makefile: allow overriding compiler executable via env
+ variable
+
+---
+ client/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/client/Makefile b/client/Makefile
+index cd22b8c..e9978e5 100644
+--- Makefile
++++ Makefile
+@@ -57,13 +57,13 @@ DEBUG_OPTIM     =       -g -O2
+ CFLAGS		=	$(DEBUG_OPTIM)
+ CXXFLAGS	=	$(DEBUG_OPTIM)
+ FNAPI_VERSION	=	$(FN_VER_MAJOR).$(FN_VER_MINOR)
+ CC		=	gcc
+-CXX		=	c++
++CXX		?=	c++
+ CXXOPT_LIB	=	-Wall $(CXXFLAGS) -DFRONTIER_DEBUG -DFNTR_USE_NAMESPACE -DFNTR_USE_EXCEPTIONS -fPIC -DPIC
+ CXXOPT_APP	=	-Wall $(CXXFLAGS) -DFRONTIER_DEBUG -DFNTR_USE_NAMESPACE -DFNTR_USE_EXCEPTIONS -fPIC -DPIC
+ COPT		=	-Wall $(CFLAGS) -DFRONTIER_DEBUG -fPIC -DPIC
+-LINK_SO         =       c++ $(CXXFLAGS) -shared -o libfrontier_client.so.$(FN_VER_MAJOR).$(FN_VER_MINOR) -Wl,-soname,libfrontier_client.so.$(FN_VER_MAJOR)
+-LINK_DYLIB	=	c++ $(CXXFLAGS) -dynamiclib -undefined dynamic_lookup  -compatibility_version $(FN_VER_MAJOR) -current_version $(FN_VER_MAJOR).$(FN_VER_MINOR) -o libfrontier_client.$(FN_VER_MAJOR).$(FN_VER_MINOR).dylib -single_module $(LIBS)
++LINK_SO     =   $(CXX) $(CXXFLAGS) -shared -o libfrontier_client.so.$(FN_VER_MAJOR).$(FN_VER_MINOR) -Wl,-soname,libfrontier_client.so.$(FN_VER_MAJOR)
++LINK_DYLIB	=	$(CXX) $(CXXFLAGS) -dynamiclib -undefined dynamic_lookup  -compatibility_version $(FN_VER_MAJOR) -current_version $(FN_VER_MAJOR).$(FN_VER_MINOR) -o libfrontier_client.$(FN_VER_MAJOR).$(FN_VER_MINOR).dylib -single_module $(LIBS)
+ LINK		=	ar cr libfrontier_client.a
+ 
+ COMMON_INC	=	${EXPAT_INC} ${OPENSSL_INC} ${PACPARSER_INC} ${ZLIB_INC}

@@ -1,0 +1,24 @@
+package: qulacs
+description: qulacs Python package
+version: "0.6.4.1"
+tag: "0.6.4.1"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/qulacs-0.6.4.1.tar.gz
+requires:
+  - Python
+  - pip
+  - Boost
+  - scipy
+  - numpy
+build_requires:
+  - bits-recipe-tools
+license: TODO
+patches:
+  - qulacs-0.6.4.1.patch
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

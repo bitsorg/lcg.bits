@@ -1,0 +1,8 @@
+--- ./versioneer.py~	2020-04-15 15:41:08.000000000 +0200
++++ ./versioneer.py	2024-06-14 16:43:17.861635174 +0200
+@@ -342 +342 @@
+-    parser = configparser.SafeConfigParser()
++    parser = configparser.ConfigParser()
+@@ -344 +344 @@
+-        parser.readfp(f)
++        parser.read_file(f)

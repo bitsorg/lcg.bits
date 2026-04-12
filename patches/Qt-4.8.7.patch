@@ -1,0 +1,541 @@
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/TypeTraits.h.orig	2012-11-23 11:09:56.000000000 +0100
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/TypeTraits.h	2016-02-17 13:15:35.184556940 +0100
+@@ -166,9 +166,15 @@
+         typedef T Type;
+     };
+
+-#if (defined(__GLIBCXX__) && (__GLIBCXX__ >= 20070724) && defined(__GXX_EXPERIMENTAL_CXX0X__)) || (defined(_MSC_VER) && (_MSC_VER >= 1600))
++#if (defined(__GXX_EXPERIMENTAL_CXX0X__) || __cplusplus >= 201103L) && ((defined(__GLIBCXX__) && (__GLIBCXX__ >= 20150905)))
++
++    // GCC's libstdc++ supports C++ TR1 type_traits in the std namespace since GCC 5.x,
++    // which corresponds to the GCC DATESTAMP 20150905.
++    template<typename T> struct HasTrivialConstructor : public std::is_trivially_constructible<T> { };
++    template<typename T> struct HasTrivialDestructor : public std::is_trivially_destructible<T> { };
++
++#elif (defined(_MSC_VER) && (_MSC_VER >= 1600))
+
+-    // GCC's libstdc++ 20070724 and later supports C++ TR1 type_traits in the std namespace.
+     // VC10 (VS2010) and later support C++ TR1 type_traits in the std::tr1 namespace.
+     template<typename T> struct HasTrivialConstructor : public std::tr1::has_trivial_constructor<T> { };
+     template<typename T> struct HasTrivialDestructor : public std::tr1::has_trivial_destructor<T> { };
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/HashTable.h.orig	2012-11-23 11:09:56.000000000 +0100
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/HashTable.h	2016-02-16 18:20:15.139569167 +0100
+@@ -257,7 +257,7 @@
+
+     using std::swap;
+
+-#if !COMPILER(MSVC) && !OS(QNX) && !defined(_LIBCPP_VERSION)
++#if !COMPILER(MSVC) && !OS(QNX) && !defined(_LIBCPP_VERSION) && __cplusplus < 201103L
+    // The Dinkumware C++ library (used by MSVC and QNX) and clang's libc++ have a swap for pairs defined.
+
+    // swap pairs by component, in case of pair members that specialize swap
+--- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSImmediate.h.orig	2015-05-07 16:14:48.000000000 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSImmediate.h	2016-03-14 13:25:07.180899656 +0100
+@@ -37,6 +37,13 @@
+ #include <stdint.h>
+ #include <stdlib.h>
+
++#if __cplusplus >= 201103L
++#include <cmath>
++using std::signbit;
++#else
++#include <math.h>
++#endif
++
+ namespace JSC {
+
+     class ExecState;
+--- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h.orig	2016-10-11 14:03:43.000000000 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h	2016-10-11 14:30:54.000000000 +0200
+@@ -25,7 +25,12 @@
+
+ #include "CallData.h"
+ #include "ConstructData.h"
+-#include <math.h>
++#if __cplusplus >= 201103L
++  #include <cmath>
++  using std::signbit;
++#else
++  #include <math.h>
++#endif
+ #include <stddef.h> // for size_t
+ #include <stdint.h>
+ #include <wtf/AlwaysInline.h>
+--- src/3rdparty/javascriptcore/JavaScriptCore/runtime/Structure.h.orig	2012-11-23 11:09:55.000000000 +0100
++++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/Structure.h	2016-02-16 18:20:15.143569213 +0100
+@@ -210,7 +210,7 @@
+         bool m_isPinnedPropertyTable : 1;
+         bool m_hasGetterSetterProperties : 1;
+         bool m_hasNonEnumerableProperties : 1;
+-#if COMPILER(WINSCW)
++#if COMPILER(WINSCW) || __cplusplus >= 201103L
+         // Workaround for Symbian WINSCW compiler that cannot resolve unsigned type of the declared
+         // bitfield, when used as argument in make_pair() function calls in structure.ccp.
+         // This bitfield optimization is insignificant for the Symbian emulator target.
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h.orig	2016-03-14 13:52:47.688271735 +0100
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h	2016-03-14 13:54:42.069340856 +0100
+@@ -27,7 +27,14 @@
+ #define WTF_MathExtras_h
+
+ #include <float.h>
++
++#if __cplusplus >= 201103L
++#include <cmath>
++using std::isfinite;
++#else
+ #include <math.h>
++#endif
++
+ #include <stdlib.h>
+
+ #if OS(SOLARIS)
+--- src/3rdparty/webkit/Source/JavaScriptCore/wtf/TypeTraits.h.orig	2016-02-17 13:13:56.751653365 +0100
++++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/TypeTraits.h	2016-02-17 13:15:58.744773786 +0100
+@@ -179,9 +179,15 @@
+         typedef T Type;
+     };
+
+-#if (defined(__GLIBCXX__) && (__GLIBCXX__ >= 20070724) && defined(__GXX_EXPERIMENTAL_CXX0X__)) || (defined(_MSC_VER) && (_MSC_VER >= 1600))
++#if (defined(__GXX_EXPERIMENTAL_CXX0X__) || __cplusplus >= 201103L) && ((defined(__GLIBCXX__) && (__GLIBCXX__ >= 20150905)))
++
++    // GCC's libstdc++ supports C++ TR1 type_traits in the std namespace since GCC 5.x,
++    // which corresponds to the GCC DATESTAMP 20150905.
++    template<typename T> struct HasTrivialConstructor : public std::is_trivially_constructible<T> { };
++    template<typename T> struct HasTrivialDestructor : public std::is_trivially_destructible<T> { };
++
++#elif (defined(_MSC_VER) && (_MSC_VER >= 1600))
+
+-    // GCC's libstdc++ 20070724 and later supports C++ TR1 type_traits in the std namespace.
+     // VC10 (VS2010) and later support C++ TR1 type_traits in the std::tr1 namespace.
+     template<typename T> struct HasTrivialConstructor : public std::tr1::has_trivial_constructor<T> { };
+     template<typename T> struct HasTrivialDestructor : public std::tr1::has_trivial_destructor<T> { };
+--- src/3rdparty/webkit/Source/JavaScriptCore/wtf/MathExtras.h.orig	2016-02-17 13:20:37.751356628 +0100
++++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/MathExtras.h	2016-02-17 14:23:02.450423871 +0100
+@@ -253,10 +253,37 @@
+ }
+
+ #if !COMPILER(MSVC) && !(COMPILER(RVCT) && PLATFORM(BREWMP)) && !OS(SOLARIS) && !OS(SYMBIAN)
+-using std::isfinite;
+-using std::isinf;
+-using std::isnan;
+-using std::signbit;
++
++// The original webkit source features using declarations for standard math library functions
++// std::isfinite, std::isinf, std::isnan and std::signbit.
++//
++// This was an horrible idea, from the webkit devs' part, and is a well deserved source of namespace
++// collisions on GCC 4.8. Nonetheless, if we want to build Qt with webkit enabled, we need to
++// keep this nonsense working with minimal webkit source changes.
++//
++// Replacing these using declarations with macros works in this context, because the macros will be
++// substituted at the preprocessing stage, before the compiler even cares about namespace collisions.
++//
++// Please note that this trick cannot be applied generally, however : one single qualified
++// call to std::something, and we're screwed. This hack should thus be removed as soon as the Qt
++// and webkit devs will have sorted this out.
++
++#ifndef isfinite
++#define isfinite(x) std::isfinite(x)
++#endif
++
++#ifndef isinf
++#define isinf(x) std::isinf(x)
++#endif
++
++#ifndef isnan
++#define isnan(x) std::isnan(x)
++#endif
++
++#ifndef signbit
++#define signbit(x) std::signbit(x)
++#endif
++
+ #endif
+
+ #endif // #ifndef WTF_MathExtras_h
+--- src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h.orig	2015-05-07 16:14:45.000000000 +0200
++++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h	2016-03-14 15:37:12.979817291 +0100
+@@ -181,7 +181,15 @@
+         typedef HashSetTranslatorAdapter<ValueType, ValueTraits, T, HashTranslator> Adapter;
+         return m_impl.template contains<T, Adapter>(value);
+     }
+-
++
++#if ((__GNUC__ * 100 + __GNUC_MINOR__) < 600)
++    template<typename T, typename U, typename V>
++    inline pair<typename HashSet<T, U, V>::const_iterator, bool> HashSet<T,U,V>::add(const ValueType &value)
++    {
++        pair<typename HashTableType::iterator, bool> p = m_impl.add(value);
++        return make_pair(typename HashSet<T, U, V>::const_iterator(p.first), p.second);
++    }
++#else
+     template<typename T, typename U, typename V>
+     inline pair<typename HashSet<T, U, V>::iterator, bool> HashSet<T, U, V>::add(const ValueType& value)
+     {
+@@ -191,6 +199,7 @@
+         return m_impl.add(value);
+ #endif
+     }
++#endif
+
+     template<typename Value, typename HashFunctions, typename Traits>
+     template<typename T, typename HashTranslator>
+@@ -198,7 +207,10 @@
+     HashSet<Value, HashFunctions, Traits>::add(const T& value)
+     {
+         typedef HashSetTranslatorAdapter<ValueType, ValueTraits, T, HashTranslator> Adapter;
+-#if COMPILER(MSVC) && _MSC_VER >= 1700
++#if (__GNUC__ * 100 + __GNUC_MINOR__) < 600
++        pair<typename HashTableType::iterator, bool> p = m_impl.template addPassingHashCode<T, T, Adapter>(value, value);
++        return make_pair(typename HashSet<Value, HashFunctions, Traits>::iterator(p.first), p.second);
++#elif COMPILER(MSVC) && _MSC_VER >= 1700
+         return iterator_const_cast(m_impl.template addPassingHashCode<T, T, Adapter>(value, value));
+ #else
+         return m_impl.template addPassingHashCode<T, T, Adapter>(value, value);
+
+--- src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.cpp.orig        2015-05-07 16:14:47.000000001 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.cpp  2016-04-05 11:33:03.385785725 +0200
+@@ -1835,9 +1835,9 @@
+ RegisterID* BytecodeGenerator::emitCatch(RegisterID* targetRegister, Label* start, Label* end)
+ {
+ #if ENABLE(JIT)
+-    HandlerInfo info = { start->bind(0, 0), end->bind(0, 0), instructions().size(), m_dynamicScopeDepth + m_baseScopeDepth, CodeLocationLabel() };
++    HandlerInfo info = { static_cast<uint32_t>(start->bind(0, 0)), static_cast<uint32_t>(end->bind(0, 0)), static_cast<uint32_t>(instructions().size()), static_cast<uint32_t>(m_dynamicScopeDepth + m_baseScopeDepth), CodeLocationLabel() };
+ #else
+-    HandlerInfo info = { start->bind(0, 0), end->bind(0, 0), instructions().size(), m_dynamicScopeDepth + m_baseScopeDepth };
++    HandlerInfo info = { static_cast<uint32_t>(start->bind(0, 0)), static_cast<uint32_t>(end->bind(0, 0)), static_cast<uint32_t>(instructions().size()), static_cast<uint32_t>(m_dynamicScopeDepth + m_baseScopeDepth) };
+ #endif
+
+     m_codeBlock->addExceptionHandler(info);
+@@ -1889,7 +1889,7 @@
+
+ void BytecodeGenerator::beginSwitch(RegisterID* scrutineeRegister, SwitchInfo::SwitchType type)
+ {
+-    SwitchInfo info = { instructions().size(), type };
++    SwitchInfo info = { static_cast<uint32_t>(instructions().size()), type };
+     switch (type) {
+         case SwitchInfo::SwitchImmediate:
+             emitOpcode(op_switch_imm);
+
+--- src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.h.orig  2015-05-07 16:14:47.000000001 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.h    2016-04-05 11:28:20.310788560 +0200
+@@ -176,7 +176,7 @@
+             // Node::emitCode assumes that dst, if provided, is either a local or a referenced temporary.
+             ASSERT(!dst || dst == ignoredResult() || !dst->isTemporary() || dst->refCount());
+             if (!m_codeBlock->numberOfLineInfos() || m_codeBlock->lastLineInfo().lineNumber != n->lineNo()) {
+-                LineInfo info = { instructions().size(), n->lineNo() };
++                LineInfo info = { static_cast<uint32_t>(instructions().size()), n->lineNo() };
+                 m_codeBlock->addLineInfo(info);
+             }
+             if (m_emitNodeDepth >= s_maxEmitNodeDepth)
+@@ -195,7 +195,7 @@
+         void emitNodeInConditionContext(ExpressionNode* n, Label* trueTarget, Label* falseTarget, bool fallThroughMeansTrue)
+         {
+             if (!m_codeBlock->numberOfLineInfos() || m_codeBlock->lastLineInfo().lineNumber != n->lineNo()) {
+-                LineInfo info = { instructions().size(), n->lineNo() };
++                LineInfo info = { static_cast<uint32_t>(instructions().size()), n->lineNo() };
+                 m_codeBlock->addLineInfo(info);
+             }
+             if (m_emitNodeDepth >= s_maxEmitNodeDepth)
+
+--- src/3rdparty/javascriptcore/JavaScriptCore/runtime/Identifier.cpp.orig    2015-05-07 16:14:48.000000001 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/Identifier.cpp      2016-04-05 11:35:07.892472523 +0200
+@@ -195,7 +195,7 @@
+         UString::Rep::empty().hash();
+         return &UString::Rep::empty();
+     }
+-    UCharBuffer buf = {s, length};
++    UCharBuffer buf = {s, static_cast<unsigned int>(length)};
+     pair<HashSet<UString::Rep*>::iterator, bool> addResult = globalData->identifierTable->add<UCharBuffer, UCharBufferTranslator>(buf);
+
+     // If the string is newly-translated, then we need to adopt it.
+
+--- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSONObject.cpp.orig    2015-05-07 16:14:48.000000001 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSONObject.cpp      2016-04-05 11:38:02.534275500 +0200
+@@ -320,7 +320,7 @@
+             default:
+                 static const char hexDigits[] = "0123456789abcdef";
+                 UChar ch = data[i];
+-                UChar hex[] = { '\\', 'u', hexDigits[(ch >> 12) & 0xF], hexDigits[(ch >> 8) & 0xF], hexDigits[(ch >> 4) & 0xF], hexDigits[ch & 0xF] };
++                UChar hex[] = { '\\', 'u', static_cast<UChar>(hexDigits[(ch >> 12) & 0xF]), static_cast<UChar>(hexDigits[(ch >> 8) & 0xF]), static_cast<UChar>(hexDigits[(ch >> 4) & 0xF]), static_cast<UChar>(hexDigits[ch & 0xF]) };
+                 builder.append(hex, sizeof(hex) / sizeof(UChar));
+                 break;
+         }
+
+--- src/3rdparty/javascriptcore/JavaScriptCore/yarr/RegexCompiler.cpp.orig    2015-05-07 16:14:47.000000001 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/yarr/RegexCompiler.cpp      2016-04-05 11:48:32.560185228 +0200
+@@ -719,7 +719,7 @@
+
+     constructor.setupOffsets();
+
+-    return false;
++    return 0;
+ };
+
+
+--- src/3rdparty/webkit/Source/WebCore/dom/Element.cpp.orig   2015-05-07 16:14:47.000000001 +0200
++++ src/3rdparty/webkit/Source/WebCore/dom/Element.cpp     2016-04-05 11:57:48.574866111 +0200
+@@ -1080,7 +1080,7 @@
+ {
+     // Ref currentStyle in case it would otherwise be deleted when setRenderStyle() is called.
+     RefPtr<RenderStyle> currentStyle(renderStyle());
+-    bool hasParentStyle = parentNodeForRenderingAndStyle() ? parentNodeForRenderingAndStyle()->renderStyle() : false;
++    bool hasParentStyle = parentNodeForRenderingAndStyle() ? static_cast<bool>(parentNodeForRenderingAndStyle()->renderStyle()) : false;
+     bool hasDirectAdjacentRules = currentStyle && currentStyle->childrenAffectedByDirectAdjacentRules();
+     bool hasIndirectAdjacentRules = currentStyle && currentStyle->childrenAffectedByForwardPositionalRules();
+
+
+--- src/plugins/accessible/widgets/itemviews.cpp.orig 2015-05-07 16:14:48.000000001 +0200
++++ src/plugins/accessible/widgets/itemviews.cpp   2016-04-05 12:13:47.064159508 +0200
+@@ -393,7 +393,7 @@
+     QModelIndex index = view()->model()->index(0, column, view()->rootIndex());
+     if (!index.isValid() || view()->selectionMode() & QAbstractItemView::NoSelection)
+         return false;
+-    view()->selectionModel()->select(index, QItemSelectionModel::Columns & QItemSelectionModel::Deselect);
++    view()->selectionModel()->select(index, (QItemSelectionModel::SelectionFlags)(QItemSelectionModel::Columns & QItemSelectionModel::Deselect));
+     return true;
+ }
+
+From 27aa46933bb32a88c310fe5918a49a3f34d65dfe Mon Sep 17 00:00:00 2001
+From: Mike McQuaid <mike@mikemcquaid.com>
+Date: Sun, 13 Sep 2015 11:55:59 +0100
+Subject: [PATCH] Fix El Capitan build.
+
+---
+ src/gui/painting/qpaintengine_mac.cpp | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/src/gui/painting/qpaintengine_mac.cpp b/src/gui/painting/qpaintengine_mac.cpp
+index 4aa0668..63b646d 100644
+--- src/gui/painting/qpaintengine_mac.cpp
++++ src/gui/painting/qpaintengine_mac.cpp
+@@ -340,13 +340,7 @@ CGColorSpaceRef QCoreGraphicsPaintEngine::macDisplayColorSpace(const QWidget *wi
+     }
+
+     // Get the color space from the display profile.
+-    CGColorSpaceRef colorSpace = 0;
+-    CMProfileRef displayProfile = 0;
+-    CMError err = CMGetProfileByAVID((CMDisplayIDType)displayID, &displayProfile);
+-    if (err == noErr) {
+-        colorSpace = CGColorSpaceCreateWithPlatformColorSpace(displayProfile);
+-        CMCloseProfile(displayProfile);
+-    }
++    CGColorSpaceRef colorSpace = CGDisplayCopyColorSpace(displayID);
+
+     // Fallback: use generic DeviceRGB
+     if (colorSpace == 0)
+--
+2.3.8 (Apple Git-58)
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h.orig    2016-10-12 10:45:39.831628726 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h 2016-10-12 10:52:37.916564096 +0200
+@@ -193,4 +193,38 @@
+ inline float rad2grad(float r) { return r * 200.0f / piFloat; }
+ inline float grad2rad(float g) { return g * piFloat / 200.0f; }
+
++ #if !COMPILER(MSVC) && !(COMPILER(RVCT) && PLATFORM(BREWMP)) && !OS(SOLARIS) && !OS(SYMBIAN)
++
++// The original webkit source features using declarations for standard math library functions
++// std::isfinite, std::isinf, std::isnan and std::signbit.
++//
++// This was an horrible idea, from the webkit devs' part, and is a well deserved source of namespace
++// collisions on GCC 4.8. Nonetheless, if we want to build Qt with webkit enabled, we need to
++// keep this nonsense working with minimal webkit source changes.
++//
++// Replacing these using declarations with macros works in this context, because the macros will be
++// substituted at the preprocessing stage, before the compiler even cares about namespace collisions.
++//
++// Please note that this trick cannot be applied generally, however : one single qualified
++// call to std::something, and we're screwed. This hack should thus be removed as soon as the Qt
++// and webkit devs will have sorted this out.
++
++#ifndef isfinite
++#define isfinite(x) std::isfinite(x)
++#endif
++
++#ifndef isinf
++#define isinf(x) std::isinf(x)
++#endif
++
++#ifndef isnan
++#define isnan(x) std::isnan(x)
++#endif
++
++#ifndef signbit
++#define signbit(x) std::signbit(x)
++#endif
++
++#endif
++
+ #endif // #ifndef WTF_MathExtras_h
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h.orig	2016-10-17 11:22:16.838639789 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h	2016-10-17 11:55:28.460836990 +0200
+@@ -61,7 +61,7 @@
+ #else
+ typedef uint16_t UChar;
+ #endif
+-typedef uint32_t UChar32;
++typedef int32_t UChar32;
+ 
+ // some defines from ICU
+ 
+@@ -190,7 +190,7 @@
+ 
+ inline UChar32 toLower(UChar32 ch)
+ {
+-    return QChar::toLower(ch);
++    return QChar::toLower(static_cast<uint32_t>(ch));
+ }
+ 
+ inline int toLower(UChar* result, int resultLength, const UChar* src, int srcLength,  bool* error)
+@@ -248,7 +248,7 @@
+ 
+ inline UChar32 toUpper(UChar32 ch)
+ {
+-    return QChar::toUpper(ch);
++    return QChar::toUpper(static_cast<uint32_t>(ch));
+ }
+ 
+ inline int toUpper(UChar* result, int resultLength, const UChar* src, int srcLength,  bool* error)
+@@ -306,12 +306,12 @@
+ 
+ inline int toTitleCase(UChar32 c)
+ {
+-    return QChar::toTitleCase(c);
++    return QChar::toTitleCase(static_cast<uint32_t>(c));
+ }
+ 
+ inline UChar32 foldCase(UChar32 c)
+ {
+-    return QChar::toCaseFolded(c);
++    return QChar::toCaseFolded(static_cast<uint32_t>(c));
+ }
+ 
+ inline int foldCase(UChar* result, int resultLength, const UChar* src, int srcLength,  bool* error)
+@@ -336,12 +336,12 @@
+ {
+     const uint test = U_MASK(QChar::Other_Control) |
+                       U_MASK(QChar::Other_NotAssigned);
+-    return !(U_MASK(QChar::category(c)) & test);
++    return !(U_MASK(QChar::category(static_cast<uint32_t>(c))) & test);
+ }
+ 
+ inline bool isSeparatorSpace(UChar32 c)
+ {
+-    return QChar::category(c) == QChar::Separator_Space;
++    return QChar::category(static_cast<uint32_t>(c)) == QChar::Separator_Space;
+ }
+ 
+ inline bool isPunct(UChar32 c)
+@@ -353,12 +353,12 @@
+                       U_MASK(QChar::Punctuation_InitialQuote) |
+                       U_MASK(QChar::Punctuation_FinalQuote) |
+                       U_MASK(QChar::Punctuation_Other);
+-    return U_MASK(QChar::category(c)) & test;
++    return U_MASK(QChar::category(static_cast<uint32_t>(c))) & test;
+ }
+ 
+ inline bool isLower(UChar32 c)
+ {
+-    return QChar::category(c) == QChar::Letter_Lowercase;
++    return QChar::category(static_cast<uint32_t>(c)) == QChar::Letter_Lowercase;
+ }
+ 
+ inline bool hasLineBreakingPropertyComplexContext(UChar32)
+@@ -369,17 +369,17 @@
+ 
+ inline UChar32 mirroredChar(UChar32 c)
+ {
+-    return QChar::mirroredChar(c);
++    return QChar::mirroredChar(static_cast<uint32_t>(c));
+ }
+ 
+ inline uint8_t combiningClass(UChar32 c)
+ {
+-    return QChar::combiningClass(c);
++    return QChar::combiningClass(static_cast<uint32_t>(c));
+ }
+ 
+ inline DecompositionType decompositionType(UChar32 c)
+ {
+-    return (DecompositionType)QChar::decompositionTag(c);
++    return (DecompositionType)QChar::decompositionTag(static_cast<uint32_t>(c));
+ }
+ 
+ inline int umemcasecmp(const UChar* a, const UChar* b, int len)
+@@ -396,12 +396,12 @@
+ 
+ inline Direction direction(UChar32 c)
+ {
+-    return (Direction)QChar::direction(c);
++    return (Direction)QChar::direction(static_cast<uint32_t>(c));
+ }
+ 
+ inline CharCategory category(UChar32 c)
+ {
+-    return (CharCategory) U_MASK(QChar::category(c));
++    return (CharCategory) U_MASK(QChar::category(static_cast<uint32_t>(c)));
+ }
+ 
+ } }
+ ConversionResult convertUTF8ToUTF16(
+     const char** sourceStart, const char* sourceEnd, 
+--- src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/UTF8.cpp.orig	2016-10-17 11:59:16.750540729 +0200
++++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/UTF8.cpp	2016-10-17 12:33:38.615027218 +0200
+@@ -228,8 +228,8 @@
+ // Magic values subtracted from a buffer value during UTF8 conversion.
+ // This table contains as many values as there might be trailing bytes
+ // in a UTF-8 sequence.
+-static const UChar32 offsetsFromUTF8[6] = { 0x00000000UL, 0x00003080UL, 0x000E2080UL, 
+-            0x03C82080UL, 0xFA082080UL, 0x82082080UL };
++static const UChar32 offsetsFromUTF8[6] = { 0x00000000, 0x00003080, 0x000E2080, 
++            0x03C82080, static_cast<UChar32>(0xFA082080), static_cast<UChar32>(0x82082080) };
+ 
+ ConversionResult convertUTF8ToUTF16(
+     const char** sourceStart, const char* sourceEnd, 
+--- src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/UTF8.cpp.orig	2016-10-17 13:13:18.298554535 +0200
++++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/UTF8.cpp	2016-10-17 13:13:55.843505442 +0200
+@@ -233,8 +233,9 @@
+ // Magic values subtracted from a buffer value during UTF8 conversion.
+ // This table contains as many values as there might be trailing bytes
+ // in a UTF-8 sequence.
+-static const UChar32 offsetsFromUTF8[6] = { 0x00000000UL, 0x00003080UL, 0x000E2080UL, 
+-            0x03C82080UL, 0xFA082080UL, 0x82082080UL };
++static const UChar32 offsetsFromUTF8[6] = { 0x00000000, 0x00003080, 0x000E2080, 
++            0x03C82080, static_cast<UChar32>(0xFA082080), static_cast<UChar32>(0x82082080) };
++
+ 
+ static inline UChar32 readUTF8Sequence(const char*& sequence, unsigned length)
+ {
+--- src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h.orig	2016-10-19 11:59:52.499992758 +0200
++++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h	2016-10-19 11:54:18.203455643 +0200
+@@ -68,7 +68,7 @@
+ #endif
+ 
+ #if !USE(QT_ICU_TEXT_BREAKING)
+-typedef uint32_t UChar32;
++typedef int32_t UChar32;
+ #endif
+ 
+ namespace WTF {
+--- src/3rdparty/webkit/Source/WebCore/html/HTMLImageElement.cpp.orig
++++ src/3rdparty/webkit/Source/WebCore/html/HTMLImageElement.cpp
+@@ -74,7 +74,7 @@
+     RefPtr<HTMLImageElement> image = adoptRef(new HTMLImageElement(imgTag, document));
+     if (optionalWidth)
+         image->setWidth(*optionalWidth);
+-    if (optionalHeight > 0)
++    if (optionalHeight)
+         image->setHeight(*optionalHeight);
+     return image.release();
+ }
+--- tools/linguist/linguist/messagemodel.cpp.orig
++++ tools/linguist/linguist/messagemodel.cpp
+@@ -183,7 +183,7 @@
+         if (ContextItem *c = one->findContext(oc->context())) {
+             for (int j = 0; j < oc->messageCount(); ++j) {
+                 MessageItem *m = oc->messageItem(j);
+-                if (c->findMessage(m->text(), m->comment()) >= 0)
++                if (c->findMessage(m->text(), m->comment()))
+                     ++inBoth;
+             }
+         }

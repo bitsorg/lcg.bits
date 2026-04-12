@@ -1,0 +1,11 @@
+--- CMakeLists.txt~	2024-05-28 02:36:27.000000000 +0200
++++ CMakeLists.txt	2024-08-13 08:27:30.406258971 +0200
+@@ -34,0 +35,3 @@
++message(STATUS "Forcing SIMD SUPPORT: No")
++set(DEFAULT_USE_SIMD No)
++
+--- CMakeLists.txt~	2024-08-13 08:37:40.985139841 +0200
++++ CMakeLists.txt	2024-08-13 08:40:39.340802510 +0200
+@@ -52 +52 @@
+-		set(DEFAULT_OPT_FLAGS "-mtune=native -march=native -mfpmath=both")
++		set(DEFAULT_OPT_FLAGS "-mtune=generic -march=x86-64 -mfpmath=both")

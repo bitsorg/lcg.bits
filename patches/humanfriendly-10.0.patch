@@ -1,0 +1,32 @@
+--- ./humanfriendly/testing.py~	2020-03-06 22:01:01.000000000 +0100
++++ ./humanfriendly/testing.py	2025-09-18 10:22:54.132921282 +0200
+@@ -28 +28 @@
+-import pipes
++#import pipes
+@@ -30,0 +31,10 @@
++if sys.version_info < (3, 13):
++    import pipes
++else:
++    # pipes was removed in Python 3.13
++    print(
++        "Warning: humanfriendly.testing tried to import 'pipes', "
++        "which has been removed in Python 3.13+. "
++        "Some test helpers may not work correctly."
++    )
++    pipes = None
+--- ./humanfriendly/cli.py~	2020-03-02 01:06:35.000000000 +0100
++++ ./humanfriendly/cli.py	2025-09-19 10:31:30.012818074 +0200
+@@ -82 +81,0 @@
+-import pipes
+@@ -85 +84,6 @@
+-
++try:
++    import pipes
++    shell_quote = pipes.quote
++except ImportError:
++    import shlex
++    shell_quote = shlex.quote
+@@ -179 +183,2 @@
+-    spinner_label = "Waiting for command: %s" % " ".join(map(pipes.quote, command_line))
++#    spinner_label = "Waiting for command: %s" % " ".join(map(pipes.quote, command_line))
++    spinner_label = "Waiting for command: %s" % " ".join(map(shell_quote, command_line))

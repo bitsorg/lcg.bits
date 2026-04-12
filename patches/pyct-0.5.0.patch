@@ -1,0 +1,9 @@
+--- ./pyct/cmd.py~	2023-01-30 12:08:19.000000000 +0100
++++ ./pyct/cmd.py	2025-02-26 16:53:52.946640554 +0100
+@@ -13 +13 @@
+-import distutils.dir_util
++#import distutils.dir_util
+@@ -50 +50,2 @@
+-    distutils.dir_util.copy_tree(source, path, verbose=verbose)
++#    distutils.dir_util.copy_tree(source, path, verbose=verbose)
++    shutil.copytree(source, path)

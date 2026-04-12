@@ -1,0 +1,24 @@
+--- src/Makefile.orig	2013-05-29 20:53:57.000000000 +0200
++++ src/Makefile	2013-05-29 20:54:19.000000000 +0200
+@@ -19,7 +19,7 @@
+ $(LIB_SHARED):  $(objects)
+ 	mkdir -p $(LIBDIR_SHARED)
+ 	@echo creating the shared library $@
+-	$(FC) $(LDFLAGSSHARED) $(objects) -o $@ -shared -Wl,-soname,$(notdir $@)
++	$(FC) $(LDFLAGSSHARED) $(objects) $(LIBS_HERWIG) -o $@ -shared 
+ 
+ $(LIB_ARCHIVE) : $(objects)
+ 	mkdir -p $(LIBDIR_ARCHIVE)
+--- configure.orig	2020-07-27 16:10:52.243864119 +0200
++++ configure	2020-07-27 16:11:12.167515236 +0200
+@@ -63,8 +63,8 @@
+ #
+ # export FFLAGS_OPT="-O2 -Wuninitialized"
+ # -Wuninitialized outputs many irrelevant warnings and therefore obscurs
+-export FFLAGS_OPT="-O2"
+-export FFLAGS_DBG=-g
++export FFLAGS_OPT="-O2 -std=legacy"
++export FFLAGS_DBG="-g -std=legacy"
+ export CFLAGS_OPT=-O2
+ export CFLAGS_DBG=-g
+ export CXXFLAGS_OPT="-O2 -ansi -pedantic -W -Wall"

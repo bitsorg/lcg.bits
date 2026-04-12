@@ -1,0 +1,8 @@
+--- configure.orig	2015-02-12 23:42:19.753296502 +0100
++++ configure		2015-02-12 23:42:40.193298956 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/bin/bash
+ #
+ # Configuration script, to be run before compilation
+ #

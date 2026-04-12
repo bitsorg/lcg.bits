@@ -1,0 +1,8 @@
+--- ./src/core/util/per_cpu.h~	2025-06-07 08:07:48.000000000 +0200
++++ ./src/core/util/per_cpu.h	2025-08-05 11:33:01.006171040 +0200
+@@ -85 +85 @@
+-  explicit PerCpu(PerCpuOptions options) : shards_(options.Shards()) {}
++  explicit PerCpu(PerCpuOptions options) : shards_(options.Shards()), data_{new T[shards_]} {}
+@@ -97 +97 @@
+-  std::unique_ptr<T[]> data_{new T[shards_]};
++  std::unique_ptr<T[]> data_;

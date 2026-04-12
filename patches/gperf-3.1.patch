@@ -1,0 +1,11 @@
+--- lib/getline.cc.orig	2023-06-02 09:42:43.222546068 +0200
++++ lib/getline.cc	2023-06-02 09:43:04.723768058 +0200
+@@ -55,7 +55,7 @@
+ 
+   for (;;)
+     {
+-      register int c = getc (stream);
++      int c = getc (stream);
+ 
+       /* We always want at least one char left in the buffer, since we
+          always (unless we get an error while reading the first char)

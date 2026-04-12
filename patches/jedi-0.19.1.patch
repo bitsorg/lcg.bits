@@ -1,0 +1,14 @@
+--- ./jedi/third_party/typeshed/third_party/2/six/moves/__init__.pyi~	2023-10-02 11:17:57.000000000 +0200
++++ ./jedi/third_party/typeshed/third_party/2/six/moves/__init__.pyi	2025-09-19 12:29:50.272228775 +0200
+@@ -8 +8,7 @@
+-import pipes
++try:
++    import pipes
++    shell_quote = pipes.quote
++except ImportError:
++    import shlex
++    shell_quote = shlex.quote
++    
+@@ -78 +84 @@
+-shlex_quote = pipes.quote
++shlex_quote = shell_quote

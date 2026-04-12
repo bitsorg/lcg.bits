@@ -1,0 +1,22 @@
+--- panel/compiler.py.orig	2023-10-25 10:21:21
++++ panel/compiler.py	2023-10-25 10:22:10
+@@ -70,12 +70,12 @@
+             with open(filename, 'wb') as f:
+                 f.write(response.content)
+         else:
+-            content = response.content.decode('utf-8')
++            content = response.content.decode('utf-8', 'replace')
+             with open(filename, 'w', encoding="utf-8") as f:
+                 f.write(content)
+         if map_response:
+             with open(f'{filename}.map', 'w', encoding="utf-8") as f:
+-                f.write(map_response.content.decode('utf-8'))
++                f.write(map_response.content.decode('utf-8', 'replace'))
+ 
+ def write_bundled_tarball(tarball, name=None, module=False):
+     model_name = name.split('.')[-1].lower() if name else ''
+--- pyproject.toml	2025-07-25 16:07:20
++++ pyproject.toml	2025-07-25 16:05:28
+@@ -3 +3 @@
+-    "param >=1.9.2",
++    "param >=1.9.2,<2.0",

@@ -1,0 +1,10 @@
+--- lib/cpp/src/thrift/concurrency/Mutex.h.orig	2025-04-30 10:00:26.483438077 +0200
++++ lib/cpp/src/thrift/concurrency/Mutex.h	2025-04-30 10:01:00.533764054 +0200
+@@ -22,6 +22,7 @@
+ 
+ #include <memory>
+ #include <thrift/TNonCopyable.h>
++#include <cstdint>
+ 
+ namespace apache {
+ namespace thrift {

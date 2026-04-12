@@ -1,0 +1,14 @@
+--- ATOOLS/Org/binreloc.c.orig	2021-11-25 12:17:37.595451976 +0100
++++ ATOOLS/Org/binreloc.c	2021-11-25 12:24:05.628306054 +0100
+@@ -216,7 +216,10 @@
+ 			break;
+ 
+ 		/* Sanity check. */
+-		if (strstr (line, " r-xp ") == NULL || strchr (line, '/') == NULL)
++                /* With binutils > 2.30 (const void *) "" is placed in "r--p" area of memory
++                   In general, for the mechanism of detection it doesn't really matter where your symbol is,
++                   therefore, check for strstr (line, " r-xp ") == NULL is removed */  
++		if (strchr (line, '/') == NULL)
+ 			continue;
+ 
+ 		/* Parse line. */

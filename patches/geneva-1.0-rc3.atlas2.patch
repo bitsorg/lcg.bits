@@ -1,0 +1,604 @@
+diff -Naur ORIG/include/Geneva/Components/BoundingConstantsBase.hpp PATCHED/include/Geneva/Components/BoundingConstantsBase.hpp
+--- include/Geneva/Components/BoundingConstantsBase.hpp	2018-07-09 14:01:33.000000000 +0200
++++ include/Geneva/Components/BoundingConstantsBase.hpp	2024-06-11 12:41:01.655052152 +0200
+@@ -58,6 +58,8 @@
+          : _boundFactor (1.0), _numTauNBins(numTauNBins), _tauNMin(tauNMin), _tauNMax(tauNMax), _tauNSampling(1.1)
+       {
+          _binTauNEdges.reserve(_numTauNBins + 1);
++         _binTauNEdges.clear();
++         for (size_t i = 0; i <= _numTauNBins; ++i) _binTauNEdges.push_back(0);
+          for (size_t i = 0; i <= _numTauNBins; ++i) {
+             _binTauNEdges[i] = tauNVal(static_cast<double>(i) / static_cast<double>(_numTauNBins));
+          }
+diff -Naur ORIG/packages/beamfunc/CMakeLists.txt PATCHED/packages/beamfunc/CMakeLists.txt
+--- packages/beamfunc/CMakeLists.txt	2018-07-09 14:01:33.000000000 +0200
++++ packages/beamfunc/CMakeLists.txt	2024-06-11 01:06:55.617067914 +0200
+@@ -77,7 +77,7 @@
+    message (">> Use 'make beamfunc-install-data' to download and install missing data files.")
+ endif ()
+ 
+-set (URL "https://stash.desy.de/projects/GENEVA/repos/geneva-data/raw/beamfunc")
++set (URL "https://gitlab.desy.de/geneva/geneva-data/-/raw/master/beamfunc")
+ 
+ # write and generate scripts to install beamfunc grid files
+ function (write_install_data_script script_filename dest_share)
+diff -Naur ORIG/python/bin/geneva PATCHED/python/bin/geneva
+--- python/bin/geneva	2018-07-09 14:01:33.000000000 +0200
++++ python/bin/geneva	2024-06-10 22:53:41.816189919 +0200
+@@ -196,7 +196,7 @@
+    commands = None
+    while process.master:
+       if not args.quiet:
+-         print cpp.get_banner()
++         print(cpp.get_banner())
+ 
+       try:
+          commands = getCommandProvider(args).getAllCommands(args)
+@@ -209,7 +209,7 @@
+          break
+ 
+       if args.dry_run:
+-         print "List of commands to execute:\n"
++         print("List of commands to execute:\n")
+          from pprint import pprint
+          pprint(commands)
+          process.signal_exit()
+diff -Naur ORIG/python/bin/geneva-lhef-reweight PATCHED/python/bin/geneva-lhef-reweight
+--- python/bin/geneva-lhef-reweight	2018-07-09 14:01:33.000000000 +0200
++++ python/bin/geneva-lhef-reweight	2024-06-10 22:53:41.854190505 +0200
+@@ -132,8 +132,8 @@
+ 
+          seeds.sort()
+          seedlist = []
+-         for k, g in groupby(enumerate(seeds), lambda (i, x): i-x):
+-            seedlist.append(map(itemgetter(1),g))
++         for k, g in groupby(enumerate(seeds), lambda i_x: i_x[0]-i_x[1]):
++            seedlist.append(list(map(itemgetter(1),g)))
+          seedstr=""
+          for s in seedlist:
+             seedstr += str(s[0])
+diff -Naur ORIG/python/bin/geneva-NERSC PATCHED/python/bin/geneva-NERSC
+--- python/bin/geneva-NERSC	2018-07-09 14:01:33.000000000 +0200
++++ python/bin/geneva-NERSC	2024-06-10 22:53:41.877190859 +0200
+@@ -74,7 +74,7 @@
+    numNodes = nersc.getNumNodes(args.machine, numCores)
+    executable = os.path.join(sys.path[0], os.path.basename(args.python_executable))
+    if not os.path.isfile(executable):
+-      print "Could not find executable: " + executable
++      print("Could not find executable: " + executable)
+       sys.exit(1)
+    command = ["srun", "-n", str(numCores), executable]
+    options = []
+@@ -89,7 +89,7 @@
+ 
+    slurmfile = "submit" + args.run_name + ".sl"
+    if os.path.isfile(slurmfile):
+-      print "SLURM file "+slurmfile+" already present. Select different runname."
++      print("SLURM file "+slurmfile+" already present. Select different runname.")
+       sys.exit(1)
+    else:
+       nersc.writeSlurmFile(slurmfile, args.machine, args.queue, args.license, numNodes, timestring, command)
+@@ -101,7 +101,7 @@
+    if (not args.dry_run):
+       run_command(batchline)
+    else:
+-      print batchline
++      print(batchline)
+ 
+ #-------------------------------------------------------------------------------
+ if __name__ == "__main__":
+diff -Naur ORIG/python/CMakeLists.txt PATCHED/python/CMakeLists.txt
+--- python/CMakeLists.txt	2018-07-09 14:01:33.000000000 +0200
++++ python/CMakeLists.txt	2024-06-10 22:39:59.480498225 +0200
+@@ -22,7 +22,7 @@
+ if (${PROJECT_NAME}_enable_python)
+    message ("== Configuring Geneva Python interface")
+ 
+-   find_package (PythonInterp EXACT 2.7)
++   find_package (PythonInterp)
+    if (PYTHONINTERP_FOUND)
+       set (${PROJECT_NAME}_USE_PYTHON TRUE)
+    else ()
+diff -Naur ORIG/python/extensions.cpp PATCHED/python/extensions.cpp
+--- python/extensions.cpp	2018-07-09 14:01:33.000000000 +0200
++++ python/extensions.cpp	2024-06-10 23:10:46.807007688 +0200
+@@ -34,7 +34,7 @@
+ //------------------------------------------------------------------------------
+ static PyObject* get_banner(PyObject* self, PyObject* args)
+ {
+-   return PyString_FromString(Geneva::header().c_str());
++   return PyUnicode_FromString(Geneva::header().c_str());
+ }
+ 
+ //------------------------------------------------------------------------------
+@@ -48,7 +48,7 @@
+       Log::setVerbosity(Log::kWarning);
+       OptionMap opt(Geneva(std::string(command)).optionMap());
+       for (OptionMap::const_iterator it = opt.begin(); it != opt.end(); ++it) {
+-         PyDict_SetItemString(d, it->first.c_str(), PyString_FromString(it->second->getValueStr().c_str()));
++         PyDict_SetItemString(d, it->first.c_str(), PyUnicode_FromString(it->second->getValueStr().c_str()));
+       }
+    } catch (...) {
+       mainExceptionHandler();
+@@ -136,9 +136,18 @@
+ };
+ 
+ //------------------------------------------------------------------------------
+-PyMODINIT_FUNC initcpp_extensions(void)
++static struct PyModuleDef cpp_extensionsmodule = {
++    PyModuleDef_HEAD_INIT,
++    "cpp_extensions",
++    "Python interface for the Geneva",
++    -1,
++    cpp_extensions_methods
++};
++
++
++PyMODINIT_FUNC PyInit_cpp_extensions(void)
+ {
+-   Py_InitModule("cpp_extensions", cpp_extensions_methods);
++  return PyModule_Create(&cpp_extensionsmodule);
+ }
+ 
+ } // namespace Geneva
+diff -Naur ORIG/python/genevapylib/CombineAnalyzerFiles.py PATCHED/python/genevapylib/CombineAnalyzerFiles.py
+--- python/genevapylib/CombineAnalyzerFiles.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/CombineAnalyzerFiles.py	2024-06-10 22:53:23.824912859 +0200
+@@ -29,8 +29,8 @@
+ import xml.etree.ElementTree as ET
+ import xml.dom.minidom
+ 
+-import process
+-import utils
++from . import process
++from . import utils
+ 
+ 
+ #-------------------------------------------------------------------------------
+@@ -379,12 +379,12 @@
+    analyzeroutput = ""
+ 
+    # TODO: remove sort ? (needed to facilitate comparisons)
+-   for k, result in sorted(ratefinal.iteritems()):
++   for k, result in sorted(ratefinal.items()):
+       analyzeroutput += formatoutput(k, result, "rate")
+ 
+    analyzeroutput += "\n"
+ 
+-   for k, result in sorted(histfinal.iteritems()):
++   for k, result in sorted(histfinal.items()):
+       analyzeroutput += formatoutput(k, result, "hist")
+ 
+    AnalyzerOutputfinal = ET.SubElement(rootfinal, "AnalyzerOutput")
+@@ -456,7 +456,7 @@
+          batch_size = 2
+       else:
+          batch_size = int(m.ceil(num/(1.0*size)))
+-      batches = [batch_files[i:i+batch_size] for i in xrange(0, num, batch_size)]
++      batches = [batch_files[i:i+batch_size] for i in range(0, num, batch_size)]
+ 
+       # Perform run on each batch, and write result to temporary file.
+       if process.mpi:
+diff -Naur ORIG/python/genevapylib/CombineGridFiles.py PATCHED/python/genevapylib/CombineGridFiles.py
+--- python/genevapylib/CombineGridFiles.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/CombineGridFiles.py	2024-06-10 22:53:23.876913660 +0200
+@@ -19,8 +19,8 @@
+ from collections import OrderedDict
+ import numpy as np
+ 
+-import process
+-import utils
++from . import process
++from . import utils
+ 
+ #-------------------------------------------------------------------------------
+ # Private functions
+@@ -28,7 +28,7 @@
+ 
+ def _plot_grids(outstem, iter, dim, numBins, values, numevts, xsec):
+    #  order grids by dimension and then lexicographically
+-   allgrids=[g[0] for g in sorted(zip(dim.keys(), dim.values()), key=lambda g: g[1])]
++   allgrids=[g[0] for g in sorted(zip(list(dim.keys()), list(dim.values())), key=lambda g: g[1])]
+    # calculates cumulants
+    cumValues = {}
+    for g in allgrids:
+@@ -383,7 +383,7 @@
+    numEvents = {}
+    crossSection = {}
+    outfiles = []
+-   for name, infiles in gridFiles.items():
++   for name, infiles in list(gridFiles.items()):
+       outfile = outstem + name + ".dat"
+       if process.master:
+          process.log("Combining grid: " + name)
+@@ -427,7 +427,7 @@
+          # output files.
+          files = list(OrderedDict.fromkeys(
+             i
+-            for infiles in gridFiles.values()
++            for infiles in list(gridFiles.values())
+             for i in infiles
+             if not any(os.path.samefile(o, i) for o in outfiles)))
+          if backup_path:
+diff -Naur ORIG/python/genevapylib/CombineXSecFiles.py PATCHED/python/genevapylib/CombineXSecFiles.py
+--- python/genevapylib/CombineXSecFiles.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/CombineXSecFiles.py	2024-06-10 22:53:23.887913829 +0200
+@@ -17,8 +17,8 @@
+ import os
+ import numpy as np
+ 
+-import process
+-import utils
++from . import process
++from . import utils
+ 
+ #-------------------------------------------------------------------------------
+ # Private functions
+diff -Naur ORIG/python/genevapylib/CommandProvider.py PATCHED/python/genevapylib/CommandProvider.py
+--- python/genevapylib/CommandProvider.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/CommandProvider.py	2024-06-10 22:53:23.890913875 +0200
+@@ -16,11 +16,11 @@
+ 
+ def getCommandProvider(args):
+    if args.stage == "analyze-rivet":
+-      import Rivet
++      from . import Rivet
+       return Rivet.Rivet()
+    else:
+       #Pick the right process from input card
+-      from OptionHandler import OptionHandler
++      from .OptionHandler import OptionHandler
+       try:
+          if "--help" in args.extra_options:
+             raise ValueError("--help cannot be passed as extra option.")
+@@ -29,10 +29,10 @@
+          extra_options = ""
+       calc = OptionHandler(args.option_file, extra_options).getValue("calc")
+       if calc == "CalcSCETppV012":
+-         from DrellYan import DrellYan
++         from .DrellYan import DrellYan
+          return DrellYan()
+       elif "CalcNLOppV" in calc:
+-         from FixedOrder import FixedOrder
++         from .FixedOrder import FixedOrder
+          return FixedOrder()
+       else:
+          raise ValueError("Cannot yet handle calculation "+calc+" !")
+diff -Naur ORIG/python/genevapylib/DrellYan.py PATCHED/python/genevapylib/DrellYan.py
+--- python/genevapylib/DrellYan.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/DrellYan.py	2024-06-10 22:53:23.925914414 +0200
+@@ -14,9 +14,9 @@
+ #    Definition of class DrellYan
+ #-------------------------------------------------------------------------------
+ 
+-import OptionHandler as opt
+-import Lhef as lhef
+-from utils import format_tag, format_path, join_paths, get_filenames
++from . import OptionHandler as opt
++from . import Lhef as lhef
++from .utils import format_tag, format_path, join_paths, get_filenames
+ 
+ 
+ class DrellYan:
+diff -Naur ORIG/python/genevapylib/execute.py PATCHED/python/genevapylib/execute.py
+--- python/genevapylib/execute.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/execute.py	2024-06-10 23:55:44.907598300 +0200
+@@ -32,9 +32,9 @@
+ import subprocess
+ import io
+ 
+-import process
+-import config
+-import utils
++from . import process
++from . import config
++from . import utils
+ 
+ 
+ def execute(commands, quiet):
+diff -Naur ORIG/python/genevapylib/FixedOrder.py PATCHED/python/genevapylib/FixedOrder.py
+--- python/genevapylib/FixedOrder.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/FixedOrder.py	2024-06-10 22:53:23.956914892 +0200
+@@ -14,8 +14,8 @@
+ #    Definition of class FixedOrder
+ #-------------------------------------------------------------------------------
+ 
+-import OptionHandler as opt
+-from utils import format_tag, join_paths, get_filenames
++from . import OptionHandler as opt
++from .utils import format_tag, join_paths, get_filenames
+ 
+ 
+ class FixedOrder:
+diff -Naur ORIG/python/genevapylib/__init__.py PATCHED/python/genevapylib/__init__.py
+--- python/genevapylib/__init__.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/__init__.py	2024-06-11 00:10:31.405631530 +0200
+@@ -0,0 +1 @@
++from .cpp_extensions import *
+diff -Naur ORIG/python/genevapylib/Lhef.py PATCHED/python/genevapylib/Lhef.py
+--- python/genevapylib/Lhef.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/Lhef.py	2024-06-11 00:32:55.710015419 +0200
+@@ -16,8 +16,8 @@
+ 
+ import math as m
+ 
+-from config import geneva_use_zlib
+-import process
++from .config import geneva_use_zlib
++from . import process
+ 
+ if geneva_use_zlib:
+    import gzip
+diff -Naur ORIG/python/genevapylib/OptionHandler.py PATCHED/python/genevapylib/OptionHandler.py
+--- python/genevapylib/OptionHandler.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/OptionHandler.py	2024-06-11 00:33:04.176148243 +0200
+@@ -14,8 +14,8 @@
+ #    Definition of class OptionHandler
+ #-------------------------------------------------------------------------------
+ 
+-import cpp_extensions as cpp
+-from utils import format_tag, format_path
++from . import cpp_extensions as cpp
++from .utils import format_tag, format_path
+ 
+ 
+ class OptionHandler:
+diff -Naur ORIG/python/genevapylib/process.py PATCHED/python/genevapylib/process.py
+--- python/genevapylib/process.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/process.py	2024-06-10 22:53:24.009915708 +0200
+@@ -64,6 +64,10 @@
+ 
+ import os
+ import sys
++import atexit
++import atexit
++import atexit
++import atexit
+ import traceback
+ 
+ mpi = None
+@@ -275,7 +279,7 @@
+       do_exit = __return_value is not None
+ 
+    if do_exit:
+-      sys.exitfunc = __scheduled_exit_function
++      atexit.register(__scheduled_exit_function)
+       sys.exit(__return_value)
+ 
+ def exit(return_value = 0):
+@@ -320,7 +324,7 @@
+    if has_error():
+       if master:
+          log_error(message, False)
+-      sys.exitfunc = __scheduled_exit_function
++      atexit.register(__scheduled_exit_function)
+       sys.exit(__return_value)
+ 
+ def has_error():
+@@ -440,10 +444,10 @@
+    sys.__excepthook__(exception_type, value, traceback)
+    if debug:
+       log_debug("Uncaught exception ...")
+-   sys.exitfunc = __mpi_unscheduled_exit_function
++   atexit.register(__mpi_unscheduled_exit_function)
+ 
+ name_tag = __empty_name_tag
+-sys.exitfunc = __empty_exit_function
++atexit.register(__empty_exit_function)
+ 
+ #-------------------------------------------------------------------------------
+ # auto-initialize if we were started with OpenMPI mpirun
+diff -Naur ORIG/python/genevapylib/ReweightEventMultiplicity.py PATCHED/python/genevapylib/ReweightEventMultiplicity.py
+--- python/genevapylib/ReweightEventMultiplicity.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/ReweightEventMultiplicity.py	2024-06-11 00:33:23.705454646 +0200
+@@ -17,8 +17,8 @@
+ import os
+ import shutil
+ 
+-import process
+-from config import geneva_use_zlib
++from . import process
++from .config import geneva_use_zlib
+ 
+ if geneva_use_zlib:
+    import gzip
+diff -Naur ORIG/python/genevapylib/Rivet.py PATCHED/python/genevapylib/Rivet.py
+--- python/genevapylib/Rivet.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/Rivet.py	2024-06-11 00:33:30.800565970 +0200
+@@ -16,8 +16,8 @@
+ 
+ import os
+ 
+-from config import geneva_use_zlib
+-from utils import format_tag, join_paths, get_filenames
++from .config import geneva_use_zlib
++from .utils import format_tag, join_paths, get_filenames
+ 
+ if geneva_use_zlib:
+    import gzip
+diff -Naur ORIG/python/genevapylib/SubmitNersc.py PATCHED/python/genevapylib/SubmitNersc.py
+--- python/genevapylib/SubmitNersc.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/SubmitNersc.py	2024-06-10 22:53:24.036916124 +0200
+@@ -22,7 +22,7 @@
+    """Get the name of the host we are running (only works for Cori-Haswell, Cori-KNL and Edison)"""
+    allowedMachines = ["edison","cori-haswell","cori-knl"]
+    if not machine in allowedMachines:
+-      print "Machine "+machine+" not supported. Can only run on the following systems: "+str(allowedMachines)
++      print("Machine "+machine+" not supported. Can only run on the following systems: "+str(allowedMachines))
+       sys.exit(1)
+ 
+ def checkQueue(machine,queue):
+@@ -32,7 +32,7 @@
+    if machine in ["edison", "cori-haswell"," cori-knl"]:
+       allowedQueues = ["regular", "premium", "debug"]
+       if not queue in allowedQueues:
+-         print "Queue "+queue+" not supported. Can only run on the following queues: "+str(allowedQueues)
++         print("Queue "+queue+" not supported. Can only run on the following queues: "+str(allowedQueues))
+          sys.exit(1)
+ 
+ def getTimeString(machine,queue,max_time):
+@@ -41,14 +41,14 @@
+    """
+    #Get the time information
+    if (queue == "debug") and (max_time > 30):
+-      print "Can only run up to 30 minutes on the debug queue."
++      print("Can only run up to 30 minutes on the debug queue.")
+       sys.exit(1)
+    else:
+       if (machine == "edison") and (max_time > 2160):
+-         print "On Edison can only run up to 36 hours on the regular or premium queues."
++         print("On Edison can only run up to 36 hours on the regular or premium queues.")
+          sys.exit(1)
+       elif (machine[:4] == "cori") and (max_time > 2880):
+-         print "On Cori can only run up to 48 hours on the regular or premium queues."
++         print("On Cori can only run up to 48 hours on the regular or premium queues.")
+          sys.exit(1)
+    hours = int(max_time / 60)
+    minutes = max_time % 60
+@@ -65,7 +65,7 @@
+    elif machine == "edison":
+       numCoresPerNode = 24
+    else:
+-      print "This script only works for Edison and Cori-Haswell or Cori-KNL."
++      print("This script only works for Edison and Cori-Haswell or Cori-KNL.")
+       sys.exit(1)
+    numNodes = int(math.ceil(float(numCores) / numCoresPerNode))
+    return numNodes
+diff -Naur ORIG/python/genevapylib/utils.py PATCHED/python/genevapylib/utils.py
+--- python/genevapylib/utils.py	2018-07-09 14:01:33.000000000 +0200
++++ python/genevapylib/utils.py	2024-06-11 00:00:32.066144020 +0200
+@@ -16,10 +16,10 @@
+ 
+ import os
+ import sys
+-import imp
++from importlib.machinery import SourceFileLoader
+ import shutil
+ 
+-import process
++from . import process
+ 
+ #-------------------------------------------------------------------------------
+ # Executable handling
+@@ -35,7 +35,7 @@
+          if output == '' and p.poll() is not None:
+             break
+          if output:
+-            print output.strip()
++            print(output.strip())
+       rc = p.poll()
+       return rc
+    except Exception as error:
+@@ -55,7 +55,7 @@
+    try:
+       tmp = sys.dont_write_bytecode
+       sys.dont_write_bytecode = True
+-      return imp.load_source(os.path.basename(executable), executable)
++      return SourceFileLoader(os.path.basename(executable), executable).load_module()
+    finally:
+       sys.dont_write_bytecode = tmp
+ 
+diff -Naur ORIG/src/Components/BoundingConstantsFSR.cpp PATCHED/src/Components/BoundingConstantsFSR.cpp
+--- src/Components/BoundingConstantsFSR.cpp	2018-07-09 14:01:33.000000000 +0200
++++ src/Components/BoundingConstantsFSR.cpp	2024-06-11 13:30:17.304992181 +0200
+@@ -34,6 +34,8 @@
+ {
+    _binSizeZ = (_zMax - _zMin) / static_cast<double>(_numZBins);
+    _binZEdges.reserve(_numZBins + 1);
++   _binZEdges.clear();
++   for (size_t i = 0; i <= _numZBins; ++i) _binZEdges.push_back(0);
+    for (size_t i = 0; i <= _numZBins; ++i) {
+       _binZEdges[i] = _zMin + static_cast<double>(i) * _binSizeZ;
+    }
+@@ -47,6 +49,8 @@
+    initStream >> _tauNMax;
+    initStream >> _tauNSampling;
+    _binTauNEdges.reserve(_numTauNBins+1);
++   _binTauNEdges.clear();
++   for (size_t i = 0; i <= _numTauNBins; ++i) _binTauNEdges.push_back(0);
+    for (size_t bin = 0; bin <= _numTauNBins; bin++) {
+       initStream >> _binTauNEdges[bin];
+    }
+@@ -56,6 +60,8 @@
+    initStream >> _zMax;
+    initStream >> _binSizeZ;
+    _binZEdges.reserve(_numZBins + 1);
++   _binZEdges.clear();
++   for (size_t i = 0; i <= _numZBins; ++i) _binZEdges.push_back(0);
+    for (size_t bin = 0; bin <= _numZBins; bin++) {
+       initStream >> _binZEdges[bin];
+    }
+diff -Naur ORIG/src/Components/BoundingConstantsISR.cpp PATCHED/src/Components/BoundingConstantsISR.cpp
+--- src/Components/BoundingConstantsISR.cpp	2018-07-09 14:01:33.000000000 +0200
++++ src/Components/BoundingConstantsISR.cpp	2024-06-11 13:05:24.521442322 +0200
+@@ -42,6 +42,8 @@
+    initStream >> _tauNMax;
+    initStream >> _tauNSampling;
+    _binTauNEdges.reserve(_numTauNBins+1);
++   _binTauNEdges.clear();
++   for (size_t i = 0; i <= _numTauNBins; ++i) _binTauNEdges.push_back(0);
+    for (size_t bin = 0; bin <= _numTauNBins; bin++) {
+       initStream >> _binTauNEdges[bin];
+    }
+--- cmake/Modules/ExternalProjectAddOns.cmake.orig	2024-05-29 15:19:58.378111981 +0200
++++ cmake/Modules/ExternalProjectAddOns.cmake	2024-05-29 15:20:37.201667742 +0200
+@@ -38,6 +38,14 @@
+ #  will be run first.
+ #-------------------------------------------------------------------------------
+ 
++function(_ep_get_configuration_subdir_suffix suffix_var)
++  set(suffix "")
++  if(CMAKE_CONFIGURATION_TYPES)
++    set(suffix "/${CMAKE_CFG_INTDIR}")
++  endif()
++  set(${suffix_var} "${suffix}" PARENT_SCOPE)
++endfunction()
++
+ function (ExternalProject_Add_Finish name prefix_dir)
+    ExternalProject_Add_Step (${name} finish
+       COMMAND ${CMAKE_COMMAND} -D${name}_ROOT=${prefix_dir} ${CMAKE_BINARY_DIR}
+diff -Naur site-packages-orig/genevapylib/Lhef.py site-packages/genevapylib/Lhef.py
+--- python/genevapylib/Lhef.py.orig	2024-06-27 13:34:46.520394154 +0200
++++ python/genevapylib/Lhef.py	2024-06-27 13:35:58.621481531 +0200
+@@ -28,13 +28,11 @@
+ 
+ 
+ def _open_file(filename):
+-   f = open(filename,'rb')
+-   if (f.read(2) == '\x1f\x8b') and geneva_use_zlib:
+-      f.seek(0)
+-      return io.BufferedReader(gzip.GzipFile(fileobj=f))
++   f = open(filename,"rb")
++   if (bytes(f.read(2)).hex() == '1f8b') and geneva_use_zlib:
++      return io.TextIOWrapper(gzip.GzipFile(filename))
+    else:
+-      f.seek(0)
+-      return f
++      return open(filename,'r')
+ 
+ class XSInfo:
+    def __init__(self):
+diff -Naur site-packages-orig/genevapylib/ReweightEventMultiplicity.py site-packages/genevapylib/ReweightEventMultiplicity.py
+--- python/genevapylib/ReweightEventMultiplicity.py.orig	2024-06-27 13:34:46.521394155 +0200
++++ python/genevapylib/ReweightEventMultiplicity.py	2024-06-27 13:36:19.430506751 +0200
+@@ -22,16 +22,15 @@
+ 
+ if geneva_use_zlib:
+    import gzip
++   import io
+ 
+ 
+ def _open_files(infile, outfile):
+    f = open(infile,'rb')
+-   if (f.read(2) == '\x1f\x8b') and geneva_use_zlib:
+-      f.seek(0)
+-      return gzip.GzipFile(fileobj=f), gzip.GzipFile(outfile, "w")
++   if (bytes(f.read(2)).hex() == '1f8b') and geneva_use_zlib:
++      return io.TextIOWrapper(gzip.GzipFile(infile)), io.TextIOWrapper(gzip.GzipFile(outfile, "w"))
+    else:
+-      f.seek(0)
+-      return f, open(outfile, "w")
++      return open(infile,"r"), open(outfile, "w")
+ 
+ def reweight(infile, mult, nweights, posmuupfix, posmudownfix,
+              rwgt_fac_central, rwgt_fac_up, rwgt_fac_down, xsec_fac, extraLog, keep):

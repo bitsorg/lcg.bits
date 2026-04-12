@@ -1,0 +1,17 @@
+--- ./coloredlogs/converter/__init__.py~	2020-02-15 00:18:02.000000000 +0100
++++ ./coloredlogs/converter/__init__.py	2025-09-19 12:08:48.776527503 +0200
+@@ -12 +12 @@
+-import pipes
++#import pipes
+@@ -16 +16,7 @@
+-
++try:
++    import pipes
++    shell_quote = pipes.quote
++except ImportError:
++    import shlex
++    shell_quote = shlex.quote
++    
+@@ -78 +84 @@
+-        command_line = ['script', '-qc', ' '.join(map(pipes.quote, command)), '/dev/null']
++        command_line = ['script', '-qc', ' '.join(map(shell_quote, command)), '/dev/null']

@@ -1,0 +1,24 @@
+--- tools/perf/util/setup.py~	2025-04-03 13:58:37.000000000 +0200
++++ tools/perf/util/setup.py	2025-04-08 16:34:18.581603001 +0200
+@@ -64,4 +64,5 @@
+ if cc_is_clang:
+     cflags += ["-Wno-unused-command-line-argument" ]
++    cflags += ["-Wno-cast-function-type-mismatch" ]
+ else:
+     cflags += ['-Wno-cast-function-type' ]
+--- tools/perf/Makefile.config~	2025-04-03 13:58:37.000000000 +0200
++++ tools/perf/Makefile.config	2025-04-08 16:33:30.917956123 +0200
+@@ -712,5 +712,5 @@
+     ifeq ($(feature-clang-bpf-co-re), 0)
+       $(warning Warning: Disabled BPF skeletons as clang is too old)
+-      BUILD_BPF_SKEL := 0
++      BUILD_BPF_SKEL := 1
+     endif
+   endif
+@@ -1182,5 +1182,5 @@
+     LDFLAGS += $(LIBTRACEEVENT_LDFLAGS)
+     EXTLIBS += ${TRACEEVENTLIBS}
+-    LIBTRACEEVENT_VERSION := $(shell PKG_CONFIG_PATH=$(LIBTRACEEVENT_DIR) $(PKG_CONFIG) --modversion libtraceevent)
++    LIBTRACEEVENT_VERSION := $(shell $(PKG_CONFIG) --modversion libtraceevent)
+     LIBTRACEEVENT_VERSION_1 := $(word 1, $(subst ., ,$(LIBTRACEEVENT_VERSION)))
+     LIBTRACEEVENT_VERSION_2 := $(word 2, $(subst ., ,$(LIBTRACEEVENT_VERSION)))

@@ -1,0 +1,12 @@
+--- SuiteSparse_config/SuiteSparse_config.mk.orig	2021-05-18 15:01:16.000000000 +0200
++++ SuiteSparse_config/SuiteSparse_config.mk	2021-06-23 18:24:55.125239613 +0200
+@@ -194,2 +194,2 @@
+-            BLAS ?= -lblas
+-            LAPACK ?= -llapack
++            BLAS ?= -lopenblas
++            LAPACK ?= -lopenblas
+--- Makefile.orig	2021-05-18 15:01:16.000000000 +0200
++++ Makefile	2021-06-23 17:47:54.403142948 +0200
+@@ -47 +47 @@
+-install: metisinstall
++install: metisinstall library

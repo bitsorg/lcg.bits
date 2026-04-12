@@ -1,0 +1,23 @@
+--- configure.orig	2016-02-22 15:47:18.674199570 +0100
++++ configure	2016-02-22 15:48:30.694675795 +0100
+@@ -178,7 +178,8 @@
+   esac
+ done
+ 
+-test "$CONF_OS" = Linux -a "$CONF_BITS" \!= 32 && CONF_LIBDIRSUFFIX=64
++## patch to avoid lib64 directory for Ubuntu/Debian
++test "$CONF_OS" = Linux -a "$CONF_BITS" \!= 32 && test ! -f /etc/debian_version && CONF_LIBDIRSUFFIX=64
+ 
+ CONF_M=${CONF_BITS:+-m$CONF_BITS}
+ 
+--- makefile.in.orig    2016-05-27 10:43:59.000000000 +0200
++++ makefile.in 2016-05-27 10:44:39.000000000 +0200
+@@ -41,8 +41,6 @@
+          $(BLD)/PDG.h "$(INCLUDEDIR)"
+        strip $(BLD)/FeynHiggs$(EXE) $(BLD)/table$(EXE)
+        cp -p $(BLD)/FeynHiggs$(EXE) $(BLD)/table$(EXE) $(BLD)/fcc "$(BINDIR)"
+-       -strip $(BLD)/MFeynHiggs$(EXE)
+-       -cp -p $(BLD)/MFeynHiggs$(EXE) "$(BINDIR)"
+ 
+ force: $(BLD)/version.h
+

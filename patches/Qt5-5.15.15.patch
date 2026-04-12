@@ -1,0 +1,41 @@
+--- qtbase/src/platformsupport/input/xkbcommon/qxkbcommon.cpp~	2024-07-23 12:25:47.000000000 +0200
++++ qtbase/src/platformsupport/input/xkbcommon/qxkbcommon.cpp	2024-10-24 11:32:13.384990997 +0200
+@@ -275,0 +276 @@
++#ifdef XKB_KEY_dead_lowline
+@@ -280 +281 @@
+-
++#endif
+--- qtlocation/src/3rdparty/mapbox-gl-native/src/mbgl/gl/stencil_mode.hpp~	2024-07-23 12:25:58.000000000 +0200
++++ qtlocation/src/3rdparty/mapbox-gl-native/src/mbgl/gl/stencil_mode.hpp	2024-10-24 12:54:06.494569997 +0200
+@@ -2,0 +3,2 @@
++#include <cstdint>
++
+--- qtlocation/src/3rdparty/mapbox-gl-native/include/mbgl/util/geometry.hpp~	2024-07-23 12:25:58.000000000 +0200
++++ qtlocation/src/3rdparty/mapbox-gl-native/include/mbgl/util/geometry.hpp	2024-10-24 12:51:19.028871772 +0200
+@@ -2,0 +3,2 @@
++#include <cstdint>
++
+--- qtlocation/src/3rdparty/mapbox-gl-native/include/mbgl/util/string.hpp~	2024-07-23 12:25:58.000000000 +0200
++++ qtlocation/src/3rdparty/mapbox-gl-native/include/mbgl/util/string.hpp	2024-10-24 12:54:53.245106539 +0200
+@@ -2,0 +3 @@
++#include <cstdint>
+--- qtlocation/src/3rdparty/mapbox-gl-native/deps/rapidjson/1.1.0/include/rapidjson/document.h.orig	2024-06-05 15:09:46.627490522 +0200
++++ qtlocation/src/3rdparty/mapbox-gl-native/deps/rapidjson/1.1.0/include/rapidjson/document.h	2024-06-05 15:10:57.140700721 +0200
+@@ -316,8 +316,6 @@
+ 
+     GenericStringRef(const GenericStringRef& rhs) : s(rhs.s), length(rhs.length) {}
+ 
+-    GenericStringRef& operator=(const GenericStringRef& rhs) { s = rhs.s; length = rhs.length; }
+-
+     //! implicit conversion to plain CharType pointer
+     operator const Ch *() const { return s; }
+ 
+@@ -328,6 +326,8 @@
+     //! Disallow construction from non-const array
+     template<SizeType N>
+     GenericStringRef(CharType (&str)[N]) /* = delete */;
++    //! Copy assignment operator not permitted - immutable type
++    GenericStringRef& operator=(const GenericStringRef& rhs) /* = delete */;
+ };
+ 
+ //! Mark a character pointer as constant string

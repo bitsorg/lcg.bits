@@ -1,0 +1,14 @@
+--- ./webio_jupyter_extension/serverextension.py~	2021-09-10 02:24:57.000000000 +0200
++++ ./webio_jupyter_extension/serverextension.py	2025-10-02 15:40:04.377424498 +0200
+@@ -1,2 +1,9 @@
+-from notebook.utils import url_path_join
+-from notebook.base.handlers import IPythonHandler
++try:
++    # Try modern Jupyter Server
++    from jupyter_server.utils import url_path_join
++    from jupyter_server.base.handlers import APIHandler as IPythonHandler
++except ImportError:
++    # Fallback to classic Notebook
++    from notebook.utils import url_path_join
++    from notebook.base.handlers import IPythonHandler
++

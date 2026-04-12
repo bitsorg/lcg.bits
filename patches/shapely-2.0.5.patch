@@ -1,0 +1,15 @@
+--- setup.py.orig	2024-07-30 13:27:26.078312468 +0200
++++ setup.py	2024-07-30 13:28:33.039662689 +0200
+@@ -156,6 +156,12 @@
+ else:
+     ext_options = get_geos_paths()
+ 
++    # Add the compile flag to suppress the incompatible-pointer-types warning
++    if 'extra_compile_args' not in ext_options:
++        ext_options['extra_compile_args'] = ['-Wno-error=incompatible-pointer-types']
++    else:
++        ext_options['extra_compile_args'].append('-Wno-error=incompatible-pointer-types')
++
+     ext_modules = [
+         Extension(
+             "shapely.lib",

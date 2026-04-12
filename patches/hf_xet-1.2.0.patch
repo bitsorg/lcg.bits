@@ -1,0 +1,8 @@
+--- pyproject.toml~	2025-10-24 20:55:07
++++ pyproject.toml	2026-02-18 11:33:52
+@@ -52,5 +52,4 @@
+ 
+ [tool.maturin]
+-python-source = "hf_xet/python"
+ features = ["pyo3/extension-module"]
+ manifest-path = "hf_xet/Cargo.toml"

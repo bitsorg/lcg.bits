@@ -1,0 +1,29 @@
+package: onnxruntime
+description: onnxruntime Python package
+version: "1.24.4"
+tag: "1.24.4"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/onnxruntime-1.24.4.tar.gz
+requires:
+  - Python
+  - setuptools
+  - six
+  - wheel
+  - blas
+  - numpy
+  - pip
+  - onnx
+  - torch
+  - packaging
+  - coloredlogs
+  - sympy
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

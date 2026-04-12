@@ -1,0 +1,35 @@
+*** externals/qwt/src/qwt/6.0.1/qwtconfig.pri	2011-08-01 16:33:53.000000000 +0200
+--- qwtconfig.pri	2013-04-22 22:43:11.000000000 +0200
+***************
+*** 16,29 ****
+  # Install paths
+  ######################################################################
+  
+! QWT_INSTALL_PREFIX = $$[QT_INSTALL_PREFIX]
+  
+! unix {
+!     QWT_INSTALL_PREFIX    = /usr/local/qwt-$$QWT_VERSION
+! }
+! 
+! win32 {
+!     QWT_INSTALL_PREFIX    = C:/Qwt-$$QWT_VERSION
+  }
+  
+  QWT_INSTALL_DOCS      = $${QWT_INSTALL_PREFIX}/doc
+--- 16,31 ----
+  # Install paths
+  ######################################################################
+  
+! #QWT_INSTALL_PREFIX = $$[QWT_INSTALL_PREFIX]
+! isEmpty(QWT_INSTALL_PREFIX) {
+  
+!   unix {
+!       QWT_INSTALL_PREFIX    = /usr/local/qwt-$$QWT_VERSION
+!   }
+! 
+!   win32 {
+!       QWT_INSTALL_PREFIX    = C:/Qwt-$$QWT_VERSION
+!   }
+  }
+  
+  QWT_INSTALL_DOCS      = $${QWT_INSTALL_PREFIX}/doc

@@ -1,0 +1,52 @@
+package: grpc
+description: grpc library/tool (from LCG software stack)
+version: "1.62.3"
+tag: "1.62.3"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/grpc-1.62.3.tar.gz
+requires:
+  - absl
+  - c_ares
+  - re2
+  - protobuf
+  - zlib
+build_requires:
+  - bits-recipe-tools
+license: Apache-2.0
+patches:
+  - grpc-1.62.3.patch
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  cmake $SOURCEDIR \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DgRPC_INSTALL:Bool=ON \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DBUILD_SHARED_LIBS=ON \
+    -DgRPC_BUILD_CODEGEN=ON \
+    -DgRPC_BUILD_CSHARP_EXT:Bool=OFF \
+    -DgRPC_ABSL_PROVIDER:String=package \
+    -DgRPC_CARES_PROVIDER:String=package \
+    -DgRPC_SSL_PROVIDER:String=package \
+    -DgRPC_ZLIB_PROVIDER:String=package \
+    -DgRPC_RE2_PROVIDER:String=package \
+    -DgRPC_PROTOBUF_PROVIDER:String=package \
+    -DgRPC_USE_PROTO_LITE:Bool=OFF \
+    -DgRPC_PROTOBUF_PACKAGE_TYPE:String=CONFIG \
+    -DgRPC_BUILD_TESTS:BOOL=OFF \
+    -DgRPC_GFLAGS_PROVIDER:String=none \
+    -DgRPC_BENCHMARK_PROVIDER:String=none \
+    -DgRPC_BUILD_GRPC_PHP_PLUGIN=OFF \
+    -DgRPC_BUILD_GRPC_OBJECTIVE_C_PLUGIN=OFF \
+    -DgRPC_BUILD_GRPC_NODE_PLUGIN=OFF \
+    -DgRPC_BUILD_GRPC_CSHARP_PLUGIN=OFF \
+    -DgRPC_BUILD_GRPC_RUBY_PLUGIN=OFF \
+    -DgRPC_BUILD_GRPC_CPP_PLUGIN=ON \
+    -DgRPC_BUILD_GRPC_PYTHON_PLUGIN=ON
+}

@@ -1,0 +1,13 @@
+--- src/profile.cc~	2024-07-03 08:07:32.721073530 +0200
++++ src/profile.cc	2024-07-03 08:27:08.154865396 +0200
+@@ -32 +32 @@
+-HIDDEN void             (*igprof_abort)(void) throw () = &abort;
++HIDDEN void             (*igprof_abort)(void) = &abort;
+--- src/profile.h~	2023-01-12 16:35:04.000000000 +0100
++++ src/profile.h	2024-07-03 08:27:32.233304808 +0200
+@@ -14 +14 @@
+-typedef void IgProfAbortFunc (void) __attribute__((noreturn));
++typedef void IgProfAbortFunc (void);
+@@ -24,1 +24,1 @@
+-extern void             (*igprof_abort) (void) throw ();
++extern void             (*igprof_abort) (void) ;

@@ -1,0 +1,25 @@
+package: numcodecs
+description: numcodecs Python package
+version: "0.16.0"
+tag: "0.16.0"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/numcodecs-0.16.0.tar.gz
+requires:
+  - Python
+  - pip
+  - setuptools
+  - cython
+  - numpy
+  - entrypoints
+build_requires:
+  - bits-recipe-tools
+license: TODO
+patches:
+  - numcodecs-0.16.0.patch
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

@@ -1,0 +1,22 @@
+package: jsoncpp
+description: C++ library for JSON reading and writing
+version: "1.9.3"
+tag: "1.9.3"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/jsoncpp-1.9.3.zip
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  cmake $SOURCEDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DBUILD_SHARED_LIBS=ON \
+    -DCMAKE_BUILD_TYPE=Release
+}

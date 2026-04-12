@@ -1,0 +1,12 @@
+--- Makeshared.subdir	2013-05-15 14:33:11.000000000 +0200
++++ Makeshared.subdir	2013-05-15 14:37:09.000000000 +0200
+@@ -42,7 +42,7 @@
+ $(LIBNAME): $(objects)
+ 	@mkdir -p $(LIBDIR)
+ 	@echo creating the shared library $@
+-	$(CXX) $(LDFLAGSSHARED) $(objects) -o $@ -shared -Wl,-soname,$(notdir $@)
++	$(CXX) $(LDFLAGSSHARED) $(objects) -o $@ -shared 
+ 
+ deps := $(patsubst $(DIRNAME)/%.F,$(TMPDIR)/%.d,$(wildcard $(DIRNAME)/*.F))
+ 
+

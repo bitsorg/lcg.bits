@@ -1,0 +1,251 @@
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/content_summary.h~	2022-04-22 16:58:52.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/content_summary.h	2023-05-17 14:33:24.642171492 +0200
+@@ -20,0 +21 @@
++#include <cstdint>
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/uri.h~	2022-04-22 16:58:52.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/uri.h	2023-05-17 14:25:50.823637995 +0200
+@@ -21,0 +22 @@
++#include <cstdint>
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/statinfo.h~	2022-04-22 16:58:52.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/statinfo.h	2023-05-17 14:33:06.561913399 +0200
+@@ -20,0 +21 @@
++#include <cstdint>
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/fsinfo.h~	2022-04-22 16:58:52.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/include/hdfspp/fsinfo.h	2023-05-17 14:33:37.601356482 +0200
+@@ -20,0 +21 @@
++#include <cstdint>
+--- hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-catalog/hadoop-yarn-applications-catalog-webapp/package.json~	2022-04-22 16:58:52.000000000 +0200
++++ hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-catalog/hadoop-yarn-applications-catalog-webapp/package.json	2023-08-01 15:15:05.290269617 +0200
+@@ -19,6 +19,9 @@
+         "shelljs": "^0.2.6",
+         "apidoc": "0.17.7"
+     },
++    "resolutions": {
++        "triple-beam": "1.3.0"
++    },
+     "scripts": {
+         "prestart": "npm install & mvn clean package",
+         "pretest": "npm install"
+--- hadoop-common-project/hadoop-common/HadoopCommon.cmake.org	2024-07-30 16:02:55.981750646 +0200
++++ hadoop-common-project/hadoop-common/HadoopCommon.cmake	2024-07-30 16:03:39.864976602 +0200
+@@ -212,4 +212,4 @@
+ endif()
+ 
+ # Set GNU99 as the C standard to use
+-set(CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
+\ No newline at end of file
++set(CMAKE_C_FLAGS "-Wno-implicit-function-declaration -std=gnu99 ${CMAKE_C_FLAGS}")
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/proto/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/proto/CMakeLists.txt	2024-08-26 10:44:58.019867468 +0200
+@@ -21,18 +20,0 @@
+-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS
+-  ${PROTO_HDFS_DIR}/datatransfer.proto
+-  ${PROTO_HDFS_DIR}/ClientDatanodeProtocol.proto
+-  ${PROTO_HDFS_DIR}/ClientNamenodeProtocol.proto
+-  ${PROTO_HDFS_DIR}/acl.proto
+-  ${PROTO_HDFS_DIR}/datatransfer.proto
+-  ${PROTO_HDFS_DIR}/encryption.proto
+-  ${PROTO_HDFS_DIR}/erasurecoding.proto
+-  ${PROTO_HDFS_DIR}/hdfs.proto
+-  ${PROTO_HDFS_DIR}/inotify.proto
+-  ${PROTO_HDFS_DIR}/xattr.proto
+-  ${PROTO_HDFS_DIR}/ReconfigurationProtocol.proto
+-  ${PROTO_HADOOP_DIR}/IpcConnectionContext.proto
+-  ${PROTO_HADOOP_DIR}/ProtobufRpcEngine.proto
+-  ${PROTO_HADOOP_DIR}/RpcHeader.proto
+-  ${PROTO_HADOOP_DIR}/Security.proto
+-  ${PROTO_HADOOP_DIR}/HAServiceProtocol.proto
+-)
+@@ -41 +23,2 @@
+-target_link_libraries(protoc-gen-hrpc ${PROTOBUF_PROTOC_LIBRARY} ${PROTOBUF_LIBRARY})
++MESSAGE(STATUS "protoc library is ${PROTOBUF_PROTOC_LIBRARY} ")
++target_link_libraries(protoc-gen-hrpc PRIVATE protobuf::libprotobuf protobuf::libprotoc)
+@@ -84 +67,25 @@
+-add_library(proto_obj OBJECT ${PROTO_SRCS} ${PROTO_HDRS} ${HRPC_SRCS})
++add_library(proto_obj OBJECT ${HRPC_SRCS})
++
++protobuf_generate(
++  TARGET proto_obj
++  IMPORT_DIRS ${PROTO_HDFS_DIR} ${PROTO_HADOOP_DIR}
++  PROTOS
++  ${PROTO_HDFS_DIR}/datatransfer.proto
++  ${PROTO_HDFS_DIR}/ClientDatanodeProtocol.proto
++  ${PROTO_HDFS_DIR}/ClientNamenodeProtocol.proto
++  ${PROTO_HDFS_DIR}/acl.proto
++  ${PROTO_HDFS_DIR}/datatransfer.proto
++  ${PROTO_HDFS_DIR}/encryption.proto
++  ${PROTO_HDFS_DIR}/erasurecoding.proto
++  ${PROTO_HDFS_DIR}/hdfs.proto
++  ${PROTO_HDFS_DIR}/inotify.proto
++  ${PROTO_HDFS_DIR}/xattr.proto
++  ${PROTO_HDFS_DIR}/ReconfigurationProtocol.proto
++  ${PROTO_HADOOP_DIR}/IpcConnectionContext.proto
++  ${PROTO_HADOOP_DIR}/ProtobufRpcEngine.proto
++  ${PROTO_HADOOP_DIR}/RpcHeader.proto
++  ${PROTO_HADOOP_DIR}/Security.proto
++  ${PROTO_HADOOP_DIR}/HAServiceProtocol.proto
++)
++target_link_libraries(proto_obj PRIVATE protobuf::libprotobuf)
++
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/common/CMakeLists.txt	2024-08-26 10:48:42.419486366 +0200
+@@ -24,0 +25,1 @@
++target_link_libraries(common_obj PRIVATE protobuf::libprotobuf)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/CMakeLists.txt~	2024-08-26 09:40:50.193699847 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/CMakeLists.txt	2024-08-26 10:41:24.173398915 +0200
+@@ -45 +45 @@
+-find_package(Protobuf REQUIRED)
++find_package(Protobuf REQUIRED CONFIG)
+@@ -75 +75 @@
+-set (CMAKE_REQUIRED_LIBRARIES ${PROTOBUF_LIBRARY} ${PROTOBUF_PROTOC_LIBRARY})
++set (CMAKE_REQUIRED_LIBRARIES protobuf::libprotoc protobuf::libprotobuf)
+@@ -156,1 +156,1 @@
+-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -std=c++11 -g -fPIC -fno-strict-aliasing")
++set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -std=c++17 -g -fPIC -fno-strict-aliasing")
+@@ -277 +277 @@
+-    ${PROTOBUF_LIBRARY}
++    protobuf::libprotobuf protobuf::libprotoc
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/CMakeLists.txt	2024-08-26 10:32:44.126260251 +0200
+@@ -43,4 +42,0 @@
+-protobuf_generate_cpp(PROTO_TEST_SRCS PROTO_TEST_HDRS
+-  ${PROTO_HADOOP_TEST_DIR}/test.proto
+-  ${PROTO_HADOOP_TEST_DIR}/test_rpc_service.proto
+-)
+@@ -83,2 +79,10 @@
+-add_executable(rpc_engine_test rpc_engine_test.cc ${PROTO_TEST_SRCS} ${PROTO_TEST_HDRS})
+-target_link_libraries(rpc_engine_test test_common rpc proto common ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++add_executable(rpc_engine_test rpc_engine_test.cc)
++protobuf_generate(
++    TARGET rpc_engine_test
++    IMPORT_DIRS "${PROTO_HADOOP_TEST_DIR}"
++    PROTOS
++      ${PROTO_HADOOP_TEST_DIR}/test.proto
++      ${PROTO_HADOOP_TEST_DIR}/test_rpc_service.proto
++)
++
++target_link_libraries(rpc_engine_test test_common rpc proto common protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/rpc/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/rpc/CMakeLists.txt	2024-08-26 11:29:52.697372778 +0200
+@@ -31,0 +32 @@
++target_link_libraries(rpc_obj PRIVATE protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/reader/CMakeLists.txt~	2023-06-10 01:33:35.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/reader/CMakeLists.txt	2024-08-26 11:29:19.281805322 +0200
+@@ -21,0 +22 @@
++target_link_libraries(reader_obj PRIVATE protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/connection/CMakeLists.txt~	2023-06-10 01:33:35.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/connection/CMakeLists.txt	2024-08-26 11:28:56.474419612 +0200
+@@ -21,0 +22 @@
++target_link_libraries(connection_obj PRIVATE protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/fs/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/fs/CMakeLists.txt	2024-08-26 11:29:34.018054535 +0200
+@@ -21,0 +22 @@
++target_link_libraries(fs_obj PRIVATE protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/proto/CMakeLists.txt~	2024-08-26 10:44:58.019867468 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/proto/CMakeLists.txt	2024-08-26 11:27:20.945787145 +0200
+@@ -52 +52 @@
+-      COMMAND ${PROTOBUF_PROTOC_EXECUTABLE}
++      COMMAND protobuf::protoc
+@@ -69,0 +70 @@
++  LANGUAGE cpp
+@@ -90,1 +91,1 @@
+-target_link_libraries(proto_obj PRIVATE protobuf::libprotobuf)
++target_link_libraries(proto_obj PUBLIC protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/bindings/c/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/lib/bindings/c/CMakeLists.txt	2024-08-26 11:33:45.065448134 +0200
+@@ -21,0 +22 @@
++target_link_libraries(bindings_c_obj PRIVATE protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/examples/CMakeLists.txt~	2023-06-10 01:33:35.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/examples/CMakeLists.txt	2024-08-26 12:46:51.519837803 +0200
+@@ -17,0 +18,1 @@
++link_libraries(protobuf::libprotobuf protobuf::libprotoc)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tools/CMakeLists.txt~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tools/CMakeLists.txt	2024-08-26 12:45:47.591768692 +0200
+@@ -24,0 +25 @@
++link_libraries(protobuf::libprotobuf protobuf::libprotoc)
+@@ -93 +94 @@
+-target_link_libraries(hdfs_tail tools_common hdfspp_static)
+\ No newline at end of file
++target_link_libraries(hdfs_tail tools_common hdfspp_static)
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/remote_block_reader_test.cc~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/remote_block_reader_test.cc	2024-08-26 12:53:00.838497881 +0200
+@@ -56,2 +56,2 @@
+-namespace pb = ::google::protobuf;
+-namespace pbio = pb::io;
++namespace hpb = ::google::protobuf;
++namespace pbio = ::google::protobuf::io;
+@@ -112 +112 @@
+-static inline string ToDelimitedString(const pb::MessageLite *msg) {
++static inline string ToDelimitedString(const hpb::MessageLite *msg) {
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/CMakeLists.txt~	2024-08-26 10:32:44.126260251 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/CMakeLists.txt	2024-08-26 12:41:45.272594518 +0200
+@@ -67 +67 @@
+-target_link_libraries(remote_block_reader_test test_common reader proto common connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(remote_block_reader_test test_common reader proto common connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -71 +71 @@
+-target_link_libraries(sasl_digest_md5_test common ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(sasl_digest_md5_test common protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -75 +75 @@
+-target_link_libraries(retry_policy_test common gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(retry_policy_test common gmock_main ${CMAKE_THREAD_LIBS_INIT} protobuf::libprotoc protobuf::libprotobuf)
+@@ -88 +88 @@
+-target_link_libraries(rpc_engine_test test_common rpc proto common protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(rpc_engine_test test_common rpc proto common protobuf::libprotobuf protobuf::libprotoc ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -92 +92 @@
+-target_link_libraries(bad_datanode_test rpc reader proto fs bindings_c rpc proto common reader connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(bad_datanode_test rpc reader proto fs bindings_c rpc proto common reader connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -96 +96 @@
+-target_link_libraries(node_exclusion_test fs gmock_main common ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(node_exclusion_test fs gmock_main common protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+@@ -108 +108 @@
+-target_link_libraries(hdfspp_errors_test common gmock_main bindings_c fs rpc proto common reader connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(hdfspp_errors_test common gmock_main bindings_c fs rpc proto common reader connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -112 +112 @@
+-target_link_libraries(hdfs_builder_test test_common gmock_main bindings_c fs rpc proto common reader connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(hdfs_builder_test test_common gmock_main bindings_c fs rpc proto common reader connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -116 +116 @@
+-target_link_libraries(logging_test common gmock_main bindings_c fs rpc proto common reader connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(logging_test common gmock_main bindings_c fs rpc proto common reader connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} gmock_main ${CMAKE_THREAD_LIBS_INIT})
+@@ -120 +120 @@
+-target_link_libraries(hdfs_ioservice_test fs gmock_main common ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(hdfs_ioservice_test fs gmock_main common protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+@@ -124 +124 @@
+-target_link_libraries(user_lock_test fs gmock_main common ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(user_lock_test fs gmock_main common protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+@@ -128 +128 @@
+-target_link_libraries(hdfs_config_connect_bugs_test common gmock_main bindings_c fs rpc proto common reader connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
++target_link_libraries(hdfs_config_connect_bugs_test common gmock_main bindings_c fs rpc proto common reader connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} ${SASL_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+@@ -148,0 +149,2 @@
++target_link_libraries(hdfspp_test_static PUBLIC protobuf::libprotobuf protobuf::libprotoc)
++target_link_libraries(hdfspp_test_shim_static PUBLIC protobuf::libprotobuf protobuf::libprotoc)
+@@ -160 +162 @@
+-link_libhdfs_test(libhdfs_threaded hdfspp_test_shim_static fs reader rpc proto common connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES} )
++link_libhdfs_test(libhdfs_threaded hdfspp_test_shim_static fs reader rpc proto common connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES} )
+@@ -164 +166 @@
+-link_libhdfs_test (hdfspp_mini_dfs_smoke hdfspp_test_shim_static fs reader rpc proto common connection gmock_main ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES})
++link_libhdfs_test (hdfspp_mini_dfs_smoke hdfspp_test_shim_static fs reader rpc proto common connection gmock_main protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES})
+@@ -168 +170 @@
+-link_libhdfs_test(libhdfs_mini_stress_valgrind hdfspp_test_static fs reader rpc proto common connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES})
++link_libhdfs_test(libhdfs_mini_stress_valgrind hdfspp_test_static fs reader rpc proto common connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES})
+@@ -173 +175 @@
+-link_libhdfs_test(libhdfs_mini_stress hdfspp_test_shim_static fs reader rpc proto common connection ${PROTOBUF_LIBRARIES} ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES})
++link_libhdfs_test(libhdfs_mini_stress hdfspp_test_shim_static fs reader rpc proto common connection protobuf::libprotoc protobuf::libprotobuf ${OPENSSL_LIBRARIES} native_mini_dfs ${JAVA_JVM_LIBRARY} ${SASL_LIBRARIES})
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/rpc_engine_test.cc~	2023-06-10 01:41:44.000000000 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/tests/rpc_engine_test.cc	2024-08-26 12:51:52.487422723 +0200
+@@ -43,1 +42,0 @@
+-namespace pb = ::google::protobuf;
+--- hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/CMakeLists.txt~	2024-08-26 13:34:27.548457739 +0200
++++ hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/libhdfspp/CMakeLists.txt	2024-08-26 13:38:13.989188005 +0200
+@@ -85,0 +86,2 @@
++set (CMAKE_REQUIRED_INCLUDES)
++set (CMAKE_REQUIRED_LIBRARIES)
+--- hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-catalog/hadoop-yarn-applications-catalog-webapp/package.json.orig	2025-11-06 14:33:43.980441040 +0100
++++ hadoop-yarn-project/hadoop-yarn/hadoop-yarn-applications/hadoop-yarn-applications-catalog/hadoop-yarn-applications-catalog-webapp/package.json	2025-11-06 14:34:37.765886818 +0100
+@@ -20,6 +20,7 @@
+         "apidoc": "0.17.7"
+     },
+     "resolutions": {
++        "color": "3.1.3",
+         "triple-beam": "1.3.0"
+     },
+     "scripts": {

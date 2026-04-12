@@ -1,0 +1,53 @@
+--- GNUmakefile.orig	2019-06-10 15:23:54.806793753 +0200
++++ GNUmakefile	2019-06-10 16:56:22.691132440 +0200
+@@ -1,12 +1,16 @@
+ PYTHON ?= python2
++PIP ?= pip
+ SAGE ?= sage
+ PREFIX = /usr/local
+ SOLLYA_DIR = /usr/local
+-INSTALL_OPTIONS = --system --target=${PREFIX}
+-CPPFLAGS = -I${SOLLYA_DIR}/include
+-LDFLAGS = -L${SOLLYA_DIR}/lib
+-PYTHONPATH = $(shell PYTHONUSERBASE=${PREFIX} ${PYTHON} -c "import site; \
+-	     print(site.getusersitepackages())")
++MPFI_DIR ?= /usr/local
++MPFR_DIR ?= /usr/local
++GMP_DIR ?= /usr/local
++INSTALL_OPTIONS = --root=/ --target=${PREFIX}
++CPPFLAGS = -I${SOLLYA_DIR}/include -I${MPFI_DIR}/include -I${MPFR_DIR}/include -I${GMP_DIR}/include
++LDFLAGS = -L${SOLLYA_DIR}/lib -L${MPFI_DIR}/lib -L${MPFR_DIR}/lib -L${GMP_DIR}/lib
++PYTHONPATH := $(shell PYTHONUSERBASE=${PREFIX} ${PYTHON} -c "import site; \
++	     print(site.getusersitepackages())"):${PYTHONPATH}
+ 
+ export LDFLAGS CPPFLAGS PYTHONPATH
+ 
+@@ -17,6 +21,7 @@
+ SOBJ := sollya.so sagesollya.so sollya_extra_functions.so
+ 
+ sollya.so sollya_extra_functions.so: ${DEPS}
++	echo ${PYTHONPATH}
+ 	${PYTHON} setup.py build_ext --inplace
+ 
+ build: sollya.so sollya_extra_functions.so
+@@ -25,8 +30,8 @@
+ 	WITH_SAGE=foo ${SAGE} -python setup.py build_ext --inplace
+ 
+ csollya_ops.pxd sollya_ops.pxi: gen_ops.py
+-	> /dev/null echo '#include <sollya.h>' | cpp "${CPPFLAGS}" && \
+-	    echo '#include <sollya.h>' | cpp "${CPPFLAGS}" \
++	> /dev/null echo '#include <sollya.h>' | cpp ${CPPFLAGS} && \
++	    echo '#include <sollya.h>' | cpp ${CPPFLAGS} \
+ 	    | grep SOLLYA_BASE_FUNC_ \
+ 	    | ${PYTHON} $< csollya_ops.pxd sollya_ops.pxi
+ 
+@@ -38,7 +43,8 @@
+ generated: ${GEN_DEPS}
+ 
+ install: sollya.so sollya_extra_functions.so
+-	pip install ${INSTALL_OPTIONS} .
++	echo ${PYTHONPATH}
++	${PIP} install ${INSTALL_OPTIONS} .
+ 
+ clean:
+ 	${PYTHON} setup.py clean

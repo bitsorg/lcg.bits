@@ -1,0 +1,19 @@
+package: async_generator
+description: async_generator Python package
+version: "1.10"
+tag: "1.10"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/async_generator-1.10.tar.gz
+requires:
+  - Python
+  - setuptools
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

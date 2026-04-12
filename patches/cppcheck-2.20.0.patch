@@ -1,0 +1,13 @@
+--- lib/library.cpp.orig	2025-07-20 12:15:59.000000000 +0200
++++ lib/library.cpp	2025-07-30 13:00:03.541180217 +0200
+@@ -215,5 +215,2 @@
+             std::list<std::string> cfgfolders;
+-    #ifdef FILESDIR
+-            cfgfolders.emplace_back(FILESDIR "/cfg");
+-    #endif
+             if (exename) {
+@@ -222,2 +219,3 @@
+-                cfgfolders.push_back(std::move(exepath));
++                cfgfolders.push_back(exepath);
++                cfgfolders.push_back(std::move(exepath) + "../share/Cppcheck/cfg");
+             }

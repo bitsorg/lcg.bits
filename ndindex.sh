@@ -1,0 +1,19 @@
+package: ndindex
+description: ndindex Python package
+version: "1.8"
+tag: "1.8"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/ndindex-1.8.tar.gz
+requires:
+  - Python
+  - pip
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include PythonRecipe)
+##############################
+MODULE_OPTIONS="--python"
+##############################

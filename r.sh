@@ -1,0 +1,22 @@
+package: R
+description: R library/tool (from LCG software stack)
+version: "4.5.0"
+tag: "4.5.0"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/R-4.5.0.tar.gz
+requires:
+  - fribidi
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include AutoToolsRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
+  ./configure --prefix=$INSTALLROOT --disable-R-framework --enable-R-shlib --without-x --with-cairo --with-libpng --with-libtiff --with-jpeglib
+}

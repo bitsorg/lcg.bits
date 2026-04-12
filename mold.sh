@@ -1,0 +1,29 @@
+package: mold
+description: mold library/tool (from LCG software stack)
+version: "unknown"
+tag: "unknown"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/mold-unknown.tar.gz
+requires:
+  - mimalloc
+  - tbb
+  - zlib
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Configure() {
+  cmake $SOURCEDIR \
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=${ENABLE_IPO} \
+    -DMOLD_USE_SYSTEM_MIMALLOC=ON \
+    -DMOLD_USE_SYSTEM_TBB=ON
+}

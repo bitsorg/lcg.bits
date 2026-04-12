@@ -1,0 +1,33 @@
+--- src/diss/Elastic.f.orig	2024-02-14 15:43:49.274258385 +0100
++++ src/diss/Elastic.f	2024-02-14 15:45:52.516054457 +0100
+@@ -103,10 +103,28 @@
+       double precision dum,gcohu1,gcohu2,gcohu3
+       integer i
+ 
++      character(len=*), parameter :: DEFAULT_PATH = "../"
++      character(len=256) :: sfPath, filePath1, filePath2
++      integer :: iostat
++
+       include 'gcoh.f'
+       
+-      open(40,file='../src/diss/SplinesWithVariableKnots.dat')
+-      open(41,file='../src/diss/SplinesWithVariableKnots_Unpol.dat')
++      integer :: length
++      call get_environment_variable('SFGENPATH', sfPath, length, iostat)
++      if (iostat /= 0) sfPath = DEFAULT_PATH
++
++      sfPath = trim(sfPath) // "/src/diss/"
++
++      filePath1 = trim(sfPath) // "SplinesWithVariableKnots.dat"
++      filePath2 = trim(sfPath) // "SplinesWithVariableKnots_Unpol.dat"
++
++      ! Print the full file paths
++      print *, "File path 1: ", filePath1
++      print *, "File path 2: ", filePath2
++
++      
++      open(40,file=filePath1)
++      open(41,file=filePath2)      
+       
+       do i=1,1000
+          read(40,*)gcoh(1,i),gcoh(2,i),dum,geunc1,geunc2,gcoh(3,i),dum

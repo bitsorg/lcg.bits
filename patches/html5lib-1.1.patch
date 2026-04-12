@@ -1,0 +1,23 @@
+--- ./setup.py~	2020-06-23 01:23:02.000000000 +0200
++++ ./setup.py	2025-11-25 16:30:41.932129603 +0100
+@@ -92,3 +92,17 @@
+-                a.targets[0].id == "__version__" and
+-                isinstance(a.value, ast.Str)):
+-            version = a.value.s
++                a.targets[0].id == "__version__"):
++            value = a.value
++            # Python < 3.14: ast.Str is used
++            Str = getattr(ast, "Str", ())
++            Constant = getattr(ast, "Constant", ())
++
++            if isinstance(value, Str):
++                # old AST representation
++                version = value.s
++            elif isinstance(value, Constant):
++                # Python 3.8+: ast.Constant(value="...")
++                v = getattr(value, "value", None)
++                if isinstance(v, str):
++                    version = v
++
++    if version is None:
++        raise RuntimeError("Unable to determine html5lib version")

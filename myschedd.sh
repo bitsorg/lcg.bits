@@ -1,0 +1,23 @@
+package: myschedd
+description: myschedd library/tool (from LCG software stack)
+version: "1.9-2"
+tag: "1.9-2"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/myschedd-1.9-2.tar.gz
+requires:
+  - go
+build_requires:
+  - bits-recipe-tools
+license: TODO
+---
+#!/bin/bash -e
+##############################
+. $(bits-include CMakeRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib"
+##############################
+function Make() {
+  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
+  "" GODEBUG=netdns=cgo go build
+  cmake
+}
