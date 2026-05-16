@@ -1,5 +1,5 @@
 package: pytest_cov
-description: pytest_cov Python package
+description: pytest-cov coverage plugin for pytest
 version: "7.0.0"
 tag: "7.0.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - coverage
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

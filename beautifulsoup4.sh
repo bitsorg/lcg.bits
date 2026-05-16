@@ -1,5 +1,5 @@
 package: beautifulsoup4
-description: beautifulsoup4 Python package
+description: Beautiful Soup HTML/XML parsing library for Python
 version: "4.10.0"
 tag: "4.10.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - soupsieve
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

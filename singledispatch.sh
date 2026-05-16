@@ -1,5 +1,5 @@
 package: singledispatch
-description: singledispatch Python package
+description: singledispatch backport of functools.singledispatch
 version: "3.4.0.3"
 tag: "3.4.0.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pooch
-description: pooch Python package
+description: Pooch manage downloading and caching data files
 version: "1.6.0"
 tag: "1.6.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

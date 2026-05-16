@@ -1,5 +1,5 @@
 package: tensorflow_io_gcs_filesystem
-description: tensorflow_io_gcs_filesystem Python package
+description: TensorFlow I/O GCS filesystem plugin
 version: "unknown"
 tag: "unknown"
 requires:
@@ -8,7 +8,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

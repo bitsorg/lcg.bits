@@ -1,5 +1,5 @@
 package: cfgv
-description: cfgv Python package
+description: cfgv validate and apply defaults to configuration files
 version: "3.3.1"
 tag: "3.3.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

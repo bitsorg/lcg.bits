@@ -1,5 +1,5 @@
 package: trio
-description: trio Python package
+description: Trio async concurrency library for Python
 version: "0.28.0"
 tag: "0.28.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - exceptiongroup
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT OR Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

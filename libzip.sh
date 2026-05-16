@@ -1,5 +1,5 @@
 package: libzip
-description: libzip library/tool (from LCG software stack)
+description: libzip library for reading, creating and modifying ZIP archives
 version: "1.9.2"
 tag: "1.9.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

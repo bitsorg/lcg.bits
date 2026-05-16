@@ -1,5 +1,5 @@
 package: awkward
-description: awkward Python package
+description: Awkward Array manipulate jagged/nested arrays like NumPy
 version: "2.9.0"
 tag: "2.9.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

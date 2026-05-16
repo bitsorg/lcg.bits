@@ -1,5 +1,5 @@
 package: gl2ps
-description: OpenGL to PostScript/PDF/SVG printing library
+description: GL2PS OpenGL to PostScript/SVG/PDF rendering library
 version: "1.4.2"
 tag: "1.4.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - png
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GL2PS
 ---
 #!/bin/bash -e
 ##############################

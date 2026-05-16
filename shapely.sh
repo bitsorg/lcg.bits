@@ -1,5 +1,5 @@
 package: shapely
-description: shapely Python package
+description: Shapely geometric objects manipulation for Python
 version: "2.0.5"
 tag: "2.0.5"
 sources:
@@ -12,7 +12,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - shapely-2.0.5.patch
 ---

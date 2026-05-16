@@ -1,5 +1,5 @@
 package: horovod
-description: horovod Python package
+description: Horovod distributed deep learning training framework
 version: "0.28.1"
 tag: "0.28.1"
 sources:
@@ -17,7 +17,7 @@ requires:
   # - sympy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - horovod-0.28.1.patch
 ---

@@ -1,5 +1,5 @@
 package: tokenizers
-description: tokenizers Python package
+description: Hugging Face Tokenizers fast tokenization library (Rust)
 version: "0.22.1"
 tag: "0.22.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - huggingface_hub
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

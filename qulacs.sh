@@ -1,5 +1,5 @@
 package: qulacs
-description: qulacs Python package
+description: Qulacs fast quantum circuit simulator for Python
 version: "0.6.4.1"
 tag: "0.6.4.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - qulacs-0.6.4.1.patch
 ---

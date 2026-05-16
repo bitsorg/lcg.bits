@@ -1,5 +1,5 @@
 package: pyqt5_sip
-description: pyqt5_sip Python package
+description: PyQt5-sip SIP module for PyQt5
 version: "12.15.0"
 tag: "12.15.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - Qt5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-only OR LGPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

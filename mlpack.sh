@@ -1,5 +1,5 @@
 package: mlpack
-description: mlpack library/tool (from LCG software stack)
+description: mlpack fast and flexible C++ machine learning library
 version: "4.6.2"
 tag: "4.6.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ensmallen
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

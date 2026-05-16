@@ -1,5 +1,5 @@
 package: python_jsonpath
-description: python_jsonpath Python package
+description: python-jsonpath JSONPath implementation for Python
 version: "0.7.1"
 tag: "0.7.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

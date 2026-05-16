@@ -1,12 +1,12 @@
 package: uuid
-description: DCE compatible Universally Unique Identifier library
+description: libuuid universally unique identifier library
 version: "1.42"
 tag: "1.42"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/e2fsprogs-1.42.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

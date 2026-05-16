@@ -1,5 +1,5 @@
 package: fastapi
-description: fastapi Python package
+description: FastAPI high-performance async web framework for APIs
 version: "0.119.0"
 tag: "0.119.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

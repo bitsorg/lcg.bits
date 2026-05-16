@@ -1,5 +1,5 @@
 package: qd
-description: qd Monte Carlo event generator
+description: QD double-double and quad-double floating-point library
 version: "2.3.24"
 tag: "2.3.24"
 sources:
@@ -11,7 +11,7 @@ requires:
   - libtool
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - qd-2.3.24.patch
 ---
@@ -23,5 +23,6 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  autoreconf --force --install COMMAND ./configure --prefix=$INSTALLROOT --enable-shared
+  autoreconf --force --install
+  ./configure --prefix=$INSTALLROOT --enable-shared
 }

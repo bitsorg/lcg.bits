@@ -1,5 +1,5 @@
 package: pre_commit
-description: pre_commit Python package
+description: pre-commit framework for managing git pre-commit hooks
 version: "3.8.0"
 tag: "3.8.0"
 sources:
@@ -18,7 +18,7 @@ requires:
   - nodeenv
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

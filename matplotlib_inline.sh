@@ -1,5 +1,5 @@
 package: matplotlib_inline
-description: matplotlib_inline Python package
+description: matplotlib-inline inline Matplotlib backend for IPython
 version: "0.1.7"
 tag: "0.1.7"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

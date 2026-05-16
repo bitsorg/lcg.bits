@@ -1,5 +1,5 @@
 package: uproot_browser
-description: uproot_browser Python package
+description: uproot-browser TUI browser for ROOT files using uproot
 version: "0.6.7"
 tag: "0.6.7"
 sources:
@@ -18,7 +18,7 @@ requires:
   - uproot
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: plumbum
-description: plumbum Python package
+description: Plumbum shell combinators and CLI toolkit for Python
 version: "1.9.0"
 tag: "1.9.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

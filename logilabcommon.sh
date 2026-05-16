@@ -1,5 +1,5 @@
 package: logilabcommon
-description: logilabcommon Python package
+description: logilab-common utility modules for Python (logilab)
 version: "1.8.1"
 tag: "1.8.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

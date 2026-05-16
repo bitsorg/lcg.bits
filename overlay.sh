@@ -1,5 +1,5 @@
 package: overlay
-description: overlay Key4hep framework package
+description: overlay custom package overlay/patching utility
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - raida
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

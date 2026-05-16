@@ -1,5 +1,5 @@
 package: pillow
-description: pillow Python package
+description: Pillow the friendly PIL (Python Imaging Library) fork
 version: "11.2.1"
 tag: "11.2.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - cffi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: HPND
 ---
 #!/bin/bash -e
 ##############################

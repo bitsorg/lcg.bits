@@ -3,7 +3,7 @@ description: CERN ROOT data analysis framework
 version: "v6.32.02"
 tag: "v6.32.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/root-v6.32.02).zip
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/root-v6.32.02.zip
 requires:
   - Python
   - fftw
@@ -71,5 +71,5 @@ function Configure() {
     -Dzlib=ON
 }
 function Make() {
-  echo "ROOT Build Step" COMMAND make ${JOBS:+-j $JOBS}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

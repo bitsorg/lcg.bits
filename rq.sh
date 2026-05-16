@@ -1,5 +1,5 @@
 package: rq
-description: rq Python package
+description: RQ simple Python job queue backed by Redis
 version: "1.10.1"
 tag: "1.10.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - click
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

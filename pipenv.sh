@@ -1,5 +1,5 @@
 package: pipenv
-description: pipenv Python package
+description: Pipenv Python virtualenv + pip workflow tool
 version: "2024.4.0"
 tag: "2024.4.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - virtualenv_clone
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

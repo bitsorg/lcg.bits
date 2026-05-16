@@ -1,5 +1,5 @@
 package: virtualenv
-description: virtualenv Python package
+description: virtualenv tool to create isolated Python environments
 version: "20.28.0"
 tag: "20.28.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - platformdirs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

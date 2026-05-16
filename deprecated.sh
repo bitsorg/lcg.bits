@@ -1,5 +1,5 @@
 package: deprecated
-description: deprecated Python package
+description: Deprecated Python @deprecated decorator
 version: "1.2.13"
 tag: "1.2.13"
 sources:
@@ -10,7 +10,7 @@ requires:
   - wrapt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

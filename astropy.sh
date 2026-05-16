@@ -1,5 +1,5 @@
 package: astropy
-description: astropy Python package
+description: Astropy community Python package for astronomy
 version: "6.1.4"
 tag: "6.1.4"
 sources:
@@ -15,7 +15,7 @@ requires:
   - Jinja2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

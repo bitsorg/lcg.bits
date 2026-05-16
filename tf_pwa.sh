@@ -1,5 +1,5 @@
 package: tf_pwa
-description: tf_pwa Python package
+description: tf-pwa TensorFlow-based partial wave analysis toolkit
 version: "0.2.2"
 tag: "0.2.2"
 sources:
@@ -15,7 +15,7 @@ requires:
   - sympy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

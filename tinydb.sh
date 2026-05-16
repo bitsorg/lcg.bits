@@ -1,5 +1,5 @@
 package: tinydb
-description: tinydb Python package
+description: TinyDB lightweight document-oriented database for Python
 version: "4.8.2"
 tag: "4.8.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

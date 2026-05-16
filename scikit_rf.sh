@@ -1,5 +1,5 @@
 package: scikit_rf
-description: scikit_rf Python package
+description: scikit-rf RF and microwave engineering toolkit for Python
 version: "1.1.0"
 tag: "1.1.0"
 sources:
@@ -16,7 +16,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

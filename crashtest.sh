@@ -1,5 +1,5 @@
 package: crashtest
-description: crashtest Python package
+description: Crashtest structured exception handling for Python
 version: "0.3.1"
 tag: "0.3.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

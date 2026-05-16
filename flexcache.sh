@@ -1,5 +1,5 @@
 package: flexcache
-description: flexcache Python package
+description: FlexCache flexible memoization with cache invalidation
 version: "0.3"
 tag: "0.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

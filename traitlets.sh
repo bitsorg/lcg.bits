@@ -1,5 +1,5 @@
 package: traitlets
-description: traitlets Python package
+description: traitlets typed Python attributes with observability
 version: "5.14.3"
 tag: "5.14.3"
 sources:
@@ -13,7 +13,7 @@ requires:
   - decorator
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

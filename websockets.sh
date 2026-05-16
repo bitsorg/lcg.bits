@@ -1,5 +1,5 @@
 package: websockets
-description: websockets Python package
+description: websockets library for building WebSocket servers and clients
 version: "14.1"
 tag: "14.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

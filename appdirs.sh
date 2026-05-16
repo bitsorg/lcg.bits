@@ -1,5 +1,5 @@
 package: appdirs
-description: appdirs Python package
+description: appdirs platform-appropriate application directories
 version: "1.4.4"
 tag: "1.4.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

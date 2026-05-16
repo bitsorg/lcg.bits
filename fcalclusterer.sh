@@ -1,5 +1,5 @@
 package: fcalclusterer
-description: fcalclusterer Key4hep framework package
+description: FcalClusterer forward calorimeter clustering for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -14,7 +14,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

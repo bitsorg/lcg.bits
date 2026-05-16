@@ -1,5 +1,5 @@
 package: mypy
-description: mypy Python package
+description: mypy optional static type checker for Python
 version: "1.19.1"
 tag: "1.19.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - librt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

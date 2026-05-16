@@ -1,5 +1,5 @@
 package: pycountry
-description: pycountry Python package
+description: pycountry ISO databases for countries, languages, currencies
 version: "24.6.1"
 tag: "24.6.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

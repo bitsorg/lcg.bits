@@ -1,5 +1,5 @@
 package: heaptrack
-description: heaptrack library/tool (from LCG software stack)
+description: Heaptrack heap memory profiler
 version: "1.5.0"
 tag: "1.5.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - gdb
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 patches:
   - heaptrack-1.5.0.patch
 ---

@@ -1,5 +1,5 @@
 package: marlin
-description: marlin Key4hep framework package
+description: Marlin modular analysis and reconstruction framework for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - raida
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

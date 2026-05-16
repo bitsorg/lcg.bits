@@ -1,5 +1,5 @@
 package: uvicorn
-description: uvicorn Python package
+description: Uvicorn lightning-fast ASGI server for Python
 version: "0.37.0"
 tag: "0.37.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - h11
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: debugpy
-description: debugpy Python package
+description: debugpy debugger adapter protocol implementation for Python
 version: "1.8.1"
 tag: "1.8.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

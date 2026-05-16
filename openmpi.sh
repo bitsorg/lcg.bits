@@ -1,5 +1,5 @@
 package: openmpi
-description: openmpi library/tool (from LCG software stack)
+description: OpenMPI high-performance Message Passing Interface implementation
 version: "4.1.8"
 tag: "4.1.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - hwloc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: mpmath
-description: mpmath Python package
+description: mpmath Python library for arbitrary-precision arithmetic
 version: "1.2.1"
 tag: "1.2.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

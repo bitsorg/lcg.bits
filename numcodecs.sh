@@ -1,5 +1,5 @@
 package: numcodecs
-description: numcodecs Python package
+description: numcodecs buffer compression and transformation codecs
 version: "0.16.0"
 tag: "0.16.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - entrypoints
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - numcodecs-0.16.0.patch
 ---

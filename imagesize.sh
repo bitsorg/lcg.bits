@@ -1,5 +1,5 @@
 package: imagesize
-description: imagesize Python package
+description: imagesize gets image size from the file header
 version: "1.4.1"
 tag: "1.4.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

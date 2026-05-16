@@ -1,5 +1,5 @@
 package: VecGeom
-description: VecGeom vectorized geometry library for particle transport
+description: Vectorized geometry library for particle-transport simulations
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   # - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

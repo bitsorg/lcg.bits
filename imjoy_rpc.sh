@@ -1,5 +1,5 @@
 package: imjoy_rpc
-description: imjoy_rpc Python package
+description: imjoy-rpc remote procedure call for ImJoy plugins
 version: "0.5.59"
 tag: "0.5.59"
 sources:
@@ -12,7 +12,7 @@ requires:
   - msgpack
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: xrootd_python
-description: xrootd_python Python package
+description: xrootd-python Python bindings for XRootD
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - xrootd
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

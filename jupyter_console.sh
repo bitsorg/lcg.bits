@@ -1,5 +1,5 @@
 package: jupyter_console
-description: jupyter_console Python package
+description: jupyter_console terminal-based Jupyter client
 version: "6.6.3"
 tag: "6.6.3"
 sources:
@@ -15,7 +15,7 @@ requires:
   - jupyter_client
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

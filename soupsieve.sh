@@ -1,5 +1,5 @@
 package: soupsieve
-description: soupsieve Python package
+description: soupsieve CSS selector library for Beautiful Soup 4
 version: "2.4.1"
 tag: "2.4.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - virtualenv
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

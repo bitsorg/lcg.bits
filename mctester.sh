@@ -1,5 +1,5 @@
 package: mctester
-description: mctester Monte Carlo event generator
+description: MC-TESTER toolkit for comparisons of Monte Carlo generators
 version: "1.25.1"
 tag: "1.25.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-MCTester
 patches:
   - mctester-1.25.1.patch
 ---

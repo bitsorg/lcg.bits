@@ -1,5 +1,5 @@
 package: pycryptodome
-description: pycryptodome Python package
+description: PyCryptodome standalone Python cryptography library
 version: "3.21.0"
 tag: "3.21.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause AND Public Domain
 ---
 #!/bin/bash -e
 ##############################

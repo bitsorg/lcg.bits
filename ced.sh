@@ -1,5 +1,5 @@
 package: ced
-description: ced Key4hep framework package
+description: CED (CEDViewer Event Display) for ILC experiments
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ilcutil
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: typeguard
-description: typeguard Python package
+description: typeguard runtime type checking for Python
 version: "2.13.3"
 tag: "2.13.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

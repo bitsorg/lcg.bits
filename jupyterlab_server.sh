@@ -1,5 +1,5 @@
 package: jupyterlab_server
-description: jupyterlab_server Python package
+description: jupyterlab_server server components for JupyterLab
 version: "2.27.3"
 tag: "2.27.3"
 sources:
@@ -13,7 +13,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

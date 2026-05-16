@@ -1,5 +1,5 @@
 package: faiss
-description: faiss Python package
+description: FAISS library for efficient similarity search (Facebook AI)
 version: "1.11.0"
 tag: "1.11.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

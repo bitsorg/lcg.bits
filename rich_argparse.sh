@@ -1,5 +1,5 @@
 package: rich_argparse
-description: rich_argparse Python package
+description: rich-argparse rich-formatted argparse help
 version: "1.6.0"
 tag: "1.6.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

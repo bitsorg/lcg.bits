@@ -1,5 +1,5 @@
 package: librt
-description: librt Python package
+description: POSIX realtime extensions library (part of glibc)
 version: "0.7.8"
 tag: "0.7.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-only
 ---
 #!/bin/bash -e
 ##############################

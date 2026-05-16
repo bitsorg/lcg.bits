@@ -1,12 +1,12 @@
 package: libffi
-description: libffi library/tool (from LCG software stack)
+description: libffi portable foreign function interface library
 version: "3.4.2"
 tag: "3.4.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libffi-3.4.2.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

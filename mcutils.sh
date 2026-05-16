@@ -1,5 +1,5 @@
 package: mcutils
-description: MCUtils Monte Carlo event analysis utilities
+description: MCUtils Monte Carlo utility functions for HEP analyses
 version: "1.4.0"
 tag: "1.4.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - heputils
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
@@ -21,3 +21,4 @@ function Make() {
   make ${JOBS:+-j $JOBS}
   make install PREFIX=$INSTALLROOT
 }
+function MakeInstall() { true; }

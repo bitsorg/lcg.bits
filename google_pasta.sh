@@ -1,5 +1,5 @@
 package: google_pasta
-description: google_pasta Python package
+description: google-pasta Python source code transformation library
 version: "0.2.0"
 tag: "0.2.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

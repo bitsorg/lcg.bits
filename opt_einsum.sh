@@ -1,5 +1,5 @@
 package: opt_einsum
-description: opt_einsum Python package
+description: opt_einsum optimising contraction order for numpy.einsum
 version: "3.3.0"
 tag: "3.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - opt_einsum-3.3.0.patch
 ---

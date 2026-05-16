@@ -1,5 +1,5 @@
 package: ddmarlinpandora
-description: ddmarlinpandora Key4hep framework package
+description: DDMarlinPandora Pandora PFA plugin for DD4hep/Marlin
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -17,7 +17,7 @@ requires:
   - DD4hep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

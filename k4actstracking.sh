@@ -1,5 +1,5 @@
 package: k4actstracking
-description: k4actstracking Key4hep framework package
+description: Key4hep ACTS tracking integration
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - acts
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

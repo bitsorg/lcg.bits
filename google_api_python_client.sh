@@ -1,5 +1,5 @@
 package: google_api_python_client
-description: google_api_python_client Python package
+description: google-api-python-client Google API client library
 version: "1.12.11"
 tag: "1.12.11"
 sources:
@@ -15,7 +15,7 @@ requires:
   - httplib2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

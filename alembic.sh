@@ -1,5 +1,5 @@
 package: alembic
-description: alembic Python package
+description: Alembic database schema migration tool for SQLAlchemy
 version: "1.16.5"
 tag: "1.16.5"
 sources:
@@ -12,7 +12,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

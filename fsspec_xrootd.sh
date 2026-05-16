@@ -1,5 +1,5 @@
 package: fsspec_xrootd
-description: fsspec_xrootd Python package
+description: fsspec-xrootd XRootD filesystem interface for fsspec
 version: "0.5.1"
 tag: "0.5.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - xrootd
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

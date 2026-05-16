@@ -1,5 +1,5 @@
 package: SFGen
-description: SFGen Monte Carlo event generator
+description: SFGen exclusive B-meson decay Monte Carlo generator
 version: "1.03.atlas2"
 tag: "1.03.atlas2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-SFGen
 patches:
   - SFGen-1.03.atlas2.patch
 ---
@@ -21,5 +21,10 @@ MODULE_OPTIONS="--bin --lib"
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} FC=$FC
-  cmake -E copy_directory $SOURCEDIR/lib $INSTALLROOT/lib COMMAND cmake -E copy_directory $SOURCEDIR/bin $INSTALLROOT/bin COMMAND cmake -E copy_directory $SOURCEDIR/doc $INSTALLROOT/doc COMMAND cmake -E copy_directory $SOURCEDIR/src $INSTALLROOT/src COMMAND chmod -R go+r $INSTALLROOT/src COMMAND chmod -R go+r $INSTALLROOT/bin/input.DAT
+  cmake -E copy_directory $SOURCEDIR/lib $INSTALLROOT/lib \
+  && cmake -E copy_directory $SOURCEDIR/bin $INSTALLROOT/bin \
+  && cmake -E copy_directory $SOURCEDIR/doc $INSTALLROOT/doc \
+  && cmake -E copy_directory $SOURCEDIR/src $INSTALLROOT/src \
+  && chmod -R go+r $INSTALLROOT/src \
+  && chmod -R go+r $INSTALLROOT/bin/input.DAT
 }

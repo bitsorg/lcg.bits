@@ -1,5 +1,5 @@
 package: messaging
-description: messaging Python package
+description: messaging CERN Controls messaging library
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pure_eval
-description: pure_eval Python package
+description: pure_eval safely evaluate Python expressions without side-effects
 version: "0.2.3"
 tag: "0.2.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

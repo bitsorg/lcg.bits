@@ -1,5 +1,5 @@
 package: bokeh
-description: bokeh Python package
+description: Bokeh interactive visualization library for modern browsers
 version: "3.1.1"
 tag: "3.1.1"
 sources:
@@ -21,7 +21,7 @@ requires:
   - pandas
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

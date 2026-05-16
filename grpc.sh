@@ -1,5 +1,5 @@
 package: grpc
-description: grpc library/tool (from LCG software stack)
+description: gRPC high-performance open-source universal RPC framework
 version: "1.62.3"
 tag: "1.62.3"
 sources:

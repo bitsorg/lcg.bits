@@ -1,5 +1,5 @@
 package: altair
-description: altair Python package
+description: Altair declarative statistical visualization in Python
 version: "5.2.0"
 tag: "5.2.0"
 sources:
@@ -16,7 +16,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

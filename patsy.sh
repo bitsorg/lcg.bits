@@ -1,5 +1,5 @@
 package: patsy
-description: patsy Python package
+description: Patsy mini-language for describing statistical models
 version: "0.5.6"
 tag: "0.5.6"
 sources:
@@ -12,7 +12,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

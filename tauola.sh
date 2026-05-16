@@ -1,5 +1,5 @@
 package: tauola
-description: tauola Monte Carlo event generator
+description: TAUOLA Monte Carlo generator for tau lepton decays
 version: "28.121.2"
 tag: "28.121.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pythia6
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-TAUOLA
 patches:
   - tauola-28.121.2.patch
 ---

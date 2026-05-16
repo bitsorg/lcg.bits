@@ -1,5 +1,5 @@
 package: jiter
-description: jiter Python package
+description: jiter fast JSON iterator for Python (Rust-backed)
 version: "0.11.0"
 tag: "0.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - rust
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

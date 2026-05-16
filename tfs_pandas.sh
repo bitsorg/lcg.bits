@@ -1,5 +1,5 @@
 package: tfs_pandas
-description: tfs_pandas Python package
+description: tfs-pandas read/write MAD-X TFS files as pandas DataFrames
 version: "4.0.0"
 tag: "4.0.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - pytables
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

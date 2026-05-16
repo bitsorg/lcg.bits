@@ -1,5 +1,5 @@
 package: itk_filtering
-description: itk_filtering Python package
+description: ITK image filtering module
 version: "5.4.0"
 tag: "5.4.0"
 requires:
@@ -9,7 +9,7 @@ requires:
   - itk_core
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

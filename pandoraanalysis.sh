@@ -1,5 +1,5 @@
 package: pandoraanalysis
-description: pandoraanalysis Key4hep framework package
+description: PandoraAnalysis validation for Pandora PFA
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - DD4hep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

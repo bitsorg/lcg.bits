@@ -1,5 +1,5 @@
 package: Davix
-description: Davix high-performance data access library for HTTP/WebDAV/S3
+description: High-performance HTTP/WebDAV/S3/cloud storage I/O library
 version: "0.8.10"
 tag: "0.8.10"
 sources:
@@ -9,7 +9,7 @@ requires:
   - libxml2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

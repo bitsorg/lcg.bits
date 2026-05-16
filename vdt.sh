@@ -1,5 +1,5 @@
 package: vdt
-description: vdt library/tool (from LCG software stack)
+description: VDT vectorised math functions (CERN)
 version: "0.4.4"
 tag: "0.4.4"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 patches:
   - vdt-0.4.4.patch
 ---

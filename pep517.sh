@@ -1,5 +1,5 @@
 package: pep517
-description: pep517 Python package
+description: pep517 wrappers to call PEP 517 build backends
 version: "0.13.1"
 tag: "0.13.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

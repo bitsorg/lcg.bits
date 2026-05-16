@@ -1,5 +1,5 @@
 package: jupyter_contrib_core
-description: jupyter_contrib_core Python package
+description: jupyter_contrib_core utilities for Jupyter contrib extensions
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - jupyter_core
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pyct
-description: pyct Python package
+description: pyct common tasks for PyViz packages
 version: "0.5.0"
 tag: "0.5.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - param
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - pyct-0.5.0.patch
 ---

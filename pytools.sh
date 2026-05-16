@@ -1,5 +1,5 @@
 package: pytools
-description: pytools Python package
+description: pytools small Python utility functions collection
 version: "2019.1.1"
 tag: "2019.1.1"
 requires:
@@ -69,7 +69,7 @@ requires:
   # - py2neo
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: mock
-description: mock Python package
+description: mock Python mocking and patching library
 version: "3.0.5"
 tag: "3.0.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

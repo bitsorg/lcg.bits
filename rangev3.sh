@@ -1,12 +1,12 @@
 package: rangev3
-description: Range library for C++14/17/20 (Eric Niebler's range-v3)
+description: range-v3 library extending C++11/14 with ranges and views
 version: "0.12.0"
 tag: "0.12.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rangev3-0.12.0.tgz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSL-1.0
 ---
 #!/bin/bash -e
 ##############################

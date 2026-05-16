@@ -1,5 +1,5 @@
 package: ultralytics_thop
-description: ultralytics_thop Python package
+description: ultralytics-thop FLOPs/params counting for neural networks
 version: "2.0.14"
 tag: "2.0.14"
 sources:
@@ -13,7 +13,7 @@ requires:
   - torch
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - ultralytics_thop-2.0.14.patch
 ---

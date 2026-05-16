@@ -1,5 +1,5 @@
 package: click
-description: click Python package
+description: Click composable command line interface toolkit for Python
 version: "8.3.1"
 tag: "8.3.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

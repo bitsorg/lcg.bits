@@ -1,12 +1,12 @@
 package: photos++
-description: photos++ Monte Carlo event generator
+description: PHOTOS++ C++ version of PHOTOS radiative corrections
 version: "3.61"
 tag: "3.61"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/PHOTOS.3.61-LHC.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PHOTOS++
 ---
 #!/bin/bash -e
 ##############################

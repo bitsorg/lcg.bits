@@ -1,5 +1,5 @@
 package: key4hep_stack
-description: key4hep_stack Key4hep framework package
+description: Key4hep full software stack meta-package
 version: "0"
 tag: "0"
 requires:
@@ -33,7 +33,7 @@ requires:
   - mold
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
@@ -41,7 +41,6 @@ license: TODO
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Make() {
-  make ${JOBS:+-j $JOBS}
-  make install
-}
+function Configure() { true; }
+function Make() { true; }
+function MakeInstall() { true; }

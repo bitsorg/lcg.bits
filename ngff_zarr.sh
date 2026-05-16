@@ -1,5 +1,5 @@
 package: ngff_zarr
-description: ngff_zarr Python package
+description: ngff-zarr Next Generation File Format Zarr utilities
 version: "0.10.2"
 tag: "0.10.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

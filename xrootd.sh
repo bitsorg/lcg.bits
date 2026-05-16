@@ -1,9 +1,9 @@
 package: xrootd
-description: XRootD high-performance scalable data access framework
-version: "5.9.2"
-tag: "5.9.2"
+description: XRootD high-performance, fault-tolerant access to data
+version: "6.0.1"
+tag: "6.0.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/xrootd-5.9.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/xrootd-6.0.1.tar.gz
 requires:
   - Python
   - zlib
@@ -13,7 +13,7 @@ requires:
   - Davix
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: torch
-description: torch Python package
+description: PyTorch open-source machine learning framework
 version: "2.11.0"
 tag: "2.11.0"
 sources:
@@ -22,7 +22,7 @@ requires:
   - fsspec
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

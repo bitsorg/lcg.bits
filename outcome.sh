@@ -1,5 +1,5 @@
 package: outcome
-description: outcome Python package
+description: outcome Pythonic implementation of a Result type
 version: "1.3.0"
 tag: "1.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - attrs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT OR Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: optuna
-description: optuna Python package
+description: Optuna hyperparameter optimization framework
 version: "4.4.0"
 tag: "4.4.0"
 sources:
@@ -16,7 +16,7 @@ requires:
   - tqdm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

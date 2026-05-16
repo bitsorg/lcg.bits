@@ -1,5 +1,5 @@
 package: versioneer
-description: versioneer Python package
+description: versioneer version management from VCS for Python packages
 version: "0.29"
 tag: "0.29"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Unlicense
 ---
 #!/bin/bash -e
 ##############################

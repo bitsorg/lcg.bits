@@ -1,5 +1,5 @@
 package: google_benchmark
-description: google_benchmark library/tool (from LCG software stack)
+description: Google Benchmark C++ micro-benchmarking library
 version: "1.9.5"
 tag: "1.9.5"
 sources:
@@ -8,7 +8,7 @@ requires:
   - googletest
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

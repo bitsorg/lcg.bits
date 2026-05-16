@@ -1,5 +1,5 @@
 package: tvm
-description: tvm Python package
+description: Apache TVM deep learning compiler and ML compilation framework
 version: "unknown"
 tag: "unknown"
 sources:
@@ -23,7 +23,7 @@ requires:
   - psutil
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

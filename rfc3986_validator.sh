@@ -1,5 +1,5 @@
 package: rfc3986_validator
-description: rfc3986_validator Python package
+description: rfc3986-validator RFC 3986 URI format validator
 version: "0.1.1"
 tag: "0.1.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

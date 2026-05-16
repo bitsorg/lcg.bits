@@ -1,5 +1,5 @@
 package: mp_units
-description: mp_units library/tool (from LCG software stack)
+description: mp-units compile-time C++ units of measurement library
 version: "bfcb26e5"
 tag: "bfcb26e5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - Catch2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

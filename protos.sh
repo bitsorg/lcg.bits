@@ -1,5 +1,5 @@
 package: protos
-description: PROTOS top quark anomalous couplings generator
+description: PROTOS Monte Carlo event generator for e+e- physics
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PROTOS
 ---
 #!/bin/bash -e
 ##############################

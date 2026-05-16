@@ -1,5 +1,5 @@
 package: yoda
-description: YODA Yet more Objects for Data Analysis (HEP histogramming)
+description: YODA (Yet more Objects for Data Analysis) histogram library
 version: "1.9.0"
 tag: "1.9.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

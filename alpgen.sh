@@ -1,12 +1,12 @@
 package: alpgen
-description: ALPGEN LO multi-parton matrix element generator
+description: ALPGEN leading-order multi-parton matrix-element event generator
 version: "2.1.4"
 tag: "2.1.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/alpgen_v2.1.4.tgz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-Alpgen
 patches:
   - alpgen-2.1.4.patch
 ---

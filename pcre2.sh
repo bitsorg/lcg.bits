@@ -1,12 +1,12 @@
 package: pcre2
-description: Perl Compatible Regular Expressions library (version 2)
+description: PCRE2 Perl-compatible regular expressions library (v2)
 version: "10.42"
 tag: "10.42"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pcre2-10.42.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

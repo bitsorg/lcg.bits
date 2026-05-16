@@ -1,5 +1,5 @@
 package: starlette
-description: starlette Python package
+description: Starlette lightweight async web framework for Python
 version: "0.48.0"
 tag: "0.48.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - anyio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

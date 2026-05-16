@@ -1,5 +1,5 @@
 package: wasmtime
-description: wasmtime Python package
+description: wasmtime Python bindings for the Wasmtime WebAssembly runtime
 version: "40.0.0"
 tag: "40.0.0"
 requires:
@@ -9,7 +9,7 @@ requires:
   - importlib_resources
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

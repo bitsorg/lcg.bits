@@ -1,5 +1,5 @@
 package: herwig++
-description: herwig++ Monte Carlo event generator
+description: Herwig++ Monte Carlo event generator (legacy C++ version)
 version: "unknown"
 tag: "unknown"
 sources:
@@ -11,7 +11,7 @@ requires:
   - fastjet
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################

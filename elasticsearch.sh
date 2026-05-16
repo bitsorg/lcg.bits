@@ -1,5 +1,5 @@
 package: elasticsearch
-description: elasticsearch Python package
+description: Elasticsearch official Python client
 version: "6.3.0"
 tag: "6.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - urllib3
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

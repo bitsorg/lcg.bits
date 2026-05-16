@@ -1,5 +1,5 @@
 package: langchain_core
-description: langchain_core Python package
+description: LangChain core abstractions and primitives
 version: "0.3.29"
 tag: "0.3.29"
 sources:
@@ -15,7 +15,7 @@ requires:
   - tenacity
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: ultralytics
-description: ultralytics Python package
+description: Ultralytics YOLO object detection and tracking framework
 version: "8.3.58"
 tag: "8.3.58"
 sources:
@@ -27,7 +27,7 @@ requires:
   - opencv_python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: AGPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

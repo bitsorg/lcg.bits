@@ -1,5 +1,5 @@
 package: sqlalchemy
-description: sqlalchemy Python package
+description: SQLAlchemy SQL toolkit and object-relational mapper
 version: "2.0.48"
 tag: "2.0.48"
 sources:
@@ -11,7 +11,7 @@ requires:
   - greenlet
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

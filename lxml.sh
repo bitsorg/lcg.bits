@@ -1,5 +1,5 @@
 package: lxml
-description: lxml Python package
+description: lxml powerful and fast XML and HTML processing library
 version: "5.3.1"
 tag: "5.3.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - cython
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

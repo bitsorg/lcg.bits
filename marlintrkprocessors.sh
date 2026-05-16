@@ -1,5 +1,5 @@
 package: marlintrkprocessors
-description: marlintrkprocessors Key4hep framework package
+description: MarlinTrkProcessors track finding/fitting Marlin processors
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -16,7 +16,7 @@ requires:
   - kitrackmarlin
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

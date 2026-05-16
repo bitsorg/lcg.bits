@@ -1,5 +1,5 @@
 package: opendatadetector
-description: Open Data Detector generic tracking detector geometry
+description: Open Data Detector ACTS tracking geometry for benchmarks
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

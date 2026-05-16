@@ -1,5 +1,5 @@
 package: torchmetrics
-description: torchmetrics Python package
+description: TorchMetrics machine learning metrics for PyTorch
 version: "1.7.2"
 tag: "1.7.2"
 sources:
@@ -14,7 +14,7 @@ requires:
   # - torch
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: jupyter_highlight_selected_word
-description: jupyter_highlight_selected_word Python package
+description: Jupyter extension to highlight all instances of selected word
 version: "0.2.0"
 tag: "0.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

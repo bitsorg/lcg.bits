@@ -1,5 +1,5 @@
 package: miniopy_async
-description: miniopy_async Python package
+description: miniopy-async async MinIO Python client
 version: "1.21.1"
 tag: "1.21.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - aiofile
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

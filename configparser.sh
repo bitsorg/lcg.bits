@@ -1,5 +1,5 @@
 package: configparser
-description: configparser Python package
+description: configparser backport of Python 3 configparser module
 version: "5.3.0"
 tag: "5.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

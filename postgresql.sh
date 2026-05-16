@@ -1,5 +1,5 @@
 package: postgresql
-description: postgresql library/tool (from LCG software stack)
+description: PostgreSQL open-source relational database system
 version: "17.5"
 tag: "17.5"
 sources:
@@ -12,7 +12,7 @@ requires:
   - gettext
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: PostgreSQL
 ---
 #!/bin/bash -e
 ##############################

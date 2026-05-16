@@ -1,5 +1,5 @@
 package: itkwasm_downsample
-description: itkwasm_downsample Python package
+description: ITK WASM image downsampling module
 version: "1.4.3"
 tag: "1.4.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

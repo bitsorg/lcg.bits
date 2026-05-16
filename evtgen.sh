@@ -1,5 +1,5 @@
 package: evtgen
-description: Monte Carlo event generator for B-meson and other particle decays
+description: EvtGen Monte Carlo generator for B/D meson decays
 version: "1.7.0"
 tag: "1.7.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - tauola++
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 patches:
   - evtgen-1.7.0.patch
 ---
@@ -31,5 +31,5 @@ function Configure() {
     -DTAUOLAPP_ROOT_DIR=${tauola++_home}
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} -j1 FLIBS=${FORTRAN_LIBRARY}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} FLIBS=${FORTRAN_LIBRARY}
 }

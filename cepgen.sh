@@ -1,5 +1,5 @@
 package: cepgen
-description: cepgen Monte Carlo event generator
+description: CepGen central exclusive production event generator
 version: "1.2.5patch2"
 tag: "1.2.5patch2"
 sources:
@@ -22,7 +22,7 @@ requires:
   - jsonmcpp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

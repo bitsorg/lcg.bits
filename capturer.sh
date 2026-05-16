@@ -1,5 +1,5 @@
 package: capturer
-description: capturer Python package
+description: capturer transparently captures stdout/stderr in Python
 version: "3.0"
 tag: "3.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - humanfriendly
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

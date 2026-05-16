@@ -1,5 +1,5 @@
 package: libsvm
-description: libsvm Python package
+description: LIBSVM library for support vector machines
 version: "3.23"
 tag: "3.23"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

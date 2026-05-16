@@ -1,5 +1,5 @@
 package: k4simgeant4
-description: k4simgeant4 Key4hep framework package
+description: Key4hep Geant4 full simulation framework
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - Geant4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: swig
-description: swig library/tool (from LCG software stack)
+description: SWIG interface compiler connecting C/C++ with scripting languages
 version: "4.4.0"
 tag: "4.4.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

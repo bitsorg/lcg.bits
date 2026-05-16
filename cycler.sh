@@ -1,5 +1,5 @@
 package: cycler
-description: cycler Python package
+description: Cycler composable cycles for matplotlib property iteration
 version: "0.12.1"
 tag: "0.12.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

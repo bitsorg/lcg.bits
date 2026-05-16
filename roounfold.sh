@@ -1,5 +1,5 @@
 package: RooUnfold
-description: RooUnfold library/tool (from LCG software stack)
+description: RooUnfold unfolding framework for HEP distributions
 version: "3.0.5"
 tag: "3.0.5"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

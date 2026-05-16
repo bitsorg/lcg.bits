@@ -1,12 +1,12 @@
 package: jsoncpp
-description: C++ library for JSON reading and writing
+description: JsonCpp JSON parser and generator for C++
 version: "1.9.3"
 tag: "1.9.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jsoncpp-1.9.3.zip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

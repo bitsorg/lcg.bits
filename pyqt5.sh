@@ -1,5 +1,5 @@
 package: pyqt5
-description: pyqt5 Python package
+description: PyQt5 Python bindings for Qt5
 version: "5.15.10"
 tag: "5.15.10"
 sources:
@@ -10,7 +10,7 @@ requires:
   - sip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-only OR LGPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

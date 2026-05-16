@@ -1,5 +1,5 @@
 package: fplll
-description: fplll library/tool (from LCG software stack)
+description: fplll lattice reduction algorithms library
 version: "5.4.4"
 tag: "5.4.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - mpfr
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

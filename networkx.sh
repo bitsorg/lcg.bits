@@ -1,5 +1,5 @@
 package: networkx
-description: networkx Python package
+description: NetworkX creation and analysis of complex networks in Python
 version: "3.4.2"
 tag: "3.4.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

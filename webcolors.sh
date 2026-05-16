@@ -1,5 +1,5 @@
 package: webcolors
-description: webcolors Python package
+description: webcolors work with color names and values in HTML/CSS
 version: "24.11.1"
 tag: "24.11.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

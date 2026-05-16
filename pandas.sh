@@ -1,5 +1,5 @@
 package: pandas
-description: pandas Python package
+description: pandas data analysis and manipulation library
 version: "2.2.3"
 tag: "2.2.3"
 sources:
@@ -18,7 +18,7 @@ requires:
   - xlrd
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

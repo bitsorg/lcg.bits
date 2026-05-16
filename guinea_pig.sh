@@ -1,5 +1,5 @@
 package: guinea_pig
-description: guinea_pig Monte Carlo event generator
+description: Guinea Pig beam-beam interaction simulation program
 version: "1.2.2"
 tag: "1.2.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - fftw
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-GuineaPig
 ---
 #!/bin/bash -e
 ##############################

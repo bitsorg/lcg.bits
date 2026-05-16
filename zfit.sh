@@ -1,5 +1,5 @@
 package: zfit
-description: zfit Python package
+description: zfit scalable Pythonic fitting library (HEP)
 version: "0.28.0"
 tag: "0.28.0"
 sources:
@@ -37,7 +37,7 @@ requires:
   - zfit_interface
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

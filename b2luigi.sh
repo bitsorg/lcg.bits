@@ -1,5 +1,5 @@
 package: b2luigi
-description: b2luigi Python package
+description: b2luigi workflow management based on Luigi (Belle II)
 version: "unknown"
 tag: "unknown"
 sources:
@@ -14,7 +14,7 @@ requires:
   - colorama
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

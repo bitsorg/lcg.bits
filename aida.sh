@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aida-3.2.1-src.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

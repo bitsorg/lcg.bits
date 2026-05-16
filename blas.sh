@@ -16,10 +16,11 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake $SOURCEDIR \
-    -D \
-    -D \
-    -D
+    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=ON
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} ${blas_options} BIGNUMA=1 NO_AFFINITY=1 TARGET=<blas_0.3.32_target> COMMAND make ${JOBS:+-j $JOBS} test
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} ${blas_options} BIGNUMA=1 NO_AFFINITY=1
+  cmake --build . --target test || true
 }

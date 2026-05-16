@@ -1,5 +1,5 @@
 package: more_itertools
-description: more_itertools Python package
+description: more-itertools extensions to Python's itertools
 version: "10.6.0"
 tag: "10.6.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

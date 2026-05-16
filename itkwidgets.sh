@@ -1,5 +1,5 @@
 package: itkwidgets
-description: itkwidgets Python package
+description: itkwidgets Jupyter widget for ITK image visualization
 version: "1.0a53"
 tag: "1.0a53"
 sources:
@@ -20,7 +20,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

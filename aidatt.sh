@@ -1,5 +1,5 @@
 package: aidatt
-description: aidatt Key4hep framework package
+description: AI-Driven Tracking toolkit for Key4hep
 version: "unknown"
 tag: "unknown"
 sources:
@@ -12,7 +12,7 @@ requires:
   - DD4hep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

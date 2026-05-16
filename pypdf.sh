@@ -1,5 +1,5 @@
 package: pypdf
-description: pypdf Python package
+description: pypdf pure-Python PDF library
 version: "3.11.0"
 tag: "3.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

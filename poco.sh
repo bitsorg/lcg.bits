@@ -1,5 +1,5 @@
 package: poco
-description: poco library/tool (from LCG software stack)
+description: POCO C++ portable networking and application framework
 version: "1.14.1"
 tag: "1.14.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - utf8proc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSL-1.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: sip
-description: sip Python package
+description: SIP tool for creating Python bindings for C/C++ libraries
 version: "6.8.3"
 tag: "6.8.3"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-only OR LGPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

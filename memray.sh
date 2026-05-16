@@ -1,5 +1,5 @@
 package: memray
-description: memray Python package
+description: memray memory profiler for Python
 version: "1.19.2"
 tag: "1.19.2"
 sources:
@@ -14,7 +14,7 @@ requires:
   - textual
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

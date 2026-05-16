@@ -1,5 +1,5 @@
 package: werkzeug
-description: werkzeug Python package
+description: Werkzeug WSGI web application library for Python
 version: "3.1.3"
 tag: "3.1.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - MarkupSafe
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pydantic_extra_types
-description: pydantic_extra_types Python package
+description: pydantic-extra-types extra type definitions for Pydantic
 version: "2.10.5"
 tag: "2.10.5"
 sources:
@@ -14,7 +14,7 @@ requires:
   - python_ulid
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

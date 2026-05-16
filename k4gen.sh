@@ -1,5 +1,5 @@
 package: k4gen
-description: k4gen Key4hep framework package
+description: Key4hep generator wrapper algorithms
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -16,7 +16,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

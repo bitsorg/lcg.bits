@@ -1,5 +1,5 @@
 package: fastjsonschema
-description: fastjsonschema Python package
+description: fastjsonschema fast JSON Schema validator for Python
 version: "2.17.1"
 tag: "2.17.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

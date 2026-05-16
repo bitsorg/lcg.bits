@@ -1,5 +1,5 @@
 package: png
-description: png library/tool (from LCG software stack)
+description: libpng official PNG reference library
 version: "1.6.55"
 tag: "1.6.55"
 sources:
@@ -8,7 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Libpng
 ---
 #!/bin/bash -e
 ##############################

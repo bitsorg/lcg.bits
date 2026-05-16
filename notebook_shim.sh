@@ -1,5 +1,5 @@
 package: notebook_shim
-description: notebook_shim Python package
+description: notebook-shim compatibility shim for Jupyter Notebook extensions
 version: "0.2.4"
 tag: "0.2.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

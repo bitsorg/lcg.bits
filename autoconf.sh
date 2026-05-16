@@ -1,5 +1,5 @@
 package: autoconf
-description: GNU Autoconf automatic configure script generator
+description: GNU Autoconf portable build-system configuration tool
 version: "2.73"
 tag: "2.73"
 sources:
@@ -8,7 +8,7 @@ requires:
   - m4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

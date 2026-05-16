@@ -1,5 +1,5 @@
 package: libpqxx
-description: libpqxx library/tool (from LCG software stack)
+description: libpqxx official C++ client API for PostgreSQL
 version: "7.10.1"
 tag: "7.10.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - postgresql
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

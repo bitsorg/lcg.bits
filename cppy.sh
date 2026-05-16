@@ -1,5 +1,5 @@
 package: cppy
-description: cppy Python package
+description: cppy C++ support library for writing Python extension modules
 version: "1.2.1"
 tag: "1.2.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

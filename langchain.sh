@@ -1,5 +1,5 @@
 package: langchain
-description: langchain Python package
+description: LangChain framework for developing LLM-powered applications
 version: "0.3.14"
 tag: "0.3.14"
 sources:
@@ -30,7 +30,7 @@ requires:
   # - faiss
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

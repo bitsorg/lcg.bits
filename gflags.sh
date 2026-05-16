@@ -1,12 +1,12 @@
 package: gflags
-description: Google command-line flags parsing library
+description: Google gflags C++ command-line flag parsing library
 version: "2.2.2"
 tag: "2.2.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gflags-2.2.2.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

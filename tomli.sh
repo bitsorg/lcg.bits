@@ -1,5 +1,5 @@
 package: tomli
-description: tomli Python package
+description: tomli minimal TOML parser for Python
 version: "2.0.1"
 tag: "2.0.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

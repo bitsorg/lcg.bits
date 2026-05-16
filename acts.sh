@@ -1,14 +1,17 @@
 package: acts
 description: ACTS track reconstruction framework for HEP experiments
-version: "26.0.0"
-tag: "26.0.0"
+version: "46.5.0"
+tag: "46.5.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/acts-26.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/acts-46.5.0.tar.gz
 requires:
   - Boost
   - eigen
   - ROOT
   - DD4hep
+  - sympy
+  - particle
+  - hatchling
 build_requires:
   - bits-recipe-tools
 license: MPL-2.0
@@ -31,6 +34,5 @@ function Configure() {
     -DACTS_BUILD_PLUGIN_TGEO=ON \
     -DACTS_BUILD_UNITTESTS=OFF \
     -DACTS_USE_SYSTEM_LIBS=ON \
-    -I${XercesC_ROOT}/include \
-    -I${eigen_ROOT}/include/eigen3"
+    -DCMAKE_CXX_FLAGS="-I${XercesC_ROOT}/include -I${eigen_ROOT}/include/eigen3"
 }

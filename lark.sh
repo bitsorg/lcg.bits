@@ -1,5 +1,5 @@
 package: lark
-description: lark Python package
+description: Lark modern parsing library for Python
 version: "1.1.5"
 tag: "1.1.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

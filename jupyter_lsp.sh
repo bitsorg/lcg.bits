@@ -1,5 +1,5 @@
 package: jupyter_lsp
-description: jupyter_lsp Python package
+description: jupyter-lsp Language Server Protocol support for JupyterLab
 version: "2.2.5"
 tag: "2.2.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - jupyter_server
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

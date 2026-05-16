@@ -1,5 +1,5 @@
 package: awscrt
-description: awscrt Python package
+description: awscrt AWS common runtime library for Python
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

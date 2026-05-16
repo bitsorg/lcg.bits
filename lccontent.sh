@@ -1,5 +1,5 @@
 package: lccontent
-description: lccontent Key4hep framework package
+description: LCContent Pandora reconstruction algorithms for linear colliders
 version: "03.02.00"
 tag: "03.02.00"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pandoramonitoring
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
@@ -26,5 +26,5 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DPANDORA_MONITORING=ON \
     -DCMAKE_MODULE_PATH=${pandorapfa_ROOT}/cmakemodules \
-    -Wno-error"
+    -DCMAKE_CXX_FLAGS="-Wno-error"
 }

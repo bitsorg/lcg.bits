@@ -1,5 +1,5 @@
 package: pyshtools
-description: pyshtools Python package
+description: pyshtools spherical harmonic analysis and synthesis
 version: "4.13.1"
 tag: "4.13.1"
 sources:
@@ -20,7 +20,7 @@ requires:
   - fftw
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

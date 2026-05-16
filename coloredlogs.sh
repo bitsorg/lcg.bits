@@ -1,5 +1,5 @@
 package: coloredlogs
-description: coloredlogs Python package
+description: coloredlogs colored terminal log output for Python's logging
 version: "15.0.1"
 tag: "15.0.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - verboselogs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - coloredlogs-15.0.1.patch
 ---

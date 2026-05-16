@@ -1,5 +1,5 @@
 package: sphinx
-description: sphinx Python package
+description: Sphinx Python documentation generator
 version: "8.1.3"
 tag: "8.1.3"
 sources:
@@ -19,7 +19,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

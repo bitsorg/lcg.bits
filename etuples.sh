@@ -1,5 +1,5 @@
 package: etuples
-description: etuples Python package
+description: etuples e-tuple algebraic matching for Python
 version: "0.3.9"
 tag: "0.3.9"
 sources:
@@ -11,7 +11,7 @@ requires:
   - multipledispatch
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

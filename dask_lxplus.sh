@@ -1,5 +1,5 @@
 package: dask_lxplus
-description: dask_lxplus Python package
+description: dask-lxplus Dask helper for CERN lxplus batch
 version: "0.3.3"
 tag: "0.3.3"
 sources:
@@ -18,7 +18,7 @@ requires:
   - watchdog
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

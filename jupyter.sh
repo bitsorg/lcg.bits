@@ -1,5 +1,5 @@
 package: jupyter
-description: jupyter Python package
+description: Jupyter metapackage for Jupyter notebook and client
 version: "1.0.0"
 tag: "1.0.0"
 sources:
@@ -30,7 +30,7 @@ requires:
   - entrypoints
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - jupyter-1.0.0.patch
 ---

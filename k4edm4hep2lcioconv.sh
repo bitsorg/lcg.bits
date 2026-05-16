@@ -1,5 +1,5 @@
 package: k4edm4hep2lcioconv
-description: k4edm4hep2lcioconv Key4hep framework package
+description: Key4hep EDM4hep↔LCIO event-data model converter
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -9,7 +9,7 @@ requires:
   - LCIO
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

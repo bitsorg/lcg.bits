@@ -1,5 +1,5 @@
 package: vincia
-description: vincia Monte Carlo event generator
+description: VINCIA antenna shower plugin for Pythia 8
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - pythia8
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################
@@ -18,7 +18,10 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SHELL -c "cp -rf ${pythia8_ROOT}/config.mk $SOURCEDIR/" COMMAND $SHELL -c "sed -i.bak -e 's/make -C$(PYTHIA8)//g' -e 's/make -C$(PY8DIR)//g' $SOURCEDIR/Makefile"
+  $SHELL -c "cp -rf ${pythia8_ROOT}/config.mk $SOURCEDIR/"
+  $SHELL -c "sed -i.bak -e 's/make -C$(PYTHIA8)//g' -e 's/make -C$(PY8DIR)//g' $SOURCEDIR/Makefile"
   make PYTHIA8=${pythia8_ROOT} PY8DIR=${pythia8_ROOT}
-  cmake -DSRC=$SOURCEDIR/lib -DDST=$INSTALLROOT/lib -P # (lcgcmake-internal script removed) COMMAND cmake -DSRC=$SOURCEDIR/bin -DDST=$INSTALLROOT/bin -P # (lcgcmake-internal script removed) COMMAND cmake -DSRC=$SOURCEDIR/tunes -DDST=$INSTALLROOT/tunes -P # (lcgcmake-internal script removed) COMMAND cmake -DSRC=$SOURCEDIR/include -DDST=$INSTALLROOT/include -P # (lcgcmake-internal script removed) COMMAND cmake -DSRC=$SOURCEDIR/data -DDST=$INSTALLROOT/data -P # (lcgcmake-internal script removed) COMMAND cmake -DSRC=$SOURCEDIR/antennae -DDST=$INSTALLROOT/antennae -P # (lcgcmake-internal script removed) COMMAND cmake -DSRC=$SOURCEDIR/xmldoc -DDST=$INSTALLROOT/xmldoc -P # (lcgcmake-internal script removed) ELSE
+  for d in lib bin tunes include data antennae xmldoc; do
+    [ -d $SOURCEDIR/$d ] && rsync -a $SOURCEDIR/$d/ $INSTALLROOT/$d/
+  done
 }

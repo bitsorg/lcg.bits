@@ -1,5 +1,5 @@
 package: joblib
-description: joblib Python package
+description: joblib tools for pipelining in Python (caching, parallelism)
 version: "1.5.3"
 tag: "1.5.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

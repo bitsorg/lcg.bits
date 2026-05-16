@@ -1,5 +1,5 @@
 package: et_xmlfile
-description: et_xmlfile Python package
+description: et_xmlfile low-memory XML file writing library
 version: "1.1.0"
 tag: "1.1.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

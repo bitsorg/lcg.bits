@@ -1,5 +1,5 @@
 package: jupyter_core
-description: jupyter_core Python package
+description: jupyter_core base package for Jupyter projects
 version: "5.7.2"
 tag: "5.7.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - traitlets
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

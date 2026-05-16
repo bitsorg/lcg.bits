@@ -1,5 +1,5 @@
 package: typing_inspection
-description: typing_inspection Python package
+description: typing-inspection Python typing inspection utilities
 version: "0.4.2"
 tag: "0.4.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

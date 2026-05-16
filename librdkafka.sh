@@ -1,5 +1,5 @@
 package: librdkafka
-description: librdkafka library/tool (from LCG software stack)
+description: librdkafka high-performance Apache Kafka C/C++ library
 version: "2.11.0"
 tag: "2.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - lz4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

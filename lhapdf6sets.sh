@@ -1,10 +1,10 @@
 package: lhapdf6sets
-description: LHAPDF6 minimal PDF sets for validation
+description: LHAPDF6 PDF data sets
 version: "unknown"
 tag: "unknown"
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PDFSets
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: shellescape
-description: shellescape Python package
+description: shellescape shell-escape strings for Python
 version: "3.8.1"
 tag: "3.8.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

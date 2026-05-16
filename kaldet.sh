@@ -1,5 +1,5 @@
 package: kaldet
-description: kaldet Key4hep framework package
+description: KalDet Kalman-filter detector model for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -11,7 +11,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

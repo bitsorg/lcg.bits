@@ -1,5 +1,5 @@
 package: soqt
-description: soqt library/tool (from LCG software stack)
+description: SoQt Qt widget for OpenInventor/Coin3D
 version: "1.5.0"
 tag: "1.5.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - Qt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: jupyter_latex_envs
-description: jupyter_latex_envs Python package
+description: Jupyter extension for LaTeX environments in notebooks
 version: "1.4.6"
 tag: "1.4.6"
 sources:
@@ -14,7 +14,7 @@ requires:
   - traitlets
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

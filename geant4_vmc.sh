@@ -1,5 +1,5 @@
 package: geant4_vmc
-description: Geant4 Virtual Monte Carlo interface
+description: Geant4 VMC (Virtual Monte Carlo) interface library
 version: "unknown"
 tag: "unknown"
 sources:
@@ -12,7 +12,7 @@ requires:
   - vmc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

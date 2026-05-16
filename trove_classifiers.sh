@@ -1,5 +1,5 @@
 package: trove_classifiers
-description: trove_classifiers Python package
+description: trove-classifiers canonical list of Python package classifiers
 version: "unknown"
 tag: "unknown"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

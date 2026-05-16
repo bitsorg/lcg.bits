@@ -1,5 +1,5 @@
 package: flake8
-description: flake8 Python package
+description: Flake8 Python code style, lint and complexity checker
 version: "7.3.0"
 tag: "7.3.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - mccabe
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

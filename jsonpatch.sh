@@ -1,5 +1,5 @@
 package: jsonpatch
-description: jsonpatch Python package
+description: jsonpatch apply JSON Patch operations (RFC 6902)
 version: "1.33"
 tag: "1.33"
 sources:
@@ -10,7 +10,7 @@ requires:
   - jsonpointer
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

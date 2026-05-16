@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gperf-3.1.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 patches:
   - gperf-3.1.patch
 ---

@@ -1,5 +1,5 @@
 package: pythonsollya
-description: pythonsollya Python package
+description: Python-Sollya Python interface to the Sollya library
 version: "0.3"
 tag: "0.3"
 sources:
@@ -14,7 +14,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 patches:
   - pythonsollya-0.3.patch
 ---

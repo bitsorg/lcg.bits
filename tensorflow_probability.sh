@@ -1,5 +1,5 @@
 package: tensorflow_probability
-description: tensorflow_probability Python package
+description: TensorFlow Probability probabilistic deep learning library
 version: "0.25.0"
 tag: "0.25.0"
 sources:
@@ -17,7 +17,7 @@ requires:
   - looseversion
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - tensorflow_probability-0.25.0.patch
 ---

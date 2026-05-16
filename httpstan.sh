@@ -1,5 +1,5 @@
 package: httpstan
-description: httpstan Python package
+description: httpstan HTTP-based interface to Stan statistical models
 version: "4.13.0"
 tag: "4.13.0"
 requires:
@@ -15,7 +15,7 @@ requires:
   - py_lz4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

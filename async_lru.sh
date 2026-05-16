@@ -1,5 +1,5 @@
 package: async_lru
-description: async_lru Python package
+description: async_lru LRU cache decorator for async functions
 version: "2.0.4"
 tag: "2.0.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

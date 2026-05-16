@@ -1,5 +1,5 @@
 package: gast
-description: gast Python package
+description: GAST generic Python AST representation
 version: "0.6.0"
 tag: "0.6.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

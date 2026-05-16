@@ -1,5 +1,5 @@
 package: scikitbuild
-description: scikitbuild Python package
+description: scikit-build improved build system generator for CPython
 version: "0.18.1"
 tag: "0.18.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - distro
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

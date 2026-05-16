@@ -1,5 +1,5 @@
 package: graphviz
-description: graphviz library/tool (from LCG software stack)
+description: Graphviz graph visualization software
 version: "12.2.1"
 tag: "12.2.1"
 sources:
@@ -14,7 +14,7 @@ requires:
   # - pango
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: EPL-1.0
 ---
 #!/bin/bash -e
 ##############################

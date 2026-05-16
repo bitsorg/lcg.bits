@@ -1,5 +1,5 @@
 package: pygsi
-description: pygsi Python package
+description: pygsi Python GSI grid security infrastructure bindings
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

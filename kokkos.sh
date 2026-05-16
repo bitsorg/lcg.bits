@@ -1,5 +1,5 @@
 package: kokkos
-description: kokkos library/tool (from LCG software stack)
+description: Kokkos performance portability programming model
 version: "4.7.01"
 tag: "4.7.01"
 sources:
@@ -8,7 +8,7 @@ requires:
   - hwloc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

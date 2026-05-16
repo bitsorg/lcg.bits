@@ -1,12 +1,12 @@
 package: feynhiggs
-description: FeynHiggs Higgs boson mass and mixing calculations in MSSM
+description: FeynHiggs program for MSSM Higgs mass calculations
 version: "2.10.2"
 tag: "2.10.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/FeynHiggs-2.10.2.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-FeynHiggs
 patches:
   - feynhiggs-2.10.2.patch
 ---

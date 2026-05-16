@@ -1,5 +1,5 @@
 package: threadpoolctl
-description: threadpoolctl Python package
+description: threadpoolctl limit threads in native libs (BLAS, OpenMP)
 version: "3.5.0"
 tag: "3.5.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

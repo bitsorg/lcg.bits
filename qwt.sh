@@ -1,5 +1,5 @@
 package: qwt
-description: qwt library/tool (from LCG software stack)
+description: Qt Widgets for Technical Applications (Qwt)
 version: "6.0.1"
 tag: "6.0.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Qt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 patches:
   - qwt-6.0.1.patch
 ---

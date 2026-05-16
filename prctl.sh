@@ -1,5 +1,5 @@
 package: prctl
-description: prctl Python package
+description: prctl Linux process control utility
 version: "1.8.1"
 tag: "1.8.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################

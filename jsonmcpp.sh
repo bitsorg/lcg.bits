@@ -1,12 +1,12 @@
 package: jsonmcpp
-description: jsonmcpp library/tool (from LCG software stack)
+description: jsonmcpp JSON manipulation C++ library
 version: "3.12.0"
 tag: "3.12.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/json-3.12.0.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

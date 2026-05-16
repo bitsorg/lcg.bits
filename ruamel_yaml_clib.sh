@@ -1,5 +1,5 @@
 package: ruamel_yaml_clib
-description: ruamel_yaml_clib Python package
+description: ruamel.yaml.clib C extension speedups for ruamel.yaml
 version: "0.2.15"
 tag: "0.2.15"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

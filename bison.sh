@@ -1,5 +1,5 @@
 package: bison
-description: GNU Bison general-purpose parser generator
+description: GNU Bison LALR/GLR parser generator
 version: "3.8.2"
 tag: "3.8.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - m4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

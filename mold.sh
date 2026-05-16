@@ -1,5 +1,5 @@
 package: mold
-description: mold library/tool (from LCG software stack)
+description: mold modern high-speed linker for ELF
 version: "unknown"
 tag: "unknown"
 sources:
@@ -10,7 +10,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

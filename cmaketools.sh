@@ -1,12 +1,12 @@
 package: cmaketools
-description: CMake utility scripts and helper modules for LCG builds
+description: CMakeTools auxiliary scripts for CMake-based builds
 version: "1.9"
 tag: "1.9"
 sources:
   - https://github.com/HEP-SF/cmaketools/archive/1.9.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

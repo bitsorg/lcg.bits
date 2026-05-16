@@ -1,5 +1,5 @@
 package: numpy
-description: numpy library/tool (from LCG software stack)
+description: NumPy fundamental package for array computing in Python
 version: "2.4.0"
 tag: "2.4.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - cython
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -21,7 +21,6 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  cmake
   make ${JOBS:+-j $JOBS}
   mkdir -p $INSTALLROOT/lib/python3/site-packages
 }

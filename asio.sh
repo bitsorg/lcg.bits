@@ -1,5 +1,5 @@
 package: asio
-description: asio library/tool (from LCG software stack)
+description: Asio C++ async I/O library (network and low-level I/O)
 version: "1.30.2"
 tag: "1.30.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - CMake
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSL-1.0
 ---
 #!/bin/bash -e
 ##############################

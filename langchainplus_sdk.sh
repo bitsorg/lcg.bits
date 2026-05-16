@@ -1,5 +1,5 @@
 package: langchainplus_sdk
-description: langchainplus_sdk Python package
+description: LangSmith SDK for LangChain tracing and evaluation
 version: "unknown"
 tag: "unknown"
 sources:
@@ -12,7 +12,7 @@ requires:
   - tenacity
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

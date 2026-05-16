@@ -1,5 +1,5 @@
 package: go.uuid
-description: go.uuid library/tool (from LCG software stack)
+description: go.uuid Go UUID generation and parsing library
 version: "b2ce238"
 tag: "b2ce238"
 sources:
@@ -8,7 +8,7 @@ requires:
   - go
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: clupatra
-description: clupatra Key4hep framework package
+description: Clupatra Kalman-filter track finding for ILC/CLICdp
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -15,7 +15,7 @@ requires:
   - kaltest
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

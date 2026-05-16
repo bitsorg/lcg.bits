@@ -1,5 +1,5 @@
 package: polars
-description: polars Python package
+description: Polars fast DataFrame library for Python (Rust-backed)
 version: "0.18.13"
 tag: "0.18.13"
 requires:
@@ -10,7 +10,7 @@ requires:
   - jemalloc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

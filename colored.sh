@@ -1,5 +1,5 @@
 package: colored
-description: colored Python package
+description: colored simple Python library for terminal color output
 version: "2.2.3"
 tag: "2.2.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

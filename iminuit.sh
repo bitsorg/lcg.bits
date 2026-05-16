@@ -1,5 +1,5 @@
 package: iminuit
-description: iminuit Python package
+description: iminuit Minuit2 minimizer Python interface
 version: "2.32.0"
 tag: "2.32.0"
 sources:
@@ -17,7 +17,7 @@ requires:
   - ipywidgets
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

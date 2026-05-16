@@ -1,5 +1,5 @@
 package: s3transfer
-description: s3transfer Python package
+description: s3transfer Amazon S3 transfer management library
 version: "0.10.3"
 tag: "0.10.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   # - awscrt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

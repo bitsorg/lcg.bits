@@ -1,5 +1,5 @@
 package: redis
-description: redis Python package
+description: redis-py Python client for Redis
 version: "4.3.3"
 tag: "4.3.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

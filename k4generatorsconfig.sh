@@ -1,5 +1,5 @@
 package: k4generatorsconfig
-description: k4generatorsconfig Key4hep framework package
+description: Key4hep generator configuration package
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pythia8
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

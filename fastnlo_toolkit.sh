@@ -1,5 +1,5 @@
 package: fastnlo_toolkit
-description: fastnlo_toolkit Monte Carlo event generator
+description: fastNLO toolkit for perturbative QCD calculations with NLO tables
 version: "unknown"
 tag: "unknown"
 sources:
@@ -10,7 +10,7 @@ requires:
   - fastjet
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

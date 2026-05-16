@@ -1,5 +1,5 @@
 package: websocket_client
-description: websocket_client Python package
+description: websocket-client WebSocket client library for Python
 version: "1.8.0"
 tag: "1.8.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

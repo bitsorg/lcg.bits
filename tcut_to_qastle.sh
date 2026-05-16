@@ -1,5 +1,5 @@
 package: tcut_to_qastle
-description: tcut_to_qastle Python package
+description: tcut_to_qastle convert ROOT TCut strings to qastle
 version: "0.7"
 tag: "0.7"
 sources:
@@ -11,7 +11,7 @@ requires:
   - qastle
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

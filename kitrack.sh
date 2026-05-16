@@ -1,5 +1,5 @@
 package: kitrack
-description: kitrack Key4hep framework package
+description: KiTrack combinatorial track finder for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

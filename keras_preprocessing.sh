@@ -1,5 +1,5 @@
 package: keras_preprocessing
-description: keras_preprocessing Python package
+description: Keras Preprocessing data preprocessing utilities
 version: "1.1.2"
 tag: "1.1.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - keras
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

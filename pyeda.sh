@@ -1,5 +1,5 @@
 package: pyeda
-description: pyeda Python package
+description: PyEDA Boolean algebra and digital logic toolkit
 version: "0.29.0"
 tag: "0.29.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 patches:
   - pyeda-0.29.0.patch
 ---

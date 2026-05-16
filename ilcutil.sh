@@ -1,12 +1,12 @@
 package: ilcutil
-description: ilcutil Key4hep framework package
+description: ILCUtil utility library for ILC software packages
 version: "HEAD"
 tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ilcutil-HEAD.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

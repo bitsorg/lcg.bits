@@ -1,5 +1,5 @@
 package: railroad_diagrams
-description: railroad_diagrams Python package
+description: railroad-diagrams SVG railroad diagram generator
 version: "1.1.1"
 tag: "1.1.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: CC0-1.0
 ---
 #!/bin/bash -e
 ##############################

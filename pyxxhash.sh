@@ -1,5 +1,5 @@
 package: pyxxhash
-description: pyxxhash Python package
+description: pyxxhash Python bindings for xxHash
 version: "3.5.0"
 tag: "3.5.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - xxHash
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

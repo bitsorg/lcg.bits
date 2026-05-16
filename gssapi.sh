@@ -1,5 +1,5 @@
 package: gssapi
-description: gssapi Python package
+description: gssapi Python GSSAPI Kerberos authentication bindings
 version: "1.8.3"
 tag: "1.8.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - decorator
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

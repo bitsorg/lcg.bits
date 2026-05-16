@@ -1,5 +1,5 @@
 package: astunparse
-description: astunparse Python package
+description: astunparse Python AST unparsing library
 version: "1.6.3"
 tag: "1.6.3"
 sources:
@@ -11,7 +11,7 @@ requires:
   - wheel
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

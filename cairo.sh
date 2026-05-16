@@ -1,5 +1,5 @@
 package: cairo
-description: 2D vector graphics library with multiple output backends
+description: Cairo 2D vector graphics library with multiple backends
 version: "1.18.4"
 tag: "1.18.4"
 sources:
@@ -13,7 +13,7 @@ requires:
   - ninja
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: recola
-description: recola Monte Carlo event generator
+description: RECOLA recursive one-loop amplitude generator
 version: "2.2.4.atlas1"
 tag: "2.2.4.atlas1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - recola_SM
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 patches:
   - recola-2.2.4.atlas1.patch
 ---
@@ -32,5 +32,5 @@ function Configure() {
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} install
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

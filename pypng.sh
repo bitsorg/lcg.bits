@@ -1,5 +1,5 @@
 package: pypng
-description: pypng Python package
+description: PyPNG pure Python PNG image read/write library
 version: "0.20220715.0"
 tag: "0.20220715.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - pypng-0.20220715.0.patch
 ---

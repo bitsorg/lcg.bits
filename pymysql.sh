@@ -1,5 +1,5 @@
 package: pymysql
-description: pymysql Python package
+description: PyMySQL pure-Python MySQL client library
 version: "1.1.2"
 tag: "1.1.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

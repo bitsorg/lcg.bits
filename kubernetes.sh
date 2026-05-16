@@ -1,5 +1,5 @@
 package: kubernetes
-description: kubernetes Python package
+description: Official Python client library for Kubernetes
 version: "35.0.0"
 tag: "35.0.0"
 sources:
@@ -18,7 +18,7 @@ requires:
   - durationpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

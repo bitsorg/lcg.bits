@@ -1,5 +1,5 @@
 package: uncertainties
-description: uncertainties Python package
+description: uncertainties Python package for error propagation
 version: "3.2.3"
 tag: "3.2.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: gosam_contrib
-description: gosam_contrib Monte Carlo event generator
+description: GoSam contrib package for automated one-loop calculations
 version: "2.0-20200904"
 tag: "2.0-20200904"
 sources:
@@ -8,7 +8,7 @@ requires:
   - looptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

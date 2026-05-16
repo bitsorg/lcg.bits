@@ -1,5 +1,5 @@
 package: panel
-description: panel Python package
+description: Panel high-level app and dashboarding for Python
 version: "1.1.0"
 tag: "1.1.0"
 sources:
@@ -25,7 +25,7 @@ requires:
   # - nodejs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - panel-1.1.0.patch
 ---

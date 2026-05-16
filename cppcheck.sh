@@ -9,7 +9,7 @@ requires:
   - pygments
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-only
 patches:
   - cppcheck-2.20.0.patch
 ---

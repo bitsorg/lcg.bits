@@ -1,5 +1,5 @@
 package: propcache
-description: propcache Python package
+description: propcache fast property caching utilities
 version: "0.2.1"
 tag: "0.2.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

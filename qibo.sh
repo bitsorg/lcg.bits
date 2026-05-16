@@ -1,5 +1,5 @@
 package: qibo
-description: qibo Python package
+description: Qibo open-source quantum computing framework
 version: "0.2.23"
 tag: "0.2.23"
 sources:
@@ -17,7 +17,7 @@ requires:
   - tabulate
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - qibo-0.2.23.patch
 ---

@@ -1,5 +1,5 @@
 package: mpi4py
-description: mpi4py Python package
+description: mpi4py MPI for Python bindings
 version: "4.0.3"
 tag: "4.0.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - openmpi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

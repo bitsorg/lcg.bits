@@ -1,5 +1,5 @@
 package: idna
-description: idna Python package
+description: IDNA internationalized domain names support for Python
 version: "3.10"
 tag: "3.10"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

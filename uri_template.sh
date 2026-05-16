@@ -1,5 +1,5 @@
 package: uri_template
-description: uri_template Python package
+description: uri-template URI template parsing and expansion (RFC 6570)
 version: "1.3.0"
 tag: "1.3.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

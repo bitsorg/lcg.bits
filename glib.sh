@@ -1,23 +1,31 @@
 package: glib
-description: glib library/tool (from LCG software stack)
-version: "2.76.2"
-tag: "2.76.2"
+description: GLib core utility library for GNOME (strings, collections, mainloop)
+version: "2.86.5"
+tag: "2.86.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/glib-2.76.2.tar.xz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/glib-2.86.5.tar.xz
 requires:
   - libffi
   - pkg_config
   - gettext
-  - looseversion
+  - meson
+  - pcre2
+  - ninja
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 patches:
-  - glib-2.76.2.patch
+  - glib-2.86.5.patch
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include MesonRecipe)
 ##############################
+MODULE_OPTIONS="--bin --lib"
 MESON_EXTRA_OPTIONS="-Dlibmount=disabled -Dtests=false"
 ##############################
+function Configure() {
+  CPPFLAGS="-I${gettext_ROOT}/include" \
+  LDFLAGS="-L${gettext_ROOT}/lib" \
+  meson setup ${MESON_BUILDDIR} --prefix=$INSTALLROOT ${MESON_EXTRA_OPTIONS}
+}

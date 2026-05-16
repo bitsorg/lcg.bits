@@ -1,5 +1,5 @@
 package: torch_scatter
-description: torch_scatter Python package
+description: torch-scatter segment-based reduction operations
 version: "2.1.2"
 tag: "2.1.2"
 sources:
@@ -11,7 +11,7 @@ requires:
   # - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

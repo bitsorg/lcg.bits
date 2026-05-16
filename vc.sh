@@ -1,12 +1,12 @@
 package: Vc
-description: Vc library/tool (from LCG software stack)
+description: Vc portable, zero-overhead SIMD vector types for C++
 version: "1.4.5"
 tag: "1.4.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Vc-1.4.5.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

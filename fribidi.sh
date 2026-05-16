@@ -1,5 +1,5 @@
 package: fribidi
-description: fribidi library/tool (from LCG software stack)
+description: GNU FriBidi Unicode bidirectional algorithm implementation
 version: "1.0.13"
 tag: "1.0.13"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ninja
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

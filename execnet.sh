@@ -1,5 +1,5 @@
 package: execnet
-description: execnet Python package
+description: execnet rapid multi-Python deployment for pytest-xdist
 version: "2.1.1"
 tag: "2.1.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: eigen
-description: eigen library/tool (from LCG software stack)
+description: eigen header-only C++ template library for linear algebra
 version: "3.4.1"
 tag: "3.4.1"
 sources:

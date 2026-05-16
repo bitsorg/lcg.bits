@@ -1,5 +1,5 @@
 package: backoff
-description: backoff Python package
+description: backoff function decoration for exponential backoff retry
 version: "2.2.1"
 tag: "2.2.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

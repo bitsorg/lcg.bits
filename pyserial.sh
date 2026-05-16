@@ -1,5 +1,5 @@
 package: pyserial
-description: pyserial Python package
+description: pyserial Python serial port access library
 version: "3.4"
 tag: "3.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

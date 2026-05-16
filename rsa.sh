@@ -1,5 +1,5 @@
 package: rsa
-description: rsa Python package
+description: rsa pure-Python RSA cryptography implementation
 version: "4.0"
 tag: "4.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pyasn1
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - rsa-4.0.patch
 ---

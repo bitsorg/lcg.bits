@@ -1,5 +1,5 @@
 package: svgpath
-description: svgpath Python package
+description: svgpath SVG path parsing and manipulation for Python
 version: "6.3"
 tag: "6.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

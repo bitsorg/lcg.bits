@@ -1,5 +1,5 @@
 package: grpcio
-description: grpcio Python package
+description: grpcio gRPC Python implementation
 version: "1.73.0"
 tag: "1.73.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - grpcio-1.73.0.patch
 ---

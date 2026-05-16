@@ -1,5 +1,5 @@
 package: param
-description: param Python package
+description: Param declarative data classes with parameter typing
 version: "1.13.0"
 tag: "1.13.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: svgwrite
-description: svgwrite Python package
+description: svgwrite SVG drawing library for Python
 version: "1.4.3"
 tag: "1.4.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

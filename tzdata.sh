@@ -1,5 +1,5 @@
 package: tzdata
-description: tzdata Python package
+description: tzdata IANA timezone data distribution for Python
 version: "2024.1"
 tag: "2024.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

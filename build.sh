@@ -1,5 +1,5 @@
 package: build
-description: build Python package
+description: build PEP 517 compliant Python package builder
 version: "0.8.0"
 tag: "0.8.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pep517
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

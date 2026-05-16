@@ -1,5 +1,5 @@
 package: pylint
-description: pylint Python package
+description: Pylint Python static code analysis tool
 version: "4.0.5"
 tag: "4.0.5"
 sources:
@@ -16,7 +16,7 @@ requires:
   - platformdirs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

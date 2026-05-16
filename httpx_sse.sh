@@ -1,5 +1,5 @@
 package: httpx_sse
-description: httpx_sse Python package
+description: httpx-sse Server-Sent Events support for HTTPX
 version: "0.4.0"
 tag: "0.4.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

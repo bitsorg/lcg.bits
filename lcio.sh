@@ -1,5 +1,5 @@
 package: LCIO
-description: LCIO (Linear Collider I/O) event data model and persistence library
+description: Linear Collider I/O event data model and persistence library
 version: "02.23.02"
 tag: "02.23.02"
 sources:
@@ -9,7 +9,7 @@ requires:
   - SIO
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

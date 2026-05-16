@@ -1,5 +1,5 @@
 package: metakernel
-description: metakernel Python package
+description: MetaKernel base Jupyter kernel with common functionality
 version: "0.30.2"
 tag: "0.30.2"
 sources:
@@ -13,7 +13,7 @@ requires:
   - ipyparallel
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

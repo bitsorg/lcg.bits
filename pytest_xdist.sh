@@ -1,5 +1,5 @@
 package: pytest_xdist
-description: pytest_xdist Python package
+description: pytest-xdist pytest plugin for distributed testing
 version: "3.8.0"
 tag: "3.8.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - execnet
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

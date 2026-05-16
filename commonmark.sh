@@ -1,5 +1,5 @@
 package: commonmark
-description: commonmark Python package
+description: CommonMark spec-compliant Markdown parser for Python
 version: "0.9.1"
 tag: "0.9.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

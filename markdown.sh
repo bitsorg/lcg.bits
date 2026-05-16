@@ -1,5 +1,5 @@
 package: markdown
-description: markdown Python package
+description: Markdown Python implementation of Markdown
 version: "3.7"
 tag: "3.7"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

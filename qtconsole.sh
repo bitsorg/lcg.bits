@@ -1,5 +1,5 @@
 package: qtconsole
-description: qtconsole Python package
+description: qtconsole Qt-based rich Jupyter terminal
 version: "5.6.1"
 tag: "5.6.1"
 sources:
@@ -16,7 +16,7 @@ requires:
   - Qt5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: dask_jobqueue
-description: dask_jobqueue Python package
+description: dask-jobqueue deploy Dask on HPC job schedulers
 version: "0.9.0"
 tag: "0.9.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - distributed
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: flake8_builtins
-description: flake8_builtins Python package
+description: flake8-builtins check for use of Python builtins as names
 version: "3.1.0"
 tag: "3.1.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - flake8
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

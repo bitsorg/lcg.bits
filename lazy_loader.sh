@@ -1,5 +1,5 @@
 package: lazy_loader
-description: lazy_loader Python package
+description: lazy_loader lazy module loading for Python packages
 version: "0.4"
 tag: "0.4"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

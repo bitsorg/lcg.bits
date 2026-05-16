@@ -1,5 +1,5 @@
 package: marlinreco
-description: marlinreco Key4hep framework package
+description: MarlinReco reconstruction Marlin processors for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -17,7 +17,7 @@ requires:
   - GSL
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

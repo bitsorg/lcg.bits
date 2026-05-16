@@ -1,5 +1,5 @@
 package: jupyterlab_rise
-description: jupyterlab_rise Python package
+description: RISE JupyterLab extension for Reveal.js slideshows
 version: "0.42.0"
 tag: "0.42.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - jupyterlab
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

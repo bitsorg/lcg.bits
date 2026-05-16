@@ -1,5 +1,5 @@
 package: lcfiplus
-description: lcfiplus Key4hep framework package
+description: LCFIPlus flavor tagging package for ILC/CLICdp
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

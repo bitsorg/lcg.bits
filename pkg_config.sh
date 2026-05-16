@@ -1,12 +1,12 @@
 package: pkg_config
-description: pkg_config library/tool (from LCG software stack)
+description: pkg-config helper tool for querying library compile/link flags
 version: "0.29.2"
 tag: "0.29.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pkg-config-0.29.2.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 patches:
   - pkg_config-0.29.2.patch
 ---

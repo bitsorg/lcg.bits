@@ -1,5 +1,5 @@
 package: cartopy
-description: cartopy Python package
+description: Cartopy geospatial data processing and map projections
 version: "0.24.1"
 tag: "0.24.1"
 sources:
@@ -17,7 +17,7 @@ requires:
   - matplotlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

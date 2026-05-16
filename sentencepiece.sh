@@ -1,5 +1,5 @@
 package: sentencepiece
-description: sentencepiece Python package
+description: SentencePiece unsupervised text tokenizer
 version: "0.2.0"
 tag: "0.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - sentencepiece-0.2.0.patch
 ---

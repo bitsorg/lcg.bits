@@ -1,5 +1,5 @@
 package: json_logger
-description: json_logger Python package
+description: json-logger JSON log formatter for Python
 version: "2.0.7"
 tag: "2.0.7"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: GENIE
-description: GENIE Monte Carlo event generator
+description: Comprehensive Monte Carlo neutrino event generator
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - libxml2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-only
 ---
 #!/bin/bash -e
 ##############################

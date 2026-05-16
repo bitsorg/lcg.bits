@@ -1,5 +1,5 @@
 package: k4simdelphes
-description: k4simdelphes Key4hep framework package
+description: Key4hep Delphes fast simulation wrapper
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - evtgen
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

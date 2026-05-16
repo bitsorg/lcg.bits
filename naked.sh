@@ -1,5 +1,5 @@
 package: naked
-description: naked Python package
+description: Naked Python framework and tools for CLI application development
 version: "0.1.32"
 tag: "0.1.32"
 sources:
@@ -11,7 +11,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

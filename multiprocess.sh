@@ -1,5 +1,5 @@
 package: multiprocess
-description: multiprocess Python package
+description: multiprocess better multiprocessing and dill-based pickling
 version: "0.70.16"
 tag: "0.70.16"
 sources:
@@ -10,7 +10,7 @@ requires:
   - dill
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

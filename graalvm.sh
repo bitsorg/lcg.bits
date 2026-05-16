@@ -1,5 +1,5 @@
 package: GraalVM
-description: GraalVM library/tool (from LCG software stack)
+description: GraalVM polyglot runtime (JVM + native image)
 version: "22.0.0.2"
 tag: "22.0.0.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - java
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only WITH Classpath-exception-2.0
 ---
 #!/bin/bash -e
 ##############################

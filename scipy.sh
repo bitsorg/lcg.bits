@@ -1,5 +1,5 @@
 package: scipy
-description: scipy Python package
+description: SciPy scientific and technical computing library for Python
 version: "1.17.1"
 tag: "1.17.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - pythran
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

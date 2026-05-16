@@ -1,5 +1,5 @@
 package: MarkupSafe
-description: MarkupSafe Python package
+description: MarkupSafe safely handles HTML/XML markup in Python
 version: "2.1.5"
 tag: "2.1.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

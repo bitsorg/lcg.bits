@@ -1,5 +1,5 @@
 package: paramiko
-description: paramiko Python package
+description: Paramiko SSHv2 protocol library for Python
 version: "2.9.2"
 tag: "2.9.2"
 sources:
@@ -13,7 +13,7 @@ requires:
   - pynacl
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

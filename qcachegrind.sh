@@ -1,5 +1,5 @@
 package: qcachegrind
-description: qcachegrind library/tool (from LCG software stack)
+description: QCachegrind GUI front-end for Cachegrind/Callgrind profiler
 version: "20.12.1"
 tag: "20.12.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - valgrind
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################
@@ -21,5 +21,7 @@ function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   "${Qt5_ROOT}/bin/qmake"
   make ${JOBS:+-j $JOBS}
-  make ${JOBS:+-j $JOBS} COMMAND cmake -E make_directory $INSTALLROOT/bin COMMAND cmake
+  make ${JOBS:+-j $JOBS} \
+  && cmake -E make_directory $INSTALLROOT/bin
+cmake
 }

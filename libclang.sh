@@ -1,5 +1,5 @@
 package: libclang
-description: libclang Python package
+description: libclang C interface to the Clang compiler
 version: "18.1.1"
 tag: "18.1.1"
 requires:
@@ -8,7 +8,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 WITH LLVM-exception
 ---
 #!/bin/bash -e
 ##############################

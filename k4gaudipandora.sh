@@ -1,5 +1,5 @@
 package: k4gaudipandora
-description: k4gaudipandora Key4hep framework package
+description: Key4hep Gaudi-Pandora PFA integration
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -15,7 +15,7 @@ requires:
   - k4reco
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

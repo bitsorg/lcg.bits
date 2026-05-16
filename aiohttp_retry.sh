@@ -1,5 +1,5 @@
 package: aiohttp_retry
-description: aiohttp_retry Python package
+description: aiohttp_retry retry middleware for aiohttp
 version: "2.9.1"
 tag: "2.9.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - aiohttp_cors
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

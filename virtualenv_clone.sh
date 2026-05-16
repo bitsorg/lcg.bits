@@ -1,5 +1,5 @@
 package: virtualenv_clone
-description: virtualenv_clone Python package
+description: virtualenv-clone create a copy of a virtualenv
 version: "0.5.4"
 tag: "0.5.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

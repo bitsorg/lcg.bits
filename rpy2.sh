@@ -1,5 +1,5 @@
 package: rpy2
-description: rpy2 Python package
+description: rpy2 Python interface to R language
 version: "3.0.4"
 tag: "3.0.4"
 sources:
@@ -15,7 +15,7 @@ requires:
   - cffi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

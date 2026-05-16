@@ -1,5 +1,5 @@
 package: VTK
-description: VTK library/tool (from LCG software stack)
+description: Visualization Toolkit (VTK) for 3D graphics and data visualization
 version: "9.5.0"
 tag: "9.5.0"
 sources:
@@ -24,7 +24,7 @@ requires:
   - jsoncpp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pyproj
-description: pyproj Python package
+description: pyproj Python interface to PROJ cartographic library
 version: "3.7.1"
 tag: "3.7.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - certifi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

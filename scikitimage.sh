@@ -1,5 +1,5 @@
 package: scikitimage
-description: scikitimage Python package
+description: scikit-image image processing algorithms for Python
 version: "0.25.2"
 tag: "0.25.2"
 sources:
@@ -22,7 +22,7 @@ requires:
   - lazy_loader
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

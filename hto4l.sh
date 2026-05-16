@@ -1,5 +1,5 @@
 package: hto4l
-description: hto4l Monte Carlo event generator
+description: HTo4l NLO generator for H→4 leptons via gg fusion
 version: "2.02"
 tag: "2.02"
 sources:
@@ -8,7 +8,7 @@ requires:
   - GSL
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-HTo4l
 patches:
   - hto4l-2.02.patch
 ---
@@ -21,5 +21,6 @@ MODULE_OPTIONS="--bin --lib"
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} GSL_HOME=${GSL_ROOT}
-  cmake -E make_directory $INSTALLROOT/bin COMMAND cmake
+  cmake -E make_directory $INSTALLROOT/bin
+cmake
 }

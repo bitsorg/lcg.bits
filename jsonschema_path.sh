@@ -1,5 +1,5 @@
 package: jsonschema_path
-description: jsonschema_path Python package
+description: jsonschema-path path-based JSON Schema traversal
 version: "0.3.3"
 tag: "0.3.3"
 sources:
@@ -13,7 +13,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

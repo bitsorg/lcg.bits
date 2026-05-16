@@ -1,5 +1,5 @@
 package: httpx_ws
-description: httpx_ws Python package
+description: httpx-ws WebSocket support for HTTPX
 version: "0.7.1"
 tag: "0.7.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - httpx
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

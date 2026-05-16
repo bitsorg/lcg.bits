@@ -1,5 +1,5 @@
 package: ipywidgets
-description: ipywidgets Python package
+description: ipywidgets interactive HTML widgets for Jupyter notebooks
 version: "8.1.7"
 tag: "8.1.7"
 sources:
@@ -14,7 +14,7 @@ requires:
   - nbformat
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

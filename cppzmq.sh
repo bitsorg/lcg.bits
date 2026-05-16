@@ -1,5 +1,5 @@
 package: cppzmq
-description: Header-only C++ binding for ZeroMQ
+description: cppzmq header-only C++ ZeroMQ bindings
 version: "4.8.1"
 tag: "4.8.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - zeromq
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

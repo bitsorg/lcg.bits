@@ -21,5 +21,6 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  autoreconf --install --force COMMAND ./configure --prefix=$INSTALLROOT
+  autoreconf --install --force
+  ./configure --prefix=$INSTALLROOT
 }

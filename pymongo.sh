@@ -1,5 +1,5 @@
 package: pymongo
-description: pymongo Python package
+description: PyMongo official MongoDB driver for Python
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

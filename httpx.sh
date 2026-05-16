@@ -1,5 +1,5 @@
 package: httpx
-description: httpx Python package
+description: HTTPX fully featured async HTTP client for Python
 version: "0.28.1"
 tag: "0.28.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - sniffio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

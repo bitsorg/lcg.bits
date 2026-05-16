@@ -1,5 +1,5 @@
 package: fccsw
-description: fccsw Key4hep framework package
+description: FCCSW Future Circular Collider Software framework
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

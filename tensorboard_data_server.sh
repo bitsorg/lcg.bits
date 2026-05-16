@@ -1,5 +1,5 @@
 package: tensorboard_data_server
-description: tensorboard_data_server Python package
+description: tensorboard_data_server fast data loading for TensorBoard
 version: "0.7.2"
 tag: "0.7.2"
 requires:
@@ -10,7 +10,7 @@ requires:
   - mock
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

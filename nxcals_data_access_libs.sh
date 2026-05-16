@@ -1,10 +1,10 @@
 package: nxcals_data_access_libs
-description: nxcals_data_access_libs library/tool (from LCG software stack)
+description: NXCALS data access client libraries (CERN accelerator logging)
 version: ""${NXCALS_JAVA_VERSION}""
 tag: ""${NXCALS_JAVA_VERSION}""
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

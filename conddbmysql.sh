@@ -1,5 +1,5 @@
 package: conddbmysql
-description: conddbmysql Key4hep framework package
+description: CondDB MySQL backend for conditions database access
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ilcutil
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

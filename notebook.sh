@@ -1,5 +1,5 @@
 package: notebook
-description: notebook Python package
+description: Jupyter Notebook web application for interactive computing
 version: "7.4.5"
 tag: "7.4.5"
 sources:
@@ -22,7 +22,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pprof
-description: pprof library/tool (from LCG software stack)
+description: pprof tool for profiling and visualization of Go programs
 version: "54271f7"
 tag: "54271f7"
 sources:
@@ -11,7 +11,7 @@ requires:
   - go_demangle
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

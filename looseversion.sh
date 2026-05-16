@@ -1,5 +1,5 @@
 package: looseversion
-description: looseversion library/tool (from LCG software stack)
+description: looseversion simple Python version comparison
 version: "1.3.0"
 tag: "1.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Python-2.0
 ---
 #!/bin/bash -e
 ##############################

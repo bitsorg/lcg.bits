@@ -1,5 +1,5 @@
 package: siphash24
-description: siphash24 Python package
+description: siphash24 SipHash-2-4 keyed hash function for Python
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

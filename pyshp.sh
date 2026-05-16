@@ -1,5 +1,5 @@
 package: pyshp
-description: pyshp Python package
+description: pyshp read/write ESRI Shapefiles in pure Python
 version: "2.3.1"
 tag: "2.3.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: R
-description: R library/tool (from LCG software stack)
+description: R statistical computing language and environment
 version: "4.5.0"
 tag: "4.5.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - fribidi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: sphinx_rtd_theme
-description: sphinx_rtd_theme Python package
+description: sphinx-rtd-theme Read the Docs Sphinx theme
 version: "3.0.2"
 tag: "3.0.2"
 sources:
@@ -20,7 +20,7 @@ requires:
   - sphinx
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

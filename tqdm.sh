@@ -1,5 +1,5 @@
 package: tqdm
-description: tqdm Python package
+description: tqdm fast, extensible progress bar for Python
 version: "4.67.1"
 tag: "4.67.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT AND MPL-2.0
 ---
 #!/bin/bash -e
 ##############################

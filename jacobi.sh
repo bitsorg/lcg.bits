@@ -1,5 +1,5 @@
 package: jacobi
-description: jacobi Python package
+description: jacobi Python Jacobi method numerical differentiation
 version: "0.9.2"
 tag: "0.9.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

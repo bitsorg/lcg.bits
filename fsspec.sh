@@ -1,5 +1,5 @@
 package: fsspec
-description: fsspec Python package
+description: fsspec filesystem interfaces for Python
 version: "2025.2.0"
 tag: "2025.2.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - panel
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

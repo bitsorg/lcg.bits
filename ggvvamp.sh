@@ -1,5 +1,5 @@
 package: ggvvamp
-description: ggvvamp loop amplitude library for gg→VV processes
+description: gg→VV amplitude library for loop-induced processes
 version: "1.0.atlas1"
 tag: "1.0.atlas1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ginac
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-GGVVAMP
 ---
 #!/bin/bash -e
 ##############################

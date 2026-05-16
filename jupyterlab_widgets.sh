@@ -1,5 +1,5 @@
 package: jupyterlab_widgets
-description: jupyterlab_widgets Python package
+description: jupyterlab_widgets JupyterLab extension for ipywidgets
 version: "3.0.15"
 tag: "3.0.15"
 sources:
@@ -10,7 +10,7 @@ requires:
   - jupyter_packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

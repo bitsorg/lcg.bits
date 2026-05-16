@@ -1,5 +1,5 @@
 package: libxslt
-description: GNOME XSLT processing library
+description: libxslt XSLT C library for GNOME
 version: "1.1.38"
 tag: "1.1.38"
 sources:
@@ -8,7 +8,7 @@ requires:
   - libxml2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

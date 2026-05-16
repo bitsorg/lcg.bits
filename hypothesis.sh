@@ -1,5 +1,5 @@
 package: hypothesis
-description: hypothesis Python package
+description: Hypothesis property-based testing library for Python
 version: "6.135.1"
 tag: "6.135.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - click
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MPL-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: verboselogs
-description: verboselogs Python package
+description: verboselogs verbose logging level additions for Python
 version: "1.7"
 tag: "1.7"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

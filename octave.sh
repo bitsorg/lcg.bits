@@ -1,5 +1,5 @@
 package: octave
-description: octave library/tool (from LCG software stack)
+description: GNU Octave high-level language for numerical computation
 version: "10.3.0"
 tag: "10.3.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - fftw
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

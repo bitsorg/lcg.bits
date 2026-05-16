@@ -1,5 +1,5 @@
 package: lazy_object_proxy
-description: lazy_object_proxy Python package
+description: lazy-object-proxy fast and thorough lazy object proxy
 version: "1.10.0"
 tag: "1.10.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

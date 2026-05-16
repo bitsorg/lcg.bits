@@ -1,5 +1,5 @@
 package: sphinxcontrib_jquery
-description: sphinxcontrib_jquery Python package
+description: sphinxcontrib-jquery jQuery for Sphinx HTML themes
 version: "4.1"
 tag: "4.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

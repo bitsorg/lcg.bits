@@ -1,5 +1,5 @@
 package: synr
-description: synr Python package
+description: synr stable AST representation for Python (TVM)
 version: "0.5.0"
 tag: "0.5.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - attrs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

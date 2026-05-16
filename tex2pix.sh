@@ -1,5 +1,5 @@
 package: tex2pix
-description: tex2pix Python package
+description: tex2pix convert LaTeX equations to images
 version: "0.3.1"
 tag: "0.3.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

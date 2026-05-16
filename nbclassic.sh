@@ -1,5 +1,5 @@
 package: nbclassic
-description: nbclassic Python package
+description: nbclassic classic Jupyter Notebook interface
 version: "1.3.3"
 tag: "1.3.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   - notebook_shim
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

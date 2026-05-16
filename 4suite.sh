@@ -1,5 +1,5 @@
 package: 4suite
-description: 4suite Python package
+description: 4Suite XML/XPath/XSLT toolkit for Python
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

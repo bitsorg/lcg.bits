@@ -1,5 +1,5 @@
 package: pyparser
-description: pyparser Python package
+description: pyparser Pyparsing-based parser utilities
 version: "1.0"
 tag: "1.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - parse
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

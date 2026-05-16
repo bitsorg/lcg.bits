@@ -1,5 +1,5 @@
 package: pexpect
-description: pexpect Python package
+description: Pexpect controlling interactive console applications
 version: "4.9.0"
 tag: "4.9.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ptyprocess
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 patches:
   - pexpect-4.9.0.patch
 ---

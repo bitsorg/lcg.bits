@@ -1,5 +1,5 @@
 package: zarr
-description: zarr Python package
+description: zarr chunked, compressed N-dimensional arrays for Python
 version: "3.0.0"
 tag: "3.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

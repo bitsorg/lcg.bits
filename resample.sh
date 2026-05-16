@@ -1,5 +1,5 @@
 package: resample
-description: resample Python package
+description: resample resampling algorithms for Python
 version: "1.10.1"
 tag: "1.10.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

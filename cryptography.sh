@@ -1,5 +1,5 @@
 package: cryptography
-description: cryptography Python package
+description: "cryptography Python package: cryptographic primitives"
 version: "46.0.3"
 tag: "46.0.3"
 requires:
@@ -12,7 +12,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 OR BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

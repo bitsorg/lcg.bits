@@ -1,5 +1,5 @@
 package: ipyparallel
-description: ipyparallel Python package
+description: ipyparallel interactive parallel computing with Jupyter
 version: "9.0.0"
 tag: "9.0.0"
 sources:
@@ -18,7 +18,7 @@ requires:
   - joblib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - ipyparallel-9.0.0.patch
 ---

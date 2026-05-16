@@ -1,5 +1,5 @@
 package: zstandard
-description: zstandard library/tool (from LCG software stack)
+description: zstandard Python bindings for Zstandard compression
 version: "0.23.0"
 tag: "0.23.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cffi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

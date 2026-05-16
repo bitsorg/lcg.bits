@@ -1,5 +1,5 @@
 package: exceptiongroup
-description: exceptiongroup Python package
+description: exceptiongroup Python 3.11 ExceptionGroup backport
 version: "1.2.2"
 tag: "1.2.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

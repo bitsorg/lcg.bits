@@ -1,5 +1,5 @@
 package: aiohttp
-description: aiohttp Python package
+description: aiohttp async HTTP client/server framework for asyncio
 version: "3.11.11"
 tag: "3.11.11"
 sources:
@@ -16,7 +16,7 @@ requires:
   - charset_normalizer
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

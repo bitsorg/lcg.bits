@@ -1,5 +1,5 @@
 package: pyvisa
-description: pyvisa Python package
+description: PyVISA Python package for instrument control via VISA
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: k4geo
-description: k4geo Key4hep framework package
+description: Key4hep detector geometry descriptions (DD4hep)
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - LCIO
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

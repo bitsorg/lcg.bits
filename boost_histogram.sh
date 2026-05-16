@@ -1,5 +1,5 @@
 package: boost_histogram
-description: boost_histogram Python package
+description: boost-histogram fast C++ backed Python histogramming
 version: "1.7.1"
 tag: "1.7.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

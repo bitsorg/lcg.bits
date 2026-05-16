@@ -1,5 +1,5 @@
 package: mdurl
-description: mdurl Python package
+description: mdurl URL utilities for markdown-it-py
 version: "0.1.2"
 tag: "0.1.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

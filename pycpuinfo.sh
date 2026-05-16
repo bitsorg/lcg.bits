@@ -1,5 +1,5 @@
 package: pycpuinfo
-description: pycpuinfo Python package
+description: py-cpuinfo get CPU info with pure Python
 version: "9.0.0"
 tag: "9.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: tensorflow
-description: tensorflow Python package
+description: TensorFlow open-source machine learning framework (Google)
 version: "2.20.0"
 tag: "2.20.0"
 requires:
@@ -25,7 +25,7 @@ requires:
   # - TensorRT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

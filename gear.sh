@@ -1,5 +1,5 @@
 package: gear
-description: gear Key4hep framework package
+description: GEAR detector description toolkit for ILC experiments
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

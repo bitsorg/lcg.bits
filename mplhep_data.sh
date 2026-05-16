@@ -1,5 +1,5 @@
 package: mplhep_data
-description: mplhep_data Python package
+description: mplhep-data data files (experiment logos etc.) for mplhep
 version: "0.0.4"
 tag: "0.0.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

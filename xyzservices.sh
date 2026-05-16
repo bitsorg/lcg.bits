@@ -1,5 +1,5 @@
 package: xyzservices
-description: xyzservices Python package
+description: xyzservices repository of XYZ tile service providers
 version: "2023.5.0"
 tag: "2023.5.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

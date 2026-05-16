@@ -1,5 +1,5 @@
 package: itk_numerics
-description: itk_numerics Python package
+description: ITK numerical methods module
 version: "5.4.0"
 tag: "5.4.0"
 requires:
@@ -8,7 +8,7 @@ requires:
   - itk_core
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: ppft
-description: ppft Python package
+description: ppft distributed and parallel Python
 version: "1.7.7"
 tag: "1.7.7"
 sources:
@@ -11,7 +11,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

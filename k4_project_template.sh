@@ -1,5 +1,5 @@
 package: k4_project_template
-description: k4_project_template Key4hep framework package
+description: Key4hep project CMake template
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -8,7 +8,7 @@ requires:
   - k4fwcore
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

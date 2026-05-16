@@ -1,5 +1,5 @@
 package: matplotlib
-description: matplotlib Python package
+description: Matplotlib comprehensive 2D plotting library for Python
 version: "3.10.8"
 tag: "3.10.8"
 sources:
@@ -23,7 +23,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: PSF-2.0
 ---
 #!/bin/bash -e
 ##############################

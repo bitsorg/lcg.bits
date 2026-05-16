@@ -1,5 +1,5 @@
 package: suitesparse
-description: suitesparse library/tool (from LCG software stack)
+description: SuiteSparse sparse matrix algorithms collection
 version: "5.10.1"
 tag: "5.10.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - gmp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - suitesparse-5.10.1.patch
 ---
@@ -25,3 +25,4 @@ function Make() {
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} install CC=$CC INSTALL_LIB=$INSTALLROOT/lib INSTALL_INCLUDE=$INSTALLROOT/include BLAS=-lopenblas LAPACK=-lopenblas
 }
+function MakeInstall() { true; }

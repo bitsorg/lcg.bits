@@ -1,5 +1,5 @@
 package: tblib
-description: tblib Python package
+description: tblib pickling support for Python tracebacks
 version: "1.7.0"
 tag: "1.7.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

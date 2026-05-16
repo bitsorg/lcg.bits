@@ -1,5 +1,5 @@
 package: greenlet
-description: greenlet Python package
+description: greenlet lightweight in-process concurrent programming
 version: "3.2.3"
 tag: "3.2.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: appnope
-description: appnope Python package
+description: appnope macOS App Nap disabling library for Python
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

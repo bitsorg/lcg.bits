@@ -1,5 +1,5 @@
 package: urllib3
-description: urllib3 Python package
+description: urllib3 powerful user-friendly HTTP client for Python
 version: "2.6.3"
 tag: "2.6.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

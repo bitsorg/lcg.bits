@@ -1,5 +1,5 @@
 package: openqasm3
-description: openqasm3 Python package
+description: openqasm3 OpenQASM 3 AST and parsing library
 version: "1.0.1"
 tag: "1.0.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - antlr4_python3_runtime
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

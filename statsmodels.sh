@@ -1,5 +1,5 @@
 package: statsmodels
-description: statsmodels Python package
+description: statsmodels statistical models and tests for Python
 version: "0.14.5"
 tag: "0.14.5"
 sources:
@@ -18,7 +18,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

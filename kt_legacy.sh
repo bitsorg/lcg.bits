@@ -1,5 +1,5 @@
 package: kt_legacy
-description: kt_legacy Python package
+description: kt-legacy k_T jet clustering legacy routines
 version: "1.0.5"
 tag: "1.0.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

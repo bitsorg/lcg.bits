@@ -1,5 +1,5 @@
 package: vector
-description: vector Python package
+description: vector Lorentz/spatial vector library for HEP in Python
 version: "1.8.0"
 tag: "1.8.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

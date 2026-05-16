@@ -1,5 +1,5 @@
 package: imjoy_utils
-description: imjoy_utils Python package
+description: imjoy-utils utility functions for ImJoy
 version: "0.1.2"
 tag: "0.1.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

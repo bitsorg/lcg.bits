@@ -1,5 +1,5 @@
 package: pickleshare
-description: pickleshare Python package
+description: pickleshare tiny filesystem-based database for Python
 version: "0.7.5"
 tag: "0.7.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

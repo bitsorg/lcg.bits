@@ -1,5 +1,5 @@
 package: cupy
-description: cupy Python package
+description: CuPy NumPy-compatible array library for NVIDIA GPUs
 version: "unknown"
 tag: "unknown"
 sources:
@@ -12,7 +12,7 @@ requires:
   - fastrlock
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

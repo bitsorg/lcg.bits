@@ -1,5 +1,5 @@
 package: asdf_transform_schemas
-description: asdf_transform_schemas Python package
+description: ASDF transform schema definitions
 version: "0.5.0"
 tag: "0.5.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - asdf_standard
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

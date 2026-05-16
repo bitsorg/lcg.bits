@@ -1,5 +1,5 @@
 package: sniffio
-description: sniffio Python package
+description: sniffio detect which async library is being used
 version: "1.3.1"
 tag: "1.3.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT OR Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

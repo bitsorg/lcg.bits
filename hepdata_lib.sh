@@ -1,5 +1,5 @@
 package: hepdata_lib
-description: hepdata_lib Python package
+description: hepdata_lib library for preparing HEPData submissions
 version: "0.20.0"
 tag: "0.20.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - hist
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: terminado
-description: terminado Python package
+description: terminado tornado and gevent WebSocket terminal server
 version: "0.18.1"
 tag: "0.18.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - ptyprocess
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

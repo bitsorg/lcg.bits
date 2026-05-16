@@ -1,5 +1,5 @@
 package: onnx
-description: onnx Python package
+description: ONNX Open Neural Network Exchange format library
 version: "1.16.0"
 tag: "1.16.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - onnx-1.16.0.patch
 ---

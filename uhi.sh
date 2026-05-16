@@ -1,5 +1,5 @@
 package: uhi
-description: uhi Python package
+description: UHI Unified Histogram Indexing protocol (HEP)
 version: "0.3.0"
 tag: "0.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: astor
-description: astor Python package
+description: astor Python AST read/write library
 version: "0.8.1"
 tag: "0.8.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

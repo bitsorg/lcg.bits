@@ -1,5 +1,5 @@
 package: pygraphviz
-description: pygraphviz Python package
+description: PyGraphviz Python interface to Graphviz graph library
 version: "1.11"
 tag: "1.11"
 sources:
@@ -10,7 +10,7 @@ requires:
   - graphviz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

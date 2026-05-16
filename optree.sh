@@ -1,5 +1,5 @@
 package: optree
-description: optree Python package
+description: optree optimised PyTree utilities for JAX/PyTorch
 version: "0.14.1"
 tag: "0.14.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

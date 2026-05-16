@@ -1,5 +1,5 @@
 package: pypi_arrow
-description: pypi_arrow Python package
+description: pypi-arrow PyPI package status tracker
 version: "1.3.0"
 tag: "1.3.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - python_dateutil
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

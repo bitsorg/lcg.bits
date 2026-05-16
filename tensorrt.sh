@@ -1,5 +1,5 @@
 package: TensorRT
-description: TensorRT Python package
+description: NVIDIA TensorRT SDK for high-performance deep learning inference
 version: "unknown"
 tag: "unknown"
 requires:
@@ -11,7 +11,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-NVIDIA-TensorRT
 ---
 #!/bin/bash -e
 ##############################

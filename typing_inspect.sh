@@ -1,5 +1,5 @@
 package: typing_inspect
-description: typing_inspect Python package
+description: typing_inspect runtime inspection of Python typing types
 version: "0.9.0"
 tag: "0.9.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: luigi
-description: luigi Python package
+description: Luigi workflow management system for data pipelines
 version: "3.6.0"
 tag: "3.6.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - tenacity
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: recola_SM
-description: recola_SM Monte Carlo event generator
+description: RECOLA Standard Model process library
 version: "2.2.3"
 tag: "2.2.3"
 sources:
@@ -8,7 +8,7 @@ requires:
   - collier
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

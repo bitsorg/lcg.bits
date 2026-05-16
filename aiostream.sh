@@ -1,5 +1,5 @@
 package: aiostream
-description: aiostream Python package
+description: aiostream async generator pipelines for Python
 version: "0.4.5"
 tag: "0.4.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPLv3
 ---
 #!/bin/bash -e
 ##############################

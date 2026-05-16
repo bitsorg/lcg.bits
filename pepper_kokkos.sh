@@ -1,5 +1,5 @@
 package: pepper_kokkos
-description: pepper_kokkos Monte Carlo event generator
+description: PEPPER track reconstruction package with Kokkos backend
 version: "1.8.0"
 tag: "1.8.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - openmpi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

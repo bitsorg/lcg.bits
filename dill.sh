@@ -1,5 +1,5 @@
 package: dill
-description: dill Python package
+description: dill extends Python's pickle for serializing lambdas etc.
 version: "0.4.0"
 tag: "0.4.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

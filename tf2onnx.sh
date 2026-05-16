@@ -1,5 +1,5 @@
 package: tf2onnx
-description: tf2onnx Python package
+description: tf2onnx convert TensorFlow models to ONNX format
 version: "1.16.1"
 tag: "1.16.1"
 sources:
@@ -14,7 +14,7 @@ requires:
   - tensorflow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

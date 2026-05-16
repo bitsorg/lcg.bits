@@ -1,5 +1,5 @@
 package: numba
-description: numba library/tool (from LCG software stack)
+description: Numba JIT compiler for numerical Python (LLVM-based)
 version: "0.63.0rc1"
 tag: "0.63.0rc1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - llvmlite
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

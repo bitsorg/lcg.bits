@@ -1,5 +1,5 @@
 package: tabulate
-description: tabulate Python package
+description: tabulate pretty-print tabular data in Python
 version: "0.9.0"
 tag: "0.9.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

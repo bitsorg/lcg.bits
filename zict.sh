@@ -1,5 +1,5 @@
 package: zict
-description: zict Python package
+description: zict mutable mapping tools for Dask
 version: "3.0.0"
 tag: "3.0.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - HeapDict
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

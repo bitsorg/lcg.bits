@@ -1,5 +1,5 @@
 package: kubernetes_asyncio
-description: kubernetes_asyncio Python package
+description: kubernetes_asyncio async Kubernetes Python client
 version: "21.7.1"
 tag: "21.7.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - aiohttp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

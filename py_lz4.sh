@@ -1,5 +1,5 @@
 package: py_lz4
-description: py_lz4 Python package
+description: lz4 Python bindings for the LZ4 compression library
 version: "4.4.5"
 tag: "4.4.5"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

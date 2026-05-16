@@ -1,5 +1,5 @@
 package: python_box
-description: python_box Python package
+description: python-box Python dictionaries with advanced dot notation
 version: "7.2.0"
 tag: "7.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

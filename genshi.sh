@@ -1,5 +1,5 @@
 package: genshi
-description: genshi Python package
+description: Genshi Python toolkit for XML/HTML stream generation
 version: "0.7.7"
 tag: "0.7.7"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

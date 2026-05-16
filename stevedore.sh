@@ -1,5 +1,5 @@
 package: stevedore
-description: stevedore Python package
+description: stevedore manage dynamic plugins for Python
 version: "3.3.0"
 tag: "3.3.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

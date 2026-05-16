@@ -1,5 +1,5 @@
 package: clicperformance
-description: clicperformance Key4hep framework package
+description: CLICPerformance performance study tools for CLIC detector
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -16,7 +16,7 @@ requires:
   - k4geo
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

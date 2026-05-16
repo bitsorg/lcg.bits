@@ -1,5 +1,5 @@
 package: openapi_core
-description: openapi_core Python package
+description: openapi-core OpenAPI spec validation and parsing
 version: "0.19.4"
 tag: "0.19.4"
 sources:
@@ -17,7 +17,7 @@ requires:
   - isodate
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

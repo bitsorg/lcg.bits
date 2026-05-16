@@ -1,5 +1,5 @@
 package: pytables
-description: pytables Python package
+description: PyTables HDF5 tables package for managing large datasets
 version: "3.10.2"
 tag: "3.10.2"
 sources:
@@ -13,7 +13,7 @@ requires:
   - cython
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

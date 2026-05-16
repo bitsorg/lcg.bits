@@ -1,5 +1,5 @@
 package: autograd
-description: autograd Python package
+description: Autograd automatic differentiation of NumPy code
 version: "1.7.0"
 tag: "1.7.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

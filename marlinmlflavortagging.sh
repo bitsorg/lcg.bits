@@ -1,5 +1,5 @@
 package: marlinmlflavortagging
-description: marlinmlflavortagging Key4hep framework package
+description: MarlinML ML-based flavor tagging for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -14,7 +14,7 @@ requires:
   - AIDA
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

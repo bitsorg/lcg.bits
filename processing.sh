@@ -1,5 +1,5 @@
 package: processing
-description: processing Python package
+description: processing Python multiprocessing compatibility module
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

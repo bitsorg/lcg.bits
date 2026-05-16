@@ -1,5 +1,5 @@
 package: xarray
-description: xarray Python package
+description: xarray labeled multi-dimensional arrays for Python
 version: "2025.4.0"
 tag: "2025.4.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pandas
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

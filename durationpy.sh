@@ -1,5 +1,5 @@
 package: durationpy
-description: durationpy Python package
+description: durationpy convert strings to Python timedelta objects
 version: "0.10"
 tag: "0.10"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

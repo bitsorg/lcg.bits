@@ -1,5 +1,5 @@
 package: dotmap
-description: dotmap Python package
+description: DotMap dot-access dict subclass for Python
 version: "1.3.30"
 tag: "1.3.30"
 sources:
@@ -8,7 +8,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: kr8s
-description: kr8s Python package
+description: kr8s simple Kubernetes Python client
 version: "0.20.14"
 tag: "0.20.14"
 sources:
@@ -15,7 +15,7 @@ requires:
   - PyYAML
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

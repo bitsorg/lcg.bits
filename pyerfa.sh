@@ -1,5 +1,5 @@
 package: pyerfa
-description: pyerfa Python package
+description: pyERFA Python bindings for ERFA astronomical library
 version: "2.0.1.4"
 tag: "2.0.1.4"
 sources:
@@ -11,7 +11,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

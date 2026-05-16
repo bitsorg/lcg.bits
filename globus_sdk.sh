@@ -1,5 +1,5 @@
 package: globus_sdk
-description: globus_sdk Python package
+description: Globus Python SDK for the Globus data management platform
 version: "3.9.0"
 tag: "3.9.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

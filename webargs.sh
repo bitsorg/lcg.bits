@@ -1,5 +1,5 @@
 package: webargs
-description: webargs Python package
+description: webargs declarative request parsing and validation library
 version: "8.4.0"
 tag: "8.4.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - marshmallow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: marshmallow
-description: marshmallow Python package
+description: marshmallow object serialization and deserialization library
 version: "3.16.0"
 tag: "3.16.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

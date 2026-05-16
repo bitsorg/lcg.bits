@@ -1,5 +1,5 @@
 package: py4j
-description: py4j Python package
+description: Py4J enables Python programs to access Java objects
 version: "0.10.9.9"
 tag: "0.10.9.9"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

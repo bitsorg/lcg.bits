@@ -1,5 +1,5 @@
 package: sollya
-description: sollya library/tool (from LCG software stack)
+description: Sollya environment for safe floating-point code development
 version: "8.0"
 tag: "8.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - fplll
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 patches:
   - sollya-8.0.patch
 ---

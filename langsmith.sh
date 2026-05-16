@@ -1,5 +1,5 @@
 package: langsmith
-description: langsmith Python package
+description: LangSmith platform client for LLM observability
 version: "0.2.10"
 tag: "0.2.10"
 sources:
@@ -13,7 +13,7 @@ requires:
   - httpx
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

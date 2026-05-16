@@ -1,5 +1,5 @@
 package: tensorflow_estimator
-description: tensorflow_estimator Python package
+description: TensorFlow Estimator high-level TF model training API
 version: "unknown"
 tag: "unknown"
 requires:
@@ -17,7 +17,7 @@ requires:
   - gast
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

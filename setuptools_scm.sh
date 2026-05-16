@@ -1,5 +1,5 @@
 package: setuptools_scm
-description: setuptools_scm Python package
+description: setuptools_scm manages Python package versions from SCM tags
 version: "8.2.0"
 tag: "8.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

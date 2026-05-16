@@ -1,5 +1,5 @@
 package: importlib_metadata
-description: importlib_metadata Python package
+description: importlib_metadata backport of importlib.metadata
 version: "9.0.0"
 tag: "9.0.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - zipp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

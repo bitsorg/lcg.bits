@@ -1,5 +1,5 @@
 package: langchain_text_splitters
-description: langchain_text_splitters Python package
+description: LangChain text splitting utilities
 version: "0.3.5"
 tag: "0.3.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - langchain_core
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

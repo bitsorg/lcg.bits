@@ -1,5 +1,5 @@
 package: itkwasm
-description: itkwasm Python package
+description: ITK WebAssembly bindings
 version: "1.0b185"
 tag: "1.0b185"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

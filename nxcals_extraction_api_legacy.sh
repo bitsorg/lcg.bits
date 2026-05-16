@@ -1,5 +1,5 @@
 package: nxcals_extraction_api_legacy
-description: nxcals_extraction_api_legacy Python package
+description: NXCALS legacy extraction API (CERN)
 version: "unknown"
 tag: "unknown"
 requires:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

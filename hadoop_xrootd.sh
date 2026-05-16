@@ -1,5 +1,5 @@
 package: hadoop_xrootd
-description: hadoop_xrootd library/tool (from LCG software stack)
+description: XRootD plugin for Hadoop distributed filesystem
 version: "1.0.7"
 tag: "1.0.7"
 sources:
@@ -11,7 +11,7 @@ requires:
   - xrootd
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
@@ -21,6 +21,7 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  mvn clean package -DskipTests -Dxrootd.lib64.path=${xrootd_ROOT}/lib -Dxrootd.include.path=${xrootd_ROOT}/include/xrootd ELSE BUILD_COMMAND mvn clean package -DskipTests -Dxrootd.lib64.path=${xrootd_ROOT}/lib64 -Dxrootd.include.path=${xrootd_ROOT}/include/xrootd
-  cmake -E make_directory $INSTALLROOT/lib COMMAND cmake
+  mvn clean package -DskipTests -Dxrootd.lib64.path=${xrootd_ROOT}/lib -Dxrootd.include.path=${xrootd_ROOT}/include/xrootd
+  cmake -E make_directory $INSTALLROOT/lib
+cmake
 }

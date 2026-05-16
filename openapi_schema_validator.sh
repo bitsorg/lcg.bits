@@ -1,5 +1,5 @@
 package: openapi_schema_validator
-description: openapi_schema_validator Python package
+description: openapi-schema-validator OpenAPI schema validation
 version: "0.6.3"
 tag: "0.6.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   - rfc3339_validator
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

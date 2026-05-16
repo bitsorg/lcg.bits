@@ -1,5 +1,5 @@
 package: atomicwrites
-description: atomicwrites Python package
+description: atomicwrites atomic file writes for Python
 version: "1.3.0"
 tag: "1.3.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

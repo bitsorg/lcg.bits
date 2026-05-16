@@ -1,5 +1,5 @@
 package: yarl
-description: yarl Python package
+description: yarl yet another URL library for Python
 version: "1.18.3"
 tag: "1.18.3"
 sources:
@@ -11,7 +11,7 @@ requires:
   - multidict
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

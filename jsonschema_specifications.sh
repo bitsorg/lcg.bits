@@ -1,5 +1,5 @@
 package: jsonschema_specifications
-description: jsonschema_specifications Python package
+description: jsonschema-specifications JSON Schema meta-schemas
 version: "2023.7.1"
 tag: "2023.7.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - referencing
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: mysql
-description: mysql library/tool (from LCG software stack)
+description: MySQL relational database server and client libraries
 version: "10.11.16"
 tag: "10.11.16"
 sources:
@@ -16,7 +16,7 @@ requires:
   - msgpackc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################
@@ -35,5 +35,5 @@ function Configure() {
     -DMYSQL_MAINTAINER_MODE=OFF
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} -j4
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

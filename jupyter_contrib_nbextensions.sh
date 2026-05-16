@@ -1,5 +1,5 @@
 package: jupyter_contrib_nbextensions
-description: jupyter_contrib_nbextensions Python package
+description: Collection of unofficial Jupyter notebook extensions
 version: "unknown"
 tag: "unknown"
 sources:
@@ -28,7 +28,7 @@ requires:
   # - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

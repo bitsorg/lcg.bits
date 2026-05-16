@@ -1,5 +1,5 @@
 package: itk_segmentation
-description: itk_segmentation Python package
+description: ITK image segmentation module
 version: "5.4.0"
 tag: "5.4.0"
 requires:
@@ -8,7 +8,7 @@ requires:
   - itk_filtering
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

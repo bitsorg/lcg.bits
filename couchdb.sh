@@ -1,5 +1,5 @@
 package: CouchDB
-description: CouchDB Python package
+description: CouchDB Python client library
 version: "1.2"
 tag: "1.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - CouchDB-1.2.patch
 ---

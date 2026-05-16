@@ -1,5 +1,5 @@
 package: mccabe
-description: mccabe Python package
+description: mccabe McCabe complexity checker for Python
 version: "0.7.0"
 tag: "0.7.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pytest_runner
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

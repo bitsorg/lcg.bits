@@ -1,5 +1,5 @@
 package: rdflib
-description: rdflib Python package
+description: RDFLib Python library for RDF graph manipulation
 version: "6.1.1"
 tag: "6.1.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pyparsing
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

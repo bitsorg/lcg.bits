@@ -1,5 +1,5 @@
 package: pytest_runner
-description: pytest_runner Python package
+description: pytest-runner invoke pytest via setup.py test
 version: "6.0.1"
 tag: "6.0.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

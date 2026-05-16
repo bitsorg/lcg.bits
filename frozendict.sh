@@ -1,5 +1,5 @@
 package: frozendict
-description: frozendict Python package
+description: frozendict immutable dict for Python
 version: "2.3.8"
 tag: "2.3.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

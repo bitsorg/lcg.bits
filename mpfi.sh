@@ -1,5 +1,5 @@
 package: mpfi
-description: mpfi library/tool (from LCG software stack)
+description: MPFI multiple-precision interval arithmetic library
 version: "1.5.3"
 tag: "1.5.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - mpfr
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

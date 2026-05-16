@@ -1,5 +1,5 @@
 package: pycuda
-description: pycuda Python package
+description: PyCUDA CUDA integration for Python
 version: "unknown"
 tag: "unknown"
 sources:
@@ -14,7 +14,7 @@ requires:
   - py_tools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

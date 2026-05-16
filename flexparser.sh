@@ -1,5 +1,5 @@
 package: flexparser
-description: flexparser Python package
+description: FlexParser flexible typed configuration file parser
 version: "0.4"
 tag: "0.4"
 sources:
@@ -10,7 +10,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

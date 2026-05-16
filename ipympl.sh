@@ -1,5 +1,5 @@
 package: ipympl
-description: ipympl Python package
+description: ipympl interactive matplotlib backend for Jupyter
 version: "0.9.3"
 tag: "0.9.3"
 sources:
@@ -14,7 +14,7 @@ requires:
   # - jupyter_packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

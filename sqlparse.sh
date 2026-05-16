@@ -1,5 +1,5 @@
 package: sqlparse
-description: sqlparse Python package
+description: sqlparse non-validating SQL parser for Python
 version: "0.5.3"
 tag: "0.5.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

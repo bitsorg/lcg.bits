@@ -1,5 +1,5 @@
 package: html5lib
-description: html5lib library/tool (from LCG software stack)
+description: html5lib Python HTML5 parser
 version: "1.1"
 tag: "1.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - html5lib-1.1.patch
 ---

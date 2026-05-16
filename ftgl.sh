@@ -1,5 +1,5 @@
 package: ftgl
-description: ftgl library/tool (from LCG software stack)
+description: FTGL OpenGL font rendering library using FreeType
 version: "2.4.0"
 tag: "2.4.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - freetype
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - ftgl-2.4.0.patch
 ---

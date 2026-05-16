@@ -1,5 +1,5 @@
 package: pixman
-description: Pixel manipulation library for X and Cairo
+description: Pixman low-level pixel manipulation library
 version: "0.46.0"
 tag: "0.46.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ninja
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: libgeotiff
-description: libgeotiff library/tool (from LCG software stack)
+description: libgeotiff GeoTIFF geographic metadata library
 version: "1.7.4"
 tag: "1.7.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - tiff
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################
@@ -31,5 +31,5 @@ function Configure() {
     --with-libtiff=${tiff_ROOT}
 }
 function Make() {
-  make ${JOBS:+-j $JOBS}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

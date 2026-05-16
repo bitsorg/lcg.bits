@@ -1,5 +1,5 @@
 package: torch_geometric
-description: torch_geometric Python package
+description: PyTorch Geometric deep learning on graphs and other irregular structures
 version: "2.6.1"
 tag: "2.6.1"
 sources:
@@ -26,7 +26,7 @@ requires:
   # - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

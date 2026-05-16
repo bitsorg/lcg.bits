@@ -1,5 +1,5 @@
 package: docopt
-description: docopt Python package
+description: docopt Pythonic command-line argument parser
 version: "0.6.2"
 tag: "0.6.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

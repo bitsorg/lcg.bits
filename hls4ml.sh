@@ -1,5 +1,5 @@
 package: hls4ml
-description: hls4ml Python package
+description: hls4ml machine learning firmware synthesis for FPGAs
 version: "1.2.0"
 tag: "1.2.0"
 sources:
@@ -19,7 +19,7 @@ requires:
   - calmjs_parse
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

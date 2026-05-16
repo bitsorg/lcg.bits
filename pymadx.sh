@@ -1,5 +1,5 @@
 package: pymadx
-description: pymadx Python package
+description: pyMADX Python wrapper for MAD-X
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - tabulate
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

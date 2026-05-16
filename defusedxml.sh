@@ -1,5 +1,5 @@
 package: defusedxml
-description: defusedxml Python package
+description: defusedxml safe XML parsing (defense against XXE)
 version: "0.7.1"
 tag: "0.7.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - libxml2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: PSFL
 ---
 #!/bin/bash -e
 ##############################

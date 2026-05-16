@@ -1,5 +1,5 @@
 package: plotly
-description: plotly Python package
+description: Plotly interactive graphing library for Python
 version: "5.16.1"
 tag: "5.16.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - rust
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

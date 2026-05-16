@@ -1,5 +1,5 @@
 package: tensorboardX
-description: tensorboardX Python package
+description: TensorboardX TensorBoard writer for PyTorch
 version: "2.6.2.2"
 tag: "2.6.2.2"
 sources:
@@ -11,7 +11,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

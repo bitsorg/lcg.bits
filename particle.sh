@@ -1,5 +1,5 @@
 package: particle
-description: particle Python package
+description: Particle HEP particle data from PDG in Python
 version: "0.26.0"
 tag: "0.26.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

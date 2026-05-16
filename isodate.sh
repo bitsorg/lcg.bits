@@ -1,5 +1,5 @@
 package: isodate
-description: isodate Python package
+description: isodate ISO 8601 date/time/duration parser and formatter
 version: "0.7.2"
 tag: "0.7.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

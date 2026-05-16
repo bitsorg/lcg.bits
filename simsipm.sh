@@ -1,12 +1,12 @@
 package: simsipm
-description: SimSiPM Silicon Photomultiplier simulation library
+description: SimSiPM fast SiPM (silicon photomultiplier) simulation library
 version: "HEAD"
 tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/simsipm-HEAD.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

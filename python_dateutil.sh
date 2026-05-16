@@ -1,5 +1,5 @@
 package: python_dateutil
-description: python_dateutil Python package
+description: python-dateutil extensions to the standard datetime module
 version: "2.9.0.post0"
 tag: "2.9.0.post0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 OR BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

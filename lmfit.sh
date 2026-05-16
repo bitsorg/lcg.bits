@@ -1,5 +1,5 @@
 package: lmfit
-description: lmfit Python package
+description: lmfit non-linear least-squares minimization for Python
 version: "1.2.2"
 tag: "1.2.2"
 sources:
@@ -13,7 +13,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

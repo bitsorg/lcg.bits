@@ -1,5 +1,5 @@
 package: pathos
-description: pathos Python package
+description: pathos multiprocessing and parallel map for Python
 version: "0.2.3"
 tag: "0.2.3"
 sources:
@@ -14,7 +14,7 @@ requires:
   - dill
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

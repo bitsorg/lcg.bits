@@ -8,7 +8,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -21,8 +21,7 @@ function Configure() {
     -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_COMPILER=$CXX \
-    -Wno-tautological-compare \
-    -Wno-sizeof-pointer-memaccess" \
+    -DCMAKE_CXX_FLAGS="-Wno-tautological-compare -Wno-sizeof-pointer-memaccess" \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=1 \
     -DASSIMP_BUILD_TESTS=OFF \

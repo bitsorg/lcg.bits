@@ -1,5 +1,5 @@
 package: Authlib
-description: Authlib Python package
+description: Authlib OAuth and OpenID Connect library for Python
 version: "0.15.5"
 tag: "0.15.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cryptography
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,12 +1,12 @@
 package: cppgsl
-description: C++ Guidelines Support Library (Microsoft GSL implementation)
+description: Microsoft C++ Guidelines Support Library (GSL) headers
 version: "4.2.0"
 tag: "4.2.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cppgsl-4.2.0.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

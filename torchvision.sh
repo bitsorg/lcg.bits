@@ -1,5 +1,5 @@
 package: torchvision
-description: torchvision Python package
+description: torchvision datasets, model architectures and transforms for PyTorch
 version: "0.22.1"
 tag: "0.22.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - ninja
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

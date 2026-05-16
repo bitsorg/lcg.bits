@@ -1,5 +1,5 @@
 package: kfp_server_api
-description: kfp_server_api Python package
+description: KFP server REST API client
 version: "2.4.0"
 tag: "2.4.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - urllib3
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

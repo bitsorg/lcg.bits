@@ -1,5 +1,5 @@
 package: jax_cuda12_plugin
-description: jax_cuda12_plugin Python package
+description: JAX CUDA 12 XLA plugin
 version: "unknown"
 tag: "unknown"
 requires:
@@ -8,7 +8,7 @@ requires:
   - jax_cuda12_pjrt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

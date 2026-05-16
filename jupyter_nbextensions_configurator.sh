@@ -1,5 +1,5 @@
 package: jupyter_nbextensions_configurator
-description: jupyter_nbextensions_configurator Python package
+description: Jupyter server extension to configure nbextensions
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - jupyter_core
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

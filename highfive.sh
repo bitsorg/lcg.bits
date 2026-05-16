@@ -1,5 +1,5 @@
 package: highfive
-description: highfive library/tool (from LCG software stack)
+description: HighFive header-only C++ HDF5 interface library
 version: "2.10.1"
 tag: "2.10.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - hdf5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSL-1.0
 patches:
   - highfive-2.10.1.patch
 ---

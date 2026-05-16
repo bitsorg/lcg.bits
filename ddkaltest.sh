@@ -1,5 +1,5 @@
 package: ddkaltest
-description: ddkaltest Key4hep framework package
+description: DDKalTest Kalman-filter track fit for DD4hep geometry
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -14,7 +14,7 @@ requires:
   - aidatt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

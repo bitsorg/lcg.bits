@@ -1,5 +1,5 @@
 package: mimesis
-description: mimesis Python package
+description: Mimesis fake data generator for Python
 version: "14.0.0"
 tag: "14.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

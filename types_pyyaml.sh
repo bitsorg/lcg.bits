@@ -1,5 +1,5 @@
 package: types_pyyaml
-description: types_pyyaml Python package
+description: types-PyYAML type stubs for PyYAML
 version: "6.0.12.20241230"
 tag: "6.0.12.20241230"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: cpymad
-description: cpymad Python package
+description: cpymad Python bindings to MAD-X
 version: "1.19.0"
 tag: "1.19.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - zipp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-MAD-X
 ---
 #!/bin/bash -e
 ##############################

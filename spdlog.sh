@@ -1,5 +1,5 @@
 package: spdlog
-description: spdlog library/tool (from LCG software stack)
+description: spdlog fast C++ logging library, header-only or compiled
 version: "1.15.0"
 tag: "1.15.0"
 sources:

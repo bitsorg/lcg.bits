@@ -1,5 +1,5 @@
 package: pip
-description: pip library/tool (from LCG software stack)
+description: pip the Python package installer
 version: "23.3.1"
 tag: "23.3.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

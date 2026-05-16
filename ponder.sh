@@ -1,5 +1,5 @@
 package: ponder
-description: ponder library/tool (from LCG software stack)
+description: Ponder tool for documenting pandas DataFrames
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

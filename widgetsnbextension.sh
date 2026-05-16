@@ -1,5 +1,5 @@
 package: widgetsnbextension
-description: widgetsnbextension Python package
+description: widgetsnbextension IPython widgets for Jupyter notebook
 version: "4.0.14"
 tag: "4.0.14"
 sources:
@@ -15,7 +15,7 @@ requires:
   - tornado
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

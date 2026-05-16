@@ -1,5 +1,5 @@
 package: epos4
-description: epos4 Monte Carlo event generator
+description: EPOS4 hadronic interaction and heavy-ion event generator
 version: "4.0.3.atlas1"
 tag: "4.0.3.atlas1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - hepmc3
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-EPOS4
 patches:
   - epos4-4.0.3.atlas1.patch
 ---

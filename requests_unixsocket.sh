@@ -1,5 +1,5 @@
 package: requests_unixsocket
-description: requests_unixsocket Python package
+description: requests-unixsocket Unix domain socket support for requests
 version: "0.2.0"
 tag: "0.2.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pbr
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

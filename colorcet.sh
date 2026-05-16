@@ -1,5 +1,5 @@
 package: colorcet
-description: colorcet Python package
+description: Colorcet collection of perceptually uniform colormaps
 version: "3.1.0"
 tag: "3.1.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pyct
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: CC-BY-4.0
 ---
 #!/bin/bash -e
 ##############################

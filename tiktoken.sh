@@ -1,5 +1,5 @@
 package: tiktoken
-description: tiktoken Python package
+description: tiktoken fast BPE tokenizer for OpenAI models
 version: "0.12.0"
 tag: "0.12.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - rust
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

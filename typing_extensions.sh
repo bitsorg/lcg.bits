@@ -1,5 +1,5 @@
 package: typing_extensions
-description: typing_extensions Python package
+description: typing-extensions backport of Python typing module additions
 version: "4.15.0"
 tag: "4.15.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: PSF-2.0
 ---
 #!/bin/bash -e
 ##############################

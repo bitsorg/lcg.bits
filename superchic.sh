@@ -1,5 +1,5 @@
 package: superchic
-description: superchic Monte Carlo event generator
+description: SuperChic Monte Carlo generator for central exclusive processes
 version: "4.02.2"
 tag: "4.02.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-SuperChic
 patches:
   - superchic-4.02.2.patch
 ---

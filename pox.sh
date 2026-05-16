@@ -1,5 +1,5 @@
 package: pox
-description: pox Python package
+description: pox utilities for cross-platform path handling in Python
 version: "0.2.5"
 tag: "0.2.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

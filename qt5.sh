@@ -1,5 +1,5 @@
 package: Qt5
-description: Qt5 library/tool (from LCG software stack)
+description: Qt5 cross-platform application and UI framework
 version: "5.15.15"
 tag: "5.15.15"
 sources:
@@ -9,7 +9,7 @@ requires:
   - fontconfig
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 patches:
   - Qt5-5.15.15.patch
 ---

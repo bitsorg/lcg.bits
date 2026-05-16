@@ -1,5 +1,5 @@
 package: xdrlib3
-description: xdrlib3 Python package
+description: xdrlib3 XDR data packing/unpacking for Python 3
 version: "0.1.1"
 tag: "0.1.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Python-2.0
 ---
 #!/bin/bash -e
 ##############################

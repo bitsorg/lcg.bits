@@ -1,5 +1,5 @@
 package: opensearch_py
-description: opensearch_py Python package
+description: opensearch-py official Python client for OpenSearch
 version: "2.8.0"
 tag: "2.8.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - aiohttp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

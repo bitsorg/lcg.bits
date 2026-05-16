@@ -1,5 +1,5 @@
 package: webio_jupyter_extension
-description: webio_jupyter_extension Python package
+description: WebIO Jupyter extension for interactive web I/O
 version: "0.1.0"
 tag: "0.1.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - rust
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - webio_jupyter_extension-0.1.0.patch
 ---

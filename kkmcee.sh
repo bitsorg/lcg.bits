@@ -1,5 +1,5 @@
 package: kkmcee
-description: kkmcee Monte Carlo event generator
+description: KKMC-ee Monte Carlo generator for e+e- annihilation
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - libtool
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-KKMC-ee
 ---
 #!/bin/bash -e
 ##############################
@@ -23,5 +23,7 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  cmake -E create_symlink dizet-6.45 dizet COMMAND autoreconf --force --install COMMAND ./configure --with-photos=${photos++_home} --prefix=$INSTALLROOT
+  cmake -E create_symlink dizet-6.45 dizet
+  autoreconf --force --install
+  ./configure --with-photos=${photos___home} --prefix=$INSTALLROOT
 }

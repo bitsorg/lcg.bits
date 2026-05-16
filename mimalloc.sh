@@ -1,12 +1,12 @@
 package: mimalloc
-description: mimalloc library/tool (from LCG software stack)
+description: mimalloc compact high-performance memory allocator (Microsoft)
 version: "3.2.6"
 tag: "3.2.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mimalloc-3.2.6).tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

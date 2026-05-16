@@ -1,5 +1,5 @@
 package: pyarrow
-description: pyarrow Python package
+description: PyArrow Python bindings to Apache Arrow
 version: "${arrow_native_version}"
 tag: "${arrow_native_version}"
 sources:
@@ -15,7 +15,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

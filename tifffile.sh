@@ -1,5 +1,5 @@
 package: tifffile
-description: tifffile Python package
+description: tifffile read/write TIFF files using numpy arrays
 version: "2023.4.12"
 tag: "2023.4.12"
 sources:
@@ -12,7 +12,7 @@ requires:
   - numcodecs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

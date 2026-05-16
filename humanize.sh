@@ -1,5 +1,5 @@
 package: humanize
-description: humanize Python package
+description: humanize Python humanization utilities
 version: "4.0.0"
 tag: "4.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

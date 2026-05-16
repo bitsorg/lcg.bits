@@ -1,5 +1,5 @@
 package: decorator
-description: decorator Python package
+description: decorator Python library to simplify function decorator usage
 version: "5.2.1"
 tag: "5.2.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

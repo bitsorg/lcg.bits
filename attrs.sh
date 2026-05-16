@@ -1,5 +1,5 @@
 package: attrs
-description: attrs Python package
+description: attrs Python classes without boilerplate
 version: "25.1.0"
 tag: "25.1.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

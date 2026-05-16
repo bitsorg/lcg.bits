@@ -1,5 +1,5 @@
 package: executing
-description: executing Python package
+description: executing get the currently executing AST node
 version: "2.1.0"
 tag: "2.1.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

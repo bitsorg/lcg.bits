@@ -1,5 +1,5 @@
 package: gcovr
-description: gcovr Python package
+description: gcovr Gcov coverage reports generator
 version: "7.2"
 tag: "7.2"
 sources:
@@ -14,7 +14,7 @@ requires:
   - colorlog
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,12 +1,12 @@
 package: gnu_tar
-description: gnu_tar library/tool (from LCG software stack)
+description: GNU tar archiving utility
 version: "1.30"
 tag: "1.30"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tar-1.30.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

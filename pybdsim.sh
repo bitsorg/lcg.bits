@@ -1,5 +1,5 @@
 package: pybdsim
-description: pybdsim Python package
+description: pyBDSIM Python interface to BDSIM accelerator simulation
 version: "3.6.1"
 tag: "3.6.1"
 sources:
@@ -16,7 +16,7 @@ requires:
   # - uproot
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

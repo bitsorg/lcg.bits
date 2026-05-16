@@ -1,12 +1,12 @@
 package: freeglut
-description: Open-source implementation of the GLUT OpenGL Utility Toolkit
-version: "unknown"
-tag: "unknown"
+description: FreeGLUT open-source OpenGL utility toolkit
+version: "3.8.0"
+tag: "3.8.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/freeglut-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/freeglut-3.8.0.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

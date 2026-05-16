@@ -1,5 +1,5 @@
 package: bcrypt
-description: bcrypt Python package
+description: bcrypt password hashing library for Python
 version: "5.0.0"
 tag: "5.0.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - cffi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

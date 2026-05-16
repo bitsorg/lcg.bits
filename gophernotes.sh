@@ -1,5 +1,5 @@
 package: gophernotes
-description: gophernotes library/tool (from LCG software stack)
+description: Gophernotes Go kernel for Jupyter notebooks
 version: "7c3ca4e"
 tag: "7c3ca4e"
 sources:
@@ -15,7 +15,7 @@ requires:
   - gomacro
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -27,5 +27,5 @@ function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/gopherdata/gophernotes
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/gopherdata/gophernotes
-  cmake -E chdir $INSTALLROOT/src/github.com/gopherdata/gophernotes go install #          COMMAND cmake -E copy_directory $SOURCEDIR/go/src/github.com/gopherdata/gophernotes/kernel #                                                     $INSTALLROOT/share/jupyter/kernels/gophernotes
+  cmake -E chdir $INSTALLROOT/src/github.com/gopherdata/gophernotes go install
 }

@@ -1,5 +1,5 @@
 package: blosc
-description: Blosc high-performance meta-compressor
+description: Python-Blosc high-performance compressor bindings
 version: "1.11.4"
 tag: "1.11.4"
 sources:
@@ -14,7 +14,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - blosc-1.11.4.patch
 ---

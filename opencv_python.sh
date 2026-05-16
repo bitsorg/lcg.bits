@@ -1,5 +1,5 @@
 package: opencv_python
-description: opencv_python Python package
+description: opencv-python pre-built OpenCV Python packages
 version: "4.12.0.88"
 tag: "4.12.0.88"
 sources:
@@ -11,7 +11,7 @@ requires:
   - scikitbuild
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

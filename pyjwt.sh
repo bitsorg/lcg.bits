@@ -1,5 +1,5 @@
 package: PyJWT
-description: PyJWT Python package
+description: PyJWT JSON Web Token implementation for Python
 version: "2.0.1"
 tag: "2.0.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

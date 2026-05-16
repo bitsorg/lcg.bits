@@ -1,5 +1,5 @@
 package: send2trash
-description: send2trash Python package
+description: send2trash cross-platform move-to-trash for Python
 version: "1.8.3"
 tag: "1.8.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

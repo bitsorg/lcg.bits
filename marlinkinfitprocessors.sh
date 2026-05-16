@@ -1,5 +1,5 @@
 package: marlinkinfitprocessors
-description: marlinkinfitprocessors Key4hep framework package
+description: MarlinKinFitProcessors Marlin processors using kinematic fitting
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -15,7 +15,7 @@ requires:
   - raida
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

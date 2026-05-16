@@ -1,5 +1,5 @@
 package: google_api_core
-description: google_api_core Python package
+description: google-api-core Google API client core library
 version: "2.10.1"
 tag: "2.10.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

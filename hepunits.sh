@@ -1,5 +1,5 @@
 package: hepunits
-description: hepunits Python package
+description: hepunits physical units and constants for Python (HEP)
 version: "2.4.3"
 tag: "2.4.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pint
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

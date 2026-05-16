@@ -1,5 +1,5 @@
 package: wsproto
-description: wsproto Python package
+description: wsproto pure-Python WebSocket/HTTP implementation
 version: "1.2.0"
 tag: "1.2.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - h11
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

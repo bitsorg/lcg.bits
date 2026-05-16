@@ -1,5 +1,5 @@
 package: stomppy
-description: stomppy Python package
+description: stomp.py STOMP message protocol client for Python
 version: "6.1.0"
 tag: "6.1.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - docopt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

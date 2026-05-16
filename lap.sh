@@ -1,5 +1,5 @@
 package: lap
-description: lap Python package
+description: lap fast linear assignment problem solver (C++)
 version: "0.5.12"
 tag: "0.5.12"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

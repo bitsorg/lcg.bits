@@ -1,5 +1,5 @@
 package: nose
-description: nose Python package
+description: nose test runner extending Python's unittest
 version: "1.7.0"
 tag: "1.7.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: isort
-description: isort Python package
+description: isort Python utility to sort imports alphabetically
 version: "5.12.0"
 tag: "5.12.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

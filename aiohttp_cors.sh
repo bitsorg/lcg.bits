@@ -1,5 +1,5 @@
 package: aiohttp_cors
-description: aiohttp_cors Python package
+description: aiohttp_cors CORS support for aiohttp servers
 version: "0.7.0"
 tag: "0.7.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - aiohttp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

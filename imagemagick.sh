@@ -1,5 +1,5 @@
 package: imagemagick
-description: imagemagick library/tool (from LCG software stack)
+description: ImageMagick software suite for image conversion and editing
 version: "7.0.8.7"
 tag: "7.0.8.7"
 sources:
@@ -16,7 +16,7 @@ requires:
   # - pango
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-ImageMagick
 ---
 #!/bin/bash -e
 ##############################

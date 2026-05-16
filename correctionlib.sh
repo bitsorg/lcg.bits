@@ -1,5 +1,5 @@
 package: correctionlib
-description: correctionlib Python package
+description: correctionlib schema-based correction evaluation library
 version: "2.8.0"
 tag: "2.8.0"
 sources:
@@ -17,7 +17,7 @@ requires:
   - ninja
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - correctionlib-2.8.0.patch
 ---

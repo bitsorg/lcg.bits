@@ -1,5 +1,5 @@
 package: pysimdjson
-description: pysimdjson Python package
+description: pysimdjson Python bindings for simdjson JSON library
 version: "7.0.1"
 tag: "7.0.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pybind11
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

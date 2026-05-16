@@ -1,5 +1,5 @@
 package: protobufpy
-description: protobufpy library/tool (from LCG software stack)
+description: protobuf Python runtime for Protocol Buffers
 version: "5.28.3"
 tag: "5.28.3"
 sources:
@@ -8,7 +8,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

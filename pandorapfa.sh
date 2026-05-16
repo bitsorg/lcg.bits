@@ -1,12 +1,12 @@
 package: pandorapfa
-description: PandoraPFA multi-algorithm particle flow reconstruction
+description: PandoraPFA particle flow algorithm for calorimeter reconstruction
 version: "unknown"
 tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pandorapfa-unknown.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

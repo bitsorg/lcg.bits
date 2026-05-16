@@ -1,5 +1,5 @@
 package: spey
-description: spey Python package
+description: spey smooth inference for reinterpretation (HEP)
 version: "0.2.5"
 tag: "0.2.5"
 sources:
@@ -16,7 +16,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - spey-0.2.5.patch
 ---

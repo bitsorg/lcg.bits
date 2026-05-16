@@ -1,5 +1,5 @@
 package: cudnn
-description: cudnn library/tool (from LCG software stack)
+description: NVIDIA cuDNN deep learning GPU primitive library
 version: "8.2.4.15"
 tag: "8.2.4.15"
 sources:
@@ -8,7 +8,7 @@ requires:
   - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-NVIDIA-cuDNN
 ---
 #!/bin/bash -e
 ##############################

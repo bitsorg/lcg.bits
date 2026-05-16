@@ -1,5 +1,5 @@
 package: hepdata_validator
-description: hepdata_validator Python package
+description: hepdata-validator HEPData submission YAML schema validator
 version: "0.3.6"
 tag: "0.3.6"
 sources:
@@ -14,7 +14,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

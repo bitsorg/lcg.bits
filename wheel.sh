@@ -1,5 +1,5 @@
 package: wheel
-description: wheel library/tool (from LCG software stack)
+description: wheel Python built-package format (PEP 427)
 version: "0.45.1"
 tag: "0.45.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

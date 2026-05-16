@@ -1,5 +1,5 @@
 package: pyqtwebengine
-description: pyqtwebengine Python package
+description: PyQtWebEngine Python bindings for Qt WebEngine
 version: "5.12.1"
 tag: "5.12.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pyqt5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

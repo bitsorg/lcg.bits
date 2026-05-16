@@ -1,5 +1,5 @@
 package: fccanalyses
-description: fccanalyses Key4hep framework package
+description: FCCAnalyses analysis framework for FCC experiments
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -16,7 +16,7 @@ requires:
   # - onnxruntime
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

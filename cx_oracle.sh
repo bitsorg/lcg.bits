@@ -1,5 +1,5 @@
 package: cx_oracle
-description: cx_oracle Python package
+description: cx_Oracle Python interface to Oracle Database
 version: "8.3.0"
 tag: "8.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - oracle
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

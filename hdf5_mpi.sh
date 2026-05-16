@@ -1,5 +1,5 @@
 package: hdf5_mpi
-description: hdf5_mpi library/tool (from LCG software stack)
+description: HDF5 library built with MPI parallel I/O support
 version: "1.14.6"
 tag: "1.14.6"
 sources:
@@ -9,7 +9,7 @@ requires:
   - openmpi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

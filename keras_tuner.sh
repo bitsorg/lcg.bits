@@ -1,5 +1,5 @@
 package: keras_tuner
-description: keras_tuner Python package
+description: KerasTuner hyperparameter tuning library for Keras
 version: "1.4.7"
 tag: "1.4.7"
 sources:
@@ -16,7 +16,7 @@ requires:
   - keras
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

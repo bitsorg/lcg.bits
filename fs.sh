@@ -1,5 +1,5 @@
 package: fs
-description: fs Python package
+description: PyFilesystem2 filesystem abstraction layer for Python
 version: "2.4.16"
 tag: "2.4.16"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

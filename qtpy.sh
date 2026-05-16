@@ -1,5 +1,5 @@
 package: qtpy
-description: qtpy Python package
+description: QtPy thin abstraction layer over PyQt5/PySide2
 version: "2.4.2"
 tag: "2.4.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pyqt5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

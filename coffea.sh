@@ -1,5 +1,5 @@
 package: coffea
-description: coffea Python package
+description: Coffea Columnar Object Framework For Effective Analysis
 version: "2025.12.0"
 tag: "2025.12.0"
 sources:
@@ -40,7 +40,7 @@ requires:
   - vector
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

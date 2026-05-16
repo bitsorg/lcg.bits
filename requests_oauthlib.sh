@@ -1,5 +1,5 @@
 package: requests_oauthlib
-description: requests_oauthlib Python package
+description: requests-oauthlib OAuthlib support for the requests library
 version: "1.2.0"
 tag: "1.2.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - oauthlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

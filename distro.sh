@@ -1,5 +1,5 @@
 package: distro
-description: distro Python package
+description: distro OS platform information for Python
 version: "1.9.0"
 tag: "1.9.0"
 requires:
@@ -7,7 +7,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

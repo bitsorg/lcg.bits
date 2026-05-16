@@ -1,5 +1,5 @@
 package: glog
-description: Google C++ logging library
+description: Google glog C++ application-level logging library
 version: "0.4.0"
 tag: "0.4.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - gflags
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

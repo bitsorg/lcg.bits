@@ -1,5 +1,5 @@
 package: cedviewer
-description: cedviewer Key4hep framework package
+description: CEDViewer Marlin processor for ILC event display
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -13,7 +13,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

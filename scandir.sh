@@ -1,5 +1,5 @@
 package: scandir
-description: scandir Python package
+description: scandir fast directory iteration function for Python
 version: "1.10.0"
 tag: "1.10.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

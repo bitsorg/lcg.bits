@@ -1,5 +1,5 @@
 package: cma
-description: cma Python package
+description: CMA-ES covariance matrix adaptation evolution strategy optimizer
 version: "3.4.0"
 tag: "3.4.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

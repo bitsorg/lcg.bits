@@ -1,5 +1,5 @@
 package: go_liner
-description: go_liner library/tool (from LCG software stack)
+description: liner Go readline-like library for command-line input
 version: "6f820f8"
 tag: "6f820f8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - go_runewidth
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

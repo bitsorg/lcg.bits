@@ -1,5 +1,5 @@
 package: google_auth_oauthlib
-description: google_auth_oauthlib Python package
+description: google-auth-oauthlib OAuthlib integration for google-auth
 version: "1.0.0"
 tag: "1.0.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - requests_oauthlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

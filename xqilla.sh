@@ -1,5 +1,5 @@
 package: xqilla
-description: xqilla library/tool (from LCG software stack)
+description: XQilla XQuery and XPath 2.0 library
 version: "2.3.4"
 tag: "2.3.4"
 sources:
@@ -8,7 +8,7 @@ requires:
   - XercesC
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

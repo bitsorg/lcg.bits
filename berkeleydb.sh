@@ -1,5 +1,5 @@
 package: berkeleydb
-description: berkeleydb Python package
+description: berkeleydb Python bindings for Oracle Berkeley DB
 version: "18.1.15"
 tag: "18.1.15"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

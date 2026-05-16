@@ -1,5 +1,5 @@
 package: minio
-description: minio Python package
+description: MinIO Python client SDK for S3-compatible object storage
 version: "7.2.15"
 tag: "7.2.15"
 sources:
@@ -15,7 +15,7 @@ requires:
   - urllib3
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

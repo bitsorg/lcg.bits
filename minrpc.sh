@@ -1,5 +1,5 @@
 package: minrpc
-description: minrpc Python package
+description: minrpc minimal RPC implementation
 version: "0.2.0"
 tag: "0.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

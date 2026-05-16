@@ -1,5 +1,5 @@
 package: asiofi
-description: asiofi library/tool (from LCG software stack)
+description: asiofi FairMQ async transport based on Asio
 version: "0.5.1"
 tag: "0.5.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ofi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

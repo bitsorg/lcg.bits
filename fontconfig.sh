@@ -1,5 +1,5 @@
 package: fontconfig
-description: Library for font configuration and customization
+description: Fontconfig font configuration and customization library
 version: "2.14.2"
 tag: "2.14.2"
 sources:
@@ -12,7 +12,7 @@ requires:
   - uuid
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

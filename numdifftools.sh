@@ -1,5 +1,5 @@
 package: numdifftools
-description: numdifftools Python package
+description: numdifftools numerical differentiation tools for Python
 version: "0.9.41"
 tag: "0.9.41"
 sources:
@@ -11,7 +11,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

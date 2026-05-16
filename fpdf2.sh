@@ -1,5 +1,5 @@
 package: fpdf2
-description: fpdf2 Python package
+description: fpdf2 minimalist PDF creation library for Python
 version: "2.7.9"
 tag: "2.7.9"
 sources:
@@ -12,7 +12,7 @@ requires:
   - fonttools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

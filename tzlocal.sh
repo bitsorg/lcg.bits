@@ -1,5 +1,5 @@
 package: tzlocal
-description: tzlocal Python package
+description: tzlocal detect local timezone for Python
 version: "2.0.0"
 tag: "2.0.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pytz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

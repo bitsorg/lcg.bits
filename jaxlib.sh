@@ -1,5 +1,5 @@
 package: jaxlib
-description: jaxlib Python package
+description: jaxlib compiled XLA-based backend for JAX
 version: "${jax_native_version}"
 tag: "${jax_native_version}"
 requires:
@@ -13,7 +13,7 @@ requires:
   - ml_dtypes
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: langchain_community
-description: langchain_community Python package
+description: LangChain community integrations
 version: "0.3.14"
 tag: "0.3.14"
 sources:
@@ -18,7 +18,7 @@ requires:
   - tenacity
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

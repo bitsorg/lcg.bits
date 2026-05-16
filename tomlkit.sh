@@ -1,5 +1,5 @@
 package: tomlkit
-description: tomlkit Python package
+description: tomlkit style-preserving TOML library for Python
 version: "0.11.8"
 tag: "0.11.8"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

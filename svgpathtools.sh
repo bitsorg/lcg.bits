@@ -1,5 +1,5 @@
 package: svgpathtools
-description: svgpathtools Python package
+description: svgpathtools tools for SVG path data manipulation
 version: "1.6.1"
 tag: "1.6.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - svgwrite
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

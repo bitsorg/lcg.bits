@@ -1,5 +1,5 @@
 package: hep_flare
-description: hep_flare Python package
+description: hep-flare Dask-aware columnar HEP analysis tools
 version: "0.2.2"
 tag: "0.2.2"
 sources:
@@ -11,7 +11,7 @@ requires:
   - b2luigi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: go_runewidth
-description: go_runewidth library/tool (from LCG software stack)
+description: runewidth Go library for calculating rune widths
 version: "703b5e6"
 tag: "703b5e6"
 sources:
@@ -8,7 +8,7 @@ requires:
   - go
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

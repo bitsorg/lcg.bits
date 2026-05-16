@@ -1,5 +1,5 @@
 package: py_tools
-description: py_tools Python package
+description: py-tools collection of Python utility scripts
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - decorator
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

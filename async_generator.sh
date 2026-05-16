@@ -1,5 +1,5 @@
 package: async_generator
-description: async_generator Python package
+description: async_generator async generators for Python 3.5+
 version: "1.10"
 tag: "1.10"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT OR Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: motif
-description: motif library/tool (from LCG software stack)
+description: Motif tool for multi-omics data integration
 version: "2.3.8"
 tag: "2.3.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - flex
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - motif-2.3.8.patch
 ---

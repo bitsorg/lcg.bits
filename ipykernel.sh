@@ -1,5 +1,5 @@
 package: ipykernel
-description: ipykernel Python package
+description: ipykernel IPython kernel for Jupyter
 version: "6.29.5"
 tag: "6.29.5"
 sources:
@@ -18,7 +18,7 @@ requires:
   # - appnope
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

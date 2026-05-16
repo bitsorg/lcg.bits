@@ -1,12 +1,12 @@
 package: pcre
-description: Perl Compatible Regular Expressions library
+description: PCRE Perl-compatible regular expression library (v1)
 version: "8.43"
 tag: "8.43"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pcre-8.43.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

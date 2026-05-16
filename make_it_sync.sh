@@ -1,5 +1,5 @@
 package: make_it_sync
-description: make_it_sync Python package
+description: make_it_sync utility to run async coroutines synchronously
 version: "2.0.0"
 tag: "2.0.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

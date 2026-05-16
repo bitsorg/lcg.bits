@@ -1,5 +1,5 @@
 package: snowballstemmer
-description: snowballstemmer Python package
+description: snowballstemmer snowball stemming algorithms for Python
 version: "2.2.0"
 tag: "2.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: fqdn
-description: fqdn Python package
+description: fqdn fully-qualified domain name validation for Python
 version: "1.5.1"
 tag: "1.5.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - arrow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MPL-2.0
 ---
 #!/bin/bash -e
 ##############################

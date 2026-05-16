@@ -1,5 +1,5 @@
 package: doxygen
-description: doxygen library/tool (from LCG software stack)
+description: Doxygen documentation generator from annotated C++ sources
 version: "1.16.1"
 tag: "1.16.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - xapian
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################

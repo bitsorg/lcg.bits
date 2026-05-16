@@ -1,5 +1,5 @@
 package: contourpy
-description: contourpy Python package
+description: ContourPy Python library for computing contour lines
 version: "1.0.7"
 tag: "1.0.7"
 sources:
@@ -10,7 +10,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

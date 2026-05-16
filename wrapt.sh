@@ -1,5 +1,5 @@
 package: wrapt
-description: wrapt Python package
+description: wrapt transparent function wrapper and decorator utility
 version: "1.16.0"
 tag: "1.16.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

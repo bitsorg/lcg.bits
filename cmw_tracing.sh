@@ -1,12 +1,12 @@
 package: cmw_tracing
-description: cmw_tracing Python package
+description: CMW tracing library (CERN Controls Middleware)
 version: "unknown"
 tag: "unknown"
 requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

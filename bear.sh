@@ -1,5 +1,5 @@
 package: bear
-description: bear library/tool (from LCG software stack)
+description: Bear tool that generates a compile_commands.json database
 version: "3.1.5"
 tag: "3.1.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - spdlog
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: clang
-description: clang library/tool (from LCG software stack)
+description: Clang C/C++/ObjC frontend for the LLVM compiler infrastructure
 version: "6.0.0"
 tag: "6.0.0"
 requires:
@@ -7,7 +7,7 @@ requires:
   - gcc
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 WITH LLVM-exception
 ---
 #!/bin/bash -e
 ##############################

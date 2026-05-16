@@ -1,5 +1,5 @@
 package: ipython_genutils
-description: ipython_genutils Python package
+description: ipython_genutils retained IPython utility functions
 version: "0.2.0"
 tag: "0.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

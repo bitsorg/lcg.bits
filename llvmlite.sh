@@ -1,5 +1,5 @@
 package: llvmlite
-description: llvmlite library/tool (from LCG software stack)
+description: llvmlite lightweight LLVM Python bindings for numba
 version: "0.46.0rc1"
 tag: "0.46.0rc1"
 requires:
@@ -9,7 +9,7 @@ requires:
   - wheel
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

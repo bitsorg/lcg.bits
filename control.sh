@@ -1,5 +1,5 @@
 package: control
-description: control Python package
+description: Python Control Systems Library
 version: "0.9.1"
 tag: "0.9.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - matplotlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: ruff
-description: ruff Python package
+description: Ruff extremely fast Python linter and formatter (Rust-based)
 version: "0.15.9"
 tag: "0.15.9"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: safetensors
-description: safetensors Python package
+description: safetensors simple, safe format for storing tensors
 version: "0.7.0"
 tag: "0.7.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   # - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

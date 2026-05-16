@@ -1,5 +1,5 @@
 package: tauola++
-description: tauola++ Monte Carlo event generator
+description: TAUOLA++ C++ version of TAUOLA tau decay generator
 version: "1.1.6"
 tag: "1.1.6"
 sources:
@@ -8,7 +8,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-TAUOLA++
 ---
 #!/bin/bash -e
 ##############################

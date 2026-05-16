@@ -1,5 +1,5 @@
 package: delphes
-description: Delphes fast detector simulation framework
+description: Delphes fast detector response simulation framework
 version: "3.5.1"
 tag: "3.5.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   # - pythia8
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

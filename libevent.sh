@@ -1,12 +1,12 @@
 package: libevent
-description: libevent library/tool (from LCG software stack)
+description: libevent asynchronous event notification library
 version: "2.1.11"
 tag: "2.1.11"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libevent-2.1.11.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pystan
-description: pystan Python package
+description: PyStan Python interface to the Stan probabilistic language
 version: "3.10.0"
 tag: "3.10.0"
 requires:
@@ -20,7 +20,7 @@ requires:
   - pysimdjson
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

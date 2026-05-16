@@ -1,5 +1,5 @@
 package: events
-description: events Python package
+description: events.py simple events system for Python
 version: "0.5"
 tag: "0.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

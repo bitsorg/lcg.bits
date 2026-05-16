@@ -1,5 +1,5 @@
 package: xgboost
-description: xgboost Python package
+description: XGBoost scalable distributed gradient boosting library
 version: "2.1.3"
 tag: "2.1.3"
 sources:
@@ -14,7 +14,7 @@ requires:
   # - scikitlearn
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

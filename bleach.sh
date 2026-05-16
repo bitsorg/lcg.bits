@@ -1,5 +1,5 @@
 package: bleach
-description: bleach Python package
+description: Bleach allowed-list-based HTML sanitization library
 version: "3.3.1"
 tag: "3.3.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - webencodings
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

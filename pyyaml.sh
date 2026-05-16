@@ -1,5 +1,5 @@
 package: PyYAML
-description: PyYAML Python package
+description: PyYAML YAML parser and emitter for Python
 version: "6.0.2"
 tag: "6.0.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

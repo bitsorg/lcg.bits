@@ -1,5 +1,5 @@
 package: pbr
-description: pbr Python package
+description: PBR Python Build Reasonableness setuptools helper
 version: "6.0.0"
 tag: "6.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

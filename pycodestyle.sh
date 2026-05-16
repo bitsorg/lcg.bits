@@ -1,5 +1,5 @@
 package: pycodestyle
-description: pycodestyle Python package
+description: pycodestyle Python style guide checker (PEP 8)
 version: "2.14.0"
 tag: "2.14.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

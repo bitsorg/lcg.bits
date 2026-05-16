@@ -1,5 +1,5 @@
 package: aiosignal
-description: aiosignal Python package
+description: aiosignal asyncio-safe list of registered callbacks
 version: "1.2.0"
 tag: "1.2.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - frozenlist
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

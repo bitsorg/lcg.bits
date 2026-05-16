@@ -21,5 +21,5 @@ function Configure() {
     -DTBB_TEST=OFF
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} ${tbb_build_options}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

@@ -1,5 +1,5 @@
 package: tensorboard
-description: tensorboard Python package
+description: TensorBoard TensorFlow visualization toolkit
 version: "2.20.0"
 tag: "2.20.0"
 requires:
@@ -20,7 +20,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

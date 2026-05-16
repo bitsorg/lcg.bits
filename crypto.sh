@@ -1,5 +1,5 @@
 package: crypto
-description: crypto Python package
+description: PyCrypto/pycryptodome legacy cryptographic modules
 version: "1.4.1"
 tag: "1.4.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - shellescape
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

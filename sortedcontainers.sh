@@ -1,5 +1,5 @@
 package: sortedcontainers
-description: sortedcontainers Python package
+description: SortedContainers sorted list, dict and set implementations
 version: "2.4.0"
 tag: "2.4.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

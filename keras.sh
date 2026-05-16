@@ -1,5 +1,5 @@
 package: keras
-description: keras Python package
+description: Keras deep learning API for Python
 version: "3.11.3"
 tag: "3.11.3"
 sources:
@@ -15,7 +15,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

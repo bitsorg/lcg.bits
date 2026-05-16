@@ -1,5 +1,5 @@
 package: mcfm
-description: MCFM Monte Carlo for FeMtobarn processes
+description: MCFM Monte Carlo for FeMtobarn processes (NLO parton-level)
 version: "10.3.atlas"
 tag: "10.3.atlas"
 sources:
@@ -8,7 +8,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-MCFM
 ---
 #!/bin/bash -e
 ##############################
@@ -25,5 +25,5 @@ function Configure() {
     -Dwith_library=ON
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} -j4
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

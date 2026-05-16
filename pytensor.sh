@@ -1,5 +1,5 @@
 package: pytensor
-description: pytensor Python package
+description: PyTensor library for tensor computations (Theano successor)
 version: "2.35.1"
 tag: "2.35.1"
 sources:
@@ -17,7 +17,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - pytensor-2.35.1.patch
 ---

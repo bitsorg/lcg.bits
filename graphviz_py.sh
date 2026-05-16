@@ -1,5 +1,5 @@
 package: graphviz_py
-description: graphviz_py Python package
+description: graphviz Python interface to Graphviz graph-drawing
 version: "0.20.1"
 tag: "0.20.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

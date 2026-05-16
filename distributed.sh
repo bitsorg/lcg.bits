@@ -1,5 +1,5 @@
 package: distributed
-description: distributed Python package
+description: Distributed Dask's distributed task scheduler
 version: "2025.2.0"
 tag: "2025.2.0"
 sources:
@@ -24,7 +24,7 @@ requires:
   - bokeh
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

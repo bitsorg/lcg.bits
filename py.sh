@@ -1,5 +1,5 @@
 package: py
-description: py Python package
+description: py library with cross-python path and file utilities
 version: "1.11.0"
 tag: "1.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

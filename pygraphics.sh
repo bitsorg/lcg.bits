@@ -1,5 +1,5 @@
 package: pygraphics
-description: pygraphics Python package
+description: pygraphics Python turtle graphics and image library
 version: "2.0"
 tag: "2.0"
 requires:
@@ -8,7 +8,7 @@ requires:
   - pyqt5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

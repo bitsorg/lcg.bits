@@ -1,5 +1,5 @@
 package: google_auth
-description: google_auth Python package
+description: google-auth Google authentication library for Python
 version: "2.38.0"
 tag: "2.38.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

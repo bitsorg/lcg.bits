@@ -1,5 +1,5 @@
 package: hatchling
-description: hatchling Python package
+description: Hatchling extensible PEP 517 build backend
 version: "1.28.0"
 tag: "1.28.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - trove_classifiers
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

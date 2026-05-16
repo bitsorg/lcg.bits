@@ -1,12 +1,12 @@
 package: ampt
-description: ampt Monte Carlo event generator
+description: AMPT (A Multi-Phase Transport) heavy-ion event generator
 version: "2.26t9b_atlas"
 tag: "2.26t9b_atlas"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/ampt-2.26t9b_atlas.zip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-Ampt
 patches:
   - ampt-2.26t9b_atlas.patch
 ---

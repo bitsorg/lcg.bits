@@ -1,5 +1,5 @@
 package: oracle
-description: oracle library/tool (from LCG software stack)
+description: Oracle Database server
 version: "19.19.0.0.0"
 tag: "19.19.0.0.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - libaio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-Oracle
 ---
 #!/bin/bash -e
 ##############################

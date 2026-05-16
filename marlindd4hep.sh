@@ -1,5 +1,5 @@
 package: marlindd4hep
-description: marlindd4hep Key4hep framework package
+description: MarlinDD4hep DD4hep geometry integration for Marlin
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - DD4hep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

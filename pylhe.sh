@@ -1,5 +1,5 @@
 package: pylhe
-description: pylhe Python package
+description: pylhe lightweight Python interface to Les Houches Event files
 version: "1.0.1"
 tag: "1.0.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - vector
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

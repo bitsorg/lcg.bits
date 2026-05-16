@@ -1,5 +1,5 @@
 package: avro
-description: avro Python package
+description: Apache Avro data serialization library for Python
 version: "1.12.0"
 tag: "1.12.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

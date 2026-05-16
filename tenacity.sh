@@ -1,5 +1,5 @@
 package: tenacity
-description: tenacity Python package
+description: Tenacity general-purpose Python retry library
 version: "9.0.0"
 tag: "9.0.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

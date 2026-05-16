@@ -1,5 +1,5 @@
 package: nbconvert
-description: nbconvert Python package
+description: nbconvert converts Jupyter notebooks to other formats
 version: "7.16.4"
 tag: "7.16.4"
 sources:
@@ -27,7 +27,7 @@ requires:
   # - nbclient
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

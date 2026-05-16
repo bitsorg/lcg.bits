@@ -1,5 +1,5 @@
 package: iniconfig
-description: iniconfig Python package
+description: iniconfig small INI file reader for Python
 version: "2.1.0"
 tag: "2.1.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

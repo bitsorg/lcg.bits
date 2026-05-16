@@ -1,5 +1,5 @@
 package: qastle
-description: qastle Python package
+description: qastle text-based query language for HEP data
 version: "0.19.0"
 tag: "0.19.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - lark
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

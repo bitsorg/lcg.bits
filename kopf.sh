@@ -1,5 +1,5 @@
 package: kopf
-description: kopf Python package
+description: Kopf Kubernetes operator framework for Python
 version: "1.40.0"
 tag: "1.40.0"
 sources:
@@ -20,7 +20,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: colorama
-description: colorama Python package
+description: Colorama cross-platform colored terminal text for Python
 version: "0.4.6"
 tag: "0.4.6"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

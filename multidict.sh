@@ -1,5 +1,5 @@
 package: multidict
-description: multidict Python package
+description: multidict key-values pairs where key may have several values
 version: "6.4.4"
 tag: "6.4.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

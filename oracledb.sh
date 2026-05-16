@@ -1,5 +1,5 @@
 package: oracledb
-description: oracledb Python package
+description: python-oracledb Oracle Database driver for Python
 version: "3.4.2"
 tag: "3.4.2"
 sources:
@@ -12,7 +12,7 @@ requires:
   - cryptography
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

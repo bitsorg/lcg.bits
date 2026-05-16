@@ -1,5 +1,5 @@
 package: hf_xet
-description: hf_xet Python package
+description: hf-xet Hugging Face Xet large-file storage backend
 version: "1.2.0"
 tag: "1.2.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - rust
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - hf_xet-1.2.0.patch
 ---

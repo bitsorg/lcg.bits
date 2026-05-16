@@ -1,5 +1,5 @@
 package: lightning_utilities
-description: lightning_utilities Python package
+description: lightning-utilities common utility functions for PyTorch Lightning
 version: "0.12.0"
 tag: "0.12.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - lightning_utilities-0.12.0.patch
 ---

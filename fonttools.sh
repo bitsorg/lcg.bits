@@ -1,5 +1,5 @@
 package: fonttools
-description: fonttools Python package
+description: fonttools library for manipulating font files in Python
 version: "4.40.0"
 tag: "4.40.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - fs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

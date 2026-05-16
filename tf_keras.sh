@@ -1,5 +1,5 @@
 package: tf_keras
-description: tf_keras Python package
+description: tf-keras official Keras for TensorFlow 2
 version: "2.20.1"
 tag: "2.20.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - tensorflow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

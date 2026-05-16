@@ -1,5 +1,5 @@
 package: pyroscope_io
-description: pyroscope_io Python package
+description: pyroscope-io Python client for Pyroscope profiler
 version: "0.8.5"
 tag: "0.8.5"
 requires:
@@ -8,7 +8,7 @@ requires:
   - cffi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

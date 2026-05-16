@@ -1,12 +1,12 @@
 package: gettext
-description: GNU gettext internationalization and localization library
-version: "0.24"
-tag: "0.24"
+description: GNU gettext internationalisation and localisation library
+version: "1.0"
+tag: "1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gettext-0.24.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/gettext-1.0.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
@@ -15,6 +15,26 @@ license: TODO
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  ./configure --prefix=$INSTALLROOT --without-xz --without-bzip2 --disable-curses --disable-openmp --enable-relocatable --disable-rpath --enable-nls --disable-native-java --disable-acl --disable-java --disable-dependency-tracking --disable-silent-rules --enable-static --enable-shared
+  ./configure --prefix=$INSTALLROOT \
+    --disable-acl \
+    --disable-csharp \
+    --disable-curses \
+    --disable-d \
+    --disable-dependency-tracking \
+    --disable-java \
+    --disable-native-java \
+    --disable-openmp \
+    --disable-rpath \
+    --disable-silent-rules \
+    --enable-nls \
+    --enable-relocatable \
+    --enable-shared \
+    --enable-static \
+    --without-bzip2 \
+    --without-emacs \
+    --without-selinux \
+    --without-xz
+}
+function MakeInstall() {
+  make install-exec
 }

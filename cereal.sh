@@ -1,12 +1,12 @@
 package: cereal
-description: cereal library/tool (from LCG software stack)
+description: Cereal C++11 header-only serialization library
 version: "1.3.2"
 tag: "1.3.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cereal-1.3.2).tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

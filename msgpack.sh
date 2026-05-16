@@ -1,5 +1,5 @@
 package: msgpack
-description: msgpack Python package
+description: msgpack MessagePack serializer for Python
 version: "1.0.5"
 tag: "1.0.5"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

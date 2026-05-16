@@ -1,5 +1,5 @@
 package: pygments
-description: pygments Python package
+description: Pygments generic syntax highlighter for Python
 version: "2.18.0"
 tag: "2.18.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

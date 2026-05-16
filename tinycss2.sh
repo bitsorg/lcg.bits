@@ -1,5 +1,5 @@
 package: tinycss2
-description: tinycss2 Python package
+description: tinycss2 low-level CSS parser for Python
 version: "1.2.1"
 tag: "1.2.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - webencodings
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

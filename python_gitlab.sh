@@ -1,5 +1,5 @@
 package: python_gitlab
-description: python_gitlab Python package
+description: python-gitlab Python wrapper for the GitLab REST API
 version: "1.8.0"
 tag: "1.8.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

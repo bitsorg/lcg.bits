@@ -1,5 +1,5 @@
 package: nest_asyncio
-description: nest_asyncio Python package
+description: nest-asyncio allow nested asyncio event loops
 version: "1.6.0"
 tag: "1.6.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

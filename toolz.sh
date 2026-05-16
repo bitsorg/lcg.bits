@@ -1,5 +1,5 @@
 package: toolz
-description: toolz Python package
+description: toolz functional utilities for iterators, functions, dicts
 version: "1.0.0"
 tag: "1.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

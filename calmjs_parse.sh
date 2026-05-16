@@ -1,5 +1,5 @@
 package: calmjs_parse
-description: calmjs_parse Python package
+description: calmjs.parse ECMAScript parser for Python
 version: "1.3.1"
 tag: "1.3.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - calmjs_parse-1.3.1.patch
 ---

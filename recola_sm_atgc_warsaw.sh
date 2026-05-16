@@ -1,5 +1,5 @@
 package: recola_SM_ATGC_WARSAW
-description: recola_SM_ATGC_WARSAW Monte Carlo event generator
+description: RECOLA aTGC/Warsaw basis process library for RECOLA
 version: "2.2.4"
 tag: "2.2.4"
 sources:
@@ -8,7 +8,7 @@ requires:
   - collier
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: onnxruntime
-description: onnxruntime Python package
+description: ONNX Runtime cross-platform ML model inference engine
 version: "1.24.4"
 tag: "1.24.4"
 sources:
@@ -19,7 +19,7 @@ requires:
   - sympy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

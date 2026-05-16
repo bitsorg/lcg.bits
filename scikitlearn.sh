@@ -1,5 +1,5 @@
 package: scikitlearn
-description: scikitlearn Python package
+description: scikit-learn machine learning library for Python
 version: "1.8.0"
 tag: "1.8.0"
 sources:
@@ -16,7 +16,7 @@ requires:
   # - threadpoolctl
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

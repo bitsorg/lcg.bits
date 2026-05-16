@@ -1,5 +1,5 @@
 package: gomacro
-description: gomacro library/tool (from LCG software stack)
+description: Gomacro Go interpreter with generics/macro support
 version: "c9f381e"
 tag: "c9f381e"
 sources:
@@ -10,7 +10,7 @@ requires:
   - go_runewidth
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MPL-2.0
 ---
 #!/bin/bash -e
 ##############################

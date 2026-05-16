@@ -1,5 +1,5 @@
 package: retrying
-description: retrying Python package
+description: retrying general-purpose Python retry decorator
 version: "1.3.3"
 tag: "1.3.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

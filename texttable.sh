@@ -1,5 +1,5 @@
 package: texttable
-description: texttable Python package
+description: texttable simple ASCII table generator for Python
 version: "1.7.0"
 tag: "1.7.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

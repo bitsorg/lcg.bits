@@ -1,5 +1,5 @@
 package: histoprint
-description: histoprint Python package
+description: histoprint pretty histogram printing in the terminal
 version: "2.6.0"
 tag: "2.6.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - click
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

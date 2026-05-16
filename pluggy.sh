@@ -1,5 +1,5 @@
 package: pluggy
-description: pluggy Python package
+description: pluggy plugin and hook calling mechanism for Python
 version: "1.5.0"
 tag: "1.5.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - zipp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

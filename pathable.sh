@@ -1,5 +1,5 @@
 package: pathable
-description: pathable Python package
+description: pathable tree-like data structure traversal by path
 version: "0.4.4"
 tag: "0.4.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

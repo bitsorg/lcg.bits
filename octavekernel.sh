@@ -1,5 +1,5 @@
 package: octavekernel
-description: octavekernel Python package
+description: octave_kernel Octave kernel for Jupyter notebooks
 version: "0.32.0"
 tag: "0.32.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - ipykernel
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

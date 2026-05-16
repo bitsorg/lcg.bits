@@ -1,5 +1,5 @@
 package: QKeras
-description: QKeras Python package
+description: QKeras quantization-aware training extension for Keras
 version: "0.9.0"
 tag: "0.9.0"
 sources:
@@ -17,7 +17,7 @@ requires:
   - keras_tuner
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

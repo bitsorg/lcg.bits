@@ -1,5 +1,5 @@
 package: fire
-description: fire Python package
+description: Python Fire generates CLIs from Python objects (Google)
 version: "0.7.1"
 tag: "0.7.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - termcolor
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

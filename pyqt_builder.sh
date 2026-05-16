@@ -1,5 +1,5 @@
 package: pyqt_builder
-description: pyqt_builder Python package
+description: PyQt-builder PEP 517 builder for PyQt packages
 version: "1.18.1"
 tag: "1.18.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

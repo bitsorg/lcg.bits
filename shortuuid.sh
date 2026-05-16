@@ -1,5 +1,5 @@
 package: shortuuid
-description: shortuuid Python package
+description: shortuuid generate concise, unambiguous UUIDs
 version: "1.0.13"
 tag: "1.0.13"
 sources:
@@ -10,7 +10,7 @@ requires:
   - #Django
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

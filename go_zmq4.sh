@@ -1,5 +1,5 @@
 package: go_zmq4
-description: go_zmq4 library/tool (from LCG software stack)
+description: zmq4 Go ZeroMQ (ZMQ4) bindings
 version: "7a493a6"
 tag: "7a493a6"
 sources:
@@ -9,7 +9,7 @@ requires:
   - zeromq
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

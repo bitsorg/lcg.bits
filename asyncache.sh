@@ -1,5 +1,5 @@
 package: asyncache
-description: asyncache Python package
+description: asyncache cache helper for async functions
 version: "0.3.1"
 tag: "0.3.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cachetools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

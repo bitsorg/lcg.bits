@@ -1,12 +1,12 @@
 package: libaio
-description: libaio library/tool (from LCG software stack)
+description: Linux asynchronous I/O interface library
 version: "0.3.110-1"
 tag: "0.3.110-1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libaio-0.3.110-1.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-only
 ---
 #!/bin/bash -e
 ##############################
@@ -19,3 +19,4 @@ function Make() {
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} prefix=$INSTALLROOT install
 }
+function MakeInstall() { true; }

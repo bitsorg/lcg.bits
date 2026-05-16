@@ -1,12 +1,12 @@
 package: fastjet
-description: Package for jet finding in hadron and e+e- collisions
+description: FastJet package for jet finding in particle physics
 version: "3.5.1"
 tag: "3.5.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fastjet-3.5.1.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################

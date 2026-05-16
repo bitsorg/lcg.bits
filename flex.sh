@@ -1,5 +1,5 @@
 package: flex
-description: Flex fast lexical analyser generator
+description: GNU Flex fast lexical analyser generator
 version: "2.6.4"
 tag: "2.6.4"
 sources:
@@ -8,7 +8,7 @@ requires:
   - bison
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

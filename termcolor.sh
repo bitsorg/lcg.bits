@@ -1,5 +1,5 @@
 package: termcolor
-description: termcolor Python package
+description: termcolor ANSI color formatting for terminal output
 version: "2.4.0"
 tag: "2.4.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

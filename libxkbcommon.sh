@@ -1,5 +1,5 @@
 package: libxkbcommon
-description: libxkbcommon library/tool (from LCG software stack)
+description: libxkbcommon X keyboard extension library
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - bison
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

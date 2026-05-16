@@ -1,5 +1,5 @@
 package: six
-description: six library/tool (from LCG software stack)
+description: six Python 2 and 3 compatibility utilities
 version: "1.17.0"
 tag: "1.17.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

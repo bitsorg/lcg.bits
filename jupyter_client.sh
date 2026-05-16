@@ -1,5 +1,5 @@
 package: jupyter_client
-description: jupyter_client Python package
+description: jupyter_client Jupyter protocol client and kernel management
 version: "7.4.9"
 tag: "7.4.9"
 sources:
@@ -14,7 +14,7 @@ requires:
   - tornado
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

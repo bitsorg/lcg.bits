@@ -1,5 +1,5 @@
 package: pydantic_settings
-description: pydantic_settings Python package
+description: pydantic-settings settings management via Pydantic
 version: "2.6.1"
 tag: "2.6.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

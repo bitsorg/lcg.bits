@@ -1,5 +1,5 @@
 package: babel
-description: babel Python package
+description: Babel internationalisation tools for Python
 version: "2.17.0"
 tag: "2.17.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pytz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

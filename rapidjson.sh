@@ -1,12 +1,12 @@
 package: rapidjson
-description: Fast C++ JSON parser and generator library
+description: RapidJSON fast JSON parser/generator for C++
 version: "1.1.0"
 tag: "1.1.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rapidjson-1.1.0.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - rapidjson-1.1.0.patch
 ---

@@ -1,5 +1,5 @@
 package: pyasn1
-description: pyasn1 Python package
+description: pyasn1 pure-Python ASN.1 library
 version: "0.6.1"
 tag: "0.6.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

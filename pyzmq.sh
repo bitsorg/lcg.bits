@@ -1,5 +1,5 @@
 package: pyzmq
-description: pyzmq Python package
+description: PyZMQ Python bindings for ZeroMQ
 version: "26.2.1"
 tag: "26.2.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - py
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

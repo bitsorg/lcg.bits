@@ -9,7 +9,7 @@ requires:
   - pkg_config
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

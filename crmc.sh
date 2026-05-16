@@ -1,5 +1,5 @@
 package: crmc
-description: crmc Monte Carlo event generator
+description: CRMC cosmic ray Monte Carlo interface package
 version: "2.0.1p5"
 tag: "2.0.1p5"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-CRMC
 patches:
   - crmc-2.0.1p5.patch
 ---

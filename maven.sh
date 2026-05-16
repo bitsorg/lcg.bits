@@ -1,5 +1,5 @@
 package: maven
-description: maven library/tool (from LCG software stack)
+description: Apache Maven project management and comprehension tool
 version: "3.8.5"
 tag: "3.8.5"
 sources:
@@ -8,7 +8,7 @@ requires:
   - java
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - maven-3.8.5.patch
 ---

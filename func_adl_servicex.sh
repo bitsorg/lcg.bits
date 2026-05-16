@@ -1,5 +1,5 @@
 package: func_adl_servicex
-description: func_adl_servicex Python package
+description: func_adl_servicex ServiceX backend for func_adl
 version: "2.1"
 tag: "2.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - servicex
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

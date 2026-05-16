@@ -1,5 +1,5 @@
 package: pythran
-description: pythran Python package
+description: Pythran ahead-of-time compiler for Python scientific code
 version: "0.17.0"
 tag: "0.17.0"
 sources:
@@ -14,7 +14,7 @@ requires:
   - ply
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 patches:
   - pythran-0.17.0.patch
 ---

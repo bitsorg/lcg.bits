@@ -1,5 +1,5 @@
 package: veccore
-description: veccore library/tool (from LCG software stack)
+description: VecCore C++ header-only SIMD abstraction library (CERN)
 version: "0.8.2"
 tag: "0.8.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - umesimd
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

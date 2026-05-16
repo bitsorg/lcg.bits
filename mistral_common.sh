@@ -1,5 +1,5 @@
 package: mistral_common
-description: mistral_common Python package
+description: mistral-common common utilities for Mistral models
 version: "1.8.5"
 tag: "1.8.5"
 sources:
@@ -20,7 +20,7 @@ requires:
   - fastapi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - mistral_common-1.8.5.patch
 ---

@@ -1,5 +1,5 @@
 package: autopep8
-description: autopep8 Python package
+description: autopep8 automatic PEP 8 Python code formatter
 version: "2.3.1"
 tag: "2.3.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

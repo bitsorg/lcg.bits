@@ -1,5 +1,5 @@
 package: pyasn1_modules
-description: pyasn1_modules Python package
+description: pyasn1_modules collection of pre-built ASN.1 data structures
 version: "0.4.1"
 tag: "0.4.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pyasn1
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################

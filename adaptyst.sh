@@ -1,5 +1,5 @@
 package: adaptyst
-description: adaptyst library/tool (from LCG software stack)
+description: Adaptyst performance profiling framework (CERN)
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -19,7 +19,7 @@ requires:
   - perf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

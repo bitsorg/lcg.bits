@@ -1,5 +1,5 @@
 package: donfig
-description: donfig Python package
+description: Donfig easy configuration for Python packages
 version: "0.8.1.post1"
 tag: "0.8.1.post1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - PyYAML
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

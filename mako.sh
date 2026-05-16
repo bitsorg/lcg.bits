@@ -1,5 +1,5 @@
 package: mako
-description: mako Python package
+description: Mako fast Python template library
 version: "1.3.5"
 tag: "1.3.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - MarkupSafe
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

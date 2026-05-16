@@ -1,5 +1,5 @@
 package: black
-description: black Python package
+description: Black uncompromising Python code formatter
 version: "24.10.0"
 tag: "24.10.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - platformdirs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

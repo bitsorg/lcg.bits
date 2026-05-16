@@ -1,5 +1,5 @@
 package: HeapDict
-description: HeapDict Python package
+description: HeapDict heap-based priority queue for Python
 version: "1.0.1"
 tag: "1.0.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

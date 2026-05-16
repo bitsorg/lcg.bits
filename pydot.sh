@@ -1,5 +1,5 @@
 package: pydot
-description: pydot Python package
+description: pydot Python interface to Graphviz's dot language
 version: "1.4.1"
 tag: "1.4.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pyparsing
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

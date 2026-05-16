@@ -1,5 +1,5 @@
 package: marlinutil
-description: marlinutil Key4hep framework package
+description: MarlinUtil utility library for Marlin processors
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -13,7 +13,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

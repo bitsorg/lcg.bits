@@ -1,12 +1,12 @@
 package: double_conversion
-description: Binary-decimal and decimal-binary conversion routines for IEEE doubles
+description: double-conversion fast binary-decimal floating-point conversions
 version: "3.1.5"
 tag: "3.1.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/double-conversion-3.1.5.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -19,5 +19,6 @@ function Configure() {
     -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_COMPILER=$CXX \
-    -fPIC"
+    -DCMAKE_C_FLAGS="-fPIC" \
+    -DCMAKE_CXX_FLAGS="-fPIC"
 }

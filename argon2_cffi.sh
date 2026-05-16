@@ -1,5 +1,5 @@
 package: argon2_cffi
-description: argon2_cffi Python package
+description: argon2-cffi Argon2 password hashing Python bindings
 version: "23.1.0"
 tag: "23.1.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

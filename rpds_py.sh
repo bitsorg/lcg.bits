@@ -1,5 +1,5 @@
 package: rpds_py
-description: rpds_py Python package
+description: rpds-py Python bindings for Rust persistent data structures
 version: "0.29.0"
 tag: "0.29.0"
 requires:
@@ -7,7 +7,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

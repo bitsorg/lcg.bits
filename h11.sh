@@ -1,5 +1,5 @@
 package: h11
-description: h11 Python package
+description: h11 pure-Python HTTP/1.1 protocol implementation
 version: "0.16.0"
 tag: "0.16.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: nbformat
-description: nbformat Python package
+description: nbformat Jupyter notebook file format reference implementation
 version: "5.9.1"
 tag: "5.9.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - fastjsonschema
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

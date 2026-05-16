@@ -1,5 +1,5 @@
 package: psutil
-description: psutil Python package
+description: psutil cross-platform process and system utilities
 version: "5.9.8"
 tag: "5.9.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

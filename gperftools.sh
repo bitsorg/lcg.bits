@@ -1,5 +1,5 @@
 package: gperftools
-description: gperftools library/tool (from LCG software stack)
+description: "Google Performance Tools: heap profiler, CPU profiler, tcmalloc"
 version: "2.18.1"
 tag: "2.18.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - libunwind
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

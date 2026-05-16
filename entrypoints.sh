@@ -1,5 +1,5 @@
 package: entrypoints
-description: entrypoints Python package
+description: entrypoints discover and load Python entry points
 version: "0.4"
 tag: "0.4"
 requires:
@@ -7,7 +7,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

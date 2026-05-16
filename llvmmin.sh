@@ -1,5 +1,5 @@
 package: llvmmin
-description: llvmmin Python package
+description: LLVM minimal build for embedding in tools
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 WITH LLVM-exception
 ---
 #!/bin/bash -e
 ##############################

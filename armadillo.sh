@@ -1,5 +1,5 @@
 package: armadillo
-description: Armadillo C++ linear algebra library
+description: Armadillo C++ linear algebra library with MATLAB-like API
 version: "11.4.2"
 tag: "11.4.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - hdf5
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

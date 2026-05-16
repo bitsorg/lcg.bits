@@ -1,12 +1,12 @@
 package: photos
-description: photos Monte Carlo event generator
+description: PHOTOS Monte Carlo for radiative corrections in decays
 version: "215.4"
 tag: "215.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/photos-215.4-src.tgz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PHOTOS
 patches:
   - photos-215.4.patch
 ---

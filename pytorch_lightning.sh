@@ -1,5 +1,5 @@
 package: pytorch_lightning
-description: pytorch_lightning Python package
+description: PyTorch Lightning lightweight PyTorch wrapper
 version: "2.5.1.post0"
 tag: "2.5.1.post0"
 sources:
@@ -17,7 +17,7 @@ requires:
   # - torch
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

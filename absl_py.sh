@@ -1,5 +1,5 @@
 package: absl_py
-description: absl_py Python package
+description: Abseil Python common libraries (Google)
 version: "1.4.0"
 tag: "1.4.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

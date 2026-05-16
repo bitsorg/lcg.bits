@@ -1,5 +1,5 @@
 package: hdf5
-description: HDF5 high-performance data management and storage library
+description: HDF5 hierarchical data format library for large datasets
 version: "1.14.6"
 tag: "1.14.6"
 sources:
@@ -8,7 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

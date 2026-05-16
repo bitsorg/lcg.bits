@@ -1,5 +1,5 @@
 package: semantic_version
-description: semantic_version Python package
+description: semantic_version semantic versioning for Python
 version: "2.10.0"
 tag: "2.10.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

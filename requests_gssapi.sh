@@ -1,5 +1,5 @@
 package: requests_gssapi
-description: requests_gssapi Python package
+description: requests-gssapi GSSAPI/Kerberos auth for the requests library
 version: "1.2.3"
 tag: "1.2.3"
 sources:
@@ -11,7 +11,7 @@ requires:
   - gssapi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

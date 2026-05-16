@@ -1,5 +1,5 @@
 package: fjcontrib
-description: FastJet Contrib package of jet substructure tools and plugins
+description: FastJet contrib package collection of add-on jet tools
 version: "1.102"
 tag: "1.102"
 sources:
@@ -8,7 +8,7 @@ requires:
   - fastjet
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

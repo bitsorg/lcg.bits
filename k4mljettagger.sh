@@ -1,5 +1,5 @@
 package: k4mljettagger
-description: k4mljettagger Key4hep framework package
+description: Key4hep ML-based jet flavor tagger
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - DD4hep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

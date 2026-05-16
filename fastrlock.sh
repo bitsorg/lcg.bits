@@ -1,5 +1,5 @@
 package: fastrlock
-description: fastrlock Python package
+description: fastrlock fast recursive lock implementation for Cython
 version: "unknown"
 tag: "unknown"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cython
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

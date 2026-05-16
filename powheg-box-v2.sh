@@ -1,5 +1,5 @@
 package: powheg-box-v2
-description: powheg-box-v2 Monte Carlo event generator
+description: POWHEG BOX v2 NLO event generator framework
 version: "r3744.lhcb3.rdynamic"
 tag: "r3744.lhcb3.rdynamic"
 sources:
@@ -9,7 +9,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-POWHEG
 ---
 #!/bin/bash -e
 ##############################
@@ -22,3 +22,4 @@ function Make() {
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb FCOMP=$FC CCOMP=$CXX LHAPDF=${lhapdf_ROOT} FASTJET=${fastjet_ROOT}
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb install PREFIX=$INSTALLROOT
 }
+function MakeInstall() { true; }

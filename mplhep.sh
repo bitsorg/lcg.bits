@@ -1,5 +1,5 @@
 package: mplhep
-description: mplhep Python package
+description: mplhep Matplotlib style sheets and helpers for HEP publications
 version: "1.0.0"
 tag: "1.0.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

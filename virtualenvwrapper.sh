@@ -1,5 +1,5 @@
 package: virtualenvwrapper
-description: virtualenvwrapper Python package
+description: virtualenvwrapper extensions to virtualenv
 version: "4.8.4"
 tag: "4.8.4"
 sources:
@@ -12,7 +12,7 @@ requires:
   - stevedore
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: setuptools
-description: setuptools library/tool (from LCG software stack)
+description: setuptools Python packaging, build and distribution library
 version: "80.10.2"
 tag: "80.10.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

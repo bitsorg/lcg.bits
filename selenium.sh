@@ -1,5 +1,5 @@
 package: selenium
-description: selenium Python package
+description: Selenium web browser automation framework
 version: "4.28.0"
 tag: "4.28.0"
 sources:
@@ -16,7 +16,7 @@ requires:
   - websocket_client
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: oauthlib
-description: oauthlib Python package
+description: OAuthlib framework-agnostic OAuth 1 and 2 library
 version: "3.0.1"
 tag: "3.0.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cryptography
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: charset_normalizer
-description: charset_normalizer Python package
+description: charset-normalizer alternative to chardet for encoding detection
 version: "3.4.0"
 tag: "3.4.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

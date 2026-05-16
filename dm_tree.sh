@@ -1,5 +1,5 @@
 package: dm_tree
-description: dm_tree Python package
+description: dm-tree library for working with nested data structures
 version: "0.1.9"
 tag: "0.1.9"
 sources:
@@ -15,7 +15,7 @@ requires:
   - wrapt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

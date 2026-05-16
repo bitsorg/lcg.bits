@@ -1,5 +1,5 @@
 package: larcontent
-description: LArContent Liquid Argon TPC reconstruction algorithms for Pandora
+description: LArContent Pandora reconstruction algorithms for LAr-TPC
 version: "04.11.02"
 tag: "04.11.02"
 sources:
@@ -11,7 +11,7 @@ requires:
   - eigen
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -27,5 +27,5 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DPANDORA_MONITORING=ON \
     -DCMAKE_MODULE_PATH=${pandorapfa_ROOT}/cmakemodules \
-    -Wno-error"
+    -DCMAKE_CXX_FLAGS="-Wno-error"
 }

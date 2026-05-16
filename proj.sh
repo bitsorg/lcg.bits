@@ -1,5 +1,5 @@
 package: proj
-description: proj library/tool (from LCG software stack)
+description: PROJ cartographic projections and coordinate transformations
 version: "9.6.0"
 tag: "9.6.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pkg_config
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################
@@ -26,5 +26,5 @@ function Configure() {
     --prefix=$INSTALLROOT
 }
 function Make() {
-  make ${JOBS:+-j $JOBS}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

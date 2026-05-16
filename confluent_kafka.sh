@@ -1,5 +1,5 @@
 package: confluent_kafka
-description: confluent_kafka Python package
+description: confluent-kafka high-performance Apache Kafka Python client
 version: "2.11.0"
 tag: "2.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - librdkafka
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

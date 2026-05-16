@@ -1,5 +1,5 @@
 package: pango
-description: pango library/tool (from LCG software stack)
+description: Pango library for text layout and rendering
 version: "1.48.9"
 tag: "1.48.9"
 sources:
@@ -12,7 +12,7 @@ requires:
   - glib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: physsim
-description: physsim Key4hep framework package
+description: PhysSim physics generator library for ILC studies
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: numexpr
-description: numexpr Python package
+description: numexpr fast numerical array expression evaluator
 version: "2.10.1"
 tag: "2.10.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

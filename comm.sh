@@ -1,5 +1,5 @@
 package: comm
-description: comm Python package
+description: comm Jupyter kernel communication protocol library
 version: "0.2.2"
 tag: "0.2.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - traitlets
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

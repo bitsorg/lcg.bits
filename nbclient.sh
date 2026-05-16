@@ -1,5 +1,5 @@
 package: nbclient
-description: nbclient Python package
+description: nbclient client library for executing Jupyter notebooks
 version: "0.5.3"
 tag: "0.5.3"
 sources:
@@ -14,7 +14,7 @@ requires:
   - nest_asyncio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

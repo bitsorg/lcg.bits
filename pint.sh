@@ -1,5 +1,5 @@
 package: pint
-description: pint Python package
+description: Pint Python units library for quantities
 version: "0.25.2"
 tag: "0.25.2"
 sources:
@@ -14,7 +14,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,9 +1,9 @@
 package: gdb
-description: gdb library/tool (from LCG software stack)
-version: "17.1"
-tag: "17.1"
+description: GNU Debugger for C, C++, Fortran, and other languages
+version: "17.2"
+tag: "17.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gdb-17.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/gdb-17.2.tar.gz
 requires:
   - texinfo
   - Python
@@ -11,7 +11,7 @@ requires:
   - mpfr
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

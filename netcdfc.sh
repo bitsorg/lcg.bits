@@ -1,5 +1,5 @@
 package: netcdfc
-description: netcdfc library/tool (from LCG software stack)
+description: NetCDF-C library for array-oriented scientific data
 version: "4.9.3"
 tag: "4.9.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   - libxml2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

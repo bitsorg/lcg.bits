@@ -1,5 +1,5 @@
 package: marlinfastjet
-description: marlinfastjet Key4hep framework package
+description: MarlinFastJet FastJet jet finding Marlin processor
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -13,7 +13,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
@@ -27,6 +27,6 @@ function Configure() {
     -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
-    -I${fjcontrib_ROOT}/include" \
+    -DCMAKE_CXX_FLAGS="-I${fjcontrib_ROOT}/include" \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=${ENABLE_IPO}
 }

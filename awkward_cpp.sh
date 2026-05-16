@@ -1,5 +1,5 @@
 package: awkward_cpp
-description: awkward_cpp Python package
+description: awkward-cpp compiled components for Awkward Array
 version: "52"
 tag: "52"
 sources:
@@ -11,7 +11,7 @@ requires:
   - arrow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

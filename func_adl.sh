@@ -1,5 +1,5 @@
 package: func_adl
-description: func_adl Python package
+description: func_adl functional analysis description language for HEP
 version: "3.4.2"
 tag: "3.4.2"
 sources:
@@ -11,7 +11,7 @@ requires:
   - make_it_sync
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

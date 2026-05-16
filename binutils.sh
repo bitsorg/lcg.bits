@@ -1,12 +1,12 @@
 package: binutils
-description: GNU Binutils binary tools (assembler, linker, nm, etc.)
+description: GNU Binutils binary tools (assembler, linker, nm, objdump...)
 version: "2.28"
 tag: "2.28"
 sources:
   - http://lcgpackages.web.cern.ch/lcgpackages/tarFiles/sources/binutils-2.28.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: aiofile
-description: aiofile Python package
+description: aiofile async file operations for Python asyncio
 version: "3.9.0"
 tag: "3.9.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - caio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

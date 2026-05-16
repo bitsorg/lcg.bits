@@ -1,5 +1,5 @@
 package: isoduration
-description: isoduration Python package
+description: isoduration operations with ISO 8601 durations
 version: "20.11.0"
 tag: "20.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pypi_arrow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

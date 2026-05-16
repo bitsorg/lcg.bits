@@ -1,5 +1,5 @@
 package: spark
-description: spark Python package
+description: Apache Spark unified analytics engine for large-scale data
 version: "4.1.1"
 tag: "4.1.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - py4j
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

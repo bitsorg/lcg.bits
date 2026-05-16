@@ -1,5 +1,5 @@
 package: vecmath
-description: vecmath library/tool (from LCG software stack)
+description: Vecmath Java 3D vector math library (geometry utilities)
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -9,7 +9,7 @@ requires:
   - vdt
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: hepstats
-description: hepstats Python package
+description: hepstats modelling and fitting statistics utilities (HEP)
 version: "0.9.2"
 tag: "0.9.2"
 sources:
@@ -15,7 +15,7 @@ requires:
   - uhi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

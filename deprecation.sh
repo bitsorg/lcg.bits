@@ -1,5 +1,5 @@
 package: deprecation
-description: deprecation Python package
+description: deprecation library for marking deprecated code
 version: "2.1.0"
 tag: "2.1.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

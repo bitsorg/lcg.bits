@@ -1,5 +1,5 @@
 package: k4clue
-description: k4clue Key4hep framework package
+description: Key4hep CLUE clustering algorithm
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -11,7 +11,7 @@ requires:
   - cluestering
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

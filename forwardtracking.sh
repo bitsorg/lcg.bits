@@ -1,5 +1,5 @@
 package: forwardtracking
-description: forwardtracking Key4hep framework package
+description: Forward tracking algorithm Marlin processor for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -17,7 +17,7 @@ requires:
   - raida
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

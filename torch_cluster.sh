@@ -1,5 +1,5 @@
 package: torch_cluster
-description: torch_cluster Python package
+description: torch-cluster methods for clustering in point clouds
 version: "1.6.3p1"
 tag: "1.6.3p1"
 sources:
@@ -13,7 +13,7 @@ requires:
   # - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - torch_cluster-1.6.3p1.patch
 ---

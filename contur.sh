@@ -1,5 +1,5 @@
 package: contur
-description: Contur automated constraints from LHC measurements
+description: Contur automated LHC BSM model constraint tool
 version: "3.1.3"
 tag: "3.1.3"
 sources:
@@ -24,7 +24,7 @@ requires:
   - sqlparse
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: cramjam
-description: cramjam Python package
+description: cramjam Python bindings for multiple compression algorithms
 version: "2.11.0"
 tag: "2.11.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: hyperopt
-description: hyperopt Python package
+description: Hyperopt distributed hyperparameter optimization
 version: "0.2.8"
 tag: "0.2.8"
 sources:
@@ -17,7 +17,7 @@ requires:
   - arrow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

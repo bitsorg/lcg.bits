@@ -1,5 +1,5 @@
 package: qibojit
-description: qibojit Python package
+description: qibojit JIT-based simulation backend for Qibo
 version: "0.1.12"
 tag: "0.1.12"
 sources:
@@ -13,7 +13,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - qibojit-0.1.12.patch
 ---

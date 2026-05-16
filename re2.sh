@@ -1,5 +1,5 @@
 package: re2
-description: Fast, safe, thread-friendly regular expression library
+description: RE2 fast, safe regular expression library
 version: "2023.11.01"
 tag: "2023.11.01"
 sources:
@@ -8,7 +8,7 @@ requires:
   - absl
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

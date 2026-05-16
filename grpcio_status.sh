@@ -1,5 +1,5 @@
 package: grpcio_status
-description: grpcio_status Python package
+description: grpcio-status status proto bindings for gRPC Python
 version: "1.56.2"
 tag: "1.56.2"
 sources:
@@ -12,7 +12,7 @@ requires:
   - googleapis_common_protos
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pydantic
-description: pydantic Python package
+description: Pydantic data validation using Python type annotations
 version: "2.12.5"
 tag: "2.12.5"
 sources:
@@ -13,7 +13,7 @@ requires:
   - hypothesis
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: annotated_types
-description: annotated_types Python package
+description: annotated_types reusable type annotations for Python
 version: "0.6.0"
 tag: "0.6.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: itkwasm_downsample_wasi
-description: itkwasm_downsample_wasi Python package
+description: ITK WASM downsampling WASI build
 version: "1.5.0"
 tag: "1.5.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - itkwasm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

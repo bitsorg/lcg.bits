@@ -1,5 +1,5 @@
 package: requests
-description: requests Python package
+description: Requests elegant HTTP library for Python
 version: "2.32.3"
 tag: "2.32.3"
 sources:
@@ -10,7 +10,7 @@ requires:
   - charset_normalizer
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

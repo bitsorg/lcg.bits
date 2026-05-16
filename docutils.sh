@@ -1,5 +1,5 @@
 package: docutils
-description: docutils Python package
+description: Docutils Python documentation utilities and reStructuredText
 version: "0.21.2"
 tag: "0.21.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause AND GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

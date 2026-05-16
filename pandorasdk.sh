@@ -1,5 +1,5 @@
 package: pandorasdk
-description: PandoraSDK Software Development Kit for Pandora pattern recognition
+description: PandoraSDK software development kit for Pandora algorithms
 version: "03.04.02"
 tag: "03.04.02"
 sources:
@@ -8,7 +8,7 @@ requires:
   - pandorapfa
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -23,5 +23,5 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
     -DCMAKE_MODULE_PATH=${pandorapfa_ROOT}/cmakemodules \
-    -Wno-error"
+    -DCMAKE_CXX_FLAGS="-Wno-error"
 }

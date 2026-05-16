@@ -1,5 +1,5 @@
 package: scikit_hep
-description: scikit_hep Python package
+description: Scikit-HEP metapackage for HEP Python tools
 version: "2026.2.1"
 tag: "2026.2.1"
 sources:
@@ -24,7 +24,7 @@ requires:
   - resample
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

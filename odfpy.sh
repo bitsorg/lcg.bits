@@ -1,5 +1,5 @@
 package: odfpy
-description: odfpy Python package
+description: odfpy Python API for OpenDocument Format (ODF)
 version: "1.4.1"
 tag: "1.4.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - defusedxml
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 OR GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

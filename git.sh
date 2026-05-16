@@ -1,5 +1,5 @@
 package: git
-description: git library/tool (from LCG software stack)
+description: Git distributed version control system
 version: "2.49.0"
 tag: "2.49.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - expat
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################
@@ -19,5 +19,6 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  make ${JOBS:+-j $JOBS} configure COMMAND ./configure --prefix=$INSTALLROOT --with-openssl --with-curl --with-expat --with-tcltk
+  make configure
+  ./configure --prefix=$INSTALLROOT --with-openssl --with-curl --with-expat --with-tcltk
 }

@@ -1,5 +1,5 @@
 package: myschedd
-description: myschedd library/tool (from LCG software stack)
+description: myschedd HTCondor schedd configuration utility
 version: "1.9-2"
 tag: "1.9-2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - go
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
@@ -19,5 +19,4 @@ MODULE_OPTIONS="--bin --lib"
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   "" GODEBUG=netdns=cgo go build
-  cmake
 }

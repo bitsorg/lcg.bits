@@ -1,5 +1,5 @@
 package: lcfivertex
-description: lcfivertex Key4hep framework package
+description: LCFIVertex vertex finder Marlin processor
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -13,7 +13,7 @@ requires:
   - raida
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

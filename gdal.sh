@@ -1,5 +1,5 @@
 package: gdal
-description: gdal library/tool (from LCG software stack)
+description: GDAL Geospatial Data Abstraction Library Python bindings
 version: "3.10.2"
 tag: "3.10.2"
 sources:
@@ -14,7 +14,7 @@ requires:
   - tiff
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################
@@ -38,5 +38,5 @@ function Configure() {
     --with-sqlite3=${sqlite_ROOT}
 }
 function Make() {
-  make ${JOBS:+-j $JOBS}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

@@ -1,5 +1,5 @@
 package: tensorflow_model_optimization
-description: tensorflow_model_optimization Python package
+description: TensorFlow Model Optimization toolkit
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - absl_py
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

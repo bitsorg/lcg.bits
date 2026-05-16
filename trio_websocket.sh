@@ -1,5 +1,5 @@
 package: trio_websocket
-description: trio_websocket Python package
+description: trio-websocket WebSocket client/server for Trio
 version: "0.11.1"
 tag: "0.11.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - wsproto
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

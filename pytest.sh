@@ -1,5 +1,5 @@
 package: pytest
-description: pytest Python package
+description: pytest simple and powerful Python testing framework
 version: "9.0.2"
 tag: "9.0.2"
 sources:
@@ -20,7 +20,7 @@ requires:
   - pygments
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pastel
-description: pastel Python package
+description: Pastel bring colors to your terminal
 version: "0.2.1"
 tag: "0.2.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

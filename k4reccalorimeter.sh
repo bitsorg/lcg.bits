@@ -1,5 +1,5 @@
 package: k4reccalorimeter
-description: k4reccalorimeter Key4hep framework package
+description: Key4hep calorimeter reconstruction algorithms
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -18,7 +18,7 @@ requires:
   - simsipm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

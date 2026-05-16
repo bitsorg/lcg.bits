@@ -1,5 +1,5 @@
 package: referencing
-description: referencing Python package
+description: referencing Python JSON Schema referencing implementation
 version: "0.35.1"
 tag: "0.35.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - attrs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: asn1crypto
-description: asn1crypto Python package
+description: asn1crypto fast Python ASN.1 parser and serializer
 version: "0.24.0"
 tag: "0.24.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

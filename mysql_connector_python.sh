@@ -1,5 +1,5 @@
 package: mysql_connector_python
-description: mysql_connector_python Python package
+description: MySQL Connector/Python official MySQL database driver
 version: "9.4.0"
 tag: "9.4.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################

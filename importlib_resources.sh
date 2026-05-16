@@ -1,5 +1,5 @@
 package: importlib_resources
-description: importlib_resources Python package
+description: importlib_resources backport of importlib.resources
 version: "6.5.2"
 tag: "6.5.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - zipp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

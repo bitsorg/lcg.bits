@@ -1,5 +1,5 @@
 package: rfc3339_validator
-description: rfc3339_validator Python package
+description: rfc3339-validator RFC 3339 date-time format validator
 version: "0.1.4"
 tag: "0.1.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

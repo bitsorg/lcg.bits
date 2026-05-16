@@ -1,5 +1,5 @@
 package: humanfriendly
-description: humanfriendly Python package
+description: humanfriendly human-friendly output for Python
 version: "10.0"
 tag: "10.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - docutils
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - humanfriendly-10.0.patch
 ---

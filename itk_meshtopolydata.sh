@@ -1,5 +1,5 @@
 package: itk_meshtopolydata
-description: itk_meshtopolydata Python package
+description: ITK mesh-to-polydata conversion module
 version: "0.11.0"
 tag: "0.11.0"
 requires:
@@ -9,7 +9,7 @@ requires:
   - itk_core
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

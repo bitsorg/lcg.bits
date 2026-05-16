@@ -1,5 +1,5 @@
 package: pyrsistent
-description: pyrsistent Python package
+description: pyrsistent immutable/persistent data structures for Python
 version: "0.18.0"
 tag: "0.18.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

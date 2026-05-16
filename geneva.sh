@@ -1,5 +1,5 @@
 package: geneva
-description: geneva Monte Carlo event generator
+description: Geneva stochastic global optimisation framework
 version: "1.0-rc3.atlas2"
 tag: "1.0-rc3.atlas2"
 sources:
@@ -13,7 +13,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - geneva-1.0-rc3.atlas2.patch
 ---
@@ -35,5 +35,6 @@ function Configure() {
     -Dlhapdf_ROOT=${lhapdf_ROOT}
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} beamfunc-install-data COMMAND make ${JOBS:+-j $JOBS}
+  make ${JOBS:+-j $JOBS} beamfunc-install-data
+make ${JOBS:+-j $JOBS}
 }

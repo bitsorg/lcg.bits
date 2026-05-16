@@ -1,5 +1,5 @@
 package: parso
-description: parso Python package
+description: parso Python parser that supports error recovery
 version: "0.8.4"
 tag: "0.8.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

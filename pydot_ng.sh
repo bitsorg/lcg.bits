@@ -1,5 +1,5 @@
 package: pydot_ng
-description: pydot_ng Python package
+description: pydot-ng improved Python interface to Graphviz
 version: "2.0.0"
 tag: "2.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pyparsing
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

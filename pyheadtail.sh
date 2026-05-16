@@ -1,5 +1,5 @@
 package: PyHEADTAIL
-description: PyHEADTAIL Python package
+description: PyHEADTAIL macroparticle tracking code for accelerator beams
 version: "1.16.4"
 tag: "1.16.4"
 sources:
@@ -13,7 +13,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

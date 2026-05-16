@@ -1,5 +1,5 @@
 package: click_didyoumean
-description: click_didyoumean Python package
+description: click-didyoumean 'did you mean?' suggestions for Click
 version: "0.3.0"
 tag: "0.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - click
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

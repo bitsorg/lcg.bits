@@ -1,5 +1,5 @@
 package: namex
-description: namex Python package
+description: namex Keras package API surface management
 version: "0.0.8"
 tag: "0.0.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

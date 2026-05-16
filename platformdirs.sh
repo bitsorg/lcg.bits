@@ -1,5 +1,5 @@
 package: platformdirs
-description: platformdirs Python package
+description: platformdirs get appropriate platform directories
 version: "4.3.6"
 tag: "4.3.6"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: colorlog
-description: colorlog Python package
+description: colorlog colored logging formatter for Python
 version: "6.7.0"
 tag: "6.7.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: pyopencl
-description: pyopencl Python package
+description: PyOpenCL OpenCL Python bindings
 version: "unknown"
 tag: "unknown"
 sources:
@@ -15,7 +15,7 @@ requires:
   - pybind11
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

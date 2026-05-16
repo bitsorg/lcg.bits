@@ -1,5 +1,5 @@
 package: openai
-description: openai Python package
+description: openai Python client library for the OpenAI API
 version: "2.3.0"
 tag: "2.3.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

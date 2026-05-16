@@ -1,5 +1,5 @@
 package: omniorb
-description: omniorb library/tool (from LCG software stack)
+description: omniORB portable CORBA ORB for C++
 version: "4.3.2"
 tag: "4.3.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later AND LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

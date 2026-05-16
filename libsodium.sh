@@ -1,12 +1,12 @@
 package: libsodium
-description: libsodium library/tool (from LCG software stack)
+description: libsodium modern cryptography library (NaCl fork)
 version: "1.0.21"
 tag: "1.0.21"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libsodium-1.0.21.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 patches:
   - libsodium-1.0.21.patch
 ---

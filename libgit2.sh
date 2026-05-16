@@ -1,5 +1,5 @@
 package: libgit2
-description: libgit2 library/tool (from LCG software stack)
+description: libgit2 portable C implementation of Git core
 version: "1.1.1"
 tag: "1.1.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only WITH GCC-exception-2.0
 ---
 #!/bin/bash -e
 ##############################

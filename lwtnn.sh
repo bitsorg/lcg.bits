@@ -1,5 +1,5 @@
 package: lwtnn
-description: lwtnn library/tool (from LCG software stack)
+description: lwtnn lightweight neural-network inference library (C++)
 version: "2.13"
 tag: "2.13"
 sources:
@@ -9,7 +9,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

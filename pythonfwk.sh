@@ -1,5 +1,5 @@
 package: PythonFWK
-description: PythonFWK library/tool (from LCG software stack)
+description: PythonFWK Python framework base for LCG software
 version: "unknown"
 tag: "unknown"
 sources:
@@ -8,7 +8,7 @@ requires:
   - openssl
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

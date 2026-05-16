@@ -1,5 +1,5 @@
 package: itk_core
-description: itk_core Python package
+description: ITK core module for image processing
 version: "5.4.0"
 tag: "5.4.0"
 requires:
@@ -8,7 +8,7 @@ requires:
   - numpy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

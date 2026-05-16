@@ -1,5 +1,5 @@
 package: servicex
-description: servicex Python package
+description: ServiceX data delivery service for HEP analysis
 version: "3.1.0"
 tag: "3.1.0"
 sources:
@@ -26,7 +26,7 @@ requires:
   - uproot
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

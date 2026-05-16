@@ -1,5 +1,5 @@
 package: sympy
-description: sympy Python package
+description: SymPy Python library for symbolic mathematics
 version: "1.14.0"
 tag: "1.14.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - mpmath
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

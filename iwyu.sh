@@ -1,12 +1,12 @@
 package: iwyu
-description: iwyu library/tool (from LCG software stack)
+description: Include-What-You-Use C/C++ header analysis tool
 version: "unknown"
 tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/include-what-you-use-unknown.src.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LLVM-exception
 ---
 #!/bin/bash -e
 ##############################

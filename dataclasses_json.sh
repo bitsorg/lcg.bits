@@ -1,5 +1,5 @@
 package: dataclasses_json
-description: dataclasses_json Python package
+description: dataclasses-json serialize dataclasses to/from JSON
 version: "0.5.8"
 tag: "0.5.8"
 sources:
@@ -12,7 +12,7 @@ requires:
   - typing_inspect
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

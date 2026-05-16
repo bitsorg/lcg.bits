@@ -1,5 +1,5 @@
 package: RELAX
-description: RELAX library/tool (from LCG software stack)
+description: RELAX XML schema language validation library
 version: "6.1.2"
 tag: "6.1.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################
@@ -25,5 +25,5 @@ function Configure() {
     -DCMAKE_CXX_FLAGS=$CXXFLAGS
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} ROOTSYS=${ROOT_ROOT}
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

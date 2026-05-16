@@ -1,5 +1,5 @@
 package: orjson
-description: orjson Python package
+description: orjson fast JSON library for Python (Rust-based)
 version: "3.11.4"
 tag: "3.11.4"
 requires:
@@ -7,7 +7,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 OR MIT
 ---
 #!/bin/bash -e
 ##############################

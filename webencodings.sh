@@ -1,5 +1,5 @@
 package: webencodings
-description: webencodings library/tool (from LCG software stack)
+description: webencodings character encoding for the web
 version: "0.5.1"
 tag: "0.5.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

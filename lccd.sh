@@ -1,5 +1,5 @@
 package: lccd
-description: lccd Key4hep framework package
+description: LCCD (Linear Collider Conditions Data) library
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - conddbmysql
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

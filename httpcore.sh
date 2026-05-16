@@ -1,5 +1,5 @@
 package: httpcore
-description: httpcore Python package
+description: httpcore minimal HTTP client implementation
 version: "1.0.7"
 tag: "1.0.7"
 sources:
@@ -13,7 +13,7 @@ requires:
   - sniffio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

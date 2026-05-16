@@ -1,5 +1,5 @@
 package: traittypes
-description: traittypes Python package
+description: traittypes Numpy array trait types for traitlets
 version: "0.2.1"
 tag: "0.2.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - traitlets
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

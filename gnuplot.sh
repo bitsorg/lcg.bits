@@ -1,5 +1,5 @@
 package: gnuplot
-description: gnuplot library/tool (from LCG software stack)
+description: Gnuplot portable interactive data and function plotting utility
 version: "6.0.4"
 tag: "6.0.4"
 sources:
@@ -8,7 +8,7 @@ sources:
   # - pango
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-gnuplot
 ---
 #!/bin/bash -e
 ##############################

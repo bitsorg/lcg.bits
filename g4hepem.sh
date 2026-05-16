@@ -1,5 +1,5 @@
 package: g4hepem
-description: g4hepem library/tool (from LCG software stack)
+description: G4HepEm EM physics tabulation library for Geant4
 version: "20251114"
 tag: "20251114"
 sources:
@@ -9,7 +9,7 @@ requires:
   - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

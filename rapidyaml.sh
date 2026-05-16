@@ -1,5 +1,5 @@
 package: rapidyaml
-description: rapidyaml library/tool (from LCG software stack)
+description: ryml (rapidyaml) fast C++ YAML parser and emitter
 version: "0.7.0"
 tag: "0.7.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - CMake
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

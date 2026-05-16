@@ -1,5 +1,5 @@
 package: torch_sparse
-description: torch_sparse Python package
+description: torch-sparse sparse matrix operations for PyTorch
 version: "0.6.18"
 tag: "0.6.18"
 sources:
@@ -12,7 +12,7 @@ requires:
   # - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -17,8 +17,9 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake $SOURCEDIR \
     -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DEXPAT_BUILD_DOCS=OFF
+    -DEXPAT_BUILD_DOCS=OFF \
+    -DCMAKE_C_FLAGS=-fPIC
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} CFLAGS=-fPIC ELSE
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }

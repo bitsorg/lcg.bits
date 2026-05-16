@@ -1,5 +1,5 @@
 package: jax
-description: jax Python package
+description: JAX NumPy on accelerators with autograd and JIT (Google)
 version: "0.9.2"
 tag: "0.9.2"
 sources:
@@ -16,7 +16,7 @@ requires:
   - importlib_metadata
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

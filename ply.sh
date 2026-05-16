@@ -1,5 +1,5 @@
 package: ply
-description: ply Python package
+description: PLY Python Lex-Yacc parser tools
 version: "3.11"
 tag: "3.11"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

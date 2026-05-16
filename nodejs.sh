@@ -1,5 +1,5 @@
 package: nodejs
-description: nodejs library/tool (from LCG software stack)
+description: Node.js JavaScript runtime built on V8
 version: "22.14.0"
 tag: "22.14.0"
 sources:
@@ -8,7 +8,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

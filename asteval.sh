@@ -1,5 +1,5 @@
 package: asteval
-description: asteval Python package
+description: asteval safe mathematical expression evaluator for Python
 version: "0.9.31"
 tag: "0.9.31"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

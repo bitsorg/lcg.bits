@@ -1,5 +1,5 @@
 package: jupyterlab_pygments
-description: jupyterlab_pygments Python package
+description: jupyterlab_pygments Pygments theme for JupyterLab
 version: "0.3.0"
 tag: "0.3.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pygments
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

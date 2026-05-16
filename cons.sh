@@ -1,5 +1,5 @@
 package: cons
-description: cons Python package
+description: cons Lisp-style cons cells for Python
 version: "0.4.6"
 tag: "0.4.6"
 sources:
@@ -10,7 +10,7 @@ requires:
   - logical_unification
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

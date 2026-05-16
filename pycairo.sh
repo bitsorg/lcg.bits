@@ -1,5 +1,5 @@
 package: pycairo
-description: pycairo Python package
+description: Pycairo Python bindings for the Cairo library
 version: "1.28.0"
 tag: "1.28.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-only OR MPL-1.1
 ---
 #!/bin/bash -e
 ##############################

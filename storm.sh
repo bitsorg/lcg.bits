@@ -1,5 +1,5 @@
 package: storm
-description: storm Python package
+description: Apache Storm distributed real-time computation system
 version: "0.23"
 tag: "0.23"
 sources:
@@ -10,7 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: kiwisolver
-description: kiwisolver Python package
+description: Kiwisolver efficient C++ implementation of Cassowary solver
 version: "1.4.5"
 tag: "1.4.5"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cppy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

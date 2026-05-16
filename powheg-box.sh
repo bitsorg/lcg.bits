@@ -1,5 +1,5 @@
 package: powheg-box
-description: powheg-box Monte Carlo event generator
+description: POWHEG BOX framework for NLO generators matched to shower
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-POWHEG
 ---
 #!/bin/bash -e
 ##############################

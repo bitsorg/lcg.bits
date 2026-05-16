@@ -1,5 +1,5 @@
 package: qqvvamp
-description: qqvvamp loop amplitude library for qq→VV processes
+description: qq→VV amplitude library for EW boson pair production
 version: "1.1.atlas1"
 tag: "1.1.atlas1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ginac
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-QQVVAMP
 ---
 #!/bin/bash -e
 ##############################

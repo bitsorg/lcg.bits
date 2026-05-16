@@ -1,5 +1,5 @@
 package: pathspec
-description: pathspec Python package
+description: pathspec utility library for pattern matching file paths
 version: "0.11.1"
 tag: "0.11.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MPL-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: types_python_dateutil
-description: types_python_dateutil Python package
+description: types-python-dateutil type stubs for python-dateutil
 version: "2.9.0.20241206"
 tag: "2.9.0.20241206"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

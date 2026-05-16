@@ -1,5 +1,5 @@
 package: numba_stats
-description: numba_stats Python package
+description: numba-stats numba-accelerated statistical functions
 version: "1.10.1"
 tag: "1.10.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - scipy
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

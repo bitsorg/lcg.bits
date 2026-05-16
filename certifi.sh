@@ -1,5 +1,5 @@
 package: certifi
-description: certifi Python package
+description: Certifi Mozilla CA bundle for Python
 version: "2024.8.30"
 tag: "2024.8.30"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MPL-2.0
 ---
 #!/bin/bash -e
 ##############################

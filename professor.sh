@@ -1,5 +1,5 @@
 package: professor
-description: professor Monte Carlo event generator
+description: Professor Monte Carlo generator tuning tool
 version: "2.5.6"
 tag: "2.5.6"
 sources:
@@ -18,7 +18,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

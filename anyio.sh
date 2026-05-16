@@ -1,5 +1,5 @@
 package: anyio
-description: anyio Python package
+description: AnyIO asynchronous networking and concurrency library
 version: "4.6.1"
 tag: "4.6.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   # - sniffio
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

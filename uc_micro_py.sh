@@ -1,5 +1,5 @@
 package: uc_micro_py
-description: uc_micro_py Python package
+description: uc-micro-py micro subset of Unicode data for Python
 version: "1.0.2"
 tag: "1.0.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

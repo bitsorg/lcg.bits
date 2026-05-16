@@ -1,5 +1,5 @@
 package: zfit_physics
-description: zfit_physics Python package
+description: zfit-physics physics models plugin for zfit
 version: "0.9.0"
 tag: "0.9.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - zfit
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

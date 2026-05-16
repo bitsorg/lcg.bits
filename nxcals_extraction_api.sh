@@ -1,5 +1,5 @@
 package: nxcals_extraction_api
-description: nxcals_extraction_api Python package
+description: NXCALS data extraction API (CERN)
 version: ""${NXCALS_PYTHON_VERSION}""
 tag: ""${NXCALS_PYTHON_VERSION}""
 requires:
@@ -11,7 +11,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

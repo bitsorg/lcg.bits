@@ -1,12 +1,12 @@
 package: NsightSystems
-description: NsightSystems library/tool (from LCG software stack)
+description: NVIDIA Nsight Systems system-wide performance analysis tool
 version: "unknown"
 tag: "unknown"
 requires:
   - cuda
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-NVIDIA-Nsight
 ---
 #!/bin/bash -e
 ##############################

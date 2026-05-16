@@ -1,5 +1,5 @@
 package: asciitree
-description: asciitree Python package
+description: asciitree draws tree structures in ASCII
 version: "0.3.3"
 tag: "0.3.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

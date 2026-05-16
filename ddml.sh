@@ -1,5 +1,5 @@
 package: ddml
-description: ddml Key4hep framework package
+description: DDML Machine Learning integration for DD4hep
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - openmpi
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

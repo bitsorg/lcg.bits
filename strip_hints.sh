@@ -1,5 +1,5 @@
 package: strip_hints
-description: strip_hints Python package
+description: strip-hints remove Python type hints from source code
 version: "0.1.13"
 tag: "0.1.13"
 sources:
@@ -10,7 +10,7 @@ requires:
   - wheel
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

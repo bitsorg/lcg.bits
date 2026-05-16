@@ -1,5 +1,5 @@
 package: garlic
-description: garlic Key4hep framework package
+description: GARLIC Geant4-based calorimeter photon veto simulation
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -11,7 +11,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

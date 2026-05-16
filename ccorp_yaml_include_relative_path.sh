@@ -1,5 +1,5 @@
 package: ccorp_yaml_include_relative_path
-description: ccorp_yaml_include_relative_path Python package
+description: PyYAML plugin for YAML !include with relative paths
 version: "0.0.4"
 tag: "0.0.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

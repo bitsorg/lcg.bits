@@ -1,5 +1,5 @@
 package: pandocfilters
-description: pandocfilters Python package
+description: pandocfilters utillities for writing Pandoc filters
 version: "1.5.1"
 tag: "1.5.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

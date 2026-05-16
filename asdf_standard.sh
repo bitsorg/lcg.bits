@@ -1,5 +1,5 @@
 package: asdf_standard
-description: asdf_standard Python package
+description: ASDF standard schema definitions
 version: "1.1.1"
 tag: "1.1.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

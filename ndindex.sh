@@ -1,5 +1,5 @@
 package: ndindex
-description: ndindex Python package
+description: ndindex Python NumPy-style index manipulation library
 version: "1.8"
 tag: "1.8"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

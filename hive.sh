@@ -1,5 +1,5 @@
 package: hive
-description: hive library/tool (from LCG software stack)
+description: Apache Hive data warehouse for Hadoop
 version: "1.1.1"
 tag: "1.1.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - java
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

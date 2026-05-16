@@ -1,5 +1,5 @@
 package: jsonschema
-description: jsonschema Python package
+description: jsonschema JSON Schema validator for Python
 version: "4.23.0"
 tag: "4.23.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - pyrsistent
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

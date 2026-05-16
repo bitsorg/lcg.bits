@@ -1,5 +1,5 @@
 package: prompt_toolkit
-description: prompt_toolkit Python package
+description: prompt_toolkit library for interactive command-line programs
 version: "3.0.47"
 tag: "3.0.47"
 sources:
@@ -11,7 +11,7 @@ requires:
   - wcwidth
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

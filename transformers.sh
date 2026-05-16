@@ -1,5 +1,5 @@
 package: transformers
-description: transformers Python package
+description: Hugging Face Transformers state-of-the-art NLP models
 version: "4.57.3"
 tag: "4.57.3"
 sources:
@@ -23,7 +23,7 @@ requires:
   - scikitlearn
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

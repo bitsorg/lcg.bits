@@ -1,5 +1,5 @@
 package: Geant4-vecgeom-scalar
-description: Geant4 build with VecGeom scalar geometry
+description: Geant4 build variant using VecGeom scalar geometry backend
 version: "unknown"
 tag: "unknown"
 sources:
@@ -13,7 +13,7 @@ requires:
   - clhep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-Geant4
 ---
 #!/bin/bash -e
 ##############################

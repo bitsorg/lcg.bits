@@ -1,12 +1,12 @@
 package: lhapdfsets
-description: LHAPDF6 PDF data sets (parton distribution function grids)
+description: Additional LHAPDF PDF data sets
 version: "6.5.5"
 tag: "6.5.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/lhapdf-6.5.5).tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PDFSets
 ---
 #!/bin/bash -e
 ##############################

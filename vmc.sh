@@ -1,5 +1,5 @@
 package: vmc
-description: vmc library/tool (from LCG software stack)
+description: VMC (Virtual Monte Carlo) interface library
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

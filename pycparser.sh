@@ -1,5 +1,5 @@
 package: pycparser
-description: pycparser library/tool (from LCG software stack)
+description: pycparser complete C99 parser in pure Python
 version: "2.22"
 tag: "2.22"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

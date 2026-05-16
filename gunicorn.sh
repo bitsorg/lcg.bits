@@ -1,5 +1,5 @@
 package: gunicorn
-description: gunicorn Python package
+description: Gunicorn Python WSGI HTTP Server for UNIX
 version: "23.0.0"
 tag: "23.0.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - packaging
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

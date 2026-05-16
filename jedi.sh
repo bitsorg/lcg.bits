@@ -1,5 +1,5 @@
 package: jedi
-description: jedi Python package
+description: Jedi autocompletion and static analysis library for Python
 version: "0.19.1"
 tag: "0.19.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - parso
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 patches:
   - jedi-0.19.1.patch
 ---

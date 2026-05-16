@@ -1,5 +1,5 @@
 package: seaborn
-description: seaborn Python package
+description: seaborn statistical data visualization based on matplotlib
 version: "0.13.2"
 tag: "0.13.2"
 sources:
@@ -14,7 +14,7 @@ requires:
   - statsmodels
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

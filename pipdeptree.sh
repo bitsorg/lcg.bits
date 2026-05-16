@@ -1,5 +1,5 @@
 package: pipdeptree
-description: pipdeptree Python package
+description: pipdeptree pip dependency tree visualizer
 version: "2.9.0"
 tag: "2.9.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

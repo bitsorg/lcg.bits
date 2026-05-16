@@ -1,5 +1,5 @@
 package: go_demangle
-description: go_demangle library/tool (from LCG software stack)
+description: go-demangle Go symbol demangling library
 version: "5e5cf60"
 tag: "5e5cf60"
 sources:
@@ -8,7 +8,7 @@ requires:
   - go
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

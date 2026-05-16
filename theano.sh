@@ -1,5 +1,5 @@
 package: theano
-description: theano Python package
+description: Theano Python library for efficient mathematical expressions on GPU
 version: "unknown"
 tag: "unknown"
 sources:
@@ -15,7 +15,7 @@ requires:
   - pydot_ng
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

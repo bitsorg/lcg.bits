@@ -1,5 +1,5 @@
 package: beniget
-description: beniget Python package
+description: beniget Python AST def-use chains analyser
 version: "0.4.2.post1"
 tag: "0.4.2.post1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - gast
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

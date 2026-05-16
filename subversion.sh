@@ -1,5 +1,5 @@
 package: subversion
-description: subversion Monte Carlo event generator
+description: Apache Subversion centralized version control system
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - sqlite
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

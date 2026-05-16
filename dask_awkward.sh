@@ -1,5 +1,5 @@
 package: dask_awkward
-description: dask_awkward Python package
+description: dask-awkward Dask collections for Awkward Arrays
 version: "2025.9.0"
 tag: "2025.9.0"
 sources:
@@ -13,7 +13,7 @@ requires:
   - cachetools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: simplegeneric
-description: simplegeneric Python package
+description: simplegeneric simple generic functions for Python
 version: "0.8.1"
 tag: "0.8.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ZPL-2.1
 ---
 #!/bin/bash -e
 ##############################

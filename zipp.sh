@@ -1,5 +1,5 @@
 package: zipp
-description: zipp Python package
+description: zipp backport of zipfile.Path from Python 3.8+
 version: "3.20.2"
 tag: "3.20.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - toml
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

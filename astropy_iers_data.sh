@@ -1,5 +1,5 @@
 package: astropy_iers_data
-description: astropy_iers_data Python package
+description: Astropy IERS data tables for time and coordinate transforms
 version: "0.2024.10.21.0.33.21"
 tag: "0.2024.10.21.0.33.21"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

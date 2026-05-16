@@ -1,5 +1,5 @@
 package: chardet
-description: chardet Python package
+description: Chardet universal encoding detector for Python
 version: "5.2.0"
 tag: "5.2.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: requests_toolbelt
-description: requests_toolbelt Python package
+description: requests-toolbelt utility belt for the requests library
 version: "1.0.0"
 tag: "1.0.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - requests
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

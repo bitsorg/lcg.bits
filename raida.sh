@@ -1,5 +1,5 @@
 package: raida
-description: raida Key4hep framework package
+description: RAIDA ROOT-based implementation of the AIDA analysis interface
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

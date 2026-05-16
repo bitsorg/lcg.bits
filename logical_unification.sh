@@ -1,5 +1,5 @@
 package: logical_unification
-description: logical_unification Python package
+description: logical-unification unification of Python objects
 version: "0.4.6"
 tag: "0.4.6"
 sources:
@@ -11,7 +11,7 @@ requires:
   - multipledispatch
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

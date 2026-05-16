@@ -1,5 +1,5 @@
 package: botocore
-description: botocore Python package
+description: Botocore low-level AWS service interface library
 version: "1.35.48"
 tag: "1.35.48"
 sources:
@@ -12,7 +12,7 @@ requires:
   - urllib3
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

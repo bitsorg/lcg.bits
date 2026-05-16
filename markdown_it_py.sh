@@ -1,5 +1,5 @@
 package: markdown_it_py
-description: markdown_it_py Python package
+description: markdown-it-py Markdown parser in Python
 version: "2.2.0"
 tag: "2.2.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - mdurl
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

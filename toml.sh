@@ -1,5 +1,5 @@
 package: toml
-description: toml Python package
+description: toml Python TOML file parser and encoder
 version: "0.10.2"
 tag: "0.10.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

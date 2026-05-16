@@ -1,5 +1,5 @@
 package: stack_data
-description: stack_data Python package
+description: stack_data extract data from Python stack frames
 version: "0.6.3"
 tag: "0.6.3"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

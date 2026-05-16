@@ -1,5 +1,5 @@
 package: pytransport
-description: pytransport Python package
+description: PyTransport numerical transport equation solver for inflation
 version: "2.0.2"
 tag: "2.0.2"
 sources:
@@ -13,7 +13,7 @@ requires:
   - importlib_metadata
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PyTransport
 ---
 #!/bin/bash -e
 ##############################

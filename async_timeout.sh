@@ -1,5 +1,5 @@
 package: async_timeout
-description: async_timeout Python package
+description: async-timeout timeout context manager for asyncio
 version: "4.0.2"
 tag: "4.0.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

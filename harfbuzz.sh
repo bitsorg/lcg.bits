@@ -1,5 +1,5 @@
 package: harfbuzz
-description: Text shaping engine
+description: HarfBuzz OpenType text shaping engine
 version: "2.7.4"
 tag: "2.7.4"
 sources:
@@ -13,7 +13,7 @@ requires:
   - gettext
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

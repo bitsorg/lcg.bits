@@ -1,5 +1,5 @@
 package: uproot
-description: uproot Python package
+description: uproot ROOT I/O in pure Python (without CERN ROOT)
 version: "5.7.1"
 tag: "5.7.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - pyxxhash
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

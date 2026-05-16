@@ -1,5 +1,5 @@
 package: xenv
-description: xenv Python package
+description: xenv CERN LCG environment setup tool
 version: "1.0.1"
 tag: "1.0.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - nose
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

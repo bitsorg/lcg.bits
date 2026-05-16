@@ -1,5 +1,5 @@
 package: uritemplate
-description: uritemplate Python package
+description: uritemplate URI template parsing and expansion library
 version: "3.0.1"
 tag: "3.0.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

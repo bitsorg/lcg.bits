@@ -1,5 +1,5 @@
 package: pyanalysis
-description: pyanalysis Python package
+description: PyAnalysis Python analysis framework for ILC (based on LCTuple)
 version: "2.0"
 tag: "2.0"
 requires:
@@ -19,7 +19,7 @@ requires:
   - iminuit
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

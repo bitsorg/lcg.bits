@@ -1,16 +1,18 @@
 package: libarchive
-description: libarchive library/tool (from LCG software stack)
-version: "3.7.9"
-tag: "3.7.9"
+description: Multi-format archive and compression library
+version: "3.8.7"
+tag: "3.8.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libarchive-3.7.9.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/libarchive-3.8.7.tar.gz
 requires:
   - zlib
   - bzip2
   - LibLZMA
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
+patches:
+  - libarchive-3.8.7.patch
 ---
 #!/bin/bash -e
 ##############################

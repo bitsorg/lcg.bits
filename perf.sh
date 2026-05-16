@@ -1,5 +1,5 @@
 package: perf
-description: perf library/tool (from LCG software stack)
+description: Linux perf performance analysis tool
 version: "20250408"
 tag: "20250408"
 sources:
@@ -11,7 +11,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 patches:
   - perf-20250408.patch
 ---

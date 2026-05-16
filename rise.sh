@@ -1,5 +1,5 @@
 package: rise
-description: rise Python package
+description: RISE Jupyter/IPython Slideshow extension
 version: "5.7.2.2"
 tag: "5.7.2.2"
 sources:
@@ -16,7 +16,7 @@ requires:
   - beautifulsoup4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: crc32c
-description: crc32c Python package
+description: crc32c hardware-accelerated CRC32C checksum library
 version: "2.7.1"
 tag: "2.7.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

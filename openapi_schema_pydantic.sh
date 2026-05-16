@@ -1,5 +1,5 @@
 package: openapi_schema_pydantic
-description: openapi_schema_pydantic Python package
+description: openapi-schema-pydantic Pydantic models for OpenAPI 3.0
 version: "unknown"
 tag: "unknown"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pydantic
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

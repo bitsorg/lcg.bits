@@ -1,5 +1,5 @@
 package: asdf
-description: asdf Python package
+description: ASDF Advanced Scientific Data Format Python library
 version: "3.5.0"
 tag: "3.5.0"
 sources:
@@ -18,7 +18,7 @@ requires:
   - PyYAML
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

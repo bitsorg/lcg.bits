@@ -1,5 +1,5 @@
 package: madx
-description: madx library/tool (from LCG software stack)
+description: MAD-X accelerator optics design and tracking code
 version: "5.09.00"
 tag: "5.09.00"
 sources:
@@ -9,7 +9,7 @@ requires:
   - blas
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-MAD-X
 ---
 #!/bin/bash -e
 ##############################

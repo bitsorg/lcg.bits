@@ -1,5 +1,5 @@
 package: pywt
-description: pywt Python package
+description: PyWavelets wavelet transforms for Python
 version: "1.6.0"
 tag: "1.6.0"
 sources:
@@ -12,7 +12,7 @@ requires:
   - cython
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

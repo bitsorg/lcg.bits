@@ -1,5 +1,5 @@
 package: ptyprocess
-description: ptyprocess Python package
+description: ptyprocess launch a subprocess in a pseudo terminal (pty)
 version: "0.7.0"
 tag: "0.7.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

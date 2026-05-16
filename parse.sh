@@ -1,5 +1,5 @@
 package: parse
-description: parse Python package
+description: parse library to parse strings using Python format strings
 version: "1.20.2"
 tag: "1.20.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: blosc2
-description: blosc2 Python package
+description: Python-Blosc2 next-gen Python bindings for C-Blosc2
 version: "2.7.1"
 tag: "2.7.1"
 sources:
@@ -15,7 +15,7 @@ requires:
   - pycpuinfo
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: astroid
-description: astroid Python package
+description: astroid Python AST framework used by pylint
 version: "4.0.2"
 tag: "4.0.2"
 sources:
@@ -15,7 +15,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

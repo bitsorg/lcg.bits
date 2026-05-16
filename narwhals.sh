@@ -1,5 +1,5 @@
 package: narwhals
-description: narwhals Python package
+description: narwhals lightweight dataframe compatibility layer
 version: "1.9.4"
 tag: "1.9.4"
 sources:
@@ -11,7 +11,7 @@ requires:
   - pure_eval
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

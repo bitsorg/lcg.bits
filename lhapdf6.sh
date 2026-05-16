@@ -1,5 +1,5 @@
 package: lhapdf6
-description: lhapdf6 Monte Carlo event generator
+description: LHAPDF 6 parton density function interpolation library
 version: "unknown"
 tag: "unknown"
 sources:
@@ -10,7 +10,7 @@ requires:
   - cython
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################

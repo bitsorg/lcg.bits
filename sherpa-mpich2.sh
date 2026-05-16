@@ -1,5 +1,5 @@
 package: sherpa-mpich2
-description: sherpa-mpich2 Monte Carlo event generator
+description: Sherpa Monte Carlo event generator built with MPICH2
 version: "unknown"
 tag: "unknown"
 sources:
@@ -11,7 +11,7 @@ requires:
   - mpich2
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

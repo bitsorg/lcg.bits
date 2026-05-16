@@ -1,5 +1,5 @@
 package: nltk
-description: nltk Python package
+description: NLTK Natural Language Toolkit for Python
 version: "3.8.1"
 tag: "3.8.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - tqdm
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

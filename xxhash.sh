@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xxHash-0.8.2.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -19,3 +19,4 @@ function Make() {
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} install PREFIX=$INSTALLROOT CC=$CC
 }
+function MakeInstall() { true; }

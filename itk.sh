@@ -1,5 +1,5 @@
 package: itk
-description: itk Python package
+description: Insight Segmentation and Registration Toolkit
 version: "5.4.0"
 tag: "5.4.0"
 requires:
@@ -14,7 +14,7 @@ requires:
   - itk_segmentation
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: nanobind
-description: nanobind Python package
+description: nanobind lightweight C++/Python binding library
 version: "2.10.2"
 tag: "2.10.2"
 sources:
@@ -10,7 +10,7 @@ requires:
   - CMake
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

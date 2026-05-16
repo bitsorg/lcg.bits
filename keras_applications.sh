@@ -1,5 +1,5 @@
 package: keras_applications
-description: keras_applications Python package
+description: Keras Applications pre-trained model definitions
 version: "1.0.8"
 tag: "1.0.8"
 sources:
@@ -10,7 +10,7 @@ requires:
   - keras
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: simplejson
-description: simplejson Python package
+description: simplejson simple, fast JSON encoder/decoder for Python
 version: "3.16.1"
 tag: "3.16.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

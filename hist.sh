@@ -1,5 +1,5 @@
 package: hist
-description: hist Python package
+description: Hist powerful histogramming based on boost-histogram
 version: "2.10.1"
 tag: "2.10.1"
 sources:
@@ -18,7 +18,7 @@ requires:
   - dask
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

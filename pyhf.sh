@@ -1,5 +1,5 @@
 package: pyhf
-description: pyhf Python package
+description: pyhf pure-Python HistFactory statistical model (HEP)
 version: "0.7.6"
 tag: "0.7.6"
 sources:
@@ -23,7 +23,7 @@ requires:
   - uproot
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

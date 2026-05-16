@@ -1,5 +1,5 @@
 package: rapidsim
-description: rapidsim Monte Carlo event generator
+description: RapidSim fast Monte Carlo simulation for heavy-flavour decays
 version: "1.4.4"
 tag: "1.4.4"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: Garfield++
-description: Garfield++ library/tool (from LCG software stack)
+description: Garfield++ toolkit for detailed simulation of particle detectors
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -9,7 +9,7 @@ requires:
   - Geant4
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

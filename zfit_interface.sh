@@ -1,5 +1,5 @@
 package: zfit_interface
-description: zfit_interface Python package
+description: zfit-interface abstract interface definitions for zfit
 version: "0.0.3"
 tag: "0.0.3"
 sources:
@@ -12,7 +12,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

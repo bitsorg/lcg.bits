@@ -1,5 +1,5 @@
 package: jmespath
-description: jmespath Python package
+description: JMESPath query language for JSON in Python
 version: "1.0.1"
 tag: "1.0.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

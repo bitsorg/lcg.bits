@@ -1,5 +1,5 @@
 package: caio
-description: caio Python package
+description: caio async I/O file operations for Linux
 version: "0.9.25"
 tag: "0.9.25"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - caio-0.9.25.patch
 ---

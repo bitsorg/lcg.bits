@@ -1,5 +1,5 @@
 package: kfp
-description: kfp Python package
+description: Kubeflow Pipelines SDK for ML workflow orchestration
 version: "2.13.0"
 tag: "2.13.0"
 sources:
@@ -28,7 +28,7 @@ requires:
   - docstring_parser
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

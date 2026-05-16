@@ -1,5 +1,5 @@
 package: funcsigs
-description: funcsigs Python package
+description: funcsigs Python 3 function signatures backport
 version: "1.0.2"
 tag: "1.0.2"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

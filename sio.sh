@@ -1,5 +1,5 @@
 package: SIO
-description: SIO simple sequential I/O library for Key4hep
+description: Simple sequential binary I/O library (Key4hep)
 version: "00.02"
 tag: "00.02"
 sources:
@@ -8,7 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 patches:
   - SIO-00.02.patch
 ---

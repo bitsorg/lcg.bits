@@ -1,5 +1,5 @@
 package: asttokens
-description: asttokens Python package
+description: asttokens annotates Python AST nodes with source code positions
 version: "2.4.1"
 tag: "2.4.1"
 sources:
@@ -11,7 +11,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

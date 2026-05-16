@@ -1,5 +1,5 @@
 package: cachetools
-description: cachetools Python package
+description: cachetools extensible memoizing collections for Python
 version: "5.5.1"
 tag: "5.5.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

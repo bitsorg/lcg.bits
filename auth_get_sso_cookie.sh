@@ -1,5 +1,5 @@
 package: auth_get_sso_cookie
-description: auth_get_sso_cookie Python package
+description: auth-get-sso-cookie CERN SSO cookie helper
 version: "2.4.0-1"
 tag: "2.4.0-1"
 sources:
@@ -14,7 +14,7 @@ requires:
   - qrcode
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

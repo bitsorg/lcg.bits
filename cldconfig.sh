@@ -1,5 +1,5 @@
 package: cldconfig
-description: cldconfig Key4hep framework package
+description: cldconfig dynamic linker configuration utility
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -12,7 +12,7 @@ requires:
   - evtgen
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

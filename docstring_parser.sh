@@ -1,5 +1,5 @@
 package: docstring_parser
-description: docstring_parser Python package
+description: docstring-parser parse Python docstrings
 version: "0.15"
 tag: "0.15"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

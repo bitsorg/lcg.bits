@@ -1,5 +1,5 @@
 package: vgm
-description: vgm library/tool (from LCG software stack)
+description: VGM (Virtual Geometry Model) detector geometry conversion
 version: "unknown"
 tag: "unknown"
 sources:
@@ -11,7 +11,7 @@ requires:
   - XercesC
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

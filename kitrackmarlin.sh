@@ -1,5 +1,5 @@
 package: kitrackmarlin
-description: kitrackmarlin Key4hep framework package
+description: KiTrackMarlin Marlin processor wrapper for KiTrack
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -14,7 +14,7 @@ requires:
   - clhep
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

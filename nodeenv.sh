@@ -1,5 +1,5 @@
 package: nodeenv
-description: nodeenv Python package
+description: nodeenv Node.js virtual environment for Python
 version: "1.9.1"
 tag: "1.9.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

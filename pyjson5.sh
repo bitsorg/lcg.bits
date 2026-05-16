@@ -1,5 +1,5 @@
 package: pyjson5
-description: pyjson5 Python package
+description: PyJSON5 JSON5 encoder/decoder for Python
 version: "0.9.6"
 tag: "0.9.6"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

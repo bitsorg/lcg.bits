@@ -1,5 +1,5 @@
 package: sherpa-openmpi
-description: sherpa-openmpi Monte Carlo event generator
+description: Sherpa Monte Carlo event generator built with OpenMPI
 version: "2.2.11p2.openmpi3"
 tag: "2.2.11p2.openmpi3"
 sources:
@@ -13,7 +13,7 @@ requires:
   - blackhat
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

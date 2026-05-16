@@ -1,5 +1,5 @@
 package: pyflakes
-description: pyflakes Python package
+description: pyflakes passive checker for Python programs
 version: "3.4.0"
 tag: "3.4.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

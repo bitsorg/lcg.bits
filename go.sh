@@ -1,12 +1,12 @@
 package: go
-description: go library/tool (from LCG software stack)
+description: Go programming language toolchain
 version: "1.12.5"
 tag: "1.12.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go1.12.5.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: tricktrack
-description: tricktrack library/tool (from LCG software stack)
+description: TrickTrack cellular automaton track seeding library
 version: "1.0.9"
 tag: "1.0.9"
 sources:
@@ -8,7 +8,7 @@ requires:
   - eigen
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

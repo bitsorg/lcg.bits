@@ -1,5 +1,5 @@
 package: plotext
-description: plotext Python package
+description: plotext plots data directly on terminal
 version: "5.2.7"
 tag: "5.2.7"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

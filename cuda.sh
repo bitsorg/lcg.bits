@@ -1,10 +1,10 @@
 package: cuda
-description: cuda library/tool (from LCG software stack)
+description: NVIDIA CUDA parallel computing platform and API
 version: "11.4"
 tag: "11.4"
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-NVIDIA-CUDA
 ---
 #!/bin/bash -e
 ##############################

@@ -1,23 +1,27 @@
 package: bzip2
-description: bzip2 lossless data compression library
+description: bzip2 high-quality block-sorting data compression library
 version: "1.0.6"
 tag: "1.0.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/bzip2-1.0.6.tar.gz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-bzip2
 patches:
   - bzip2-1.0.6.patch
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include AutoToolsRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Make() {
+function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
+}
+function Make() {
   make ${JOBS:+-j $JOBS}
-  make ${JOBS:+-j $JOBS} install PREFIX=$INSTALLROOT PACKAGE_FINDER BZip2
+}
+function MakeInstall() {
+  make install PREFIX=$INSTALLROOT
 }

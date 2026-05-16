@@ -1,5 +1,5 @@
 package: mpfr
-description: GNU MPFR multiple-precision floating-point arithmetic library
+description: GNU MPFR multiple-precision floating-point library
 version: "4.2.1"
 tag: "4.2.1"
 sources:
@@ -8,7 +8,7 @@ requires:
   - gmp
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

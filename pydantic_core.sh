@@ -1,5 +1,5 @@
 package: pydantic_core
-description: pydantic_core Python package
+description: pydantic-core Rust-backed core for Pydantic v2
 version: "2.41.5"
 tag: "2.41.5"
 requires:
@@ -8,7 +8,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: archspec
-description: archspec Python package
+description: archspec library for detecting CPU microarchitecture
 version: "0.1.4"
 tag: "0.1.4"
 sources:
@@ -11,7 +11,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0 OR MIT
 ---
 #!/bin/bash -e
 ##############################

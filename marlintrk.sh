@@ -1,5 +1,5 @@
 package: marlintrk
-description: marlintrk Key4hep framework package
+description: MarlinTrk track fitting framework for Marlin
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -18,7 +18,7 @@ requires:
   - ddkaltest
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: marshmallow_enum
-description: marshmallow_enum Python package
+description: marshmallow-enum Enum field for marshmallow
 version: "1.5.1"
 tag: "1.5.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - marshmallow
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

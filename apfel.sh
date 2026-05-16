@@ -1,5 +1,5 @@
 package: apfel
-description: apfel Monte Carlo event generator
+description: APFEL parton distribution function evolution library
 version: "3.0.4"
 tag: "3.0.4"
 sources:
@@ -10,7 +10,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

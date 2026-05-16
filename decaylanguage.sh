@@ -1,5 +1,5 @@
 package: DecayLanguage
-description: DecayLanguage Python package
+description: DecayLanguage toolkit for decay descriptor parsing (HEP)
 version: "0.20.0"
 tag: "0.20.0"
 sources:
@@ -18,7 +18,7 @@ requires:
   - plumbum
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: jupyterlab
-description: jupyterlab Python package
+description: JupyterLab next-generation Jupyter web-based interface
 version: "4.4.7"
 tag: "4.4.7"
 sources:
@@ -18,7 +18,7 @@ requires:
   # - nodejs
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

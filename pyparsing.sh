@@ -1,5 +1,5 @@
 package: pyparsing
-description: pyparsing Python package
+description: pyparsing Python parsing module
 version: "3.2.5"
 tag: "3.2.5"
 sources:
@@ -11,7 +11,7 @@ requires:
   - railroad_diagrams
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

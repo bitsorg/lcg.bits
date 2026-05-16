@@ -1,5 +1,5 @@
 package: typer
-description: typer Python package
+description: Typer CLI framework based on Python type hints
 version: "0.15.1"
 tag: "0.15.1"
 sources:
@@ -10,7 +10,7 @@ requires:
   - click
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

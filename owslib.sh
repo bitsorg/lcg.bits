@@ -1,5 +1,5 @@
 package: OWSLib
-description: OWSLib Python package
+description: OWSLib Python package for OGC Web Services
 version: "0.34.1"
 tag: "0.34.1"
 sources:
@@ -14,7 +14,7 @@ requires:
   - pyproj
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

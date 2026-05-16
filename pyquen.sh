@@ -1,10 +1,10 @@
 package: pyquen
-description: pyquen Monte Carlo event generator
+description: PYQUEN parton quenching model for heavy-ion collisions
 version: "1.5.1"
 tag: "1.5.1"
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LicenseRef-PYQUEN
 ---
 #!/bin/bash -e
 ##############################

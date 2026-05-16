@@ -1,5 +1,5 @@
 package: accelerate
-description: accelerate Python package
+description: Hugging Face Accelerate library for distributed/mixed precision training
 version: "1.3.0"
 tag: "1.3.0"
 sources:
@@ -16,7 +16,7 @@ requires:
   # - transformers
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

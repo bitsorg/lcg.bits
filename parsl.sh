@@ -1,5 +1,5 @@
 package: parsl
-description: parsl Python package
+description: Parsl parallel scripting library for Python
 version: "1.2.0"
 tag: "1.2.0"
 sources:
@@ -18,7 +18,7 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

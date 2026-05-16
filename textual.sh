@@ -1,5 +1,5 @@
 package: textual
-description: textual Python package
+description: Textual TUI (text user interface) framework for Python
 version: "0.74.0"
 tag: "0.74.0"
 sources:
@@ -10,7 +10,7 @@ requires:
   - rich
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

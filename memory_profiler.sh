@@ -1,5 +1,5 @@
 package: memory_profiler
-description: memory_profiler Python package
+description: memory-profiler monitor memory usage of Python programs
 version: "0.61.0"
 tag: "0.61.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

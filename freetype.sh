@@ -1,5 +1,5 @@
 package: freetype
-description: FreeType font rendering library
+description: FreeType scalable font rendering engine
 version: "2.14.3"
 tag: "2.14.3"
 sources:
@@ -8,7 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: FTL OR GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################

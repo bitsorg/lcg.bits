@@ -1,5 +1,5 @@
 package: pydigitalwavetools
-description: pydigitalwavetools Python package
+description: pyDigitalWaveTools Python digital waveform tools
 version: "1.1"
 tag: "1.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: unigen
-description: unigen library/tool (from LCG software stack)
+description: UniGen universal Monte Carlo event format and library
 version: "2.2"
 tag: "2.2"
 sources:
@@ -8,7 +8,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 patches:
   - unigen-2.2.patch
 ---
@@ -23,3 +23,4 @@ function Make() {
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} DESTDIR=$INSTALLROOT install
 }
+function MakeInstall() { true; }

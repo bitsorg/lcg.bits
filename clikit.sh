@@ -1,5 +1,5 @@
 package: clikit
-description: clikit Python package
+description: Clikit CLI framework toolkit for Python
 version: "0.6.2"
 tag: "0.6.2"
 sources:
@@ -12,7 +12,7 @@ requires:
   - pylev
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

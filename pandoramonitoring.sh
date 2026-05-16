@@ -1,5 +1,5 @@
 package: pandoramonitoring
-description: PandoraMonitoring monitoring and display for Pandora algorithms
+description: PandoraMonitoring ROOT-based visualization for Pandora
 version: "03.06.00"
 tag: "03.06.00"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pandorasdk
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
@@ -24,5 +24,5 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
     -DCMAKE_MODULE_PATH=${pandorapfa_ROOT}/cmakemodules \
-    -Wno-error"
+    -DCMAKE_CXX_FLAGS="-Wno-error"
 }

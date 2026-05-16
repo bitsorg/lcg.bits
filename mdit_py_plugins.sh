@@ -1,5 +1,5 @@
 package: mdit_py_plugins
-description: mdit_py_plugins Python package
+description: mdit-py-plugins collection of plugins for markdown-it-py
 version: "0.4.0"
 tag: "0.4.0"
 sources:
@@ -11,7 +11,7 @@ requires:
   - markdown_it_py
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

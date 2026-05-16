@@ -1,5 +1,5 @@
 package: identify
-description: identify Python package
+description: identify file identification library for Python
 version: "2.5.24"
 tag: "2.5.24"
 sources:
@@ -10,7 +10,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

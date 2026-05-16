@@ -1,5 +1,5 @@
 package: retry
-description: retry Python package
+description: retry decorators for retrying function calls
 version: "0.9.2"
 tag: "0.9.2"
 sources:
@@ -12,7 +12,7 @@ requires:
   - py
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

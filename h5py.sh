@@ -1,5 +1,5 @@
 package: h5py
-description: h5py Python package
+description: h5py Pythonic interface to HDF5 binary data format
 version: "3.13.0"
 tag: "3.13.0"
 sources:
@@ -15,7 +15,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

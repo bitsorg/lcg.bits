@@ -1,5 +1,5 @@
 package: shellingham
-description: shellingham Python package
+description: shellingham detect surrounding shell for Python
 version: "1.5.4"
 tag: "1.5.4"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

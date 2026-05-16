@@ -1,5 +1,5 @@
 package: fcc_config
-description: fcc_config Key4hep framework package
+description: FCC (Future Circular Collider) detector configuration files
 version: "HEAD"
 tag: "HEAD"
 sources:
@@ -10,7 +10,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################

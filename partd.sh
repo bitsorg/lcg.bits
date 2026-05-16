@@ -1,5 +1,5 @@
 package: partd
-description: partd Python package
+description: Partd key-value append store on disk for Dask
 version: "1.4.2"
 tag: "1.4.2"
 sources:
@@ -11,7 +11,7 @@ requires:
   - toolz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

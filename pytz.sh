@@ -1,5 +1,5 @@
 package: pytz
-description: pytz Python package
+description: pytz timezone definitions for Python (Olson tz database)
 version: "2022.7.1"
 tag: "2022.7.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

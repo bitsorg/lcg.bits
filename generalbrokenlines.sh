@@ -1,5 +1,5 @@
 package: generalbrokenlines
-description: generalbrokenlines Key4hep framework package
+description: General Broken Lines track fit library
 version: "unknown"
 tag: "unknown"
 sources:
@@ -9,7 +9,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: minikanren
-description: minikanren Python package
+description: miniKanren logic programming micro-framework for Python
 version: "1.0.3"
 tag: "1.0.3"
 sources:
@@ -14,7 +14,7 @@ requires:
   - toolz
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

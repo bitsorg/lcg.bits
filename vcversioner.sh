@@ -1,5 +1,5 @@
 package: vcversioner
-description: vcversioner Python package
+description: vcversioner version from VCS tags for Python packages
 version: "2.16.0.0"
 tag: "2.16.0.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: ISC
 ---
 #!/bin/bash -e
 ##############################

@@ -1,5 +1,5 @@
 package: python_ulid
-description: python_ulid Python package
+description: python-ulid ULID (Universally Unique Lexicographically Sortable) IDs
 version: "3.1.0"
 tag: "3.1.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

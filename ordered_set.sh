@@ -1,5 +1,5 @@
 package: ordered_set
-description: ordered_set Python package
+description: ordered-set MutableSet that remembers insertion order
 version: "4.1.0"
 tag: "4.1.0"
 sources:
@@ -9,7 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

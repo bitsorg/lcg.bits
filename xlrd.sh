@@ -1,5 +1,5 @@
 package: xlrd
-description: xlrd Python package
+description: xlrd library for reading Excel (.xls) files
 version: "2.0.1"
 tag: "2.0.1"
 sources:
@@ -9,7 +9,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################

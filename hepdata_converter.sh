@@ -1,5 +1,5 @@
 package: hepdata_converter
-description: hepdata_converter Python package
+description: HEPData converter for submission formats
 version: "0.3.1"
 tag: "0.3.1"
 sources:
@@ -12,7 +12,7 @@ requires:
   - PyYAML
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################

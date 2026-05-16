@@ -1,5 +1,5 @@
 package: openapi_spec_validator
-description: openapi_spec_validator Python package
+description: openapi-spec-validator OpenAPI spec structural validation
 version: "0.7.1"
 tag: "0.7.1"
 sources:
@@ -13,7 +13,7 @@ requires:
   - openapi_schema_validator
 build_requires:
   - bits-recipe-tools
-license: TODO
+license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
