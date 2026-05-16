@@ -15,5 +15,5 @@ overrides:
   hepmc3:
     tag: 3.2.7
 
-
+append_arch: dev4lhcb
 ---

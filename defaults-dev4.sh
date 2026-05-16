@@ -1,20 +1,12 @@
-
 package: defaults-dev4
 version: v1
-env:
-  MACOSX_DEPLOYMENT_TARGET: '14.0'
+append_arch: dev4
 
-dev3: &base
-  - !include dev3.yaml
-
-dev4: &override
+override:
   ROOT:
     tag: 'v6-36-00-patches'
 
 disable:
   - Gaudi
-    
-overrides:
-  [*base, *override]    
-
 ---
+
