@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nanomsg-1.1.5.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e

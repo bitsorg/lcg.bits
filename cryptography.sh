@@ -12,11 +12,12 @@ requires:
   - typing_extensions
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0 OR BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

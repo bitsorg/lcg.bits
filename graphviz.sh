@@ -12,8 +12,12 @@ requires:
   - gettext
   # optional:
   # - pango
+prefer_system: ".*"
+prefer_system_check:
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: EPL-1.0
 ---
 #!/bin/bash -e

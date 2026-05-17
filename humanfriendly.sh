@@ -11,6 +11,7 @@ requires:
   - docutils
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - humanfriendly-10.0.patch
@@ -19,5 +20,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

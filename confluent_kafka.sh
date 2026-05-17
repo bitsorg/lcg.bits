@@ -10,11 +10,14 @@ requires:
   - librdkafka
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e
+export CFLAGS="-I${LIBRDKAFKA_ROOT}/include ${CFLAGS:-}"
+export LDFLAGS="-L${LIBRDKAFKA_ROOT}/lib ${LDFLAGS:-}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

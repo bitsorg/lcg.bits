@@ -8,6 +8,7 @@ requires:
   - freetype
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - ftgl-2.4.0.patch

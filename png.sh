@@ -8,6 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Libpng
 ---
 #!/bin/bash -e

@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fftw-3.3.10.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
 ---
 #!/bin/bash -e

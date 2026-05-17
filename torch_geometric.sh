@@ -24,13 +24,15 @@ requires:
   - psutil
   # optional:
   # - cuda
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

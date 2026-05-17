@@ -14,6 +14,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-3.0-or-later
 patches:
   - pythonsollya-0.3.patch
@@ -22,5 +23,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

@@ -9,13 +9,15 @@ requires:
   - setuptools
   - click
   - six
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0 OR MIT
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

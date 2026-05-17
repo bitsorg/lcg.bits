@@ -4,6 +4,7 @@ version: "11.4"
 tag: "11.4"
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-NVIDIA-CUDA
 ---
 #!/bin/bash -e

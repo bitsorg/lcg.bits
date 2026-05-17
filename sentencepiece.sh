@@ -9,6 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - sentencepiece-0.2.0.patch
@@ -17,5 +18,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

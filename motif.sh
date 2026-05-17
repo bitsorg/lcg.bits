@@ -9,6 +9,7 @@ requires:
   - flex
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - motif-2.3.8.patch

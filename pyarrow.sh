@@ -15,11 +15,16 @@ requires:
   - setuptools_scm
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e
+export PYARROW_WITH_PARQUET=1
+export PYARROW_WITH_DATASET=1
+export ARROW_HOME="${ARROW_ROOT}"
+export LD_LIBRARY_PATH="${ARROW_ROOT}/lib:${LD_LIBRARY_PATH:-}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

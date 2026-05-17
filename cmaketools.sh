@@ -6,6 +6,7 @@ sources:
   - https://github.com/HEP-SF/cmaketools/archive/1.9.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e

@@ -7,8 +7,10 @@ sources:
 requires:
   - Python
   - setuptools
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-or-later
 patches:
   - python_vxi11-0.9.patch
@@ -17,5 +19,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

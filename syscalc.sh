@@ -8,6 +8,7 @@ requires:
   - lhapdf-${lhapdf6_latest_version}
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-SysCalc
 patches:
   - syscalc-1.1.7.patch

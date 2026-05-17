@@ -4,6 +4,7 @@ version: "1.8"
 tag: "1.8"
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-HYDJET
 ---
 #!/bin/bash -e

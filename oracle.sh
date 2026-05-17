@@ -8,6 +8,7 @@ requires:
   - libaio
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Oracle
 ---
 #!/bin/bash -e

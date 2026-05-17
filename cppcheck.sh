@@ -7,8 +7,10 @@ sources:
 requires:
   - pcre
   - pygments
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-only
 patches:
   - cppcheck-2.20.0.patch
@@ -17,5 +19,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

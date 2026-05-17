@@ -8,6 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: curl
 ---
 #!/bin/bash -e

@@ -8,6 +8,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-SuperChic
 patches:
   - superchic-4.02.2.patch

@@ -11,6 +11,7 @@ requires:
   - Python
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
 patches:
   - perf-20250408.patch

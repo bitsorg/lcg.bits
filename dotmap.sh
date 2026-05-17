@@ -6,13 +6,15 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dotmap-1.3.30.tar.gz
 requires:
   - setuptools
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

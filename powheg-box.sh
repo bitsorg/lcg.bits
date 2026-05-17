@@ -9,6 +9,7 @@ requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-POWHEG
 ---
 #!/bin/bash -e

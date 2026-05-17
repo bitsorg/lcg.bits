@@ -8,13 +8,16 @@ requires:
   - Python
   - setuptools
   - oracle
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+export ORACLE_HOME="${ORACLE_ROOT}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

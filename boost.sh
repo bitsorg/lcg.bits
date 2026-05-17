@@ -3,13 +3,14 @@ description: Boost C++ portable peer-reviewed libraries
 version: "1.90.0"
 tag: "1.90.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/boost_1.90.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/boost_1_90_0.tar.gz
 requires:
   - zlib
   - xz
   - bzip2
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSL-1.0
 ---
 #!/bin/bash -e

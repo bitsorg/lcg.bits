@@ -16,6 +16,7 @@ requires:
   - msgpackc
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
 ---
 #!/bin/bash -e

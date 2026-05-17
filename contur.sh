@@ -22,18 +22,15 @@ requires:
   - uncertainties
   - pymysql
   - sqlparse
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --python"
 ##############################
-function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  make ${JOBS:+-j $JOBS}
-  mkdir -p $INSTALLROOT/lib/python3/site-packages
-}

@@ -10,6 +10,7 @@ requires:
   - rust
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - hf_xet-1.2.0.patch
@@ -18,5 +19,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

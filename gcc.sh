@@ -3,7 +3,7 @@ description: GNU Compiler Collection (C, C++, Fortran)
 version: "6.2.0"
 tag: "6.2.0"
 sources:
-  - http://lcgpackages.web.cern.ch/lcgpackages/tarFiles/sources/gcc/gcc-6.2.0.tar.gz
+  - https://ftp.gnu.org/gnu/gcc/gcc-6.2.0/gcc-6.2.0.tar.gz
 requires:
   - binutils
 build_requires:

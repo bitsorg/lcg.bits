@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/p7zip_16.02_src_all.tar.bz2
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
 patches:
   - p7zip-16.02.patch

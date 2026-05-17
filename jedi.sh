@@ -8,8 +8,10 @@ requires:
   - Python
   - setuptools
   - parso
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - jedi-0.19.1.patch
@@ -18,5 +20,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

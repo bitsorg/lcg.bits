@@ -4,6 +4,7 @@ version: "unknown"
 tag: "unknown"
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-PDFSets
 ---
 #!/bin/bash -e

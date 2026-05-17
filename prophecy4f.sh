@@ -8,6 +8,7 @@ requires:
   - collier
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Prophecy4f
 ---
 #!/bin/bash -e

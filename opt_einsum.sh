@@ -8,8 +8,10 @@ requires:
   - Python
   - setuptools
   - numpy
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - opt_einsum-3.3.0.patch
@@ -18,5 +20,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

@@ -8,6 +8,7 @@ requires:
   - GSL
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-HTo4l
 patches:
   - hto4l-2.02.patch

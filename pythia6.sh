@@ -4,6 +4,7 @@ version: "6.4.28.snd"
 tag: "6.4.28.snd"
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Pythia6
 ---
 #!/bin/bash -e

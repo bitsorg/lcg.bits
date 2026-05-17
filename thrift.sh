@@ -11,6 +11,7 @@ requires:
   - flex
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - thrift-0.16.0.patch

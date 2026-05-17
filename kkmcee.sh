@@ -13,6 +13,7 @@ requires:
   - libtool
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-KKMC-ee
 ---
 #!/bin/bash -e

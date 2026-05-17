@@ -9,18 +9,15 @@ requires:
   - setuptools
   - numpy
   - llvmlite
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --python"
 ##############################
-function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  make ${JOBS:+-j $JOBS}
-  mkdir -p $INSTALLROOT/lib/python3/site-packages
-}

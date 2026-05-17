@@ -12,6 +12,7 @@ requires:
   - pythia8
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e

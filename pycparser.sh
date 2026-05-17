@@ -3,22 +3,19 @@ description: pycparser complete C99 parser in pure Python
 version: "2.22"
 tag: "2.22"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pycparser-2.22.zip
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/pycparser-2.22.tar.gz
 requires:
   - Python
   - setuptools
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --python"
 ##############################
-function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  make ${JOBS:+-j $JOBS}
-  mkdir -p $INSTALLROOT/lib/python3/site-packages
-}

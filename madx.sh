@@ -9,6 +9,7 @@ requires:
   - blas
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-MAD-X
 ---
 #!/bin/bash -e

@@ -4,8 +4,13 @@ version: "1.10.0"
 tag: "1.10.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lz4-1.10.0.tar.gz
+prefer_system: osx.*
+prefer_system_check: |
+  printf "#include <lz4.h>\n" | cc -xc -I$(brew --prefix lz4)/include - -c -M 2>&1
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
 ---
 #!/bin/bash -e

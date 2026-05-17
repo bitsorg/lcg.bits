@@ -8,8 +8,16 @@ requires:
   - pcre2
   - Python
   - Boost
+prefer_system: ".*"
+prefer_system_check: |
+  verge() {
+      [  "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
+  }
+  which swig && verge "$PKGVERSION" $(swig -version | grep Version | sed -e 's/[^0-9]*//')
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
 ---
 #!/bin/bash -e

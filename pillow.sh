@@ -11,13 +11,17 @@ requires:
   - zlib
   - libffi
   - cffi
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: HPND
 ---
 #!/bin/bash -e
+export CFLAGS="-I${ZLIB_ROOT}/include ${CFLAGS:-}"
+export LDFLAGS="-L${ZLIB_ROOT}/lib ${LDFLAGS:-}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

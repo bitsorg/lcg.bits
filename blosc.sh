@@ -12,8 +12,10 @@ requires:
   - CMake
   - ninja
   - numpy
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 patches:
   - blosc-1.11.4.patch
@@ -22,5 +24,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

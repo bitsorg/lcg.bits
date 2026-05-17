@@ -12,6 +12,7 @@ requires:
   - gettext
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: PostgreSQL
 ---
 #!/bin/bash -e

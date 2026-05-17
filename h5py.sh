@@ -13,13 +13,16 @@ requires:
   - cython
   - pkg_config
   - pip
+  - executing
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+export HDF5_DIR="${HDF5_ROOT}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

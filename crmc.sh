@@ -8,6 +8,7 @@ requires:
   - Boost
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-CRMC
 patches:
   - crmc-2.0.1p5.patch

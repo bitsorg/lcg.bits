@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dcap-unknown-${LCG_ARCH}-${LCG_OS}${LCG_OSVERS}.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e

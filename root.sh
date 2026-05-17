@@ -3,7 +3,7 @@ description: CERN ROOT data analysis framework
 version: "v6.32.02"
 tag: "v6.32.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/root-v6.32.02.zip
+  - https://root.cern/download/root_v6.32.02.source.tar.gz
 requires:
   - Python
   - fftw
@@ -20,6 +20,7 @@ requires:
   - cfitsio
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-only
 ---
 #!/bin/bash -e

@@ -3,9 +3,10 @@ description: libuv cross-platform asynchronous I/O library
 version: "1.44.2"
 tag: "1.44.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libuv-v1.44.2).tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/libuv-v1.44.2.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e

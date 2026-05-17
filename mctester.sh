@@ -8,6 +8,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-MCTester
 patches:
   - mctester-1.25.1.patch

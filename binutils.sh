@@ -6,6 +6,7 @@ sources:
   - http://lcgpackages.web.cern.ch/lcgpackages/tarFiles/sources/binutils-2.28.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
 ---
 #!/bin/bash -e

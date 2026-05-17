@@ -3,9 +3,10 @@ description: yaml-cpp YAML parser and emitter library for C++
 version: "0.6.3"
 tag: "0.6.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/yaml-cpp-0.6.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/yaml-cpp-0.6.3.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e

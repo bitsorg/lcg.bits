@@ -3,11 +3,12 @@ description: MCFM Monte Carlo for FeMtobarn processes (NLO parton-level)
 version: "10.3.atlas"
 tag: "10.3.atlas"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MCFM-10.3.atlas.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MCFM-10.3.tar.gz
 requires:
   - lhapdf
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-MCFM
 ---
 #!/bin/bash -e

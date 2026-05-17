@@ -9,18 +9,25 @@ requires:
   - setuptools
   - blas
   - cython
+  - pip
+  - meson
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+[ "$(uname -m)" = "aarch64" ] && export CFLAGS="${CFLAGS:-} -O0"
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
-##############################
-function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  make ${JOBS:+-j $JOBS}
-  mkdir -p $INSTALLROOT/lib/python3/site-packages
+MODULE_OPTIONS="--bin --python"
+
+function MakeInstall() {
+  mkdir -p "${SITE_PACKAGES}"
+  local _pip_extra=""
+  [ "$(uname -s)" = "Darwin" ] && _pip_extra="-Csetup-args=-Dblas=openblas -Csetup-args=-Dlapack=openblas"
+  "${PYTHON_EXE}" -m pip install \
+    --no-deps --no-build-isolation --root=/ --prefix="${INSTALLROOT}" ${_pip_extra} .
 }
+##############################

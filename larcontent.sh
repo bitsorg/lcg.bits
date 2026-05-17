@@ -3,7 +3,7 @@ description: LArContent Pandora reconstruction algorithms for LAr-TPC
 version: "04.11.02"
 tag: "04.11.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/larcontent-04.11.02).tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/larcontent-04.11.02.tar.gz
 requires:
   - pandorapfa
   - pandorasdk
@@ -11,6 +11,7 @@ requires:
   - eigen
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

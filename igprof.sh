@@ -8,6 +8,7 @@ requires:
   - libunwind
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
 patches:
   - igprof-5.9.18.patch

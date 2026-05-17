@@ -7,8 +7,13 @@ sources:
 requires:
   - curl
   - #
+prefer_system: osx.*
+prefer_system_check: |
+  pkg-config --atleast-version=3.2.0 xerces-c 2>&1 && printf "#include <xercesc/util/PlatformUtils.hpp>" | c++ -xc++ -I$(brew --prefix xerces-c)/include -c -
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e

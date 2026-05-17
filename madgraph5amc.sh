@@ -10,6 +10,7 @@ requires:
   - six
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
 patches:
   - madgraph5amc-3.3.1.atlas1.patch

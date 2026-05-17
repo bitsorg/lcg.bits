@@ -8,6 +8,7 @@ requires:
   - ginac
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-GGVVAMP
 ---
 #!/bin/bash -e

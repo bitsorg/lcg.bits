@@ -9,6 +9,7 @@ requires:
   - png
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GL2PS
 ---
 #!/bin/bash -e

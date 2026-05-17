@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rust-1.94.1-${RUST_ARCH}-${RUST_OS}.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT OR Apache-2.0
 ---
 #!/bin/bash -e

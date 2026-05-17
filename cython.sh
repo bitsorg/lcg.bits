@@ -7,18 +7,15 @@ sources:
 requires:
   - Python
   - setuptools
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include PythonRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
-function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  python3 setup.py -v build -e "/usr/bin/env python" BUILD_COMMAND
-  mkdir -p $INSTALLROOT/lib/python3/site-packages
-}

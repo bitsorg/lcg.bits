@@ -11,11 +11,14 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-only OR MPL-1.1
 ---
 #!/bin/bash -e
+export PKG_CONFIG_PATH="/usr/share/pkgconfig:${PKG_CONFIG_PATH:-}"
+[ "$(uname -s)" = "Darwin" ] && export CPPFLAGS="-I/opt/X11/include ${CPPFLAGS:-}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

@@ -10,8 +10,10 @@ requires:
   - jupyter_packaging
   - notebook
   - rust
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - webio_jupyter_extension-0.1.0.patch
@@ -20,5 +22,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

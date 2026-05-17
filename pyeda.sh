@@ -9,6 +9,7 @@ requires:
   - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
 patches:
   - pyeda-0.29.0.patch
@@ -17,5 +18,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

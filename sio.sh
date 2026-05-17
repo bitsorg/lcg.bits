@@ -8,6 +8,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - SIO-00.02.patch

@@ -7,16 +7,25 @@ sources:
 requires:
   - Python
   - setuptools
-  - six
+  - pip
+  - typing_extensions
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - grpcio-1.73.0.patch
 ---
 #!/bin/bash -e
+export CXX="${CXX:-g++}"
+if [ "$(uname -s)" = "Darwin" ]; then
+  export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=true
+  export GRPC_PYTHON_CFLAGS="-fvisibility=hidden -fno-wrapv -fno-exceptions -std=c++17"
+else
+  export GRPC_PYTHON_CFLAGS="-fvisibility=hidden -fno-wrapv -fno-exceptions"
+fi
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

@@ -11,6 +11,7 @@ requires:
   - libtool
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 patches:
   - qd-2.3.24.patch

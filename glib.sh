@@ -13,9 +13,8 @@ requires:
   - ninja
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
-patches:
-  - glib-2.86.5.patch
 ---
 #!/bin/bash -e
 ##############################

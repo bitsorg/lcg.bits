@@ -10,6 +10,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
 patches:
   - lhapdf-6.2.3.patch

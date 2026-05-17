@@ -13,6 +13,7 @@ requires:
   - clhep
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Geant4
 ---
 #!/bin/bash -e

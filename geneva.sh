@@ -13,6 +13,7 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - geneva-1.0-rc3.atlas2.patch

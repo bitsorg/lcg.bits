@@ -13,11 +13,13 @@ requires:
   - pythran
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+[ "$(uname -m)" = "aarch64" ] && export OPENBLAS_NUM_THREADS=1
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

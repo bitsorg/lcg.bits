@@ -8,6 +8,7 @@ requires:
   - java
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - maven-3.8.5.patch

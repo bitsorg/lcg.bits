@@ -11,6 +11,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 patches:
   - protobuf-5.28.3.patch

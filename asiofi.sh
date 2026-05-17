@@ -3,13 +3,14 @@ description: asiofi FairMQ async transport based on Asio
 version: "0.5.1"
 tag: "0.5.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/asiofi-0.5.1).tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/asiofi-0.5.1.tar.gz
 requires:
   - CMake
   - asio
   - ofi
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e

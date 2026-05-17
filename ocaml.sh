@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ocaml-4.14.2.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 ---
 #!/bin/bash -e

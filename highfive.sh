@@ -9,6 +9,7 @@ requires:
   - hdf5
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSL-1.0
 patches:
   - highfive-2.10.1.patch

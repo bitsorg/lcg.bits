@@ -9,6 +9,7 @@ requires:
   - pythia6
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-TAUOLA
 patches:
   - tauola-28.121.2.patch

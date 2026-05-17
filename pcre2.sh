@@ -4,8 +4,12 @@ version: "10.42"
 tag: "10.42"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pcre2-10.42.tar.gz
+prefer_system: ".*"
+prefer_system_check:
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

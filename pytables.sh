@@ -11,13 +11,23 @@ requires:
   - hdf5
   - xz
   - cython
+  - pip
+  - setuptools
+  - blosc
+  - blosc2
+  - packaging
+  - typing_extensions
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+export HDF5_DIR="${HDF5_ROOT}"
+export BLOSC_DIR="${BLOSC_ROOT}"
+export BLOSC2_DIR="${BLOSC2_ROOT}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

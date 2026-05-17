@@ -13,13 +13,20 @@ requires:
   - h5py
   - scipy
   - numpy
+  - namex
+  - optree
+  - absl_py
+  - ml_dtypes
+  - rich
+  - packaging
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

@@ -3,9 +3,10 @@ description: Cereal C++11 header-only serialization library
 version: "1.3.2"
 tag: "1.3.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cereal-1.3.2).tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/cereal-1.3.2.tar.gz
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

@@ -12,6 +12,7 @@ requires:
   - fplll
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-3.0-or-later
 patches:
   - sollya-8.0.patch

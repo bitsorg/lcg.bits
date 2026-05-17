@@ -8,6 +8,7 @@ requires:
   - gmp
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e

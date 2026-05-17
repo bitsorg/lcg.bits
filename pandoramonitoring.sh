@@ -3,12 +3,13 @@ description: PandoraMonitoring ROOT-based visualization for Pandora
 version: "03.06.00"
 tag: "03.06.00"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pandoramonitoring-03.06.00).tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/pandoramonitoring-03.06.00.tar.gz
 requires:
   - ROOT
   - pandorasdk
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

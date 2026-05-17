@@ -8,8 +8,10 @@ requires:
   - Python
   - setuptools
   - ptyprocess
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: ISC
 patches:
   - pexpect-4.9.0.patch
@@ -18,5 +20,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

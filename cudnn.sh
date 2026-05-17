@@ -8,6 +8,7 @@ requires:
   - cuda
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-NVIDIA-cuDNN
 ---
 #!/bin/bash -e

@@ -16,6 +16,7 @@ requires:
   # - pango
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-ImageMagick
 ---
 #!/bin/bash -e

@@ -4,8 +4,12 @@ version: "2.7.1"
 tag: "2.7.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/expat-2.7.1.tar.bz2
+prefer_system: ".*"
+prefer_system_check:
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e

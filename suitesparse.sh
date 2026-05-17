@@ -10,6 +10,7 @@ requires:
   - gmp
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 patches:
   - suitesparse-5.10.1.patch

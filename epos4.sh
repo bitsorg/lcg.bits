@@ -10,6 +10,7 @@ requires:
   - hepmc3
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-EPOS4
 patches:
   - epos4-4.0.3.atlas1.patch

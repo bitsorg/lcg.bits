@@ -9,6 +9,7 @@ requires:
   - protobuf
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - hadoop-3.3.6.patch

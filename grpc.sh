@@ -10,8 +10,13 @@ requires:
   - re2
   - protobuf
   - zlib
+prefer_system: osx.*
+prefer_system_check: |
+  printf "#include \"grpcpp/version_info.h\"\n" | cc -I$(brew --prefix grpc)/include -xc++ -std=c++20 - -c -o /dev/null
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
   - grpc-1.62.3.patch

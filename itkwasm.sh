@@ -7,13 +7,17 @@ sources:
 requires:
   - Python
   - pip
+  - wasmtime
+  - numpy
+  - typing_extensions
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

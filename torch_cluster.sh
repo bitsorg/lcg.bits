@@ -11,8 +11,10 @@ requires:
   - scipy
   # optional:
   # - cuda
+  - pip
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 patches:
   - torch_cluster-1.6.3p1.patch
@@ -21,5 +23,5 @@ patches:
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

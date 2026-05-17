@@ -16,11 +16,14 @@ requires:
   # - threadpoolctl
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+export ATLAS=None
+[ "$(uname -s)" = "Darwin" ] && export SKLEARN_NO_OPENMP=1
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
 ##############################

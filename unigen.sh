@@ -8,6 +8,7 @@ requires:
   - ROOT
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
 patches:
   - unigen-2.2.patch

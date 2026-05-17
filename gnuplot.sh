@@ -8,6 +8,7 @@ sources:
   # - pango
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-gnuplot
 ---
 #!/bin/bash -e

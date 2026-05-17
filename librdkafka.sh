@@ -10,6 +10,7 @@ requires:
   - lz4
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
 ---
 #!/bin/bash -e

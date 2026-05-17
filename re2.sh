@@ -6,8 +6,13 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/re2-2023.11.01.tar.gz
 requires:
   - absl
+prefer_system: osx.*
+prefer_system_check: |
+  printf "#include \"re2/re2.h\"\n" | cc -I$(brew --prefix re2)/include -I$(brew --prefix abseil)/include -xc++ -std=c++20 - -c -o /dev/null
+
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

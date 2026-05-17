@@ -10,9 +10,8 @@ requires:
   - LibLZMA
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
-patches:
-  - libarchive-3.8.7.patch
 ---
 #!/bin/bash -e
 ##############################

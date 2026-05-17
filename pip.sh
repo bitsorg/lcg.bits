@@ -9,11 +9,18 @@ requires:
   - setuptools
 build_requires:
   - bits-recipe-tools
+  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--python"
+MODULE_OPTIONS="--bin --python"
+
+function MakeInstall() {
+  mkdir -p "${SITE_PACKAGES}"
+  # Bootstrap: pip is not yet available, install via setup.py.
+  "${PYTHON_EXE}" setup.py install --root=/ --prefix="${INSTALLROOT}"
+}
 ##############################
