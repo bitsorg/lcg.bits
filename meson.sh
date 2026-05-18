@@ -18,3 +18,10 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+function MakeInstall() {
+  mkdir -p "${SITE_PACKAGES}"
+  "${PYTHON_EXE}" -m pip install \
+    --no-deps --no-build-isolation --ignore-installed \
+    --root=/ --prefix="${INSTALLROOT}" .
+}
+##############################

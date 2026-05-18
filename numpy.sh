@@ -11,6 +11,7 @@ requires:
   - cython
   - pip
   - meson
+  - meson_python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
