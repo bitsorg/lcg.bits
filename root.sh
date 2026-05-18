@@ -77,6 +77,7 @@ function Configure() {
     -DCINTMAXTYPEDEF=36000 \
     -Dbuiltin_ftgl=ON \
     -Dbuiltin_glew=ON \
+    -Dbuiltin_nlohmannjson=ON \
     -Dbuiltin_pcre=ON \
     -Dbuiltin_unuran=ON \
     -Dbuiltin_xxhash=ON \
