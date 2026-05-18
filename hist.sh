@@ -7,6 +7,7 @@ sources:
 requires:
   - Python
   - pip
+  - hatchling
   - boost_histogram
   - histoprint
   - numpy

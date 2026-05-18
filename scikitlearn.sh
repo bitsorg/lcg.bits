@@ -12,6 +12,7 @@ requires:
   - joblib
   - pip
   - pyarrow
+  - meson_python
   # optional:
   # - threadpoolctl
 build_requires:

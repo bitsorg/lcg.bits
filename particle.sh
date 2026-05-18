@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/particle-0.26.0.tar.gz
 requires:
   - Python
-  - setuptools
+  - hatchling
   - attrs
   - hepunits
   - pip

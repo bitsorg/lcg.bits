@@ -10,6 +10,7 @@ requires:
   - PyYAML
   - arrow
   - pip
+  - scikit_build_core
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -11,6 +11,7 @@ requires:
   - pip
   - pybind11
   - pythran
+  - meson_python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

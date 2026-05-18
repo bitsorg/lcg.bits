@@ -7,6 +7,7 @@ sources:
 requires:
   - Python
   - pip
+  - hatchling
   - numpy
   - packaging
 build_requires:

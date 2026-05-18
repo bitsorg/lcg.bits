@@ -5,6 +5,7 @@ tag: "2.9.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/awkward-2.9.0.tar.gz
 requires:
+  - hatchling
   - numpy
   - pytest_runner
   - PyYAML
