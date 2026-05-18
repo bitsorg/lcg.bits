@@ -2,8 +2,6 @@ package: wheel
 description: wheel Python built-package format (PEP 427)
 version: "0.45.1"
 tag: "0.45.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/wheel-0.45.1.tar.gz
 requires:
   - Python
   - setuptools
@@ -15,7 +13,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

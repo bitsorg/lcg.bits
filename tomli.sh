@@ -2,8 +2,6 @@ package: tomli
 description: tomli minimal TOML parser for Python
 version: "2.0.1"
 tag: "2.0.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tomli-2.0.1.tar.gz
 requires:
   - Python
   - pip
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

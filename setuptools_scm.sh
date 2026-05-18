@@ -2,8 +2,6 @@ package: setuptools_scm
 description: setuptools_scm manages Python package versions from SCM tags
 version: "8.2.0"
 tag: "8.2.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/setuptools_scm-8.2.0.tar.gz
 requires:
   - Python
   - setuptools
@@ -15,7 +13,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
