@@ -1,39 +1,17 @@
 package: numpy
 description: NumPy fundamental package for array computing in Python
-version: "2.4.4"
-tag: "2.4.4"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/numpy-2.4.4.tar.gz
+version: "2.4.0"
+tag: "2.4.0"
 requires:
   - Python
-  - setuptools
-  - blas
-  - cython
   - pip
-  - meson
-  - meson_python
 build_requires:
   - bits-recipe-tools
-  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
-[ "$(uname -m)" = "aarch64" ] && export CFLAGS="${CFLAGS:-} -O0"
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
-
-function Prepare() {
-  rsync -av --delete --exclude '**/.git' --delete-excluded "$SOURCEDIR"/ ./
-}
-
-function MakeInstall() {
-  mkdir -p "${SITE_PACKAGES}"
-  local _pip_extra=""
-  [ "$(uname -s)" = "Darwin" ] && _pip_extra="-Csetup-args=-Dblas=openblas -Csetup-args=-Dlapack=openblas"
-  "${PYTHON_EXE}" -m pip install \
-    --no-deps --no-build-isolation --ignore-installed \
-    --root=/ --prefix="${INSTALLROOT}" ${_pip_extra} .
-}
 ##############################
