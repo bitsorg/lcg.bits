@@ -24,13 +24,32 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin --python"
 
+function Prepare() {
+  rsync -av --delete --exclude '**/.git' --delete-excluded "$SOURCEDIR"/ ./
+  # numpy 2.4.0 bundles a Highway version whose float16_t increment, decrement,
+  # and compound-assignment operators are incorrectly marked 'const' while
+  # modifying the 'native' data member.  GCC 14+ correctly rejects this.
+  # Remove the erroneous 'const' qualifiers from those specific operators.
+  "${PYTHON_EXE}" -c "
+import re, sys
+f = 'numpy/_core/src/highway/hwy/base.h'
+try:
+    t = open(f).read()
+except FileNotFoundError:
+    print('hwy/base.h not found, skipping patch', file=sys.stderr)
+    sys.exit(0)
+# operator++/-- returning float16_t or float16_t& that mutate 'native'
+t = re.sub(r'(constexpr float16_t[& ]+operator[+\-]{1,2}\([^)]*\))\s+const\b',
+           r'\1', t)
+# HWY_FLOAT16_BINARY_OP macro: assign_name variants return float16_t& and mutate
+t = re.sub(r'(float16_t&\s+assign_name\([^)]*\))\s+const\b',
+           r'\1', t)
+open(f, 'w').write(t)
+print('Patched hwy/base.h: removed const from float16_t mutating operators')
+" >&2
+}
+
 function MakeInstall() {
-  echo "=== numpy build diagnostics ===" >&2
-  echo "PYTHONPATH: ${PYTHONPATH}" >&2
-  echo "MESON_PYTHON_ROOT: ${MESON_PYTHON_ROOT}" >&2
-  "${PYTHON_EXE}" -c "import mesonpy; print('mesonpy OK:', mesonpy.__file__)" >&2 \
-    || echo "ERROR: mesonpy not importable" >&2
-  echo "===============================" >&2
   mkdir -p "${SITE_PACKAGES}"
   local _pip_extra=""
   [ "$(uname -s)" = "Darwin" ] && _pip_extra="-Csetup-args=-Dblas=openblas -Csetup-args=-Dlapack=openblas"
