@@ -8,6 +8,7 @@ requires:
   - Python
   - fftw
   - GSL
+  - OpenSSL
   - xrootd
   - numpy
   - tbb
@@ -59,7 +60,9 @@ function Configure() {
   PYTHON_EXECUTABLE="${Python_ROOT}/bin/python3"
   [[ -x "$PYTHON_EXECUTABLE" ]] || PYTHON_EXECUTABLE=$(command -v python3 2>/dev/null || command -v python 2>/dev/null || true)
 
-  cmake \
+  cmake "${SOURCEDIR}" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD} \
     -DCMAKE_CXX_COMPILER=${COMPILER_CXX} \
     -DCMAKE_C_COMPILER=${COMPILER_CC} \
