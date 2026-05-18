@@ -1,4 +1,4 @@
-ackage: tbb
+package: tbb
 description: Intel Threading Building Blocks parallel programming library
 version: "v2021.5.0"
 tag: v2021.5.0
