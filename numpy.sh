@@ -28,6 +28,7 @@ function MakeInstall() {
   local _pip_extra=""
   [ "$(uname -s)" = "Darwin" ] && _pip_extra="-Csetup-args=-Dblas=openblas -Csetup-args=-Dlapack=openblas"
   "${PYTHON_EXE}" -m pip install \
-    --no-deps --no-build-isolation --root=/ --prefix="${INSTALLROOT}" ${_pip_extra} .
+    --no-deps --no-build-isolation --ignore-installed \
+    --root=/ --prefix="${INSTALLROOT}" ${_pip_extra} .
 }
 ##############################
