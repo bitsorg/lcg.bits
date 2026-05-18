@@ -17,7 +17,6 @@ requires:
   - libxml2
   - vdt
   - xz
-  - gl2ps
   - cfitsio
 build_requires:
   - bits-recipe-tools
@@ -76,6 +75,7 @@ function Configure() {
     -DCINTMAXSTRUCT=36000 \
     -DCINTMAXTYPEDEF=36000 \
     -Dbuiltin_ftgl=ON \
+    -Dbuiltin_gl2ps=ON \
     -Dbuiltin_glew=ON \
     -Dbuiltin_lz4=ON \
     -Dbuiltin_nlohmannjson=ON \
