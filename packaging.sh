@@ -5,9 +5,6 @@ tag: "24.2"
 requires:
   - Python
   - pip
-  - setuptools
-  - pyparsing
-  - six
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
