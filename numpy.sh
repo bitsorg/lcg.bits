@@ -25,6 +25,12 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --python"
 
 function MakeInstall() {
+  echo "=== numpy build diagnostics ===" >&2
+  echo "PYTHONPATH: ${PYTHONPATH}" >&2
+  echo "MESON_PYTHON_ROOT: ${MESON_PYTHON_ROOT}" >&2
+  "${PYTHON_EXE}" -c "import mesonpy; print('mesonpy OK:', mesonpy.__file__)" >&2 \
+    || echo "ERROR: mesonpy not importable" >&2
+  echo "===============================" >&2
   mkdir -p "${SITE_PACKAGES}"
   local _pip_extra=""
   [ "$(uname -s)" = "Darwin" ] && _pip_extra="-Csetup-args=-Dblas=openblas -Csetup-args=-Dlapack=openblas"

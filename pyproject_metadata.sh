@@ -11,6 +11,7 @@ build_requires:
 license: MIT
 ---
 #!/bin/bash -e
+# Rebuild trigger: ensure this is built with corrected PythonPipRecipe
 ##############################
 . $(bits-include PythonPipRecipe)
 ##############################
