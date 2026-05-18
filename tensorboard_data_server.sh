@@ -7,7 +7,6 @@ requires:
   - setuptools
   - pip
   - wheel
-  - mock
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

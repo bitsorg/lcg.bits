@@ -5,12 +5,10 @@ tag: "unknown"
 requires:
   - absl_py
   - six
-  - mock
   - numpy
   - wheel
   - Python
   - setuptools
-  - funcsigs
   - pip
   - termcolor
   - astor

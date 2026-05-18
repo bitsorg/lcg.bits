@@ -19,10 +19,8 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
+  cmake \
     -DG4HepEm_CUDA_BUILD=ON \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DCMAKE_CXX_STANDARD=17 \
     -DG4HepEm_EARLY_TRACKING_EXIT=ON
 }

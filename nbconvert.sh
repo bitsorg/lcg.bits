@@ -18,7 +18,6 @@ requires:
   - entrypoints
   - bleach
   - pandocfilters
-  - testpath
   - defusedxml
   - importlib_metadata
   - tinycss2

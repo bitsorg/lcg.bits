@@ -19,9 +19,7 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DCMAKE_CXX_STANDARD=17 \
     -DOPENBLAS_PROVIDES_LAPACK=true \
     -DALLOW_BLAS_LAPACK_MACOS=true

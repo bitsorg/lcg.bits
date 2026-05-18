@@ -15,3 +15,5 @@ license: LicenseRef-NVIDIA-cuDNN
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
+MODULE_OPTIONS="--bin --lib --inc"
+##############################

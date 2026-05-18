@@ -16,9 +16,7 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DCMAKE_CXX_STANDARD=17 \
     -DCMAKE_C_COMPILER=${CMAKE_C_WRAPPER} \
     -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS} \

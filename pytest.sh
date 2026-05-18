@@ -8,7 +8,6 @@ requires:
   - Python
   - setuptools
   - py
-  - funcsigs
   - six
   - attrs
   - pluggy

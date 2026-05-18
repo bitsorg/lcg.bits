@@ -17,10 +17,34 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include AutoToolsRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Make() {
-  make ${JOBS:+-j $JOBS} LIBRARY_PATH=${lhapdf_ROOT}/lib CPPFLAGS=-I${Boost_home_include} CPATH=${Boost_home_include}
+function Configure() {
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+
+  # Exclude building Manual (requires LaTeX)
+  sed -i.bak '/Manual/d' Makefile.am 2>/dev/null || true
+  rm -f Makefile.am.bak
+
+  autoreconf -ivf
+
+  # Sherpa's configure uses wget; provide a curl-based shim
+  mkdir -p fakewget
+  printf '#!/bin/sh\nexec curl -fO "$1"\n' > fakewget/wget
+  chmod +x fakewget/wget
+  export PATH="$PWD/fakewget:$PATH"
+
+  ./configure --prefix="$INSTALLROOT" \
+    ${LHAPDF_ROOT:+--enable-lhapdf=$LHAPDF_ROOT} \
+    ${FASTJET_ROOT:+--enable-fastjet=$FASTJET_ROOT} \
+    ${OPENLOOPS_ROOT:+--enable-openloops=$OPENLOOPS_ROOT}
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
+setenv SHERPA_ROOT $PKG_ROOT
+setenv SHERPA_INSTALL_PATH $PKG_ROOT/lib/SHERPA-MC
+setenv SHERPA_SHARE_PATH $PKG_ROOT/share/SHERPA-MC
+EOF
 }

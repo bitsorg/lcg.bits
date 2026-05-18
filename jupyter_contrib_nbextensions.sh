@@ -13,7 +13,6 @@ requires:
   - jupyter_highlight_selected_word
   - lxml
   - jsonschema
-  - ipython_genutils
   - jupyter_latex_envs
   - jsonschema
   - jupyter_core

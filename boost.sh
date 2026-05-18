@@ -20,8 +20,14 @@ license: BSL-1.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/bootstrap.sh ${Boost_bootstrap_options} --with-toolset=${Boost_toolset}
-  $SOURCEDIR/b2 ${Boost_jam_options} --debug-configuration --toolset=${Boost_toolset} --user-config=$BUILDDIR/user-config.jam
-  $SOURCEDIR/b2 ${Boost_jam_options} --toolset=${Boost_toolset} --prefix=$INSTALLROOT install --user-config=$BUILDDIR/user-config.jam
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+  case $(uname) in
+    Darwin) TOOLSET=clang ;;
+    *) TOOLSET=gcc ;;
+  esac
+  ./bootstrap.sh --with-toolset=$TOOLSET
+  ./b2 --prefix="$INSTALLROOT" toolset=$TOOLSET ${JOBS:+-j$JOBS} install
+}
+function MakeInstall() {
+  true
 }

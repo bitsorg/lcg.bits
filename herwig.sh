@@ -18,6 +18,14 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  ./configure --prefix=$INSTALLROOT "FFLAGS=-O2 -fPIC -Wuninitialized -fno-automatic" F77=$FC CC=$CC
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+  ./configure --prefix="$INSTALLROOT" \
+    "FFLAGS=-O2 -fPIC -Wuninitialized -fno-automatic -fno-range-check" \
+    F77=$FC CC=$CC
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
+setenv HERWIG_ROOT $PKG_ROOT
+setenv HERWIG_INSTALL_PATH $PKG_ROOT/lib/herwig
+EOF
 }

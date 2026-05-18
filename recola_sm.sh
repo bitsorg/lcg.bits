@@ -18,9 +18,7 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -Dcollier_path=${collier_ROOT}/lib \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -Dstatic=OFF \

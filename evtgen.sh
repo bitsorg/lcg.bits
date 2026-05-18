@@ -22,8 +22,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DEVTGEN_PHOTOS=ON \
     -DPHOTOSPP_ROOT_DIR=${photos++_home} \
     -DEVTGEN_PYTHIA=ON \

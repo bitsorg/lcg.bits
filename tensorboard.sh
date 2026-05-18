@@ -7,7 +7,6 @@ requires:
   - setuptools
   - pip
   - wheel
-  - mock
   - werkzeug
   - markdown
   - six

@@ -16,9 +16,7 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -Dstatic=OFF \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }

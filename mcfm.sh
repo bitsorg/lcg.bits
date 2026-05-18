@@ -18,9 +18,7 @@ license: LicenseRef-MCFM
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -Duse_internal_lhapdf=OFF \
     -Dlhapdf_include_path=${lhapdf_ROOT}/include \
     -Dwith_library=ON

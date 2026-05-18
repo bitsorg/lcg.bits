@@ -18,11 +18,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -G \
     -DBUILD_TESTING=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DCMAKE_C_COMPILER="" \
     -DCMAKE_C_FLAGS=$CFLAGS \

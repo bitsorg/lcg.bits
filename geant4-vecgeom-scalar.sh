@@ -23,9 +23,7 @@ license: LicenseRef-Geant4
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DGEANT4_USE_GDML=ON \
     -DXERCESC_ROOT_DIR=${XercesC_ROOT} \
     -DGEANT4_USE_SYSTEM_CLHEP=ON \

@@ -11,12 +11,16 @@ license: MIT OR Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin"
 ##############################
-function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  make ${JOBS:+-j $JOBS}
-  $SOURCEDIR/install.sh --prefix=$INSTALLROOT  --verbose
+# Rust is distributed as a pre-built binary tarball; no compilation needed.
+function Configure() {
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+}
+function Make() { true; }
+function MakeInstall() {
+  mkdir -p "$INSTALLROOT"
+  ./install.sh --prefix="$INSTALLROOT" --verbose
 }

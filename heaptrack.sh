@@ -23,9 +23,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DCMAKE_CXX_COMPILER=$CXX \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DHEAPTRACK_BUILD_INTERPRET=ON
 }

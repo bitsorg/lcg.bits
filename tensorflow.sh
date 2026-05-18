@@ -9,7 +9,6 @@ requires:
   - numpy
   - six
   - wheel
-  - mock
   - tensorboard
   - absl_py
   - keras_applications

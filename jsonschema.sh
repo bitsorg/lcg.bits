@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - setuptools
-  - vcversioner
   - setuptools_scm
   - attrs
   - pyrsistent

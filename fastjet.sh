@@ -16,5 +16,5 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  $SOURCEDIR/configure --prefix=$INSTALLROOT --enable-shared --enable-allplugins --disable-auto-ptr --enable-limited-thread-safety --enable-thread-safety
+  $SOURCEDIR/configure --prefix=$INSTALLROOT --enable-shared --enable-allplugins --disable-auto-ptr --enable-limited-thread-safety --enable-thread-safety --disable-silent-rules
 }

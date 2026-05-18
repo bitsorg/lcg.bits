@@ -15,3 +15,5 @@ license: LicenseRef-Oracle
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
+MODULE_OPTIONS=""
+##############################

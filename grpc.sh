@@ -28,12 +28,13 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
+    -G Ninja \
     -DgRPC_INSTALL:Bool=ON \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=ON \
+    ${OPENSSL_ROOT:+-DOPENSSL_ROOT_DIR=$OPENSSL_ROOT} \
+    ${ABSEIL_ROOT:+-DCMAKE_PREFIX_PATH="$ABSEIL_ROOT${PROTOBUF_ROOT:+:$PROTOBUF_ROOT}"} \
     -DgRPC_BUILD_CODEGEN=ON \
     -DgRPC_BUILD_CSHARP_EXT:Bool=OFF \
     -DgRPC_ABSL_PROVIDER:String=package \

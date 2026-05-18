@@ -21,9 +21,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -Dcollier_path=${collier_ROOT}/lib \
     -Dmodel=SM \
     -Dmodelfile_path=${recola_SM_ROOT}/lib/cmake \

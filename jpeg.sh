@@ -16,7 +16,7 @@ license: LicenseRef-IJG
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
+  cmake \
     -D \
     -D \
     -D

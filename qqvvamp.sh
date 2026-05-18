@@ -18,8 +18,6 @@ license: LicenseRef-QQVVAMP
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DGiNaC_DIR=${ginac_ROOT}
 }

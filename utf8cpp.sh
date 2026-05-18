@@ -16,9 +16,7 @@ license: BSL-1.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DCMAKE_CXX_COMPILER="" \
     -DUTF8_TESTS=OFF
 }

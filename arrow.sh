@@ -28,3 +28,17 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  cmake "$SOURCEDIR/cpp" \
+    -G Ninja \
+    -DARROW_DEPENDENCY_SOURCE=SYSTEM \
+    -DBUILD_SHARED_LIBS=TRUE \
+    -DARROW_BUILD_BENCHMARKS=OFF \
+    -DARROW_BUILD_TESTS=OFF \
+    ${BOOST_ROOT:+-DBOOST_ROOT=$BOOST_ROOT} \
+    ${PYTHON_ROOT:+-DPYTHON_EXECUTABLE=$PYTHON_ROOT/bin/python3} \
+    ${FLATBUFFERS_ROOT:+-DFlatbuffers_ROOT=$FLATBUFFERS_ROOT} \
+    ${RAPIDJSON_ROOT:+-DRapidJSON_ROOT=$RAPIDJSON_ROOT} \
+    ${LZ4_ROOT:+-DLZ4_ROOT=$LZ4_ROOT} \
+    ${SNAPPY_ROOT:+-DSnappy_ROOT=$SNAPPY_ROOT}
+}

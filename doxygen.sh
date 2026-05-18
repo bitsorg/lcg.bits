@@ -20,7 +20,6 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DCMAKE_OSX_DEPLOYMENT_TARGET=""
 }

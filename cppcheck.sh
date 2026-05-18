@@ -5,7 +5,7 @@ tag: "2.20.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cppcheck-2.20.0.tar.gz
 requires:
-  - pcre
+  - pcre2
   - pygments
   - pip
 build_requires:

@@ -5,7 +5,7 @@ tag: "10.3.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/octave-10.3.0.tar.gz
 requires:
-  - pcre
+  - pcre2
   - blas
   - Qt5
   - gnuplot

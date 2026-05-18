@@ -10,14 +10,10 @@ requires:
   - setuptools
   - ptyprocess
   - six
-  - pickleshare
   - pexpect
   - traitlets
-  - simplegeneric
   - prompt_toolkit
   - pygments
-  - ipython_genutils
-  - backcall
   - jedi
   - decorator
 build_requires:

@@ -9,7 +9,6 @@ requires:
   - setuptools
   - notebook
   - jupyter_core
-  - ipython_genutils
   - traitlets
   - decorator
   - tornado

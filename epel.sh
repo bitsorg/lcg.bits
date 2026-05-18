@@ -13,3 +13,5 @@ license: GPL-2.0-or-later
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
+MODULE_OPTIONS=""
+##############################

@@ -13,5 +13,5 @@ license: Apache-2.0
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
-MODULE_OPTIONS="--include"
+MODULE_OPTIONS="--inc"
 ##############################

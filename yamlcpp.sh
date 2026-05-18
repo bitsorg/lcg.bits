@@ -13,10 +13,14 @@ license: MIT
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake --root"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DYAML_BUILD_SHARED_LIBS=ON
+  cmake \
+    -DYAML_BUILD_SHARED_LIBS=ON \
+    -DYAML_CPP_BUILD_TESTS=OFF \
+    -DCMAKE_SKIP_RPATH=YES
+}
+function PostInstall() {
+  printf 'setenv YAMLCPP_INCLUDE_DIR $PKG_ROOT/include\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }

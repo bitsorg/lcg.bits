@@ -13,7 +13,7 @@ license: Apache-2.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--include"
+MODULE_OPTIONS="--inc"
 ##############################
 function Make() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .

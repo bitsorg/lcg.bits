@@ -13,12 +13,10 @@ license: MIT
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--include"
+MODULE_OPTIONS="--inc"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DCMAKE_CXX_STANDARD=17 \
     -DGSL_TEST=OFF
 }

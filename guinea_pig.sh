@@ -18,9 +18,7 @@ license: LicenseRef-GuineaPig
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
     -DFFTW3=ON

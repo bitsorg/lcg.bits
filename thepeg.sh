@@ -21,7 +21,28 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+
+  # ThePEG's configure tries to invoke perl for documentation; fake it
+  mkdir -p fakeperl/bin
+  ln -nfs /usr/bin/perl fakeperl/bin/perl
+  export PATH="$PWD/fakeperl/bin:$PATH"
+
+  # Accumulate LDFLAGS for optional deps
+  export LDFLAGS=""
+  [[ $LHAPDF_ROOT ]] && LDFLAGS="$LDFLAGS -L$LHAPDF_ROOT/lib"
+  [[ $GSL_ROOT ]]    && LDFLAGS="$LDFLAGS -L$GSL_ROOT/lib"
+  case $(uname) in
+    Linux) LDFLAGS="-Wl,--no-as-needed $LDFLAGS" ;;
+  esac
+
   autoreconf --install --force
-  ./configure --prefix=$INSTALLROOT
+  ./configure --prefix="$INSTALLROOT" \
+    --disable-silent-rules \
+    --enable-shared \
+    --disable-static \
+    --without-javagui \
+    ${GSL_ROOT:+--with-gsl="$GSL_ROOT"} \
+    ${LHAPDF_ROOT:+--with-lhapdf="$LHAPDF_ROOT"} \
+    ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"}
 }

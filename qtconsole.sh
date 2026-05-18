@@ -10,7 +10,6 @@ requires:
   - ipykernel
   - jupyter_client
   - pygments
-  - ipython_genutils
   - traitlets
   - jupyter_core
   - Qt5

@@ -16,9 +16,7 @@ license: LGPL-2.1-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -Dmomentum:STRING=MEV \
-    -Dlength:STRING=MM \
-    -DCMAKE_BUILD_TYPE=Release
+    -Dlength:STRING=MM
 }

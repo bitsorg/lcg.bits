@@ -22,11 +22,32 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \
-    -DFASTSYS=${fastjet_ROOT} \
+    -DFASTSYS=${FASTJET_ROOT} \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+}
+function PostInstall() {
+  # Copy data files (excluding source and build artefacts)
+  rsync -a \
+    --exclude='**/CMakeModules' \
+    --exclude=CMakeLists.txt \
+    --exclude='**/.git' \
+    --exclude='*.h' \
+    --exclude='*.c' \
+    --exclude='*.cpp' \
+    --exclude='*.f' \
+    "$SOURCEDIR"/ "$INSTALLROOT"/
+  # Extend modulefile with EPOS4 runtime environment
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
+setenv EPOS4_ROOT $PKG_ROOT
+setenv EPO4VSN 4.0.3
+# Final slash is required by EPOS, please leave it be
+setenv EPO4 $PKG_ROOT/
+prepend-path PATH $::env(EPO4)bin
+setenv OPT ./
+setenv HTO ./
+setenv CHK ./
+EOF
 }

@@ -18,6 +18,13 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  ./configure --prefix=$INSTALLROOT "FFLAGS=-fPIC -std=legacy" CFLAGS=-fPIC
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+  case $(uname -m) in
+    x86_64) EXTRA_FLAGS="--64" ;;
+    *) EXTRA_FLAGS="" ;;
+  esac
+  ./configure --prefix="$INSTALLROOT" ${EXTRA_FLAGS} "FFLAGS=-fPIC -std=legacy" CFLAGS=-fPIC
+}
+function PostInstall() {
+  printf 'setenv LOOPTOOLS_ROOT $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }

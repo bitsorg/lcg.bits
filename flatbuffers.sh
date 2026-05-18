@@ -16,12 +16,10 @@ license: Apache-2.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--include"
+MODULE_OPTIONS="--inc"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DFLATBUFFERS_INSTALL=ON \
     -DFLATBUFFERS_BUILD_FLATLIB=ON \
     -DFLATBUFFERS_BUILD_FLATC=ON \

@@ -8,9 +8,8 @@ requires:
   - Python
   - setuptools
   - R
-  - singledispatch
   - xz
-  - pcre
+  - pcre2
   - tzlocal
   - cffi
   - pip

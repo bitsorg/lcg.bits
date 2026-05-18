@@ -20,9 +20,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DBOOST_ROOT=${Boost_ROOT} \
     -DBOOST_INCLUDE_DIR=${Boost_home_include} \
     -DBoost_NO_SYSTEM_PATHS=TRUE

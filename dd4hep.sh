@@ -28,9 +28,7 @@ license: LGPL-3.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DBOOST_ROOT=${Boost_ROOT} \
     -DCMAKE_CXX_STANDARD=17 \
     -DDD4HEP_USE_XERCESC=ON \

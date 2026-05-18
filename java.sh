@@ -13,3 +13,5 @@ license: GPL-2.0-only WITH Classpath-exception-2.0
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
+MODULE_OPTIONS="--bin"
+##############################

@@ -20,9 +20,7 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DENABLE_UNIT_TESTS=OFF \
     -DENABLE_FUNC_TESTS=OFF
 }

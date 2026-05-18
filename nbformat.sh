@@ -9,7 +9,6 @@ requires:
   - pip
   - setuptools
   - traitlets
-  - ipython_genutils
   - jupyter_core
   - jsonschema
   - fastjsonschema

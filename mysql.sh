@@ -26,13 +26,11 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
+  cmake \
     -DENABLE_DTRACE=0 \
     -DDOWNLOAD_BOOST=1 \
     -DWITH_BOOST=$SOURCEDIR/boost \
     -DWITH_PCRE=bundled \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DMYSQL_MAINTAINER_MODE=OFF
 }
 function Make() {

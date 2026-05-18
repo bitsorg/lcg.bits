@@ -8,7 +8,6 @@ requires:
   - Python
   - pip
   - setuptools
-  - ipython_genutils
   - six
   - decorator
 build_requires:

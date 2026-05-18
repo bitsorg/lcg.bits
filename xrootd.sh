@@ -23,8 +23,7 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  cmake \
     -DFORCE_ENABLED=ON \
     -DENABLE_FUSE=FALSE \
     -DENABLE_KRB5=TRUE \

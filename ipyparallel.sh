@@ -5,7 +5,6 @@ tag: "9.0.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ipyparallel-9.0.0.tar.gz
 requires:
-  - ipython_genutils
   - decorator
   - pyzmq
   - traitlets

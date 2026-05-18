@@ -18,6 +18,31 @@ license: GPL-2.0-or-later OR LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  ./configure --prefix=$INSTALLROOT --enable-cxx
+  # C23 compatibility fix (gcc 15+: void g(){} is no longer valid)
+  sed -i.orig 's/void g(){}/void g(int p1,t1 const* p2,t1 p3,t2 p4,t1 const* p5,int p6){}/' "$SOURCEDIR/acinclude.m4" || true
+  sed -i.orig 's/void g(){}/void g(int p1,t1 const* p2,t1 p3,t2 p4,t1 const* p5,int p6){}/' "$SOURCEDIR/configure" || true
+
+  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+
+  case $(uname -m) in
+    x86_64) MARCH="core2" ;;
+    *) MARCH="" ;;
+  esac
+
+  case $(uname) in
+    Darwin)
+      ./configure --prefix="$INSTALLROOT" --enable-cxx --disable-static --enable-shared \
+        ${MARCH:+--build=$MARCH --host=$MARCH} --with-pic
+      ;;
+    *)
+      ./configure --prefix="$INSTALLROOT" --enable-cxx --enable-static --disable-shared \
+        ${MARCH:+--build=$MARCH --host=$MARCH} --with-pic
+      ;;
+  esac
+}
+function Make() {
+  make ${JOBS:+-j $JOBS} MAKEINFO=:
+}
+function MakeInstall() {
+  make install MAKEINFO=:
 }

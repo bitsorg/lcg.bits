@@ -23,13 +23,11 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
+  cmake \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -Dprotobuf_BUILD_SHARED_LIBS=OFF \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     -Dprotobuf_BUILD_TESTS=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DABSL_PROPAGATE_CXX_STD=ON \
     -Dprotobuf_ABSL_PROVIDER=package \

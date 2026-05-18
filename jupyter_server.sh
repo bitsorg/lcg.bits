@@ -9,7 +9,6 @@ requires:
   - Jinja2
   - tornado
   - pyzmq
-  - ipython_genutils
   - traitlets
   - jupyter_core
   - pip

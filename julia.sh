@@ -13,3 +13,5 @@ license: MIT
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
+MODULE_OPTIONS="--bin --lib"
+##############################

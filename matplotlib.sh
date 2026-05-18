@@ -12,7 +12,6 @@ requires:
   - nose
   - pyparsing
   - pytz
-  - mock
   - kiwisolver
   - pycairo
   - pillow

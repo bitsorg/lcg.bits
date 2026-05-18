@@ -22,9 +22,8 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+  export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L${GEANT4_ROOT}/lib"
+  cmake \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \
@@ -38,4 +37,13 @@ function Configure() {
     -DGeant4VMC_USE_GEANT4_VIS=ON \
     -DGeant4VMC_USE_GEANT4_G3TOG4=OFF \
     -DGeant4VMC_INSTALL_EXAMPLES=OFF
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
+setenv GEANT4_VMC_ROOT $PKG_ROOT
+setenv G4VMCINSTALL $PKG_ROOT
+setenv USE_VGM 1
+prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include/geant4vmc
+prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include/g4root
+EOF
 }
