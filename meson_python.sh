@@ -1,7 +1,7 @@
 package: meson_python
 description: meson-python - Meson Python build backend (mesonpy)
-version: "0.17.1"
-tag: "0.17.1"
+version: "0.19.0"
+tag: "0.19.0"
 requires:
   - Python
   - pip
