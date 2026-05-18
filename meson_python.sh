@@ -6,6 +6,7 @@ requires:
   - Python
   - pip
   - meson
+  - packaging
   - pyproject_metadata
   - tomli
 build_requires:

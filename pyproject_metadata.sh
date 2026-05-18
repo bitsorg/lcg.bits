@@ -5,6 +5,7 @@ tag: "0.11.0"
 requires:
   - Python
   - pip
+  - packaging
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
