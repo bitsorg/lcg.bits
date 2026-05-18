@@ -18,6 +18,7 @@ requires:
   - vdt
   - xz
   - cfitsio
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
