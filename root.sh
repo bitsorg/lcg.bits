@@ -94,6 +94,7 @@ function Configure() {
     -Dmathmore=ON \
     -Dopengl=ON \
     -Dpyroot=ON \
+    -Dpgsql=OFF \
     -Dpythia8=OFF \
     -Dr=OFF \
     -Dreflex=ON \
