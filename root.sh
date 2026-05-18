@@ -14,7 +14,6 @@ requires:
   - tbb
   - blas
   - zlib
-  - lz4
   - libxml2
   - vdt
   - xz
@@ -71,7 +70,6 @@ function Configure() {
     ${ENABLE_COCOA} \
     ${OPENSSL_ROOT:+-DOPENSSL_ROOT=$OPENSSL_ROOT} \
     ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include} \
-    ${lz4_ROOT:+-DLZ4_ROOT=$lz4_ROOT} \
     ${PYTHON_EXECUTABLE:+-DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
@@ -79,6 +77,7 @@ function Configure() {
     -DCINTMAXTYPEDEF=36000 \
     -Dbuiltin_ftgl=ON \
     -Dbuiltin_glew=ON \
+    -Dbuiltin_lz4=ON \
     -Dbuiltin_nlohmannjson=ON \
     -Dbuiltin_pcre=ON \
     -Dbuiltin_unuran=ON \
