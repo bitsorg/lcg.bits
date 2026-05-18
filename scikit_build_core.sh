@@ -2,8 +2,6 @@ package: scikit_build_core
 description: scikit-build-core PEP 517 build backend for CMake-based Python packages
 version: "0.11.4"
 tag: "0.11.4"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit_build_core-0.11.4.tar.gz
 requires:
   - Python
   - pip
@@ -17,7 +15,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
