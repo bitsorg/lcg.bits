@@ -149,6 +149,14 @@ function Configure() {
   # _ver_ge A B: true if version A >= version B
   _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
 
+  # ROOT < 6.34: bundled LLVM 13 fails to compile with C++20 on GCC 15 libstdc++.
+  # std::ranges probes iterators via operator-, triggering a static_assert in
+  # iterator_facade_base for forward iterators (e.g. StringMapKeyIterator).
+  # ROOT 6.34+ upgraded bundled LLVM to fix this.  Cap the standard at C++17.
+  if ! _ver_ge "$_root_ver" "6.34.00" && [[ "${CMAKE_CXX_STANDARD}" -ge 20 ]]; then
+    CMAKE_CXX_STANDARD=17
+  fi
+
   # >= 6.36.00: external jpeg/png packages available; use them
   _media_flags=""
   _ver_ge "$_root_ver" "6.36.00" && _media_flags="-Dbuiltin_jpeg=OFF -Dbuiltin_png=OFF"
