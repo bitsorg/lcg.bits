@@ -60,7 +60,7 @@ function Configure() {
   # Locate davix.pc wherever it landed (lib/pkgconfig or lib/*/pkgconfig on
   # Ubuntu multiarch) and prepend that directory to PKG_CONFIG_PATH.
   if [[ -n "${DAVIX_ROOT}" ]]; then
-    _davix_pc=$(find "${DAVIX_ROOT}/lib" -name 'davix.pc' -print -quit 2>/dev/null)
+    _davix_pc=$(find "${DAVIX_ROOT}/lib" "${DAVIX_ROOT}/lib64" -name 'davix.pc' -print -quit 2>/dev/null)
     [[ -n "$_davix_pc" ]] && export PKG_CONFIG_PATH="$(dirname "$_davix_pc")${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
   fi
 
