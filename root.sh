@@ -97,22 +97,15 @@ function Configure() {
   PYTHON_EXECUTABLE="${PYTHON_ROOT}/bin/python3"
   [[ -x "$PYTHON_EXECUTABLE" ]] || PYTHON_EXECUTABLE=$(command -v python3 2>/dev/null || command -v python 2>/dev/null || true)
 
-  # Pre-set cmake FindPython3 cache variables so cmake skips subprocess
-  # detection entirely.  PYTHON_ROOT, PYTHON_INCLUDE_DIR, and PYTHONPATH
-  # are all set by bits module files.
-  _pymajmin=$(${PYTHON_EXECUTABLE} -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || true)
-  _python_inc="${PYTHON_INCLUDE_DIR}/python${_pymajmin}"
-  _python_lib=$(find "${PYTHON_ROOT}/lib" "${PYTHON_ROOT}/lib64" \
-    \( -name 'libpython3*.so' ! -name '*.so.1*' \) -print -quit 2>/dev/null || true)
-  # numpy.get_include() returns the dir containing numpy/ndarraytypes.h (e.g.
-  # …/numpy/core/include or …/numpy/_core/include for numpy >= 2.0).
-  # Fallback: find ndarraytypes.h and strip the trailing /numpy/ndarraytypes.h
-  # to get the correct cmake include root (one level above the numpy/ subdir).
-  _numpy_inc=$(${PYTHON_EXECUTABLE} -c "import numpy; print(numpy.get_include())" 2>/dev/null \
-    || find "${NUMPY_ROOT:-/dev/null}/lib/python${_pymajmin}/site-packages/numpy" \
-         -name 'ndarraytypes.h' -print -quit 2>/dev/null \
-       | sed 's|/numpy/ndarraytypes\.h$||' || true)
-  unset _pymajmin
+  # Point cmake at the bits Python installation.  Python3_ROOT_DIR restricts
+  # the search to $PYTHON_ROOT; Python3_EXECUTABLE pins the exact interpreter.
+  # We do NOT pre-set Python3_INCLUDE_DIR / Python3_LIBRARY /
+  # Python3_NumPy_INCLUDE_DIRS — pre-setting those as cmake cache variables
+  # overrides cmake's own subprocess detection, and an empty or stale value
+  # causes component failures that are harder to diagnose than letting cmake
+  # query the interpreter directly (it uses sysconfig and numpy.get_include(),
+  # which handle python3.14t ABI tags and numpy 2.x layout correctly).
+  # PYTHONPATH is already set by bits module files so "import numpy" works.
 
   # -------------------------------------------------------------------------
   # Version-gated cmake flags (strip leading 'v' from PKGVERSION for sorting)
@@ -167,10 +160,7 @@ function Configure() {
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
     ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
     ${PYTHON_ROOT:+-DPython3_ROOT_DIR=$PYTHON_ROOT} \
-    ${_python_inc:+-DPython3_INCLUDE_DIR=$_python_inc} \
-    ${_python_lib:+-DPython3_LIBRARY=$_python_lib} \
-    ${_numpy_inc:+-DPython3_NumPy_INCLUDE_DIRS=$_numpy_inc} \
-    ${PYTHON_EXECUTABLE:+-DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE} \
+    ${PYTHON_EXECUTABLE:+-DPython3_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
     -DCINTMAXSTRUCT=36000 \
