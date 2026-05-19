@@ -1,4 +1,4 @@
-package: openssl
+package: OpenSSL
 description: OpenSSL toolkit for TLS/SSL and general cryptography
 version: "3.0.19"
 tag: "3.0.19"

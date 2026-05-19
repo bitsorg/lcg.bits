@@ -5,6 +5,7 @@ tag: "8.18.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/curl-8.18.0.tar.gz
 requires:
+  - OpenSSL
   - zlib
 build_requires:
   - bits-recipe-tools
@@ -18,5 +19,7 @@ license: curl
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix="$INSTALLROOT" --with-gssapi --without-libidn2 --without-libpsl
+  ./configure --prefix="$INSTALLROOT" \
+    --with-openssl="${OPENSSL_ROOT}" \
+    --with-gssapi --without-libidn2 --without-libpsl
 }

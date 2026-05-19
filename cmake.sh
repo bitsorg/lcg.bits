@@ -5,7 +5,7 @@ tag: "3.30.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cmake-3.30.6.tar.gz
 requires:
-  - openssl
+  - OpenSSL
 prefer_system: osx.*
 prefer_system_check: |
   verge() { [[  "$1" = "$(echo -e "$1\n$2" | sort -V | head -n1)" ]]; }

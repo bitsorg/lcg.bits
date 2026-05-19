@@ -5,7 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Python-unknown.tgz
 requires:
-  - openssl
+  - OpenSSL
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
