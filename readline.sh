@@ -1,9 +1,9 @@
 package: readline
 description: GNU Readline command-line editing and history library
-version: "8.0"
-tag: "8.0"
+version: "8.3"
+tag: "8.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/readline-8.0.tar.gz
+  - ftp://ftp.cwru.edu/pub/bash/readline-8.3.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -18,6 +18,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix="$INSTALLROOT" \
-    CFLAGS="-Wno-error=incompatible-pointer-types -Wno-error=return-mismatch -Wno-old-style-definition"
+    ./configure --prefix="$INSTALLROOT" 
+    #CFLAGS="-Wno-error=incompatible-pointer-types -Wno-error=return-mismatch -Wno-old-style-definition"
 }

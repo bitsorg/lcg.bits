@@ -20,6 +20,6 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   ./configure --prefix="$INSTALLROOT" \
-    --with-openssl="${OPENSSL_ROOT}" \
+    --with-openssl \
     --with-gssapi --without-libidn2 --without-libpsl
 }
