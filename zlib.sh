@@ -17,7 +17,7 @@ license: Zlib
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   ./configure --prefix $INSTALLROOT

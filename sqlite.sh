@@ -18,7 +18,7 @@ license: blessing
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   ./configure --prefix=$INSTALLROOT "CPPFLAGS=${CPPFLAGS} -DSQLITE_ENABLE_COLUMN_METADATA=1"

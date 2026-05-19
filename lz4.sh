@@ -19,5 +19,5 @@ license: BSD-2-Clause
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################

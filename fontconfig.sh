@@ -19,7 +19,7 @@ license: MIT
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   ./configure --disable-docs --prefix=$INSTALLROOT

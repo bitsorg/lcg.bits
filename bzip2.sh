@@ -15,7 +15,7 @@ patches:
 ##############################
 . $(bits-include MakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() { true; }
 function Make() {

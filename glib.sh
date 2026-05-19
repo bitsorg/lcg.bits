@@ -21,7 +21,7 @@ license: LGPL-2.1-or-later
 ##############################
 . $(bits-include MesonRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 MESON_EXTRA_OPTIONS="-Dlibmount=disabled -Dtests=false"
 ##############################
 function Configure() {

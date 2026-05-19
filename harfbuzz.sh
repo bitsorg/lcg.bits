@@ -20,7 +20,7 @@ license: MIT
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   ./configure --prefix=$INSTALLROOT --with-cairo --with-freetype --with-glib

@@ -20,7 +20,7 @@ license: FTL OR GPL-2.0-or-later
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   ./configure --prefix $INSTALLROOT --with-pic --with-png=no --with-bzip2=no --with-harfbuzz=no CC=$CC CFLAGS=-O

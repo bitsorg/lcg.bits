@@ -17,5 +17,6 @@ license: LGPL-2.1-or-later
 ##############################
 . $(bits-include MesonRecipe)
 ##############################
+MODULE_OPTIONS="--lib --pkgconfig"
 MESON_WRAP_MODE="nofallback"
 ##############################

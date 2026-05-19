@@ -17,3 +17,4 @@ license: MIT
 ##############################
 . $(bits-include MesonRecipe)
 ##############################
+MODULE_OPTIONS="--lib --pkgconfig"
