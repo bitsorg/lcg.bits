@@ -15,7 +15,7 @@ license: BSD-3-Clause
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --root-inc"
+MODULE_OPTIONS="--bin --lib --root-inc --cmake"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \

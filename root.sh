@@ -20,6 +20,10 @@ requires:
   - vdt
   - xz
   - cfitsio
+  - jsonmcpp
+  - gl2ps
+  - Vc
+  - protobuf
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -43,6 +47,9 @@ function Prepare() {
   fi
 }
 function Configure() {
+  # Default ROOT_TESTING to OFF unless set externally
+  ROOT_TESTING=${ROOT_TESTING:-OFF}
+
   # Detect C++ standard from environment before unsetting flags
   CMAKE_CXX_STANDARD=17
   [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14
@@ -71,7 +78,6 @@ function Configure() {
     _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
   fi
 
-
   # Platform-specific settings
   SONAME=so
   COMPILER_CXX=g++
@@ -98,10 +104,49 @@ function Configure() {
   _python_inc="${PYTHON_INCLUDE_DIR}/python${_pymajmin}"
   _python_lib=$(find "${PYTHON_ROOT}/lib" "${PYTHON_ROOT}/lib64" \
     \( -name 'libpython3*.so' ! -name '*.so.1*' \) -print -quit 2>/dev/null || true)
+  # numpy.get_include() returns the dir containing numpy/ndarraytypes.h (e.g.
+  # …/numpy/core/include or …/numpy/_core/include for numpy >= 2.0).
+  # Fallback: find ndarraytypes.h and strip the trailing /numpy/ndarraytypes.h
+  # to get the correct cmake include root (one level above the numpy/ subdir).
   _numpy_inc=$(${PYTHON_EXECUTABLE} -c "import numpy; print(numpy.get_include())" 2>/dev/null \
     || find "${NUMPY_ROOT:-/dev/null}/lib/python${_pymajmin}/site-packages/numpy" \
-         -name 'ndarraytypes.h' -exec dirname {} \; 2>/dev/null | head -1 || true)
+         -name 'ndarraytypes.h' -print -quit 2>/dev/null \
+       | sed 's|/numpy/ndarraytypes\.h$||' || true)
   unset _pymajmin
+
+  # -------------------------------------------------------------------------
+  # Version-gated cmake flags (strip leading 'v' from PKGVERSION for sorting)
+  _root_ver="${PKGVERSION#v}"
+  # _ver_ge A B: true if version A >= version B
+  _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
+
+  # >= 6.36.00: external jpeg/png packages available; use them
+  _media_flags=""
+  _ver_ge "$_root_ver" "6.36.00" && _media_flags="-Dbuiltin_jpeg=OFF -Dbuiltin_png=OFF"
+
+  # < 6.40: use builtin copies; >= 6.40: switch to external packages + curl
+  if _ver_ge "$_root_ver" "6.40.00"; then
+    _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
+  else
+    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
+  fi
+
+  # < 6.36.99: explicit pgsql=OFF; >= 6.36.99: roottest flag replaces it
+  if _ver_ge "$_root_ver" "6.36.99"; then
+    _test_flags="-Droottest=${ROOT_TESTING}"
+  else
+    _test_flags="-Dpgsql=OFF"
+  fi
+
+  # Vc SIMD acceleration: Linux only, ROOT < 6.40, when Vc dep is loaded
+  _vc_flag=""
+  if [[ $(uname) != Darwin ]] && ! _ver_ge "$_root_ver" "6.40.00" && [[ -n "${VC_ROOT}" ]]; then
+    _vc_flag="-Dvc=ON"
+  fi
+
+  # SOFIE ONNX model importer: enabled when protobuf is available
+  _sofie_flag=""
+  [[ -n "${PROTOBUF_ROOT}" ]] && _sofie_flag="-Dtmva-sofie=ON"
 
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
@@ -114,6 +159,7 @@ function Configure() {
     ${OPENSSL_ROOT:+-DOPENSSL_ROOT=$OPENSSL_ROOT} \
     ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include} \
     ${GSL_ROOT:+-DGSL_ROOT_DIR=$GSL_ROOT} \
+    -Ddavix=ON \
     ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT} \
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
     ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
@@ -126,14 +172,9 @@ function Configure() {
     -DCINTLONGLINE=4096 \
     -DCINTMAXSTRUCT=36000 \
     -DCINTMAXTYPEDEF=36000 \
-    -Dbuiltin_ftgl=ON \
-    -Dbuiltin_gl2ps=ON \
-    -Dbuiltin_glew=ON \
-    -Dbuiltin_lz4=ON \
-    -Dbuiltin_nlohmannjson=ON \
-    -Dbuiltin_pcre=ON \
-    -Dbuiltin_unuran=ON \
-    -Dbuiltin_xxhash=ON \
+    ${_builtin_flags} \
+    ${_media_flags} \
+    -Dbuiltin_nlohmannjson=OFF \
     -Dcintex=ON \
     -Dexplicitlink=ON \
     -Dfail-on-missing=ON \
@@ -144,9 +185,9 @@ function Configure() {
     -Dgenvector=ON \
     -Dhttp=ON \
     -Dmathmore=ON \
+    -Dmysql=OFF \
     -Dopengl=ON \
     -Dpyroot=ON \
-    -Dpgsql=OFF \
     -Dpythia8=OFF \
     -Dr=OFF \
     -Dreflex=ON \
@@ -154,13 +195,16 @@ function Configure() {
     -Droofit_multiprocess=OFF \
     -Droot7=ON \
     -Dssl=ON \
+    ${_sofie_flag} \
     -Dtesting=${ROOT_TESTING} \
     -Dunfold=ON \
     -Dunuran=ON \
+    ${_vc_flag} \
     -Dxft=ON \
     -Dxml=ON \
     -Dxrootd=ON \
-    -Dzlib=ON
+    -Dzlib=ON \
+    ${_test_flags}
 }
 function PostInstall() {
   printf 'setenv ROOTSYS $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
