@@ -1,9 +1,8 @@
 package: readline
 description: GNU Readline command-line editing and history library
-version: "8.0"
-tag: "8.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/readline-8.0.tar.gz
+version: "HEAD"
+tag: "master"
+source: https://github.com/gnu-mirror-unofficial/readline.git
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
