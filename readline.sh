@@ -1,12 +1,15 @@
 package: readline
 description: GNU Readline command-line editing and history library
-version: "HEAD"
-tag: "master"
-source: https://github.com/gnu-mirror-unofficial/readline.git
+version: "8.0"
+tag: "8.0"
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/readline-8.0.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
+patches:
+  - readline-8.0.patch
 ---
 #!/bin/bash -e
 ##############################
@@ -15,6 +18,6 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  autoreconf -ivf
-  ./configure --prefix="$INSTALLROOT"
+  ./configure --prefix="$INSTALLROOT" \
+    CFLAGS="-Wno-error=incompatible-pointer-types -Wno-error=return-mismatch -Wno-old-style-definition"
 }

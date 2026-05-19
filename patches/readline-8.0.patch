@@ -1,0 +1,11 @@
+--- a/readline.h
++++ b/readline.h
+@@ -26,6 +26,8 @@
+ extern "C" {
+ #endif
+
++#include <stdio.h>
++
+ #if defined (READLINE_LIBRARY)
+ #  include "rlstdc.h"
+ #  include "rltypedefs.h"
