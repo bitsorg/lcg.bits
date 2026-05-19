@@ -42,7 +42,7 @@ function Configure() {
   unset ROOTSYS CXXFLAGS CFLAGS LDFLAGS
 
   # Expose xrootd location via the env var ROOT's cmake actually checks
-  [[ -n "${xrootd_ROOT}" ]] && export XRDSYS="${xrootd_ROOT}"
+  [[ -n "${XROOTD_ROOT}" ]] && export XRDSYS="${XROOTD_ROOT}"
 
   # Platform-specific settings
   SONAME=so

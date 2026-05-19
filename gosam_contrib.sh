@@ -18,5 +18,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT "FFLAGS=-std=legacy" #                    --with-looptools=${looptools_ROOT}
+  ./configure --prefix=$INSTALLROOT "FFLAGS=-std=legacy" #                    --with-looptools=${LOOPTOOLS_ROOT}
 }

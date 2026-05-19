@@ -23,5 +23,5 @@ MODULE_OPTIONS="--bin --lib"
 function Make() {
   cmake -E remove -f $SOURCEDIR/sys_calc \
   && cmake -E remove -f $SOURCEDIR/src/*.o \
-  && make ${JOBS:+-j $JOBS} all LHAPDF_HOME=${lhapdf_ROOT} BOOST_INCLUDE=${Boost_home_include} BOOST_HOME=${Boost_ROOT} "CXXFLAGS="
+  && make ${JOBS:+-j $JOBS} all LHAPDF_HOME=${LHAPDF_ROOT} BOOST_INCLUDE=${Boost_home_include} BOOST_HOME=${Boost_ROOT} "CXXFLAGS="
 }

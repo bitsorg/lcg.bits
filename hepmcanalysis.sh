@@ -24,7 +24,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} HepMCdir=${HepMC_ROOT} FastJetdir=${fastjet_ROOT} ROOTSYS=${ROOT_ROOT} CLHEPdir=${clhep_ROOT} ${library_path}=${clhep_ROOT}/lib:$ENV{${library_path}} LIBRARY_PATH=${fastjet_ROOT}/lib:$LIBRARY_PATH
+  make ${JOBS:+-j $JOBS} HepMCdir=${HepMC_ROOT} FastJetdir=${FASTJET_ROOT} ROOTSYS=${ROOT_ROOT} CLHEPdir=${CLHEP_ROOT} ${library_path}=${CLHEP_ROOT}/lib:$ENV{${library_path}} LIBRARY_PATH=${FASTJET_ROOT}/lib:$LIBRARY_PATH
   cmake -E copy_directory $SOURCEDIR/lib $INSTALLROOT/lib \
   && cmake -E copy_directory $SOURCEDIR/include $INSTALLROOT/include
 }

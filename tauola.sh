@@ -21,5 +21,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --datadir=$INSTALLROOT/data --with-pythia6=${pythia6_ROOT} --with-photos=${photos_ROOT} --with-hepevt=4000
+  ./configure --prefix=$INSTALLROOT --datadir=$INSTALLROOT/data --with-pythia6=${PYTHIA6_ROOT} --with-photos=${PHOTOS_ROOT} --with-hepevt=4000
 }

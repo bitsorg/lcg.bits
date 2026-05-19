@@ -18,5 +18,5 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --fastjet-config=${fastjet_ROOT}/bin/fastjet-config
+  ./configure --prefix=$INSTALLROOT --fastjet-config=${FASTJET_ROOT}/bin/fastjet-config
 }

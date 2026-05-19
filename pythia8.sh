@@ -20,7 +20,7 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-lhapdf6=${lhapdf_ROOT} --enable-shared --with-python-config=${Python_ROOT}/bin/python-config
+  ./configure --prefix=$INSTALLROOT --with-lhapdf6=${LHAPDF_ROOT} --enable-shared --with-python-config=${Python_ROOT}/bin/python-config
 }
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'

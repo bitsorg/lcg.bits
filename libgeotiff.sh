@@ -26,6 +26,6 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=ON \
     -DWITH_TIFF=ON \
-    -DTIFF_DIR=${tiff_ROOT} \
-    -DPROJ_DIR=${proj_ROOT}
+    -DTIFF_DIR=${TIFF_ROOT} \
+    -DPROJ_DIR=${PROJ_ROOT}
 }

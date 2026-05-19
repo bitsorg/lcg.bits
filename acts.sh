@@ -36,5 +36,5 @@ function Configure() {
     -DACTS_BUILD_PLUGIN_TGEO=ON \
     -DACTS_BUILD_UNITTESTS=OFF \
     -DACTS_USE_SYSTEM_LIBS=ON \
-    -DCMAKE_CXX_FLAGS="-I${XercesC_ROOT}/include -I${eigen_ROOT}/include/eigen3"
+    -DCMAKE_CXX_FLAGS="-I${XercesC_ROOT}/include -I${EIGEN_ROOT}/include/eigen3"
 }

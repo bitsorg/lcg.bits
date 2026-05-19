@@ -25,6 +25,6 @@ function Configure() {
     -DSKIP_BUILD_TEST=ON \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_DOC=OFF \
-    -DPostgreSQL_ROOT=${postgresql_ROOT} \
+    -DPostgreSQL_ROOT=${POSTGRESQL_ROOT} \
     -DCMAKE_CXX_STANDARD=17
 }

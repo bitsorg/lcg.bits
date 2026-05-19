@@ -19,5 +19,5 @@ license: LGPL-2.1-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-mpfr=${mpfr_ROOT}
+  ./configure --prefix=$INSTALLROOT --with-mpfr=${MPFR_ROOT}
 }

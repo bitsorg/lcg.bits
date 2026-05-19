@@ -27,6 +27,6 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
     -DPANDORA_MONITORING=ON \
-    -DCMAKE_MODULE_PATH=${pandorapfa_ROOT}/cmakemodules \
+    -DCMAKE_MODULE_PATH=${PANDORAPFA_ROOT}/cmakemodules \
     -DCMAKE_CXX_FLAGS="-Wno-error"
 }

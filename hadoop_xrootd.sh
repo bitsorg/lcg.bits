@@ -22,7 +22,7 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  mvn clean package -DskipTests -Dxrootd.lib64.path=${xrootd_ROOT}/lib -Dxrootd.include.path=${xrootd_ROOT}/include/xrootd
+  mvn clean package -DskipTests -Dxrootd.lib64.path=${XROOTD_ROOT}/lib -Dxrootd.include.path=${XROOTD_ROOT}/include/xrootd
   cmake -E make_directory $INSTALLROOT/lib
 cmake
 }

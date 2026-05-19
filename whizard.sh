@@ -32,11 +32,11 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake -E make_directory $INSTALLROOT/tmppdfsets
-  ${lhapdf_ROOT}/bin/lhapdf --pdfdir=$INSTALLROOT/tmppdfsets --listdir=${lhapdf_ROOT}/share/LHAPDF install cteq6l1 CT10
-  LCIO_DIR=${LCIO_ROOT} LOOPTOOLS_DIR=${looptools_ROOT}/lib64 LHAPDF_DATA_PATH=$INSTALLROOT/tmppdfsets \
-    HOPPET_DIR=${hoppet_ROOT} LHAPDF_DIR=${lhapdf_ROOT} HEPMC_DIR=${hepmc3_ROOT} \
-    ./configure --enable-hepmc --enable-fastjet --with-fastjet=${fastjet_ROOT} \
-      --enable-hoppet --enable-gosam --with-gosam=${gosam_ROOT}/bin \
-      --enable-looptools --enable-openloops --with-openloops=${openloops_ROOT} \
+  ${LHAPDF_ROOT}/bin/lhapdf --pdfdir=$INSTALLROOT/tmppdfsets --listdir=${LHAPDF_ROOT}/share/LHAPDF install cteq6l1 CT10
+  LCIO_DIR=${LCIO_ROOT} LOOPTOOLS_DIR=${LOOPTOOLS_ROOT}/lib64 LHAPDF_DATA_PATH=$INSTALLROOT/tmppdfsets \
+    HOPPET_DIR=${HOPPET_ROOT} LHAPDF_DIR=${LHAPDF_ROOT} HEPMC_DIR=${HEPMC3_ROOT} \
+    ./configure --enable-hepmc --enable-fastjet --with-fastjet=${FASTJET_ROOT} \
+      --enable-hoppet --enable-gosam --with-gosam=${GOSAM_ROOT}/bin \
+      --enable-looptools --enable-openloops --with-openloops=${OPENLOOPS_ROOT} \
       --prefix=$INSTALLROOT
 }

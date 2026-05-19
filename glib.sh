@@ -25,7 +25,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 MESON_EXTRA_OPTIONS="-Dlibmount=disabled -Dtests=false"
 ##############################
 function Configure() {
-  CPPFLAGS="-I${gettext_ROOT}/include" \
-  LDFLAGS="-L${gettext_ROOT}/lib" \
+  CPPFLAGS="-I${GETTEXT_ROOT}/include" \
+  LDFLAGS="-L${GETTEXT_ROOT}/lib" \
   meson setup ${MESON_BUILDDIR} --prefix=$INSTALLROOT ${MESON_EXTRA_OPTIONS}
 }

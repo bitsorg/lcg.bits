@@ -36,5 +36,5 @@ function Configure() {
     -DADAPTYST_SCRIPT_PATH=$INSTALLROOT/share/adaptyst \
     -DADAPTYST_CONFIG_PATH=$INSTALLROOT/etc/adaptyst.conf \
     -DCMAKE_CXX_STANDARD=17 \
-    -DPERF_DIR=${perf_ROOT}
+    -DPERF_DIR=${PERF_ROOT}
 }

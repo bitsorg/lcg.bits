@@ -19,5 +19,5 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no --with-coin=${coin3d_ROOT} --with-qt=${Qt_ROOT} QTDIR=${Qt_ROOT}
+  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no --with-coin=${COIN3D_ROOT} --with-qt=${Qt_ROOT} QTDIR=${Qt_ROOT}
 }

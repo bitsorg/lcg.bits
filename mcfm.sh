@@ -23,6 +23,6 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -Duse_internal_lhapdf=OFF \
-    -Dlhapdf_include_path=${lhapdf_ROOT}/include \
+    -Dlhapdf_include_path=${LHAPDF_ROOT}/include \
     -Dwith_library=ON
 }

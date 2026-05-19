@@ -27,5 +27,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  $SOURCEDIR/configure --prefix=$INSTALLROOT --with-pcre-prefix=${pcre2_ROOT} PCRE_LIBS=${pcre2_ROOT}/lib/libpcre.a --with-boost=${Boost_ROOT}
+  $SOURCEDIR/configure --prefix=$INSTALLROOT --with-pcre-prefix=${PCRE2_ROOT} PCRE_LIBS=${PCRE2_ROOT}/lib/libpcre.a --with-boost=${Boost_ROOT}
 }

@@ -18,5 +18,5 @@ license: LicenseRef-TAUOLA++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-pic --with-tau-spinner --with-lhapdf=${lhapdf_ROOT}
+  ./configure --prefix=$INSTALLROOT --with-pic --with-tau-spinner --with-lhapdf=${LHAPDF_ROOT}
 }

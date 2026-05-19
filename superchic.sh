@@ -24,6 +24,6 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DLHAPDF_DIR=${lhapdf_ROOT} \
+    -DLHAPDF_DIR=${LHAPDF_ROOT} \
     -DSUPERCHIC_ENABLE_TESTS=OFF
 }

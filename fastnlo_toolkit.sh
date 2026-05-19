@@ -20,5 +20,5 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-lhapdf=${lhapdf_ROOT} --with-fastjet=${fastjet_ROOT} --with-yoda=${yoda_ROOT} "CFLAGS=-g0 ${C_FLAGS}" "CXXFLAGS=-g0 ${CXX_FLAGS}" "FCFLAGS=-g0 ${Fortran_FLAGS}" #    --enable-pyext   # need to specify swig package if this option is switched on!
+  ./configure --prefix=$INSTALLROOT --with-lhapdf=${LHAPDF_ROOT} --with-fastjet=${FASTJET_ROOT} --with-yoda=${YODA_ROOT} "CFLAGS=-g0 ${C_FLAGS}" "CXXFLAGS=-g0 ${CXX_FLAGS}" "FCFLAGS=-g0 ${Fortran_FLAGS}" #    --enable-pyext   # need to specify swig package if this option is switched on!
 }

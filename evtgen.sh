@@ -29,7 +29,7 @@ function Configure() {
     -DEVTGEN_PHOTOS=ON \
     -DPHOTOSPP_ROOT_DIR=${photos++_home} \
     -DEVTGEN_PYTHIA=ON \
-    -DPYTHIA8_ROOT_DIR=${pythia8_ROOT} \
+    -DPYTHIA8_ROOT_DIR=${PYTHIA8_ROOT} \
     -DEVTGEN_TAUOLA=ON \
     -DTAUOLAPP_ROOT_DIR=${tauola++_home}
 }
