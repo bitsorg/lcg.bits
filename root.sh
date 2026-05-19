@@ -45,6 +45,13 @@ function Prepare() {
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
     sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
+  # builtin FTGL: GCC 14+ rejects implicit unsigned char* -> char* conversion.
+  # Replace with an explicit reinterpret_cast.  Guard prevents double-patching.
+  _ftgl="${SOURCEDIR}/graf3d/ftgl/src/FTVectoriser.cxx"
+  if [[ -f "${_ftgl}" ]] && grep -q 'char\* tagList = &outline\.tags' "${_ftgl}"; then
+    sed -i 's|char\* tagList = &outline\.tags\[startIndex\];|char* tagList = reinterpret_cast<char*>(\&outline.tags[startIndex]);|' "${_ftgl}"
+  fi
+  unset _ftgl
 }
 function Configure() {
   # Default ROOT_TESTING to OFF unless set externally
