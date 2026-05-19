@@ -163,6 +163,7 @@ function Configure() {
     ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT} \
     ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT=$JSONMCPP_ROOT} \
     ${GL2PS_ROOT:+-Dgl2ps_ROOT=$GL2PS_ROOT} \
+    ${VC_ROOT:+-DVc_ROOT=$VC_ROOT} \
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
     ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
     ${PYTHON_ROOT:+-DPython3_ROOT_DIR=$PYTHON_ROOT} \
