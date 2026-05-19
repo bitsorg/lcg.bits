@@ -24,6 +24,7 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_LIBDIR=lib \
     -DPCRE2_SUPPORT_JIT=ON \
     -DBUILD_SHARED_LIBS=ON
 }
