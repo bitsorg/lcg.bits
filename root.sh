@@ -91,6 +91,12 @@ function Configure() {
   PYTHON_EXECUTABLE="${Python_ROOT}/bin/python3"
   [[ -x "$PYTHON_EXECUTABLE" ]] || PYTHON_EXECUTABLE=$(command -v python3 2>/dev/null || command -v python 2>/dev/null || true)
 
+  # cmake's find_package(Python3 COMPONENTS NumPy) runs the Python interpreter
+  # in a subprocess that may not see PYTHONPATH set by bits module files.
+  # Pre-compute numpy's include dir here (where PYTHONPATH is set) and pass it
+  # as a cache variable so cmake skips the subprocess check entirely.
+  _numpy_inc=$(${PYTHON_EXECUTABLE} -c "import numpy; print(numpy.get_include())" 2>/dev/null || true)
+
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -DCMAKE_BUILD_TYPE=Release \
@@ -105,6 +111,7 @@ function Configure() {
     ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT} \
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
     ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
+    ${_numpy_inc:+-DPython3_NumPy_INCLUDE_DIR=$_numpy_inc} \
     ${PYTHON_EXECUTABLE:+-DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
