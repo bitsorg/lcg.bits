@@ -93,18 +93,14 @@ function Configure() {
       ;;
   esac
 
-  # Python executable: prefer the one from the Python package dep
-  PYTHON_EXECUTABLE="${PYTHON_ROOT}/bin/python3"
-  [[ -x "$PYTHON_EXECUTABLE" ]] || PYTHON_EXECUTABLE=$(command -v python3 2>/dev/null || command -v python 2>/dev/null || true)
-
-  # Point cmake at the bits Python installation.  Python3_ROOT_DIR restricts
-  # the search to $PYTHON_ROOT; Python3_EXECUTABLE pins the exact interpreter.
-  # We do NOT pre-set Python3_INCLUDE_DIR / Python3_LIBRARY /
-  # Python3_NumPy_INCLUDE_DIRS — pre-setting those as cmake cache variables
-  # overrides cmake's own subprocess detection, and an empty or stale value
-  # causes component failures that are harder to diagnose than letting cmake
-  # query the interpreter directly (it uses sysconfig and numpy.get_include(),
-  # which handle python3.14t ABI tags and numpy 2.x layout correctly).
+  # Python discovery: do NOT pass Python3_ROOT_DIR or Python3_EXECUTABLE to cmake.
+  # ROOT's cmake uses FindPython3 with COMPONENTS Interpreter Development NumPy.
+  # When Python3_ROOT_DIR is set, cmake enables NO_DEFAULT_PATH and bypasses the
+  # sysconfig-based library search; this breaks library discovery for non-standard
+  # Python builds (e.g. Python 3.14 on macOS).
+  # Instead, rely on PATH: the Python module's --bin flag prepends $PYTHON_ROOT/bin,
+  # so cmake finds the right python3 on PATH and uses sysconfig to discover the
+  # include dir and libpython location automatically — exactly as lcgcmake does.
   # PYTHONPATH is already set by bits module files so "import numpy" works.
 
   # -------------------------------------------------------------------------
@@ -159,8 +155,6 @@ function Configure() {
     ${VC_ROOT:+-DVc_ROOT=$VC_ROOT} \
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
     ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
-    ${PYTHON_ROOT:+-DPython3_ROOT_DIR=$PYTHON_ROOT} \
-    ${PYTHON_EXECUTABLE:+-DPython3_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
     -DCINTMAXSTRUCT=36000 \
