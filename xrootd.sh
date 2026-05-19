@@ -12,6 +12,7 @@ requires:
   - pip
   - curl
   - Davix
+  - libzip
   - readline
 build_requires:
   - bits-recipe-tools

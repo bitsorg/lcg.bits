@@ -1,9 +1,9 @@
 package: oauthlib
 description: OAuthlib framework-agnostic OAuth 1 and 2 library
-version: "3.0.1"
-tag: "3.0.1"
+version: "3.2.2"
+tag: "3.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/oauthlib-3.0.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/oauthlib-3.2.2.tar.gz
 requires:
   - Python
   - setuptools

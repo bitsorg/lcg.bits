@@ -1,7 +1,7 @@
 package: nxcals_data_access_libs
 description: NXCALS data access client libraries (CERN accelerator logging)
-version: ""${NXCALS_JAVA_VERSION}""
-tag: ""${NXCALS_JAVA_VERSION}""
+version: "${NXCALS_JAVA_VERSION}"
+tag: "${NXCALS_JAVA_VERSION}"
 requires:
   - CMake
 build_requires:

@@ -1,7 +1,7 @@
 package: nxcals_extraction_api
 description: NXCALS data extraction API (CERN)
-version: ""${NXCALS_PYTHON_VERSION}""
-tag: ""${NXCALS_PYTHON_VERSION}""
+version: "${NXCALS_PYTHON_VERSION}"
+tag: "${NXCALS_PYTHON_VERSION}"
 requires:
   - Python
   - setuptools

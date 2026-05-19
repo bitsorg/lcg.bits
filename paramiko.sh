@@ -1,15 +1,14 @@
 package: paramiko
 description: Paramiko SSHv2 protocol library for Python
-version: "2.9.2"
-tag: "2.9.2"
+version: "3.4.0"
+tag: "3.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/paramiko-2.9.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/paramiko-3.4.0.tar.gz
 requires:
   - Python
   - setuptools
   - cryptography
   - bcrypt
-  - pyasn1
   - pynacl
   - pip
 build_requires:
