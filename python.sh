@@ -13,7 +13,7 @@ license: Python-2.0
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --python"
+MODULE_OPTIONS="--bin --lib --python"
 ##############################
 # Derive PYTHON_MAJOR_MINOR from the package version (e.g. 3.14.0 -> 3.14)
 PYTHON_MAJOR_MINOR=$(echo "$PKGVERSION" | cut -d. -f1,2)

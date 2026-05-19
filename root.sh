@@ -71,6 +71,7 @@ function Configure() {
     _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
   fi
 
+
   # Platform-specific settings
   SONAME=so
   COMPILER_CXX=g++
