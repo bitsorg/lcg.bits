@@ -39,7 +39,7 @@ function Prepare() {
   # via DAVIX_ROOT so discovery works even when davix.pc is absent or misplaced.
   # Guard prevents double-patching on reruns.
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
-    sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT env var (handles no davix.pc case)\nif(NOT DAVIX_FOUND AND DEFINED ENV{DAVIX_ROOT})\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS $ENV{DAVIX_ROOT}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS $ENV{DAVIX_ROOT}/lib $ENV{DAVIX_ROOT}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
+    sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
 }
 function Configure() {
@@ -93,6 +93,8 @@ function Configure() {
     ${ENABLE_COCOA} \
     ${OPENSSL_ROOT:+-DOPENSSL_ROOT=$OPENSSL_ROOT} \
     ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include} \
+    ${GSL_ROOT:+-DGSL_ROOT_DIR=$GSL_ROOT} \
+    ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT} \
     ${PYTHON_EXECUTABLE:+-DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
