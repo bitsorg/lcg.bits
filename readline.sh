@@ -14,3 +14,7 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  autoreconf -ivf
+  ./configure --prefix="$INSTALLROOT"
+}
