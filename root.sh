@@ -11,6 +11,7 @@ requires:
   - GSL
   - OpenSSL
   - xrootd
+  - Davix
   - numpy
   - tbb
   - blas
