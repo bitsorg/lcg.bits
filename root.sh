@@ -64,6 +64,13 @@ function Configure() {
     [[ -n "$_davix_pc" ]] && export PKG_CONFIG_PATH="$(dirname "$_davix_pc")${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
   fi
 
+  # FindVdt.cmake uses plain find_path/find_library with no hint variables and
+  # VDT installs no cmake config or pkg-config files.  Pre-set the exact cache
+  # variables FindVdt expects so cmake skips the search entirely.
+  if [[ -n "${VDT_ROOT}" ]]; then
+    _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
+  fi
+
   # Platform-specific settings
   SONAME=so
   COMPILER_CXX=g++
@@ -95,7 +102,8 @@ function Configure() {
     ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include} \
     ${GSL_ROOT:+-DGSL_ROOT_DIR=$GSL_ROOT} \
     ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT} \
-    ${VDT_ROOT:+-DVDT_ROOT_DIR=$VDT_ROOT} \
+    ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
+    ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
     ${PYTHON_EXECUTABLE:+-DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
