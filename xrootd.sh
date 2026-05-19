@@ -7,6 +7,7 @@ sources:
 requires:
   - CMake
   - Python
+  - setuptools
   - zlib
   - libxml2
   - pip
@@ -39,6 +40,7 @@ function Configure() {
     -DREADLINE_ROOT_DIR="${READLINE_ROOT}" \
     -DREADLINE_INCLUDE_DIR="${READLINE_ROOT}/include" \
     -DENABLE_PYTHON=TRUE \
+    -DPIP_OPTIONS="--no-build-isolation --no-deps" \
     -DENABLE_VOMS=FALSE \
     -DENABLE_HTTP=TRUE \
     -DENABLE_XRDCL=ON \
