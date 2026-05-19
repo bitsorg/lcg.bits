@@ -18,6 +18,5 @@ license: curl
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  ./configure --with-gssapi --without-libidn2 --without-libpsl
+  ./configure --prefix="$INSTALLROOT" --with-gssapi --without-libidn2 --without-libpsl
 }

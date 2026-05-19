@@ -34,6 +34,5 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib --root-inc --pkgconfig"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   # platform-conditional: ./Configure darwin64-""-cc ELSE ./config no-shared -fPIC  --prefix=$INSTALLROOT --openssldir=$INSTALLROOT/etc/openssl -I${zlib_ROOT}/include -L${zlib_ROOT}/lib
 }

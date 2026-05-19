@@ -22,7 +22,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} -j1 -C vendor/CutTools
   $SHELL -c "echo Installing madgraph 3.3.1.atlas1"
 }

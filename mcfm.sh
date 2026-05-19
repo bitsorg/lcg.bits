@@ -26,6 +26,3 @@ function Configure() {
     -Dlhapdf_include_path=${lhapdf_ROOT}/include \
     -Dwith_library=ON
 }
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
-}

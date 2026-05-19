@@ -19,7 +19,6 @@ license: LicenseRef-Prophecy4f
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} COLLIERDIR=${collier_ROOT}/lib FC=gfortran INPUT=-I${collier_ROOT}/include/
   cmake -E make_directory $INSTALLROOT/bin
 cmake

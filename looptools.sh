@@ -18,7 +18,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
   case $(uname -m) in
     x86_64) EXTRA_FLAGS="--64" ;;
     *) EXTRA_FLAGS="" ;;

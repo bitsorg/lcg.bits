@@ -26,6 +26,3 @@ function Configure() {
     -DCMAKE_MODULE_PATH=${CMAKETOOLS_MODULES} \
     -DCMAKE_CXX_FLAGS=$CXXFLAGS
 }
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
-}

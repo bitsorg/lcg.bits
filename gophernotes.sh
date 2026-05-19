@@ -26,7 +26,6 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/gopherdata/gophernotes
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/gopherdata/gophernotes
   cmake -E chdir $INSTALLROOT/src/github.com/gopherdata/gophernotes go install

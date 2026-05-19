@@ -16,7 +16,6 @@ license: LicenseRef-NVIDIA-Nsight
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS}
   $SOURCEDIR/NsightSystems-linux-public-<NsightSystems_unknown_full>.run --quiet --noprogress -- -targetpath=$INSTALLROOT  : Specify install path -noprompt
 }

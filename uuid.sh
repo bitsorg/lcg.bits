@@ -16,7 +16,6 @@ license: MIT
 MODULE_OPTIONS="--lib --inc --pkgconfig"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
   case $(uname) in
     Darwin) DISABLE_SHARED="--disable-shared" ;;
     *) DISABLE_SHARED="" ;;

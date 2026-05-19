@@ -18,6 +18,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --prefix= --enable-relocatable CC=$CC
+  ./configure --prefix= --enable-relocatable CC=$CC
 }

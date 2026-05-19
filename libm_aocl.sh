@@ -18,7 +18,6 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS}
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT
 }

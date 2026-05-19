@@ -20,7 +20,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} all2
   cmake -E copy_directory $SOURCEDIR/bin $INSTALLROOT/bin
 }

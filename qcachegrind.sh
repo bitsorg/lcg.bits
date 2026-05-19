@@ -20,7 +20,6 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   "${Qt5_ROOT}/bin/qmake"
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} \

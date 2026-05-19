@@ -16,7 +16,6 @@ license: LicenseRef-NVIDIA-CUDA
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E make_directory -p $BUILDDIR/cuda/tmp
   $SOURCEDIR/cuda_<cuda_11.4_full>_linux${CUDA_ARCH_NAME} --silent         # disable interactive prompts --override       # override compiler version checks --toolkit        # install CUDA Toolkit --toolkitpath=$INSTALLROOT
 }

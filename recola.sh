@@ -33,6 +33,3 @@ function Configure() {
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
-}

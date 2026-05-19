@@ -20,8 +20,8 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ${Qt_ROOT}/bin/qmake QWT_INSTALL_PREFIX=$INSTALLROOT
   make ${JOBS:+-j $JOBS}
   make install
 }
+function MakeInstall() { true; }  # install folded into Make()

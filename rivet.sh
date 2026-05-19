@@ -22,7 +22,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
 
   (
   unset PYTHON_VERSION

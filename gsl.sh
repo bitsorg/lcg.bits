@@ -16,6 +16,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --prefix $INSTALLROOT ${GSL_config_options} CC=$CC CFLAGS=-O2
+  ./configure --prefix $INSTALLROOT ${GSL_config_options} CC=$CC CFLAGS=-O2
 }

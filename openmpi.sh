@@ -19,6 +19,5 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --enable-mpi-cxx --disable-dependency-tracking --disable-silent-rules --enable-ipv6 --enable-mca-no-build=reachable-netlink --with-libevent=${lib} --with-sge
 }

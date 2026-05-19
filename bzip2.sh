@@ -13,13 +13,11 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include AutoToolsRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-}
+function Configure() { true; }
 function Make() {
   make ${JOBS:+-j $JOBS}
 }

@@ -21,6 +21,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --datadir=$INSTALLROOT/data --with-pythia6=${pythia6_ROOT} --with-photos=${photos_ROOT} --with-hepevt=4000
 }

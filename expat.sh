@@ -27,6 +27,3 @@ function Configure() {
     -DEXPAT_BUILD_DOCS=OFF \
     -DCMAKE_C_FLAGS=-fPIC
 }
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
-}

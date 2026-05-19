@@ -18,6 +18,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no ${coin3d_config_opts} ${libtoolpatch}
 }

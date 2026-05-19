@@ -31,7 +31,6 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E make_directory $INSTALLROOT/tmppdfsets
   ${lhapdf_ROOT}/bin/lhapdf --pdfdir=$INSTALLROOT/tmppdfsets --listdir=${lhapdf_ROOT}/share/LHAPDF install cteq6l1 CT10
   LCIO_DIR=${LCIO_ROOT} LOOPTOOLS_DIR=${looptools_ROOT}/lib64 LHAPDF_DATA_PATH=$INSTALLROOT/tmppdfsets \

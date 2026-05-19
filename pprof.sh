@@ -22,7 +22,6 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/google/pprof
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/google/pprof
   cmake -E chdir $INSTALLROOT/src/github.com/google/pprof go install

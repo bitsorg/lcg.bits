@@ -16,7 +16,6 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./bootstrap.sh
   ./configure --prefix=$INSTALLROOT
 }

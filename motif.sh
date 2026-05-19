@@ -21,6 +21,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --disable-printing --prefix $INSTALLROOT
+  ./configure --disable-printing --prefix $INSTALLROOT
 }

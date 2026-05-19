@@ -21,9 +21,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E remove -f $SOURCEDIR/sys_calc \
   && cmake -E remove -f $SOURCEDIR/src/*.o \
   && make ${JOBS:+-j $JOBS} all LHAPDF_HOME=${lhapdf_ROOT} BOOST_INCLUDE=${Boost_home_include} BOOST_HOME=${Boost_ROOT} "CXXFLAGS="
-  rsync -a $SOURCEDIR/sys_calc $INSTALLROOT/bin/
 }

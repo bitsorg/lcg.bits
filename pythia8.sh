@@ -20,7 +20,6 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --with-lhapdf6=${lhapdf_ROOT} --enable-shared --with-python-config=${Python_ROOT}/bin/python-config
 }
 function PostInstall() {

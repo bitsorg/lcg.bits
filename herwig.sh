@@ -18,7 +18,6 @@ patches:
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
   ./configure --prefix="$INSTALLROOT" \
     "FFLAGS=-O2 -fPIC -Wuninitialized -fno-automatic -fno-range-check" \
     F77=$FC CC=$CC

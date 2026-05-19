@@ -18,7 +18,6 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   $SHELL -c "cp -rf ${pythia8_ROOT}/config.mk $SOURCEDIR/"
   $SHELL -c "sed -i.bak -e 's/make -C$(PYTHIA8)//g' -e 's/make -C$(PY8DIR)//g' $SOURCEDIR/Makefile"
   make PYTHIA8=${pythia8_ROOT} PY8DIR=${pythia8_ROOT}

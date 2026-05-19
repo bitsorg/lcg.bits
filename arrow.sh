@@ -31,6 +31,7 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake "$SOURCEDIR/cpp" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -G Ninja \
     -DARROW_DEPENDENCY_SOURCE=SYSTEM \
     -DBUILD_SHARED_LIBS=TRUE \

@@ -18,6 +18,5 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --prefix $INSTALLROOT
+  ./configure --prefix $INSTALLROOT
 }

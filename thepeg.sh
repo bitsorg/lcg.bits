@@ -21,7 +21,6 @@ patches:
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
 
   # ThePEG's configure tries to invoke perl for documentation; fake it
   mkdir -p fakeperl/bin

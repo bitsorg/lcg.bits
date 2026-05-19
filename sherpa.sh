@@ -22,7 +22,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
 
   # Exclude building Manual (requires LaTeX)
   sed -i.bak '/Manual/d' Makefile.am 2>/dev/null || true

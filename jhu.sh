@@ -20,7 +20,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} -j1 -C JHUGenerator Comp=gfortran
   cmake -E make_directory $INSTALLROOT/bin
 cmake

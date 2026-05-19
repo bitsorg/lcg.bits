@@ -18,7 +18,6 @@ license: LicenseRef-PROTOS
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} FC=<protos_unknown_FC> LIBRARY_PATH=${lhapdf_ROOT}/lib
   make ${JOBS:+-j $JOBS} INSTALL_DIR=$INSTALLROOT/bin install
 }

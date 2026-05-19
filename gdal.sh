@@ -26,18 +26,15 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DNETCDF_DIR=${netcdfc_ROOT} \
     -DSWIG_EXECUTABLE=${swig_ROOT}/bin/swig \
     -DBUILD_SHARED_LIBS=ON \
-    --prefix=$INSTALLROOT \
-    --with-netcdf=${netcdfc_ROOT} \
-    --with-geotiff=${libgeotiff_ROOT} \
-    --with-hdf5=${hdf5_ROOT} \
-    --with-libtiff=${tiff_ROOT} \
-    --with-sqlite3=${sqlite_ROOT}
-}
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
+    -DGDAL_USE_GEOTIFF_INTERNAL=OFF \
+    -DGEOTIFF_DIR=${libgeotiff_ROOT} \
+    -DHDF5_ROOT=${hdf5_ROOT} \
+    -DTIFF_DIR=${tiff_ROOT} \
+    -DSQLite3_ROOT=${sqlite_ROOT}
 }

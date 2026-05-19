@@ -22,7 +22,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} install CC=$CC INSTALL_LIB=$INSTALLROOT/lib INSTALL_INCLUDE=$INSTALLROOT/include BLAS=-lopenblas LAPACK=-lopenblas
 }

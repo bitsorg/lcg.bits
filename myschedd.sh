@@ -18,6 +18,5 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   "" GODEBUG=netdns=cgo go build
 }

@@ -38,3 +38,4 @@ function Make() {
   make ${JOBS:+-j $JOBS}
   make install
 }
+function MakeInstall() { true; }  # install folded into Make()

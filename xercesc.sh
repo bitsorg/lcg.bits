@@ -23,6 +23,5 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --prefix=$INSTALLROOT ${xerces_config_opts}
+  ./configure --prefix=$INSTALLROOT ${xerces_config_opts}
 }

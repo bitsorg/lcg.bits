@@ -26,6 +26,5 @@ license: LicenseRef-ImageMagick
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --disable-openmp --prefix=$INSTALLROOT
 }

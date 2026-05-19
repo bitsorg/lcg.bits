@@ -18,7 +18,6 @@ license: Apache-2.0
 MODULE_OPTIONS="--inc"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS}
   cmake -E make_directory $INSTALLROOT/include \
   && cmake -E make_directory $INSTALLROOT/include/umesimd \

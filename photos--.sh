@@ -16,6 +16,5 @@ license: LicenseRef-PHOTOS++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT  CFLAGS=-O2 FFLAGS=-O2 F77=$FC "CXXFLAGS=${PHOTOS_CXX_FLAGS} -O2"
 }

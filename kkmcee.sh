@@ -23,7 +23,6 @@ license: LicenseRef-KKMC-ee
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   cmake -E create_symlink dizet-6.45 dizet
   autoreconf --force --install
   ./configure --with-photos=${photos___home} --prefix=$INSTALLROOT

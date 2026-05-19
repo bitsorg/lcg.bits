@@ -16,7 +16,6 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS}
   cmake -E copy_directory $SOURCEDIR/nxcals $INSTALLROOT/nxcals/nxcals_java
 }

@@ -22,7 +22,6 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   mvn clean package -DskipTests -Dxrootd.lib64.path=${xrootd_ROOT}/lib -Dxrootd.include.path=${xrootd_ROOT}/include/xrootd
   cmake -E make_directory $INSTALLROOT/lib
 cmake

@@ -18,6 +18,5 @@ license: GPL-2.0-or-later AND LGPL-2.1-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT PYTHON=/usr/bin/env\ python
 }

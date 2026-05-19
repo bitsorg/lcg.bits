@@ -16,6 +16,5 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --prefix=$INSTALLROOT ${_libffi_opt}
+  ./configure --prefix=$INSTALLROOT ${_libffi_opt}
 }

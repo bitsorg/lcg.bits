@@ -18,7 +18,6 @@ license: GPL-2.0-only WITH Classpath-exception-2.0
 MODULE_OPTIONS="--bin"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS}
   $SHELL -c "cp -r $SOURCEDIR $INSTALLROOT" # symlinks need to be preserved for graalHome to be found
 }

@@ -24,7 +24,6 @@ function Configure() {
   true
 }
 function Make() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
   case $(uname) in
     Darwin) TOOLSET=clang ;;
     *) TOOLSET=gcc ;;

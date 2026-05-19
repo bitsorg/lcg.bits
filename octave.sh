@@ -24,6 +24,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT "CPPFLAGS=${OCTAVE_CPP_FLAGS}" "LDFLAGS=${OCTAVE_LD_FLAGS} ${BLASPATH}" "--with-blas=${BLASLIB}" "--with-lapack=${BLASLIB}" ${with_qt_flag} --libdir=$INSTALLROOT/lib --disable-rpath
 }

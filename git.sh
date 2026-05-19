@@ -19,7 +19,6 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make configure
   ./configure --prefix=$INSTALLROOT --with-openssl --with-curl --with-expat --with-tcltk
 }

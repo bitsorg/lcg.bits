@@ -21,6 +21,5 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --enable-shared --enable-static --enable-binreloc --enable-analysis --enable-pythia --enable-hepevtsize=${sherpa_hepevt} --enable-lhapdf=${lhapdf_ROOT} --enable-hepmc2=${HepMC_ROOT} --enable-openloops=. --enable-lhole --enable-mpi --with-sqlite3=${sqlite_ROOT}
 }

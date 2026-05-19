@@ -21,7 +21,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} GSL_HOME=${GSL_ROOT}
   cmake -E make_directory $INSTALLROOT/bin
 cmake

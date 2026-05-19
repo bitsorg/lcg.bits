@@ -28,6 +28,3 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
     -DTBB_TEST=OFF
 }
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
-}

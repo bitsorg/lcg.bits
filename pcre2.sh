@@ -22,9 +22,8 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DPCRE2_SUPPORT_JIT=ON \
-    -DBUILD_SHARED_LIBS=ON \
-    --enable-jit \
-    --prefix=$INSTALLROOT
+    -DBUILD_SHARED_LIBS=ON
 }

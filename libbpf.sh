@@ -17,7 +17,6 @@ license: LGPL-2.1-only OR BSD-2-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   make ${JOBS:+-j $JOBS} -C src
   make ${JOBS:+-j $JOBS} DESTDIR=$INSTALLROOT -C src install \
   && sed -i "s@/usr@$INSTALLROOT@" $INSTALLROOT/usr/lib64/pkgconfig/libbpf.pc \

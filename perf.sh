@@ -23,7 +23,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ""/compile_perf.sh $INSTALLROOT COMPILE
   ""/compile_perf.sh $INSTALLROOT INSTALL
 }

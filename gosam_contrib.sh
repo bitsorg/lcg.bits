@@ -18,6 +18,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT "FFLAGS=-std=legacy" #                    --with-looptools=${looptools_ROOT}
 }

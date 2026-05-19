@@ -22,7 +22,6 @@ patches:
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
 
   # LHAPDF 6.2.x Python bindings support Python 2 only; disable with Python 3
   DISABLE_PYTHON=""

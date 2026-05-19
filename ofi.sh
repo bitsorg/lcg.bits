@@ -16,6 +16,5 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --enable-mlx=no --prefix=$INSTALLROOT
 }

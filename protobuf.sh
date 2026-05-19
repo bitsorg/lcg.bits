@@ -25,6 +25,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -Dprotobuf_BUILD_SHARED_LIBS=OFF \
@@ -32,6 +33,5 @@ function Configure() {
     -Dprotobuf_BUILD_TESTS=OFF \
     -DCMAKE_CXX_STANDARD=17 \
     -DABSL_PROPAGATE_CXX_STD=ON \
-    -Dprotobuf_ABSL_PROVIDER=package \
-    --prefix=$INSTALLROOT
+    -Dprotobuf_ABSL_PROVIDER=package
 }

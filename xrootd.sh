@@ -12,6 +12,7 @@ requires:
   - pip
   - curl
   - Davix
+  - readline
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -31,6 +32,8 @@ function Configure() {
     -DENABLE_FUSE=FALSE \
     -DENABLE_KRB5=TRUE \
     -DENABLE_READLINE=TRUE \
+    -DREADLINE_ROOT_DIR="${readline_ROOT}" \
+    -DREADLINE_INCLUDE_DIR="${readline_ROOT}/include" \
     -DENABLE_PYTHON=TRUE \
     -DENABLE_VOMS=FALSE \
     -DENABLE_HTTP=TRUE \

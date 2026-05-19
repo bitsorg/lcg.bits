@@ -23,6 +23,5 @@ license: FTL OR GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix $INSTALLROOT --with-pic --with-png=no --with-bzip2=no --with-harfbuzz=no CC=$CC CFLAGS=-O
 }

@@ -18,6 +18,5 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
-  $SOURCEDIR/configure --prefix=$INSTALLROOT CXXFLAGS=-Wno-register --with-boost=${Boost_ROOT}
+  ./configure --prefix=$INSTALLROOT CXXFLAGS=-Wno-register --with-boost=${Boost_ROOT}
 }

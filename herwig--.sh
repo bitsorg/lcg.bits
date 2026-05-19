@@ -21,6 +21,5 @@ license: GPL-2.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --with-gsl=${GSL_ROOT} --with-thepeg=${thepeg_ROOT} --with-fastjet=${fastjet_ROOT} --with-boost=${Boost_ROOT} ${library_path}=${thepeg_ROOT}/lib/ThePEG:${GSL_ROOT}/lib:${Boost_ROOT}/lib:$ENV{${library_path}}
 }

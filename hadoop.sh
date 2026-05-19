@@ -22,7 +22,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   mvn package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true
   mvn -f hadoop-client-modules/hadoop-client/pom.xml install -Dgpg.skip=true dependency:copy-dependencies
   cmake -E copy_directory hadoop-dist/target/hadoop-3.3.6 $INSTALLROOT \
