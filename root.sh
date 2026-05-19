@@ -45,9 +45,13 @@ function Configure() {
   # Expose xrootd location via the env var ROOT's cmake actually checks
   [[ -n "${XROOTD_ROOT}" ]] && export XRDSYS="${XROOTD_ROOT}"
 
-  # pkg_check_modules needs PKG_CONFIG_PATH set explicitly; module files
-  # alone are not sufficient when cmake spawns pkg-config as a subprocess.
-  [[ -n "${DAVIX_ROOT}" ]] && export PKG_CONFIG_PATH="${DAVIX_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+  # FindDavix.cmake uses only pkg_check_modules — no cmake-variable fallback.
+  # Locate davix.pc wherever it landed (lib/pkgconfig or lib/*/pkgconfig on
+  # Ubuntu multiarch) and prepend that directory to PKG_CONFIG_PATH.
+  if [[ -n "${DAVIX_ROOT}" ]]; then
+    _davix_pc=$(find "${DAVIX_ROOT}/lib" -name 'davix.pc' -print -quit 2>/dev/null)
+    [[ -n "$_davix_pc" ]] && export PKG_CONFIG_PATH="$(dirname "$_davix_pc")${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+  fi
 
   # Platform-specific settings
   SONAME=so
