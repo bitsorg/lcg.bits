@@ -7,6 +7,7 @@ sources:
 requires:
   - CMake
   - Python
+  - Clang
   - fftw
   - GSL
   - OpenSSL
@@ -85,10 +86,13 @@ function Configure() {
     _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
   fi
 
-  # Platform-specific settings
+  # Platform and compiler settings.
+  # On Linux, use the bits Clang installation.  Clang installs its executables
+  # into bin-safe/ (not bin/) to avoid shadowing system clang on macOS; bits'
+  # automatic $CLANG_ROOT/bin → PATH entry is therefore useless for compiling,
+  # so we point cmake directly at bin-safe/clang{,++}.
+  # On macOS, prefer_system uses Xcode/system clang via the generic names.
   SONAME=so
-  COMPILER_CXX=g++
-  COMPILER_CC=gcc
   ENABLE_COCOA=""
   case $(uname) in
     Darwin)
@@ -97,6 +101,15 @@ function Configure() {
       COMPILER_CC=clang
       SONAME=dylib
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
+      ;;
+    *)
+      if [[ -n "${CLANG_ROOT}" && -x "${CLANG_ROOT}/bin-safe/clang++" ]]; then
+        COMPILER_CXX="${CLANG_ROOT}/bin-safe/clang++"
+        COMPILER_CC="${CLANG_ROOT}/bin-safe/clang"
+      else
+        COMPILER_CXX=g++
+        COMPILER_CC=gcc
+      fi
       ;;
   esac
 
