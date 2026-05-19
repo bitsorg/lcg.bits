@@ -5,7 +5,6 @@ tag: "2.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/unigen-2.2.tar.gz
 requires:
-  - CMake
   - ROOT
 build_requires:
   - bits-recipe-tools
@@ -16,7 +15,7 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

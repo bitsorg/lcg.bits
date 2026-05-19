@@ -31,7 +31,7 @@ license: Apache-2.0
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc --pkgconfig"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .

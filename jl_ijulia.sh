@@ -3,7 +3,6 @@ description: IJulia Julia kernel for Jupyter notebooks
 version: "1.29.0"
 tag: "1.29.0"
 requires:
-  - CMake
   - julia
 build_requires:
   - bits-recipe-tools
@@ -12,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

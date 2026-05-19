@@ -47,3 +47,11 @@ function Configure() {
     LDFLAGS="$LOCAL_LDFLAGS"
   )
 }
+function PostInstall() {
+  PYVER=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])' 2>/dev/null || echo "python3")
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << MODEOF
+prepend-path PYTHONPATH \$PKG_ROOT/lib/${PYVER}/site-packages
+setenv RIVET_ANALYSIS_PATH \$PKG_ROOT/lib/Rivet
+setenv RIVET_DATA_PATH \$PKG_ROOT/share/Rivet
+MODEOF
+}

@@ -5,7 +5,6 @@ tag: "2.07"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/C50-2.07.tar.gz
 requires:
-  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -15,7 +14,7 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

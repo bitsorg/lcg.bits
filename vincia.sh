@@ -5,7 +5,6 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/vincia-unknown.tgz
 requires:
-  - CMake
   - pythia8
 build_requires:
   - bits-recipe-tools
@@ -14,7 +13,7 @@ license: GPL-2.0-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

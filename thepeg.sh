@@ -18,7 +18,7 @@ patches:
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
@@ -45,4 +45,7 @@ function Configure() {
     ${GSL_ROOT:+--with-gsl="$GSL_ROOT"} \
     ${LHAPDF_ROOT:+--with-lhapdf="$LHAPDF_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"}
+}
+function PostInstall() {
+  printf 'setenv ThePEG_INSTALL_PATH $PKG_ROOT/lib/ThePEG\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }

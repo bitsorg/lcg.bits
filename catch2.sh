@@ -16,5 +16,5 @@ license: BSL-1.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--inc"
+MODULE_OPTIONS="--inc --pkgconfig"
 ##############################

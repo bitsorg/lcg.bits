@@ -40,3 +40,9 @@ function Configure() {
     -DGEANT4_BUILD_TLS_MODEL=global-dynamic \
     ${CXXSTD:+-DGEANT4_BUILD_CXXSTD=$CXXSTD}
 }
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'
+prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include/Geant4
+prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include
+MODEOF
+}

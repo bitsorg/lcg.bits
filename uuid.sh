@@ -13,7 +13,7 @@ license: MIT
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--lib --inc"
+MODULE_OPTIONS="--lib --inc --pkgconfig"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .

@@ -28,7 +28,7 @@ license: LGPL-2.1-only
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pylib"
 ##############################
 function Configure() {
   # Detect C++ standard from environment before unsetting flags
@@ -113,4 +113,7 @@ function Configure() {
     -Dxml=ON \
     -Dxrootd=ON \
     -Dzlib=ON
+}
+function PostInstall() {
+  printf 'setenv ROOTSYS $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }

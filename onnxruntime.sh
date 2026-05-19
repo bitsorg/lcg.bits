@@ -28,3 +28,6 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+function PostInstall() {
+  printf 'prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include/onnxruntime\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
+}

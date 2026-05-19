@@ -17,9 +17,15 @@ license: GPL-2.0-only
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' $SOURCEDIR/ .
   ./configure --prefix=$INSTALLROOT --with-lhapdf6=${lhapdf_ROOT} --enable-shared --with-python-config=${Python_ROOT}/bin/python-config
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'
+setenv PYTHIA8 $PKG_ROOT
+setenv PYTHIA8DATA $PKG_ROOT/share/Pythia8/xmldoc
+MODEOF
 }

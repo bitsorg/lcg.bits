@@ -5,7 +5,6 @@ tag: "r3744.lhcb3.rdynamic"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/powheg-box-v2-r3744.lhcb3.rdynamic.tar.gz
 requires:
-  - CMake
   - fastjet
   - lhapdf
 build_requires:
@@ -15,7 +14,7 @@ license: LicenseRef-POWHEG
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

@@ -19,7 +19,7 @@ patches:
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
   rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
@@ -45,4 +45,6 @@ function PostInstall() {
       ln -nfs lib lib64
     fi
   popd
+  # Extend modulefile: data path used by all MC generators at runtime
+  printf 'prepend-path LHAPDF_DATA_PATH $PKG_ROOT/share/LHAPDF\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }

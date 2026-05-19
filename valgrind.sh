@@ -20,3 +20,6 @@ function Configure() {
   chmod +x ./configure
   ./configure --prefix=$INSTALLROOT
 }
+function PostInstall() {
+  printf 'setenv VALGRIND_LIB $PKG_ROOT/lib/valgrind\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
+}

@@ -5,7 +5,6 @@ tag: "5.10.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/suitesparse-5.10.1.tar.gz
 requires:
-  - CMake
   - blas
   - mpfr
   - gmp
@@ -18,7 +17,7 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

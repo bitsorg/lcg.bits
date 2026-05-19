@@ -26,3 +26,6 @@ function Configure() {
     -DBUILD_SHARED_LIBS=ON \
     -DCMAKE_INSTALL_LIBDIR=lib
 }
+function PostInstall() {
+  printf 'prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include/vmc\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
+}

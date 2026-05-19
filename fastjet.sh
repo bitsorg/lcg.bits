@@ -13,8 +13,11 @@ license: GPL-2.0-only
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   $SOURCEDIR/configure --prefix=$INSTALLROOT --enable-shared --enable-allplugins --disable-auto-ptr --enable-limited-thread-safety --enable-thread-safety --disable-silent-rules
+}
+function PostInstall() {
+  printf 'setenv FASTJET $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }

@@ -21,7 +21,7 @@ license: LGPL-3.0-or-later
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
@@ -37,4 +37,12 @@ function Configure() {
     -DENABLE_XRDCL=ON \
     -DXRDCL_ONLY=ON \
     -DENABLE_XRDEC=OFF
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'
+setenv XRD_CONNECTIONWINDOW 3
+setenv XRD_CONNECTIONRETRY 1
+setenv XRD_TIMEOUTRESOLUTION 1
+setenv XRD_REQUESTTIMEOUT 150
+MODEOF
 }

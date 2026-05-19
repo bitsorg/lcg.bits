@@ -5,7 +5,6 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Protosunknown.tar.gz
 requires:
-  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools
@@ -14,7 +13,7 @@ license: LicenseRef-PROTOS
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################

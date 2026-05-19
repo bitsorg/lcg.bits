@@ -18,8 +18,11 @@ license: BSL-1.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
+function Configure() {
+  true
+}
 function Make() {
   rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
   case $(uname) in

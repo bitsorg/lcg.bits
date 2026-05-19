@@ -16,7 +16,7 @@ license: LGPL-2.1-only
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \

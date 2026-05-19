@@ -3,7 +3,6 @@ description: NVIDIA Nsight Systems system-wide performance analysis tool
 version: "unknown"
 tag: "unknown"
 requires:
-  - CMake
   - cuda
 build_requires:
   - bits-recipe-tools
@@ -12,7 +11,7 @@ license: LicenseRef-NVIDIA-Nsight
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
