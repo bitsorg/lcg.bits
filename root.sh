@@ -153,9 +153,16 @@ function Configure() {
     _vc_flag="-Dvc=ON"
   fi
 
-  # SOFIE ONNX model importer: enabled when protobuf is available
+  # SOFIE ONNX model importer: enabled when protobuf is available.
+  # Also pass Protobuf_ROOT and absl_ROOT so protobuf's cmake config can resolve
+  # find_dependency(absl) and create the absl::strings target required by
+  # utf8_range-targets.cmake.  absl is a transitive dep (via protobuf) so
+  # ABSL_ROOT is set in the environment but invisible to cmake due to CMP0144.
   _sofie_flag=""
-  [[ -n "${PROTOBUF_ROOT}" ]] && _sofie_flag="-Dtmva-sofie=ON"
+  if [[ -n "${PROTOBUF_ROOT}" ]]; then
+    _sofie_flag="-Dtmva-sofie=ON -DProtobuf_ROOT=${PROTOBUF_ROOT}"
+    [[ -n "${ABSL_ROOT}" ]] && _sofie_flag+=" -Dabsl_ROOT=${ABSL_ROOT}"
+  fi
 
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
