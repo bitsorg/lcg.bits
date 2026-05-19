@@ -18,7 +18,7 @@ patches:
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \

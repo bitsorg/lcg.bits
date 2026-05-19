@@ -16,5 +16,5 @@ license: BSD-3-Clause
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--inc --cmake"
 ##############################

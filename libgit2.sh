@@ -16,5 +16,5 @@ license: GPL-2.0-only WITH GCC-exception-2.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --pkgconfig"
+MODULE_OPTIONS="--bin --lib --pkgconfig --cmake"
 ##############################

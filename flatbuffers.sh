@@ -16,7 +16,7 @@ license: Apache-2.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--inc"
+MODULE_OPTIONS="--bin --lib --inc --cmake"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \

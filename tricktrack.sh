@@ -16,5 +16,5 @@ license: Apache-2.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake"
 ##############################

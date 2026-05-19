@@ -15,5 +15,5 @@ license: LGPL-3.0-only
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake"
 ##############################

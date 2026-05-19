@@ -18,7 +18,7 @@ license: BSL-1.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --root-inc"
+MODULE_OPTIONS="--bin --lib --root-inc --cmake"
 ##############################
 function Configure() {
   true

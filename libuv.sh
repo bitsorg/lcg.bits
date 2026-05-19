@@ -15,5 +15,5 @@ license: MIT
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --pkgconfig"
+MODULE_OPTIONS="--bin --lib --pkgconfig --cmake"
 ##############################

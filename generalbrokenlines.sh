@@ -17,5 +17,5 @@ license: LGPL-2.1-or-later
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake"
 ##############################

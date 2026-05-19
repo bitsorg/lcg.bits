@@ -15,7 +15,7 @@ license: MPL-2.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--inc"
+MODULE_OPTIONS="--inc --cmake"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
