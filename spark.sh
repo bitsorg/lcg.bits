@@ -8,7 +8,6 @@ requires:
   - hadoop
   - Python
   - py4j
-  - pip
   - grpcio
   - numpy
   - pandas

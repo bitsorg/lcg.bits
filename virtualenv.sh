@@ -10,7 +10,6 @@ requires:
   - distlib
   - filelock
   - six
-  - pip
   - platformdirs
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/numba-stats-1.10.1.tar.gz
 requires:
   - Python
-  - pip
   - numba
   - numpy
   - scipy

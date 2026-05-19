@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/debugpy-1.8.1.zip
 requires:
   - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

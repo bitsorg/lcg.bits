@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qibo-0.2.23.tar.gz
 requires:
   - Python
-  - pip
   - cma
   - joblib
   - networkx

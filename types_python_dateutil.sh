@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/types_python_dateutil-2.9.0.20241206.tar.gz
 requires:
   - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -13,7 +13,6 @@ requires:
   - packaging
   - tenacity
   - rust
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ipython-8.32.0.tar.gz
 requires:
   - Python
-  - pip
   - ptyprocess
   - six
   - pexpect

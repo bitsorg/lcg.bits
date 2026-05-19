@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lmfit-1.2.2.tar.gz
 requires:
   - Python
-  - pip
   - asteval
   - uncertainties
   - numpy

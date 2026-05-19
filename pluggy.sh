@@ -9,7 +9,6 @@ requires:
   - setuptools_scm
   - importlib_metadata
   - zipp
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

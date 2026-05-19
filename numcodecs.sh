@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/numcodecs-0.16.0.tar.gz
 requires:
   - Python
-  - pip
   - cython
   - numpy
   - entrypoints

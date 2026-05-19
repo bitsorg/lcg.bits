@@ -25,7 +25,6 @@ requires:
   # - functools32
   # - backports
   # - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hls4ml-1.2.0.tar.gz
 requires:
   - Python
-  - pip
   - h5py
   - numpy
   - onnx

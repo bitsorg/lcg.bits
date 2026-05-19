@@ -9,7 +9,6 @@ requires:
   - matplotlib
   - hepdata_validator
   - PyYAML
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

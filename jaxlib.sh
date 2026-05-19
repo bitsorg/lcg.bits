@@ -4,7 +4,6 @@ version: "${jax_native_version}"
 tag: "${jax_native_version}"
 requires:
   - Python
-  - pip
   - flatbuffers
   - scipy
   - numpy

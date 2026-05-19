@@ -4,7 +4,6 @@ version: "0.18.13"
 tag: "0.18.13"
 requires:
   - Python
-  - pip
   - wheel
   - jemalloc
 build_requires:

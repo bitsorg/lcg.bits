@@ -7,7 +7,6 @@ sources:
 requires:
   - rust
   - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

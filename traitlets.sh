@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/traitlets-5.14.3.tar.gz
 requires:
   - Python
-  - pip
   - six
   - decorator
 build_requires:

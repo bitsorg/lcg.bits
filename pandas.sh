@@ -15,7 +15,6 @@ requires:
   - odfpy
   - openpyxl
   - xlrd
-  - pip
   - tzdata
 build_requires:
   - bits-recipe-tools

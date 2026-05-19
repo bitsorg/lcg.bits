@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - setuptools_scm
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

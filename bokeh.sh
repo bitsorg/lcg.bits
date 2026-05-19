@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/bokeh-3.1.1.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
   - python_dateutil
   - Jinja2

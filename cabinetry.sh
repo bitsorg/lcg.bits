@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cabinetry-0.5.2.tar.gz
 requires:
   - Python
-  - pip
   - awkward
   - boost_histogram
   - click

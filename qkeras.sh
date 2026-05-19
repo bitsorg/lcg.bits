@@ -14,7 +14,6 @@ requires:
   - numpy
   - networkx
   - keras_tuner
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

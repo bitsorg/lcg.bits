@@ -14,7 +14,6 @@ requires:
   - pytest
   - pylint
   - ipywidgets
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

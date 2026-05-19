@@ -20,7 +20,6 @@ requires:
   - terminado
   - prometheus_client
   - requests
-  - pip
   - nbclassic
   - notebook_shim
   - jupyterlab

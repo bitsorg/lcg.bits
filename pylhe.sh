@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pylhe-1.0.1.tar.gz
 requires:
   - Python
-  - pip
   - awkward
   - graphviz_py
   - particle

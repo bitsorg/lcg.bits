@@ -8,7 +8,6 @@ requires:
   - Python
   - pytest
   - coverage
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

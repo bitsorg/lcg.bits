@@ -8,7 +8,6 @@ requires:
   - Python
   - flake8
   - attrs
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

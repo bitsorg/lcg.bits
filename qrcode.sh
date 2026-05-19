@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qrcode-7.4.2.tar.gz
 requires:
   - Python
-  - pip
   - pypng
   - typing_extensions
 build_requires:

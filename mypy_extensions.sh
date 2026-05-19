@@ -8,7 +8,6 @@ requires:
   - Python
   - typing_extensions
   - tomli
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

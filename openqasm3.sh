@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/openqasm3-1.0.1.tar.gz
 requires:
   - Python
-  - pip
   - antlr4_python3_runtime
 build_requires:
   - bits-recipe-tools

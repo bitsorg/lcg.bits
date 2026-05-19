@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/resample-1.10.1.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - scipy
 build_requires:

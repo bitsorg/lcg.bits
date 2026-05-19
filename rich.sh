@@ -8,7 +8,6 @@ requires:
   - Python
   - commonmark
   - pygments
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -17,7 +17,6 @@ requires:
   - requests
   - packaging
   - sphinx
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

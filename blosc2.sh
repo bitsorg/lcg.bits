@@ -12,7 +12,6 @@ requires:
   - ninja
   - numpy
   - pycpuinfo
-  - pip
   - ndindex
   - msgpack
   - numexpr

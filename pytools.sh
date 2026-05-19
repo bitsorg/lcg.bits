@@ -23,7 +23,6 @@ requires:
   - pygments
   - mistune
   - prettytable
-  - pip
   - PyYAML
   - pathos
   - prompt_toolkit

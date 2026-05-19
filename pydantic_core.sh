@@ -4,7 +4,6 @@ version: "2.41.5"
 tag: "2.41.5"
 requires:
   - Python
-  - pip
   - typing_extensions
 build_requires:
   - bits-recipe-tools

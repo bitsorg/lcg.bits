@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/safetensors-0.7.0.tar.gz
 requires:
   - Python
-  - pip
   # optional:
   # - tensorflow
   # - torch

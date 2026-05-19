@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/contourpy-1.0.7.tar.gz
 requires:
   - Python
-  - pip
   - numpy
 build_requires:
   - bits-recipe-tools

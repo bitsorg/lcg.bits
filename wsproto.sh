@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/wsproto-1.2.0.tar.gz
 requires:
   - Python
-  - pip
   - h11
 build_requires:
   - bits-recipe-tools

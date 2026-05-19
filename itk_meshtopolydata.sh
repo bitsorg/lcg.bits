@@ -4,7 +4,6 @@ version: "0.11.0"
 tag: "0.11.0"
 requires:
   - Python
-  - pip
   - numpy
   - itk_core
 build_requires:

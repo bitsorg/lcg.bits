@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - mpmath
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

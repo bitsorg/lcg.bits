@@ -9,7 +9,6 @@ requires:
   - async_timeout
   - deprecated
   - packaging
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

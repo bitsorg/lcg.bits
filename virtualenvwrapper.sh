@@ -9,7 +9,6 @@ requires:
   - virtualenv
   - virtualenv_clone
   - stevedore
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

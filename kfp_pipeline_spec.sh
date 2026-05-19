@@ -4,7 +4,6 @@ version: "0.6.0"
 tag: "0.6.0"
 requires:
   - Python
-  - pip
   - protobuf
 build_requires:
   - bits-recipe-tools

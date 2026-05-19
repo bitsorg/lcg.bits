@@ -7,7 +7,6 @@ requires:
   - asn1crypto
   - cffi
   - six
-  - pip
   - typing_extensions
 build_requires:
   - bits-recipe-tools

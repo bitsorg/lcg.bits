@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hf_xet-1.2.0.tar.gz
 requires:
   - Python
-  - pip
   - rust
 build_requires:
   - bits-recipe-tools

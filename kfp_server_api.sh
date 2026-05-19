@@ -10,7 +10,6 @@ requires:
   - certifi
   - python_dateutil
   - urllib3
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

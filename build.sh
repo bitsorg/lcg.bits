@@ -9,7 +9,6 @@ requires:
   - tomli
   - packaging
   - pep517
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

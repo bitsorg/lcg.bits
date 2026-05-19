@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hep_flare-0.2.2.tar.gz
 requires:
   - Python
-  - pip
   - b2luigi
 build_requires:
   - bits-recipe-tools

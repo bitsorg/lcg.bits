@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/optree-0.14.1.tar.gz
 requires:
   - Python
-  - pip
   - typing_extensions
 build_requires:
   - bits-recipe-tools

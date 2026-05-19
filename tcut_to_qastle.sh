@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tcut_to_qastle-0.7.tar.gz
 requires:
   - Python
-  - pip
   - qastle
 build_requires:
   - bits-recipe-tools

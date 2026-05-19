@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/imjoy-rpc-0.5.59.tar.gz
 requires:
   - Python
-  - pip
   - shortuuid
   - websockets
   - msgpack

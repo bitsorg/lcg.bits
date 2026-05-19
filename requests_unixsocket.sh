@@ -9,7 +9,6 @@ requires:
   - requests
   - urllib3
   - pbr
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

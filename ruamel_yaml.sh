@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - ruamel_yaml_clib
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

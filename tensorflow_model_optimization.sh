@@ -10,7 +10,6 @@ requires:
   - numpy
   - dm_tree
   - absl_py
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

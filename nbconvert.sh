@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nbconvert-7.16.4.tar.gz
 requires:
   - Python
-  - pip
   - mistune
   - Jinja2
   - pygments

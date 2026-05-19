@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/confuse-2.0.1.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
 build_requires:
   - bits-recipe-tools

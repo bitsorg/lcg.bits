@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kr8s-0.20.14.tar.gz
 requires:
   - Python
-  - pip
   - aiohttp
   - anyio
   - python_box

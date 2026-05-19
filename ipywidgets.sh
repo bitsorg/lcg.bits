@@ -11,7 +11,6 @@ requires:
   - traitlets
   - ipykernel
   - nbformat
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

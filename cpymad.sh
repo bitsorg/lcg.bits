@@ -12,7 +12,6 @@ requires:
   - madx
   - importlib_resources
   - zipp
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

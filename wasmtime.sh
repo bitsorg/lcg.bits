@@ -4,7 +4,6 @@ version: "40.0.0"
 tag: "40.0.0"
 requires:
   - Python
-  - pip
   - cffi
   - importlib_resources
 build_requires:

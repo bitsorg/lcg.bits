@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - idna
-  - pip
   - exceptiongroup
   # optional:
   # - sniffio

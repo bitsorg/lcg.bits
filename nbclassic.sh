@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nbclassic-1.3.3.tar.gz
 requires:
   - jupyter_server
-  - pip
   - babel
   - ipykernel
   - notebook_shim

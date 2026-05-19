@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tf_keras-2.20.1.tar.gz
 requires:
   - Python
-  - pip
   - tensorflow
 build_requires:
   - bits-recipe-tools

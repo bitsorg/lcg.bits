@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gunicorn-23.0.0.tar.gz
 requires:
   - Python
-  - pip
   - packaging
 build_requires:
   - bits-recipe-tools

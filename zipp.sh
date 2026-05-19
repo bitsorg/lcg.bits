@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/zipp-3.20.2.tar.gz
 requires:
   - Python
-  - pip
   - toml
 build_requires:
   - bits-recipe-tools

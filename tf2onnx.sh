@@ -12,7 +12,6 @@ requires:
   - flatbuffers
   - onnxruntime
   - tensorflow
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

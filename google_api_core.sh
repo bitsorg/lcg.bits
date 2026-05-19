@@ -10,7 +10,6 @@ requires:
   - googleapis_common_protos
   - protobuf
   - requests
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

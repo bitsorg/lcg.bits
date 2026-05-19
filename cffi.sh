@@ -8,7 +8,6 @@ requires:
   - Python
   - pycparser
   - libffi
-  - pip
   - pkg_config
 build_requires:
   - bits-recipe-tools

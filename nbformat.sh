@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nbformat-5.9.1.tar.gz
 requires:
   - Python
-  - pip
   - traitlets
   - jupyter_core
   - jsonschema

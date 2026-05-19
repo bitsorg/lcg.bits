@@ -14,7 +14,6 @@ requires:
   - atomicwrites
   - packaging
   - iniconfig
-  - pip
   - pygments
 build_requires:
   - bits-recipe-tools

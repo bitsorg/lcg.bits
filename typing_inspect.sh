@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/typing_inspect-0.9.0.tar.gz
 requires:
   - Python
-  - pip
   - mypy_extensions
   - typing_extensions
 build_requires:

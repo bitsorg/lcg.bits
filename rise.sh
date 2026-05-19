@@ -12,7 +12,6 @@ requires:
   - decorator
   - tornado
   - beautifulsoup4
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

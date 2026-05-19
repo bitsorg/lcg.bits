@@ -9,7 +9,6 @@ requires:
   - cryptography
   - bcrypt
   - pynacl
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

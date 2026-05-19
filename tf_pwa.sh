@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tf-pwa-0.2.2.tar.gz
 requires:
   - Python
-  - pip
   - tensorflow
   - matplotlib
   - PyYAML

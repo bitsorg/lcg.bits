@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/optuna-4.4.0.tar.gz
 requires:
   - Python
-  - pip
   - alembic
   - colorlog
   - numpy

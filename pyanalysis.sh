@@ -17,7 +17,6 @@ requires:
   - joblib
   - uncertainties
   - iminuit
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

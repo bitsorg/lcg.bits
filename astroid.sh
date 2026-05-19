@@ -10,7 +10,6 @@ requires:
   - six
   - wrapt
   - pytest_runner
-  - pip
   - typing_extensions
 build_requires:
   - bits-recipe-tools

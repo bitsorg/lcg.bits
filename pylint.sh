@@ -10,7 +10,6 @@ requires:
   - isort
   - mccabe
   - tomlkit
-  - pip
   - dill
   - platformdirs
 build_requires:

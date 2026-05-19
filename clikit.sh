@@ -9,7 +9,6 @@ requires:
   - crashtest
   - pastel
   - pylev
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

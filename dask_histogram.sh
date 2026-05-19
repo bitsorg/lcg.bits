@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dask_histogram-2025.2.0.tar.gz
 requires:
   - Python
-  - pip
   - dask
   - boost_histogram
   - dask_awkward

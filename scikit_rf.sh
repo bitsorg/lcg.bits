@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit_rf-1.1.0.tar.gz
 requires:
   - Python
-  - pip
   - numba
   - scipy
   - pandas

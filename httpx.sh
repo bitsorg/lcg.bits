@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/httpx-0.28.1.tar.gz
 requires:
   - Python
-  - pip
   - certifi
   - httpcore
   - idna

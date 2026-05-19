@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jsonschema_path-0.3.3.tar.gz
 requires:
   - Python
-  - pip
   - pathable
   - PyYAML
   - referencing

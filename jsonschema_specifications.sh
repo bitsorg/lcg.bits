@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jsonschema_specifications-2023.7.1.tar.gz
 requires:
   - Python
-  - pip
   - referencing
 build_requires:
   - bits-recipe-tools

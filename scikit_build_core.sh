@@ -4,7 +4,6 @@ version: "0.11.4"
 tag: "0.11.4"
 requires:
   - Python
-  - pip
   - packaging
   - pyproject_metadata
   - tomli

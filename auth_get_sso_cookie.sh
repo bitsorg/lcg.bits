@@ -11,7 +11,6 @@ requires:
   - beautifulsoup4
   - Authlib
   - qrcode
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

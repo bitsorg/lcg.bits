@@ -4,7 +4,6 @@ version: "3.11.4"
 tag: "3.11.4"
 requires:
   - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

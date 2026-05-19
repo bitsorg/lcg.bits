@@ -8,7 +8,6 @@ requires:
   - Python
   - pillow
   - numpy
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

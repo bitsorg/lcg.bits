@@ -4,7 +4,6 @@ version: "5.4.0"
 tag: "5.4.0"
 requires:
   - Python
-  - pip
   - itk_numerics
   - itk_core
 build_requires:

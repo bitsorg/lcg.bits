@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mistral_common-1.8.5.tar.gz
 requires:
   - Python
-  - pip
   - jsonschema
   - numpy
   - pillow

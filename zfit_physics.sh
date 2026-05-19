@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/zfit_physics-0.9.0.tar.gz
 requires:
   - Python
-  - pip
   - zfit
 build_requires:
   - bits-recipe-tools

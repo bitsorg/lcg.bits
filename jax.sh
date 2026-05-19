@@ -13,7 +13,6 @@ requires:
   - typing_extensions
   - jaxlib
   - importlib_metadata
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_server_terminals-0.5.3.tar.gz
 requires:
   - Python
-  - pip
   - terminado
 build_requires:
   - bits-recipe-tools

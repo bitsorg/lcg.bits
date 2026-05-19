@@ -11,7 +11,6 @@ requires:
   - pyzmq
   - python_dateutil
   - tornado
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

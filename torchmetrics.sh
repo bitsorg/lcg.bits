@@ -12,7 +12,6 @@ requires:
   - scikitlearn
   # optional:
   # - torch
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

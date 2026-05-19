@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - six
-  - pip
   - absl_py
   - attrs
   - numpy

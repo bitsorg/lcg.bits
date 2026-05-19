@@ -11,7 +11,6 @@ requires:
   - platformdirs
   - typing_extensions
   - numpy
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

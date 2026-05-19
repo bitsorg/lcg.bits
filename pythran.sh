@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pythran-0.17.0.tar.gz
 requires:
   - Python
-  - pip
   - beniget
   - gast
   - numpy

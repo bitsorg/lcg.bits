@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pypdf-3.11.0.tar.gz
 requires:
   - Python
-  - pip
   - typing_extensions
 build_requires:
   - bits-recipe-tools

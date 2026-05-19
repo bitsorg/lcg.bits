@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nltk-3.8.1.zip
 requires:
   - Python
-  - pip
   - click
   - joblib
   - regex

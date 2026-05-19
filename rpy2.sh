@@ -11,7 +11,6 @@ requires:
   - pcre2
   - tzlocal
   - cffi
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pypi_arrow-1.3.0.tar.gz
 requires:
   - Python
-  - pip
   - types_python_dateutil
   - python_dateutil
 build_requires:

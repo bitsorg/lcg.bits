@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - numpy
-  - pip
   - pybind11
   - pythran
   - meson_python

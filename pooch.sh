@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - setuptools_scm
-  - pip
   - appdirs
   - packaging
   - requests

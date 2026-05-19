@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fire-0.7.1.tar.gz
 requires:
   - Python
-  - pip
   - six
   - termcolor
 build_requires:

@@ -8,7 +8,6 @@ requires:
   - Python
   - numpy
   - setuptools_scm
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

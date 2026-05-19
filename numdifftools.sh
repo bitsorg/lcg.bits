@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/numdifftools-0.9.41.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - scipy
 build_requires:

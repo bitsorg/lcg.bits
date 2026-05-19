@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jacobi-0.9.2.tar.gz
 requires:
   - Python
-  - pip
   - numpy
 build_requires:
   - bits-recipe-tools

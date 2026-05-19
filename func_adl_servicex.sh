@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/func_adl_servicex-2.1.tar.gz
 requires:
   - Python
-  - pip
   - func_adl
   - qastle
   - servicex

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/soupsieve-2.4.1.tar.gz
 requires:
   - Python
-  - pip
   - build
   - virtualenv
 build_requires:

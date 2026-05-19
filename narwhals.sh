@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/narwhals-1.9.4.tar.gz
 requires:
   - Python
-  - pip
   - executing
   - pure_eval
 build_requires:

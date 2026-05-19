@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/uvicorn-0.37.0.tar.gz
 requires:
   - Python
-  - pip
   - gunicorn
   - click
   - h11

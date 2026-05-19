@@ -15,7 +15,6 @@ requires:
   - humanize
   - click_didyoumean
   - watchdog
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

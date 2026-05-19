@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/zfit-0.28.0.tar.gz
 requires:
   - Python
-  - pip
   - attrs
   - boost_histogram
   - colorama

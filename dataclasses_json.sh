@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dataclasses-json-0.5.8.tar.gz
 requires:
   - Python
-  - pip
   - marshmallow
   - marshmallow_enum
   - typing_inspect

@@ -11,7 +11,6 @@ requires:
   - CMake
   - ninja
   - numpy
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

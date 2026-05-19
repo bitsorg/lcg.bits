@@ -15,7 +15,6 @@ requires:
   - python_dateutil
   - notebook
   - joblib
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

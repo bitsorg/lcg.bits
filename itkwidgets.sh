@@ -18,7 +18,6 @@ requires:
   - numpy
   - scipy
   - six
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

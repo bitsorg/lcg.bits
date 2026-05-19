@@ -10,7 +10,6 @@ requires:
   - cython
   - cffi
   - py
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/langsmith-0.2.10.tar.gz
 requires:
   - Python
-  - pip
   - pydantic
   - requests
   - orjson

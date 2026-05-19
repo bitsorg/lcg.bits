@@ -9,7 +9,6 @@ requires:
   - Python
   - zlib
   - libxml2
-  - pip
   - curl
   - Davix
   - libzip

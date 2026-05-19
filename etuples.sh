@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/etuples-0.3.9.tar.gz
 requires:
   - Python
-  - pip
   - cons
   - multipledispatch
 build_requires:

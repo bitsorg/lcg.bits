@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - flake8
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

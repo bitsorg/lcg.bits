@@ -4,7 +4,6 @@ version: "0.29.0"
 tag: "0.29.0"
 requires:
   - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

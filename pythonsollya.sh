@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pythonsollya-release-0.3.tar.gz
 requires:
   - Python
-  - pip
   - cython
   - mpfi
   - sollya

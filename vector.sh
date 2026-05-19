@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/vector-1.8.0.tar.gz
 requires:
   - Python
-  - pip
   - hatchling
   - numpy
   - packaging

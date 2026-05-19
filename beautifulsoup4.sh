@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - soupsieve
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

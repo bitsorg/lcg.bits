@@ -4,7 +4,6 @@ version: "24.2"
 tag: "24.2"
 requires:
   - Python
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

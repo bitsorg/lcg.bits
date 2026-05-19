@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aiohttp_retry-2.9.1.tar.gz
 requires:
   - Python
-  - pip
   - aiohttp
   - aiohttp_cors
 build_requires:

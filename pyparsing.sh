@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyparsing-3.2.5.tar.gz
 requires:
   - Python
-  - pip
   - railroad_diagrams
 build_requires:
   - bits-recipe-tools

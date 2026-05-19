@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/decaylanguage-0.20.0.tar.gz
 requires:
   - Python
-  - pip
   - attrs
   - deprecated
   - graphviz_py

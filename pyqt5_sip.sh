@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/PyQt5_sip-12.15.0.tar.gz
 requires:
   - Python
-  - pip
   - Qt5
 build_requires:
   - bits-recipe-tools

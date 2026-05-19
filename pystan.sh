@@ -4,7 +4,6 @@ version: "3.10.0"
 tag: "3.10.0"
 requires:
   - Python
-  - pip
   - wheel
   - numpy
   - cython

@@ -10,7 +10,6 @@ requires:
   - protobuf
   - typing_extensions
   - numpy
-  - pip
   - six
 build_requires:
   - bits-recipe-tools

@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - ptyprocess
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

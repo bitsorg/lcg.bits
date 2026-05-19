@@ -13,7 +13,6 @@ requires:
   - yarl
   - attrs
   - charset_normalizer
-  - pip
   - aiohappyeyeballs
   - propcache
 build_requires:

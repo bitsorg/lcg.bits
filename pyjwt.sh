@@ -5,7 +5,7 @@ tag: "2.8.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/PyJWT-2.8.0.tar.gz
 requires:
-  - pip
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

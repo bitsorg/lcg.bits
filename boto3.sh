@@ -11,7 +11,6 @@ requires:
   - s3transfer
   # optional:
   # - awscrt
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

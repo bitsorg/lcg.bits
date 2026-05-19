@@ -16,7 +16,6 @@ requires:
   - psutil
   - mpi4py
   - typing_extensions
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

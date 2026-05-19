@@ -11,7 +11,6 @@ requires:
   - six
   - cython
   - pkg_config
-  - pip
   - executing
 build_requires:
   - bits-recipe-tools

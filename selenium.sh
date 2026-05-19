@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/selenium-4.28.0.tar.gz
 requires:
   - Python
-  - pip
   - rust
   - certifi
   - trio

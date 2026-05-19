@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-arrow-${arrow_native_version}.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - six
   - cython

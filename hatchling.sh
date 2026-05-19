@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hatchling-1.28.0.tar.gz
 requires:
   - Python
-  - pip
   - pluggy
   - tomli
   - pathspec

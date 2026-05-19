@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_schema_validator-0.6.3.tar.gz
 requires:
   - Python
-  - pip
   - jsonschema
   - jsonschema_specifications
   - rfc3339_validator

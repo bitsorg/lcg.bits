@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/asdf_transform_schemas-0.5.0.tar.gz
 requires:
   - Python
-  - pip
   - asdf_standard
 build_requires:
   - bits-recipe-tools

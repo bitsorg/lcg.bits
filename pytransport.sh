@@ -10,7 +10,6 @@ requires:
   - matplotlib
   - scipy
   - importlib_metadata
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

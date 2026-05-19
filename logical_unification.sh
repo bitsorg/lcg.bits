@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/logical-unification-0.4.6.tar.gz
 requires:
   - Python
-  - pip
   - toolz
   - multipledispatch
 build_requires:

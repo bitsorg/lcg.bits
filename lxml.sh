@@ -9,7 +9,6 @@ requires:
   - libxml2
   - libxslt
   - cython
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

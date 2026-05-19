@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/langchain_community-0.3.14.tar.gz
 requires:
   - Python
-  - pip
   - langsmith
   - aiohttp
   - dataclasses_json

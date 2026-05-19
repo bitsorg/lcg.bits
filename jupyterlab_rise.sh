@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyterlab_rise-0.42.0.tar.gz
 requires:
   - Python
-  - pip
   - jupyterlab
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/distributed-2025.2.0.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
   - six
   - cloudpickle

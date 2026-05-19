@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/oracledb-3.4.2.tar.gz
 requires:
   - Python
-  - pip
   - oracle
   - cryptography
 build_requires:

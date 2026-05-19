@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/notebook_shim-0.2.4.tar.gz
 requires:
   - Python
-  - pip
   - jupyter_server
 build_requires:
   - bits-recipe-tools

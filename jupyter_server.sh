@@ -11,7 +11,6 @@ requires:
   - pyzmq
   - traitlets
   - jupyter_core
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

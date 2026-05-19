@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fastapi-0.119.0.tar.gz
 requires:
   - Python
-  - pip
   - pydantic
   - starlette
   - typing_extensions

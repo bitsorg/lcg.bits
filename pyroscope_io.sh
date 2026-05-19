@@ -4,7 +4,6 @@ version: "0.8.5"
 tag: "0.8.5"
 requires:
   - Python
-  - pip
   - cffi
 build_requires:
   - bits-recipe-tools

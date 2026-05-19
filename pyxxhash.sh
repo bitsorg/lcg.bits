@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xxhash-3.5.0.tar.gz
 requires:
   - Python
-  - pip
   - xxHash
 build_requires:
   - bits-recipe-tools

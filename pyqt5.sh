@@ -8,7 +8,6 @@ requires:
   - Python
   - Qt5
   - sip
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

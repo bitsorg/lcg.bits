@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pytest_xdist-3.8.0.tar.gz
 requires:
   - Python
-  - pip
   - pytest
   - execnet
 build_requires:

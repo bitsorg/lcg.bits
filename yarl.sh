@@ -8,7 +8,6 @@ requires:
   - Python
   - idna
   - multidict
-  - pip
   - propcache
 build_requires:
   - bits-recipe-tools

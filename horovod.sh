@@ -9,7 +9,6 @@ requires:
   - psutil
   - PyYAML
   - packaging
-  - pip
   # optional:
   # - torch
   # - keras

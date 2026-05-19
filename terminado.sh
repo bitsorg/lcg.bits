@@ -8,7 +8,6 @@ requires:
   - Python
   - tornado
   - ptyprocess
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

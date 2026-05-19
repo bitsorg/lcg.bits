@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/boost_histogram-1.7.1.tar.gz
 requires:
   - Python
-  - pip
   - numpy
 build_requires:
   - bits-recipe-tools

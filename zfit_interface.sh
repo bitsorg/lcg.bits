@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/zfit_interface-0.0.3.tar.gz
 requires:
   - Python
-  - pip
   - uhi
   - numpy
   - typing_extensions

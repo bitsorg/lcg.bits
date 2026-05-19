@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/typing_inspection-0.4.2.tar.gz
 requires:
   - Python
-  - pip
   - typing_extensions
 build_requires:
   - bits-recipe-tools

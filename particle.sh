@@ -9,7 +9,6 @@ requires:
   - hatchling
   - attrs
   - hepunits
-  - pip
   - deprecated
   - typing_extensions
 build_requires:

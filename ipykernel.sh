@@ -16,7 +16,6 @@ requires:
   # - setuptools
   # - six
   # - appnope
-  - pip
   - comm
   - nest_asyncio
   - psutil

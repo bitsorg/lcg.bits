@@ -38,7 +38,6 @@ requires:
   - dask_awkward
   - dask_histogram
   - vector
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

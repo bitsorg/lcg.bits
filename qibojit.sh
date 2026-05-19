@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qibojit-0.1.12.tar.gz
 requires:
   - Python
-  - pip
   - numba
   - psutil
   - qibo

@@ -12,7 +12,6 @@ requires:
   - ipykernel
   - jupyter_core
   - jupyter_client
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

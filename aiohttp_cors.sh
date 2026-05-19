@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aiohttp-cors-0.7.0.tar.gz
 requires:
   - Python
-  - pip
   - aiohttp
 build_requires:
   - bits-recipe-tools

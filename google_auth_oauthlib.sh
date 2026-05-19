@@ -8,7 +8,6 @@ requires:
   - Python
   - google_auth
   - requests_oauthlib
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

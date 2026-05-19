@@ -11,7 +11,6 @@ requires:
   - tornado
   - notebook
   - jupyter_core
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

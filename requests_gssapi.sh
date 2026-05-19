@@ -8,7 +8,6 @@ requires:
   - Python
   - requests
   - gssapi
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

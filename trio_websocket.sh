@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/trio-websocket-0.11.1.tar.gz
 requires:
   - Python
-  - pip
   - arrow
   - trio
   - wsproto

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pytensor-2.35.1.tar.gz
 requires:
   - Python
-  - pip
   - cons
   - etuples
   - filelock

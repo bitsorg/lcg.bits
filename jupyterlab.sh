@@ -16,7 +16,6 @@ requires:
   - Jinja2
   # optional:
   # - nodejs
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

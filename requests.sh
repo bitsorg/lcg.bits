@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - charset_normalizer
-  - pip
   - chardet
   - idna
   - urllib3

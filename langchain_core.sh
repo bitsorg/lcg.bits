@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/langchain_core-0.3.29.tar.gz
 requires:
   - Python
-  - pip
   - langsmith
   - packaging
   - anyio

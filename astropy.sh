@@ -12,7 +12,6 @@ requires:
   - PyYAML
   - extension_helpers
   - Jinja2
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

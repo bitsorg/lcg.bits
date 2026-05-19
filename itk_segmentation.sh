@@ -4,7 +4,6 @@ version: "5.4.0"
 tag: "5.4.0"
 requires:
   - Python
-  - pip
   - itk_filtering
 build_requires:
   - bits-recipe-tools

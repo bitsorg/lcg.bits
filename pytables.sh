@@ -11,7 +11,6 @@ requires:
   - hdf5
   - xz
   - cython
-  - pip
   - blosc
   - blosc2
   - packaging

@@ -11,7 +11,6 @@ requires:
   - nbformat
   - async_generator
   - nest_asyncio
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

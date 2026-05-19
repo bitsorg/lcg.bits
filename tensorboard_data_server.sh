@@ -4,7 +4,6 @@ version: "0.7.2"
 tag: "0.7.2"
 requires:
   - Python
-  - pip
   - wheel
 build_requires:
   - bits-recipe-tools

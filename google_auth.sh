@@ -10,7 +10,6 @@ requires:
   - pyasn1_modules
   - rsa
   - six
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

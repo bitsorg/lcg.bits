@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/luigi-3.6.0.tar.gz
 requires:
   - Python
-  - pip
   - tornado
   - tenacity
 build_requires:

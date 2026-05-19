@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hist-2.10.1.tar.gz
 requires:
   - Python
-  - pip
   - hatchling
   - boost_histogram
   - histoprint

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/markdown-it-py-2.2.0.tar.gz
 requires:
   - Python
-  - pip
   - mdurl
 build_requires:
   - bits-recipe-tools

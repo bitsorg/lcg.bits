@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_core-0.19.4.tar.gz
 requires:
   - Python
-  - pip
   - jsonschema_path
   - jsonschema
   - more_itertools

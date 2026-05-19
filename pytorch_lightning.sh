@@ -15,7 +15,6 @@ requires:
   - lightning_utilities
   # optional:
   # - torch
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

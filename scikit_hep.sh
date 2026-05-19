@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit_hep-2026.2.1.tar.gz
 requires:
   - Python
-  - pip
   - awkward
   - DecayLanguage
   - hepunits

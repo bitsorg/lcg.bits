@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ultralytics_thop-2.0.14.tar.gz
 requires:
   - Python
-  - pip
   - wheel
   - numpy
   - torch

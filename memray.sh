@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/memray-1.19.2.tar.gz
 requires:
   - Python
-  - pip
   - libunwind
   - lz4
   - Jinja2

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_spec_validator-0.7.1.tar.gz
 requires:
   - Python
-  - pip
   - jsonschema
   - jsonschema_path
   - lazy_object_proxy

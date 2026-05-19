@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dask_awkward-2025.9.0.tar.gz
 requires:
   - Python
-  - pip
   - dask
   - awkward
   - typing_extensions

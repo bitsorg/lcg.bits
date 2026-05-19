@@ -9,7 +9,6 @@ requires:
   - pytest_runner
   - PyYAML
   - arrow
-  - pip
   - scikit_build_core
 build_requires:
   - bits-recipe-tools

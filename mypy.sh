@@ -9,7 +9,6 @@ requires:
   - typing_extensions
   - mypy_extensions
   - tomli
-  - pip
   - pathspec
   - librt
 build_requires:

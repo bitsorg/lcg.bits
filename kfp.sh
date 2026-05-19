@@ -26,7 +26,6 @@ requires:
   - strip_hints
   - typer
   - docstring_parser
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

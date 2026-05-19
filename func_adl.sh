@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/func_adl-3.4.2.tar.gz
 requires:
   - Python
-  - pip
   - make_it_sync
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/histoprint-2.6.0.tar.gz
 requires:
   - Python
-  - pip
   - uhi
   - numpy
   - click

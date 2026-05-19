@@ -6,7 +6,6 @@ requires:
   - pydot
   - sip
   - pyqt5
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -17,7 +17,6 @@ requires:
   - scipy
   - tqdm
   - fftw
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

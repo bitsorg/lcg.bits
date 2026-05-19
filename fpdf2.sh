@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fpdf2-2.7.9.tar.gz
 requires:
   - Python
-  - pip
   - defusedxml
   - pillow
   - fonttools

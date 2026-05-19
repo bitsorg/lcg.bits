@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/matplotlib-3.10.8.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - nose
   - pyparsing

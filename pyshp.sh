@@ -5,7 +5,7 @@ tag: "2.3.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyshp-2.3.1.tar.gz
 requires:
-  - pip
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

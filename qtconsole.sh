@@ -12,7 +12,6 @@ requires:
   - traitlets
   - jupyter_core
   - Qt5
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

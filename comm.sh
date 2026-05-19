@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/comm-0.2.2.tar.gz
 requires:
   - Python
-  - pip
   - traitlets
 build_requires:
   - bits-recipe-tools

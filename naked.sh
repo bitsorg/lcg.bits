@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Naked-0.1.32.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
   - requests
 build_requires:

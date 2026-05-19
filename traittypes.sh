@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/traittypes-0.2.1.tar.gz
 requires:
   - Python
-  - pip
   - traitlets
 build_requires:
   - bits-recipe-tools

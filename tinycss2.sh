@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tinycss2-1.2.1.tar.gz
 requires:
   - Python
-  - pip
   - webencodings
 build_requires:
   - bits-recipe-tools

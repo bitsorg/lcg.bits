@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/miniKanren-1.0.3.tar.gz
 requires:
   - Python
-  - pip
   - cons
   - etuples
   - logical_unification

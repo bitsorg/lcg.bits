@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/langchain_text_splitters-0.3.5.tar.gz
 requires:
   - Python
-  - pip
   - langchain_core
 build_requires:
   - bits-recipe-tools

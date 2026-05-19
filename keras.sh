@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/keras-3.11.3.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
   - six
   - h5py

@@ -5,7 +5,7 @@ tag: "1.3.30"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dotmap-1.3.30.tar.gz
 requires:
-  - pip
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

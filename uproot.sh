@@ -5,7 +5,6 @@ tag: "5.7.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/uproot-5.7.1.tar.gz
 requires:
-  - pip
   - hatchling
   - numpy
   - awkward

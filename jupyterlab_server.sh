@@ -11,7 +11,6 @@ requires:
   - jsonschema
   - packaging
   - requests
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

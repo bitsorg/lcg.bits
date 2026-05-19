@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/frozenlist-1.4.1.tar.gz
 requires:
   - Python
-  - pip
   - cython
 build_requires:
   - bits-recipe-tools

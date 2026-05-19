@@ -8,7 +8,6 @@ requires:
   - Python
   - six
   - wheel
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

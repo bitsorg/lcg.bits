@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/itkwasm_downsample_wasi-1.5.0.tar.gz
 requires:
   - Python
-  - pip
   - importlib_resources
   - itkwasm
 build_requires:

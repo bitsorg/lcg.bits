@@ -10,7 +10,6 @@ requires:
   - wheel
   - blas
   - numpy
-  - pip
   - onnx
   - torch
   - packaging

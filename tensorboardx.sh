@@ -5,7 +5,6 @@ tag: "2.6.2.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tensorboardX-2.6.2.2.tar.gz
 requires:
-  - pip
   - numpy
   - protobuf
   - packaging

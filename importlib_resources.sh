@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/importlib_resources-6.5.2.tar.gz
 requires:
   - Python
-  - pip
   - zipp
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/autograd-v1.7.0.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - scipy
 build_requires:

@@ -9,7 +9,6 @@ requires:
   - six
   - cffi
   - pycparser
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

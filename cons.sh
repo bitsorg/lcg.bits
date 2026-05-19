@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cons-0.4.6.tar.gz
 requires:
   - Python
-  - pip
   - logical_unification
 build_requires:
   - bits-recipe-tools

@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - keras
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

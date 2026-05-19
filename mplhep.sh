@@ -11,7 +11,6 @@ requires:
   - mplhep_data
   - matplotlib
   - packaging
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

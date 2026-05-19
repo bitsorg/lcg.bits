@@ -8,7 +8,6 @@ requires:
   - Python
   - redis
   - click
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -5,7 +5,7 @@ tag: "5.28.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-5.28.3.tar.gz
 requires:
-  - pip
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

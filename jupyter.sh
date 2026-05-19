@@ -27,7 +27,6 @@ requires:
   - notebook
   - qtconsole
   - entrypoints
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -11,7 +11,6 @@ requires:
   # optional:
   # - spark
   # - scikitlearn
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -9,7 +9,6 @@ requires:
   - numpy
   - scipy
   - svgwrite
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -9,7 +9,6 @@ requires:
   - setuptools_scm
   - attrs
   - pyrsistent
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

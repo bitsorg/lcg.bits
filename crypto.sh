@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/crypto-1.4.1.tar.gz
 requires:
   - Python
-  - pip
   - naked
   - shellescape
 build_requires:

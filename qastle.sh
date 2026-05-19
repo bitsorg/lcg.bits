@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qastle-0.19.0.tar.gz
 requires:
   - Python
-  - pip
   - lark
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/altair-5.2.0.tar.gz
 requires:
   - Python
-  - pip
   - Jinja2
   - jsonschema
   - numpy

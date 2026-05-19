@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/b2luigi-unknown.tar.gz
 requires:
   - Python
-  - pip
   - luigi
   - tenacity
   - Jinja2

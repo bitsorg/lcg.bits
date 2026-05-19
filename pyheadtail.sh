@@ -10,7 +10,6 @@ requires:
   - cython
   - h5py
   - scipy
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

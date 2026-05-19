@@ -11,7 +11,6 @@ requires:
   - matplotlib
   # optional:
   # - jupyter_packaging
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

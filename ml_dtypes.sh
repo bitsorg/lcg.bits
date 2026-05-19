@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ml_dtypes-0.5.1.tar.gz
 requires:
   - Python
-  - pip
   - numpy
 build_requires:
   - bits-recipe-tools

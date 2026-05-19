@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/donfig-0.8.1.post1.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
 build_requires:
   - bits-recipe-tools

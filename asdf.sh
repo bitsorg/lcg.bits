@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/asdf-3.5.0.tar.gz
 requires:
   - Python
-  - pip
   - asdf_standard
   - asdf_transform_schemas
   - semantic_version

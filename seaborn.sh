@@ -11,7 +11,6 @@ requires:
   - pandas
   - matplotlib
   - statsmodels
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

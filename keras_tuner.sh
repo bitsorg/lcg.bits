@@ -13,7 +13,6 @@ requires:
   - ipython
   - kt_legacy
   - keras
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

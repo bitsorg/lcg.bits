@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hepdata_lib-0.20.0.tar.gz
 requires:
   - Python
-  - pip
   - hepdata_validator
   - PyYAML
   - scipy

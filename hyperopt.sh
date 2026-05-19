@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hyperopt-0.2.8.tar.gz
 requires:
   - Python
-  - pip
   - cloudpickle
   - networkx
   - numpy

@@ -8,7 +8,6 @@ requires:
   - Python
   - locket
   - toolz
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

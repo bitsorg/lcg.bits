@@ -8,7 +8,6 @@ requires:
   - Python
   - six
   - cffi
-  - pip
   - rust
 build_requires:
   - bits-recipe-tools

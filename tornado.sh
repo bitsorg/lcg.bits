@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - certifi
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

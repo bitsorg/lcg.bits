@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/transformers-4.57.3.tar.gz
 requires:
   - Python
-  - pip
   - tokenizers
   - regex
   - huggingface_hub

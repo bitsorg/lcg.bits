@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/spey-v0.2.5.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - scipy
   - autograd

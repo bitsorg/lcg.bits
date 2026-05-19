@@ -12,7 +12,6 @@ requires:
   - yoda
   - sympy
   - eigen
-  - pip
   - wheel
   - iminuit
   - ROOT

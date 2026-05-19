@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/httpcore-1.0.7.tar.gz
 requires:
   - Python
-  - pip
   - anyio
   - certifi
   - h11

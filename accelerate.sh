@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/accelerate-1.3.0.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - packaging
   - psutil

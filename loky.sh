@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/loky-3.5.6.tar.gz
 requires:
   - Python
-  - pip
   - cloudpickle
 build_requires:
   - bits-recipe-tools

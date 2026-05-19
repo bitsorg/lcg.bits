@@ -8,7 +8,6 @@ requires:
   - Python
   - six
   - appdirs
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

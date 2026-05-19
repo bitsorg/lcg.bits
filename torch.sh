@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/torch-2.11.0.tar.gz
 requires:
   - Python
-  - pip
   - PyYAML
   - cffi
   - numpy

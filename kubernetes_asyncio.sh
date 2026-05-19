@@ -12,7 +12,6 @@ requires:
   - python_dateutil
   - urllib3
   - aiohttp
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

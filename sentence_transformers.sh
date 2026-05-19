@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/sentence-transformers-5.1.1.tar.gz
 requires:
   - Python
-  - pip
   - torchvision
   - nltk
   - sentencepiece

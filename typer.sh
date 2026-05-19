@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/typer-0.15.1.tar.gz
 requires:
   - Python
-  - pip
   - click
 build_requires:
   - bits-recipe-tools

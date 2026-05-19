@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/SQLAlchemy-2.0.48.tar.gz
 requires:
   - Python
-  - pip
   - typing_extensions
   - greenlet
 build_requires:

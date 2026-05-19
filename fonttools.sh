@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fonttools-4.40.0.tar.gz
 requires:
   - Python
-  - pip
   - fs
 build_requires:
   - bits-recipe-tools

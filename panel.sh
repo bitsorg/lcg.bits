@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/panel-1.1.0.tar.gz
 requires:
   - Python
-  - pip
   - pyct
   - numpy
   - pyviz_comms

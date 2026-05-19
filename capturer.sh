@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/capturer-3.0.tar.gz
 requires:
   - Python
-  - pip
   - humanfriendly
 build_requires:
   - bits-recipe-tools

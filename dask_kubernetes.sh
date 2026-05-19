@@ -15,7 +15,6 @@ requires:
   - pykube_ng
   - rich
   - kr8s
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ninja-1.13.2.tar.gz
 requires:
   - Python
-  - pip
 prefer_system: ".*"
 prefer_system_check: |
   type ninja

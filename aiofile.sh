@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aiofile-3.9.0.tar.gz
 requires:
   - Python
-  - pip
   - caio
 build_requires:
   - bits-recipe-tools

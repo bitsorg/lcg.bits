@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/trio-0.28.0.tar.gz
 requires:
   - Python
-  - pip
   - attrs
   - sniffio
   - sortedcontainers

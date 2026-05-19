@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tokenizers-0.22.1.tar.gz
 requires:
   - Python
-  - pip
   - huggingface_hub
 build_requires:
   - bits-recipe-tools

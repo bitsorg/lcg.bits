@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mdit_py_plugins-0.4.0.tar.gz
 requires:
   - Python
-  - pip
   - markdown_it_py
 build_requires:
   - bits-recipe-tools

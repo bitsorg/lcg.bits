@@ -4,7 +4,6 @@ version: "0.19.0"
 tag: "0.19.0"
 requires:
   - Python
-  - pip
   - meson
   - packaging
   - pyproject_metadata

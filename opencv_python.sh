@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/opencv-python-4.12.0.88.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - scikitbuild
 build_requires:

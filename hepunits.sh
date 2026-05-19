@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - attrs
-  - pip
   - pint
 build_requires:
   - bits-recipe-tools

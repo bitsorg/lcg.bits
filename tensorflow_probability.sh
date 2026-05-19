@@ -14,7 +14,6 @@ requires:
   - gast
   - dm_tree
   - looseversion
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

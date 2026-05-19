@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ultralytics-8.3.58.tar.gz
 requires:
   - Python
-  - pip
   - wheel
   - numpy
   - matplotlib

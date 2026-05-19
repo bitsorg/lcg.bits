@@ -9,7 +9,6 @@ requires:
   - numpy
   - packaging
   - pandas
-  - pip
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

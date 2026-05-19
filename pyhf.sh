@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyhf-0.7.6.tar.gz
 requires:
   - Python
-  - pip
   - iminuit
   - numpy
   - scipy

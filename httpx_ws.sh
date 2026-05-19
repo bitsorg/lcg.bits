@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/httpx_ws-0.7.1.tar.gz
 requires:
   - Python
-  - pip
   - wsproto
   - anyio
   - httpcore

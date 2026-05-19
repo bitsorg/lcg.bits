@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tifffile-2023.4.12.tar.gz
 requires:
   - Python
-  - pip
   - numpy
   - numcodecs
 build_requires:

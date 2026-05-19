@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/alembic-1.16.5.tar.gz
 requires:
   - Python
-  - pip
   - mako
   - sqlalchemy
   - typing_extensions

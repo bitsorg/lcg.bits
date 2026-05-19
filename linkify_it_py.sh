@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/linkify-it-py-2.0.2.tar.gz
 requires:
   - Python
-  - pip
   - uc_micro_py
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qulacs-0.6.4.1.tar.gz
 requires:
   - Python
-  - pip
   - Boost
   - scipy
   - numpy

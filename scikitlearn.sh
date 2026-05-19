@@ -10,7 +10,6 @@ requires:
   - scipy
   - cython
   - joblib
-  - pip
   - pyarrow
   - meson_python
   # optional:

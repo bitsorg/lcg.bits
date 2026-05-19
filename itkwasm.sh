@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/itkwasm-1.0b185.tar.gz
 requires:
   - Python
-  - pip
   - wasmtime
   - numpy
   - typing_extensions

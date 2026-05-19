@@ -8,7 +8,6 @@ requires:
   - Python
   - pandas
   - numpy
-  - pip
   - pytables
 build_requires:
   - bits-recipe-tools

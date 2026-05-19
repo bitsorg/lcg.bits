@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit-image-0.25.2.tar.gz
 requires:
   - Python
-  - pip
   - pillow
   - numpy
   - cython

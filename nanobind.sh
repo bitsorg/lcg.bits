@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nanobind-2.10.2.tar.gz
 requires:
   - Python
-  - pip
   - CMake
 build_requires:
   - bits-recipe-tools
