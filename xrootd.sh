@@ -46,12 +46,6 @@ function Configure() {
     -DXRDCL_ONLY=ON \
     -DENABLE_XRDEC=OFF
 }
-function MakeInstall() {
-  # PIP_NO_BUILD_ISOLATION bypasses pip's isolated build env, which fails on
-  # Python 3.14 when XRootD 6.0.1's cmake_install.cmake calls pip without flags.
-  # (PIP_OPTIONS cmake var was added to XRootD after 6.0.1.)
-  PIP_NO_BUILD_ISOLATION=1 cmake --install .
-}
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'
 setenv XRD_CONNECTIONWINDOW 3

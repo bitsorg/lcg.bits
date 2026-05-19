@@ -45,4 +45,9 @@ function PostInstall() {
       [[ ! -e python ]] && ln -nfs "$(basename "$d")" python
     done
   popd
+  # Bootstrap setuptools and wheel into the Python installation itself.
+  # Since Python 3.12, ensurepip no longer bundles setuptools; without it
+  # any pip call using build isolation (the default) cannot find the
+  # setuptools build backend — e.g. XRootD's cmake_install.cmake.
+  "$INSTALLROOT/bin/python3" -m pip install --upgrade setuptools wheel
 }
