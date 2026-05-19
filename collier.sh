@@ -4,6 +4,8 @@ version: "1.2.8"
 tag: "1.2.8"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/collier-1.2.8.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

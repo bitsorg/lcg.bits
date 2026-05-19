@@ -7,8 +7,9 @@ source: https://github.com/uxlfoundation/oneTBB
 #tag: "2022.2.0"
 #sources:
 #  - https://lcgpackages.web.cern.ch/tarFiles/sources/tbb2022.2.0oss_src.tgz
-build_requires:
+requires:
   - CMake
+build_requires:
   - bits-recipe-tools
 license: Apache-2.0
 prefer_system: .*

@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4edm4hep2lcioconv-HEAD.tar.gz
 requires:
+  - CMake
   - EDM4hep
   - LCIO
 build_requires:

@@ -5,6 +5,7 @@ tag: "2.13"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lwtnn-2.13.tar.gz
 requires:
+  - CMake
   - eigen
   - Boost
 build_requires:

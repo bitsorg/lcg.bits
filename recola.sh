@@ -5,6 +5,7 @@ tag: "2.2.4.atlas1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/recola2-2.2.4.tar.gz
 requires:
+  - CMake
   - collier
   - recola_SM
 build_requires:

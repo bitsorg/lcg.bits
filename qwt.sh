@@ -5,6 +5,7 @@ tag: "6.0.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qwt-6.0.1.tar.bz2
 requires:
+  - CMake
   - Qt
 build_requires:
   - bits-recipe-tools

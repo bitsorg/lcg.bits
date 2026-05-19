@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/garfieldpp-HEAD.tar.gz
 requires:
+  - CMake
   - ROOT
   - Geant4
 build_requires:

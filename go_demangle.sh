@@ -5,6 +5,7 @@ tag: "5e5cf60"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go_demangle-5e5cf60.tar.gz
 requires:
+  - CMake
   - go
 build_requires:
   - bits-recipe-tools

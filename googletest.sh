@@ -5,6 +5,7 @@ tag: "1.16.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/googletest-1.16.0.tar.gz
 requires:
+  - CMake
   - Python
 build_requires:
   - bits-recipe-tools

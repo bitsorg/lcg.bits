@@ -5,6 +5,7 @@ tag: "10.11.16"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mariadb-10.11.16.tar.gz
 requires:
+  - CMake
   - Boost
   - bison
   - jemalloc

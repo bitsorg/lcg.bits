@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4clue-HEAD.tar.gz
 requires:
+  - CMake
   - DD4hep
   - k4fwcore
   - alpaka

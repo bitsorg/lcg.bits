@@ -5,6 +5,7 @@ tag: "0.8.10"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/davix-0.8.10.tar.gz
 requires:
+  - CMake
   - Boost
   - libxml2
 build_requires:

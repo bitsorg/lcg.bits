@@ -5,6 +5,7 @@ tag: "1.90.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/boost_1_90_0.tar.gz
 requires:
+  - CMake
   - zlib
   - xz
   - bzip2

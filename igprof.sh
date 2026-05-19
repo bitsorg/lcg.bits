@@ -5,6 +5,7 @@ tag: "5.9.18"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/igprof-5.9.18.tar.gz
 requires:
+  - CMake
   - libunwind
 build_requires:
   - bits-recipe-tools

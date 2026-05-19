@@ -5,6 +5,7 @@ tag: "3.1.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/bear-3.1.5.tar.gz
 requires:
+  - CMake
   - jsonmcpp
   - grpc
   - spdlog

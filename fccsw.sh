@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fccsw-HEAD.tar.gz
 requires:
+  - CMake
   - DD4hep
   - k4geo
   - ROOT

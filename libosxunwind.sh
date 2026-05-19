@@ -4,6 +4,8 @@ version: "0.0.6"
 tag: "0.0.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libosxunwind-0.0.6.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

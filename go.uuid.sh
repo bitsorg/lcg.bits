@@ -5,6 +5,7 @@ tag: "b2ce238"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go.uuid-b2ce238.tar.gz
 requires:
+  - CMake
   - go
 build_requires:
   - bits-recipe-tools

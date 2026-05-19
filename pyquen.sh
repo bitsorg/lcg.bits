@@ -2,6 +2,8 @@ package: pyquen
 description: PYQUEN parton quenching model for heavy-ion collisions
 version: "1.5.1"
 tag: "1.5.1"
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

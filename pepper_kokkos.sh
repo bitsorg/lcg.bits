@@ -5,6 +5,7 @@ tag: "1.8.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/pepper-1.8.0-kokkos.tar.gz
 requires:
+  - CMake
   - lhapdf
   - kokkos
   - hepmc3

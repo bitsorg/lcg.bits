@@ -5,6 +5,7 @@ tag: "1.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/EDM4hep-1.0.tar.gz
 requires:
+  - CMake
   - ROOT
   - podio
   - Jinja2

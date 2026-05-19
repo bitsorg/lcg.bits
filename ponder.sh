@@ -5,6 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ponder-unknown.tar.gz
 requires:
+  - CMake
   - Boost
 build_requires:
   - bits-recipe-tools

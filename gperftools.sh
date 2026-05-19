@@ -5,6 +5,7 @@ tag: "2.18.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gperftools-2.18.1.tar.gz
 requires:
+  - CMake
   - libunwind
 build_requires:
   - bits-recipe-tools

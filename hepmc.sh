@@ -4,6 +4,8 @@ version: "2.06.09.alice"
 tag: "2.06.09.alice"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC-2.06.09.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

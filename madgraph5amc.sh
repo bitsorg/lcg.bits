@@ -5,6 +5,7 @@ tag: "3.3.1.atlas1"
 sources:
   - https://launchpad.net/mg5amcnlo/2.0/2.1.0/+download/MG5_aMC_v3.3.1.atlas1.tar.gz
 requires:
+  - CMake
   - Python
   - syscalc
   - six

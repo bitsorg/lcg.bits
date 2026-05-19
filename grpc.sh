@@ -5,6 +5,7 @@ tag: "1.62.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/grpc-1.62.3.tar.gz
 requires:
+  - CMake
   - absl
   - c_ares
   - re2

@@ -4,6 +4,8 @@ version: "4.7.0"
 tag: "4.7.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tiff-4.7.0.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

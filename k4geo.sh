@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4geo-HEAD.tar.gz
 requires:
+  - CMake
   - DD4hep
   - EDM4hep
   - LCIO

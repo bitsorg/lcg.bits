@@ -5,6 +5,7 @@ tag: "20250408"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/linux-dev-20250408.tar.gz
 requires:
+  - CMake
   - libtraceevent
   - libbpf
   - flex

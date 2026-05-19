@@ -5,6 +5,7 @@ tag: "1.7.8-rc1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/bdsim-1.7.8-rc1.tar.gz
 requires:
+  - CMake
   - Geant4
   - ROOT
   - clhep

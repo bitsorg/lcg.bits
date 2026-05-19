@@ -5,6 +5,7 @@ tag: "master"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/DD4hep-master.tar.gz
 requires:
+  - CMake
   - ROOT
   - XercesC
   - Boost

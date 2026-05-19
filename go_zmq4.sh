@@ -5,6 +5,7 @@ tag: "7a493a6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go_zmq4-7a493a6.tar.gz
 requires:
+  - CMake
   - go
   - zeromq
 build_requires:

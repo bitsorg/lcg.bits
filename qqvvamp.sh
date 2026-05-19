@@ -5,6 +5,7 @@ tag: "1.1.atlas1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/qqvvamp-1.1.atlas1.tar.gz
 requires:
+  - CMake
   - ginac
 build_requires:
   - bits-recipe-tools

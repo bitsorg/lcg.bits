@@ -5,6 +5,7 @@ tag: "1.4.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gl2ps-1.4.2.tgz
 requires:
+  - CMake
   - zlib
   - png
 build_requires:

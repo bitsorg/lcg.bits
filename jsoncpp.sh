@@ -4,6 +4,8 @@ version: "1.9.3"
 tag: "1.9.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jsoncpp-1.9.3.zip
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

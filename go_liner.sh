@@ -5,6 +5,7 @@ tag: "6f820f8"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go_liner-6f820f8.tar.gz
 requires:
+  - CMake
   - go
   - go_runewidth
 build_requires:

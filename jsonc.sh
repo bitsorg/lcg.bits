@@ -4,6 +4,8 @@ version: "0.17"
 tag: "0.17"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/json-c-0.17.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

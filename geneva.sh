@@ -5,6 +5,7 @@ tag: "1.0-rc3.atlas2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/geneva-1.0-rc3.atlas2.tar.gz
 requires:
+  - CMake
   - lhapdf
   - openloops
   - zlib

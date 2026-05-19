@@ -5,6 +5,7 @@ tag: "00.02"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/SIO-00.02.tar.gz
 requires:
+  - CMake
   - zlib
 build_requires:
   - bits-recipe-tools

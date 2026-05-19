@@ -4,6 +4,8 @@ version: "3.2.1"
 tag: "3.2.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aida-3.2.1-src.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

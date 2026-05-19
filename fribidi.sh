@@ -5,6 +5,7 @@ tag: "1.0.13"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fribidi-1.0.13.tar.xz
 requires:
+  - CMake
   - meson
   - ninja
 build_requires:

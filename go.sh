@@ -4,6 +4,8 @@ version: "1.12.5"
 tag: "1.12.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go1.12.5.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

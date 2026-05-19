@@ -5,6 +5,7 @@ tag: "1.8.7"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ginac-1.8.7.tar.bz2
 requires:
+  - CMake
   - cln
 build_requires:
   - bits-recipe-tools

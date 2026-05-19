@@ -5,6 +5,7 @@ tag: "1.16.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/doxygen-1.16.1.src.tar.gz
 requires:
+  - CMake
   - Python
   - graphviz
   - xapian

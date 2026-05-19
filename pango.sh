@@ -5,6 +5,7 @@ tag: "1.48.9"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pango-1.48.9.tar.gz
 requires:
+  - CMake
   - cairo
   - harfbuzz
   - freetype

@@ -5,6 +5,7 @@ tag: "3.0.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/RooUnfold-3.0.5.tar.gz
 requires:
+  - CMake
   - ROOT
 build_requires:
   - bits-recipe-tools

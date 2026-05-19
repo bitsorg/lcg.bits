@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/marlintrkprocessors-HEAD.tar.gz
 requires:
+  - CMake
   - marlintrk
   - marlin
   - marlinutil

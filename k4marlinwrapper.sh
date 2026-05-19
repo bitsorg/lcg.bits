@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4marlinwrapper-HEAD.tar.gz
 requires:
+  - CMake
   - k4edm4hep2lcioconv
   - marlin
   - k4fwcore

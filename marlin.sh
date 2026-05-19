@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/marlin-HEAD.tar.gz
 requires:
+  - CMake
   - LCIO
   - ilcutil
   - gear

@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/marlinutil-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - marlin
   - clhep

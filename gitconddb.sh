@@ -5,6 +5,7 @@ tag: "0.2.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/GitCondDB-0.2.2.tar.gz
 requires:
+  - CMake
   - libgit2
   - fmt
 build_requires:

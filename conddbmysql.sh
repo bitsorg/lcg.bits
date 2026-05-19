@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/conddbmysql-HEAD.tar.gz
 requires:
+  - CMake
   - mysql
   - ilcutil
 build_requires:

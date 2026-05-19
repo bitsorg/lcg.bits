@@ -4,6 +4,8 @@ version: "1.14"
 tag: "1.14"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lcov-1.14.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

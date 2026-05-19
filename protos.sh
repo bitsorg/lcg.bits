@@ -5,6 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Protosunknown.tar.gz
 requires:
+  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools

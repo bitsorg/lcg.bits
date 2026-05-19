@@ -4,6 +4,8 @@ version: "1.12.0"
 tag: "1.12.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyroscope_1.12.0_linux_${pyroscope_ARCH}.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

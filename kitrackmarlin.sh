@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kitrackmarlin-HEAD.tar.gz
 requires:
+  - CMake
   - kitrack
   - marlin
   - marlinutil

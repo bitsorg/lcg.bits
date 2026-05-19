@@ -5,6 +5,7 @@ tag: "0.8.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/VecCore-0.8.2.tar.gz
 requires:
+  - CMake
   - umesimd
 build_requires:
   - bits-recipe-tools

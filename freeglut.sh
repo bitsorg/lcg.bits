@@ -4,6 +4,8 @@ version: "3.8.0"
 tag: "3.8.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/freeglut-3.8.0.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

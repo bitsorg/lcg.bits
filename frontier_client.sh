@@ -4,6 +4,8 @@ version: "2.10.2"
 tag: "2.10.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/frontier_client__2.10.2__src.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

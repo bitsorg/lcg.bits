@@ -5,6 +5,7 @@ tag: "3.8.7"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libarchive-3.8.7.tar.gz
 requires:
+  - CMake
   - zlib
   - bzip2
   - LibLZMA

@@ -5,6 +5,7 @@ tag: "1.2.5patch2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/cepgen-1.2.5patch2.tar.gz
 requires:
+  - CMake
   - apfel
   - Boost
   - lhapdf

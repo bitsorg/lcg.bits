@@ -5,6 +5,7 @@ tag: "11.4.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/armadillo-11.4.2.tar.xz
 requires:
+  - CMake
   - blas
   - hdf5
 build_requires:

@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fccdetectors-HEAD.tar.gz
 requires:
+  - CMake
   - DD4hep
 build_requires:
   - bits-recipe-tools

@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/VecGeom-vHEAD.tar.gz
 requires:
+  - CMake
   - Vc
   - veccore
   - XercesC

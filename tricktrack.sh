@@ -5,6 +5,7 @@ tag: "1.0.9"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/TrickTrack-1.0.9.tar.gz
 requires:
+  - CMake
   - eigen
 build_requires:
   - bits-recipe-tools

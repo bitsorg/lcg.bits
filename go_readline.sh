@@ -5,6 +5,7 @@ tag: "2972be2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go_readline-2972be2.tar.gz
 requires:
+  - CMake
   - go
   - go_liner
 build_requires:

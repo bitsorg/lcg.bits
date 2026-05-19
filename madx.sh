@@ -5,6 +5,7 @@ tag: "5.09.00"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/madx-5.09.00.tar.gz
 requires:
+  - CMake
   - zlib
   - blas
 build_requires:

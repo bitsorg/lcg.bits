@@ -5,6 +5,7 @@ tag: "2.02"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Hto4l-v2.02.tar.bz2
 requires:
+  - CMake
   - GSL
 build_requires:
   - bits-recipe-tools

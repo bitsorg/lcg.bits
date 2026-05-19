@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4simgeant4-HEAD.tar.gz
 requires:
+  - CMake
   - k4fwcore
   - DD4hep
   - Geant4

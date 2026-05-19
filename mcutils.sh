@@ -5,6 +5,7 @@ tag: "1.4.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/mcutils-1.4.0.tar.gz
 requires:
+  - CMake
   - heputils
 build_requires:
   - bits-recipe-tools

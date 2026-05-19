@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4actstracking-HEAD.tar.gz
 requires:
+  - CMake
   - podio
   - EDM4hep
   - k4fwcore

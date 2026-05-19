@@ -5,6 +5,7 @@ tag: "01.07"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/podio-01.07.tar.gz
 requires:
+  - CMake
   - ROOT
   - Python
   - PyYAML

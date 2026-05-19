@@ -5,6 +5,7 @@ tag: "master"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Gaudi-master.tar.gz
 requires:
+  - CMake
   - Boost
   - Python
   - ROOT

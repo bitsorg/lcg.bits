@@ -4,6 +4,8 @@ version: "3.2.0"
 tag: "3.2.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/msgpack-c-cpp-3.2.0.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

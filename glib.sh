@@ -5,6 +5,7 @@ tag: "2.86.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/glib-2.86.5.tar.xz
 requires:
+  - CMake
   - libffi
   - pkg_config
   - gettext

@@ -5,6 +5,7 @@ tag: "1.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/heaptrack-v1.5.0.tar.gz
 requires:
+  - CMake
   - Boost
   - libunwind
   - zlib

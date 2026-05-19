@@ -5,6 +5,7 @@ tag: "1.14.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/poco-1.14.1.tar.gz
 requires:
+  - CMake
   - zlib
   - expat
   - sqlite

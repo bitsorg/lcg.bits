@@ -5,6 +5,7 @@ tag: "r330"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/starlight-r330.tgz
 requires:
+  - CMake
   - hepmc3
   - dpmjet
 build_requires:

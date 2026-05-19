@@ -4,6 +4,8 @@ version: "3.2.6"
 tag: "3.2.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mimalloc-3.2.6.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

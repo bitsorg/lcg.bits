@@ -4,6 +4,8 @@ version: "3.1.5"
 tag: "3.1.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/double-conversion-3.1.5.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -5,6 +5,7 @@ tag: "3.10.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gdal-3.10.2.tar.gz
 requires:
+  - CMake
   - curl
   - zlib
   - netcdfc

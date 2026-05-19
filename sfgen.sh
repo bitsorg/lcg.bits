@@ -5,6 +5,7 @@ tag: "1.03.atlas2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SFGen1.03.tar.gz
 requires:
+  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools

@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/opendatadetector-HEAD.tar.gz
 requires:
+  - CMake
   - DD4hep
   - ROOT
   - Boost

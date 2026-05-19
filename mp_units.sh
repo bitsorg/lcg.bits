@@ -5,6 +5,7 @@ tag: "bfcb26e5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mp_units-bfcb26e5.tar.gz
 requires:
+  - CMake
   - cppgsl
   - fmt
   - Catch2

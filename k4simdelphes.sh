@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4simdelphes-HEAD.tar.gz
 requires:
+  - CMake
   - k4fwcore
   - delphes
   - pythia8

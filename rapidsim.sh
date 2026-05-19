@@ -5,6 +5,7 @@ tag: "1.4.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/RapidSim-1.4.4.tar.gz
 requires:
+  - CMake
   - ROOT
 build_requires:
   - bits-recipe-tools

@@ -4,6 +4,8 @@ version: "1.4.3"
 tag: "1.4.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pacparser-1.4.3.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

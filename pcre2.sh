@@ -7,6 +7,8 @@ sources:
 prefer_system: ".*"
 prefer_system_check:
 
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

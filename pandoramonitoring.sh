@@ -5,6 +5,7 @@ tag: "03.06.00"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pandoramonitoring-03.06.00.tar.gz
 requires:
+  - CMake
   - ROOT
   - pandorasdk
 build_requires:

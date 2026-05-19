@@ -4,6 +4,8 @@ version: "0.3.32"
 tag: "0.3.32"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/OpenBLAS-0.3.32.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

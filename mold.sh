@@ -5,6 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mold-unknown.tar.gz
 requires:
+  - CMake
   - mimalloc
   - tbb
   - zlib

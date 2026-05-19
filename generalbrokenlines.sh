@@ -5,6 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/generalbrokenlines-unknown.tar.gz
 requires:
+  - CMake
   - eigen
   - ROOT
 build_requires:

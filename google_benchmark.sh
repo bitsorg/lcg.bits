@@ -5,6 +5,7 @@ tag: "1.9.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/google_benchmark-1.9.5.tar.gz
 requires:
+  - CMake
   - googletest
 build_requires:
   - bits-recipe-tools

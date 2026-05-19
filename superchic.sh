@@ -5,6 +5,7 @@ tag: "4.02.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v4.02.2.tar.gz
 requires:
+  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools

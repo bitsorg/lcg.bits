@@ -4,6 +4,8 @@ version: "0.3.110-1"
 tag: "0.3.110-1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libaio-0.3.110-1.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

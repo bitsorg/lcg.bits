@@ -5,6 +5,7 @@ tag: "0.16.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/thrift-0.16.0.tar.gz
 requires:
+  - CMake
   - pkg_config
   - Boost
   - bison

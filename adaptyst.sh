@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/adaptyst-HEAD.tar.gz
 requires:
+  - CMake
   - Boost
   - jsonmcpp
   - poco

@@ -5,6 +5,7 @@ tag: "0.4.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/vdt-0.4.4.tar.gz
 requires:
+  - CMake
   - Python
 build_requires:
   - bits-recipe-tools
@@ -19,3 +20,9 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  cmake "${SOURCEDIR}" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+}

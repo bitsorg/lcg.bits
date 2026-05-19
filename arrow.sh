@@ -5,6 +5,7 @@ tag: "23.0.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-arrow-23.0.1.tar.gz
 requires:
+  - CMake
   - Boost
   - Python
   - numpy

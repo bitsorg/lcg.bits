@@ -5,6 +5,7 @@ tag: "08.11"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-08.11.tar.gz
 requires:
+  - CMake
   - GSL
   - looptools
   - chaplin

@@ -5,6 +5,7 @@ tag: "3.7.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Catch2-3.7.1.tar.gz
 requires:
+  - CMake
   - Python
 build_requires:
   - bits-recipe-tools

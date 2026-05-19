@@ -4,6 +4,8 @@ version: "3.1.1"
 tag: "3.1.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/simdjson-3.1.1.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

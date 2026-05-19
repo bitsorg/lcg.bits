@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4_project_template-HEAD.tar.gz
 requires:
+  - CMake
   - k4fwcore
 build_requires:
   - bits-recipe-tools

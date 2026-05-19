@@ -5,6 +5,7 @@ tag: "6.0.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xrootd-6.0.1.tar.gz
 requires:
+  - CMake
   - Python
   - zlib
   - libxml2

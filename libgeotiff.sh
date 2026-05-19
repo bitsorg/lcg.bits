@@ -5,6 +5,7 @@ tag: "1.7.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libgeotiff-1.7.4.tar.gz
 requires:
+  - CMake
   - proj
   - tiff
 build_requires:

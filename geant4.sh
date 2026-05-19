@@ -5,6 +5,7 @@ tag: "11.4.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4.11.4.1.tar.gz
 requires:
+  - CMake
   - XercesC
   - expat
   - Python

@@ -5,6 +5,7 @@ tag: "3.0.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/apfel-3.0.4.tar.gz
 requires:
+  - CMake
   - lhapdf
   - swig
   - Python

@@ -5,6 +5,7 @@ tag: "02.23.02"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/LCIO-02.23.02.tar.gz
 requires:
+  - CMake
   - ROOT
   - SIO
 build_requires:

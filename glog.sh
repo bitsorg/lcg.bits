@@ -5,6 +5,7 @@ tag: "0.4.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/glog-0.4.0.tar.gz
 requires:
+  - CMake
   - gflags
 build_requires:
   - bits-recipe-tools

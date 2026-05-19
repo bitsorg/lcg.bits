@@ -3,6 +3,7 @@ description: NVIDIA Nsight Systems system-wide performance analysis tool
 version: "unknown"
 tag: "unknown"
 requires:
+  - CMake
   - cuda
 build_requires:
   - bits-recipe-tools

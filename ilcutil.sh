@@ -4,6 +4,8 @@ version: "HEAD"
 tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ilcutil-HEAD.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

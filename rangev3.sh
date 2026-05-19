@@ -4,6 +4,8 @@ version: "0.12.0"
 tag: "0.12.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rangev3-0.12.0.tgz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

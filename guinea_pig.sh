@@ -5,6 +5,7 @@ tag: "1.2.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/guinea_pig-1.2.2.tar.gz
 requires:
+  - CMake
   - fftw
 build_requires:
   - bits-recipe-tools

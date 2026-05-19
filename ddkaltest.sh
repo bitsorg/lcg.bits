@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ddkaltest-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - ROOT
   - DD4hep

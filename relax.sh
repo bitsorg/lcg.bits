@@ -5,6 +5,7 @@ tag: "6.1.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/RELAX-6.1.2.tar.gz
 requires:
+  - CMake
   - cmaketools
   - ROOT
 build_requires:

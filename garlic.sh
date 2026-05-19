@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/garlic-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - marlin
   - marlinutil

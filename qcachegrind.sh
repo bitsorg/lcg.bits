@@ -5,6 +5,7 @@ tag: "20.12.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kcachegrind-20.12.1.tar.gz
 requires:
+  - CMake
   - Qt5
   - valgrind
 build_requires:

@@ -5,6 +5,7 @@ tag: "2.2.11p2.openmpi3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SHERPA-MC-2.2.11p2.openmpi3.tar.gz
 requires:
+  - CMake
   - lhapdf
   - openmpi
   - fastjet

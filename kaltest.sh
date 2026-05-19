@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kaltest-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - ROOT
 build_requires:

@@ -5,6 +5,7 @@ tag: "1.7.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-<evtgen_1.7.0_tag>.tar.gz
 requires:
+  - CMake
   - pythia8
   - photos++
   - tauola++

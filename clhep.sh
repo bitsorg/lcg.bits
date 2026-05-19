@@ -4,6 +4,8 @@ version: "2.4.7.2"
 tag: "2.4.7.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/clhep-2.4.7.2.tgz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

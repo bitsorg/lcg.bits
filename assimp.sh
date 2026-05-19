@@ -5,6 +5,7 @@ tag: "5.0.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/assimp-5.0.1.tar.gz
 requires:
+  - CMake
   - Boost
 build_requires:
   - bits-recipe-tools

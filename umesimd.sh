@@ -4,6 +4,8 @@ version: "0.8.1"
 tag: "0.8.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/umesimd-0.8.1.tgz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -5,6 +5,7 @@ tag: "2.2.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SM_ATGC_WARSAW_2.2.4.tar.gz
 requires:
+  - CMake
   - collier
 build_requires:
   - bits-recipe-tools

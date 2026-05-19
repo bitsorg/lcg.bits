@@ -5,6 +5,7 @@ tag: "22.0.0.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/graalvm-ce-java11-linux-amd64-22.0.0.2.tar.gz
 requires:
+  - CMake
   - java
 build_requires:
   - bits-recipe-tools

@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fccanalyses-HEAD.tar.gz
 requires:
+  - CMake
   - EDM4hep
   - k4fwcore
   - fastjet

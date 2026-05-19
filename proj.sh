@@ -5,6 +5,7 @@ tag: "9.6.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/proj-9.6.0.tar.gz
 requires:
+  - CMake
   - sqlite
   - pkg_config
 build_requires:

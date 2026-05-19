@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC3-HEAD.tar.gz
 requires:
+  - CMake
   - ROOT
 build_requires:
   - bits-recipe-tools

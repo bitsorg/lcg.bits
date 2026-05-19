@@ -5,6 +5,7 @@ tag: "v6.32.02"
 sources:
   - https://root.cern/download/root_v6.32.02.source.tar.gz
 requires:
+  - CMake
   - Python
   - fftw
   - GSL
@@ -18,7 +19,6 @@ requires:
   - vdt
   - xz
   - cfitsio
-  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

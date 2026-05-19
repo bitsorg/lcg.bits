@@ -5,6 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ensmallen-unknown.tar.gz
 requires:
+  - CMake
   - armadillo
 build_requires:
   - bits-recipe-tools

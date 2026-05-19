@@ -4,6 +4,8 @@ version: "2.2.2"
 tag: "2.2.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gflags-2.2.2.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

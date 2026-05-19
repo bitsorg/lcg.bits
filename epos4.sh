@@ -5,6 +5,7 @@ tag: "4.0.3.atlas1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/epos4.0.3.atlas1.tgz
 requires:
+  - CMake
   - ROOT
   - fastjet
   - hepmc3

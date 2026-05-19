@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kaldet-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - marlin
   - kaltest

@@ -5,6 +5,7 @@ tag: "3.5.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/delphes-3.5.1.tar.gz
 requires:
+  - CMake
   - ROOT
   # optional:
   # - pythia8

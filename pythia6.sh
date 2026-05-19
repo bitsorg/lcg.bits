@@ -2,6 +2,8 @@ package: pythia6
 description: Pythia 6 Monte Carlo event generator (legacy Fortran version)
 version: "6.4.28.snd"
 tag: "6.4.28.snd"
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

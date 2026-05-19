@@ -5,6 +5,7 @@ tag: "7.10.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libpqxx-7.10.1.zip
 requires:
+  - CMake
   - postgresql
 build_requires:
   - bits-recipe-tools

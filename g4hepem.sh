@@ -5,6 +5,7 @@ tag: "20251114"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/g4hepem-20251114.tar.gz
 requires:
+  - CMake
   - Geant4
   - cuda
 build_requires:

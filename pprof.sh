@@ -5,6 +5,7 @@ tag: "54271f7"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pprof-54271f7.tar.gz
 requires:
+  - CMake
   - go
   - graphviz
   - go_readline

@@ -5,6 +5,7 @@ tag: "5.28.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-all-5.28.3.tar.gz
 requires:
+  - CMake
   - Python
   - setuptools
   - absl

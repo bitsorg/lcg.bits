@@ -4,6 +4,8 @@ version: "4.13.6"
 tag: "4.13.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ccache-4.13.6.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

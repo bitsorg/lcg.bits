@@ -4,6 +4,8 @@ version: "3.4.1"
 tag: "3.4.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/eigen-3.4.1.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

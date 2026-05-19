@@ -4,6 +4,8 @@ version: "10.2.1"
 tag: "10.2.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fmt-10.2.1.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

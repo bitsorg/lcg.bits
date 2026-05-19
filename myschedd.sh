@@ -5,6 +5,7 @@ tag: "1.9-2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/myschedd-1.9-2.tar.gz
 requires:
+  - CMake
   - go
 build_requires:
   - bits-recipe-tools

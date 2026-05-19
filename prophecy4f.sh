@@ -5,6 +5,7 @@ tag: "3.0.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Prophecy4f-3.0.2.tar.gz
 requires:
+  - CMake
   - collier
 build_requires:
   - bits-recipe-tools

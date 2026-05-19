@@ -4,6 +4,8 @@ version: "3.1.3"
 tag: "3.1.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libjpeg-turbo-3.1.3.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

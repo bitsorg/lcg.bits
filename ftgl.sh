@@ -5,6 +5,7 @@ tag: "2.4.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ftgl-2.4.0.tar.gz
 requires:
+  - CMake
   - freetype
 build_requires:
   - bits-recipe-tools

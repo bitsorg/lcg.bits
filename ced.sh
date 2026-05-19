@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ced-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
 build_requires:
   - bits-recipe-tools

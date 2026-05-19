@@ -5,6 +5,7 @@ tag: "2.0.1p5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/crmc.v2.0.1p5.tar.gz
 requires:
+  - CMake
   - Boost
 build_requires:
   - bits-recipe-tools

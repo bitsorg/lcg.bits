@@ -4,6 +4,8 @@ version: "3.1.0"
 tag: "3.1.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aocl-libm-linux-gcc-3.1.0.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

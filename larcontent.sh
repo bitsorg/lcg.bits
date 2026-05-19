@@ -5,6 +5,7 @@ tag: "04.11.02"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/larcontent-04.11.02.tar.gz
 requires:
+  - CMake
   - pandorapfa
   - pandorasdk
   - pandoramonitoring

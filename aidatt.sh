@@ -5,6 +5,7 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aidatt-unknown.tar.gz
 requires:
+  - CMake
   - ilcutil
   - LCIO
   - eigen

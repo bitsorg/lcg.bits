@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4rectracker-HEAD.tar.gz
 requires:
+  - CMake
   - k4fwcore
   - DD4hep
   - ROOT

@@ -5,6 +5,7 @@ tag: "4.8.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cppzmq-4.8.1.tar.gz
 requires:
+  - CMake
   - zeromq
 build_requires:
   - bits-recipe-tools

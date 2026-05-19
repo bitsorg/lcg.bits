@@ -5,6 +5,7 @@ tag: "4.6.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mlpack-4.6.2.tar.gz
 requires:
+  - CMake
   - armadillo
   - cereal
   - ensmallen

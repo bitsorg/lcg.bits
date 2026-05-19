@@ -5,6 +5,7 @@ tag: "1.1.7"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sysCalc-1.1.7.tar.gz
 requires:
+  - CMake
   - lhapdf-${lhapdf6_latest_version}
 build_requires:
   - bits-recipe-tools

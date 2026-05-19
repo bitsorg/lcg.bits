@@ -4,6 +4,8 @@ version: "20230802.1"
 tag: "20230802.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/abseil-cpp-20230802.1.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

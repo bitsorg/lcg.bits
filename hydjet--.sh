@@ -3,6 +3,7 @@ description: HYDJET++ improved heavy-ion Monte Carlo generator
 version: "2.1"
 tag: "2.1"
 requires:
+  - CMake
   - ROOT
 build_requires:
   - bits-recipe-tools

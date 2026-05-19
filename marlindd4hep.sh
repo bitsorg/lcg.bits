@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/marlindd4hep-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - marlin
   - DD4hep

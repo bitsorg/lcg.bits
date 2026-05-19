@@ -5,6 +5,7 @@ tag: "46.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/acts-46.5.0.tar.gz
 requires:
+  - CMake
   - Boost
   - eigen
   - ROOT

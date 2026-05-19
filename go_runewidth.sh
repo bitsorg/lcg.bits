@@ -5,6 +5,7 @@ tag: "703b5e6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/go_runewidth-703b5e6.tar.gz
 requires:
+  - CMake
   - go
 build_requires:
   - bits-recipe-tools

@@ -2,6 +2,8 @@ package: cuda
 description: NVIDIA CUDA parallel computing platform and API
 version: "11.4"
 tag: "11.4"
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

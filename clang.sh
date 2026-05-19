@@ -4,10 +4,10 @@ tag: "llvmorg-20.1.7-alice2"
 source: https://github.com/alisw/llvm-project-reduced
 mem_per_job: 1280
 requires:
+  - CMake
   - "GCC-Toolchain:(?!osx)"
 build_requires:
   - "Python"
-  - CMake
   - curl
   - ninja
 env:

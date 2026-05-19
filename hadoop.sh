@@ -5,6 +5,7 @@ tag: "3.3.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hadoop-3.3.6-src.tar.gz
 requires:
+  - CMake
   - maven
   - protobuf
 build_requires:

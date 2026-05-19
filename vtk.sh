@@ -5,6 +5,7 @@ tag: "9.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/VTK-9.5.0.tar.gz
 requires:
+  - CMake
   - libxml2
   - glib
   - expat

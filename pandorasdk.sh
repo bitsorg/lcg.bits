@@ -5,6 +5,7 @@ tag: "03.04.02"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pandorasdk-03.04.02.tar.gz
 requires:
+  - CMake
   - pandorapfa
 build_requires:
   - bits-recipe-tools

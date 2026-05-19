@@ -5,6 +5,7 @@ tag: "3.4.14"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/HepMCAnalysis-3.4.14.tgz
 requires:
+  - CMake
   - HepMC
   - fastjet
   - ROOT

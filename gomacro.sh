@@ -5,6 +5,7 @@ tag: "c9f381e"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gomacro-c9f381e.tar.gz
 requires:
+  - CMake
   - go
   - go_liner
   - go_runewidth

@@ -5,6 +5,7 @@ tag: "03.02.00"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lccontent-03.02.00.tar.gz
 requires:
+  - CMake
   - pandorapfa
   - pandorasdk
   - pandoramonitoring

@@ -4,6 +4,8 @@ version: "1.44.2"
 tag: "1.44.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libuv-v1.44.2.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

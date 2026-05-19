@@ -5,6 +5,7 @@ tag: "2.1.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/OpenLoops-2.1.2.tar.gz
 requires:
+  - CMake
   - Python
 build_requires:
   - bits-recipe-tools

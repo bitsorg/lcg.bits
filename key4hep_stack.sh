@@ -3,6 +3,7 @@ description: Key4hep full software stack meta-package
 version: "0"
 tag: "0"
 requires:
+  - CMake
   - podio
   - EDM4hep
   - DD4hep

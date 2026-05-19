@@ -5,6 +5,7 @@ tag: "10.3.atlas"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MCFM-10.3.tar.gz
 requires:
+  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools

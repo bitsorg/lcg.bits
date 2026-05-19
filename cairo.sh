@@ -5,6 +5,7 @@ tag: "1.18.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cairo-1.18.4.tar.gz
 requires:
+  - CMake
   - pixman
   - pkg_config
   - freetype

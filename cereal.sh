@@ -4,6 +4,8 @@ version: "1.3.2"
 tag: "1.3.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cereal-1.3.2.tar.gz
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

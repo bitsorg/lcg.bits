@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kitrack-HEAD.tar.gz
 requires:
+  - CMake
   - ilcutil
   - marlin
   - ROOT

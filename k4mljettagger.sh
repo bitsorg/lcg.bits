@@ -5,6 +5,7 @@ tag: "HEAD"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/k4mljettagger-HEAD.tar.gz
 requires:
+  - CMake
   - EDM4hep
   - k4fwcore
   - ROOT

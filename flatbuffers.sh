@@ -5,6 +5,7 @@ tag: "25.2.10"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/flatbuffers-25.2.10.tar.gz
 requires:
+  - CMake
   - setuptools
   - numpy
 build_requires:

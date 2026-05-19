@@ -3,6 +3,8 @@ description: LCGenv environment setup script generator
 version: "1.3.22"
 tag: "v1.3.22"
 source: https://gitlab.cern.ch/GENSER/lcgenv.git
+requires:
+  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

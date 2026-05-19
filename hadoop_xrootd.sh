@@ -5,6 +5,7 @@ tag: "1.0.7"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hadoop-xrootd-v1.0.7.tar.gz
 requires:
+  - CMake
   - java
   - maven
   - hadoop
