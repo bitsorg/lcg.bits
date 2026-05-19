@@ -101,7 +101,27 @@ function Configure() {
   # Instead, rely on PATH: the Python module's --bin flag prepends $PYTHON_ROOT/bin,
   # so cmake finds the right python3 on PATH and uses sysconfig to discover the
   # include dir and libpython location automatically — exactly as lcgcmake does.
-  # PYTHONPATH is already set by bits module files so "import numpy" works.
+
+  # Build PYTHONPATH before calling cmake.  bits' init.sh automatically adds
+  # $PKG_ROOT/bin to PATH and $PKG_ROOT/lib to LD_LIBRARY_PATH for every dep,
+  # but does NOT propagate lib/pythonX.Y/site-packages to PYTHONPATH (that is
+  # only done in the TCL module files used post-install, not during builds).
+  # Without PYTHONPATH, cmake's FindPython3 cannot run
+  #   "import numpy; numpy.get_include()"
+  # and the NumPy component detection fails, blocking tmva-pymva.
+  # We replicate PythonRecipe's approach: query the interpreter for the exact
+  # version, then scan every *_ROOT env var for a matching site-packages dir.
+  if [[ -n "${PYTHON_ROOT}" ]]; then
+    _pyver=$("${PYTHON_ROOT}/bin/python3" -c \
+      'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || true)
+    if [[ -n "${_pyver}" ]]; then
+      for _rv in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1 | sort -u); do
+        _sp="${!_rv}/lib/python${_pyver}/site-packages"
+        [[ -d "${_sp}" ]] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}" || true
+      done
+    fi
+    unset _pyver _rv _sp
+  fi
 
   # -------------------------------------------------------------------------
   # Version-gated cmake flags (strip leading 'v' from PKGVERSION for sorting)
