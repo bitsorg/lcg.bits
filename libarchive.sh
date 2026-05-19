@@ -20,7 +20,9 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DENABLE_TEST=OFF \
     -DENABLE_INSTALL=ON \
     -DENABLE_LZMA=OFF \

@@ -19,7 +19,8 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DPCRE2_SUPPORT_JIT=ON \
     -DBUILD_SHARED_LIBS=ON \
     --enable-jit \

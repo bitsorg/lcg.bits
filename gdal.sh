@@ -24,7 +24,8 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DNETCDF_DIR=${netcdfc_ROOT} \
     -DSWIG_EXECUTABLE=${swig_ROOT}/bin/swig \

@@ -18,7 +18,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DABSL_BUILD_TESTING=OFF \
     -DABSL_ENABLE_INSTALL=ON \
     -DCMAKE_CXX_STANDARD=17 \

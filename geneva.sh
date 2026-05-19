@@ -25,7 +25,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -Dgeneva_enable_hepmc=OFF \
     -Dgeneva_enable_lhapdf=ON \
     -Dgeneva_enable_openloops=ON \

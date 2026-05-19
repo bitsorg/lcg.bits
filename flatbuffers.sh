@@ -19,7 +19,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--inc"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DFLATBUFFERS_INSTALL=ON \
     -DFLATBUFFERS_BUILD_FLATLIB=ON \
     -DFLATBUFFERS_BUILD_FLATC=ON \

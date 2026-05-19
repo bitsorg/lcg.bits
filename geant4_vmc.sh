@@ -23,7 +23,9 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   export LDFLAGS="${LDFLAGS:+$LDFLAGS }-L${GEANT4_ROOT}/lib"
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \

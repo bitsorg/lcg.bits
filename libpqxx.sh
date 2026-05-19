@@ -18,7 +18,9 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DSKIP_BUILD_TEST=ON \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_DOC=OFF \

@@ -20,7 +20,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=14 \
     -DUNWIND_INCLUDE_DIR:PATH=${libunwind_ROOT}/include \
     -DUNWIND_LIBRARY:FILEPATH=${libunwind_ROOT}/lib/libunwind.so \

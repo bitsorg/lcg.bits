@@ -18,6 +18,8 @@ license: MIT
 MODULE_OPTIONS="--inc"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DCPPZMQ_BUILD_TESTS=OFF
 }

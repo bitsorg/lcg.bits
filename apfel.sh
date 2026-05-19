@@ -20,7 +20,9 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DAPFEL_ENABLE_PYTHON=ON \
     -DAPFEL_ENABLE_TESTS=ON \
     -DAPFEL_ENABLE_LHAPDF=ON \

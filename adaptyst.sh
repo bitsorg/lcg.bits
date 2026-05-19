@@ -29,7 +29,8 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DADAPTYST_SCRIPT_PATH=$INSTALLROOT/share/adaptyst \
     -DADAPTYST_CONFIG_PATH=$INSTALLROOT/etc/adaptyst.conf \
     -DCMAKE_CXX_STANDARD=17 \

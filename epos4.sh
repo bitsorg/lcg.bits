@@ -22,7 +22,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake \
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \
     -DFASTSYS=${FASTJET_ROOT} \
