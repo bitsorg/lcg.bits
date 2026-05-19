@@ -91,10 +91,17 @@ function Configure() {
   PYTHON_EXECUTABLE="${PYTHON_ROOT}/bin/python3"
   [[ -x "$PYTHON_EXECUTABLE" ]] || PYTHON_EXECUTABLE=$(command -v python3 2>/dev/null || command -v python 2>/dev/null || true)
 
-  # PYTHONPATH is set by bits module files (numpy's module prepends its
-  # site-packages).  Pre-compute numpy's include dir so cmake can pre-set
-  # Python3_NumPy_INCLUDE_DIR and skip its subprocess check.
-  _numpy_inc=$(${PYTHON_EXECUTABLE} -c "import numpy; print(numpy.get_include())" 2>/dev/null || true)
+  # Pre-set cmake FindPython3 cache variables so cmake skips subprocess
+  # detection entirely.  PYTHON_ROOT, PYTHON_INCLUDE_DIR, and PYTHONPATH
+  # are all set by bits module files.
+  _pymajmin=$(${PYTHON_EXECUTABLE} -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || true)
+  _python_inc="${PYTHON_INCLUDE_DIR}/python${_pymajmin}"
+  _python_lib=$(find "${PYTHON_ROOT}/lib" "${PYTHON_ROOT}/lib64" \
+    \( -name 'libpython3*.so' ! -name '*.so.1*' \) -print -quit 2>/dev/null || true)
+  _numpy_inc=$(${PYTHON_EXECUTABLE} -c "import numpy; print(numpy.get_include())" 2>/dev/null \
+    || find "${NUMPY_ROOT:-/dev/null}/lib/python${_pymajmin}/site-packages/numpy" \
+         -name 'ndarraytypes.h' -exec dirname {} \; 2>/dev/null | head -1 || true)
+  unset _pymajmin
 
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
@@ -111,7 +118,9 @@ function Configure() {
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
     ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
     ${PYTHON_ROOT:+-DPython3_ROOT_DIR=$PYTHON_ROOT} \
-    ${_numpy_inc:+-DPython3_NumPy_INCLUDE_DIR=$_numpy_inc} \
+    ${_python_inc:+-DPython3_INCLUDE_DIR=$_python_inc} \
+    ${_python_lib:+-DPython3_LIBRARY=$_python_lib} \
+    ${_numpy_inc:+-DPython3_NumPy_INCLUDE_DIRS=$_numpy_inc} \
     ${PYTHON_EXECUTABLE:+-DPYTHON_EXECUTABLE=$PYTHON_EXECUTABLE} \
     -Dcheck_connection=OFF \
     -DCINTLONGLINE=4096 \
