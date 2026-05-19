@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/octave_kernel-0.32.0.tar.gz
 requires:
   - Python
-  - setuptools
   - octave
   - metakernel
   - jupyter_client

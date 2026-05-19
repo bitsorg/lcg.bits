@@ -5,6 +5,7 @@ tag: "2.1.4"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/alpgen_v2.1.4.tgz
 requires:
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

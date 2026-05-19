@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/fs-2.4.16.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - appdirs
   - pip

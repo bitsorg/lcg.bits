@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/yacs-0.1.8.tar.gz
 requires:
   - Python
-  - setuptools
   - PyYAML
   - pip
 build_requires:

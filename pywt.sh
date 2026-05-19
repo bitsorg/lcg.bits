@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/PyWavelets-1.6.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pillow
   - numpy
   - cython

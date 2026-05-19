@@ -6,10 +6,8 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pipenv-2024.4.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - certifi
-  - setuptools
   - virtualenv
   - virtualenv_clone
 build_requires:

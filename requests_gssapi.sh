@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/requests-gssapi-1.2.3.tar.gz
 requires:
   - Python
-  - setuptools
   - requests
   - gssapi
   - pip

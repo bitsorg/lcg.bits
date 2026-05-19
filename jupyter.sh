@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter-1.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - metakernel
   - pyzmq
   - tornado

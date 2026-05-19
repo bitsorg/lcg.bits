@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gssapi-1.8.3.tar.gz
 requires:
   - Python
-  - setuptools
   - decorator
   - pip
 build_requires:

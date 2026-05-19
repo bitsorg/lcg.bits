@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pymadx-unknown.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - matplotlib
   - importlib_metadata

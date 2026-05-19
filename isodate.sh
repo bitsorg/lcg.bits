@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/isodate-0.7.2.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

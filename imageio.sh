@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/imageio-2.37.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pillow
   - numpy
   - pip

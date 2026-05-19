@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/patsy-0.5.6.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - pandas
   - six

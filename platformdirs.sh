@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/platformdirs-4.3.6.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - pip
 build_requires:

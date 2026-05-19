@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyterlab_pygments-0.3.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pygments
   - pip
 build_requires:

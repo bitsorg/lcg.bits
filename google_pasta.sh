@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/google-pasta-0.2.0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

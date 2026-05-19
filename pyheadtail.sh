@@ -8,7 +8,6 @@ requires:
   - Python
   - numpy
   - cython
-  - setuptools
   - h5py
   - scipy
   - pip

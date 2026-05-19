@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pytest-9.0.2.tar.gz
 requires:
   - Python
-  - setuptools
   - py
   - six
   - attrs

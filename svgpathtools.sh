@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/svgpathtools-1.6.1.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - scipy
   - svgwrite

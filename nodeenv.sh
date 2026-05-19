@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nodeenv-1.9.1.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

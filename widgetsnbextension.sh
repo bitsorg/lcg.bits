@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/widgetsnbextension-4.0.14.tar.gz
 requires:
   - Python
-  - setuptools
   - notebook
   - jupyter_core
   - traitlets

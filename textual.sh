@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/textual-0.74.0.tar.gz
 requires:
   - Python
-  - setuptools
   - rich
   - pip
 build_requires:

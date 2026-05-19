@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/archspec-0.1.4.tar.gz
 requires:
   - Python
-  - setuptools
   - click
   - six
   - pip

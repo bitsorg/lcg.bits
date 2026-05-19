@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_latex_envs-1.4.6.tar.gz
 requires:
   - Python
-  - setuptools
   - ipython
   - jupyter_core
   - nbconvert

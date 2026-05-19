@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ruamel.yaml-0.18.10.tar.gz
 requires:
   - Python
-  - setuptools
   - ruamel_yaml_clib
   - pip
 build_requires:

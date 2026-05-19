@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/importlib_metadata-9.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - six
   - zipp

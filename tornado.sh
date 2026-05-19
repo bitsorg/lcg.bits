@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tornado-6.4.1.tar.gz
 requires:
   - Python
-  - setuptools
   - certifi
   - pip
 build_requires:

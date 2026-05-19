@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/iso8601-1.0.2.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

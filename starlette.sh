@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/starlette-0.48.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - anyio
 build_requires:

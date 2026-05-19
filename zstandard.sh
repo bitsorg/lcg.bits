@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/zstandard-0.23.0.tar.gz
 requires:
   - Python
-  - setuptools
   - cffi
   - pip
 build_requires:

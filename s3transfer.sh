@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/s3transfer-0.10.3.tar.gz
 requires:
   - Python
-  - setuptools
   - botocore
   # optional:
   # - awscrt

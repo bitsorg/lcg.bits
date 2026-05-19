@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rise-5.7.2.2.tar.gz
 requires:
   - Python
-  - setuptools
   - notebook
   - jupyter_core
   - traitlets

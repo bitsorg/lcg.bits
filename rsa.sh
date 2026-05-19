@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rsa-4.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pyasn1
   - pip
 build_requires:

@@ -5,6 +5,7 @@ tag: "0.29-1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/NextGenBatchAuth-0.29-1.tar.gz
 requires:
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

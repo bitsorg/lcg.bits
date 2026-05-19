@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/more-itertools-10.6.0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

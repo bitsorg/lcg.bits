@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/virtualenv-20.28.0.tar.gz
 requires:
   - Python
-  - setuptools
   - appdirs
   - distlib
   - filelock

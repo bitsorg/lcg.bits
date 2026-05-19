@@ -9,7 +9,6 @@ requires:
   - certifi
   - six
   - python_dateutil
-  - setuptools
   - PyYAML
   - websocket_client
   - requests

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scipy-1.17.1.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - pip
   - pybind11

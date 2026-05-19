@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyrsistent-0.18.0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

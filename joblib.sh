@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/joblib-1.5.3.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

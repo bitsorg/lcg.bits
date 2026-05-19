@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - pip
-  - setuptools
   - PyYAML
   - python_dateutil
   - Jinja2

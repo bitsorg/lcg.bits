@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyslha-3.2.6.tar.gz
 requires:
   - Python
-  - setuptools
   - tex2pix
   - pip
 build_requires:

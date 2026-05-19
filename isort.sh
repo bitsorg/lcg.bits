@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/isort-5.12.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

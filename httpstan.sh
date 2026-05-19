@@ -4,7 +4,6 @@ version: "4.13.0"
 tag: "4.13.0"
 requires:
   - Python
-  - setuptools
   - pip
   - wheel
   - marshmallow

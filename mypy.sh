@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mypy-1.19.1.tar.gz
 requires:
   - Python
-  - setuptools
   - typing_extensions
   - mypy_extensions
   - tomli

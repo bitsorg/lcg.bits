@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/onnx-1.16.0.tar.gz
 requires:
   - Python
-  - setuptools
   - absl
   - protobuf
   - typing_extensions

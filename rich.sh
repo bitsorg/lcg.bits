@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rich-13.9.4.tar.gz
 requires:
   - Python
-  - setuptools
   - commonmark
   - pygments
   - pip

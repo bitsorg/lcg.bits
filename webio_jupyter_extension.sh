@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/webio_jupyter_extension-0.1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - jupyter_packaging
   - notebook
   - rust

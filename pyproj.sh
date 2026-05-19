@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyproj-3.7.1.tar.gz
 requires:
   - Python
-  - setuptools
   - proj
   - cython
   - certifi

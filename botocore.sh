@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/botocore-1.35.48.tar.gz
 requires:
   - Python
-  - setuptools
   - jmespath
   - python_dateutil
   - urllib3

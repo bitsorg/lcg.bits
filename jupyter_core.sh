@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_core-5.7.2.tar.gz
 requires:
   - Python
-  - setuptools
   - traitlets
   - pip
 build_requires:

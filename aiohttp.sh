@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aiohttp-3.11.11.tar.gz
 requires:
   - Python
-  - setuptools
   - aiosignal
   - async_timeout
   - frozenlist

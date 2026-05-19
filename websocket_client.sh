@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/websocket_client-1.8.0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

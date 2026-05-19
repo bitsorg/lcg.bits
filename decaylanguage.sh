@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - pip
-  - setuptools
   - attrs
   - deprecated
   - graphviz_py

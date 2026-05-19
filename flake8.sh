@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/flake8-7.3.0.tar.gz
 requires:
   - Python
-  - setuptools
   - entrypoints
   - pyflakes
   - pycodestyle

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pytransport-2.0.2.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - matplotlib
   - scipy

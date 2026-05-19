@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/html5lib-1.1.tar.gz
 requires:
   - Python
-  - setuptools
   - webencodings
   - six
   - pip

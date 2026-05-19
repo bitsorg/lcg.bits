@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tzlocal-2.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pytz
   - pip
 build_requires:

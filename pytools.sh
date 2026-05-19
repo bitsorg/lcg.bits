@@ -8,7 +8,6 @@ requires:
   - genshi
   - ipython
   - simplejson
-  - setuptools
   - py
   - pytest
   - nose

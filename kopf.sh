@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kopf-1.40.0.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - aiohttp
   - aiosignal

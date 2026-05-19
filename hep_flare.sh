@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - pip
-  - setuptools
   - b2luigi
 build_requires:
   - bits-recipe-tools

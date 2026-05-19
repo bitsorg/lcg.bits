@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit-build-0.18.1.tar.gz
 requires:
   - Python
-  - setuptools
   - wheel
   - packaging
   - distro

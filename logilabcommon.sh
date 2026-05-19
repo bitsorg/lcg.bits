@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/logilab-common-1.8.1.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pytest
   - mypy_extensions

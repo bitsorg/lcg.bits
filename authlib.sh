@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Authlib-0.15.5.tar.gz
 requires:
   - Python
-  - setuptools
   - cryptography
   - pip
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/asttokens-2.4.1.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - six
 build_requires:

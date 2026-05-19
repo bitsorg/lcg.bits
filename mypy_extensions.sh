@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mypy_extensions-1.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - typing_extensions
   - tomli
   - pip

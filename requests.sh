@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/requests-2.32.3.tar.gz
 requires:
   - Python
-  - setuptools
   - charset_normalizer
   - pip
   - chardet

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pip-23.3.1.tar.gz
 requires:
   - Python
-  - setuptools
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

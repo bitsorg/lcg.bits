@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dask-jobqueue-0.9.0.tar.gz
 requires:
   - Python
-  - setuptools
   - dask
   - distributed
   - pip

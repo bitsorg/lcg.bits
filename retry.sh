@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/retry-0.9.2.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - decorator
   - py

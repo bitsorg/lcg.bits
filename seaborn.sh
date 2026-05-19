@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/seaborn-0.13.2.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - scipy
   - pandas

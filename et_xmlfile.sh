@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/et_xmlfile-1.1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

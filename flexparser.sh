@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/flexparser-0.4.tar.gz
 requires:
   - Python
-  - setuptools
   - typing_extensions
   - pip
 build_requires:

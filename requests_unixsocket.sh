@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/requests-unixsocket-0.2.0.tar.gz
 requires:
   - Python
-  - setuptools
   - requests
   - urllib3
   - pbr

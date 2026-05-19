@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pandas-2.2.3.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - pytz
   - python_dateutil

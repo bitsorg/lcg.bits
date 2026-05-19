@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kiwisolver-1.4.5.tar.gz
 requires:
   - Python
-  - setuptools
   - cppy
   - pip
 build_requires:

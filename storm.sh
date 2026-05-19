@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/storm-0.23.tar.bz2
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

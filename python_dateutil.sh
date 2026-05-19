@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/python-dateutil-2.9.0.post0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - setuptools_scm
   - pip

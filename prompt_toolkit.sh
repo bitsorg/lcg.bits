@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/prompt_toolkit-3.0.47.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - wcwidth
   - pip

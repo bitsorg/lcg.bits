@@ -12,7 +12,6 @@ requires:
   - xz
   - cython
   - pip
-  - setuptools
   - blosc
   - blosc2
   - packaging

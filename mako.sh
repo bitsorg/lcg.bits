@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Mako-1.3.5.tar.gz
 requires:
   - Python
-  - setuptools
   - MarkupSafe
   - pip
 build_requires:

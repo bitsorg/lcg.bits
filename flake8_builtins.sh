@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/flake8_builtins-3.1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - flake8
   - pip
 build_requires:

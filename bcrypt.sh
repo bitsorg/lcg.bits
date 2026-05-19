@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/bcrypt-5.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - cffi
   - pip

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hepdata-converter-0.3.1.tar.gz
 requires:
   - Python
-  - setuptools
   - matplotlib
   - hepdata_validator
   - PyYAML

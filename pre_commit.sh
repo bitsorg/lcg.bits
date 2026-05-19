@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pre_commit-3.8.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - PyYAML
   - virtualenv

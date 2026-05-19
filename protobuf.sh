@@ -7,7 +7,6 @@ sources:
 requires:
   - CMake
   - Python
-  - setuptools
   - absl
   - zlib
 build_requires:

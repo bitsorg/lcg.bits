@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pykube_ng-23.6.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - PyYAML
   - requests

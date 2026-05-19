@@ -5,7 +5,6 @@ tag: "0.24.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Cartopy-0.24.1.tar.gz
 requires:
-  - setuptools
   - numpy
   - cython
   - geos

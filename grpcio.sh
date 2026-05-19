@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/grpcio-1.73.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - typing_extensions
 build_requires:

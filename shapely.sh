@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Shapely-2.0.5.tar.gz
 requires:
   - Python
-  - setuptools
   - geos
   - cython
   - numpy

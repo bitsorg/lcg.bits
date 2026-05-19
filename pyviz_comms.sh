@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyviz_comms-2.0.1.tar.gz
 requires:
   - Python
-  - setuptools
   - param
   - pip
 build_requires:

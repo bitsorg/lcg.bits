@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lxml-5.3.1.tar.gz
 requires:
   - Python
-  - setuptools
   - libxml2
   - libxslt
   - cython

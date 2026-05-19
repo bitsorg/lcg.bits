@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/uncertainties-3.2.3.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - pip
 build_requires:

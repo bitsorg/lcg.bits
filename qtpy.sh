@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/QtPy-2.4.2.tar.gz
 requires:
   - Python
-  - setuptools
   - pyqt5
   - pip
 build_requires:

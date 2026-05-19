@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mccabe-0.7.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pytest_runner
   - pip
 build_requires:

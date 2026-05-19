@@ -4,7 +4,6 @@ version: "18.1.1"
 tag: "18.1.1"
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/model-optimization-unknown.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - numpy
   - dm_tree

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/paramiko-3.4.0.tar.gz
 requires:
   - Python
-  - setuptools
   - cryptography
   - bcrypt
   - pynacl

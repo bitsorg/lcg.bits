@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hepdata-validator-0.3.6.tar.gz
 requires:
   - Python
-  - setuptools
   - jsonschema
   - PyYAML
   - requests

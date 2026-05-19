@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/yarl-1.18.3.tar.gz
 requires:
   - Python
-  - setuptools
   - idna
   - multidict
   - pip

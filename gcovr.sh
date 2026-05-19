@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/gcovr-7.2.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - lxml
   - Jinja2

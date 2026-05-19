@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Sphinx-8.1.3.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - Jinja2
   - pygments

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qtconsole-5.6.1.tar.gz
 requires:
   - Python
-  - setuptools
   - ipykernel
   - jupyter_client
   - pygments

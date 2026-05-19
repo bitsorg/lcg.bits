@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/contur-3.1.3.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - scipy
   - pandas

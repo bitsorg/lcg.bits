@@ -4,7 +4,6 @@ version: "${NXCALS_PYTHON_VERSION}"
 tag: "${NXCALS_PYTHON_VERSION}"
 requires:
   - Python
-  - setuptools
   - nxcals_data_access_libs
   - spark
   - numpy

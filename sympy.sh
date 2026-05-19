@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/sympy-1.14.0.tar.gz
 requires:
   - Python
-  - setuptools
   - mpmath
   - pip
 build_requires:

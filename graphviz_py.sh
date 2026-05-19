@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pygraphviz-0.20.1.zip
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

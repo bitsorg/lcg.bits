@@ -4,7 +4,6 @@ version: "0.46.0rc1"
 tag: "0.46.0rc1"
 requires:
   - Python
-  - setuptools
   - pip
   - wheel
 build_requires:

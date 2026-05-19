@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/func_adl_xAOD-2.1.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - func_adl
   - qastle

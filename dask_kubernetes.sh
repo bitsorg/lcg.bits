@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dask-kubernetes-2025.7.0.tar.gz
 requires:
   - Python
-  - setuptools
   - dask
   - distributed
   - kubernetes

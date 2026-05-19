@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/boto3-1.35.48.tar.gz
 requires:
   - Python
-  - setuptools
   - botocore
   - jmespath
   - s3transfer

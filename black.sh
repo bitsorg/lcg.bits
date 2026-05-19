@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/black-24.10.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - click
   - mypy_extensions

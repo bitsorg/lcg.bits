@@ -4,7 +4,6 @@ version: "46.0.3"
 tag: "46.0.3"
 requires:
   - Python
-  - setuptools
   - asn1crypto
   - cffi
   - six

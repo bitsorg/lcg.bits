@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/py-1.11.0.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - pip
 build_requires:

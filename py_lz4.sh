@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/py_lz4-4.4.5.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - lz4
   - pip

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aiosignal-1.2.0.tar.gz
 requires:
   - Python
-  - setuptools
   - frozenlist
   - pip
 build_requires:

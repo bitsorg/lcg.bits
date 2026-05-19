@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - pip
-  - setuptools
   - railroad_diagrams
 build_requires:
   - bits-recipe-tools

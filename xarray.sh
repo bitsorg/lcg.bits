@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xarray-2025.4.0.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - packaging
   - pandas

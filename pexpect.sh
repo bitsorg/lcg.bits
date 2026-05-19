@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pexpect-4.9.0.tar.gz
 requires:
   - Python
-  - setuptools
   - ptyprocess
   - pip
 build_requires:

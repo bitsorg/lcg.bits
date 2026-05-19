@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hypothesis-6.135.1.tar.gz
 requires:
   - Python
-  - setuptools
   - attrs
   - sortedcontainers
   - click

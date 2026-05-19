@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hepunits-2.4.3.tar.gz
 requires:
   - Python
-  - setuptools
   - attrs
   - pip
   - pint

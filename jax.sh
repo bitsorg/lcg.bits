@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jax-0.9.2.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - scipy
   - absl_py

@@ -5,7 +5,6 @@ tag: "unknown"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_contrib_core-unknown.tar.gz
 requires:
-  - setuptools
   - tornado
   - notebook
   - traitlets

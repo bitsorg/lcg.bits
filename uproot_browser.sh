@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/uproot_browser-0.6.7.tar.gz
 requires:
   - Python
-  - setuptools
   - awkward
   - click
   - hist

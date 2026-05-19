@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/google-auth-oauthlib-1.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - google_auth
   - requests_oauthlib
   - pip

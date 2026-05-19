@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jedi-0.19.1.tar.gz
 requires:
   - Python
-  - setuptools
   - parso
   - pip
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dask_lxplus-0.3.3.tar.gz
 requires:
   - Python
-  - setuptools
   - click
   - cryptography
   - dask

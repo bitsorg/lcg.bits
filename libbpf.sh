@@ -5,6 +5,7 @@ tag: "1.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libbpf-1.5.0.tar.gz
 requires:
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

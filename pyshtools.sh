@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyshtools-4.13.1.tar.gz
 requires:
   - Python
-  - setuptools
   - proj
   - geos
   - xarray

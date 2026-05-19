@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/stomp.py-6.1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - docopt
   - pip
 build_requires:

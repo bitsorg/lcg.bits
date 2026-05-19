@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pluggy-1.5.0.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - importlib_metadata
   - zipp

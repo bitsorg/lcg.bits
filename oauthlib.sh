@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/oauthlib-3.2.2.tar.gz
 requires:
   - Python
-  - setuptools
   - cryptography
   - pip
 build_requires:

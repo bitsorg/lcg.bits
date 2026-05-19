@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - pip
-  - setuptools
   - traitlets
   - jupyter_core
   - jsonschema

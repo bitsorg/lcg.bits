@@ -4,7 +4,6 @@ version: "8.2.0"
 tag: "8.2.0"
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

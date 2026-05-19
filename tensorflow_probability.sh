@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tensorflow-probability-0.25.0.tar.gz
 requires:
   - Python
-  - setuptools
   - absl_py
   - six
   - numpy

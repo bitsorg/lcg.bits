@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/beautifulsoup4-4.10.0.tar.gz
 requires:
   - Python
-  - setuptools
   - soupsieve
   - pip
 build_requires:

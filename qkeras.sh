@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/QKeras-0.9.0.tar.gz
 requires:
   - Python
-  - setuptools
   - tensorflow_model_optimization
   - tqdm
   - scipy

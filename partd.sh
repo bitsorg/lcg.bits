@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/partd-1.4.2.tar.gz
 requires:
   - Python
-  - setuptools
   - locket
   - toolz
   - pip

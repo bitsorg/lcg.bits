@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pysimdjson-7.0.1.tar.gz
 requires:
   - Python
-  - setuptools
   - pybind11
   - pip
 build_requires:

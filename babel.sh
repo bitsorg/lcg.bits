@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Babel-2.17.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pytz
   - pip
 build_requires:

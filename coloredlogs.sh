@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/coloredlogs-15.0.1.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - humanfriendly
   - capturer

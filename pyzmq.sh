@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyzmq-26.2.1.tar.gz
 requires:
   - Python
-  - setuptools
   - zeromq
   - cython
   - cffi

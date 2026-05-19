@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tfs-pandas-4.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pandas
   - numpy
   - pip

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pint-0.25.2.tar.gz
 requires:
   - Python
-  - setuptools
   - flexcache
   - flexparser
   - platformdirs

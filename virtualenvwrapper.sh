@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/virtualenvwrapper-4.8.4.tar.gz
 requires:
   - Python
-  - setuptools
   - virtualenv
   - virtualenv_clone
   - stevedore

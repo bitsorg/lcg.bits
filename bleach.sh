@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/bleach-3.3.1.tar.gz
 requires:
   - Python
-  - setuptools
   - html5lib
   - six
   - packaging

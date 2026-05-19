@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pytest_cov-7.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pytest
   - coverage
   - pip

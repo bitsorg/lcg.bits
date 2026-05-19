@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Jinja2-3.1.6.tar.gz
 requires:
   - Python
-  - setuptools
   - MarkupSafe
   - pip
 build_requires:

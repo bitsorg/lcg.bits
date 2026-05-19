@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pydantic_extra_types-2.10.5.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - pycountry
   - pydantic

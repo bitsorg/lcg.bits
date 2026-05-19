@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/python-gitlab-1.8.0.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - requests
   - pip

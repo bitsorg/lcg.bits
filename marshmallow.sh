@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/marshmallow-3.16.0.tar.gz
 requires:
   - Python
-  - setuptools
   - packaging
   - pip
 build_requires:

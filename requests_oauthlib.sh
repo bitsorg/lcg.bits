@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/requests-oauthlib-1.2.0.tar.gz
 requires:
   - Python
-  - setuptools
   - requests
   - oauthlib
   - pip

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pytest_runner-6.0.1.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - pip
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ppft-1.7.7.tar.gz
 requires:
   - Python
-  - setuptools
   - dill
   - six
   - pip

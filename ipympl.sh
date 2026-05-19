@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ipympl-0.9.3.tar.gz
 requires:
   - Python
-  - setuptools
   - ipykernel
   - ipywidgets
   - matplotlib

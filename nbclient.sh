@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/nbclient-0.5.3.tar.gz
 requires:
   - Python
-  - setuptools
   - traitlets
   - jupyter_client
   - nbformat

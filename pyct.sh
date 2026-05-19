@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyct-0.5.0.tar.gz
 requires:
   - Python
-  - setuptools
   - param
   - pip
 build_requires:

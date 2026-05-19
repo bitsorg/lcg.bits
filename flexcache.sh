@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/flexcache-0.3.tar.gz
 requires:
   - Python
-  - setuptools
   - typing_extensions
   - pip
 build_requires:

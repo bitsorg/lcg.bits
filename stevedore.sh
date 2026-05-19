@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/stevedore-3.3.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pbr
   - pip
 build_requires:

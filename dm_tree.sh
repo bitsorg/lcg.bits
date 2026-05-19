@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/dm_tree-0.1.9.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
   - absl_py

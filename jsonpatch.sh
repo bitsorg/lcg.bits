@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jsonpatch-1.33.tar.gz
 requires:
   - Python
-  - setuptools
   - jsonpointer
   - pip
 build_requires:

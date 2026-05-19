@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pooch-1.6.0.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - pip
   - appdirs

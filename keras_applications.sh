@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Keras_Applications-1.0.8.tar.gz
 requires:
   - Python
-  - setuptools
   - keras
   - pip
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/numba-0.63.0rc1.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - llvmlite
   - pip

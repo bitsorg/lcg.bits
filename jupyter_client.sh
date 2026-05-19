@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_client-7.4.9.tar.gz
 requires:
   - Python
-  - setuptools
   - jupyter_core
   - traitlets
   - pyzmq

@@ -8,7 +8,6 @@ requires:
   - Python
   - numpy
   - scipy
-  - setuptools
   # optional:
   # - spark
   # - scikitlearn

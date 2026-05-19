@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/astropy-6.1.4.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - pyerfa
   - packaging

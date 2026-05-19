@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/click-didyoumean-0.3.0.tar.gz
 requires:
   - Python
-  - setuptools
   - click
   - pip
 build_requires:

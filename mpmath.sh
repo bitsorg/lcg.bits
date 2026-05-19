@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mpmath-1.2.1.tar.gz
 requires:
   - Python
-  - setuptools
   - setuptools_scm
   - pip
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rq-1.10.1.tar.gz
 requires:
   - Python
-  - setuptools
   - redis
   - click
   - pip

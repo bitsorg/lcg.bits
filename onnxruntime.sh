@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/onnxruntime-1.24.4.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - wheel
   - blas

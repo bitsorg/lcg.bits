@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_console-6.6.3.tar.gz
 requires:
   - Python
-  - setuptools
   - ipython
   - prompt_toolkit
   - pygments

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Deprecated-1.2.13.tar.gz
 requires:
   - Python
-  - setuptools
   - wrapt
   - pip
 build_requires:

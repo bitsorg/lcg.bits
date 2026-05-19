@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/ipywidgets-8.1.7.tar.gz
 requires:
   - Python
-  - setuptools
   - ipython
   - widgetsnbextension
   - traitlets

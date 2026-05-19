@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/multiprocess-0.70.16.tar.gz
 requires:
   - Python
-  - setuptools
   - dill
   - pip
 build_requires:

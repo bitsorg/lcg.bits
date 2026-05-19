@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/zict-3.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - HeapDict
 build_requires:

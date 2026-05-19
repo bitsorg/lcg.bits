@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/grpcio-status-1.56.2.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - grpcio
   - googleapis_common_protos

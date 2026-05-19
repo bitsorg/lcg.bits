@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/build-0.8.0.tar.gz
 requires:
   - Python
-  - setuptools
   - tomli
   - packaging
   - pep517

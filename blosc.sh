@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/blosc-1.11.4.tar.gz
 requires:
   - Python
-  - setuptools
   - wheel
   - scikitbuild
   - CMake

@@ -11,7 +11,6 @@ requires:
   - zlib
   - GSL
   - Python
-  - setuptools
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

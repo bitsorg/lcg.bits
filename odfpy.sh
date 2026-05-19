@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/odfpy-1.4.1.tar.gz
 requires:
   - Python
-  - setuptools
   - defusedxml
   - pip
 build_requires:

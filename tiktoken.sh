@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tiktoken-0.12.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - regex
   - requests

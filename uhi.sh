@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/uhi-0.3.0.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - pip
 build_requires:

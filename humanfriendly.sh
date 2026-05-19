@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/humanfriendly-10.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - docutils
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/servicex-3.1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - aiohttp
   - awkward

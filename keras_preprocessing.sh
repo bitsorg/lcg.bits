@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Keras_Preprocessing-1.1.2.tar.gz
 requires:
   - Python
-  - setuptools
   - keras
   - pip
 build_requires:

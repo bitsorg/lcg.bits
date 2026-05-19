@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kubernetes_asyncio-21.7.1.tar.gz
 requires:
   - Python
-  - setuptools
   - PyYAML
   - certifi
   - six

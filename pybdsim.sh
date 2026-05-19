@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pybdsim-3.6.1.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - scipy
   - Jinja2

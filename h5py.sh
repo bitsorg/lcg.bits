@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - hdf5
-  - setuptools
   - numpy
   - six
   - cython

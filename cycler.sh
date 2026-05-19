@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cycler-0.12.1.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - pip
 build_requires:

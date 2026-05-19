@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pydantic-2.12.5.tar.gz
 requires:
   - Python
-  - setuptools
   - cython
   - typing_extensions
   - mypy

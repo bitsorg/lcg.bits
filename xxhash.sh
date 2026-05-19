@@ -5,6 +5,7 @@ tag: "0.8.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xxHash-0.8.2.tar.gz
 requires:
+  - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

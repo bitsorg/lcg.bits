@@ -7,7 +7,6 @@ sources:
 requires:
   - Python
   - pip
-  - setuptools
   - hepdata_validator
   - PyYAML
   - scipy

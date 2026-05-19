@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/webargs-8.4.0.tar.gz
 requires:
   - Python
-  - setuptools
   - marshmallow
   - pip
 build_requires:

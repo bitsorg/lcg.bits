@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pyparser-1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - parse
   - pip
 build_requires:

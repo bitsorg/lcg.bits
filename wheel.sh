@@ -4,7 +4,6 @@ version: "0.45.1"
 tag: "0.45.1"
 requires:
   - Python
-  - setuptools
   - pip
 build_requires:
   - bits-recipe-tools

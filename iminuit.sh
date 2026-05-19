@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/iminuit-2.32.0.tar.gz
 requires:
   - Python
-  - setuptools
   - numpy
   - scipy
   - ipython

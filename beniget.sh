@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/beniget-0.4.2.post1.tar.gz
 requires:
   - Python
-  - setuptools
   - gast
   - pip
 build_requires:

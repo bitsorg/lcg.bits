@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cffi-2.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pycparser
   - libffi
   - pip

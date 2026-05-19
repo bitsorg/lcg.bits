@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pylint-4.0.5.tar.gz
 requires:
   - Python
-  - setuptools
   - astroid
   - isort
   - mccabe

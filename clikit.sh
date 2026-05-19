@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/clikit-0.6.2.tar.gz
 requires:
   - Python
-  - setuptools
   - crashtest
   - pastel
   - pylev

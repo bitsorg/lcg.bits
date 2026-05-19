@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/keras_tuner-1.4.7.tar.gz
 requires:
   - Python
-  - setuptools
   - packaging
   - numpy
   - requests

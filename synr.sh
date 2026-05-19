@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/synr-0.5.0.tar.gz
 requires:
   - Python
-  - setuptools
   - attrs
   - pip
 build_requires:

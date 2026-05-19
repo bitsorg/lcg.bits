@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/defusedxml-0.7.1.tar.gz
 requires:
   - Python
-  - setuptools
   - libxml2
   - pip
 build_requires:

@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rpy2-3.0.4.tar.gz
 requires:
   - Python
-  - setuptools
   - R
   - xz
   - pcre2

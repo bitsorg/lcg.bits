@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/colorcet-3.1.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pyct
   - pip
 build_requires:

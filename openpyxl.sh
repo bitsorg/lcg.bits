@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/openpyxl-3.1.5.tar.gz
 requires:
   - Python
-  - setuptools
   - et_xmlfile
   - pip
 build_requires:

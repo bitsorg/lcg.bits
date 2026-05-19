@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cpymad-1.19.0.tar.gz
 requires:
   - Python
-  - setuptools
   - cython
   - numpy
   - minrpc

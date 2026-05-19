@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/google-auth-2.38.0.tar.gz
 requires:
   - Python
-  - setuptools
   - cachetools
   - pyasn1_modules
   - rsa

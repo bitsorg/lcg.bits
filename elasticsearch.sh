@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/elasticsearch-6.3.0.tar.gz
 requires:
   - Python
-  - setuptools
   - urllib3
   - pip
 build_requires:

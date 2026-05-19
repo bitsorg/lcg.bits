@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/metakernel-0.30.2.tar.gz
 requires:
   - Python
-  - setuptools
   - ipython
   - pexpect
   - ipykernel

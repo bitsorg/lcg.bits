@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/opensearch_py-2.8.0.tar.gz
 requires:
   - Python
-  - setuptools
   - pip
   - python_dateutil
   - six

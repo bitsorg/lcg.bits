@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/astunparse-1.6.3.tar.gz
 requires:
   - Python
-  - setuptools
   - six
   - wheel
   - pip

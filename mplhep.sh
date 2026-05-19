@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mplhep-1.0.0.tar.gz
 requires:
   - Python
-  - setuptools
   - uhi
   - numpy
   - mplhep_data

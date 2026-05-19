@@ -4,7 +4,6 @@ version: "2.20.0"
 tag: "2.20.0"
 requires:
   - Python
-  - setuptools
   - pip
   - numpy
   - six

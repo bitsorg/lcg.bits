@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/redis-4.3.3.tar.gz
 requires:
   - Python
-  - setuptools
   - async_timeout
   - deprecated
   - packaging

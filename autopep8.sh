@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/autopep8-2.3.1.tar.gz
 requires:
   - Python
-  - setuptools
   - pycodestyle
   - pip
 build_requires:
