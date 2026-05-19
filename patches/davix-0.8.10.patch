@@ -1,0 +1,5 @@
+--- CMakeLists.txt~	2024-06-24 17:57:34.000000000 +0200
++++ CMakeLists.txt	2024-07-02 08:59:07.435667135 +0200
+@@ -100,1 +100,1 @@
+-find_package(RapidJSON QUIET)
++#find_package(RapidJSON QUIET)

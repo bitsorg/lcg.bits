@@ -33,10 +33,14 @@ MODULE_OPTIONS="--bin --lib --pylib"
 ##############################
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}/" ./
-  # ROOT's FindDavix.cmake only uses pkg_check_modules — no find_library fallback.
-  # Davix >= 0.7 may not install davix.pc at all (cmake config mode only).
-  # Prepend a direct DAVIX_ROOT-based fallback before the pkg-config block.
-  sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT env var (handles no davix.pc case)\nif(NOT DAVIX_FOUND AND DEFINED ENV{DAVIX_ROOT})\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS $ENV{DAVIX_ROOT}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS $ENV{DAVIX_ROOT}/lib $ENV{DAVIX_ROOT}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' cmake/modules/FindDavix.cmake
+  # ROOT's CMakeLists.txt does set(CMAKE_MODULE_PATH ...) which replaces any
+  # -DCMAKE_MODULE_PATH passed on the command line, so we must patch the source.
+  # FindDavix.cmake uses only pkg_check_modules; prepend a find_library fallback
+  # via DAVIX_ROOT so discovery works even when davix.pc is absent or misplaced.
+  # Guard prevents double-patching on reruns.
+  if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
+    sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT env var (handles no davix.pc case)\nif(NOT DAVIX_FOUND AND DEFINED ENV{DAVIX_ROOT})\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS $ENV{DAVIX_ROOT}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS $ENV{DAVIX_ROOT}/lib $ENV{DAVIX_ROOT}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
+  fi
 }
 function Configure() {
   # Detect C++ standard from environment before unsetting flags
