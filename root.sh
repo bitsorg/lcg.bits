@@ -45,6 +45,10 @@ function Configure() {
   # Expose xrootd location via the env var ROOT's cmake actually checks
   [[ -n "${XROOTD_ROOT}" ]] && export XRDSYS="${XROOTD_ROOT}"
 
+  # pkg_check_modules needs PKG_CONFIG_PATH set explicitly; module files
+  # alone are not sufficient when cmake spawns pkg-config as a subprocess.
+  [[ -n "${DAVIX_ROOT}" ]] && export PKG_CONFIG_PATH="${DAVIX_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+
   # Platform-specific settings
   SONAME=so
   COMPILER_CXX=g++
