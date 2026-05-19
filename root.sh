@@ -41,6 +41,9 @@ function Configure() {
   # ROOT must not see these or it picks up wrong flags
   unset ROOTSYS CXXFLAGS CFLAGS LDFLAGS
 
+  # Expose xrootd location via the env var ROOT's cmake actually checks
+  [[ -n "${xrootd_ROOT}" ]] && export XRDSYS="${xrootd_ROOT}"
+
   # Platform-specific settings
   SONAME=so
   COMPILER_CXX=g++
