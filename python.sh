@@ -49,5 +49,6 @@ function PostInstall() {
   # Since Python 3.12, ensurepip no longer bundles setuptools; without it
   # any pip call using build isolation (the default) cannot find the
   # setuptools build backend — e.g. XRootD's cmake_install.cmake.
-  "$INSTALLROOT/bin/python3" -m pip install --upgrade setuptools wheel
+  LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" \
+    "$INSTALLROOT/bin/python3" -m pip install --upgrade setuptools wheel
 }
