@@ -1,5 +1,5 @@
---- GNUmakefile.orig	2019-06-10 15:23:54.806793753 +0200
-+++ GNUmakefile	2019-06-10 16:56:22.691132440 +0200
+--- a/GNUmakefile
++++ b/GNUmakefile
 @@ -1,12 +1,16 @@
  PYTHON ?= python2
 +PIP ?= pip

@@ -1,5 +1,5 @@
---- CPP/Windows/ErrorMsg.cpp  2020-05-28 00:35:02.729896917 +0200
-+++ CPP/Windows/ErrorMsg.cpp  2020-05-28 00:40:01.676442629 +0200
+--- a/CPP/Windows/ErrorMsg.cpp
++++ b/CPP/Windows/ErrorMsg.cpp
 @@ -13,7 +13,7 @@
    const char * txt = 0;
    AString msg;
@@ -19,8 +19,8 @@
      case E_NOTIMPL             : txt = "E_NOTIMPL"; break ;
      case E_NOINTERFACE         : txt = "E_NOINTERFACE"; break ;
 
---- CPP/7zip/Archive/Wim/WimHandler.cpp.orig	2016-06-11 10:08:06.000000000 +0200
-+++ CPP/7zip/Archive/Wim/WimHandler.cpp	2021-06-23 14:37:28.618106493 +0200
+--- a/CPP/7zip/Archive/Wim/WimHandler.cpp
++++ b/CPP/7zip/Archive/Wim/WimHandler.cpp
 @@ -301 +301 @@
 -      bool numMethods = 0;
 +      int numMethods = 0;

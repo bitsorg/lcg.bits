@@ -1,5 +1,5 @@
---- src/core/lib/gprpp/per_cpu.h~	2024-08-22 13:08:54.000000000 +0200
-+++ src/core/lib/gprpp/per_cpu.h	2024-08-22 13:27:29.483446177 +0200
+--- a/src/core/lib/gprpp/per_cpu.h
++++ b/src/core/lib/gprpp/per_cpu.h
 @@ -87,1 +87,1 @@
 -  explicit PerCpu(PerCpuOptions options) : shards_(options.Shards()) {}
 +  explicit PerCpu(PerCpuOptions options) : shards_(options.Shards()), data_{new T[shards_]} {}
@@ -18,8 +18,8 @@
            return PollNonEmpty();
          });
    }
---- cmake/systemd.cmake~	2024-08-22 13:08:53.000000000 +0200
-+++ cmake/systemd.cmake	2025-03-26 10:48:24.167797056 +0100
+--- a/cmake/systemd.cmake
++++ b/cmake/systemd.cmake
 @@ -15,6 +15,6 @@
 -find_package(systemd)
 -if(TARGET systemd)

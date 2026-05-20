@@ -1,5 +1,5 @@
---- Makefile.orig       2017-02-27 15:20:28.583478976 +0100
-+++ Makefile    2017-02-27 15:20:40.763531531 +0100
+--- a/Makefile
++++ b/Makefile
 @@ -9,7 +9,7 @@
  CC     = gcc -ffloat-store
  CFLAGS = -g -Wall -DVerbOpt -O0
@@ -9,8 +9,8 @@
  
  
  #      Definitions of file sets
---- report.c.orig	2020-11-10 14:25:03.000000000 +0100
-+++ report.c	2020-11-10 14:26:23.000000000 +0100
+--- a/report.c
++++ b/report.c
 @@ -34,6 +34,8 @@
  #include <math.h>
  #include <stdio.h>

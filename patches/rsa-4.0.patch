@@ -1,5 +1,5 @@
---- setup.py.orig	2019-06-10 11:56:18.291476828 +0200
-+++ setup.py	2019-06-10 12:00:21.800060502 +0200
+--- a/setup.py
++++ b/setup.py
 @@ -15,8 +15,9 @@
  #  limitations under the License.
  

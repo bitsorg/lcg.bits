@@ -1,5 +1,5 @@
---- src/Makefile.orig	2013-05-29 20:53:57.000000000 +0200
-+++ src/Makefile	2013-05-29 20:54:19.000000000 +0200
+--- a/src/Makefile
++++ b/src/Makefile
 @@ -19,7 +19,7 @@
  $(LIB_SHARED):  $(objects)
  	mkdir -p $(LIBDIR_SHARED)
@@ -9,8 +9,8 @@
  
  $(LIB_ARCHIVE) : $(objects)
  	mkdir -p $(LIBDIR_ARCHIVE)
---- configure.orig	2020-07-27 16:10:52.243864119 +0200
-+++ configure	2020-07-27 16:11:12.167515236 +0200
+--- a/configure
++++ b/configure
 @@ -63,8 +63,8 @@
  #
  # export FFLAGS_OPT="-O2 -Wuninitialized"

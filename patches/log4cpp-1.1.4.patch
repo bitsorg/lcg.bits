@@ -1,15 +1,15 @@
---- include/log4cpp/config.h~	2024-09-16 10:55:51.844071034 +0200
-+++ include/log4cpp/config.h	2024-09-16 10:55:58.367181630 +0200
+--- a/include/log4cpp/config.h
++++ b/include/log4cpp/config.h
 @@ -0,0 +1,3 @@
 +#pragma once
 +#define LOG4CPP_HAVE_UNISTD_H 1
 +#define LOG4CPP_HAVE_SSTREAM 1
---- include/log4cpp/DailyRollingFileAppender.hh~	2023-03-12 17:46:57.000000000 +0100
-+++ include/log4cpp/DailyRollingFileAppender.hh	2024-09-16 11:00:45.030429435 +0200
+--- a/include/log4cpp/DailyRollingFileAppender.hh
++++ b/include/log4cpp/DailyRollingFileAppender.hh
 @@ -13,0 +14 @@
 +#include <time.h>
---- src/snprintf.c~	2023-03-12 17:46:57.000000000 +0100
-+++ src/snprintf.c	2024-09-16 12:49:49.605810065 +0200
+--- a/src/snprintf.c
++++ b/src/snprintf.c
 @@ -364 +364 @@
 -  { register size_t nn = (size_t)(n); \
 +  { size_t nn = (size_t)(n); \
@@ -22,7 +22,7 @@
 @@ -374,1 +374,1 @@
 -      register char *dd; register const int cc=(int)(c); \
 +      char *dd; const int cc=(int)(c); \
---- CMakeLists.txt~	2024-09-19 13:29:38.300559192 +0200
-+++ CMakeLists.txt	2024-09-19 13:30:46.990783593 +0200
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -93,1 +92,0 @@
 -  PATTERN "config.h" EXCLUDE

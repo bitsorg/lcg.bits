@@ -1,5 +1,5 @@
---- CMake/HighFiveTargetDeps.cmake~	2024-12-03 15:31:35.000000000 +0100
-+++ CMake/HighFiveTargetDeps.cmake	2025-08-15 16:05:23.149664013 +0200
+--- a/CMake/HighFiveTargetDeps.cmake
++++ b/CMake/HighFiveTargetDeps.cmake
 @@ -53,5 +53,5 @@
        set(Boost_NO_BOOST_CMAKE TRUE)
      endif()

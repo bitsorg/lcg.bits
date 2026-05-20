@@ -1,6 +1,6 @@
 diff -Naur tmp/alplib/alpgen.f tmp1/alplib/alpgen.f
---- alplib/alpgen.f	2011-03-28 08:19:18.000000000 +0200
-+++ alplib/alpgen.f	2014-03-31 15:37:15.000000000 +0200
+--- a/alplib/alpgen.f
++++ b/alplib/alpgen.f
 @@ -4647,9 +4647,9 @@
  c     
        IMPLICIT NONE
@@ -15,8 +15,8 @@ diff -Naur tmp/alplib/alpgen.f tmp1/alplib/alpgen.f
  
  
 diff -Naur tmp/alplib/alputi.f tmp1/alplib/alputi.f
---- alplib/alputi.f	2010-12-14 09:03:41.000000000 +0100
-+++ alplib/alputi.f	2014-03-28 16:37:36.000000000 +0100
+--- a/alplib/alputi.f
++++ b/alplib/alputi.f
 @@ -785,7 +785,7 @@
       &,NBIN(200),IHIS(200,100),IUSCORE(200),IOSCORE(200)
       &,IENT(200),HAVG(200),HINT(200),HSIG(200),BOOK(200),TITLE(200)
@@ -35,8 +35,8 @@ diff -Naur tmp/alplib/alputi.f tmp1/alplib/alputi.f
        CHARACTER*(*) LTIT,BTIT,SCA
        double precision hist
        CHARACTER*7  PLOT(4)
---- examples/configure_simple.orig	2015-02-26 10:18:06.592116387 +0100
-+++ examples/configure_simple	2015-02-26 10:18:31.564116645 +0100
+--- a/examples/configure_simple
++++ b/examples/configure_simple
 @@ -1,4 +1,4 @@
 -#!/bin/sh
 +#!/bin/bash

@@ -1,6 +1,6 @@
 diff -uprN makefile makefile
---- makefile	2020-07-18 16:20:50.000000000 +0200
-+++ makefile	2021-02-19 17:32:45.849097970 +0100
+--- a/makefile
++++ b/makefile
 @@ -1,7 +1,7 @@
  LIBFLAGlha = -lLHAPDF
  LIBFLAGapfel = -lAPFEL -lAPFELevol
@@ -22,8 +22,8 @@ diff -uprN makefile makefile
  sCODELHA = $(patsubst %,$(OBJ_PATH)%,$(sCODELHAi))
  
 diff -uprN src/diss/Elastic.f src/diss/Elastic.f
---- src/diss/Elastic.f	2021-03-04 20:12:40.000000000 +0100
-+++ src/diss/Elastic.f	2021-03-08 02:48:58.719823167 +0100
+--- a/src/diss/Elastic.f
++++ b/src/diss/Elastic.f
 @@ -95,13 +95,3014 @@ c      gm=dsqrt(7.78d0)*ge
        
        include 'gcoh.f'
@@ -3045,8 +3045,8 @@ diff -uprN src/diss/Elastic.f src/diss/Elastic.f
        return
        end
 diff -uprN src/main/superchic.f src/main/superchic.f
---- src/main/superchic.f	2021-03-04 20:12:46.000000000 +0100
-+++ src/main/superchic.f	2021-03-08 02:49:35.224883656 +0100
+--- a/src/main/superchic.f
++++ b/src/main/superchic.f
 @@ -628,8 +628,10 @@ ccccccccc
        endif
           
@@ -3061,8 +3061,8 @@ diff -uprN src/main/superchic.f src/main/superchic.f
  
        if(beam.eq.'ion'.or.beam.eq.'ionp')call ioninit
 diff -uprN src/phase/alpdecay.f src/phase/alpdecay.f
---- src/phase/alpdecay.f	2021-03-04 20:12:32.000000000 +0100
-+++ src/phase/alpdecay.f	2021-03-08 02:50:06.520078227 +0100
+--- a/src/phase/alpdecay.f
++++ b/src/phase/alpdecay.f
 @@ -11,7 +11,7 @@ ccccc calculate width
  
        width=gax**2*malp**3/64d0/pi
@@ -3073,8 +3073,8 @@ diff -uprN src/phase/alpdecay.f src/phase/alpdecay.f
  ccccc      
        
 diff -uprN src/sPDFs/calchg.f src/sPDFs/calchg.f
---- src/sPDFs/calchg.f	2021-03-04 20:12:28.000000000 +0100
-+++ src/sPDFs/calchg.f	2021-03-08 02:50:40.046215372 +0100
+--- a/src/sPDFs/calchg.f
++++ b/src/sPDFs/calchg.f
 @@ -1,5 +1,6 @@
  ccc   read in skewed pdf from file
 -      subroutine calchg
@@ -3084,8 +3084,8 @@ diff -uprN src/sPDFs/calchg.f src/sPDFs/calchg.f
        integer i,itot,j,jtot,outl
  
 diff -uprN src/sPDFs/calcsud.f src/sPDFs/calcsud.f
---- src/sPDFs/calcsud.f	2021-03-04 20:12:28.000000000 +0100
-+++ src/sPDFs/calcsud.f	2021-03-08 02:50:52.728888804 +0100
+--- a/src/sPDFs/calcsud.f
++++ b/src/sPDFs/calcsud.f
 @@ -1,5 +1,6 @@
  ccc   reads Sudakov factor from file
 -      subroutine calcsud

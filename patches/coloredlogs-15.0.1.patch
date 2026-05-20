@@ -1,5 +1,5 @@
---- ./coloredlogs/converter/__init__.py~	2020-02-15 00:18:02.000000000 +0100
-+++ ./coloredlogs/converter/__init__.py	2025-09-19 12:08:48.776527503 +0200
+--- a/./coloredlogs/converter/__init__.py
++++ b/./coloredlogs/converter/__init__.py
 @@ -12 +12 @@
 -import pipes
 +#import pipes

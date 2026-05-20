@@ -1,5 +1,5 @@
---- HepMC3Event/Makefile.orig	2021-05-17 14:16:37.000000000 +0200
-+++ HepMC3Event/Makefile	2021-05-17 14:18:56.000000000 +0200
+--- a/HepMC3Event/Makefile
++++ b/HepMC3Event/Makefile
 @@ -29,6 +29,7 @@
  
  HEPEVENT_INC=-I../include/
@@ -17,8 +17,8 @@
  
  $(LIB_A): $(LIB_OBJ)
  	ar cr $(LIB_A) $(LIB_OBJ)
---- platform/make.inc.in.orig	2021-05-06 00:31:22.000000000 +0200
-+++ platform/make.inc.in	2021-08-07 11:03:52.000000000 +0200
+--- a/platform/make.inc.in
++++ b/platform/make.inc.in
 @@ -24,7 +24,7 @@
  CPPFLAGS=  -P -traditional-cpp
  

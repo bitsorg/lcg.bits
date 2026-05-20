@@ -1,5 +1,5 @@
---- src/diss/Elastic.f.orig	2024-02-14 15:43:49.274258385 +0100
-+++ src/diss/Elastic.f	2024-02-14 15:45:52.516054457 +0100
+--- a/src/diss/Elastic.f
++++ b/src/diss/Elastic.f
 @@ -103,10 +103,28 @@
        double precision dum,gcohu1,gcohu2,gcohu3
        integer i

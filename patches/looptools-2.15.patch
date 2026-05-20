@@ -1,5 +1,5 @@
---- configure.orig	2020-07-27 16:36:13.887626224 +0200
-+++ configure	2020-07-27 16:37:23.487440766 +0200
+--- a/configure
++++ b/configure
 @@ -148,14 +148,14 @@
  
  set -- `eval $CONF_FC --version -c | sed '/^$/d;s/(.*)//;q' 2>&1`

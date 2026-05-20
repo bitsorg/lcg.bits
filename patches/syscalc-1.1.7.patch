@@ -1,5 +1,5 @@
---- src/Makefile.orig	2023-02-16 15:18:18.775431944 +0100
-+++ src/Makefile	2023-02-16 15:20:45.171103803 +0100
+--- a/src/Makefile
++++ b/src/Makefile
 @@ -1,7 +1,8 @@
 -COPTS = -O -DDROP_CGAL
 -INCLUDES = -I../include -I$(shell lhapdf-config --incdir)
@@ -22,8 +22,8 @@
  clean:
  	rm -f ../sys_calc *.o
 \ No newline at end of file
---- include/tinyxml2.h~	2018-02-07 15:16:46.000000000 +0100
-+++ include/tinyxml2.h	2023-05-17 14:07:44.261825538 +0200
+--- a/include/tinyxml2.h
++++ b/include/tinyxml2.h
 @@ -191 +191 @@
 -    DynArray< T, INIT >() {
 +    DynArray() {

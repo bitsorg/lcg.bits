@@ -1,5 +1,5 @@
---- Makefile.orig	2019-07-19 14:05:24.678536549 +0200
-+++ Makefile	2019-07-19 14:20:46.664148428 +0200
+--- a/Makefile
++++ b/Makefile
 @@ -12,6 +12,7 @@
  DEBUG = 
  # DEBUG = 1
@@ -39,8 +39,8 @@
  
  libHto4l.a: $(OBJECTS) $(LTL)libooptools.a
  	ar cr libHto4l.a $(OBJECTS)
---- LoopTools-2.10/makefile-lxplus.orig	2020-07-27 15:09:02.556212301 +0200
-+++ LoopTools-2.10/makefile-lxplus	2020-07-27 15:09:37.263593288 +0200
+--- a/LoopTools-2.10/makefile-lxplus
++++ b/LoopTools-2.10/makefile-lxplus
 @@ -9,7 +9,7 @@
  NOUNDERSCORE = 0
  

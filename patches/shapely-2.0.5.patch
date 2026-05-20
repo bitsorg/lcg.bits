@@ -1,5 +1,5 @@
---- setup.py.orig	2024-07-30 13:27:26.078312468 +0200
-+++ setup.py	2024-07-30 13:28:33.039662689 +0200
+--- a/setup.py
++++ b/setup.py
 @@ -156,6 +156,12 @@
  else:
      ext_options = get_geos_paths()

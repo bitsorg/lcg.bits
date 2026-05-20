@@ -1,5 +1,5 @@
---- setup.py~	2023-11-25 05:39:52.000000000 +0100
-+++ setup.py	2024-06-26 11:28:22.747080332 +0200
+--- a/setup.py
++++ b/setup.py
 @@ -2 +2 @@
 -from distutils.core import setup
 +from setuptools import setup

@@ -1,5 +1,5 @@
---- ./pyproject.toml~	1970-01-01 01:00:00.000000000 +0100
-+++ ./pyproject.toml	2025-11-27 16:26:58.153712347 +0100
+--- a/./pyproject.toml
++++ b/./pyproject.toml
 @@ -23 +23 @@
 -python = ">=3.10,<3.14"
 +python = ">=3.10,<=3.14"

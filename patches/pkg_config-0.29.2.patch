@@ -11,7 +11,7 @@ keyword. Let's avoid using `bool` as a field name.
 
 diff --git a/glib/goption.c b/glib/goption.c
 index 530e0cdba8e..c1b085c19c2 100644
---- glib/glib/goption.c.orig
+--- a/glib/glib/goption.c
 +++ glib/glib/goption.c
 @@ -56,7 +56,7 @@ typedef struct
    gpointer arg_data;

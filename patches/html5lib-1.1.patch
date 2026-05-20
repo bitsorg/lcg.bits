@@ -1,5 +1,5 @@
---- ./setup.py~	2020-06-23 01:23:02.000000000 +0200
-+++ ./setup.py	2025-11-25 16:30:41.932129603 +0100
+--- a/./setup.py
++++ b/./setup.py
 @@ -92,3 +92,17 @@
 -                a.targets[0].id == "__version__" and
 -                isinstance(a.value, ast.Str)):

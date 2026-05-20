@@ -1,5 +1,5 @@
---- configure.orig	2016-02-22 15:47:18.674199570 +0100
-+++ configure	2016-02-22 15:48:30.694675795 +0100
+--- a/configure
++++ b/configure
 @@ -178,7 +178,8 @@
    esac
  done
@@ -10,8 +10,8 @@
  
  CONF_M=${CONF_BITS:+-m$CONF_BITS}
  
---- makefile.in.orig    2016-05-27 10:43:59.000000000 +0200
-+++ makefile.in 2016-05-27 10:44:39.000000000 +0200
+--- a/makefile.in
++++ b/makefile.in
 @@ -41,8 +41,6 @@
           $(BLD)/PDG.h "$(INCLUDEDIR)"
         strip $(BLD)/FeynHiggs$(EXE) $(BLD)/table$(EXE)

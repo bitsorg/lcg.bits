@@ -1,6 +1,6 @@
 SPI-1475 : https://sft.its.cern.ch/jira/browse/SPI-1475
---- amptsub.f.orig	2019-10-29 08:51:03.895947161 +0100
-+++ amptsub.f	2019-10-29 08:51:50.895949095 +0100
+--- a/amptsub.f
++++ b/amptsub.f
 @@ -3829,12 +3829,12 @@
  c      PRINT *, ' number of projectile strings = ', IHNT2(1)
  c      PRINT *, ' number of target strings = ', IHNT2(3)
@@ -35,8 +35,8 @@ SPI-1475 : https://sft.its.cern.ch/jira/browse/SPI-1475
        END IF
  
        CALL HJAN2A
---- hijing1.383_ampt.f.orig	2019-10-29 08:50:18.723945303 +0100
-+++ hijing1.383_ampt.f	2019-10-29 08:53:36.775953450 +0100
+--- a/hijing1.383_ampt.f
++++ b/hijing1.383_ampt.f
 @@ -1973,6 +1973,7 @@
          SUBROUTINE HIJSET(EFRM,FRAME,PROJ,TARG,IAP,IZP,IAT,IZT)
          CHARACTER FRAME*4,PROJ*4,TARG*4,EFRAME*4
@@ -53,8 +53,8 @@ SPI-1475 : https://sft.its.cern.ch/jira/browse/SPI-1475
          CALL TITLE
          IHNT2(1)=IAP
          IHNT2(2)=IZP
---- main.f.orig	2019-10-29 08:50:50.947946629 +0100
-+++ main.f	2019-10-29 08:52:29.567950686 +0100
+--- a/main.f
++++ b/main.f
 @@ -142,8 +142,8 @@
        if(ihjsed.eq.11) then
           PRINT *,
@@ -66,8 +66,8 @@ SPI-1475 : https://sft.its.cern.ch/jira/browse/SPI-1475
        if(ihjsed.eq.11) then
           nseed=nseedr
        endif
---- Makefile.orig	2019-10-29 08:50:12.575945050 +0100
-+++ Makefile	2019-10-29 08:53:44.659953775 +0100
+--- a/Makefile
++++ b/Makefile
 @@ -1,6 +1,6 @@
  OBJ=main.o amptsub.o art1f.o \
  hijing1.383_ampt.o hipyset1.35.o zpc.o linana.o

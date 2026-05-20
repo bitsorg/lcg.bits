@@ -1,13 +1,13 @@
---- tools/perf/util/setup.py~	2025-04-03 13:58:37.000000000 +0200
-+++ tools/perf/util/setup.py	2025-04-08 16:34:18.581603001 +0200
+--- a/tools/perf/util/setup.py
++++ b/tools/perf/util/setup.py
 @@ -64,4 +64,5 @@
  if cc_is_clang:
      cflags += ["-Wno-unused-command-line-argument" ]
 +    cflags += ["-Wno-cast-function-type-mismatch" ]
  else:
      cflags += ['-Wno-cast-function-type' ]
---- tools/perf/Makefile.config~	2025-04-03 13:58:37.000000000 +0200
-+++ tools/perf/Makefile.config	2025-04-08 16:33:30.917956123 +0200
+--- a/tools/perf/Makefile.config
++++ b/tools/perf/Makefile.config
 @@ -712,5 +712,5 @@
      ifeq ($(feature-clang-bpf-co-re), 0)
        $(warning Warning: Disabled BPF skeletons as clang is too old)

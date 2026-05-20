@@ -1,5 +1,5 @@
---- conf/settings.xml.orig	2022-03-05 12:30:01.000000000 +0100
-+++ conf/settings.xml	2022-05-03 14:33:20.215771031 +0200
+--- a/conf/settings.xml
++++ b/conf/settings.xml
 @@ -156,13 +156,14 @@
        <url>http://my.repository.com/repo/path</url>
      </mirror>

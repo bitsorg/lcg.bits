@@ -1,5 +1,5 @@
---- lib/library.cpp.orig	2025-07-20 12:15:59.000000000 +0200
-+++ lib/library.cpp	2025-07-30 13:00:03.541180217 +0200
+--- a/lib/library.cpp
++++ b/lib/library.cpp
 @@ -215,5 +215,2 @@
              std::list<std::string> cfgfolders;
 -    #ifdef FILESDIR

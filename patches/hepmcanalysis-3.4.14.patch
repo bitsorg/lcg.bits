@@ -1,5 +1,5 @@
---- examples/hepmcreader/reader.cc.orig 2013-10-31 11:11:16.000000000 +0100
-+++ examples/hepmcreader/reader.cc      2013-10-31 11:11:59.000000000 +0100
+--- a/examples/hepmcreader/reader.cc
++++ b/examples/hepmcreader/reader.cc
 @@ -172,7 +172,7 @@
    for (vector<baseAnalysis*>::const_iterator i(analysis.begin()); i != analysis.end(); ++i) {
      (*i)->Finalize(f);
@@ -9,8 +9,8 @@
    // clean up analysis modules and configuration
    for (vector<baseAnalysis*>::const_iterator i(analysis.begin()); i != analysis.end(); ++i) {
      delete (*i);
---- config.mk.orig	2013-09-03 16:47:11.000000000 +0200
-+++ config.mk	2013-09-03 16:53:26.000000000 +0200
+--- a/config.mk
++++ b/config.mk
 @@ -10,16 +10,16 @@
  #              -I$(HepPDTdir)/include -I$(ROOTSYS)/include
  INCLUDES    = $(INCLUDEH) $(INCLUDEF)
@@ -32,8 +32,8 @@
  
  FastJetlib  = `$(FastJetdir)/bin/fastjet-config --libs --plugins=yes --rpath=no`
  # output directories
---- Makefile.orig	2013-09-03 16:52:14.000000000 +0200
-+++ Makefile	2013-09-03 16:54:04.000000000 +0200
+--- a/Makefile
++++ b/Makefile
 @@ -28,7 +28,7 @@
  	@mkdir -p $(LIBDIR) 
  	$(CXX) $(CXXFLAGS) $(INCLUDES) \
@@ -43,8 +43,8 @@
  	$(ROOTGLIBS) $(LINK_LIBS)
 
 
---- src/baseAnalysis.cc	2013-03-04 19:19:55.000000000 +0100
-+++ src/baseAnalysis.cc	2014-10-03 07:36:47.000000000 +0200
+--- a/src/baseAnalysis.cc
++++ b/src/baseAnalysis.cc
 @@ -281,8 +281,8 @@
      double pe = (*p)->momentum().e();
      

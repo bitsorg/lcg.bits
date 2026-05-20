@@ -1,5 +1,5 @@
---- models/sm/restrict_ckm.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_ckm.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_ckm.dat
++++ b/models/sm/restrict_ckm.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -63,8 +63,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/sm/restrict_c_mass.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_c_mass.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_c_mass.dat
++++ b/models/sm/restrict_c_mass.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -114,8 +114,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/sm/restrict_default.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_default.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_default.dat
++++ b/models/sm/restrict_default.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -165,8 +165,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/sm/restrict_lepton_masses.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_lepton_masses.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_lepton_masses.dat
++++ b/models/sm/restrict_lepton_masses.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -216,8 +216,8 @@
     11 5.110000e-04 # yme
     13 1.056600e-01 # ymm
     15 1.777000e+00 # ymtau 
---- models/sm/restrict_no_b_mass.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_no_b_mass.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_no_b_mass.dat
++++ b/models/sm/restrict_no_b_mass.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -267,8 +267,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/sm/restrict_no_masses.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_no_masses.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_no_masses.dat
++++ b/models/sm/restrict_no_masses.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -317,8 +317,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 0.000000e+00 # ymtau 
---- models/sm/restrict_no_tau_mass.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_no_tau_mass.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_no_tau_mass.dat
++++ b/models/sm/restrict_no_tau_mass.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -367,8 +367,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 0.000000e+00 # ymtau 
---- models/sm/restrict_no_widths.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_no_widths.dat	2016-05-03 22:54:19.000000001 +0200
+--- a/models/sm/restrict_no_widths.dat
++++ b/models/sm/restrict_no_widths.dat
 @@ -16,7 +16,7 @@
  Block MASS 
      4 0.000000e+00 # MC 
@@ -378,8 +378,8 @@
     11 0.000000e+00 # Me 
     13 0.000000e+00 # MM 
     15 1.777000e+00 # MTA 
---- models/sm/restrict_zeromass_ckm.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/sm/restrict_zeromass_ckm.dat	2016-05-03 22:54:20.000000001 +0200
+--- a/models/sm/restrict_zeromass_ckm.dat
++++ b/models/sm/restrict_zeromass_ckm.dat
 @@ -6,9 +6,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -442,8 +442,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 0.000000e+00 # ymtau 
---- models/loop_sm/restrict_ckm.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_ckm.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_ckm.dat
++++ b/models/loop_sm/restrict_ckm.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -507,8 +507,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_c_mass.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_c_mass.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_c_mass.dat
++++ b/models/loop_sm/restrict_c_mass.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -558,8 +558,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_default.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_default.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_default.dat
++++ b/models/loop_sm/restrict_default.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -609,8 +609,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_lepton_masses.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_lepton_masses.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_lepton_masses.dat
++++ b/models/loop_sm/restrict_lepton_masses.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -660,8 +660,8 @@
     11 5.110000e-04 # yme
     13 1.056600e-01 # ymm
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_no_b_mass.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_no_b_mass.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_no_b_mass.dat
++++ b/models/loop_sm/restrict_no_b_mass.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -711,8 +711,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_no_masses.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_no_masses.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_no_masses.dat
++++ b/models/loop_sm/restrict_no_masses.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -761,8 +761,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 0.000000e+00 # ymtau 
---- models/loop_sm/restrict_no_tau_mass.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_no_tau_mass.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_no_tau_mass.dat
++++ b/models/loop_sm/restrict_no_tau_mass.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -811,8 +811,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 0.000000e+00 # ymtau 
---- models/loop_sm/restrict_no_widths.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_no_widths.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_no_widths.dat
++++ b/models/loop_sm/restrict_no_widths.dat
 @@ -22,7 +22,7 @@
  Block MASS 
      4 0.000000e+00 # MC 
@@ -831,8 +831,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_parallel_test.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_parallel_test.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_parallel_test.dat
++++ b/models/loop_sm/restrict_parallel_test.dat
 @@ -22,7 +22,7 @@
  Block MASS 
      4 0.000000e+00 # MC 
@@ -851,8 +851,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 1.777000e+00 # ymtau 
---- models/loop_sm/restrict_test.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_test.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_test.dat
++++ b/models/loop_sm/restrict_test.dat
 @@ -22,7 +22,7 @@
  Block MASS 
      4 0.000000e+00 # MC 
@@ -862,8 +862,8 @@
     11 0.000000e+00 # Me 
     13 0.000000e+00 # MM 
     15 1.777000e+00 # MTA 
---- models/loop_sm/restrict_zeromass_ckm.dat	2015-10-26 02:18:52.000000001 +0100
-+++ models/loop_sm/restrict_zeromass_ckm.dat	2016-05-03 22:54:29.000000001 +0200
+--- a/models/loop_sm/restrict_zeromass_ckm.dat
++++ b/models/loop_sm/restrict_zeromass_ckm.dat
 @@ -12,9 +12,9 @@
  ## INFORMATION FOR SMINPUTS
  ###################################
@@ -926,8 +926,8 @@
     11 0.000000e+00 # yme 
     13 0.000000e+00 # ymm 
     15 0.000000e+00 # ymtau 
---- madgraph/interface/loop_interface.py.orig	2018-05-01 10:19:36.391921213 +0300
-+++ madgraph/interface/loop_interface.py	2018-05-01 10:20:08.019974345 +0300
+--- a/madgraph/interface/loop_interface.py
++++ b/madgraph/interface/loop_interface.py
 @@ -23,7 +23,7 @@
  import re
  
@@ -948,8 +948,8 @@
          to_install = self.ask('install', '0',  ask_class=AskLoopInstaller, timeout=300, 
                                path_msg=' ')
 
---- vendor/CutTools/makefile.orig	2018-06-18 13:24:17.164637074 +0200
-+++ vendor/CutTools/makefile	2018-06-18 13:24:27.756740547 +0200
+--- a/vendor/CutTools/makefile
++++ b/vendor/CutTools/makefile
 @@ -9,7 +9,7 @@
  ifeq ($(wildcard ../make_opts), ../make_opts)
    include ../make_opts
@@ -959,8 +959,8 @@
    FC=gfortran
  endif
  
---- vendor/IREGI/src/makefile_ML5_lib.orig	2018-07-09 13:33:48.546490615 +0200
-+++ vendor/IREGI/src/makefile_ML5_lib	2018-07-09 13:33:57.238573607 +0200
+--- a/vendor/IREGI/src/makefile_ML5_lib
++++ b/vendor/IREGI/src/makefile_ML5_lib
 @@ -5,7 +5,7 @@
  FFDIR=$(qcdlooppath)/ff
  onelooppath=$(PWD)/oneloop
@@ -970,8 +970,8 @@
  obj= global.o funlib.o linear_algebra.o kinematics.o matrices.o matrix_base.o cmatrix_base.o mis_warp.o special_fun.o pave_reduce.o cpave_reduce.o si_reduce.o csi_reduce.o ti_reduce.o cti_reduce.o gti_reduce.o binary_tree.o IREGI4ML5_interface.o avh_olo_foriregi.o
  olomod= avh_olo_foriregi.mod avh_olo_foriregi_dp_box.mod    avh_olo_foriregi_dp_olog.mod   avh_olo_foriregi_units.mod \
          avh_olo_foriregi_dp.mod        avh_olo_foriregi_dp_boxc.mod   avh_olo_foriregi_dp_prec.mod   avh_olo_foriregi_version.mod \
---- madgraph/various/misc.py.orig      2018-04-29 15:59:44.000000000 +0200
-+++ madgraph/various/misc.py   2018-07-18 10:11:06.000000000 +0200
+--- a/madgraph/various/misc.py
++++ b/madgraph/various/misc.py
 @@ -469,6 +469,8 @@
      try:
          if nb_core > 1:
@@ -982,8 +982,8 @@
          p = subprocess.Popen(cmd, stdout=subprocess.PIPE, 
                               stderr=subprocess.STDOUT, cwd=cwd, **opt)
 
---- madgraph/various/cluster.py.orig	2020-02-03 16:49:15.391981789 +0100
-+++ madgraph/various/cluster.py	2020-02-03 16:50:03.040159965 +0100
+--- a/madgraph/various/cluster.py
++++ b/madgraph/various/cluster.py
 @@ -875,7 +875,7 @@
                 """
          
@@ -1002,8 +1002,8 @@
          else:
              requirement = ''
  
---- /dev/null	2020-09-02 07:36:17.604620197 +0200
-+++ models/loop_sm/restrict_ckm_c_mass.dat	2020-09-02 13:18:03.083179993 +0200
+--- a//dev/null
++++ b/models/loop_sm/restrict_ckm_c_mass.dat
 @@ -0,0 +1,59 @@
 +######################################################################
 +## PARAM_CARD AUTOMATICALY GENERATED BY THE UFO  #####################
@@ -1064,8 +1064,8 @@
 +   11 0.000000e+00 # yme 
 +   13 0.000000e+00 # ymm 
 +   15 1.777000e+00 # ymtau 
---- madgraph/various/banner.py.orig	2021-05-31 16:48:08.000000001 +0200
-+++ madgraph/various/banner.py	2021-08-12 19:36:07.000000001 +0200
+--- a/madgraph/various/banner.py
++++ b/madgraph/various/banner.py
 @@ -4219,7 +4219,8 @@
          # for lepton-lepton collisions, ignore 'pdlabel' and 'lhaid'
          if abs(self['lpp1'])!=1 or abs(self['lpp2'])!=1:
@@ -1076,8 +1076,8 @@
              
              if self['pdlabel']!='nn23nlo' or self['reweight_pdf']:
                  self['pdlabel']='nn23nlo'
---- bin/.compile.py.orig	2021-08-12 19:43:58.000000001 +0200
-+++ bin/.compile.py	2021-08-12 19:26:33.000000001 +0200
+--- a/bin/.compile.py
++++ b/bin/.compile.py
 @@ -26,7 +26,7 @@
  root_path = os.path.split(os.path.dirname(os.path.realpath( __file__ )))[0]
  sys.path.append(root_path)
@@ -1131,8 +1131,8 @@
  
      def install_package(self, programs=[]):
          print("installing external package")
---- input/mg5_configuration.txt.orig	2021-05-31 16:48:15.000000001 +0200
-+++ input/mg5_configuration.txt	2021-08-12 20:19:07.000000001 +0200
+--- a/input/mg5_configuration.txt
++++ b/input/mg5_configuration.txt
 @@ -90,7 +90,7 @@
  #! Control when MG5 checks if he is up-to-date.
  #! Enter the number of day between two check (0 means never)
@@ -1191,8 +1191,8 @@
  
  #! Absolute paths to the config script in the bin directory of PineAPPL
  #! (to generate PDF-independent fast-interpolation grids).
---- input/.mg5_configuration_default.txt.orig	2021-05-31 16:48:08.000000001 +0200
-+++ input/.mg5_configuration_default.txt	2021-08-12 20:19:26.000000001 +0200
+--- a/input/.mg5_configuration_default.txt
++++ b/input/.mg5_configuration_default.txt
 @@ -90,7 +90,7 @@
  #! Control when MG5 checks if he is up-to-date.
  #! Enter the number of day between two check (0 means never)
@@ -1251,8 +1251,8 @@
 
  #! Absolute paths to the config script in the bin directory of PineAPPL
  #! (to generate PDF-independent fast-interpolation grids).
---- PLUGIN/CVMFS_PATCH/__init__.py	1970-01-01 01:00:00.000000000 +0100
-+++ PLUGIN/CVMFS_PATCH/__init__.py	2021-11-10 17:27:27.472881924 +0000
+--- a/PLUGIN/CVMFS_PATCH/__init__.py
++++ b/PLUGIN/CVMFS_PATCH/__init__.py
 @@ -0,0 +1,34 @@
 +import shutil
 +import pathlib

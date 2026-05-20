@@ -1,5 +1,5 @@
---- ./jedi/third_party/typeshed/third_party/2/six/moves/__init__.pyi~	2023-10-02 11:17:57.000000000 +0200
-+++ ./jedi/third_party/typeshed/third_party/2/six/moves/__init__.pyi	2025-09-19 12:29:50.272228775 +0200
+--- a/./jedi/third_party/typeshed/third_party/2/six/moves/__init__.pyi
++++ b/./jedi/third_party/typeshed/third_party/2/six/moves/__init__.pyi
 @@ -8 +8,7 @@
 -import pipes
 +try:

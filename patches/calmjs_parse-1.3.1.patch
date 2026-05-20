@@ -1,5 +1,5 @@
---- setup.py~	2023-10-29 11:20:14.000000000 +0100
-+++ setup.py	2024-02-07 11:23:20.600250538 +0100
+--- a/setup.py
++++ b/setup.py
 @@ -13,1 +13,1 @@
 -        env['PYTHONPATH'] = 'src'
 +        env['PYTHONPATH'] = env['PYTHONPATH'] + os.pathsep + 'src'

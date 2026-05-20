@@ -1,5 +1,5 @@
---- JHUGenerator/makefile.orig	2015-08-20 12:51:55.000000001 +0200
-+++ JHUGenerator/makefile	2015-08-20 12:52:35.000000001 +0200
+--- a/JHUGenerator/makefile
++++ b/JHUGenerator/makefile
 @@ -1,13 +1,13 @@
 -Here = $(PWD)
 +
@@ -38,8 +38,8 @@
  endif
  
  
---- JHUGenMELA/makefile.orig	2015-08-20 12:52:50.000000001 +0200
-+++ JHUGenMELA/makefile	2015-08-20 12:53:10.000000001 +0200
+--- a/JHUGenMELA/makefile
++++ b/JHUGenMELA/makefile
 @@ -1,11 +1,12 @@
 -Comp = gfort
 +/Comp = gfortran
@@ -65,8 +65,8 @@
  	@echo " "
  
  
---- JHUGenerator/pdfs/Cteq61Pdf.f.orig	2015-08-20 13:10:49.000000001 +0200
-+++ JHUGenerator/pdfs/Cteq61Pdf.f	2015-08-20 13:12:46.000000001 +0200
+--- a/JHUGenerator/pdfs/Cteq61Pdf.f
++++ b/JHUGenerator/pdfs/Cteq61Pdf.f
 @@ -134,6 +134,7 @@
       > / 'cteq6m', 'cteq6d', 'cteq6l', 'cteq6l','ctq61.'/
        Data Isetold, Isetmin0, Isetmin1, Isetmax1 /-987,1,100,140/

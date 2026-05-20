@@ -1,5 +1,5 @@
---- src/3rdparty/javascriptcore/JavaScriptCore/wtf/TypeTraits.h.orig	2012-11-23 11:09:56.000000000 +0100
-+++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/TypeTraits.h	2016-02-17 13:15:35.184556940 +0100
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/wtf/TypeTraits.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/wtf/TypeTraits.h
 @@ -166,9 +166,15 @@
          typedef T Type;
      };
@@ -18,8 +18,8 @@
      // VC10 (VS2010) and later support C++ TR1 type_traits in the std::tr1 namespace.
      template<typename T> struct HasTrivialConstructor : public std::tr1::has_trivial_constructor<T> { };
      template<typename T> struct HasTrivialDestructor : public std::tr1::has_trivial_destructor<T> { };
---- src/3rdparty/javascriptcore/JavaScriptCore/wtf/HashTable.h.orig	2012-11-23 11:09:56.000000000 +0100
-+++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/HashTable.h	2016-02-16 18:20:15.139569167 +0100
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/wtf/HashTable.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/wtf/HashTable.h
 @@ -257,7 +257,7 @@
 
      using std::swap;
@@ -29,8 +29,8 @@
     // The Dinkumware C++ library (used by MSVC and QNX) and clang's libc++ have a swap for pairs defined.
 
     // swap pairs by component, in case of pair members that specialize swap
---- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSImmediate.h.orig	2015-05-07 16:14:48.000000000 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSImmediate.h	2016-03-14 13:25:07.180899656 +0100
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSImmediate.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSImmediate.h
 @@ -37,6 +37,13 @@
  #include <stdint.h>
  #include <stdlib.h>
@@ -45,8 +45,8 @@
  namespace JSC {
 
      class ExecState;
---- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h.orig	2016-10-11 14:03:43.000000000 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h	2016-10-11 14:30:54.000000000 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSValue.h
 @@ -25,7 +25,12 @@
 
  #include "CallData.h"
@@ -61,8 +61,8 @@
  #include <stddef.h> // for size_t
  #include <stdint.h>
  #include <wtf/AlwaysInline.h>
---- src/3rdparty/javascriptcore/JavaScriptCore/runtime/Structure.h.orig	2012-11-23 11:09:55.000000000 +0100
-+++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/Structure.h	2016-02-16 18:20:15.143569213 +0100
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/runtime/Structure.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/runtime/Structure.h
 @@ -210,7 +210,7 @@
          bool m_isPinnedPropertyTable : 1;
          bool m_hasGetterSetterProperties : 1;
@@ -72,8 +72,8 @@
          // Workaround for Symbian WINSCW compiler that cannot resolve unsigned type of the declared
          // bitfield, when used as argument in make_pair() function calls in structure.ccp.
          // This bitfield optimization is insignificant for the Symbian emulator target.
---- src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h.orig	2016-03-14 13:52:47.688271735 +0100
-+++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h	2016-03-14 13:54:42.069340856 +0100
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h
 @@ -27,7 +27,14 @@
  #define WTF_MathExtras_h
 
@@ -89,8 +89,8 @@
  #include <stdlib.h>
 
  #if OS(SOLARIS)
---- src/3rdparty/webkit/Source/JavaScriptCore/wtf/TypeTraits.h.orig	2016-02-17 13:13:56.751653365 +0100
-+++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/TypeTraits.h	2016-02-17 13:15:58.744773786 +0100
+--- a/src/3rdparty/webkit/Source/JavaScriptCore/wtf/TypeTraits.h
++++ b/src/3rdparty/webkit/Source/JavaScriptCore/wtf/TypeTraits.h
 @@ -179,9 +179,15 @@
          typedef T Type;
      };
@@ -109,8 +109,8 @@
      // VC10 (VS2010) and later support C++ TR1 type_traits in the std::tr1 namespace.
      template<typename T> struct HasTrivialConstructor : public std::tr1::has_trivial_constructor<T> { };
      template<typename T> struct HasTrivialDestructor : public std::tr1::has_trivial_destructor<T> { };
---- src/3rdparty/webkit/Source/JavaScriptCore/wtf/MathExtras.h.orig	2016-02-17 13:20:37.751356628 +0100
-+++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/MathExtras.h	2016-02-17 14:23:02.450423871 +0100
+--- a/src/3rdparty/webkit/Source/JavaScriptCore/wtf/MathExtras.h
++++ b/src/3rdparty/webkit/Source/JavaScriptCore/wtf/MathExtras.h
 @@ -253,10 +253,37 @@
  }
 
@@ -153,8 +153,8 @@
  #endif
 
  #endif // #ifndef WTF_MathExtras_h
---- src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h.orig	2015-05-07 16:14:45.000000000 +0200
-+++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h	2016-03-14 15:37:12.979817291 +0100
+--- a/src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h
++++ b/src/3rdparty/webkit/Source/JavaScriptCore/wtf/HashSet.h
 @@ -181,7 +181,15 @@
          typedef HashSetTranslatorAdapter<ValueType, ValueTraits, T, HashTranslator> Adapter;
          return m_impl.template contains<T, Adapter>(value);
@@ -193,8 +193,8 @@
  #else
          return m_impl.template addPassingHashCode<T, T, Adapter>(value, value);
 
---- src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.cpp.orig        2015-05-07 16:14:47.000000001 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.cpp  2016-04-05 11:33:03.385785725 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.cpp
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.cpp
 @@ -1835,9 +1835,9 @@
  RegisterID* BytecodeGenerator::emitCatch(RegisterID* targetRegister, Label* start, Label* end)
  {
@@ -217,8 +217,8 @@
          case SwitchInfo::SwitchImmediate:
              emitOpcode(op_switch_imm);
 
---- src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.h.orig  2015-05-07 16:14:47.000000001 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.h    2016-04-05 11:28:20.310788560 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/bytecompiler/BytecodeGenerator.h
 @@ -176,7 +176,7 @@
              // Node::emitCode assumes that dst, if provided, is either a local or a referenced temporary.
              ASSERT(!dst || dst == ignoredResult() || !dst->isTemporary() || dst->refCount());
@@ -238,8 +238,8 @@
              }
              if (m_emitNodeDepth >= s_maxEmitNodeDepth)
 
---- src/3rdparty/javascriptcore/JavaScriptCore/runtime/Identifier.cpp.orig    2015-05-07 16:14:48.000000001 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/Identifier.cpp      2016-04-05 11:35:07.892472523 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/runtime/Identifier.cpp
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/runtime/Identifier.cpp
 @@ -195,7 +195,7 @@
          UString::Rep::empty().hash();
          return &UString::Rep::empty();
@@ -250,8 +250,8 @@
 
      // If the string is newly-translated, then we need to adopt it.
 
---- src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSONObject.cpp.orig    2015-05-07 16:14:48.000000001 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSONObject.cpp      2016-04-05 11:38:02.534275500 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSONObject.cpp
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/runtime/JSONObject.cpp
 @@ -320,7 +320,7 @@
              default:
                  static const char hexDigits[] = "0123456789abcdef";
@@ -262,8 +262,8 @@
                  break;
          }
 
---- src/3rdparty/javascriptcore/JavaScriptCore/yarr/RegexCompiler.cpp.orig    2015-05-07 16:14:47.000000001 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/yarr/RegexCompiler.cpp      2016-04-05 11:48:32.560185228 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/yarr/RegexCompiler.cpp
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/yarr/RegexCompiler.cpp
 @@ -719,7 +719,7 @@
 
      constructor.setupOffsets();
@@ -273,8 +273,8 @@
  };
 
 
---- src/3rdparty/webkit/Source/WebCore/dom/Element.cpp.orig   2015-05-07 16:14:47.000000001 +0200
-+++ src/3rdparty/webkit/Source/WebCore/dom/Element.cpp     2016-04-05 11:57:48.574866111 +0200
+--- a/src/3rdparty/webkit/Source/WebCore/dom/Element.cpp
++++ b/src/3rdparty/webkit/Source/WebCore/dom/Element.cpp
 @@ -1080,7 +1080,7 @@
  {
      // Ref currentStyle in case it would otherwise be deleted when setRenderStyle() is called.
@@ -285,8 +285,8 @@
      bool hasIndirectAdjacentRules = currentStyle && currentStyle->childrenAffectedByForwardPositionalRules();
 
 
---- src/plugins/accessible/widgets/itemviews.cpp.orig 2015-05-07 16:14:48.000000001 +0200
-+++ src/plugins/accessible/widgets/itemviews.cpp   2016-04-05 12:13:47.064159508 +0200
+--- a/src/plugins/accessible/widgets/itemviews.cpp
++++ b/src/plugins/accessible/widgets/itemviews.cpp
 @@ -393,7 +393,7 @@
      QModelIndex index = view()->model()->index(0, column, view()->rootIndex());
      if (!index.isValid() || view()->selectionMode() & QAbstractItemView::NoSelection)
@@ -326,8 +326,8 @@ index 4aa0668..63b646d 100644
      if (colorSpace == 0)
 --
 2.3.8 (Apple Git-58)
---- src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h.orig    2016-10-12 10:45:39.831628726 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h 2016-10-12 10:52:37.916564096 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/wtf/MathExtras.h
 @@ -193,4 +193,38 @@
  inline float rad2grad(float r) { return r * 200.0f / piFloat; }
  inline float grad2rad(float g) { return g * piFloat / 200.0f; }
@@ -367,8 +367,8 @@ index 4aa0668..63b646d 100644
 +#endif
 +
  #endif // #ifndef WTF_MathExtras_h
---- src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h.orig	2016-10-17 11:22:16.838639789 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h	2016-10-17 11:55:28.460836990 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h
 @@ -61,7 +61,7 @@
  #else
  typedef uint16_t UChar;
@@ -479,8 +479,8 @@ index 4aa0668..63b646d 100644
  } }
  ConversionResult convertUTF8ToUTF16(
      const char** sourceStart, const char* sourceEnd, 
---- src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/UTF8.cpp.orig	2016-10-17 11:59:16.750540729 +0200
-+++ src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/UTF8.cpp	2016-10-17 12:33:38.615027218 +0200
+--- a/src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/UTF8.cpp
++++ b/src/3rdparty/javascriptcore/JavaScriptCore/wtf/unicode/UTF8.cpp
 @@ -228,8 +228,8 @@
  // Magic values subtracted from a buffer value during UTF8 conversion.
  // This table contains as many values as there might be trailing bytes
@@ -492,8 +492,8 @@ index 4aa0668..63b646d 100644
  
  ConversionResult convertUTF8ToUTF16(
      const char** sourceStart, const char* sourceEnd, 
---- src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/UTF8.cpp.orig	2016-10-17 13:13:18.298554535 +0200
-+++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/UTF8.cpp	2016-10-17 13:13:55.843505442 +0200
+--- a/src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/UTF8.cpp
++++ b/src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/UTF8.cpp
 @@ -233,8 +233,9 @@
  // Magic values subtracted from a buffer value during UTF8 conversion.
  // This table contains as many values as there might be trailing bytes
@@ -506,8 +506,8 @@ index 4aa0668..63b646d 100644
  
  static inline UChar32 readUTF8Sequence(const char*& sequence, unsigned length)
  {
---- src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h.orig	2016-10-19 11:59:52.499992758 +0200
-+++ src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h	2016-10-19 11:54:18.203455643 +0200
+--- a/src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h
++++ b/src/3rdparty/webkit/Source/JavaScriptCore/wtf/unicode/qt4/UnicodeQt4.h
 @@ -68,7 +68,7 @@
  #endif
  
@@ -517,7 +517,7 @@ index 4aa0668..63b646d 100644
  #endif
  
  namespace WTF {
---- src/3rdparty/webkit/Source/WebCore/html/HTMLImageElement.cpp.orig
+--- a/src/3rdparty/webkit/Source/WebCore/html/HTMLImageElement.cpp
 +++ src/3rdparty/webkit/Source/WebCore/html/HTMLImageElement.cpp
 @@ -74,7 +74,7 @@
      RefPtr<HTMLImageElement> image = adoptRef(new HTMLImageElement(imgTag, document));
@@ -528,7 +528,7 @@ index 4aa0668..63b646d 100644
          image->setHeight(*optionalHeight);
      return image.release();
  }
---- tools/linguist/linguist/messagemodel.cpp.orig
+--- a/tools/linguist/linguist/messagemodel.cpp
 +++ tools/linguist/linguist/messagemodel.cpp
 @@ -183,7 +183,7 @@
          if (ContextItem *c = one->findContext(oc->context())) {

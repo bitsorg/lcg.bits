@@ -1,5 +1,5 @@
---- ./pyproject.toml~	2025-10-20 17:11:02.000000000 +0200
-+++ ./pyproject.toml	2025-11-26 17:51:43.120297997 +0100
+--- a/./pyproject.toml
++++ b/./pyproject.toml
 @@ -13 +13 @@
 -requires-python = ">=3.11,<3.14"
 +requires-python = ">=3.11,<=3.14"

@@ -1,5 +1,5 @@
---- ./webio_jupyter_extension/serverextension.py~	2021-09-10 02:24:57.000000000 +0200
-+++ ./webio_jupyter_extension/serverextension.py	2025-10-02 15:40:04.377424498 +0200
+--- a/./webio_jupyter_extension/serverextension.py
++++ b/./webio_jupyter_extension/serverextension.py
 @@ -1,2 +1,9 @@
 -from notebook.utils import url_path_join
 -from notebook.base.handlers import IPythonHandler

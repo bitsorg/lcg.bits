@@ -1024,8 +1024,8 @@ index 462c06d..323b1ea 100644
                matrix(cs,gs,i,lp,prin) = matrix(cs,gs,i,lp,prin) + wwTI
 -- 
 GitLab
---- src/CMakeLists.txt	2025-11-14 16:21:30.437454594 +0100
-+++ src/CMakeLists.txt	2025-11-14 16:21:44.517874177 +0100
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
 @@ -333,7 +333,33 @@
  #  Recola installation configuration  #
  #-------------------------------------#

@@ -1,5 +1,5 @@
---- CMakeLists.txt~	2024-04-29 15:46:08.000000000 +0200
-+++ CMakeLists.txt	2024-06-13 13:32:18.675588864 +0200
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -12,0 +13 @@
 +  add_definitions(WITH_MY_CUSTOM_DEF)
 @@ -34,0 +36,2 @@
@@ -10,13 +10,13 @@
 +  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/csrc>
 @@ -39 +41,0 @@
 -include(GNUInstallDirs)
---- CMakeLists.txt~	2024-06-13 13:35:08.661414483 +0200
-+++ CMakeLists.txt	2024-06-13 13:36:48.080066000 +0200
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -38 +38 @@
 -target_include_directories(${PROJECT_NAME} INTERFACE
 +target_include_directories(${PROJECT_NAME} PUBLIC
---- setup.py~	2024-04-29 15:46:08.000000000 +0200
-+++ setup.py	2024-06-13 13:57:57.615083102 +0200
+--- a/setup.py
++++ b/setup.py
 @@ -49 +49,2 @@
 -            extra_compile_args['cxx'] += ['-Wno-sign-compare']
 +            pass
@@ -24,8 +24,8 @@
 @@ -100 +101 @@
 -            include_dirs=[extensions_dir],
 +            include_dirs=[os.path.join(os.getcwd(), extensions_dir)],
---- setup.py~	2024-06-14 11:33:38.000000000 +0200
-+++ setup.py	2024-06-14 11:38:31.649725217 +0200
+--- a/setup.py
++++ b/setup.py
 @@ -11,2 +11,6 @@
 -from torch.utils.cpp_extension import (CUDA_HOME, BuildExtension, CppExtension,
 -                                       CUDAExtension)

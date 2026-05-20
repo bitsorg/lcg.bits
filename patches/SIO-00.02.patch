@@ -1,5 +1,5 @@
---- cmake/SIOBuild.cmake.orig	2025-04-29 19:44:32.630188698 +0200
-+++ cmake/SIOBuild.cmake	2025-04-29 19:44:50.637362144 +0200
+--- a/cmake/SIOBuild.cmake
++++ b/cmake/SIOBuild.cmake
 @@ -197,7 +197,7 @@
  ENDIF()
  

@@ -1,7 +1,7 @@
 Index: base/src/UPIDConverter.cxx
 ===================================================================
---- base/src/UPIDConverter.cxx	(revision 89)
-+++ base/src/UPIDConverter.cxx	(working copy)
+--- a/base/src/UPIDConverter.cxx
++++ b/base/src/UPIDConverter.cxx
 @@ -85,12 +85,12 @@
    }
  
@@ -20,8 +20,8 @@ Index: base/src/UPIDConverter.cxx
  
 Index: config/Makelib
 ===================================================================
---- config/Makelib	(revision 89)
-+++ config/Makelib	(working copy)
+--- a/config/Makelib
++++ b/config/Makelib
 @@ -3,7 +3,7 @@
  
  
@@ -78,8 +78,8 @@ Index: config/Makelib
  
 Index: converters/urqmd2u.cpp
 ===================================================================
---- converters/urqmd2u.cpp	(revision 89)
-+++ converters/urqmd2u.cpp	(working copy)
+--- a/converters/urqmd2u.cpp
++++ b/converters/urqmd2u.cpp
 @@ -75,7 +75,6 @@
    char *inpfile;
    char *outfile;

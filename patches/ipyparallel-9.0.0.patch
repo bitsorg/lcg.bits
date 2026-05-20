@@ -1,5 +1,5 @@
---- ./ipyparallel/shellcmd.py~	2020-02-02 01:00:00.000000000 +0100
-+++ ./ipyparallel/shellcmd.py	2025-03-19 11:57:59.933436876 +0100
+--- a/./ipyparallel/shellcmd.py
++++ b/./ipyparallel/shellcmd.py
 @@ -19 +19 @@
 -from .cluster.shellcmd import ShellCommandReceive
 +from .cluster.shellcmd_receive import ShellCommandReceive

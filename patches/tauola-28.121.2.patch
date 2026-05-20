@@ -1,5 +1,5 @@
---- Makefile.orig	2013-05-05 20:57:02.000000000 +0200
-+++ Makefile	2013-05-05 20:57:41.000000000 +0200
+--- a/Makefile
++++ b/Makefile
 @@ -83,7 +83,7 @@
  	  cp -rf config.mk include/ lib/ $(INSTALL_DIR)  && \
  	  cd $(INSTALL_DIR)/lib               && \

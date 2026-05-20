@@ -1,5 +1,5 @@
---- ./setup.py~	2015-08-12 02:42:23.000000000 +0200
-+++ ./setup.py	2024-07-23 14:41:19.976672675 +0200
+--- a/./setup.py
++++ b/./setup.py
 @@ -12 +12 @@
 -from distutils.core import setup
 +from setuptools import setup

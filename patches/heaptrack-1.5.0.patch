@@ -1,5 +1,5 @@
---- cmake/FindLibunwind.cmake.orig	2024-06-06 11:23:33.220410905 +0200
-+++ cmake/FindLibunwind.cmake	2024-06-06 11:25:40.566692773 +0200
+--- a/cmake/FindLibunwind.cmake
++++ b/cmake/FindLibunwind.cmake
 @@ -57,8 +57,8 @@
                            LIBUNWIND_HAS_UNW_GETCONTEXT)
    check_c_source_compiles("#define UNW_LOCAL_ONLY 1\n#include <libunwind.h>\nint main() { unw_context_t context; unw_cursor_t cursor; unw_getcontext(&context); unw_init_local(&cursor, &context); return 0; }"
@@ -11,8 +11,8 @@
    check_c_source_compiles ("#define UNW_LOCAL_ONLY 1\n#include <libunwind.h>\nint main() { return unw_set_cache_size(unw_local_addr_space, 1024, 0); }" LIBUNWIND_HAS_UNW_SET_CACHE_SIZE)
    check_c_source_compiles ("#define UNW_LOCAL_ONLY 1\n#include <libunwind.h>\nint main() { return unw_set_caching_policy(unw_local_addr_space, UNW_CACHE_PER_THREAD); }" LIBUNWIND_HAS_UNW_CACHE_PER_THREAD)
    set(CMAKE_REQUIRED_QUIET ${CMAKE_REQUIRED_QUIET_SAVE})
---- src/analyze/CMakeLists.txt~	2023-09-29 19:00:07.000000000 +0200
-+++ src/analyze/CMakeLists.txt	2025-08-15 15:48:30.000230576 +0200
+--- a/src/analyze/CMakeLists.txt
++++ b/src/analyze/CMakeLists.txt
 @@ -3,5 +3,5 @@
  endif()
  

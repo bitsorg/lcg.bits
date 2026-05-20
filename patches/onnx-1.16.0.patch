@@ -1,5 +1,5 @@
---- CMakeLists.txt~	2024-05-17 11:29:32.000000000 +0200
-+++ CMakeLists.txt	2025-04-23 10:15:45.976631157 +0200
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -508,5 +508,5 @@
  if(ONNX_USE_LITE_PROTO)
    if(TARGET protobuf::libprotobuf-lite)
@@ -14,13 +14,13 @@
 +    target_link_libraries(onnx_proto PUBLIC protobuf::libprotobuf PUBLIC ${protobuf_ABSL_USED_TARGETS})
    else()
      target_link_libraries(onnx_proto PUBLIC ${PROTOBUF_LIBRARIES})
---- requirements.txt	2025-07-25 14:43:15
-+++ requirements.txt	2025-07-25 14:41:02
+--- a/requirements.txt
++++ b/requirements.txt
 @@ -2 +2,2 @@
  protobuf>=3.20.2
 +cmake<4.0
---- pyproject.toml	2025-07-25 14:51:10
-+++ pyproject.toml	2025-07-25 14:50:47
+--- a/pyproject.toml
++++ b/pyproject.toml
 @@ -3,3 +3,3 @@
  [build-system]
 -requires = ["setuptools>=64", "protobuf>=3.20.2", "cmake"]

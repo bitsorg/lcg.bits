@@ -1,5 +1,5 @@
---- ATOOLS/Org/binreloc.c.orig	2021-11-25 12:17:37.595451976 +0100
-+++ ATOOLS/Org/binreloc.c	2021-11-25 12:24:05.628306054 +0100
+--- a/ATOOLS/Org/binreloc.c
++++ b/ATOOLS/Org/binreloc.c
 @@ -216,7 +216,10 @@
  			break;
  

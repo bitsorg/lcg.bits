@@ -1,5 +1,5 @@
 *** externals/qwt/src/qwt/6.0.1/qwtconfig.pri	2011-08-01 16:33:53.000000000 +0200
---- qwtconfig.pri	2013-04-22 22:43:11.000000000 +0200
+--- a/qwtconfig.pri
 ***************
 *** 16,29 ****
   # Install paths

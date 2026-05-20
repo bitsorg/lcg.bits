@@ -1,5 +1,5 @@
---- ./pythran/config.py~	2024-10-27 09:11:03.000000000 +0100
-+++ ./pythran/config.py	2025-02-27 16:10:43.614016816 +0100
+--- a/./pythran/config.py
++++ b/./pythran/config.py
 @@ -313,2 +313,2 @@
 -    import distutils.ccompiler
 -    import distutils.sysconfig

@@ -1,5 +1,5 @@
---- cpp-peglib/peglib.h.orig	2026-03-12 16:30:06.586258345 +0100
-+++ cpp-peglib/peglib.h	2026-03-12 16:30:34.139489250 +0100
+--- a/cpp-peglib/peglib.h
++++ b/cpp-peglib/peglib.h
 @@ -448,7 +448,7 @@
  
  namespace udl {

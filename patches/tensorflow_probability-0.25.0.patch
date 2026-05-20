@@ -1,5 +1,5 @@
---- ./tensorflow_probability/python/__init__.py~	2024-11-08 16:06:08.000000000 +0100
-+++ ./tensorflow_probability/python/__init__.py	2025-02-20 14:20:58.356987403 +0100
+--- a/./tensorflow_probability/python/__init__.py
++++ b/./tensorflow_probability/python/__init__.py
 @@ -49,2 +49,2 @@
 -  import distutils.version
 -

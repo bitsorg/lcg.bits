@@ -1,6 +1,6 @@
 diff -Naur ORIG/include/Geneva/Components/BoundingConstantsBase.hpp PATCHED/include/Geneva/Components/BoundingConstantsBase.hpp
---- include/Geneva/Components/BoundingConstantsBase.hpp	2018-07-09 14:01:33.000000000 +0200
-+++ include/Geneva/Components/BoundingConstantsBase.hpp	2024-06-11 12:41:01.655052152 +0200
+--- a/include/Geneva/Components/BoundingConstantsBase.hpp
++++ b/include/Geneva/Components/BoundingConstantsBase.hpp
 @@ -58,6 +58,8 @@
           : _boundFactor (1.0), _numTauNBins(numTauNBins), _tauNMin(tauNMin), _tauNMax(tauNMax), _tauNSampling(1.1)
        {
@@ -11,8 +11,8 @@ diff -Naur ORIG/include/Geneva/Components/BoundingConstantsBase.hpp PATCHED/incl
              _binTauNEdges[i] = tauNVal(static_cast<double>(i) / static_cast<double>(_numTauNBins));
           }
 diff -Naur ORIG/packages/beamfunc/CMakeLists.txt PATCHED/packages/beamfunc/CMakeLists.txt
---- packages/beamfunc/CMakeLists.txt	2018-07-09 14:01:33.000000000 +0200
-+++ packages/beamfunc/CMakeLists.txt	2024-06-11 01:06:55.617067914 +0200
+--- a/packages/beamfunc/CMakeLists.txt
++++ b/packages/beamfunc/CMakeLists.txt
 @@ -77,7 +77,7 @@
     message (">> Use 'make beamfunc-install-data' to download and install missing data files.")
  endif ()
@@ -23,8 +23,8 @@ diff -Naur ORIG/packages/beamfunc/CMakeLists.txt PATCHED/packages/beamfunc/CMake
  # write and generate scripts to install beamfunc grid files
  function (write_install_data_script script_filename dest_share)
 diff -Naur ORIG/python/bin/geneva PATCHED/python/bin/geneva
---- python/bin/geneva	2018-07-09 14:01:33.000000000 +0200
-+++ python/bin/geneva	2024-06-10 22:53:41.816189919 +0200
+--- a/python/bin/geneva
++++ b/python/bin/geneva
 @@ -196,7 +196,7 @@
     commands = None
     while process.master:
@@ -44,8 +44,8 @@ diff -Naur ORIG/python/bin/geneva PATCHED/python/bin/geneva
           pprint(commands)
           process.signal_exit()
 diff -Naur ORIG/python/bin/geneva-lhef-reweight PATCHED/python/bin/geneva-lhef-reweight
---- python/bin/geneva-lhef-reweight	2018-07-09 14:01:33.000000000 +0200
-+++ python/bin/geneva-lhef-reweight	2024-06-10 22:53:41.854190505 +0200
+--- a/python/bin/geneva-lhef-reweight
++++ b/python/bin/geneva-lhef-reweight
 @@ -132,8 +132,8 @@
  
           seeds.sort()
@@ -58,8 +58,8 @@ diff -Naur ORIG/python/bin/geneva-lhef-reweight PATCHED/python/bin/geneva-lhef-r
           for s in seedlist:
              seedstr += str(s[0])
 diff -Naur ORIG/python/bin/geneva-NERSC PATCHED/python/bin/geneva-NERSC
---- python/bin/geneva-NERSC	2018-07-09 14:01:33.000000000 +0200
-+++ python/bin/geneva-NERSC	2024-06-10 22:53:41.877190859 +0200
+--- a/python/bin/geneva-NERSC
++++ b/python/bin/geneva-NERSC
 @@ -74,7 +74,7 @@
     numNodes = nersc.getNumNodes(args.machine, numCores)
     executable = os.path.join(sys.path[0], os.path.basename(args.python_executable))
@@ -88,8 +88,8 @@ diff -Naur ORIG/python/bin/geneva-NERSC PATCHED/python/bin/geneva-NERSC
  #-------------------------------------------------------------------------------
  if __name__ == "__main__":
 diff -Naur ORIG/python/CMakeLists.txt PATCHED/python/CMakeLists.txt
---- python/CMakeLists.txt	2018-07-09 14:01:33.000000000 +0200
-+++ python/CMakeLists.txt	2024-06-10 22:39:59.480498225 +0200
+--- a/python/CMakeLists.txt
++++ b/python/CMakeLists.txt
 @@ -22,7 +22,7 @@
  if (${PROJECT_NAME}_enable_python)
     message ("== Configuring Geneva Python interface")
@@ -100,8 +100,8 @@ diff -Naur ORIG/python/CMakeLists.txt PATCHED/python/CMakeLists.txt
        set (${PROJECT_NAME}_USE_PYTHON TRUE)
     else ()
 diff -Naur ORIG/python/extensions.cpp PATCHED/python/extensions.cpp
---- python/extensions.cpp	2018-07-09 14:01:33.000000000 +0200
-+++ python/extensions.cpp	2024-06-10 23:10:46.807007688 +0200
+--- a/python/extensions.cpp
++++ b/python/extensions.cpp
 @@ -34,7 +34,7 @@
  //------------------------------------------------------------------------------
  static PyObject* get_banner(PyObject* self, PyObject* args)
@@ -142,8 +142,8 @@ diff -Naur ORIG/python/extensions.cpp PATCHED/python/extensions.cpp
  
  } // namespace Geneva
 diff -Naur ORIG/python/genevapylib/CombineAnalyzerFiles.py PATCHED/python/genevapylib/CombineAnalyzerFiles.py
---- python/genevapylib/CombineAnalyzerFiles.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/CombineAnalyzerFiles.py	2024-06-10 22:53:23.824912859 +0200
+--- a/python/genevapylib/CombineAnalyzerFiles.py
++++ b/python/genevapylib/CombineAnalyzerFiles.py
 @@ -29,8 +29,8 @@
  import xml.etree.ElementTree as ET
  import xml.dom.minidom
@@ -180,8 +180,8 @@ diff -Naur ORIG/python/genevapylib/CombineAnalyzerFiles.py PATCHED/python/geneva
        # Perform run on each batch, and write result to temporary file.
        if process.mpi:
 diff -Naur ORIG/python/genevapylib/CombineGridFiles.py PATCHED/python/genevapylib/CombineGridFiles.py
---- python/genevapylib/CombineGridFiles.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/CombineGridFiles.py	2024-06-10 22:53:23.876913660 +0200
+--- a/python/genevapylib/CombineGridFiles.py
++++ b/python/genevapylib/CombineGridFiles.py
 @@ -19,8 +19,8 @@
  from collections import OrderedDict
  import numpy as np
@@ -221,8 +221,8 @@ diff -Naur ORIG/python/genevapylib/CombineGridFiles.py PATCHED/python/genevapyli
              if not any(os.path.samefile(o, i) for o in outfiles)))
           if backup_path:
 diff -Naur ORIG/python/genevapylib/CombineXSecFiles.py PATCHED/python/genevapylib/CombineXSecFiles.py
---- python/genevapylib/CombineXSecFiles.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/CombineXSecFiles.py	2024-06-10 22:53:23.887913829 +0200
+--- a/python/genevapylib/CombineXSecFiles.py
++++ b/python/genevapylib/CombineXSecFiles.py
 @@ -17,8 +17,8 @@
  import os
  import numpy as np
@@ -235,8 +235,8 @@ diff -Naur ORIG/python/genevapylib/CombineXSecFiles.py PATCHED/python/genevapyli
  #-------------------------------------------------------------------------------
  # Private functions
 diff -Naur ORIG/python/genevapylib/CommandProvider.py PATCHED/python/genevapylib/CommandProvider.py
---- python/genevapylib/CommandProvider.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/CommandProvider.py	2024-06-10 22:53:23.890913875 +0200
+--- a/python/genevapylib/CommandProvider.py
++++ b/python/genevapylib/CommandProvider.py
 @@ -16,11 +16,11 @@
  
  def getCommandProvider(args):
@@ -265,8 +265,8 @@ diff -Naur ORIG/python/genevapylib/CommandProvider.py PATCHED/python/genevapylib
        else:
           raise ValueError("Cannot yet handle calculation "+calc+" !")
 diff -Naur ORIG/python/genevapylib/DrellYan.py PATCHED/python/genevapylib/DrellYan.py
---- python/genevapylib/DrellYan.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/DrellYan.py	2024-06-10 22:53:23.925914414 +0200
+--- a/python/genevapylib/DrellYan.py
++++ b/python/genevapylib/DrellYan.py
 @@ -14,9 +14,9 @@
  #    Definition of class DrellYan
  #-------------------------------------------------------------------------------
@@ -281,8 +281,8 @@ diff -Naur ORIG/python/genevapylib/DrellYan.py PATCHED/python/genevapylib/DrellY
  
  class DrellYan:
 diff -Naur ORIG/python/genevapylib/execute.py PATCHED/python/genevapylib/execute.py
---- python/genevapylib/execute.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/execute.py	2024-06-10 23:55:44.907598300 +0200
+--- a/python/genevapylib/execute.py
++++ b/python/genevapylib/execute.py
 @@ -32,9 +32,9 @@
  import subprocess
  import io
@@ -297,8 +297,8 @@ diff -Naur ORIG/python/genevapylib/execute.py PATCHED/python/genevapylib/execute
  
  def execute(commands, quiet):
 diff -Naur ORIG/python/genevapylib/FixedOrder.py PATCHED/python/genevapylib/FixedOrder.py
---- python/genevapylib/FixedOrder.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/FixedOrder.py	2024-06-10 22:53:23.956914892 +0200
+--- a/python/genevapylib/FixedOrder.py
++++ b/python/genevapylib/FixedOrder.py
 @@ -14,8 +14,8 @@
  #    Definition of class FixedOrder
  #-------------------------------------------------------------------------------
@@ -311,13 +311,13 @@ diff -Naur ORIG/python/genevapylib/FixedOrder.py PATCHED/python/genevapylib/Fixe
  
  class FixedOrder:
 diff -Naur ORIG/python/genevapylib/__init__.py PATCHED/python/genevapylib/__init__.py
---- python/genevapylib/__init__.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/__init__.py	2024-06-11 00:10:31.405631530 +0200
+--- a/python/genevapylib/__init__.py
++++ b/python/genevapylib/__init__.py
 @@ -0,0 +1 @@
 +from .cpp_extensions import *
 diff -Naur ORIG/python/genevapylib/Lhef.py PATCHED/python/genevapylib/Lhef.py
---- python/genevapylib/Lhef.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/Lhef.py	2024-06-11 00:32:55.710015419 +0200
+--- a/python/genevapylib/Lhef.py
++++ b/python/genevapylib/Lhef.py
 @@ -16,8 +16,8 @@
  
  import math as m
@@ -330,8 +330,8 @@ diff -Naur ORIG/python/genevapylib/Lhef.py PATCHED/python/genevapylib/Lhef.py
  if geneva_use_zlib:
     import gzip
 diff -Naur ORIG/python/genevapylib/OptionHandler.py PATCHED/python/genevapylib/OptionHandler.py
---- python/genevapylib/OptionHandler.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/OptionHandler.py	2024-06-11 00:33:04.176148243 +0200
+--- a/python/genevapylib/OptionHandler.py
++++ b/python/genevapylib/OptionHandler.py
 @@ -14,8 +14,8 @@
  #    Definition of class OptionHandler
  #-------------------------------------------------------------------------------
@@ -344,8 +344,8 @@ diff -Naur ORIG/python/genevapylib/OptionHandler.py PATCHED/python/genevapylib/O
  
  class OptionHandler:
 diff -Naur ORIG/python/genevapylib/process.py PATCHED/python/genevapylib/process.py
---- python/genevapylib/process.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/process.py	2024-06-10 22:53:24.009915708 +0200
+--- a/python/genevapylib/process.py
++++ b/python/genevapylib/process.py
 @@ -64,6 +64,10 @@
  
  import os
@@ -389,8 +389,8 @@ diff -Naur ORIG/python/genevapylib/process.py PATCHED/python/genevapylib/process
  #-------------------------------------------------------------------------------
  # auto-initialize if we were started with OpenMPI mpirun
 diff -Naur ORIG/python/genevapylib/ReweightEventMultiplicity.py PATCHED/python/genevapylib/ReweightEventMultiplicity.py
---- python/genevapylib/ReweightEventMultiplicity.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/ReweightEventMultiplicity.py	2024-06-11 00:33:23.705454646 +0200
+--- a/python/genevapylib/ReweightEventMultiplicity.py
++++ b/python/genevapylib/ReweightEventMultiplicity.py
 @@ -17,8 +17,8 @@
  import os
  import shutil
@@ -403,8 +403,8 @@ diff -Naur ORIG/python/genevapylib/ReweightEventMultiplicity.py PATCHED/python/g
  if geneva_use_zlib:
     import gzip
 diff -Naur ORIG/python/genevapylib/Rivet.py PATCHED/python/genevapylib/Rivet.py
---- python/genevapylib/Rivet.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/Rivet.py	2024-06-11 00:33:30.800565970 +0200
+--- a/python/genevapylib/Rivet.py
++++ b/python/genevapylib/Rivet.py
 @@ -16,8 +16,8 @@
  
  import os
@@ -417,8 +417,8 @@ diff -Naur ORIG/python/genevapylib/Rivet.py PATCHED/python/genevapylib/Rivet.py
  if geneva_use_zlib:
     import gzip
 diff -Naur ORIG/python/genevapylib/SubmitNersc.py PATCHED/python/genevapylib/SubmitNersc.py
---- python/genevapylib/SubmitNersc.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/SubmitNersc.py	2024-06-10 22:53:24.036916124 +0200
+--- a/python/genevapylib/SubmitNersc.py
++++ b/python/genevapylib/SubmitNersc.py
 @@ -22,7 +22,7 @@
     """Get the name of the host we are running (only works for Cori-Haswell, Cori-KNL and Edison)"""
     allowedMachines = ["edison","cori-haswell","cori-knl"]
@@ -465,8 +465,8 @@ diff -Naur ORIG/python/genevapylib/SubmitNersc.py PATCHED/python/genevapylib/Sub
     numNodes = int(math.ceil(float(numCores) / numCoresPerNode))
     return numNodes
 diff -Naur ORIG/python/genevapylib/utils.py PATCHED/python/genevapylib/utils.py
---- python/genevapylib/utils.py	2018-07-09 14:01:33.000000000 +0200
-+++ python/genevapylib/utils.py	2024-06-11 00:00:32.066144020 +0200
+--- a/python/genevapylib/utils.py
++++ b/python/genevapylib/utils.py
 @@ -16,10 +16,10 @@
  
  import os
@@ -499,8 +499,8 @@ diff -Naur ORIG/python/genevapylib/utils.py PATCHED/python/genevapylib/utils.py
        sys.dont_write_bytecode = tmp
  
 diff -Naur ORIG/src/Components/BoundingConstantsFSR.cpp PATCHED/src/Components/BoundingConstantsFSR.cpp
---- src/Components/BoundingConstantsFSR.cpp	2018-07-09 14:01:33.000000000 +0200
-+++ src/Components/BoundingConstantsFSR.cpp	2024-06-11 13:30:17.304992181 +0200
+--- a/src/Components/BoundingConstantsFSR.cpp
++++ b/src/Components/BoundingConstantsFSR.cpp
 @@ -34,6 +34,8 @@
  {
     _binSizeZ = (_zMax - _zMin) / static_cast<double>(_numZBins);
@@ -529,8 +529,8 @@ diff -Naur ORIG/src/Components/BoundingConstantsFSR.cpp PATCHED/src/Components/B
        initStream >> _binZEdges[bin];
     }
 diff -Naur ORIG/src/Components/BoundingConstantsISR.cpp PATCHED/src/Components/BoundingConstantsISR.cpp
---- src/Components/BoundingConstantsISR.cpp	2018-07-09 14:01:33.000000000 +0200
-+++ src/Components/BoundingConstantsISR.cpp	2024-06-11 13:05:24.521442322 +0200
+--- a/src/Components/BoundingConstantsISR.cpp
++++ b/src/Components/BoundingConstantsISR.cpp
 @@ -42,6 +42,8 @@
     initStream >> _tauNMax;
     initStream >> _tauNSampling;
@@ -540,8 +540,8 @@ diff -Naur ORIG/src/Components/BoundingConstantsISR.cpp PATCHED/src/Components/B
     for (size_t bin = 0; bin <= _numTauNBins; bin++) {
        initStream >> _binTauNEdges[bin];
     }
---- cmake/Modules/ExternalProjectAddOns.cmake.orig	2024-05-29 15:19:58.378111981 +0200
-+++ cmake/Modules/ExternalProjectAddOns.cmake	2024-05-29 15:20:37.201667742 +0200
+--- a/cmake/Modules/ExternalProjectAddOns.cmake
++++ b/cmake/Modules/ExternalProjectAddOns.cmake
 @@ -38,6 +38,14 @@
  #  will be run first.
  #-------------------------------------------------------------------------------
@@ -558,8 +558,8 @@ diff -Naur ORIG/src/Components/BoundingConstantsISR.cpp PATCHED/src/Components/B
     ExternalProject_Add_Step (${name} finish
        COMMAND ${CMAKE_COMMAND} -D${name}_ROOT=${prefix_dir} ${CMAKE_BINARY_DIR}
 diff -Naur site-packages-orig/genevapylib/Lhef.py site-packages/genevapylib/Lhef.py
---- python/genevapylib/Lhef.py.orig	2024-06-27 13:34:46.520394154 +0200
-+++ python/genevapylib/Lhef.py	2024-06-27 13:35:58.621481531 +0200
+--- a/python/genevapylib/Lhef.py
++++ b/python/genevapylib/Lhef.py
 @@ -28,13 +28,11 @@
  
  
@@ -579,8 +579,8 @@ diff -Naur site-packages-orig/genevapylib/Lhef.py site-packages/genevapylib/Lhef
  class XSInfo:
     def __init__(self):
 diff -Naur site-packages-orig/genevapylib/ReweightEventMultiplicity.py site-packages/genevapylib/ReweightEventMultiplicity.py
---- python/genevapylib/ReweightEventMultiplicity.py.orig	2024-06-27 13:34:46.521394155 +0200
-+++ python/genevapylib/ReweightEventMultiplicity.py	2024-06-27 13:36:19.430506751 +0200
+--- a/python/genevapylib/ReweightEventMultiplicity.py
++++ b/python/genevapylib/ReweightEventMultiplicity.py
 @@ -22,16 +22,15 @@
  
  if geneva_use_zlib:

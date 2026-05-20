@@ -1,5 +1,5 @@
---- src/Tools/binreloc.c.orig	2021-11-25 12:27:09.227238580 +0100
-+++ src/Tools/binreloc.c	2021-11-25 12:28:54.956199723 +0100
+--- a/src/Tools/binreloc.c
++++ b/src/Tools/binreloc.c
 @@ -215,7 +215,10 @@
  			break;
  
@@ -13,8 +13,8 @@
  
  		/* Parse line. */
 
---- configure.ac.orig   2022-03-17 11:00:16.000000000 +0100
-+++ configure.ac        2022-03-17 11:00:33.000000000 +0100
+--- a/configure.ac
++++ b/configure.ac
 @@ -215,7 +215,7 @@
    if test "$fjmajor" -lt 3; then
      AC_MSG_ERROR([FastJet version 3.0.0 or later is required])

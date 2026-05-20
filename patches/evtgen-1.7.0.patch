@@ -1,5 +1,5 @@
---- configure.orig	2017-12-13 17:02:54.000000000 +0100
-+++ configure	2018-01-08 13:23:10.262573918 +0100
+--- a/configure
++++ b/configure
 @@ -161,7 +161,6 @@
  #
  # User-changeable part, experts  -----------------------------
@@ -102,8 +102,8 @@
    tt=`gfortran -print-search-dirs|grep libraries|cut -d'=' -f2|sed  's/:/ /g'`
    LIBGFORTRANLOCATION=''
    for i in $tt
---- EvtGenBase/EvtVector4R.hh	2017-12-13 17:02:53.000000000 +0100
-+++ EvtGenBase/EvtVector4R.hh.orig	2020-03-28 08:13:13.502980641 +0100
+--- a/EvtGenBase/EvtVector4R.hh
++++ b/EvtGenBase/EvtVector4R.hh
 @@ -44,7 +44,6 @@
    inline void set(double e,double px,double py ,double pz);
    inline EvtVector4R& operator*=(double c);
@@ -128,8 +128,8 @@
  
  inline EvtVector4R& EvtVector4R::operator+=(const EvtVector4R& v2){
  
---- src/EvtGenExternal/EvtPythiaEngine.cpp.orig	2017-12-13 16:02:55.000000000 +0100
-+++ src/EvtGenExternal/EvtPythiaEngine.cpp	2021-04-22 14:57:51.574914300 +0200
+--- a/src/EvtGenExternal/EvtPythiaEngine.cpp
++++ b/src/EvtGenExternal/EvtPythiaEngine.cpp
 @@ -35,6 +35,12 @@
  #include <iostream>
  #include <sstream>

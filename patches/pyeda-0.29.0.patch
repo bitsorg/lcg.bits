@@ -1,5 +1,5 @@
---- setup.py~	2023-11-19 18:33:30.000000000 +0100
-+++ setup.py	2024-07-24 13:13:45.018399166 +0200
+--- a/setup.py
++++ b/setup.py
 @@ -189,1 +189,1 @@
 -    Extension("pyeda.boolalg.espresso", **ESPRESSO),
 +    Extension("pyeda.boolalg.espresso", **ESPRESSO, extra_compile_args=["-Wno-incompatible-pointer-types"]),

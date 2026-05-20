@@ -1,5 +1,5 @@
---- src/fonts/freetype.cpp	2013-04-24 00:37:12.000000000 +0200
-+++ freetype.cpp	2013-04-24 00:37:51.000000000 +0200
+--- a/src/fonts/freetype.cpp
++++ b/freetype.cpp
 @@ -44,6 +44,7 @@
  #include "glue/freetype.h"
  #include "glue/GLUWrapper.h"
@@ -17,8 +17,8 @@
  #include "base/dynarray.h"
  #include "base/namemap.h"
  #include "fonts/common.h"
---- include/Inventor/C/base/math-undefs.h	2010-03-02 14:20:09.000000000 +0100
-+++ /opt/local/include/Inventor/C/base/math-undefs.h	2014-01-20 22:43:08.000000000 +0100
+--- a/include/Inventor/C/base/math-undefs.h
++++ b//opt/local/include/Inventor/C/base/math-undefs.h
 @@ -39,7 +39,7 @@
    #undef's were mangled by the config.status process, it did not really
    work as intended.  20070518 larsa
@@ -37,8 +37,8 @@
  /* *********************************************************************** */
  
  #endif // !COIN_MATH_UNDEFS_H
---- src/misc/SoOffscreenRenderer.cpp.orig   2010-03-02 14:20:09.000000000 +0100
-+++ src/misc/SoOffscreenRenderer.cpp 2018-05-03 15:58:51.200133249 +0200
+--- a/src/misc/SoOffscreenRenderer.cpp
++++ b/src/misc/SoOffscreenRenderer.cpp
 @@ -1655,7 +1655,7 @@
    if (renderaction->getNumPasses() > 1) {
      SbVec3f jittervec;
@@ -49,8 +49,8 @@
                             vpsize, (float *)jittervec.getValue());
      m.setTranslate(jittervec);
 
---- cfg/config.guess.orig	2019-07-12 10:36:43.772275125 +0200
-+++ cfg/config.guess		2019-07-12 10:37:36.520706214 +0200
+--- a/cfg/config.guess
++++ b/cfg/config.guess
 @@ -1,14 +1,12 @@
  #! /bin/sh
  # Attempt to guess a canonical system name.
@@ -1247,8 +1247,8 @@
  
  config.guess timestamp = $timestamp
  
---- src/foreignfiles/steel.cpp.orig	2023-06-07 16:37:07.927288931 +0200
-+++ src/foreignfiles/steel.cpp	2023-06-07 16:38:22.516734911 +0200
+--- a/src/foreignfiles/steel.cpp
++++ b/src/foreignfiles/steel.cpp
 @@ -893,9 +893,9 @@
   */
  YY_DECL

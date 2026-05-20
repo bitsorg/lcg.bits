@@ -1,5 +1,5 @@
---- bin/lhapdf.orig	2019-06-19 12:46:07.190871488 +0200
-+++ bin/lhapdf	2019-06-19 12:46:12.070897902 +0200
+--- a/bin/lhapdf
++++ b/bin/lhapdf
 @@ -287,7 +287,7 @@
          (by default lists all sets available for download; use --installed or --outdated to explore those installed on the current system)"""
          ap = argparse.ArgumentParser(description=__doc__, usage="%(prog)s list [options] [pattern...]")

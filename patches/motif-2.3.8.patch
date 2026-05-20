@@ -1,5 +1,5 @@
---- demos/unsupported/xmform/xmform.c.orig	2020-11-04 20:43:20.000000000 +0100
-+++ demos/unsupported/xmform/xmform.c	2020-11-04 20:44:34.000000000 +0100
+--- a/demos/unsupported/xmform/xmform.c
++++ b/demos/unsupported/xmform/xmform.c
 @@ -58,6 +58,7 @@
  static void FillItPlease();
  static void NearlyEvenSpread();
@@ -8,8 +8,8 @@
  
  int main(argc, argv) 
  int argc; char **argv;
---- lib/Xm/TextF.c.orig	2020-11-04 19:19:09.000000000 +0100
-+++ lib/Xm/TextF.c	2020-11-04 19:27:24.000000000 +0100
+--- a/lib/Xm/TextF.c
++++ b/lib/Xm/TextF.c
 @@ -91,6 +91,10 @@
   * the other missing functions as _Xmwc... routines.  The new functions are
   * added static to this file.

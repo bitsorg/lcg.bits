@@ -1,5 +1,5 @@
---- ./thop/fx_profile.py~	2025-01-16 22:37:29.000000000 +0100
-+++ ./thop/fx_profile.py	2025-03-07 14:22:22.012897366 +0100
+--- a/./thop/fx_profile.py
++++ b/./thop/fx_profile.py
 @@ -4 +4,2 @@
 -from distutils.version import LooseVersion
 +#from distutils.version import LooseVersion

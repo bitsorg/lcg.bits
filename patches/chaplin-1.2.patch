@@ -1,5 +1,5 @@
---- config.guess.orig	2019-07-12 10:15:27.664662700 +0200
-+++ config.guess	2019-07-12 10:16:24.225195720 +0200
+--- a/config.guess
++++ b/config.guess
 @@ -1,14 +1,12 @@
  #! /bin/sh
  # Attempt to guess a canonical system name.

@@ -1,5 +1,5 @@
---- CMakeLists.txt.orig	2021-04-19 18:24:03.000000000 +0200
-+++ CMakeLists.txt	2021-04-19 18:23:32.000000000 +0200
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -124,6 +124,7 @@
    add_definitions(-DOS_FREEBSD)
  elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")

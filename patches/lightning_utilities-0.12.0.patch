@@ -1,5 +1,5 @@
---- ./src/lightning_utilities/install/requirements.py~	2025-01-31 11:26:17.000000000 +0100
-+++ ./src/lightning_utilities/install/requirements.py	2025-02-26 11:59:50.777178827 +0100
+--- a/./src/lightning_utilities/install/requirements.py
++++ b/./src/lightning_utilities/install/requirements.py
 @@ -6 +6,2 @@
 -from distutils.version import LooseVersion
 +#from distutils.version import LooseVersion

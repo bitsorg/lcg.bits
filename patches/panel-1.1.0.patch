@@ -1,5 +1,5 @@
---- panel/compiler.py.orig	2023-10-25 10:21:21
-+++ panel/compiler.py	2023-10-25 10:22:10
+--- a/panel/compiler.py
++++ b/panel/compiler.py
 @@ -70,12 +70,12 @@
              with open(filename, 'wb') as f:
                  f.write(response.content)
@@ -15,8 +15,8 @@
  
  def write_bundled_tarball(tarball, name=None, module=False):
      model_name = name.split('.')[-1].lower() if name else ''
---- pyproject.toml	2025-07-25 16:07:20
-+++ pyproject.toml	2025-07-25 16:05:28
+--- a/pyproject.toml
++++ b/pyproject.toml
 @@ -3 +3 @@
 -    "param >=1.9.2",
 +    "param >=1.9.2,<2.0",

@@ -1,5 +1,5 @@
---- sentencepiece/src/sentencepiece_processor.h.orig	2025-04-28 05:40:26.830300719 +0200
-+++ sentencepiece/src/sentencepiece_processor.h	2025-04-28 05:40:50.661534675 +0200
+--- a/sentencepiece/src/sentencepiece_processor.h
++++ b/sentencepiece/src/sentencepiece_processor.h
 @@ -20,6 +20,7 @@
  #include <string>
  #include <string_view>

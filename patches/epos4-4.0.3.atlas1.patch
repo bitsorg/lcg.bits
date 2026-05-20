@@ -1,6 +1,6 @@
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/CMakeLists.txt epos4.0.3ATLAS/CMakeLists.txt
---- CMakeLists.txt	2025-02-12 20:21:08.000000001 +0100
-+++ CMakeLists.txt	2025-12-03 14:37:56.000000001 +0100
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -17,6 +17,9 @@
  include("GNUInstallDirs")
  
@@ -75,8 +75,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/CMakeLists.txt epos4.0.3A
    FILES_MATCHING PATTERN "*.i")
  install(DIRECTORY ${CMAKE_SOURCE_DIR}/srcext/UR/ DESTINATION ${CMAKE_INSTALL_DATADIR}/srcext/UR
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/CMakeModules/FindFastJet.cmake epos4.0.3ATLAS/CMakeModules/FindFastJet.cmake
---- CMakeModules/FindFastJet.cmake	2025-02-12 20:21:08.000000001 +0100
-+++ CMakeModules/FindFastJet.cmake	2025-12-03 14:37:56.000000001 +0100
+--- a/CMakeModules/FindFastJet.cmake
++++ b/CMakeModules/FindFastJet.cmake
 @@ -9,10 +9,10 @@
  #  FASTJET_LIBRARY_DIRS (not cached)
  
@@ -91,8 +91,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/CMakeModules/FindFastJet.
  # handle the QUIETLY and REQUIRED arguments and set FASTJET_FOUND to TRUE if
  # all listed variables are TRUE
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/Dockerfile epos4.0.3ATLAS/Dockerfile
---- Dockerfile	1970-01-01 01:00:00.000000000 +0100
-+++ Dockerfile	2025-12-03 14:37:56.000000001 +0100
+--- a/Dockerfile
++++ b/Dockerfile
 @@ -0,0 +1,12 @@
 +FROM fedora:latest
 +
@@ -107,8 +107,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/Dockerfile epos4.0.3ATLAS
 +
 +
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/.gitlab-ci.yml epos4.0.3ATLAS/.gitlab-ci.yml
---- .gitlab-ci.yml	1970-01-01 01:00:00.000000000 +0100
-+++ .gitlab-ci.yml	2025-12-03 14:37:56.000000001 +0100
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
 @@ -0,0 +1,43 @@
 +image: fedora:40
 +
@@ -154,8 +154,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/.gitlab-ci.yml epos4.0.3A
 +
 +
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/interfaces/EposHepmc.cpp epos4.0.3ATLAS/interfaces/EposHepmc.cpp
---- interfaces/EposHepmc.cpp	2025-02-12 20:21:08.000000001 +0100
-+++ interfaces/EposHepmc.cpp	2025-12-03 14:37:56.000000001 +0100
+--- a/interfaces/EposHepmc.cpp
++++ b/interfaces/EposHepmc.cpp
 @@ -12,19 +12,14 @@
  #include "HepMC3/WriterAscii.h"
  #include "HepMC3/Units.h"
@@ -205,8 +205,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/interfaces/EposHepmc.cpp 
 -  delete writer;
  }
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/scripts/epos+.in epos4.0.3ATLAS/scripts/epos+.in
---- scripts/epos+.in	2025-02-12 20:21:10.000000001 +0100
-+++ scripts/epos+.in	2025-12-03 14:37:56.000000001 +0100
+--- a/scripts/epos+.in
++++ b/scripts/epos+.in
 @@ -17,7 +17,7 @@
  # check if the following environement variables have been defined
  if [ -z ${EPO} ]; then
@@ -244,8 +244,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/scripts/epos+.in epos4.0.
  rm -f ${CHK}$1.see
  fi
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/scripts/epos.in epos4.0.3ATLAS/scripts/epos.in
---- scripts/epos.in	2025-02-12 20:21:10.000000001 +0100
-+++ scripts/epos.in	2025-12-03 14:37:56.000000001 +0100
+--- a/scripts/epos.in
++++ b/scripts/epos.in
 @@ -204,8 +204,6 @@
  rm -f ${CHK}z-${one}.copyDo2 
  rm -f ${CHK}z-${one}.log 
@@ -302,8 +302,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/scripts/epos.in epos4.0.3
  rm -v $tmp 
  fi
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/src/KW/bas.f epos4.0.3ATLAS/src/KW/bas.f
---- src/KW/bas.f	2025-02-12 20:21:08.000000001 +0100
-+++ src/KW/bas.f	2025-12-03 14:37:56.000000001 +0100
+--- a/src/KW/bas.f
++++ b/src/KW/bas.f
 @@ -428,9 +428,13 @@
        cotid(2)=iutime(4)
  c     to read input from different file name given as argument
@@ -322,8 +322,8 @@ diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/src/KW/bas.f epos4.0.3ATL
  c added 2/9/2022 PBG
        call hqinitransfer
 diff -Naur '--exclude=*.gz' '--exclude=.git' epos4.0.3/src/KW/eos.f epos4.0.3ATLAS/src/KW/eos.f
---- src/KW/eos.f	2025-02-12 20:21:08.000000001 +0100
-+++ src/KW/eos.f	2025-12-03 14:37:56.000000001 +0100
+--- a/src/KW/eos.f
++++ b/src/KW/eos.f
 @@ -41,11 +41,11 @@
  c---------------------------------------------------------------------
  #include "aaa.h"

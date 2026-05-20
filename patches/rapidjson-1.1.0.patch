@@ -1,5 +1,5 @@
---- include/rapidjson/document.h.orig	2024-06-06 14:16:09.087198307 +0200
-+++ include/rapidjson/document.h	2024-06-06 14:18:04.238228718 +0200
+--- a/include/rapidjson/document.h
++++ b/include/rapidjson/document.h
 @@ -316,8 +316,6 @@
  
      GenericStringRef(const GenericStringRef& rhs) : s(rhs.s), length(rhs.length) {}

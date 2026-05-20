@@ -1,5 +1,5 @@
---- c-blosc/blosc/shuffle.c.orig	2025-04-30 11:06:03.906192847 +0200
-+++ c-blosc/blosc/shuffle.c	2025-04-30 11:06:48.004723012 +0200
+--- a/c-blosc/blosc/shuffle.c
++++ b/c-blosc/blosc/shuffle.c
 @@ -22,8 +22,8 @@
  
  /* Visual Studio < 2013 does not have stdbool.h so here it is a replacement: */

@@ -1,5 +1,5 @@
---- Makefile.am.res	2026-01-12 15:31:31.414888491 +0100
-+++ Makefile.am	2026-01-12 15:35:17.168492505 +0100
+--- a/Makefile.am.res
++++ b/Makefile.am
 @@ -4,8 +4,8 @@
  pkgconfigdir = $(libdir)/pkgconfig
  pkgconfig_DATA = qd.pc
