@@ -1,13 +1,12 @@
 package: ROOT
 description: CERN ROOT data analysis framework
-version: "v6.32.02"
-tag: "v6-32-02"
+version: "v6.36.04"
+tag: "v6-36-04"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
 requires:
   - CMake
   - Python
-  - Clang
   - fftw
   - GSL
   - OpenSSL
@@ -49,29 +48,6 @@ function Prepare() {
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
     sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
-  # LLVM 13 headers use uint64_t/uint32_t/etc. without including <cstdint>,
-  # relying on transitive inclusions that Clang 20 no longer provides.  This
-  # affects both LLVM's own compilation units AND ROOT code that includes LLVM
-  # headers (e.g. SmallVector.h via clang/Basic/LLVM.h).
-  # Fix: inject string(APPEND CMAKE_CXX_FLAGS "-include cstdint") into ROOT's
-  # top-level CMakeLists.txt so the flag propagates to every C++ compilation
-  # in the entire build tree (ROOT + Clang + LLVM subdirectories).
-  # Patching LLVM's own CMakeLists.txt is insufficient — it only covers LLVM's
-  # internal targets, not ROOT's compilation units that include LLVM headers.
-  # Guard prevents double-patching on reruns.
-  _root_cmake="${SOURCEDIR}/CMakeLists.txt"
-  if [[ -f "${_root_cmake}" ]] && ! grep -q 'bits: cstdint compat' "${_root_cmake}"; then
-    sed -i '1s|^|# bits: cstdint compat — Clang 20 no longer provides uint64_t transitively\nstring(APPEND CMAKE_CXX_FLAGS " -include cstdint")\n\n|' "${_root_cmake}"
-  fi
-  unset _root_cmake
-  # builtin FTGL: GCC 14+ rejects implicit unsigned char* -> char* conversion.
-  # Replace with an explicit reinterpret_cast.  Guard prevents double-patching.
-  _ftgl="${SOURCEDIR}/graf3d/ftgl/src/FTVectoriser.cxx"
-  if [[ -f "${_ftgl}" ]] && grep -q 'char\* tagList = &outline\.tags' "${_ftgl}"; then
-    sed -i 's|char\* tagList = &outline\.tags\[startIndex\];|char* tagList = reinterpret_cast<char*>(\&outline.tags[startIndex]);|' "${_ftgl}"
-  fi
-  unset _ftgl
-
   # rsync last: copies the already-patched source into the build dir
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}/" ./
 }
@@ -91,14 +67,6 @@ function Configure() {
   _root_ver="${PKGVERSION#v}"
   # _ver_ge A B: true if version A >= version B
   _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
-
-  # ROOT < 6.34: bundled LLVM 13 fails to compile with C++20 on GCC 15 libstdc++.
-  # std::ranges probes iterators via operator-, triggering a static_assert in
-  # iterator_facade_base for forward iterators (e.g. StringMapKeyIterator).
-  # ROOT 6.34+ upgraded bundled LLVM to fix this.  Cap the standard at C++17.
-  if ! _ver_ge "$_root_ver" "6.34.00" && [[ "${CMAKE_CXX_STANDARD}" -ge 20 ]]; then
-    CMAKE_CXX_STANDARD=17
-  fi
 
   # ROOT must not see these or it picks up wrong flags
   unset ROOTSYS CXXFLAGS CFLAGS LDFLAGS
@@ -121,28 +89,16 @@ function Configure() {
     _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
   fi
 
-  # Platform and compiler settings.
-  # On Linux, use the bits Clang installation.  Clang installs its executables
-  # into bin-safe/ (not bin/) to avoid shadowing system clang on macOS; bits'
-  # automatic $CLANG_ROOT/bin → PATH entry is therefore useless for compiling,
-  # so we point cmake directly at bin-safe/clang{,++}.
-  # On macOS, prefer_system uses Xcode/system clang via the generic names.
+  # Platform and compiler settings — use system cc/c++ on Linux, Xcode clang on macOS.
   ENABLE_COCOA=""
+  COMPILER_CC=cc
+  COMPILER_CXX=c++
   case $(uname) in
     Darwin)
       ENABLE_COCOA="-Dcocoa=ON"
       COMPILER_CXX=clang++
       COMPILER_CC=clang
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
-      ;;
-    *)
-      if [[ -n "${CLANG_ROOT}" && -x "${CLANG_ROOT}/bin-safe/clang++" ]]; then
-        COMPILER_CXX="${CLANG_ROOT}/bin-safe/clang++"
-        COMPILER_CC="${CLANG_ROOT}/bin-safe/clang"
-      else
-        COMPILER_CXX=g++
-        COMPILER_CC=gcc
-      fi
       ;;
   esac
 
@@ -220,6 +176,7 @@ function Configure() {
     -DCMAKE_INSTALL_LIBDIR=lib                                              \
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}                             \
     -DCMAKE_C_STANDARD=17                                                   \
+    -DCMAKE_CXX_FLAGS=" -fpermissive "                                      \
     -DCMAKE_CXX_COMPILER=${COMPILER_CXX}                                   \
     -DCMAKE_C_COMPILER=${COMPILER_CC}                                      \
     ${ENABLE_COCOA}                                                         \
