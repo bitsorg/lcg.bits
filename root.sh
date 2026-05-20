@@ -136,7 +136,7 @@ function Configure() {
   if _ver_ge "$_root_ver" "6.40.00"; then
     _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
   else
-    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
+    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
   fi
 
   # < 6.36.99: explicit pgsql=OFF; >= 6.36.99: roottest flag replaces it
@@ -234,7 +234,7 @@ function Configure() {
     -Dtmva-gpu=OFF                                                          \
     -Dtmva-sofie=OFF                                                        \
     -Dunfold=ON                                                             \
-    -Dunuran=ON                                                             \
+    -Dunuran=OFF                                                            \
     -Dbuiltin_vdt=OFF                                                       \
     -Dvdt=OFF                                                               \
     -Dvc=OFF                                                                \
