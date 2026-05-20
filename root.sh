@@ -49,23 +49,21 @@ function Prepare() {
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
     sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
-  # LLVM 13 headers use uint64_t/uint32_t/etc. without including <stdint.h>,
-  # relying on transitive inclusions that Clang 20 no longer provides.
-  # Patching individual headers is a losing battle (hundreds of affected files).
-  # Instead, prepend a C++-only forced include of <cstdint> to LLVM's root
-  # CMakeLists.txt, before any LLVM target is defined.
-  # Using string(APPEND CMAKE_CXX_FLAGS) restricts the flag to C++ only.
-  # add_compile_options() with a generator expression containing a space
-  # ($<$<COMPILE_LANGUAGE:CXX>:-include cstdint>) is split by CMake's argument
-  # parser before generator-expression evaluation, producing '$<1:-include' and
-  # 'cstdint>' as separate — invalid — compiler arguments.  CMAKE_CXX_FLAGS
-  # does not have this splitting problem and applies only to C++ compilations.
+  # LLVM 13 headers use uint64_t/uint32_t/etc. without including <cstdint>,
+  # relying on transitive inclusions that Clang 20 no longer provides.  This
+  # affects both LLVM's own compilation units AND ROOT code that includes LLVM
+  # headers (e.g. SmallVector.h via clang/Basic/LLVM.h).
+  # Fix: inject string(APPEND CMAKE_CXX_FLAGS "-include cstdint") into ROOT's
+  # top-level CMakeLists.txt so the flag propagates to every C++ compilation
+  # in the entire build tree (ROOT + Clang + LLVM subdirectories).
+  # Patching LLVM's own CMakeLists.txt is insufficient — it only covers LLVM's
+  # internal targets, not ROOT's compilation units that include LLVM headers.
   # Guard prevents double-patching on reruns.
-  _llvm_cmake="${SOURCEDIR}/interpreter/llvm-project/llvm/CMakeLists.txt"
-  if [[ -f "${_llvm_cmake}" ]] && ! grep -q 'bits: stdint compat' "${_llvm_cmake}"; then
-    sed -i '1s|^|# bits: stdint compat — Clang 20 no longer provides uint64_t transitively\nstring(APPEND CMAKE_CXX_FLAGS " -include cstdint")\n\n|' "${_llvm_cmake}"
+  _root_cmake="${SOURCEDIR}/CMakeLists.txt"
+  if [[ -f "${_root_cmake}" ]] && ! grep -q 'bits: cstdint compat' "${_root_cmake}"; then
+    sed -i '1s|^|# bits: cstdint compat — Clang 20 no longer provides uint64_t transitively\nstring(APPEND CMAKE_CXX_FLAGS " -include cstdint")\n\n|' "${_root_cmake}"
   fi
-  unset _llvm_cmake
+  unset _root_cmake
   # builtin FTGL: GCC 14+ rejects implicit unsigned char* -> char* conversion.
   # Replace with an explicit reinterpret_cast.  Guard prevents double-patching.
   _ftgl="${SOURCEDIR}/graf3d/ftgl/src/FTVectoriser.cxx"
