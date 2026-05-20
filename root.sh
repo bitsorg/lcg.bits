@@ -24,6 +24,8 @@ requires:
   - gl2ps
   - Vc
   - protobuf
+  - jpeg
+  - tiff
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

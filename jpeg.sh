@@ -20,8 +20,5 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-      -DCMAKE_BUILD_TYPE=Release \
-    -D \
-    -D \
-    -D
+      -DCMAKE_BUILD_TYPE=Release 
 }
