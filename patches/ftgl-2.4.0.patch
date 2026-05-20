@@ -21,8 +21,8 @@ index c668d32..ef13576 100644
 +++ b/src/FTContour.cpp
 @@ -174,7 +174,7 @@ void FTContour::SetParity(int parity)
  }
-
-
+ 
+ 
 -FTContour::FTContour(FT_Vector* contour, char* tags, unsigned int n)
 +FTContour::FTContour(FT_Vector* contour, unsigned char* tags, unsigned int n)
  {
@@ -33,12 +33,12 @@ index d2d187c..dc64e3a 100644
 --- a/src/FTContour.h
 +++ b/src/FTContour.h
 @@ -52,7 +52,7 @@ class FTContour
-         * @param pointTags
-         * @param numberOfPoints
-         */
+          * @param pointTags
+          * @param numberOfPoints
+          */
 -        FTContour(FT_Vector* contour, char* pointTags, unsigned int numberOfPoints);
 +        FTContour(FT_Vector* contour, unsigned char* pointTags, unsigned int numberOfPoints);
-
+ 
          /**
           * Destructor
 diff --git a/src/FTVectoriser.cpp b/src/FTVectoriser.cpp
@@ -51,6 +51,6 @@ index 26e7da8..53d738e 100644
          FT_Vector* pointList = &outline.points[startIndex];
 -        char* tagList = &outline.tags[startIndex];
 +        unsigned char* tagList = &outline.tags[startIndex];
-
+ 
          endIndex = outline.contours[i];
          contourLength =  (endIndex - startIndex) + 1;
