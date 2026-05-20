@@ -28,7 +28,7 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DGEANT4_USE_GDML=ON \
-    -DXERCESC_ROOT_DIR=${XercesC_ROOT} \
+    -DXERCESC_ROOT_DIR="${XercesC_ROOT}" \
     -DGEANT4_USE_SYSTEM_CLHEP=ON \
     -DGEANT4_USE_G3TOG4=ON
 }

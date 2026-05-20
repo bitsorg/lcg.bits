@@ -24,5 +24,5 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS=$CXXFLAGS
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 }

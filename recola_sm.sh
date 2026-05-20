@@ -22,7 +22,7 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -Dcollier_path=${COLLIER_ROOT}/lib \
+    -Dcollier_path="${COLLIER_ROOT}/lib" \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -Dstatic=OFF \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON

@@ -32,7 +32,7 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
     -DENABLE_DTRACE=0 \
     -DDOWNLOAD_BOOST=1 \
-    -DWITH_BOOST=$SOURCEDIR/boost \
+    -DWITH_BOOST="$SOURCEDIR/boost" \
     -DWITH_PCRE=bundled \
     -DMYSQL_MAINTAINER_MODE=OFF
 }

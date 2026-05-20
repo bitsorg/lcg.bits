@@ -22,5 +22,5 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DGiNaC_DIR=${GINAC_ROOT}
+    -DGiNaC_DIR="${GINAC_ROOT}"
 }

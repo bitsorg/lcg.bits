@@ -21,5 +21,5 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
   make ${JOBS:+-j $JOBS}
-  cmake -DSRC=$SOURCEDIR -DDST=$INSTALLROOT -P # (lcgcmake-internal script removed)
+  cmake -DSRC="$SOURCEDIR" -DDST="$INSTALLROOT" -P # (lcgcmake-internal script removed)
 }

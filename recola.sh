@@ -25,9 +25,9 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -Dcollier_path=${COLLIER_ROOT}/lib \
+    -Dcollier_path="${COLLIER_ROOT}/lib" \
     -Dmodel=SM \
-    -Dmodelfile_path=${RECOLA_SM_ROOT}/lib/cmake \
+    -Dmodelfile_path="${RECOLA_SM_ROOT}/lib/cmake" \
     -Dwith_python3=ON \
     -Dstatic=OFF \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
