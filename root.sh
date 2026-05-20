@@ -54,13 +54,16 @@ function Prepare() {
   # Patching individual headers is a losing battle (hundreds of affected files).
   # Instead, prepend a C++-only forced include of <cstdint> to LLVM's root
   # CMakeLists.txt, before any LLVM target is defined.
-  # Using $<COMPILE_LANGUAGE:CXX> restricts the flag to C++ only: applying
-  # -include stdint.h to C compilations on glibc 2.40+ causes a macro conflict
-  # in bits/types.h ("unexpected token in argument list" for typedef unsigned char).
+  # Using string(APPEND CMAKE_CXX_FLAGS) restricts the flag to C++ only.
+  # add_compile_options() with a generator expression containing a space
+  # ($<$<COMPILE_LANGUAGE:CXX>:-include cstdint>) is split by CMake's argument
+  # parser before generator-expression evaluation, producing '$<1:-include' and
+  # 'cstdint>' as separate — invalid — compiler arguments.  CMAKE_CXX_FLAGS
+  # does not have this splitting problem and applies only to C++ compilations.
   # Guard prevents double-patching on reruns.
   _llvm_cmake="${SOURCEDIR}/interpreter/llvm-project/llvm/CMakeLists.txt"
   if [[ -f "${_llvm_cmake}" ]] && ! grep -q 'bits: stdint compat' "${_llvm_cmake}"; then
-    sed -i '1s|^|# bits: stdint compat — Clang 20 no longer provides uint64_t transitively\nadd_compile_options($<$<COMPILE_LANGUAGE:CXX>:-include cstdint>)\n\n|' "${_llvm_cmake}"
+    sed -i '1s|^|# bits: stdint compat — Clang 20 no longer provides uint64_t transitively\nstring(APPEND CMAKE_CXX_FLAGS " -include cstdint")\n\n|' "${_llvm_cmake}"
   fi
   unset _llvm_cmake
   # builtin FTGL: GCC 14+ rejects implicit unsigned char* -> char* conversion.
