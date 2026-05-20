@@ -1,9 +1,9 @@
 package: ROOT
 description: CERN ROOT data analysis framework
 version: "v6.32.02"
-tag: "v6.32.02"
-sources:
-  - https://root.cern/download/root_v6.32.02.source.tar.gz
+tag: "v6-32-02"
+source: https://github.com/root-project/root.git
+mem_per_job: 1500
 requires:
   - CMake
   - Python
@@ -34,10 +34,13 @@ license: LGPL-2.1-only
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --pylib"
+MODULE_OPTIONS="--bin --lib --cmake --pylib"
 ##############################
 function Prepare() {
-  rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}/" ./
+  # All source patches must come BEFORE rsync.  ROOT's cmake copies LLVM headers
+  # from the build dir's rsync'd tree (not from SOURCEDIR) into its own build/
+  # subtree; if we patch after rsync, the build dir gets the unpatched copy.
+
   # ROOT's CMakeLists.txt does set(CMAKE_MODULE_PATH ...) which replaces any
   # -DCMAKE_MODULE_PATH passed on the command line, so we must patch the source.
   # FindDavix.cmake uses only pkg_check_modules; prepend a find_library fallback
@@ -46,6 +49,18 @@ function Prepare() {
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
     sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
+  # LLVM 13 headers use uint64_t/uint32_t/etc. without including <stdint.h>,
+  # relying on transitive inclusions that Clang 20 no longer provides.
+  # Patching individual headers is a losing battle (hundreds of affected files).
+  # Instead, prepend add_compile_options(-include stdint.h) to LLVM's root
+  # CMakeLists.txt so every C and C++ compilation unit in the LLVM tree gets
+  # stdint.h as a forced include, before any LLVM target is defined.
+  # Guard prevents double-patching on reruns.
+  _llvm_cmake="${SOURCEDIR}/interpreter/llvm-project/llvm/CMakeLists.txt"
+  if [[ -f "${_llvm_cmake}" ]] && ! grep -q 'bits: stdint compat' "${_llvm_cmake}"; then
+    sed -i '1s|^|# bits: stdint compat — Clang 20 no longer provides uint64_t transitively\nadd_compile_options(-include stdint.h)\n\n|' "${_llvm_cmake}"
+  fi
+  unset _llvm_cmake
   # builtin FTGL: GCC 14+ rejects implicit unsigned char* -> char* conversion.
   # Replace with an explicit reinterpret_cast.  Guard prevents double-patching.
   _ftgl="${SOURCEDIR}/graf3d/ftgl/src/FTVectoriser.cxx"
@@ -53,6 +68,9 @@ function Prepare() {
     sed -i 's|char\* tagList = &outline\.tags\[startIndex\];|char* tagList = reinterpret_cast<char*>(\&outline.tags[startIndex]);|' "${_ftgl}"
   fi
   unset _ftgl
+
+  # rsync last: copies the already-patched source into the build dir
+  rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}/" ./
 }
 function Configure() {
   # Default ROOT_TESTING to OFF unless set externally
@@ -60,10 +78,24 @@ function Configure() {
 
   # Detect C++ standard from environment before unsetting flags
   CMAKE_CXX_STANDARD=17
-  [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14
-  [[ "$CXXFLAGS" == *'-std=c++17'* ]] && CMAKE_CXX_STANDARD=17
-  [[ "$CXXFLAGS" == *'-std=c++20'* ]] && CMAKE_CXX_STANDARD=20
-  [[ "$CXXFLAGS" == *'-std=c++23'* ]] && CMAKE_CXX_STANDARD=23
+  [[ "$CXXFLAGS" == *'-std=c++11'* ]] && CMAKE_CXX_STANDARD=11 || true
+  [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14 || true
+  [[ "$CXXFLAGS" == *'-std=c++17'* ]] && CMAKE_CXX_STANDARD=17 || true
+  [[ "$CXXFLAGS" == *'-std=c++20'* ]] && CMAKE_CXX_STANDARD=20 || true
+  [[ "$CXXFLAGS" == *'-std=c++23'* ]] && CMAKE_CXX_STANDARD=23 || true
+
+  # Version-gated cmake flags (strip leading 'v' from PKGVERSION for sorting)
+  _root_ver="${PKGVERSION#v}"
+  # _ver_ge A B: true if version A >= version B
+  _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
+
+  # ROOT < 6.34: bundled LLVM 13 fails to compile with C++20 on GCC 15 libstdc++.
+  # std::ranges probes iterators via operator-, triggering a static_assert in
+  # iterator_facade_base for forward iterators (e.g. StringMapKeyIterator).
+  # ROOT 6.34+ upgraded bundled LLVM to fix this.  Cap the standard at C++17.
+  if ! _ver_ge "$_root_ver" "6.34.00" && [[ "${CMAKE_CXX_STANDARD}" -ge 20 ]]; then
+    CMAKE_CXX_STANDARD=17
+  fi
 
   # ROOT must not see these or it picks up wrong flags
   unset ROOTSYS CXXFLAGS CFLAGS LDFLAGS
@@ -92,14 +124,12 @@ function Configure() {
   # automatic $CLANG_ROOT/bin → PATH entry is therefore useless for compiling,
   # so we point cmake directly at bin-safe/clang{,++}.
   # On macOS, prefer_system uses Xcode/system clang via the generic names.
-  SONAME=so
   ENABLE_COCOA=""
   case $(uname) in
     Darwin)
       ENABLE_COCOA="-Dcocoa=ON"
       COMPILER_CXX=clang++
       COMPILER_CC=clang
-      SONAME=dylib
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
       ;;
     *)
@@ -143,20 +173,6 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # -------------------------------------------------------------------------
-  # Version-gated cmake flags (strip leading 'v' from PKGVERSION for sorting)
-  _root_ver="${PKGVERSION#v}"
-  # _ver_ge A B: true if version A >= version B
-  _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
-
-  # ROOT < 6.34: bundled LLVM 13 fails to compile with C++20 on GCC 15 libstdc++.
-  # std::ranges probes iterators via operator-, triggering a static_assert in
-  # iterator_facade_base for forward iterators (e.g. StringMapKeyIterator).
-  # ROOT 6.34+ upgraded bundled LLVM to fix this.  Cap the standard at C++17.
-  if ! _ver_ge "$_root_ver" "6.34.00" && [[ "${CMAKE_CXX_STANDARD}" -ge 20 ]]; then
-    CMAKE_CXX_STANDARD=17
-  fi
-
   # >= 6.36.00: external jpeg/png packages available; use them
   _media_flags=""
   _ver_ge "$_root_ver" "6.36.00" && _media_flags="-Dbuiltin_jpeg=OFF -Dbuiltin_png=OFF"
@@ -192,63 +208,128 @@ function Configure() {
     [[ -n "${ABSL_ROOT}" ]] && _sofie_flag+=" -Dabsl_ROOT=${ABSL_ROOT}"
   fi
 
-  cmake "${SOURCEDIR}" \
-    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD} \
-    -DCMAKE_C_STANDARD=17 \
-    -DCMAKE_CXX_COMPILER=${COMPILER_CXX} \
-    -DCMAKE_C_COMPILER=${COMPILER_CC} \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    ${ENABLE_COCOA} \
-    ${OPENSSL_ROOT:+-DOPENSSL_ROOT=$OPENSSL_ROOT} \
-    ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include} \
-    ${GSL_ROOT:+-DGSL_ROOT_DIR=$GSL_ROOT} \
-    -Ddavix=ON \
-    ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT} \
-    ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT=$JSONMCPP_ROOT} \
-    ${GL2PS_ROOT:+-Dgl2ps_ROOT=$GL2PS_ROOT} \
-    ${VC_ROOT:+-DVc_ROOT=$VC_ROOT} \
-    ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include} \
-    ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib} \
-    -Dcheck_connection=OFF \
-    -DCINTLONGLINE=4096 \
-    -DCINTMAXSTRUCT=36000 \
-    -DCINTMAXTYPEDEF=36000 \
-    ${_builtin_flags} \
-    ${_media_flags} \
-    -Dbuiltin_nlohmannjson=OFF \
-    -Dcintex=ON \
-    -Dexplicitlink=ON \
-    -Dfail-on-missing=ON \
-    -Dfftw3=ON \
-    -Dfitsio=ON \
-    -Dfortran=ON \
-    -Dgdml=ON \
-    -Dgenvector=ON \
-    -Dhttp=ON \
-    -Dmathmore=ON \
-    -Dmysql=OFF \
-    -Dopengl=ON \
-    -Dpyroot=ON \
-    -Dpythia8=OFF \
-    -Dr=OFF \
-    -Dreflex=ON \
-    -Droofit=ON \
-    -Droofit_multiprocess=OFF \
-    -Droot7=ON \
-    -Dssl=ON \
-    ${_sofie_flag} \
-    -Dtesting=${ROOT_TESTING} \
-    -Dunfold=ON \
-    -Dunuran=ON \
-    ${_vc_flag} \
-    -Dxft=ON \
-    -Dxml=ON \
-    -Dxrootd=ON \
-    -Dzlib=ON \
+  unset DYLD_LIBRARY_PATH
+
+  cmake "${SOURCEDIR}"                                                      \
+    ${CMAKE_GENERATOR:+-G "${CMAKE_GENERATOR}"}                             \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
+    -DCMAKE_BUILD_TYPE=Release                                              \
+    -DCMAKE_INSTALL_LIBDIR=lib                                              \
+    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}                             \
+    -DCMAKE_C_STANDARD=17                                                   \
+    -DCMAKE_CXX_COMPILER=${COMPILER_CXX}                                   \
+    -DCMAKE_C_COMPILER=${COMPILER_CC}                                      \
+    ${ENABLE_COCOA}                                                         \
+    -Dcheck_connection=OFF                                                  \
+    -Dfail-on-missing=ON                                                    \
+    -DCINTLONGLINE=4096                                                     \
+    -DCINTMAXSTRUCT=36000                                                   \
+    -DCINTMAXTYPEDEF=36000                                                  \
+    ${OPENSSL_ROOT:+-DOPENSSL_ROOT=$OPENSSL_ROOT}                           \
+    ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include}            \
+    ${GSL_ROOT:+-DGSL_ROOT_DIR=$GSL_ROOT}                                   \
+    ${ZLIB_ROOT:+-DZLIB_ROOT=$ZLIB_ROOT}                                    \
+    ${FFTW_ROOT:+-DFFTW_DIR=$FFTW_ROOT}                                     \
+    -Dbuiltin_fftw3=OFF                                                     \
+    ${LIBXML2_ROOT:+-DLIBXML2_ROOT=$LIBXML2_ROOT}                           \
+    ${TBB_ROOT:+-DTBB_ROOT_DIR=$TBB_ROOT}                                   \
+    ${CFITSIO_ROOT:+-DCFITSIO_ROOT=$CFITSIO_ROOT}                           \
+    ${XZ_ROOT:+-DLIBLZMA_ROOT=$XZ_ROOT}                                     \
+    -Ddavix=ON                                                              \
+    -Dbuiltin_davix=OFF                                                     \
+    ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT}                                 \
+    ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT=$JSONMCPP_ROOT}                   \
+    -Dbuiltin_nlohmannjson=OFF                                              \
+    ${GL2PS_ROOT:+-Dgl2ps_ROOT=$GL2PS_ROOT}                                 \
+    ${VC_ROOT:+-DVc_ROOT=$VC_ROOT}                                          \
+    ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include}                        \
+    ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib}                                    \
+    -Dxrootd=ON                                                             \
+    ${XROOTD_ROOT:+-DXROOTD_ROOT_DIR=$XROOTD_ROOT}                         \
+    ${_builtin_flags}                                                       \
+    ${_media_flags}                                                         \
+    -Dcintex=ON                                                             \
+    -Dexplicitlink=ON                                                       \
+    -Dfftw3=ON                                                              \
+    -Dfitsio=ON                                                             \
+    -Dfortran=ON                                                            \
+    -Dfreetype=ON                                                           \
+    -Dbuiltin_freetype=OFF                                                  \
+    -Dgdml=ON                                                               \
+    -Dgenvector=ON                                                          \
+    -Dgviz=OFF                                                              \
+    -Dhttp=ON                                                               \
+    -Dmathmore=ON                                                           \
+    -Dmysql=OFF                                                             \
+    -Dopengl=ON                                                             \
+    -Dpgsql=OFF                                                             \
+    -Dpyroot=ON                                                             \
+    -Dpythia8=OFF                                                           \
+    -Dr=OFF                                                                 \
+    -Dreflex=ON                                                             \
+    -Droofit=ON                                                             \
+    -Droofit_multiprocess=OFF                                               \
+    -Droot7=ON                                                              \
+    -Dshadowpw=OFF                                                          \
+    -Dsoversion=ON                                                          \
+    -Dsqlite=OFF                                                            \
+    -Dssl=ON                                                                \
+    -Dtesting=${ROOT_TESTING}                                               \
+    -Dtmva-gpu=OFF                                                          \
+    -Dtmva-sofie=OFF                                                        \
+    -Dunfold=ON                                                             \
+    -Dunuran=ON                                                             \
+    -Dbuiltin_vdt=OFF                                                       \
+    -Dvdt=OFF                                                               \
+    -Dvc=OFF                                                                \
+    -Dxft=ON                                                                \
+    -Dxml=ON                                                                \
+    -Dzlib=ON                                                               \
+    ${VDT_ROOT:+-Dvdt=ON}                                                   \
+    ${_sofie_flag}                                                          \
+    ${_vc_flag}                                                             \
     ${_test_flags}
 }
 function PostInstall() {
-  printf 'setenv ROOTSYS $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
+  # Verify ROOT found all requested features
+  [ "$("$INSTALLROOT/bin/root-config" --has-fftw3)" = yes ]
+
+  # Add support for ROOT_PLUGIN_PATH envvar for specifying additional plugin search paths
+  grep -v '^Unix.*.Root.PluginPath' "$INSTALLROOT/etc/system.rootrc" > system.rootrc.0
+  cat >> system.rootrc.0 <<\EOF
+# Specify additional plugin search paths via the environment variable ROOT_PLUGIN_PATH.
+# Plugins in $ROOT_PLUGIN_PATH have priority.
+Unix.*.Root.PluginPath: $(ROOT_PLUGIN_PATH):$(ROOTSYS)/etc/plugins:
+Unix.*.Root.DynamicPath: .:$(ROOT_DYN_PATH):
+EOF
+  mv system.rootrc.0 "$INSTALLROOT/etc/system.rootrc"
+
+  # Make some CMake files used by other projects relocatable
+  sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
+
+  rm -vf "$INSTALLROOT/LICENSE"
+
+  # Fix python shebangs for relocatability
+  for binfile in "$INSTALLROOT"/bin/*; do
+    [ -f "$binfile" ] || continue
+    if grep -q "^'''exec' .*python.*" "$binfile"; then
+      # This file uses a hack to get around shebang size limits. Replace with a
+      # normal shebang since we use /usr/bin/env python3, not an absolute path.
+      sed -i.bak '1d; 2d; 3d; 4s,^,#!/usr/bin/env python3\n,' "$binfile"
+    else
+      sed -i.bak '1s,^#!.*python.*,#!/usr/bin/env python3,' "$binfile"
+    fi
+  done
+  rm -fv "$INSTALLROOT"/bin/*.bak
+
+  # Append ROOT-specific env vars to the ModuleRecipe-generated modulefile.
+  # ModuleRecipe (--bin --lib --cmake --pylib) already adds PATH, LD_LIBRARY_PATH,
+  # CMAKE_PREFIX_PATH, PYTHONPATH, ROOT_ROOT, and ROOT_INCLUDE_DIR.
+  # We append the variables that ROOT users and dependent packages additionally need.
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv ROOTSYS $PKG_ROOT
+setenv ROOT_RELEASE $version
+prepend-path ROOT_DYN_PATH $PKG_ROOT/lib
+prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include
+EoF
 }
