@@ -1,5 +1,6 @@
---- src/CMakeLists.txt
-+++ src/CMakeLists.txt
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
 @@ -26,7 +26,6 @@ SET(libftgl_la_SOURCES
      FTGlyphContainer.h
      FTInternals.h
@@ -8,15 +9,20 @@
      FTList.h
      FTPoint.cpp
      FTSize.cpp
-
+@@ -131,5 +130,4 @@ SET_TARGET_PROPERTIES(
+   PROPERTIES
+     VERSION ${VERSION_SERIES}.${VERSION_MAJOR}.${VERSION_MINOR}
+ 	SOVERSION ${FTGL_SOVERSION}
+-    DEBUG_POSTFIX "d"
+ )
 diff --git a/src/FTContour.cpp b/src/FTContour.cpp
 index c668d32..ef13576 100644
---- src/FTContour.cpp
-+++ src/FTContour.cpp
+--- a/src/FTContour.cpp
++++ b/src/FTContour.cpp
 @@ -174,7 +174,7 @@ void FTContour::SetParity(int parity)
  }
- 
- 
+
+
 -FTContour::FTContour(FT_Vector* contour, char* tags, unsigned int n)
 +FTContour::FTContour(FT_Vector* contour, unsigned char* tags, unsigned int n)
  {
@@ -24,28 +30,27 @@ index c668d32..ef13576 100644
      double olddir, dir = atan2((next - cur).Y(), (next - cur).X());
 diff --git a/src/FTContour.h b/src/FTContour.h
 index d2d187c..dc64e3a 100644
---- src/FTContour.h
-+++ src/FTContour.h
+--- a/src/FTContour.h
++++ b/src/FTContour.h
 @@ -52,7 +52,7 @@ class FTContour
-          * @param pointTags
-          * @param numberOfPoints
-          */
+         * @param pointTags
+         * @param numberOfPoints
+         */
 -        FTContour(FT_Vector* contour, char* pointTags, unsigned int numberOfPoints);
 +        FTContour(FT_Vector* contour, unsigned char* pointTags, unsigned int numberOfPoints);
- 
+
          /**
           * Destructor
 diff --git a/src/FTVectoriser.cpp b/src/FTVectoriser.cpp
 index 26e7da8..53d738e 100644
---- src/FTVectoriser.cpp
-+++ src/FTVectoriser.cpp
+--- a/src/FTVectoriser.cpp
++++ b/src/FTVectoriser.cpp
 @@ -168,7 +168,7 @@ void FTVectoriser::ProcessContours()
      for(int i = 0; i < ftContourCount; ++i)
      {
          FT_Vector* pointList = &outline.points[startIndex];
 -        char* tagList = &outline.tags[startIndex];
 +        unsigned char* tagList = &outline.tags[startIndex];
- 
+
          endIndex = outline.contours[i];
          contourLength =  (endIndex - startIndex) + 1;
--- 
