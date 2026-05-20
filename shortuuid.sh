@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/shortuuid-1.0.13.tar.gz
 requires:
   - Python
-  - #Django
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

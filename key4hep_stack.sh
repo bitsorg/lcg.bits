@@ -20,7 +20,6 @@ requires:
   - k4mljettagger
   - k4actstracking
   - LCIO
-  - #
   - marlin
   - marlinutil
   - marlintrk

@@ -9,7 +9,6 @@ requires:
   - openmpi
   - fastjet
   - openloops
-  - #
   - blackhat
 build_requires:
   - bits-recipe-tools

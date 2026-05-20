@@ -54,7 +54,6 @@ requires:
   - pytz
   - qtconsole
   - simplejson
-  - #
   - m2crypto
   - deleted
   # optional:
