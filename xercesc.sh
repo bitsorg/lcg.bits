@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xerces-c-3.3.0.tar.gz
 requires:
   - curl
-  - #
 prefer_system: osx.*
 prefer_system_check: |
   pkg-config --atleast-version=3.2.0 xerces-c 2>&1 && printf "#include <xercesc/util/PlatformUtils.hpp>" | c++ -xc++ -I$(brew --prefix xerces-c)/include -c -
