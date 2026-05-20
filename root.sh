@@ -132,10 +132,6 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # >= 6.36.00: external jpeg/png packages available; use them
-  _media_flags=""
-  _ver_ge "$_root_ver" "6.36.00" && _media_flags="-Dbuiltin_jpeg=OFF -Dbuiltin_png=OFF"
-
   # < 6.40: use builtin copies; >= 6.40: switch to external packages + curl
   if _ver_ge "$_root_ver" "6.40.00"; then
     _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
@@ -207,7 +203,6 @@ function Configure() {
     -Dxrootd=ON                                                             \
     ${XROOTD_ROOT:+-DXROOTD_ROOT_DIR=$XROOTD_ROOT}                         \
     ${_builtin_flags}                                                       \
-    ${_media_flags}                                                         \
     -Dcintex=ON                                                             \
     -Dexplicitlink=ON                                                       \
     -Dfftw3=ON                                                              \
