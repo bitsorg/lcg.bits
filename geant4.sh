@@ -29,7 +29,7 @@ function Configure() {
     -DCMAKE_CXX_FLAGS="-fPIC" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DGEANT4_USE_GDML=ON \
-    -DXERCESC_ROOT_DIR=${XercesC_ROOT} \
+    -DXERCESC_ROOT_DIR="${XercesC_ROOT}" \
     -DGEANT4_USE_SYSTEM_CLHEP=ON \
     -DGEANT4_USE_G3TOG4=ON \
     -DGEANT4_INSTALL_DATA=ON \
@@ -38,7 +38,7 @@ function Configure() {
     -DGEANT4_INSTALL_EXAMPLES=OFF \
     -DGEANT4_BUILD_MULTITHREADED=OFF \
     -DGEANT4_BUILD_TLS_MODEL=global-dynamic \
-    ${CXXSTD:+-DGEANT4_BUILD_CXXSTD=$CXXSTD}
+    ${CXXSTD:+-DGEANT4_BUILD_CXXSTD="$CXXSTD"}
 }
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'

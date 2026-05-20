@@ -28,8 +28,8 @@ function Configure() {
     -DENABLE_HEPMC3=ON \
     -DENABLE_DPMJET=ON \
     -DBUILD_SHARED_LIB=ON \
-    ${HEPMC3_ROOT:+-DHepMC3_DIR=$HEPMC3_ROOT} \
-    ${DPMJET_ROOT:+-DDPMJET_DIR=$DPMJET_ROOT}
+    ${HEPMC3_ROOT:+-DHepMC3_DIR="$HEPMC3_ROOT"} \
+    ${DPMJET_ROOT:+-DDPMJET_DIR="$DPMJET_ROOT"}
 }
 function PostInstall() {
   # Copy config and headers not installed by CMake

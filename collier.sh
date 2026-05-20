@@ -31,7 +31,7 @@ function MakeInstall() {
   cmake --install .
   # Second pass: static variant
   cmake $SOURCEDIR \
-    -DCMAKE_INSTALL_PREFIX=$INSTALLROOT \
+    -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" \
     -DCMAKE_BUILD_TYPE=Release \
     -Dstatic=ON \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON

@@ -143,7 +143,7 @@ function Configure() {
 
   # < 6.36.99: explicit pgsql=OFF; >= 6.36.99: roottest flag replaces it
   if _ver_ge "$_root_ver" "6.36.99"; then
-    _test_flags="-Droottest=${ROOT_TESTING}"
+    _test_flags="-Droottest="${ROOT_TESTING}""
   else
     _test_flags="-Dpgsql=OFF"
   fi
@@ -161,8 +161,8 @@ function Configure() {
   # ABSL_ROOT is set in the environment but invisible to cmake due to CMP0144.
   _sofie_flag=""
   if [[ -n "${PROTOBUF_ROOT}" ]]; then
-    _sofie_flag="-Dtmva-sofie=ON -DProtobuf_ROOT=${PROTOBUF_ROOT}"
-    [[ -n "${ABSL_ROOT}" ]] && _sofie_flag+=" -Dabsl_ROOT=${ABSL_ROOT}"
+    _sofie_flag="-Dtmva-sofie=ON -DProtobuf_ROOT="${PROTOBUF_ROOT}""
+    [[ -n "${ABSL_ROOT}" ]] && _sofie_flag+=" -Dabsl_ROOT="${ABSL_ROOT}""
   fi
 
   unset DYLD_LIBRARY_PATH
@@ -172,39 +172,39 @@ function Configure() {
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
     -DCMAKE_BUILD_TYPE=Release                                              \
     -DCMAKE_INSTALL_LIBDIR=lib                                              \
-    -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}                             \
+    -DCMAKE_CXX_STANDARD="${CMAKE_CXX_STANDARD}"                             \
     -DCMAKE_C_STANDARD=17                                                   \
     -DCMAKE_CXX_FLAGS=" -fpermissive -Wno-stringop-overread -Wno-stringop-overflow -Wno-deprecated-declarations " \
     -DCMAKE_C_FLAGS=" -Wno-stringop-overread -Wno-stringop-overflow "       \
-    -DCMAKE_CXX_COMPILER=${COMPILER_CXX}                                   \
-    -DCMAKE_C_COMPILER=${COMPILER_CC}                                      \
+    -DCMAKE_CXX_COMPILER="${COMPILER_CXX}"                                   \
+    -DCMAKE_C_COMPILER="${COMPILER_CC}"                                      \
     ${ENABLE_COCOA}                                                         \
     -Dcheck_connection=OFF                                                  \
     -Dfail-on-missing=ON                                                    \
     -DCINTLONGLINE=4096                                                     \
     -DCINTMAXSTRUCT=36000                                                   \
     -DCINTMAXTYPEDEF=36000                                                  \
-    ${OPENSSL_ROOT:+-DOPENSSL_ROOT=$OPENSSL_ROOT}                           \
-    ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR=$OPENSSL_ROOT/include}            \
-    ${GSL_ROOT:+-DGSL_ROOT_DIR=$GSL_ROOT}                                   \
-    ${ZLIB_ROOT:+-DZLIB_ROOT=$ZLIB_ROOT}                                    \
-    ${FFTW_ROOT:+-DFFTW_DIR=$FFTW_ROOT}                                     \
+    ${OPENSSL_ROOT:+-DOPENSSL_ROOT="$OPENSSL_ROOT"}                           \
+    ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR="$OPENSSL_ROOT/include"}            \
+    ${GSL_ROOT:+-DGSL_ROOT_DIR="$GSL_ROOT"}                                   \
+    ${ZLIB_ROOT:+-DZLIB_ROOT="$ZLIB_ROOT"}                                    \
+    ${FFTW_ROOT:+-DFFTW_DIR="$FFTW_ROOT"}                                     \
     -Dbuiltin_fftw3=OFF                                                     \
-    ${LIBXML2_ROOT:+-DLIBXML2_ROOT=$LIBXML2_ROOT}                           \
-    ${TBB_ROOT:+-DTBB_ROOT_DIR=$TBB_ROOT}                                   \
-    ${CFITSIO_ROOT:+-DCFITSIO_ROOT=$CFITSIO_ROOT}                           \
-    ${XZ_ROOT:+-DLIBLZMA_ROOT=$XZ_ROOT}                                     \
+    ${LIBXML2_ROOT:+-DLIBXML2_ROOT="$LIBXML2_ROOT"}                           \
+    ${TBB_ROOT:+-DTBB_ROOT_DIR="$TBB_ROOT"}                                   \
+    ${CFITSIO_ROOT:+-DCFITSIO_ROOT="$CFITSIO_ROOT"}                           \
+    ${XZ_ROOT:+-DLIBLZMA_ROOT="$XZ_ROOT"}                                     \
     -Ddavix=ON                                                              \
     -Dbuiltin_davix=OFF                                                     \
-    ${DAVIX_ROOT:+-DDAVIX_ROOT=$DAVIX_ROOT}                                 \
-    ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT=$JSONMCPP_ROOT}                   \
+    ${DAVIX_ROOT:+-DDAVIX_ROOT="$DAVIX_ROOT"}                                 \
+    ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT="$JSONMCPP_ROOT"}                   \
     -Dbuiltin_nlohmannjson=OFF                                              \
-    ${GL2PS_ROOT:+-Dgl2ps_ROOT=$GL2PS_ROOT}                                 \
-    ${VC_ROOT:+-DVc_ROOT=$VC_ROOT}                                          \
-    ${VDT_ROOT:+-DVDT_INCLUDE_DIR=$VDT_ROOT/include}                        \
-    ${_vdt_lib:+-DVDT_LIBRARY=$_vdt_lib}                                    \
+    ${GL2PS_ROOT:+-Dgl2ps_ROOT="$GL2PS_ROOT"}                                 \
+    ${VC_ROOT:+-DVc_ROOT="$VC_ROOT"}                                          \
+    ${VDT_ROOT:+-DVDT_INCLUDE_DIR="$VDT_ROOT/include"}                        \
+    ${_vdt_lib:+-DVDT_LIBRARY="$_vdt_lib"}                                    \
     -Dxrootd=ON                                                             \
-    ${XROOTD_ROOT:+-DXROOTD_ROOT_DIR=$XROOTD_ROOT}                         \
+    ${XROOTD_ROOT:+-DXROOTD_ROOT_DIR="$XROOTD_ROOT"}                         \
     ${_builtin_flags}                                                       \
     -Dcintex=ON                                                             \
     -Dexplicitlink=ON                                                       \
@@ -232,7 +232,7 @@ function Configure() {
     -Dsoversion=ON                                                          \
     -Dsqlite=OFF                                                            \
     -Dssl=ON                                                                \
-    -Dtesting=${ROOT_TESTING}                                               \
+    -Dtesting="${ROOT_TESTING}"                                               \
     -Dtmva-gpu=OFF                                                          \
     -Dtmva-sofie=OFF                                                        \
     -Dunfold=ON                                                             \

@@ -33,8 +33,8 @@ function Configure() {
     -Dgeneva_enable_openloops=ON \
     -Dgeneva_enable_pythia8=OFF \
     -Dgeneva_enable_python=ON \
-    -Dopenloops_ROOT=${OPENLOOPS_ROOT} \
-    -Dlhapdf_ROOT=${LHAPDF_ROOT}
+    -Dopenloops_ROOT="${OPENLOOPS_ROOT}" \
+    -Dlhapdf_ROOT="${LHAPDF_ROOT}"
 }
 function Make() {
   make ${JOBS:+-j $JOBS} beamfunc-install-data

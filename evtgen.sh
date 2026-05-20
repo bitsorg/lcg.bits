@@ -27,11 +27,11 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DEVTGEN_PHOTOS=ON \
-    -DPHOTOSPP_ROOT_DIR=${photos++_home} \
+    -DPHOTOSPP_ROOT_DIR="${photos++_home}" \
     -DEVTGEN_PYTHIA=ON \
-    -DPYTHIA8_ROOT_DIR=${PYTHIA8_ROOT} \
+    -DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}" \
     -DEVTGEN_TAUOLA=ON \
-    -DTAUOLAPP_ROOT_DIR=${tauola++_home}
+    -DTAUOLAPP_ROOT_DIR="${tauola++_home}"
 }
 function Make() {
   cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} FLIBS=${FORTRAN_LIBRARY}

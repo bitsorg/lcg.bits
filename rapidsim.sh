@@ -22,5 +22,5 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DROOTSYS=${ROOT_ROOT}
+    -DROOTSYS="${ROOT_ROOT}"
 }

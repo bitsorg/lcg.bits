@@ -32,9 +32,9 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DBOOST_ROOT=${Boost_ROOT} \
+    -DBOOST_ROOT="${Boost_ROOT}" \
     -DCMAKE_CXX_STANDARD=17 \
     -DDD4HEP_USE_XERCESC=ON \
-    -DXERCESC_ROOT_DIR=${XercesC_ROOT} \
-    -DROOTSYS=${ROOT_ROOT}
+    -DXERCESC_ROOT_DIR="${XercesC_ROOT}" \
+    -DROOTSYS="${ROOT_ROOT}"
 }

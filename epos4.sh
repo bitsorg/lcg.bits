@@ -28,7 +28,7 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \
-    -DFASTSYS=${FASTJET_ROOT} \
+    -DFASTSYS="${FASTJET_ROOT}" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 function PostInstall() {
