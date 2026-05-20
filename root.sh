@@ -172,7 +172,7 @@ function Configure() {
     -DCMAKE_INSTALL_LIBDIR=lib                                              \
     -DCMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD}                             \
     -DCMAKE_C_STANDARD=17                                                   \
-    -DCMAKE_CXX_FLAGS=" -fpermissive "                                      \
+    -DCMAKE_CXX_FLAGS=" -fpermissive -Wno-stringop-overread "               \
     -DCMAKE_CXX_COMPILER=${COMPILER_CXX}                                   \
     -DCMAKE_C_COMPILER=${COMPILER_CC}                                      \
     ${ENABLE_COCOA}                                                         \
