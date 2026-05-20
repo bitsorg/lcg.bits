@@ -52,13 +52,15 @@ function Prepare() {
   # LLVM 13 headers use uint64_t/uint32_t/etc. without including <stdint.h>,
   # relying on transitive inclusions that Clang 20 no longer provides.
   # Patching individual headers is a losing battle (hundreds of affected files).
-  # Instead, prepend add_compile_options(-include stdint.h) to LLVM's root
-  # CMakeLists.txt so every C and C++ compilation unit in the LLVM tree gets
-  # stdint.h as a forced include, before any LLVM target is defined.
+  # Instead, prepend a C++-only forced include of <cstdint> to LLVM's root
+  # CMakeLists.txt, before any LLVM target is defined.
+  # Using $<COMPILE_LANGUAGE:CXX> restricts the flag to C++ only: applying
+  # -include stdint.h to C compilations on glibc 2.40+ causes a macro conflict
+  # in bits/types.h ("unexpected token in argument list" for typedef unsigned char).
   # Guard prevents double-patching on reruns.
   _llvm_cmake="${SOURCEDIR}/interpreter/llvm-project/llvm/CMakeLists.txt"
   if [[ -f "${_llvm_cmake}" ]] && ! grep -q 'bits: stdint compat' "${_llvm_cmake}"; then
-    sed -i '1s|^|# bits: stdint compat — Clang 20 no longer provides uint64_t transitively\nadd_compile_options(-include stdint.h)\n\n|' "${_llvm_cmake}"
+    sed -i '1s|^|# bits: stdint compat — Clang 20 no longer provides uint64_t transitively\nadd_compile_options($<$<COMPILE_LANGUAGE:CXX>:-include cstdint>)\n\n|' "${_llvm_cmake}"
   fi
   unset _llvm_cmake
   # builtin FTGL: GCC 14+ rejects implicit unsigned char* -> char* conversion.
