@@ -22,7 +22,6 @@ requires:
   - cfitsio
   - jsonmcpp
   - gl2ps
-  - Vc
   - protobuf
   - jpeg
   - tiff
@@ -155,12 +154,6 @@ function Configure() {
     _test_flags="-Dpgsql=OFF"
   fi
 
-  # Vc SIMD acceleration: Linux only, ROOT < 6.40, when Vc dep is loaded
-  _vc_flag=""
-  if [[ $(uname) != Darwin ]] && ! _ver_ge "$_root_ver" "6.40.00" && [[ -n "${VC_ROOT}" ]]; then
-    _vc_flag="-Dvc=ON"
-  fi
-
   # SOFIE ONNX model importer: enabled when protobuf is available.
   # Also pass Protobuf_ROOT and absl_ROOT so protobuf's cmake config can resolve
   # find_dependency(absl) and create the absl::strings target required by
@@ -208,7 +201,6 @@ function Configure() {
     ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT="$JSONMCPP_ROOT"}                   \
     -Dbuiltin_nlohmannjson=OFF                                              \
     ${GL2PS_ROOT:+-Dgl2ps_ROOT="$GL2PS_ROOT"}                                 \
-    ${VC_ROOT:+-DVc_ROOT="$VC_ROOT"}                                          \
     ${VDT_ROOT:+-DVDT_INCLUDE_DIR="$VDT_ROOT/include"}                        \
     ${_vdt_lib:+-DVDT_LIBRARY="$_vdt_lib"}                                    \
     -Dxrootd=ON                                                             \
@@ -253,7 +245,6 @@ function Configure() {
     -Dzlib=ON                                                               \
     ${VDT_ROOT:+-Dvdt=ON}                                                   \
     ${_sofie_flag}                                                          \
-    ${_vc_flag}                                                             \
     ${_test_flags}
 }
 function PostInstall() {
@@ -272,11 +263,6 @@ EOF
 
   # Make some CMake files used by other projects relocatable
   sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
-
-  # When Vc is enabled, cling generates Vc.pcm in the build tree and
-  # MathCore.pcm embeds an absolute path to it.  The sed above can't patch
-  # binary .pcm files, so we copy Vc.pcm to the install lib dir instead.
-  find "${BUILDDIR}" -name 'Vc.pcm' -exec cp {} "${INSTALLROOT}/lib/" \; 2>/dev/null || true
 
   rm -vf "$INSTALLROOT/LICENSE"
 
