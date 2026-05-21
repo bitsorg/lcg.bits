@@ -29,29 +29,18 @@ function Make() {
     Darwin) TOOLSET=clang ;;
     *) TOOLSET=gcc ;;
   esac
-  ./bootstrap.sh --with-toolset=$TOOLSET
 
-  # Append explicit Python configuration so b2 builds boost_python against
-  # our bits-managed Python rather than any system Python.
+  # Pass Python to bootstrap so it writes the correct 'using python' jam
+  # entry into project-config.jam and b2 builds boost_python.
+  # Try the bits-standard env var names; fall back silently if Python not found.
   _py_root="${PYTHON_ROOT:-${Python_ROOT}}"
-  if [[ -n "$_py_root" ]]; then
-    _py_exe="${_py_root}/bin/python3"
-    _py_ver=$("${_py_exe}" -c 'import sys; print("%d.%d" % sys.version_info[:2])')
-    _py_inc=$("${_py_exe}" -c 'import sysconfig; print(sysconfig.get_path("include"))')
-    # Search for the Python shared library; match versioned names too
-    # (e.g. libpython3.12.so.1.0 as installed by bits Python).
-    _py_lib=$(find "${_py_root}/lib" \
-                \( -name "libpython${_py_ver}.so"     \
-                   -o -name "libpython${_py_ver}m.so"  \
-                   -o -name "libpython${_py_ver}.so.*" \
-                   -o -name "libpython${_py_ver}.dylib" \) \
-                -print -quit 2>/dev/null)
-    # Fall back to the plain lib dir if the library file wasn't found.
-    _py_libdir="${_py_root}/lib"
-    [[ -n "$_py_lib" ]] && _py_libdir="$(dirname "${_py_lib}")"
-    echo "using python : ${_py_ver} : ${_py_exe} : ${_py_inc} : ${_py_libdir} ;" \
-      >> project-config.jam
+  _py_opts=""
+  if [[ -n "$_py_root" && -x "${_py_root}/bin/python3" ]]; then
+    _py_opts="--with-python=${_py_root}/bin/python3 --with-python-root=${_py_root}"
   fi
+
+  # shellcheck disable=SC2086
+  ./bootstrap.sh --with-toolset=$TOOLSET ${_py_opts}
 
   ./b2 --prefix="$INSTALLROOT" toolset=$TOOLSET ${JOBS:+-j$JOBS} install
 }
