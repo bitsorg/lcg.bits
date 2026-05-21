@@ -1,6 +1,6 @@
 --- a/cmake/GaudiToolbox.cmake
 +++ b/cmake/GaudiToolbox.cmake
-@@ -1452,7 +1452,7 @@ function(_merge_files_confdb2 dependency file_to_merge)
+@@ -1452,7 +1452,7 @@
          if(APPLE)
              set(output_files ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.confdb2 ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.confdb2.db)
          else()
@@ -9,7 +9,8 @@
          endif()
          add_custom_command(OUTPUT ${output_files}
              COMMAND run merge_confdb2_parts $<TARGET_PROPERTY:${merge_target},fragments>
-@@ -1537,10 +1537,10 @@ if(NOT CMAKE_SCRIPT_MODE_FILE AND NOT TARGET target_runtime_paths)
+@@ -1534,7 +1534,7 @@
+     endforeach()
      string(TOLOWER "${CMAKE_PROJECT_NAME}env.sh" _env_file)
      file(GENERATE OUTPUT ${CMAKE_BINARY_DIR}/${_env_file}
 -                  CONTENT "#!/bin/sh
@@ -17,10 +18,12 @@
  # Auto-generated script to set environment variables
  export PATH=\"$<SHELL_PATH:$<FILTER:$<REMOVE_DUPLICATES:$<GENEX_EVAL:$<TARGET_PROPERTY:target_runtime_paths,runtime_path>>;${_ENV_PATH}>,EXCLUDE,^[^/]>>\${PATH:+:\${PATH}}\"
  export LD_LIBRARY_PATH=\"$<SHELL_PATH:$<FILTER:$<REMOVE_DUPLICATES:$<GENEX_EVAL:$<TARGET_PROPERTY:target_runtime_paths,runtime_ld_library_path>>;${_ENV_LD_LIBRARY_PATH}>,EXCLUDE,^[^/]>>\${LD_LIBRARY_PATH:+:\${LD_LIBRARY_PATH}}\"
-@@ -1552,7 +1552,7 @@ ${RUN_SCRIPT_EXTRA_COMMANDS}
+@@ -1552,7 +1552,7 @@
  ")
      # Since we cannot tell file(GENERATE) to create an executable file (at generation time)
      # we create one (at configure time) that source the first one, then we make it executable
 -    file(WRITE ${CMAKE_BINARY_DIR}/run "#!/bin/sh\n# Auto-generated script to set the environment before the execution of a command\n. ${CMAKE_BINARY_DIR}/${_env_file}\nexec \"$@\"\n")
 +    file(WRITE ${CMAKE_BINARY_DIR}/run "#!/bin/bash\n# Auto-generated script to set the environment before the execution of a command\n. ${CMAKE_BINARY_DIR}/${_env_file}\nexec \"$@\"\n")
      execute_process(COMMAND chmod a+x ${CMAKE_BINARY_DIR}/run)
+     # Add a executable target for convenience
+     add_executable(run IMPORTED GLOBAL)
