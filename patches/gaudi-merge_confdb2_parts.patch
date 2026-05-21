@@ -1,0 +1,14 @@
+--- a/GaudiKernel/scripts/merge_confdb2_parts
++++ b/GaudiKernel/scripts/merge_confdb2_parts
+@@ -21,9 +21,12 @@ if (
+     (3, 13, 0) <= sys.version_info <= (3, 13, 7) or sys.version_info[:3] == (3, 14, 0)
+ ) and sys.platform.startswith("linux"):
+     import dbm
+-    import dbm.gnu
+-
+-    dbm._defaultmod = dbm.gnu
++    try:
++        import dbm.gnu
++        dbm._defaultmod = dbm.gnu
++    except ImportError:
++        pass  # gdbm not compiled in; use default backend (dumbdbm creates .dat files)

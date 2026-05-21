@@ -15,6 +15,10 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Geant4
+prepend_path:
+  ROOT_INCLUDE_PATH:
+    - "$GEANT4_ROOT/include/Geant4"
+    - "$GEANT4_ROOT/include"
 ---
 #!/bin/bash -e
 ##############################

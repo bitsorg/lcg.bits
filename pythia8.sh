@@ -12,6 +12,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
+env:
+  PYTHIA8: "$PYTHIA8_ROOT"
+  PYTHIA8DATA: "$PYTHIA8_ROOT/share/Pythia8/xmldoc"
 ---
 #!/bin/bash -e
 ##############################

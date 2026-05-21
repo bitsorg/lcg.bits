@@ -10,6 +10,8 @@ build_requires:
 license: GPL-2.0-only
 patches:
   - herwig-6.521.2.patch
+env:
+  HERWIG_INSTALL_PATH: "$HERWIG_ROOT/lib/herwig"
 ---
 #!/bin/bash -e
 ##############################

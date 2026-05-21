@@ -14,6 +14,13 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
+env:
+  G4VMCINSTALL: "$GEANT4_VMC_ROOT"
+  USE_VGM: "1"
+prepend_path:
+  ROOT_INCLUDE_PATH:
+    - "$GEANT4_VMC_ROOT/include/geant4vmc"
+    - "$GEANT4_VMC_ROOT/include/g4root"
 ---
 #!/bin/bash -e
 ##############################
