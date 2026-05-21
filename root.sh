@@ -267,6 +267,11 @@ EOF
   # Make some CMake files used by other projects relocatable
   sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
 
+  # When Vc is enabled, cling generates Vc.pcm in the build tree and
+  # MathCore.pcm embeds an absolute path to it.  The sed above can't patch
+  # binary .pcm files, so we copy Vc.pcm to the install lib dir instead.
+  find "${BUILDDIR}" -name 'Vc.pcm' -exec cp {} "${INSTALLROOT}/lib/" \; 2>/dev/null || true
+
   rm -vf "$INSTALLROOT/LICENSE"
 
   # Fix python shebangs for relocatability
