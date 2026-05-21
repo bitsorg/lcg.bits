@@ -13,11 +13,11 @@ license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include BinaryRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--include"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS}
-  cmake -E copy_directory $SOURCEDIR $INSTALLROOT
+  mkdir -p $INSTALLROOT/include   
+  cp -r $SOURCEDIR/cpp/AIDA $INSTALLROOT/include/
 }
