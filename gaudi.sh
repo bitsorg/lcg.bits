@@ -75,7 +75,10 @@ new_src, n = re.subn(
         '        import dbm.gnu\n'
         '        dbm._defaultmod = dbm.gnu\n'
         '    except ImportError:\n'
-        '        pass  # gdbm not compiled in; use default backend'
+        '        # gdbm unavailable; explicitly force dumbdbm which creates\n'
+        '        # <name>.dat — matching the cmake install target (.confdb2.dat)\n'
+        '        import dbm.dumb\n'
+        '        dbm._defaultmod = dbm.dumb'
     ),
     src,
 )
