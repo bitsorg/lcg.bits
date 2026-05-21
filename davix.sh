@@ -13,8 +13,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
-patches:
-  - davix-0.8.10.patch
 ---
 #!/bin/bash -e
 ##############################
@@ -29,5 +27,6 @@ function Configure() {
       -DCMAKE_INSTALL_LIBDIR=lib \
       ${OPENSSL_ROOT:+-DOPENSSL_ROOT_DIR="$OPENSSL_ROOT"} \
       ${BOOST_ROOT:+-DBOOST_ROOT="$BOOST_ROOT"} \
-    -DDAVIX_TESTS=OFF
+    -DDAVIX_TESTS=OFF \
+    -DEMBEDDED_RAPIDJSON=ON
 }
