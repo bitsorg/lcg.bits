@@ -69,13 +69,13 @@ script = srcdir / "GaudiKernel/scripts/merge_confdb2_parts"
 src = script.read_text()
 
 new_src, n = re.subn(
-    r'(    )import dbm\.gnu\n\1dbm\._defaultmod = dbm\.gnu',
+    r'    import dbm\.gnu\n\n    dbm\._defaultmod = dbm\.gnu',
     (
-        r'\1try:\n'
-        r'\1    import dbm.gnu\n'
-        r'\1    dbm._defaultmod = dbm.gnu\n'
-        r'\1except ImportError:\n'
-        r'\1    pass  # gdbm not compiled in; use default backend'
+        '    try:\n'
+        '        import dbm.gnu\n'
+        '        dbm._defaultmod = dbm.gnu\n'
+        '    except ImportError:\n'
+        '        pass  # gdbm not compiled in; use default backend'
     ),
     src,
 )
