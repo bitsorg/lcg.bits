@@ -1,9 +1,9 @@
 package: Gaudi
 description: Gaudi software framework for HEP data processing applications
-version: "master"
-tag: "master"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Gaudi-master.tar.gz
+version: "%(tag_basename)s"
+tag: "v40r2"
+source: https://gitlab.cern.ch/gaudi/Gaudi.git
+license: Apache-2.0
 requires:
   - CMake
   - Boost
@@ -18,35 +18,48 @@ requires:
   - six
   - fmt
   - pytest
+  - pytest_cov
   - PyYAML
   - jsonmcpp
   - HepPDT
   - Catch2
   - networkx
-  - pytest_cov
+  - CMake
+  - PyYAML
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: Apache-2.0
+prefer_system: (?!slc5)
+prefer_system_check:
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake --python"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=17 \
-    -DCMAKE_FIND_FRAMEWORK=LAST \
-    -DGAUDI_USE_DOXYGEN=OFF
+      -DCMAKE_CXX_STANDARD=20 \
+      -DCMAKE_FIND_FRAMEWORK=LAST \
+      -DGAUDI_USE_DOXYGEN=OFF \
+      -DCPPGSL_INCLUDE_DIR=$CPPGSL_ROOT/include \
+      -DRANGEV3_INCLUDE_DIR=$RANGEV3_ROOT/include \
+      -DROOT_INCLUDE_DIR=$ROOTSYS/include \
+      -DCPPUNIT_INCLUDE_DIR=$CPPUNIT_ROOT/include -DCPPUNIT_LIBRARY=$CPPUNIT_ROOT/lib/libcppunit.so \
+      -DGAUDI_USE_HEPPDT=OFF \
+      -DGAUDI_USE_AIDA=OFF \
+      -DGAUDI_USE_DOXYGEN=OFF \
+      -DGAUDI_USE_GPERFTOOLS=FALSE \
+      -DCMAKE_FIND_FRAMEWORK=LAST \
+      -DBoost_NO_BOOST_CMAKE=FALSE
 }
 function Make() {
-  # Gaudi's cmake prefetches pytest test-collection during make; it invokes
-  # pytest which imports ROOT.  ROOT's Python bindings live in $ROOT_ROOT/lib
-  # and must be on PYTHONPATH or the collection step fails with ModuleNotFoundError.
-  export PYTHONPATH="${ROOT_ROOT}/lib${PYTHONPATH:+:${PYTHONPATH}}"
-  make ${JOBS:+-j$JOBS}
+   # Gaudi's cmake prefetches pytest test-collection during make; it invokes
+   # pytest which imports ROOT.  ROOT's Python bindings live in $ROOT_ROOT/lib
+   # and must be on PYTHONPATH or the collection step fails with ModuleNotFoundError.
+   export PYTHONPATH="${ROOT_ROOT}/lib${PYTHONPATH:+:${PYTHONPATH}}"
+   make ${JOBS:+-j$JOBS}
 }

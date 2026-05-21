@@ -26,6 +26,7 @@ requires:
   - protobuf
   - jpeg
   - tiff
+  - nlohmann_json
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -184,6 +185,7 @@ function Configure() {
     -DCINTLONGLINE=4096                                                     \
     -DCINTMAXSTRUCT=36000                                                   \
     -DCINTMAXTYPEDEF=36000                                                  \
+    ${NLOHMANN_JSON_ROOT:+nlohmann_json_DIR=${NLOHMANN_JSON_ROOT}}          \
     ${OPENSSL_ROOT:+-DOPENSSL_ROOT="$OPENSSL_ROOT"}                           \
     ${OPENSSL_ROOT:+-DOPENSSL_INCLUDE_DIR="$OPENSSL_ROOT/include"}            \
     ${GSL_ROOT:+-DGSL_ROOT_DIR="$GSL_ROOT"}                                   \

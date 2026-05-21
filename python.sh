@@ -49,6 +49,6 @@ function PostInstall() {
   # Since Python 3.12, ensurepip no longer bundles setuptools; without it
   # any pip call using build isolation (the default) cannot find the
   # setuptools build backend — e.g. XRootD's cmake_install.cmake.
-  LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" \
-    "$INSTALLROOT/bin/python3" -m pip install --upgrade setuptools wheel hatchling hatch-vcs hatch-fancy-pypi-readme flit flit_core
+  preload="setuptools wheel hatchling hatch-vcs hatch-fancy-pypi-readme flit flit_core pytest pytest_cov PyYAML"
+  env LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"  $INSTALLROOT/bin/python3 -m pip install --upgrade $preload
 }

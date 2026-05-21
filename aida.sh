@@ -15,7 +15,7 @@ license: LGPL-2.1-or-later
 ##############################
 . $(bits-include BinaryRecipe)
 ##############################
-MODULE_OPTIONS="--include"
+MODULE_OPTIONS="--inc"
 ##############################
 function Make() {
   mkdir -p $INSTALLROOT/include   
