@@ -36,10 +36,13 @@ function Prepare() {
   # Fix GaudiToolbox.cmake: use .confdb2.dat extension (avoids gdbm dependency
   # on platforms where Python is built without _gdbm), and use #!/bin/bash
   # (merge_confdb2_parts shebang must match the shell that supports the script).
-  python3 - <<'PYEOF'
-import re, pathlib
+  python3 - "${SOURCEDIR}" <<'PYEOF'
+import sys
+import pathlib
 
-cmake_file = pathlib.Path("cmake/GaudiToolbox.cmake")
+srcdir = pathlib.Path(sys.argv[1])
+
+cmake_file = srcdir / "cmake/GaudiToolbox.cmake"
 text = cmake_file.read_text()
 
 # .confdb2) -> .confdb2.dat) in the Linux else branch output file assignment
@@ -57,7 +60,7 @@ cmake_file.write_text(text)
 print("GaudiToolbox.cmake patched")
 
 # Fix merge_confdb2_parts: guard dbm.gnu import so builds without _gdbm work
-script = pathlib.Path("GaudiKernel/scripts/merge_confdb2_parts")
+script = srcdir / "GaudiKernel/scripts/merge_confdb2_parts"
 src = script.read_text()
 
 old = (
