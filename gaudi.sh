@@ -43,3 +43,10 @@ function Configure() {
     -DCMAKE_FIND_FRAMEWORK=LAST \
     -DGAUDI_USE_DOXYGEN=OFF
 }
+function Make() {
+  # Gaudi's cmake prefetches pytest test-collection during make; it invokes
+  # pytest which imports ROOT.  ROOT's Python bindings live in $ROOT_ROOT/lib
+  # and must be on PYTHONPATH or the collection step fails with ModuleNotFoundError.
+  export PYTHONPATH="${ROOT_ROOT}/lib${PYTHONPATH:+:${PYTHONPATH}}"
+  make ${JOBS:+-j$JOBS}
+}
