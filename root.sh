@@ -31,6 +31,12 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-only
+env:
+  ROOTSYS: "$ROOT_ROOT"
+prepend_path:
+  ROOT_DYN_PATH: "$ROOT_ROOT/lib"
+  ROOT_INCLUDE_PATH: "$ROOT_ROOT/include"
+  PYTHONPATH: "$ROOT_ROOT/lib"
 ---
 #!/bin/bash -e
 ##############################

@@ -47,16 +47,3 @@ function Configure() {
       -DGAUDI_USE_GPERFTOOLS=FALSE \
       -DBoost_NO_BOOST_CMAKE=FALSE
 }
-function Make() {
-  # Gaudi's cmake prefetches pytest test-collection during make by invoking
-  # pytest, which does 'import ROOT'.  ROOT needs two env vars that bits does
-  # NOT propagate from ROOT's modulefile into the build-time init.sh:
-  #   ROOTSYS        - used by ROOT's own cmake and some runtime lookups
-  #   ROOT_DYN_PATH  - used by system.rootrc to find libCling / libRIO at
-  #                    runtime; without it cling never initialises and every
-  #                    '#include' / '#pragma' in forward declarations fails.
-  export ROOTSYS="${ROOT_ROOT}"
-  export ROOT_DYN_PATH="${ROOT_ROOT}/lib${ROOT_DYN_PATH:+:${ROOT_DYN_PATH}}"
-  export PYTHONPATH="${ROOT_ROOT}/lib${PYTHONPATH:+:${PYTHONPATH}}"
-  make ${JOBS:+-j$JOBS}
-}
