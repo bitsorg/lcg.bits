@@ -38,11 +38,18 @@ function Make() {
     _py_exe="${_py_root}/bin/python3"
     _py_ver=$("${_py_exe}" -c 'import sys; print("%d.%d" % sys.version_info[:2])')
     _py_inc=$("${_py_exe}" -c 'import sysconfig; print(sysconfig.get_path("include"))')
+    # Search for the Python shared library; match versioned names too
+    # (e.g. libpython3.12.so.1.0 as installed by bits Python).
     _py_lib=$(find "${_py_root}/lib" \
-                \( -name "libpython${_py_ver}.so" -o -name "libpython${_py_ver}m.so" \
+                \( -name "libpython${_py_ver}.so"     \
+                   -o -name "libpython${_py_ver}m.so"  \
+                   -o -name "libpython${_py_ver}.so.*" \
                    -o -name "libpython${_py_ver}.dylib" \) \
                 -print -quit 2>/dev/null)
-    echo "using python : ${_py_ver} : ${_py_exe} : ${_py_inc} : $(dirname "${_py_lib}") ;" \
+    # Fall back to the plain lib dir if the library file wasn't found.
+    _py_libdir="${_py_root}/lib"
+    [[ -n "$_py_lib" ]] && _py_libdir="$(dirname "${_py_lib}")"
+    echo "using python : ${_py_ver} : ${_py_exe} : ${_py_inc} : ${_py_libdir} ;" \
       >> project-config.jam
   fi
 
