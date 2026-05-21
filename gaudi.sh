@@ -59,29 +59,31 @@ text = text.replace('file(WRITE ${CMAKE_BINARY_DIR}/run "#!/bin/sh\n',
 cmake_file.write_text(text)
 print("GaudiToolbox.cmake patched")
 
-# Fix merge_confdb2_parts: guard dbm.gnu import so builds without _gdbm work
+# Fix merge_confdb2_parts: guard dbm.gnu import so builds without _gdbm work.
+# Match just the two lines that need wrapping; don't require surrounding context
+# (exact-string matching failed in practice because the version in SOURCES may
+# differ slightly from what the summary showed).
+import re
+
 script = srcdir / "GaudiKernel/scripts/merge_confdb2_parts"
 src = script.read_text()
 
-old = (
-    "    import dbm\n"
-    "    import dbm.gnu\n"
-    "    dbm._defaultmod = dbm.gnu\n"
+new_src, n = re.subn(
+    r'(    )import dbm\.gnu\n\1dbm\._defaultmod = dbm\.gnu',
+    (
+        r'\1try:\n'
+        r'\1    import dbm.gnu\n'
+        r'\1    dbm._defaultmod = dbm.gnu\n'
+        r'\1except ImportError:\n'
+        r'\1    pass  # gdbm not compiled in; use default backend'
+    ),
+    src,
 )
-new = (
-    "    import dbm\n"
-    "    try:\n"
-    "        import dbm.gnu\n"
-    "        dbm._defaultmod = dbm.gnu\n"
-    "    except ImportError:\n"
-    "        pass  # gdbm not compiled in; use default backend\n"
-)
-
-if old in src:
-    script.write_text(src.replace(old, new))
-    print("merge_confdb2_parts patched")
-else:
-    print("merge_confdb2_parts: pattern not found, skipping")
+if n == 0:
+    print("ERROR: merge_confdb2_parts: dbm.gnu pattern not found", file=sys.stderr)
+    sys.exit(1)
+script.write_text(new_src)
+print(f"merge_confdb2_parts patched ({n} substitution(s))")
 PYEOF
 }
 ##############################
