@@ -15,7 +15,7 @@ requires:
   - lhapdf
   - nlox
   - openloops
-  - photos++
+  - photoscpp
   - pythia8
   - qqvvamp
   - recola

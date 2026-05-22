@@ -1,4 +1,4 @@
-package: photos++
+package: photoscpp
 description: PHOTOS++ C++ version of PHOTOS radiative corrections
 version: "3.61"
 tag: "3.61"

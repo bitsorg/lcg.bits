@@ -1,4 +1,4 @@
-package: tauola++
+package: tauolacpp
 description: TAUOLA++ C++ version of TAUOLA tau decay generator
 version: "1.1.6"
 tag: "1.1.6"

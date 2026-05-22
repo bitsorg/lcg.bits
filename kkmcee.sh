@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/kkmcee-unknown.tar.gz
 requires:
   - ROOT
-  - photos++
+  - photoscpp
   - hepmc3
   - autoconf
   - automake

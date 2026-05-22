@@ -1,4 +1,4 @@
-package: Garfield++
+package: GarfieldCPP
 description: Garfield++ toolkit for detailed simulation of gaseous particle detectors
 version: "HEAD"
 tag: "HEAD"
