@@ -21,5 +21,8 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # GCC 15 defaults to C23, which forbids implicit function declarations.
+  # libxslt 1.1.38 predates C23; build it as gnu17 to avoid false errors.
+  export CFLAGS="${CFLAGS} -std=gnu17"
   ./configure --prefix=$INSTALLROOT --without-python
 }
