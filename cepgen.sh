@@ -17,8 +17,8 @@ requires:
   - hepmc3
   - tbb
   - vdt
-  - photos++
-  - tauola++
+  - photoscpp
+  - tauolacpp
   - Python
   - jsonmcpp
 build_requires:

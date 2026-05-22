@@ -1,4 +1,4 @@
-package: hydjet++
+package: hydjetcpp
 description: HYDJET++ improved heavy-ion Monte Carlo generator with jet quenching
 version: "2.1"
 tag: "2.1"

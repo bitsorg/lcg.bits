@@ -7,8 +7,8 @@ sources:
 requires:
   - CMake
   - pythia8
-  - photos++
-  - tauola++
+  - photoscpp
+  - tauolacpp
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
