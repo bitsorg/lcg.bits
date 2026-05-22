@@ -18,7 +18,7 @@ MODULE_OPTIONS="--lib"
 function Make() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
   # Compile all Fortran sources into object files; strip -m32 and use std=legacy
-  $FC -c -O2 -fno-automatic -std=legacy -fPIC \
+  ${FC:-gfortran} -c -O2 -fno-automatic -std=legacy -fPIC \
       dpmjet3.0-6.f phojet1.12-35c4.f pythia6115dpm3v1.f
   # Bundle into a static library named libDPMJET.a (what FindDPMJet.cmake looks for)
   ar rcs libDPMJET.a dpmjet3.0-6.o phojet1.12-35c4.o pythia6115dpm3v1.o

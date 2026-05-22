@@ -19,7 +19,7 @@ license: LicenseRef-POWHEG
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} -f Makefile.lhcb FCOMP=$FC CCOMP=$CXX LHAPDF=${LHAPDF_ROOT} FASTJET=${FASTJET_ROOT}
+  make ${JOBS:+-j $JOBS} -f Makefile.lhcb FCOMP=${FC:-gfortran} CCOMP=$CXX LHAPDF=${LHAPDF_ROOT} FASTJET=${FASTJET_ROOT}
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb install PREFIX=$INSTALLROOT
 }
 function MakeInstall() { true; }

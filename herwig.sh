@@ -22,7 +22,7 @@ MODULE_OPTIONS="--bin --lib --root-inc"
 function Configure() {
   ./configure --prefix="$INSTALLROOT" \
     "FFLAGS=-O2 -fPIC -Wuninitialized -fno-automatic -fno-range-check" \
-    F77=$FC CC=$CC
+    F77=${FC:-gfortran} CC=$CC
 }
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'

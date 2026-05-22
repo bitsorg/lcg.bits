@@ -21,7 +21,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} FC=$FC
+  make ${JOBS:+-j $JOBS} FC=${FC:-gfortran}
   cmake -E copy_directory $SOURCEDIR/lib $INSTALLROOT/lib \
   && cmake -E copy_directory $SOURCEDIR/bin $INSTALLROOT/bin \
   && cmake -E copy_directory $SOURCEDIR/doc $INSTALLROOT/doc \

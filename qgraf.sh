@@ -16,7 +16,7 @@ license: LicenseRef-QGRAF
 MODULE_OPTIONS="--bin"
 ##############################
 function Make() {
-  $FC -o qgraf qgraf-3.1.4.f
+  ${FC:-gfortran} -o qgraf qgraf-3.1.4.f
 }
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin"

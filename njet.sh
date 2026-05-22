@@ -22,5 +22,5 @@ function Configure() {
     --disable-autoflags \
     ${QD_ROOT:+--with-qd="$QD_ROOT"} \
     "FFLAGS=-ffixed-line-length-none -std=legacy" \
-    FC=$FC CC=$CC F77=$FC
+    FC=${FC:-gfortran} CC=$CC F77=${FC:-gfortran}
 }
