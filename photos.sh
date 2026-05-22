@@ -18,5 +18,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # g77 (GNU Fortran 77) was retired; modern GCC provides gfortran instead.
+  export F77=gfortran
   ./configure --lcgplatform=${BITS_PLATFORM:-linux} --userfflags=-fno-automatic --enable-shared
 }
