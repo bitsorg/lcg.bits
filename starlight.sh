@@ -20,16 +20,17 @@ license: LicenseRef-STARLIGHT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # FindDPMJet.cmake reads $ENV{DPMJET_DIR} — export before cmake runs
+  [[ -n "$DPMJET_ROOT" ]] && export DPMJET_DIR="$DPMJET_ROOT"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="-Wno-array-parameter -Wno-unused-but-set-variable -Wno-unknown-warning-option" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DENABLE_HEPMC3=ON \
-    -DENABLE_DPMJET=ON \
+    ${DPMJET_ROOT:+-DENABLE_DPMJET=ON} \
     -DBUILD_SHARED_LIB=ON \
-    ${HEPMC3_ROOT:+-DHepMC3_DIR="$HEPMC3_ROOT"} \
-    ${DPMJET_ROOT:+-DDPMJET_DIR="$DPMJET_ROOT"}
+    ${HEPMC3_ROOT:+-DHepMC3_DIR="$HEPMC3_ROOT"}
 }
 function PostInstall() {
   # Copy config and headers not installed by CMake
