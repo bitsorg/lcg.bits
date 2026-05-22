@@ -8,7 +8,6 @@ requires:
   - CMake
   - zlib
   - bzip2
-  - LibLZMA
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
