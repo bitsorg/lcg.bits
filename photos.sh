@@ -18,5 +18,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --lcgplatform=${BITS_PLATFORM:-linux}  --userfflags=-fno-automatic --enable-shared
+  ./configure --lcgplatform=${BITS_PLATFORM:-linux} --userfflags=-fno-automatic --enable-shared
 }
