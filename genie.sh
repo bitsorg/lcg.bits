@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/GENIE-unknown.tar.bz2
 requires:
   - ROOT
-  - lhapdf-${lhapdf5_latest_version}
+  - lhapdf
   - pythia6
   - log4cpp
   - GSL
