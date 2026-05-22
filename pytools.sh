@@ -53,9 +53,7 @@ requires:
   - ppft
   - pytz
   - qtconsole
-  - simplejson
   - m2crypto
-  - deleted
   # optional:
   # - cx_oracle
   # - py2neo
