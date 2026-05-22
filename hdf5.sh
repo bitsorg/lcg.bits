@@ -13,7 +13,23 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include AutoToolsRecipe)
+. $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
+function Configure() {
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=ON \
+    -DHDF5_BUILD_CPP_LIB=ON \
+    -DHDF5_BUILD_FORTRAN=OFF \
+    -DHDF5_BUILD_EXAMPLES=OFF \
+    -DHDF5_BUILD_TESTS=OFF \
+    -DHDF5_ENABLE_Z_LIB_SUPPORT=ON \
+    ${ZLIB_ROOT:+-DZLIB_ROOT="${ZLIB_ROOT}"} \
+    -DHDF5_INSTALL_LIB_DIR=lib
+}
+function PostInstall() {
+  printf 'setenv HDF5_ROOT $PKG_ROOT\n' >> "${INSTALLROOT}/etc/modulefiles/${PKGNAME}"
+}
