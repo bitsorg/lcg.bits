@@ -2,8 +2,6 @@ package: donfig
 description: Donfig easy configuration for Python packages
 version: "0.8.1.post1"
 tag: "0.8.1.post1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

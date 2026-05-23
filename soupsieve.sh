@@ -2,8 +2,6 @@ package: soupsieve
 description: soupsieve CSS selector library for Beautiful Soup 4
 version: "2.4.1"
 tag: "2.4.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - build
@@ -15,7 +13,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

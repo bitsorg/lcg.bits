@@ -2,8 +2,6 @@ package: more_itertools
 description: more-itertools extensions to Python's itertools
 version: "10.6.0"
 tag: "10.6.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/more-itertools-10.6.0.tar.gz
 requires:
   - Python
   - six
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

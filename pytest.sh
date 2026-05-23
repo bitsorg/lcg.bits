@@ -2,8 +2,6 @@ package: pytest
 description: pytest simple and powerful Python testing framework
 version: "9.0.2"
 tag: "9.0.2"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - py
@@ -22,7 +20,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

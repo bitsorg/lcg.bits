@@ -2,8 +2,6 @@ package: platformdirs
 description: platformdirs get appropriate platform directories
 version: "4.3.6"
 tag: "4.3.6"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools_scm
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

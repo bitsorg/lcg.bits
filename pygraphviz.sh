@@ -2,8 +2,6 @@ package: pygraphviz
 description: PyGraphviz Python interface to Graphviz graph library
 version: "1.11"
 tag: "1.11"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.zip
 requires:
   - Python
   - graphviz
@@ -14,7 +12,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

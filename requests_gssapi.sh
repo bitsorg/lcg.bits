@@ -2,8 +2,6 @@ package: requests_gssapi
 description: requests-gssapi GSSAPI/Kerberos auth for the requests library
 version: "1.2.3"
 tag: "1.2.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/requests-gssapi-1.2.3.tar.gz
 requires:
   - Python
   - requests
@@ -15,7 +13,7 @@ license: ISC
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

@@ -2,8 +2,6 @@ package: memory_profiler
 description: memory-profiler monitor memory usage of Python programs
 version: "0.61.0"
 tag: "0.61.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

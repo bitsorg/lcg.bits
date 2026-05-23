@@ -2,8 +2,6 @@ package: pox
 description: pox utilities for cross-platform path handling in Python
 version: "0.2.5"
 tag: "0.2.5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

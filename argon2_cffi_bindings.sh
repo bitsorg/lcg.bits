@@ -2,8 +2,6 @@ package: argon2_cffi_bindings
 description: argon2-cffi-bindings low-level Argon2 CFFI bindings
 version: "21.2.0"
 tag: "21.2.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cffi
@@ -15,7 +13,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

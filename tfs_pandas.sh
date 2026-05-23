@@ -2,8 +2,6 @@ package: tfs_pandas
 description: tfs-pandas read/write MAD-X TFS files as pandas DataFrames
 version: "4.0.0"
 tag: "4.0.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tfs-pandas-4.0.0.tar.gz
 requires:
   - Python
   - pandas
@@ -16,7 +14,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

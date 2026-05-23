@@ -2,8 +2,6 @@ package: pydigitalwavetools
 description: pyDigitalWaveTools Python digital waveform tools
 version: "1.1"
 tag: "1.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyDigitalWaveTools-1.1.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

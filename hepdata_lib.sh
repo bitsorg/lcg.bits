@@ -2,8 +2,6 @@ package: hepdata_lib
 description: hepdata_lib library for preparing HEPData submissions
 version: "0.20.0"
 tag: "0.20.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - hepdata_validator
@@ -18,7 +16,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

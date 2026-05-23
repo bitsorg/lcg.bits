@@ -2,8 +2,6 @@ package: pytorch_lightning
 description: PyTorch Lightning lightweight PyTorch wrapper
 version: "2.5.1.post0"
 tag: "2.5.1.post0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - numpy
   - tqdm
@@ -22,7 +20,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

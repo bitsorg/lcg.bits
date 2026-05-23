@@ -2,8 +2,6 @@ package: uri_template
 description: uri-template URI template parsing and expansion (RFC 6570)
 version: "1.3.0"
 tag: "1.3.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/uri-template-1.3.0.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

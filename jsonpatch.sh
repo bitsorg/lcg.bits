@@ -2,8 +2,6 @@ package: jsonpatch
 description: jsonpatch apply JSON Patch operations (RFC 6902)
 version: "1.33"
 tag: "1.33"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jsonpointer
@@ -14,7 +12,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

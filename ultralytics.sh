@@ -2,8 +2,6 @@ package: ultralytics
 description: Ultralytics YOLO object detection and tracking framework
 version: "8.3.58"
 tag: "8.3.58"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - wheel
@@ -30,7 +28,7 @@ license: AGPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

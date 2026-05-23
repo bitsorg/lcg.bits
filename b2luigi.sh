@@ -2,8 +2,6 @@ package: b2luigi
 description: b2luigi workflow management based on Luigi (Belle II)
 version: "1.2.6"
 tag: "1.2.6"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - luigi
@@ -17,7 +15,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

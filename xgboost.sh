@@ -2,8 +2,6 @@ package: xgboost
 description: XGBoost scalable distributed gradient boosting library
 version: "2.1.3"
 tag: "2.1.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy
@@ -18,7 +16,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

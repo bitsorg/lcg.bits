@@ -2,8 +2,6 @@ package: sympy
 description: SymPy Python library for symbolic mathematics
 version: "1.14.0"
 tag: "1.14.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - mpmath
@@ -14,7 +12,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

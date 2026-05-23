@@ -2,8 +2,6 @@ package: hatchling
 description: Hatchling extensible PEP 517 build backend
 version: "1.28.0"
 tag: "1.28.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pluggy
@@ -17,7 +15,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

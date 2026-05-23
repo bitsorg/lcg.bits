@@ -2,8 +2,6 @@ package: beautifulsoup4
 description: Beautiful Soup HTML/XML parsing library for Python
 version: "4.10.0"
 tag: "4.10.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - soupsieve
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

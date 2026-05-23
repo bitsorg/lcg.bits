@@ -2,8 +2,6 @@ package: jupyter_nbextensions_configurator
 description: Jupyter server extension to configure nbextensions
 version: "0.6.4"
 tag: "0.6.4"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - jupyter_contrib_core
   - PyYAML
@@ -18,7 +16,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

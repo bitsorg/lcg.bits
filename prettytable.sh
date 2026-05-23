@@ -2,8 +2,6 @@ package: prettytable
 description: PrettyTable ASCII table formatter for Python
 version: "3.0.0"
 tag: "3.0.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - wcwidth
@@ -15,7 +13,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

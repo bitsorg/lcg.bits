@@ -2,8 +2,6 @@ package: xarray
 description: xarray labeled multi-dimensional arrays for Python
 version: "2025.4.0"
 tag: "2025.4.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy
@@ -16,7 +14,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

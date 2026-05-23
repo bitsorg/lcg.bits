@@ -2,8 +2,6 @@ package: pandas
 description: pandas data analysis and manipulation library
 version: "2.2.3"
 tag: "2.2.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools_scm
@@ -23,7 +21,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

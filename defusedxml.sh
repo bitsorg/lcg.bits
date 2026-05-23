@@ -2,8 +2,6 @@ package: defusedxml
 description: defusedxml safe XML parsing (defense against XXE)
 version: "0.7.1"
 tag: "0.7.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - libxml2
@@ -14,7 +12,7 @@ license: PSFL
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

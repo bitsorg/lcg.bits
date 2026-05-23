@@ -2,8 +2,6 @@ package: pydantic
 description: Pydantic data validation using Python type annotations
 version: "2.12.5"
 tag: "2.12.5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cython
@@ -17,7 +15,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

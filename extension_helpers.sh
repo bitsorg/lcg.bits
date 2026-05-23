@@ -2,8 +2,6 @@ package: extension_helpers
 description: extension-helpers Python build helpers for compiled extensions
 version: "1.0.0"
 tag: "1.0.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/extension-helpers-1.0.0.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

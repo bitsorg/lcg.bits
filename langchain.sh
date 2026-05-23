@@ -2,8 +2,6 @@ package: langchain
 description: LangChain framework for developing LLM-powered applications
 version: "0.3.14"
 tag: "0.3.14"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pydantic
@@ -34,7 +32,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

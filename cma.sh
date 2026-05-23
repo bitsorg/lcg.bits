@@ -2,8 +2,6 @@ package: cma
 description: CMA-ES covariance matrix adaptation evolution strategy optimizer
 version: "3.4.0"
 tag: "3.4.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy
@@ -14,7 +12,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

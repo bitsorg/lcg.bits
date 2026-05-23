@@ -2,8 +2,6 @@ package: keras_preprocessing
 description: Keras Preprocessing data preprocessing utilities
 version: "1.1.2"
 tag: "1.1.2"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Keras_Preprocessing-1.1.2.tar.gz
 requires:
   - Python
   - keras
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

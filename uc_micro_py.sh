@@ -2,8 +2,6 @@ package: uc_micro_py
 description: uc-micro-py micro subset of Unicode data for Python
 version: "1.0.2"
 tag: "1.0.2"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/uc-micro-py-1.0.2.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

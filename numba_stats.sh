@@ -2,8 +2,6 @@ package: numba_stats
 description: numba-stats numba-accelerated statistical functions
 version: "1.10.1"
 tag: "1.10.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/numba-stats-1.10.1.tar.gz
 requires:
   - Python
   - numba
@@ -16,7 +14,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

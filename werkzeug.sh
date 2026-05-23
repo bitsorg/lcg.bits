@@ -2,8 +2,6 @@ package: werkzeug
 description: Werkzeug WSGI web application library for Python
 version: "3.1.3"
 tag: "3.1.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Werkzeug-3.1.3.tar.gz
 requires:
   - Python
   - MarkupSafe
@@ -14,7 +12,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

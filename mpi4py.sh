@@ -2,8 +2,6 @@ package: mpi4py
 description: mpi4py MPI for Python bindings
 version: "4.0.3"
 tag: "4.0.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - openmpi
@@ -14,7 +12,7 @@ license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

@@ -2,8 +2,6 @@ package: fpdf2
 description: fpdf2 minimalist PDF creation library for Python
 version: "2.7.9"
 tag: "2.7.9"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - defusedxml
@@ -16,7 +14,7 @@ license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

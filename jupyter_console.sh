@@ -2,8 +2,6 @@ package: jupyter_console
 description: jupyter_console terminal-based Jupyter client
 version: "6.6.3"
 tag: "6.6.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - ipython
@@ -19,7 +17,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

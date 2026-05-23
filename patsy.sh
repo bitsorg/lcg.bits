@@ -2,8 +2,6 @@ package: patsy
 description: Patsy mini-language for describing statistical models
 version: "0.5.6"
 tag: "0.5.6"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy
@@ -16,7 +14,7 @@ license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

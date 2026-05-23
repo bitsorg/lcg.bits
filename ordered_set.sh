@@ -2,8 +2,6 @@ package: ordered_set
 description: ordered-set MutableSet that remembers insertion order
 version: "4.1.0"
 tag: "4.1.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ordered-set-4.1.0.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

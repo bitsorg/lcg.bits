@@ -2,8 +2,6 @@ package: hepdata_validator
 description: hepdata-validator HEPData submission YAML schema validator
 version: "0.3.6"
 tag: "0.3.6"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hepdata-validator-0.3.6.tar.gz
 requires:
   - Python
   - jsonschema
@@ -18,7 +16,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

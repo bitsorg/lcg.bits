@@ -2,8 +2,6 @@ package: yacs
 description: YACS Yet Another Configuration System for Python
 version: "0.1.8"
 tag: "0.1.8"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML
@@ -14,7 +12,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

@@ -2,8 +2,6 @@ package: googleapis_common_protos
 description: googleapis-common-protos common Google API proto messages
 version: "1.56.4"
 tag: "1.56.4"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/googleapis-common-protos-1.56.4.tar.gz
 requires:
   - Python
   - protobuf
@@ -14,7 +12,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

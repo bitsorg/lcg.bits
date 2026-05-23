@@ -2,8 +2,6 @@ package: sentence_transformers
 description: sentence-transformers sentence and text embedding models
 version: "5.1.1"
 tag: "5.1.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/sentence-transformers-5.1.1.tar.gz
 requires:
   - Python
   - torchvision
@@ -20,7 +18,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

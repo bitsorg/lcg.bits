@@ -2,8 +2,6 @@ package: cartopy
 description: Cartopy geospatial data processing and map projections
 version: "0.24.1"
 tag: "0.24.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Cartopy-0.24.1.tar.gz
 requires:
   - numpy
   - cython
@@ -21,7 +19,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

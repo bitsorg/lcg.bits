@@ -2,8 +2,6 @@ package: blosc2
 description: Python-Blosc2 next-gen Python bindings for C-Blosc2
 version: "2.7.1"
 tag: "2.7.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - wheel
@@ -22,7 +20,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

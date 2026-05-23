@@ -2,8 +2,6 @@ package: huggingface_hub
 description: Hugging Face Hub client library for model/dataset download and sharing
 version: "0.35.1"
 tag: "0.35.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools
@@ -20,7 +18,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

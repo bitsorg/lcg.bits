@@ -2,8 +2,6 @@ package: astroid
 description: astroid Python AST framework used by pylint
 version: "4.0.2"
 tag: "4.0.2"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - lazy_object_proxy
@@ -18,7 +16,7 @@ license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

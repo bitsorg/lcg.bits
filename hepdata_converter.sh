@@ -2,8 +2,6 @@ package: hepdata_converter
 description: HEPData converter for submission formats
 version: "0.3.1"
 tag: "0.3.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hepdata-converter-0.3.1.tar.gz
 requires:
   - Python
   - matplotlib
@@ -16,7 +14,7 @@ license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

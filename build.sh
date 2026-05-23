@@ -2,8 +2,6 @@ package: build
 description: build PEP 517 compliant Python package builder
 version: "0.8.0"
 tag: "0.8.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - tomli
@@ -16,7 +14,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

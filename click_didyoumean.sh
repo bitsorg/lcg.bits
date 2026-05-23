@@ -2,8 +2,6 @@ package: click_didyoumean
 description: click-didyoumean 'did you mean?' suggestions for Click
 version: "0.3.0"
 tag: "0.3.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/click-didyoumean-0.3.0.tar.gz
 requires:
   - Python
   - click
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

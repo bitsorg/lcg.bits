@@ -2,8 +2,6 @@ package: google_api_python_client
 description: google-api-python-client Google API client library
 version: "1.12.11"
 tag: "1.12.11"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/google-api-python-client-1.12.11.tar.gz
 requires:
   - Python
   - google_api_core
@@ -19,7 +17,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
