@@ -18,9 +18,10 @@ license: LicenseRef-gnuplot
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # --disable-latex prevents make install from trying to write to the system
-  # texmf tree (/usr/local/share/texmf/...) which is not writable.
+  # --with-texdir redirects the gnuplot LaTeX package files (gnuplot.sty etc.)
+  # from the system texmf tree (/usr/local/share/texmf/...) into INSTALLROOT,
+  # avoiding a Permission denied failure during make install.
   ./configure --prefix="$INSTALLROOT" \
-    --disable-latex
+    --with-texdir="${INSTALLROOT}/share/texmf/tex/latex/gnuplot"
 }
 ##############################
