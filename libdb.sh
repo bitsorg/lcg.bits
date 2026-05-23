@@ -16,9 +16,14 @@ license: AGPL-3.0-only
 MODULE_OPTIONS="--lib"
 ##############################
 function Configure() {
-  # Berkeley DB requires an out-of-tree build from dist/configure
+  # Berkeley DB requires an out-of-tree build from dist/configure.
+  # Force C11 dialect: Berkeley DB 6.x uses K&R-style function definitions
+  # throughout; GCC 15 treats these as errors in C23 (its default standard).
+  # -Wno-old-style-definition suppresses the voluminous but harmless warnings.
   mkdir -p build_unix
   pushd build_unix
+  CFLAGS="-std=gnu11 -Wno-old-style-definition -O2" \
+  CXXFLAGS="-std=gnu++11 -O2" \
   ../dist/configure \
     --prefix="$INSTALLROOT" \
     --libdir="$INSTALLROOT/lib" \
