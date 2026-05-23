@@ -34,7 +34,11 @@ function Prepare() {
 function Configure() {
   export COMPMODE=OPT
   ./configure --prefix="$INSTALLROOT" --datadir="$INSTALLROOT/data"
+}
+
+function Make() {
   # GCC 15 rejects rank mismatches (scalar IDUM passed where DADMPI/DADMKK
   # expect a rank-1 array for 'hv') that older compilers silently accepted.
-  sed -i 's/^FFLAGS_tauola = /FFLAGS_tauola = -fallow-argument-mismatch /' Makefile
+  make ${JOBS:+-j $JOBS} \
+    FFLAGS_tauola="-O2 -Wuninitialized -fno-automatic -ffixed-line-length-132 -fno-backslash -fno-second-underscore -fallow-argument-mismatch"
 }

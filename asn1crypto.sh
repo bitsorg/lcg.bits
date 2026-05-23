@@ -3,7 +3,7 @@ description: asn1crypto fast Python ASN.1 parser and serializer
 version: "1.5.1"
 tag: "1.5.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+  - https://files.pythonhosted.org/packages/source/a/asn1crypto/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
