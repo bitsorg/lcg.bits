@@ -19,14 +19,17 @@ MODULE_OPTIONS="--lib"
 ##############################
 function Configure() {
   # HIJING configure does not understand --prefix (it prints "wrong option.
-  # Ignored." and continues).  Export F77 so the Makefile default (g77) is
-  # overridden when we pass F77=... on the make command line.
+  # Ignored." and continues), so we install manually in Make().
+  # The Makefile fragments hardcode 'g77' as a literal (not $(F77)), so
+  # sed-replace it with the actual Fortran compiler after configure runs.
   export F77=${FC:-gfortran}
   ./configure
+  find . \( -name "Make*.subdir" -o -name "Makefile" \) \
+    -exec sed -i "s/\bg77\b/${F77}/g" {} \;
 }
 
 function Make() {
-  make ${JOBS:+-j $JOBS} F77=${FC:-gfortran}
+  make ${JOBS:+-j $JOBS}
   # configure ignored --prefix so install manually.
   mkdir -p "${INSTALLROOT}/lib"
   cp -p lib/libhijing.* "${INSTALLROOT}/lib/"
