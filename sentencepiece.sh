@@ -2,16 +2,14 @@ package: sentencepiece
 description: SentencePiece unsupervised text tokenizer
 version: "0.2.0"
 tag: "0.2.0"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-patches:
-  - sentencepiece-0.2.0.patch
+#patches:
+#  - sentencepiece-0.2.0.patch
 ---
 #!/bin/bash -e
 ##############################
