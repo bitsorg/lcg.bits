@@ -18,5 +18,16 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT "F77=${FC:-gfortran}" "FFLAGS=-std=legacy" #                    --with-looptools=${LOOPTOOLS_ROOT}
+  ./configure --prefix=$INSTALLROOT \
+    "F77=${FC:-gfortran}" \
+    "FC=${FC:-gfortran}" \
+    "FFLAGS=-std=legacy -fallow-argument-mismatch" \
+    "FCFLAGS=-std=legacy -fallow-argument-mismatch"
+    # --with-looptools=${LOOPTOOLS_ROOT}
+}
+
+function Make() {
+  # V=1 disables libtool's >/dev/null 2>&1 redirect so compiler errors
+  # are visible in the build log.  Remove V=1 once the build is stable.
+  make V=1 ${JOBS:+-j $JOBS}
 }

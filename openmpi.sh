@@ -19,5 +19,17 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --enable-mpi-cxx --disable-dependency-tracking --disable-silent-rules --enable-ipv6 --enable-mca-no-build=reachable-netlink --with-libevent=${lib} --with-sge
+  # HWLOC_VERSION is exported by the hwloc modulefile and clashes with the
+  # identically-named internal variable guarded by OPAL_VAR_SCOPE_PUSH.
+  # Unset it so OpenMPI's configure can manage the name without conflicts.
+  unset HWLOC_VERSION
+  ./configure --prefix=$INSTALLROOT \
+    --enable-mpi-cxx \
+    --disable-dependency-tracking \
+    --disable-silent-rules \
+    --enable-ipv6 \
+    --enable-mca-no-build=reachable-netlink \
+    --with-hwloc=${hwloc_ROOT} \
+    --with-libevent=${libevent_ROOT} \
+    --with-sge
 }
