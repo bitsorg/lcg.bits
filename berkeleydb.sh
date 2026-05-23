@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
+  - libdb
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -17,3 +18,11 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+function MakeInstall() {
+  mkdir -p "$INSTALLROOT/lib/python$(python3 -c 'import sys; print("%d.%d"%sys.version_info[:2])')/site-packages"
+  # Pass the Berkeley DB C library location via environment variable
+  BERKELEYDB_DIR="${LIBDB_ROOT}" \
+  python3 -m pip install \
+    --no-deps --no-build-isolation --ignore-installed \
+    --root=/ --prefix="$INSTALLROOT" .
+}

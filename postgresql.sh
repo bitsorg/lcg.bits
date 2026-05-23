@@ -21,8 +21,12 @@ license: PostgreSQL
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # --without-readline: the bits readline.so has an unresolved ncurses 'UP'
+  # symbol that crashes gawk during configure probes; readline is only used
+  # by the psql interactive client and is not needed for the server libraries.
   ./configure --prefix="$INSTALLROOT" \
     --without-icu \
+    --without-readline \
     --with-gettext="${GETTEXT_ROOT}" \
     --enable-thread-safety
 }
