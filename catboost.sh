@@ -1,7 +1,7 @@
 package: catboost
 description: CatBoost gradient boosting on decision trees library
-version: "1.2"
-tag: "1.2"
+version: "1.2.10"
+tag: "1.2.10"
 requires:
   - Python
 build_requires:

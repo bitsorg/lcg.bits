@@ -2,8 +2,6 @@ package: pycountry
 description: pycountry ISO databases for countries, languages, currencies
 version: "24.6.1"
 tag: "24.6.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

@@ -2,8 +2,6 @@ package: pbr
 description: PBR Python Build Reasonableness setuptools helper
 version: "6.0.0"
 tag: "6.0.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

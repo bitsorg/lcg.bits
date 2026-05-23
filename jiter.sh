@@ -2,8 +2,6 @@ package: jiter
 description: jiter fast JSON iterator for Python (Rust-backed)
 version: "0.11.0"
 tag: "0.11.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - rust
@@ -17,7 +15,7 @@ export CARGO_HOME="${BUILDDIR}/.cargo"
 export CC="${CC:-cc}"
 export CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER="${CC}"
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
