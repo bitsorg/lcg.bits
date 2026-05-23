@@ -1,17 +1,5 @@
-1From 272ccd677457efa8047f77433e5ff6832159624b Mon Sep 17 00:00:00 2001
-From: Andre Sailer <andre.philippe.sailer@cern.ch>
-Date: Tue, 16 Sep 2025 09:46:04 +0200
-Subject: [PATCH] makefile: allow overriding compiler executable via env
- variable
-
----
- client/Makefile | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/client/Makefile b/client/Makefile
-index cd22b8c..e9978e5 100644
---- Makefile
-+++ Makefile
+--- a/client/Makefile
++++ b/client/Makefile
 @@ -57,13 +57,13 @@ DEBUG_OPTIM     =       -g -O2
  CFLAGS		=	$(DEBUG_OPTIM)
  CXXFLAGS	=	$(DEBUG_OPTIM)
