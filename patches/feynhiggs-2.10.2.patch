@@ -3,21 +3,89 @@
 @@ -178,7 +178,8 @@
    esac
  done
- 
+
 -test "$CONF_OS" = Linux -a "$CONF_BITS" \!= 32 && CONF_LIBDIRSUFFIX=64
 +## patch to avoid lib64 directory for Ubuntu/Debian
 +test "$CONF_OS" = Linux -a "$CONF_BITS" \!= 32 && test ! -f /etc/debian_version && CONF_LIBDIRSUFFIX=64
- 
- CONF_M=${CONF_BITS:+-m$CONF_BITS}
- 
---- a/makefile.in
-+++ b/makefile.in
-@@ -41,8 +41,6 @@
-          $(BLD)/PDG.h "$(INCLUDEDIR)"
-        strip $(BLD)/FeynHiggs$(EXE) $(BLD)/table$(EXE)
-        cp -p $(BLD)/FeynHiggs$(EXE) $(BLD)/table$(EXE) $(BLD)/fcc "$(BINDIR)"
--       -strip $(BLD)/MFeynHiggs$(EXE)
--       -cp -p $(BLD)/MFeynHiggs$(EXE) "$(BINDIR)"
- 
- force: $(BLD)/version.h
 
+ CONF_M=${CONF_BITS:+-m$CONF_BITS}
+
+@@ -207,7 +208,7 @@
+ *G95*)
+   CONF_FFLAGS="$FFLAGS -O0 -g -ffixed-line-length-132 -freal-loops $CONF_M $CONF_STATIC ${CONF_DEBUG:+-Wall}" ;;
+ *GNU*)
+-  CONF_FFLAGS="$FFLAGS -O1 -g -ffixed-line-length-none $CONF_M $CONF_STATIC ${CONF_DEBUG:+-Wall}"
++  CONF_FFLAGS="$FFLAGS -O1 -g -ffixed-line-length-none -std=legacy -fallow-invalid-boz $CONF_M $CONF_STATIC ${CONF_DEBUG:+-Wall}"
+   case "$CONF_FC" in
+   *gfortran*)
+ 	CONF_FFLAGS="$CONF_FFLAGS ${CONF_DEBUG:+-Wtabs -ffpe-trap=invalid,overflow,zero} ${CONF_STATIC_EXT:+-static-libgfortran -static-libgcc} ${CONF_QUAD:+-fdefault-real-8 -DDBLE=REAL -DDIMAG=IMAG -DDCONJG=CONJG}" ;;
+--- a/src/Main/HiggsProd.F
++++ b/src/Main/HiggsProd.F
+@@ -332,40 +332,40 @@
+
+ * ggh version 1 w/amplitude correction factors
+ 	call SetKFactors(0D0, cTopNLO, cBotReNLO, cBotImNLO)
+-	call hggSM_SquaredME(sqme, O'155')
++	call hggSM_SquaredME(sqme, 109)
+ 	csm = sqme(2)
+ 	if( csm .eq. 0 ) then
+ 	  ggh_c = 0
+ 	else
+ 	  call SetKFactors(1D0, cTopNNLO, cBotReNLO, cBotImNLO)
+-	  call hgg_SquaredME(sqme, O'155')
++	  call hgg_SquaredME(sqme, 109)
+ 	  ggh_c = ggh_SM*sqme(2)/csm
+ 	endif
+
+ * ggh version 2 w/genuine k-factors
+ 	call SetKFactors(0D0, 1D0, 0D0, 0D0)
+-	call hggSM_SquaredME(sqme, O'155')
++	call hggSM_SquaredME(sqme, 109)
+ 	csm = (kTopNLO - kTopBotNLO)*sqme(2)
+-	call hgg_SquaredME(sqme, O'155')
++	call hgg_SquaredME(sqme, 109)
+ 	c = (kTopNNLO - kTopBotNLO)*sqme(2)
+
+ 	call SetKFactors(0D0, 0D0, 1D0, 1D0)
+-	call hggSM_SquaredME(sqme, O'155')
++	call hggSM_SquaredME(sqme, 109)
+ 	csm = csm + (kBotNLO - kTopBotNLO)*sqme(2)
+-	call hgg_SquaredME(sqme, O'155')
++	call hgg_SquaredME(sqme, 109)
+ 	c = c + (kBotNLO - kTopBotNLO)*sqme(2)
+
+ 	call SetKFactors(0D0, 1D0, 1D0, 1D0)
+-	call hggSM_SquaredME(sqme, O'155')
++	call hggSM_SquaredME(sqme, 109)
+ 	csm = csm + kTopBotNLO*sqme(2)
+-	call hgg_SquaredME(sqme, O'155')
++	call hgg_SquaredME(sqme, 109)
+ 	c = c + (kTopBotNLO - 1)*sqme(2)
+
+ 	if( csm .eq. 0 ) then
+ 	  ggh_k = 0
+ 	else
+ 	  call SetKFactors(1D0, 1D0, 1D0, 1D0)
+-	  call hgg_SquaredME(sqme, O'155')
++	  call hgg_SquaredME(sqme, 109)
+ 	  ggh_k = ggh_SM*(sqme(2) + c)/csm
+ 	endif
+ 	end
+--- a/src/Main/Couplings.F
++++ b/src/Main/Couplings.F
+@@ -1374,13 +1374,13 @@
+ 	  fac = fac*(1 + ir)
+ 	endif
+
+-	call sqSM(sqmeSM, O'155')
++	call sqSM(sqmeSM, 109)
+ 	sqmeSM(3) = sqmeSM(1) + sqmeSM(2)
+ 	GammaSM(H0FF(h,t,g1,g2)) = fac*sqmeSM(3)
+ c	GammaSM(H0FF(h,t,g1,g2)) = max(GammaSM(H0FF(h,t,g1,g2)), 0D0)
+ 	GammaSMTot(h) = GammaSMTot(h) + GammaSM(H0FF(h,t,g1,g2))
+
+-	call sq(sqme, O'155')
++	call sq(sqme, 109)
+ 	sqme(3) = sqme(1) + sqme(2)
+ 	Gamma(H0FF(h,t,g1,g2)) = fac*sqme(3)
+ c	Gamma(H0FF(h,t,g1,g2)) = max(Gamma(H0FF(h,t,g1,g2)), 0D0)
