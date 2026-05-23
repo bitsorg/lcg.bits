@@ -37,7 +37,5 @@ function Configure() {
 }
 
 function Make() {
-  # V=1 disables libtool's >/dev/null 2>&1 redirect so compiler errors
-  # are visible in the build log.  Remove V=1 once the build is stable.
-  make V=1 ${JOBS:+-j $JOBS}
+  make ${JOBS:+-j $JOBS}
 }

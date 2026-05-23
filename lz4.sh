@@ -21,3 +21,10 @@ license: BSD-2-Clause
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig --cmake"
 ##############################
+function Configure() {
+  # lz4's CMakeLists.txt is in build/cmake/, not the source root
+  cmake "$SOURCEDIR/build/cmake" \
+    -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release
+}
