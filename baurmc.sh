@@ -32,9 +32,11 @@ function Make() {
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
     xargs --no-run-if-empty sed -i "s/\bg77\b/${F77}/g"
   # GCC 15 enforces argument rank consistency; allow the legacy Fortran
-  # mismatch (scalar vs rank-1 RANMAR calls) by injecting the flag directly
-  # into the generated Makefiles — --userfflags only accepts a single token.
-  sed -i '/^FFLAGS\b/s/$/ -fallow-argument-mismatch/' \
+  # mismatch (scalar vs rank-1 RANMAR calls).  baurmc's LCG build system
+  # does not use a standard FFLAGS variable; anchor the injection on
+  # -fno-automatic (set via --userfflags in Configure) which we know
+  # appears in the compile command regardless of the variable name used.
+  sed -i 's/-fno-automatic/-fno-automatic -fallow-argument-mismatch/g' \
     Makefile Makeshared.subdir Makearchive.subdir 2>/dev/null || true
   make ${JOBS:+-j $JOBS}
 }
