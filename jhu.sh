@@ -20,7 +20,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} -j1 -C JHUGenerator Comp=gfortran
+  make ${JOBS:+-j $JOBS} -j1 -C JHUGenerator Comp=${FC:-gfortran}
   cmake -E make_directory $INSTALLROOT/bin
 cmake
 }

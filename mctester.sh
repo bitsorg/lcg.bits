@@ -20,5 +20,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-root=${ROOT_ROOT}/bin "CFLAGS=-O2 -g0" "CXXFLAGS=-O2 -g0" "FFLAGS=-O2 -g0"
+  ./configure --prefix=$INSTALLROOT --with-root=${ROOT_ROOT}/bin "F77=${FC:-gfortran}" "CFLAGS=-O2 -g0" "CXXFLAGS=-O2 -g0" "FFLAGS=-O2 -g0"
 }

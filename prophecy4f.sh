@@ -19,7 +19,7 @@ license: LicenseRef-Prophecy4f
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} COLLIERDIR=${COLLIER_ROOT}/lib FC=gfortran INPUT=-I${COLLIER_ROOT}/include/
+  make ${JOBS:+-j $JOBS} COLLIERDIR=${COLLIER_ROOT}/lib FC=${FC:-gfortran} INPUT=-I${COLLIER_ROOT}/include/
   cmake -E make_directory $INSTALLROOT/bin
 cmake
 }

@@ -9,7 +9,7 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-PHOTOS
 patches:
-  - photos-215.4.patch
+  - %(name)s-%(version)s.patch
 ---
 #!/bin/bash -e
 ##############################
@@ -19,6 +19,6 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   # g77 (GNU Fortran 77) was retired; modern GCC provides gfortran instead.
-  export F77=gfortran
+  export F77=${FC:-gfortran}
   ./configure --lcgplatform=${BITS_PLATFORM:-linux} --userfflags=-fno-automatic --enable-shared
 }

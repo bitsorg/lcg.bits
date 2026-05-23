@@ -16,5 +16,12 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --lcgplatform=${BITS_PLATFORM:-linux}  --userfflags=-fno-automatic ${baurmc_fflag} --enable-shared
+  # g77 (GNU Fortran 77) was retired; modern GCC provides gfortran instead.
+  # Export F77 so both configure and the subsequent make pick it up.
+  export F77=${FC:-gfortran}
+  ./configure --lcgplatform=${BITS_PLATFORM:-linux} --userfflags=-fno-automatic ${baurmc_fflag} --enable-shared
+}
+
+function Make() {
+  make ${JOBS:+-j $JOBS} F77=${FC:-gfortran}
 }

@@ -16,5 +16,9 @@ license: LicenseRef-PHOTOS++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT  CFLAGS=-O2 FFLAGS=-O2 F77=${FC:-gfortran} "CXXFLAGS=${PHOTOS_CXX_FLAGS} -O2"
+  # Build without HepMC event-record support; HepMC is not a declared dependency.
+  # Pass --without-hepmc explicitly because the configure script requires one of
+  # --with-hepmc=<path> or --without-hepmc and aborts if neither is given.
+  ./configure --prefix=$INSTALLROOT --without-hepmc \
+    CFLAGS=-O2 FFLAGS=-O2 F77=${FC:-gfortran} "CXXFLAGS=${PHOTOS_CXX_FLAGS} -O2"
 }
