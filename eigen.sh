@@ -19,8 +19,8 @@ MODULE_OPTIONS="--inc --cmake"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
-      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-      -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_C_COMPILER="" \
-    -DCMAKE_CXX_COMPILER=""
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DEIGEN_BUILD_DOC=OFF \
+    -DBUILD_TESTING=OFF
 }

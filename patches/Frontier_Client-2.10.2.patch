@@ -1,5 +1,5 @@
---- a/client/Makefile
-+++ b/client/Makefile
+--- a/Makefile
++++ b/Makefile
 @@ -57,13 +57,13 @@ DEBUG_OPTIM     =       -g -O2
  CFLAGS		=	$(DEBUG_OPTIM)
  CXXFLAGS	=	$(DEBUG_OPTIM)

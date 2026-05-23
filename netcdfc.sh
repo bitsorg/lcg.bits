@@ -22,5 +22,10 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT "${netcdfc_CPPFLAGS}" "${netcdfc_LDFLAGS}"
+  ./configure --prefix=$INSTALLROOT \
+    --with-hdf5="${HDF5_ROOT}" \
+    --with-curl="${CURL_ROOT}" \
+    --with-libxml2="${LIBXML2_ROOT}" \
+    CPPFLAGS="-I${HDF5_ROOT}/include ${CURL_ROOT:+-I${CURL_ROOT}/include} ${LIBXML2_ROOT:+-I${LIBXML2_ROOT}/include} ${ZLIB_ROOT:+-I${ZLIB_ROOT}/include}" \
+    LDFLAGS="-L${HDF5_ROOT}/lib ${CURL_ROOT:+-L${CURL_ROOT}/lib} ${LIBXML2_ROOT:+-L${LIBXML2_ROOT}/lib} ${ZLIB_ROOT:+-L${ZLIB_ROOT}/lib}"
 }
