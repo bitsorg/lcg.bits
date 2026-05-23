@@ -15,7 +15,7 @@ license: GPL-2.0-or-later
 ##############################
 . $(bits-include MakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin"
 ##############################
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
@@ -40,4 +40,9 @@ function Prepare() {
 function Make() {
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS}
+}
+
+function MakeInstall() {
+  install -dm755 "$INSTALLROOT/bin"
+  install -m755 c5.0 report "$INSTALLROOT/bin/"
 }
