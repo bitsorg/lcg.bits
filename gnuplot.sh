@@ -17,3 +17,10 @@ license: LicenseRef-gnuplot
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  # --disable-latex prevents make install from trying to write to the system
+  # texmf tree (/usr/local/share/texmf/...) which is not writable.
+  ./configure --prefix="$INSTALLROOT" \
+    --disable-latex
+}
+##############################
