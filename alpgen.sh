@@ -3,7 +3,7 @@ description: ALPGEN leading-order multi-parton matrix-element event generator
 version: "2.1.4"
 tag: "2.1.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/alpgen_v214.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s_v214.tgz
 requires:
   - Python
 build_requires:
@@ -11,7 +11,7 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Alpgen
 patches:
-  - alpgen-2.1.4.patch
+  - %(name)s-%(version)s.patch
 ---
 #!/bin/bash -e
 ##############################
