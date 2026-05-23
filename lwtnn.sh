@@ -3,7 +3,7 @@ description: lwtnn lightweight neural-network inference library (C++)
 version: "2.13"
 tag: "2.13"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lwtnn-2.13.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - eigen

@@ -3,7 +3,7 @@ description: ONNX Runtime cross-platform ML model inference engine
 version: "1.24.4"
 tag: "1.24.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/onnxruntime-1.24.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

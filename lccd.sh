@@ -3,7 +3,7 @@ description: LCCD (Linear Collider Conditions Data) library
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lccd-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - LCIO

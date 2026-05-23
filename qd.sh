@@ -3,7 +3,7 @@ description: QD double-double and quad-double floating-point library
 version: "2.3.24"
 tag: "2.3.24"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/qd-2.3.24.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - automake

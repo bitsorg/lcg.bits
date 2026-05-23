@@ -3,7 +3,7 @@ description: pyhf pure-Python HistFactory statistical model (HEP)
 version: "0.7.6"
 tag: "0.7.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyhf-0.7.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - iminuit

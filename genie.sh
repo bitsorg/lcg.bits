@@ -1,9 +1,9 @@
 package: GENIE
 description: Comprehensive Monte Carlo neutrino event generator
-version: "unknown"
-tag: "unknown"
+version: "3.04.02"
+tag: "3.04.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/GENIE-unknown.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.bz2
 requires:
   - ROOT
   - lhapdf

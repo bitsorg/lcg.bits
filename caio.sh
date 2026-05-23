@@ -3,7 +3,7 @@ description: caio async I/O file operations for Linux
 version: "0.9.25"
 tag: "0.9.25"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/caio-0.9.25.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: Vc portable, zero-overhead SIMD vector types for C++
 version: "1.4.5"
 tag: "1.4.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Vc-1.4.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

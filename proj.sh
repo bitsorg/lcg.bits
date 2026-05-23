@@ -3,7 +3,7 @@ description: PROJ cartographic projections and coordinate transformations
 version: "9.6.0"
 tag: "9.6.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/proj-9.6.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - sqlite

@@ -3,7 +3,7 @@ description: archspec library for detecting CPU microarchitecture
 version: "0.1.4"
 tag: "0.1.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/archspec-0.1.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - click

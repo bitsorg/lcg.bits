@@ -3,7 +3,7 @@ description: overlay custom package overlay/patching utility
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/overlay-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ilcutil

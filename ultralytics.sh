@@ -3,7 +3,7 @@ description: Ultralytics YOLO object detection and tracking framework
 version: "8.3.58"
 tag: "8.3.58"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ultralytics-8.3.58.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - wheel

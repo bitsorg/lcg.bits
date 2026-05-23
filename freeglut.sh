@@ -3,7 +3,7 @@ description: FreeGLUT open-source OpenGL utility toolkit
 version: "3.8.0"
 tag: "3.8.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/freeglut-3.8.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

@@ -3,7 +3,7 @@ description: STARlight Monte Carlo for coherent photoproduction at colliders
 version: "r330"
 tag: "r330"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/starlight-r330.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tgz
 requires:
   - CMake
   - hepmc3

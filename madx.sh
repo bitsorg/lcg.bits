@@ -3,7 +3,7 @@ description: MAD-X accelerator optics design and tracking code
 version: "5.09.00"
 tag: "5.09.00"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/madx-5.09.00.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zlib

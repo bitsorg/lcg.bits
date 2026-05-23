@@ -3,7 +3,7 @@ description: openapi-core OpenAPI spec validation and parsing
 version: "0.19.4"
 tag: "0.19.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_core-0.19.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jsonschema_path

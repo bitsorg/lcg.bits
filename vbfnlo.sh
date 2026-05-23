@@ -3,7 +3,7 @@ description: VBFNLO NLO Monte Carlo generator for vector boson fusion and associ
 version: "3.0"
 tag: "3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/vbfnlo-3.0.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tgz
 requires:
   - GSL
   - lhapdf

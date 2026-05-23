@@ -3,7 +3,7 @@ description: Agner Fog's Vector Class Library for SIMD programming
 version: "2.01.02"
 tag: "2.01.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/vectorclass-2.01.02.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

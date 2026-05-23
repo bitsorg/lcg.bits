@@ -3,7 +3,7 @@ description: pathos multiprocessing and parallel map for Python
 version: "0.2.3"
 tag: "0.2.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pathos-0.2.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

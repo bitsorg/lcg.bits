@@ -3,7 +3,7 @@ description: Key4hep detector geometry descriptions (DD4hep)
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/k4geo-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - DD4hep

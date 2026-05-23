@@ -3,7 +3,7 @@ description: Plain Old Data I/O library for HEP event data models
 version: "01.07"
 tag: "01.07"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/podio-01.07.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

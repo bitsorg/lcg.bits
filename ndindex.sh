@@ -3,7 +3,7 @@ description: ndindex Python NumPy-style index manipulation library
 version: "1.8"
 tag: "1.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ndindex-1.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

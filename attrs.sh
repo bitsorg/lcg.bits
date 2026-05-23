@@ -3,7 +3,7 @@ description: attrs Python classes without boilerplate
 version: "25.1.0"
 tag: "25.1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/attrs-25.1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - hatchling

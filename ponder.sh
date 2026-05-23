@@ -1,9 +1,9 @@
 package: ponder
 description: Ponder tool for documenting pandas DataFrames
-version: "unknown"
-tag: "unknown"
+version: "2.1.1"
+tag: "2.1.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ponder-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Boost

@@ -3,7 +3,7 @@ description: rpy2 Python interface to R language
 version: "3.0.4"
 tag: "3.0.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/rpy2-3.0.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - R

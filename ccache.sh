@@ -3,7 +3,7 @@ description: Compiler cache that speeds up recompilation
 version: "4.13.6"
 tag: "4.13.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ccache-4.13.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

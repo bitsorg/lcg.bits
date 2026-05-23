@@ -3,7 +3,7 @@ description: pprof tool for profiling and visualization of Go programs
 version: "54271f7"
 tag: "54271f7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pprof-54271f7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

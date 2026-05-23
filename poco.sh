@@ -3,7 +3,7 @@ description: POCO C++ portable networking and application framework
 version: "1.14.1"
 tag: "1.14.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/poco-1.14.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zlib

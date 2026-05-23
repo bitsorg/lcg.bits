@@ -3,7 +3,7 @@ description: C5.0 decision tree algorithm Python bindings
 version: "2.07"
 tag: "2.07"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/C50-2.07.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

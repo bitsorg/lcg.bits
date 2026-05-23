@@ -3,7 +3,7 @@ description: Python-Blosc high-performance compressor bindings
 version: "1.11.4"
 tag: "1.11.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/blosc-1.11.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - wheel

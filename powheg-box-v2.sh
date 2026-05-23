@@ -3,7 +3,7 @@ description: POWHEG BOX v2 NLO event generator framework
 version: "r3744.lhcb3.rdynamic"
 tag: "r3744.lhcb3.rdynamic"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/powheg-box-v2-r3744.lhcb3.rdynamic.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - fastjet
   - lhapdf

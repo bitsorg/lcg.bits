@@ -3,7 +3,7 @@ description: Google gflags C++ command-line flag parsing library
 version: "2.2.2"
 tag: "2.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gflags-2.2.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

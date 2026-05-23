@@ -3,7 +3,7 @@ description: Param declarative data classes with parameter typing
 version: "1.13.0"
 tag: "1.13.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/param-1.13.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: PostgreSQL open-source relational database system
 version: "17.5"
 tag: "17.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/postgresql-17.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - bison
   - flex

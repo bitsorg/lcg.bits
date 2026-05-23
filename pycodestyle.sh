@@ -3,7 +3,7 @@ description: pycodestyle Python style guide checker (PEP 8)
 version: "2.14.0"
 tag: "2.14.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pycodestyle-2.14.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: "Google Performance Tools: heap profiler, CPU profiler, tcmalloc"
 version: "2.18.1"
 tag: "2.18.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gperftools-2.18.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - libunwind

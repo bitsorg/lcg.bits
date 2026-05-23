@@ -3,7 +3,7 @@ description: MarlinML ML-based flavor tagging for ILC
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/marlinmlflavortagging-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - LCIO

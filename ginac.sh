@@ -3,7 +3,7 @@ description: GiNaC open framework for symbolic computation
 version: "1.8.7"
 tag: "1.8.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ginac-1.8.7.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:
   - CMake
   - cln

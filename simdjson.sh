@@ -3,7 +3,7 @@ description: simdjson JSON parser using SIMD instructions
 version: "3.1.1"
 tag: "3.1.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/simdjson-3.1.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

@@ -3,7 +3,7 @@ description: versioneer version management from VCS for Python packages
 version: "0.29"
 tag: "0.29"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/versioneer-0.29.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

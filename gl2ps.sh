@@ -3,7 +3,7 @@ description: GL2PS OpenGL to PostScript/SVG/PDF rendering library
 version: "1.4.2"
 tag: "1.4.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gl2ps-1.4.2.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:
   - CMake
   - zlib

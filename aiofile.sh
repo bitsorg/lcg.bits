@@ -3,7 +3,7 @@ description: aiofile async file operations for Python asyncio
 version: "3.9.0"
 tag: "3.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/aiofile-3.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - caio

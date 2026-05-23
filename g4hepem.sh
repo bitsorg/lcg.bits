@@ -3,7 +3,7 @@ description: G4HepEm EM physics tabulation library for Geant4
 version: "20251114"
 tag: "20251114"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/g4hepem-20251114.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Geant4

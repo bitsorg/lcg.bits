@@ -3,7 +3,7 @@ description: ppft distributed and parallel Python
 version: "1.7.7"
 tag: "1.7.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ppft-1.7.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - dill

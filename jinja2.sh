@@ -3,7 +3,7 @@ description: Jinja2 fast and extensible Python templating engine
 version: "3.1.6"
 tag: "3.1.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Jinja2-3.1.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - MarkupSafe

@@ -1,9 +1,9 @@
 package: iwyu
 description: Include-What-You-Use C/C++ header analysis tool
-version: "unknown"
-tag: "unknown"
+version: "0.18"
+tag: "0.18"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/include-what-you-use-unknown.src.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/include-what-you-use-%(version)s.src.tar.gz
 requires:
   - CMake
 build_requires:

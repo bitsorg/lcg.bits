@@ -3,7 +3,7 @@ description: outcome Pythonic implementation of a Result type
 version: "1.3.0"
 tag: "1.3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/outcome-1.3.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - attrs

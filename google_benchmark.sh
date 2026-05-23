@@ -3,7 +3,7 @@ description: Google Benchmark C++ micro-benchmarking library
 version: "1.9.5"
 tag: "1.9.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/google_benchmark-1.9.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - googletest

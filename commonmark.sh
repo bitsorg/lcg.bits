@@ -3,7 +3,7 @@ description: CommonMark spec-compliant Markdown parser for Python
 version: "0.9.1"
 tag: "0.9.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/commonmark-0.9.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

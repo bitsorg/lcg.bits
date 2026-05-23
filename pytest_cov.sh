@@ -3,7 +3,7 @@ description: pytest-cov coverage plugin for pytest
 version: "7.0.0"
 tag: "7.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pytest_cov-7.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pytest

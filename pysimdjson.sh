@@ -3,7 +3,7 @@ description: pysimdjson Python bindings for simdjson JSON library
 version: "7.0.1"
 tag: "7.0.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pysimdjson-7.0.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pybind11

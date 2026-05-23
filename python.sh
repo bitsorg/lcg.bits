@@ -3,7 +3,7 @@ description: CPython interpreter and standard library
 version: "3.14.0"
 tag: "3.14.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Python-3.14.0.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -3,7 +3,7 @@ description: GNU Octave high-level language for numerical computation
 version: "10.3.0"
 tag: "10.3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/octave-10.3.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - pcre2
   - blas

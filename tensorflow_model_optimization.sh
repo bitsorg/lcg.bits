@@ -1,9 +1,9 @@
 package: tensorflow_model_optimization
 description: TensorFlow Model Optimization toolkit
-version: "unknown"
-tag: "unknown"
+version: "0.8.0"
+tag: "0.8.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/model-optimization-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/model-optimization-%(version)s.tar.gz
 requires:
   - Python
   - six

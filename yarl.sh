@@ -3,7 +3,7 @@ description: yarl yet another URL library for Python
 version: "1.18.3"
 tag: "1.18.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/yarl-1.18.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - idna

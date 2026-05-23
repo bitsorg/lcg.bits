@@ -3,7 +3,7 @@ description: jsonpatch apply JSON Patch operations (RFC 6902)
 version: "1.33"
 tag: "1.33"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jsonpatch-1.33.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jsonpointer

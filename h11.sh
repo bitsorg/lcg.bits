@@ -3,7 +3,7 @@ description: h11 pure-Python HTTP/1.1 protocol implementation
 version: "0.16.0"
 tag: "0.16.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/h11-0.16.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

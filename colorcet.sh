@@ -3,7 +3,7 @@ description: Colorcet collection of perceptually uniform colormaps
 version: "3.1.0"
 tag: "3.1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/colorcet-3.1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pyct

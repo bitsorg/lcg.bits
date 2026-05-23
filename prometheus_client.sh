@@ -3,7 +3,7 @@ description: prometheus_client Prometheus monitoring client for Python
 version: "0.21.1"
 tag: "0.21.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/prometheus_client-0.21.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

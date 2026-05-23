@@ -3,7 +3,7 @@ description: pytest-xdist pytest plugin for distributed testing
 version: "3.8.0"
 tag: "3.8.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pytest_xdist-3.8.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pytest

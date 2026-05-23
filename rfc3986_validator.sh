@@ -3,7 +3,7 @@ description: rfc3986-validator RFC 3986 URI format validator
 version: "0.1.1"
 tag: "0.1.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/rfc3986_validator-0.1.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: grpcio gRPC Python implementation
 version: "1.73.0"
 tag: "1.73.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/grpcio-1.73.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - typing_extensions

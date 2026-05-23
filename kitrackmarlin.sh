@@ -3,7 +3,7 @@ description: KiTrackMarlin Marlin processor wrapper for KiTrack
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/kitrackmarlin-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - kitrack

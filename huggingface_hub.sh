@@ -3,7 +3,7 @@ description: Hugging Face Hub client library for model/dataset download and shar
 version: "0.35.1"
 tag: "0.35.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/huggingface_hub-0.35.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools

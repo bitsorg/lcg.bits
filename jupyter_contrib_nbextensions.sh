@@ -1,9 +1,9 @@
 package: jupyter_contrib_nbextensions
 description: Collection of unofficial Jupyter notebook extensions
-version: "unknown"
-tag: "unknown"
+version: "0.7.0"
+tag: "0.7.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_contrib_nbextensions-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - jupyter
   - jupyter_nbextensions_configurator

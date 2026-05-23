@@ -3,7 +3,7 @@ description: jupyterlab_server server components for JupyterLab
 version: "2.27.3"
 tag: "2.27.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyterlab_server-2.27.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - jupyter_server
   - pyjson5

@@ -3,7 +3,7 @@ description: parso Python parser that supports error recovery
 version: "0.8.4"
 tag: "0.8.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/parso-0.8.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

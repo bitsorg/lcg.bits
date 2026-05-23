@@ -3,7 +3,7 @@ description: mplhep Matplotlib style sheets and helpers for HEP publications
 version: "1.0.0"
 tag: "1.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mplhep-1.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - uhi

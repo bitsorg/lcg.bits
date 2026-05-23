@@ -3,7 +3,7 @@ description: GNOME XML parsing library
 version: "2.10.4"
 tag: "2.10.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libxml2-2.10.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 prefer_system: ".*"
 prefer_system_check: |
   xml2-config --version;

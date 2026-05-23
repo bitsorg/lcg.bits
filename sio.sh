@@ -3,7 +3,7 @@ description: Simple sequential binary I/O library (Key4hep)
 version: "00.02"
 tag: "00.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/SIO-00.02.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zlib

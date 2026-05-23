@@ -3,7 +3,7 @@ description: Guinea Pig beam-beam interaction simulation program
 version: "1.2.2"
 tag: "1.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/guinea_pig-1.2.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - fftw

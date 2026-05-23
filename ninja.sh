@@ -3,7 +3,7 @@ description: Ninja small build system with a focus on speed
 version: "1.13.2"
 tag: "1.13.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ninja-1.13.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 prefer_system: ".*"

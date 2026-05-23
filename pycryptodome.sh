@@ -3,7 +3,7 @@ description: PyCryptodome standalone Python cryptography library
 version: "3.21.0"
 tag: "3.21.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pycryptodome-3.21.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

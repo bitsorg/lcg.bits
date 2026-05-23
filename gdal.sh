@@ -3,7 +3,7 @@ description: GDAL Geospatial Data Abstraction Library Python bindings
 version: "3.10.2"
 tag: "3.10.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gdal-3.10.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - curl

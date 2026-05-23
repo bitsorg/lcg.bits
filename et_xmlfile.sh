@@ -3,7 +3,7 @@ description: et_xmlfile low-memory XML file writing library
 version: "1.1.0"
 tag: "1.1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/et_xmlfile-1.1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

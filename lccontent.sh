@@ -3,7 +3,7 @@ description: LCContent Pandora reconstruction algorithms for linear colliders
 version: "03.02.00"
 tag: "03.02.00"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lccontent-03.02.00.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - pandorapfa

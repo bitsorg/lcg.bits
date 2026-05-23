@@ -3,7 +3,7 @@ description: Class Library for High Energy Physics
 version: "2.4.7.2"
 tag: "2.4.7.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/clhep-2.4.7.2.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:
   - CMake
 build_requires:

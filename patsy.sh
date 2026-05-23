@@ -3,7 +3,7 @@ description: Patsy mini-language for describing statistical models
 version: "0.5.6"
 tag: "0.5.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/patsy-0.5.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

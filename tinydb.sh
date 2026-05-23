@@ -3,7 +3,7 @@ description: TinyDB lightweight document-oriented database for Python
 version: "4.8.2"
 tag: "4.8.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tinydb-4.8.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

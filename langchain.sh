@@ -3,7 +3,7 @@ description: LangChain framework for developing LLM-powered applications
 version: "0.3.14"
 tag: "0.3.14"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/langchain-0.3.14.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pydantic

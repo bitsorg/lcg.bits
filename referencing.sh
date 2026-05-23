@@ -3,7 +3,7 @@ description: referencing Python JSON Schema referencing implementation
 version: "0.35.1"
 tag: "0.35.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/referencing-0.35.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - rpds_py

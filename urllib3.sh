@@ -3,7 +3,7 @@ description: urllib3 powerful user-friendly HTTP client for Python
 version: "2.6.3"
 tag: "2.6.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/urllib3-2.6.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: ONNX Open Neural Network Exchange format library
 version: "1.16.0"
 tag: "1.16.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/onnx-1.16.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - absl

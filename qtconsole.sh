@@ -3,7 +3,7 @@ description: qtconsole Qt-based rich Jupyter terminal
 version: "5.6.1"
 tag: "5.6.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/qtconsole-5.6.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - ipykernel

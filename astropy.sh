@@ -3,7 +3,7 @@ description: Astropy community Python package for astronomy
 version: "6.1.4"
 tag: "6.1.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/astropy-6.1.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

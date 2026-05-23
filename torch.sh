@@ -3,7 +3,7 @@ description: PyTorch open-source machine learning framework
 version: "2.11.0"
 tag: "2.11.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torch-2.11.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML

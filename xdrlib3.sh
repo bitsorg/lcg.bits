@@ -3,7 +3,7 @@ description: xdrlib3 XDR data packing/unpacking for Python 3
 version: "0.1.1"
 tag: "0.1.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/xdrlib3-0.1.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

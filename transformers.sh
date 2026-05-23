@@ -3,7 +3,7 @@ description: Hugging Face Transformers state-of-the-art NLP models
 version: "4.57.3"
 tag: "4.57.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/transformers-4.57.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - tokenizers

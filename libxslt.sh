@@ -3,7 +3,7 @@ description: libxslt XSLT C library for GNOME
 version: "1.1.38"
 tag: "1.1.38"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libxslt-1.1.38.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - libxml2
 prefer_system: ".*"

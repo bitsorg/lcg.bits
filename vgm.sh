@@ -1,9 +1,9 @@
 package: vgm
 description: VGM (Virtual Geometry Model) detector geometry conversion
-version: "unknown"
-tag: "unknown"
+version: "5.3"
+tag: "5.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/vgm-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Geant4

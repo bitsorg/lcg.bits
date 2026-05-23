@@ -3,7 +3,7 @@ description: berkeleydb Python bindings for Oracle Berkeley DB
 version: "18.1.15"
 tag: "18.1.15"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/berkeleydb-18.1.15.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

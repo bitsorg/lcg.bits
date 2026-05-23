@@ -3,7 +3,7 @@ description: QKeras quantization-aware training extension for Keras
 version: "0.9.0"
 tag: "0.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/QKeras-0.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - tensorflow_model_optimization

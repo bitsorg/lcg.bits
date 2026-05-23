@@ -3,7 +3,7 @@ description: QGRAF automatic Feynman diagram generator for perturbative calculat
 version: "3.1.4"
 tag: "3.1.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/qgraf-3.1.4.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tgz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

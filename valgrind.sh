@@ -3,7 +3,7 @@ description: Valgrind dynamic analysis tool for memory and thread errors
 version: "3.27.0"
 tag: "3.27.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/valgrind-3.27.0.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

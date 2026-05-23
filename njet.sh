@@ -3,7 +3,7 @@ description: NJet multi-parton one-loop matrix element library
 version: "2.1.1"
 tag: "2.1.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/njet-2.1.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - qd
 build_requires:

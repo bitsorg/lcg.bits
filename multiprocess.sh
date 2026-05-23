@@ -3,7 +3,7 @@ description: multiprocess better multiprocessing and dill-based pickling
 version: "0.70.16"
 tag: "0.70.16"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/multiprocess-0.70.16.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - dill

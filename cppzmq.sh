@@ -3,7 +3,7 @@ description: cppzmq header-only C++ ZeroMQ bindings
 version: "4.8.1"
 tag: "4.8.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cppzmq-4.8.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zeromq

@@ -3,7 +3,7 @@ description: torchvision datasets, model architectures and transforms for PyTorc
 version: "0.22.1"
 tag: "0.22.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torchvision-0.22.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - torch
   - pillow

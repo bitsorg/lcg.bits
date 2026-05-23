@@ -3,7 +3,7 @@ description: GNU M4 macro processor
 version: "1.4.21"
 tag: "1.4.21"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/m4-1.4.21.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

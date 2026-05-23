@@ -3,7 +3,7 @@ description: lxml powerful and fast XML and HTML processing library
 version: "5.3.1"
 tag: "5.3.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lxml-5.3.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - libxml2

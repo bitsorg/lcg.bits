@@ -1,9 +1,9 @@
 package: pymadx
 description: pyMADX Python wrapper for MAD-X
-version: "unknown"
-tag: "unknown"
+version: "2.2.1"
+tag: "2.2.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pymadx-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

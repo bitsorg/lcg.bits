@@ -3,7 +3,7 @@ description: iso8601 simple ISO 8601 date/time parser for Python
 version: "1.0.2"
 tag: "1.0.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/iso8601-1.0.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

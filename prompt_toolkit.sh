@@ -3,7 +3,7 @@ description: prompt_toolkit library for interactive command-line programs
 version: "3.0.47"
 tag: "3.0.47"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/prompt_toolkit-3.0.47.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

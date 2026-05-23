@@ -3,7 +3,7 @@ description: nbclient client library for executing Jupyter notebooks
 version: "0.5.3"
 tag: "0.5.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/nbclient-0.5.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - traitlets

@@ -3,7 +3,7 @@ description: ITK WASM downsampling WASI build
 version: "1.5.0"
 tag: "1.5.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/itkwasm_downsample_wasi-1.5.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - importlib_resources

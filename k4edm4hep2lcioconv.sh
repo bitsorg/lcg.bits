@@ -3,7 +3,7 @@ description: Key4hep EDM4hep↔LCIO event-data model converter
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/k4edm4hep2lcioconv-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - EDM4hep

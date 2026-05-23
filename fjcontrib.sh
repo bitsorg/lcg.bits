@@ -3,7 +3,7 @@ description: FastJet contrib package collection of add-on jet tools
 version: "1.102"
 tag: "1.102"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fjcontrib-1.102.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - fastjet
 build_requires:

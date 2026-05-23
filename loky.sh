@@ -3,7 +3,7 @@ description: loky robust and reusable process pool executor
 version: "3.5.6"
 tag: "3.5.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/loky-3.5.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cloudpickle

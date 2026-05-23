@@ -3,7 +3,7 @@ description: lap fast linear assignment problem solver (C++)
 version: "0.5.12"
 tag: "0.5.12"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lap-0.5.12.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - cython
   - numpy

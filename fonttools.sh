@@ -3,7 +3,7 @@ description: fonttools library for manipulating font files in Python
 version: "4.40.0"
 tag: "4.40.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fonttools-4.40.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - fs

@@ -3,7 +3,7 @@ description: Altair declarative statistical visualization in Python
 version: "5.2.0"
 tag: "5.2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/altair-5.2.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - Jinja2

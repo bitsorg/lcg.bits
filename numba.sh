@@ -3,7 +3,7 @@ description: Numba JIT compiler for numerical Python (LLVM-based)
 version: "0.63.0rc1"
 tag: "0.63.0rc1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/numba-0.63.0rc1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

@@ -3,7 +3,7 @@ description: Asio C++ async I/O library (network and low-level I/O)
 version: "1.30.2"
 tag: "1.30.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/asio-1.30.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

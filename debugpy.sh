@@ -3,7 +3,7 @@ description: debugpy debugger adapter protocol implementation for Python
 version: "1.8.1"
 tag: "1.8.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/debugpy-1.8.1.zip
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.zip
 requires:
   - Python
 build_requires:

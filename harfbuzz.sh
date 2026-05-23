@@ -3,7 +3,7 @@ description: HarfBuzz OpenType text shaping engine
 version: "2.7.4"
 tag: "2.7.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/harfbuzz-2.7.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - freetype
   - glib

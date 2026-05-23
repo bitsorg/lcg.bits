@@ -3,7 +3,7 @@ description: qrcode QR code generator for Python
 version: "7.4.2"
 tag: "7.4.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/qrcode-7.4.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pypng

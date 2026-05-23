@@ -3,7 +3,7 @@ description: Partd key-value append store on disk for Dask
 version: "1.4.2"
 tag: "1.4.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/partd-1.4.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - locket

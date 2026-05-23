@@ -3,7 +3,7 @@ description: jupyterlab_widgets JupyterLab extension for ipywidgets
 version: "3.0.15"
 tag: "3.0.15"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyterlab_widgets-3.0.15.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jupyter_packaging

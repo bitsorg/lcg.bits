@@ -3,7 +3,7 @@ description: pyslha Python reader/writer for SUSY Les Houches Accord files
 version: "3.2.6"
 tag: "3.2.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyslha-3.2.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - tex2pix

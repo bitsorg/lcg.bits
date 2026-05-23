@@ -3,7 +3,7 @@ description: lmfit non-linear least-squares minimization for Python
 version: "1.2.2"
 tag: "1.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lmfit-1.2.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - asteval

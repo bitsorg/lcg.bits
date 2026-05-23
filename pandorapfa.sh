@@ -1,9 +1,9 @@
 package: pandorapfa
 description: PandoraPFA particle flow algorithm for calorimeter reconstruction
-version: "unknown"
-tag: "unknown"
+version: "04.11.02"
+tag: "04.11.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pandorapfa-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

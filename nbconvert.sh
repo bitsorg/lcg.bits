@@ -3,7 +3,7 @@ description: nbconvert converts Jupyter notebooks to other formats
 version: "7.16.4"
 tag: "7.16.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/nbconvert-7.16.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - mistune

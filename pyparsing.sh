@@ -3,7 +3,7 @@ description: pyparsing Python parsing module
 version: "3.2.5"
 tag: "3.2.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyparsing-3.2.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - railroad_diagrams

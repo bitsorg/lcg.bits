@@ -3,7 +3,7 @@ description: pyshtools spherical harmonic analysis and synthesis
 version: "4.13.1"
 tag: "4.13.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyshtools-4.13.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - proj

@@ -3,7 +3,7 @@ description: Qibo open-source quantum computing framework
 version: "0.2.23"
 tag: "0.2.23"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/qibo-0.2.23.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cma

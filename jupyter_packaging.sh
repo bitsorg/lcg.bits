@@ -3,7 +3,7 @@ description: jupyter_packaging tools for building Jupyter packages
 version: "0.12.3"
 tag: "0.12.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_packaging-0.12.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - packaging

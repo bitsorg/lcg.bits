@@ -3,7 +3,7 @@ description: GNU Readline command-line editing and history library
 version: "8.3"
 tag: "8.3"
 sources:
-  - ftp://ftp.cwru.edu/pub/bash/readline-8.3.tar.gz
+  - ftp://ftp.cwru.edu/pub/bash/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

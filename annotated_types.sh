@@ -3,7 +3,7 @@ description: annotated_types reusable type annotations for Python
 version: "0.6.0"
 tag: "0.6.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/annotated_types-0.6.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

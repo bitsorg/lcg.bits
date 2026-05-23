@@ -1,9 +1,9 @@
 package: kkmcee
 description: KKMC-ee Monte Carlo generator for e+e- annihilation
-version: "unknown"
-tag: "unknown"
+version: "5.01.00"
+tag: "5.01.00"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/kkmcee-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - ROOT
   - photoscpp

@@ -3,7 +3,7 @@ description: AnyIO asynchronous networking and concurrency library
 version: "4.6.1"
 tag: "4.6.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/anyio-4.6.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - idna

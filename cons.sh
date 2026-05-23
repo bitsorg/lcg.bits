@@ -3,7 +3,7 @@ description: cons Lisp-style cons cells for Python
 version: "0.4.6"
 tag: "0.4.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cons-0.4.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - logical_unification

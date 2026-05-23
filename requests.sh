@@ -3,7 +3,7 @@ description: Requests elegant HTTP library for Python
 version: "2.32.3"
 tag: "2.32.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/requests-2.32.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - charset_normalizer

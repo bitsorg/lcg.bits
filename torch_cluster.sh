@@ -3,7 +3,7 @@ description: torch-cluster methods for clustering in point clouds
 version: "1.6.3p1"
 tag: "1.6.3p1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torch_cluster-1.6.3p1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - torch

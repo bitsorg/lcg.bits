@@ -3,7 +3,7 @@ description: gg→VV amplitude library for loop-induced processes
 version: "1.0.atlas1"
 tag: "1.0.atlas1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/ggvvamp-1.0.atlas1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ginac

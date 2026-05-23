@@ -3,7 +3,7 @@ description: LangChain community integrations
 version: "0.3.14"
 tag: "0.3.14"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/langchain_community-0.3.14.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - langsmith

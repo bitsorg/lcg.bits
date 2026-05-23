@@ -3,7 +3,7 @@ description: MCUtils Monte Carlo utility functions for HEP analyses
 version: "1.4.0"
 tag: "1.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/mcutils-1.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - heputils
 build_requires:

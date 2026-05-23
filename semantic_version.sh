@@ -3,7 +3,7 @@ description: semantic_version semantic versioning for Python
 version: "2.10.0"
 tag: "2.10.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/semantic_version-2.10.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: qq→VV amplitude library for EW boson pair production
 version: "1.1.atlas1"
 tag: "1.1.atlas1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/qqvvamp-1.1.atlas1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ginac

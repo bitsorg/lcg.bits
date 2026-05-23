@@ -3,7 +3,7 @@ description: Jupyter extension for LaTeX environments in notebooks
 version: "1.4.6"
 tag: "1.4.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_latex_envs-1.4.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - ipython

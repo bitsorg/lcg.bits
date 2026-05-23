@@ -3,7 +3,7 @@ description: durationpy convert strings to Python timedelta objects
 version: "0.10"
 tag: "0.10"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/durationpy-0.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

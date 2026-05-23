@@ -3,7 +3,7 @@ description: range-v3 library extending C++11/14 with ranges and views
 version: "0.12.0"
 tag: "0.12.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/rangev3-0.12.0.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:
   - CMake
 build_requires:

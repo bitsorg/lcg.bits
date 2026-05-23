@@ -1,9 +1,9 @@
 package: fastnlo_toolkit
 description: fastNLO toolkit for perturbative QCD calculations with NLO tables
-version: "unknown"
-tag: "unknown"
+version: "2.3.1pre-1871"
+tag: "2.3.1pre-1871"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/fastnlo_toolkit-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - lhapdf
   - yoda

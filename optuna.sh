@@ -3,7 +3,7 @@ description: Optuna hyperparameter optimization framework
 version: "4.4.0"
 tag: "4.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/optuna-4.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - alembic

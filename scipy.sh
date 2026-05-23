@@ -3,7 +3,7 @@ description: SciPy scientific and technical computing library for Python
 version: "1.17.1"
 tag: "1.17.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/scipy-1.17.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

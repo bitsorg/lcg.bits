@@ -3,7 +3,7 @@ description: SWIG interface compiler connecting C/C++ with scripting languages
 version: "4.4.0"
 tag: "4.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/swig-4.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - pcre2
   - Python

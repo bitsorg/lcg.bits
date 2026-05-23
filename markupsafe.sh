@@ -3,7 +3,7 @@ description: MarkupSafe safely handles HTML/XML markup in Python
 version: "2.1.5"
 tag: "2.1.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MarkupSafe-2.1.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

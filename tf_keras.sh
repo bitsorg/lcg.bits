@@ -3,7 +3,7 @@ description: tf-keras official Keras for TensorFlow 2
 version: "2.20.1"
 tag: "2.20.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tf_keras-2.20.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - tensorflow

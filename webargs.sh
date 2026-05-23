@@ -3,7 +3,7 @@ description: webargs declarative request parsing and validation library
 version: "8.4.0"
 tag: "8.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/webargs-8.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - marshmallow

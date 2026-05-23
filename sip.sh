@@ -3,7 +3,7 @@ description: SIP tool for creating Python bindings for C/C++ libraries
 version: "6.8.3"
 tag: "6.8.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/sip-6.8.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

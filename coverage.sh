@@ -3,7 +3,7 @@ description: coverage.py code coverage measurement for Python
 version: "7.13.5"
 tag: "7.13.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/coverage-7.13.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

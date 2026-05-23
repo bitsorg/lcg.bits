@@ -3,7 +3,7 @@ description: RELAX XML schema language validation library
 version: "6.1.2"
 tag: "6.1.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/RELAX-6.1.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - cmaketools

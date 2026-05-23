@@ -3,7 +3,7 @@ description: hepstats modelling and fitting statistics utilities (HEP)
 version: "0.9.2"
 tag: "0.9.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hepstats-0.9.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - asdf

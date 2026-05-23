@@ -3,7 +3,7 @@ description: memory-profiler monitor memory usage of Python programs
 version: "0.61.0"
 tag: "0.61.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/memory_profiler-0.61.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

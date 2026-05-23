@@ -3,7 +3,7 @@ description: Sollya environment for safe floating-point code development
 version: "8.0"
 tag: "8.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/sollya-8.0.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:
   - gmp
   - mpfr

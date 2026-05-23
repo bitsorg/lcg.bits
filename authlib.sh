@@ -3,7 +3,7 @@ description: Authlib OAuth and OpenID Connect library for Python
 version: "0.15.5"
 tag: "0.15.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Authlib-0.15.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cryptography

@@ -3,7 +3,7 @@ description: GIF image format library
 version: "5.2.2"
 tag: "5.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/giflib-5.2.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

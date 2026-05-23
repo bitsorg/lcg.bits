@@ -3,7 +3,7 @@ description: crc32c hardware-accelerated CRC32C checksum library
 version: "2.7.1"
 tag: "2.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/crc32c-2.7.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

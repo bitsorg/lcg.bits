@@ -3,7 +3,7 @@ description: LangChain core abstractions and primitives
 version: "0.3.29"
 tag: "0.3.29"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/langchain_core-0.3.29.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - langsmith

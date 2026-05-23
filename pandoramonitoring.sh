@@ -3,7 +3,7 @@ description: PandoraMonitoring ROOT-based visualization for Pandora
 version: "03.06.00"
 tag: "03.06.00"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pandoramonitoring-03.06.00.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

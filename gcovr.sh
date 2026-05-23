@@ -3,7 +3,7 @@ description: gcovr Gcov coverage reports generator
 version: "7.2"
 tag: "7.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gcovr-7.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - lxml

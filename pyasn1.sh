@@ -3,7 +3,7 @@ description: pyasn1 pure-Python ASN.1 library
 version: "0.6.1"
 tag: "0.6.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyasn1-0.6.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

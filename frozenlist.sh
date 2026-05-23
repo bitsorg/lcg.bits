@@ -3,7 +3,7 @@ description: frozenlist list-like structure that can be frozen
 version: "1.4.1"
 tag: "1.4.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/frozenlist-1.4.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cython

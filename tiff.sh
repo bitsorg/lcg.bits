@@ -3,7 +3,7 @@ description: LibTIFF library for TIFF image file format
 version: "4.7.0"
 tag: "4.7.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tiff-4.7.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

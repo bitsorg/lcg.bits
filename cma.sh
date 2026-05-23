@@ -3,7 +3,7 @@ description: CMA-ES covariance matrix adaptation evolution strategy optimizer
 version: "3.4.0"
 tag: "3.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cma-3.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

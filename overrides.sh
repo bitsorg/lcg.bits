@@ -3,7 +3,7 @@ description: overrides @override decorator for Python methods
 version: "7.7.0"
 tag: "7.7.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/overrides-7.7.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: rfc3339-validator RFC 3339 date-time format validator
 version: "0.1.4"
 tag: "0.1.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/rfc3339_validator-0.1.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

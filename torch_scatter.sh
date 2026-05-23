@@ -3,7 +3,7 @@ description: torch-scatter segment-based reduction operations
 version: "2.1.2"
 tag: "2.1.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torch_scatter-2.1.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - torch
   - sympy

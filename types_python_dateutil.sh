@@ -3,7 +3,7 @@ description: types-python-dateutil type stubs for python-dateutil
 version: "2.9.0.20241206"
 tag: "2.9.0.20241206"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/types_python_dateutil-2.9.0.20241206.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

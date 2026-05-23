@@ -3,7 +3,7 @@ description: docopt Pythonic command-line argument parser
 version: "0.6.2"
 tag: "0.6.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/docopt-0.6.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

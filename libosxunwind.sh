@@ -3,7 +3,7 @@ description: macOS libunwind stack-unwinding library
 version: "0.0.6"
 tag: "0.0.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libosxunwind-0.0.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

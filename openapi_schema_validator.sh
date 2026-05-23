@@ -3,7 +3,7 @@ description: openapi-schema-validator OpenAPI schema validation
 version: "0.6.3"
 tag: "0.6.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_schema_validator-0.6.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jsonschema

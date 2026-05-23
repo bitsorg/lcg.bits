@@ -3,7 +3,7 @@ description: Paramiko SSHv2 protocol library for Python
 version: "3.4.0"
 tag: "3.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/paramiko-3.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cryptography

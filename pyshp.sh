@@ -3,7 +3,7 @@ description: pyshp read/write ESRI Shapefiles in pure Python
 version: "2.3.1"
 tag: "2.3.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyshp-2.3.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

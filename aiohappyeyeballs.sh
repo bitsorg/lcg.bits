@@ -3,7 +3,7 @@ description: aiohappyeyeballs Happy Eyeballs async TCP connector
 version: "2.4.4"
 tag: "2.4.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/aiohappyeyeballs-2.4.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

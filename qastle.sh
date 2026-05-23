@@ -3,7 +3,7 @@ description: qastle text-based query language for HEP data
 version: "0.19.0"
 tag: "0.19.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/qastle-0.19.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - lark

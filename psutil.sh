@@ -3,7 +3,7 @@ description: psutil cross-platform process and system utilities
 version: "5.9.8"
 tag: "5.9.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/psutil-5.9.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

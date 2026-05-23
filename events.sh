@@ -3,7 +3,7 @@ description: events.py simple events system for Python
 version: "0.5"
 tag: "0.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/events-0.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

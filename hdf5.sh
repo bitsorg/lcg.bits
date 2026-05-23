@@ -3,7 +3,7 @@ description: HDF5 hierarchical data format library for large datasets
 version: "1.14.6"
 tag: "1.14.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hdf5-1.14.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - zlib
 build_requires:

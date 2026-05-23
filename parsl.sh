@@ -3,7 +3,7 @@ description: Parsl parallel scripting library for Python
 version: "1.2.0"
 tag: "1.2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/parsl-1.2.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - typeguard
   - ipyparallel

@@ -3,7 +3,7 @@ description: uncertainties Python package for error propagation
 version: "3.2.3"
 tag: "3.2.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/uncertainties-3.2.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

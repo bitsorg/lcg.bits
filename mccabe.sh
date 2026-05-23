@@ -3,7 +3,7 @@ description: mccabe McCabe complexity checker for Python
 version: "0.7.0"
 tag: "0.7.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mccabe-0.7.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pytest_runner

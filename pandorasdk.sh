@@ -3,7 +3,7 @@ description: PandoraSDK software development kit for Pandora algorithms
 version: "03.04.02"
 tag: "03.04.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pandorasdk-03.04.02.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - pandorapfa

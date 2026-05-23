@@ -3,7 +3,7 @@ description: liner Go readline-like library for command-line input
 version: "6f820f8"
 tag: "6f820f8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/go_liner-6f820f8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

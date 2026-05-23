@@ -3,7 +3,7 @@ description: RooUnfold unfolding framework for HEP distributions
 version: "3.0.5"
 tag: "3.0.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/RooUnfold-3.0.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

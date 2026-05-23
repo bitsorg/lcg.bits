@@ -3,7 +3,7 @@ description: Detector Description for HEP (generic detector description toolkit)
 version: "master"
 tag: "master"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/DD4hep-master.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

@@ -3,7 +3,7 @@ description: asteval safe mathematical expression evaluator for Python
 version: "0.9.31"
 tag: "0.9.31"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/asteval-0.9.31.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: threadpoolctl limit threads in native libs (BLAS, OpenMP)
 version: "3.5.0"
 tag: "3.5.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/threadpoolctl-3.5.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

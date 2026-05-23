@@ -3,7 +3,7 @@ description: FlexParser flexible typed configuration file parser
 version: "0.4"
 tag: "0.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/flexparser-0.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - typing_extensions

@@ -3,7 +3,7 @@ description: widgetsnbextension IPython widgets for Jupyter notebook
 version: "4.0.14"
 tag: "4.0.14"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/widgetsnbextension-4.0.14.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - notebook

@@ -3,7 +3,7 @@ description: Coffea Columnar Object Framework For Effective Analysis
 version: "2025.12.0"
 tag: "2025.12.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/coffea-2025.12.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - bokeh
   - dask

@@ -3,7 +3,7 @@ description: FFTW fast discrete Fourier transform library
 version: "3.3.10"
 tag: "3.3.10"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fftw-3.3.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

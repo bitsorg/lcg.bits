@@ -3,7 +3,7 @@ description: python-snappy Python bindings for Google's Snappy compression
 version: "1.1.7"
 tag: "1.1.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/snappy-1.1.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

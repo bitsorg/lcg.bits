@@ -3,7 +3,7 @@ description: Memory-efficient cross-platform serialization library
 version: "25.2.10"
 tag: "25.2.10"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/flatbuffers-25.2.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - numpy

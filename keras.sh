@@ -3,7 +3,7 @@ description: Keras deep learning API for Python
 version: "3.11.3"
 tag: "3.11.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/keras-3.11.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML

@@ -3,7 +3,7 @@ description: mimalloc compact high-performance memory allocator (Microsoft)
 version: "3.2.6"
 tag: "3.2.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mimalloc-3.2.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

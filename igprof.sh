@@ -3,7 +3,7 @@ description: IgProf performance and memory profiler
 version: "5.9.18"
 tag: "5.9.18"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/igprof-5.9.18.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - libunwind

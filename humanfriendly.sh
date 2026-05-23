@@ -3,7 +3,7 @@ description: humanfriendly human-friendly output for Python
 version: "10.0"
 tag: "10.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/humanfriendly-10.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - docutils

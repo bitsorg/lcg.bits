@@ -3,7 +3,7 @@ description: Cairo 2D vector graphics library with multiple backends
 version: "1.18.4"
 tag: "1.18.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cairo-1.18.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - pixman

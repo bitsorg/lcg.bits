@@ -3,7 +3,7 @@ description: gssapi Python GSSAPI Kerberos authentication bindings
 version: "1.8.3"
 tag: "1.8.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gssapi-1.8.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - decorator

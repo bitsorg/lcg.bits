@@ -3,7 +3,7 @@ description: GNU Libtool shared library support script
 version: "2.4.6"
 tag: "2.4.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libtool-2.4.6.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

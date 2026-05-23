@@ -3,7 +3,7 @@ description: GNU Bison LALR/GLR parser generator
 version: "3.8.2"
 tag: "3.8.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/bison-3.8.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - m4
 build_requires:

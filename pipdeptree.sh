@@ -3,7 +3,7 @@ description: pipdeptree pip dependency tree visualizer
 version: "2.9.0"
 tag: "2.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pipdeptree-2.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

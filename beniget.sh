@@ -3,7 +3,7 @@ description: beniget Python AST def-use chains analyser
 version: "0.4.2.post1"
 tag: "0.4.2.post1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/beniget-0.4.2.post1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - gast

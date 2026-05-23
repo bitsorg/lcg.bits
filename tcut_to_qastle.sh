@@ -3,7 +3,7 @@ description: tcut_to_qastle convert ROOT TCut strings to qastle
 version: "0.7"
 tag: "0.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tcut_to_qastle-0.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - qastle

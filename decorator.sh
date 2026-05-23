@@ -3,7 +3,7 @@ description: decorator Python library to simplify function decorator usage
 version: "5.2.1"
 tag: "5.2.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/decorator-5.2.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

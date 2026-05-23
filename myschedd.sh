@@ -3,7 +3,7 @@ description: myschedd HTCondor schedd configuration utility
 version: "1.9-2"
 tag: "1.9-2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/myschedd-1.9-2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - go
 build_requires:

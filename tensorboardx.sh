@@ -3,7 +3,7 @@ description: TensorboardX TensorBoard writer for PyTorch
 version: "2.6.2.2"
 tag: "2.6.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tensorboardX-2.6.2.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - numpy
   - protobuf

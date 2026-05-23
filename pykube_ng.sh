@@ -3,7 +3,7 @@ description: pykube-ng lightweight Kubernetes Python client
 version: "23.6.0"
 tag: "23.6.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pykube_ng-23.6.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML

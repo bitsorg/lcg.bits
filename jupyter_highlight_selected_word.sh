@@ -3,7 +3,7 @@ description: Jupyter extension to highlight all instances of selected word
 version: "0.2.0"
 tag: "0.2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_highlight_selected_word-0.2.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

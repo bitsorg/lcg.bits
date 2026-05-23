@@ -3,7 +3,7 @@ description: Pint Python units library for quantities
 version: "0.25.2"
 tag: "0.25.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pint-0.25.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - flexcache

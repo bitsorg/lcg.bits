@@ -3,7 +3,7 @@ description: nbformat Jupyter notebook file format reference implementation
 version: "5.9.1"
 tag: "5.9.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/nbformat-5.9.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - traitlets

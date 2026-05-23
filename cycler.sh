@@ -3,7 +3,7 @@ description: Cycler composable cycles for matplotlib property iteration
 version: "0.12.1"
 tag: "0.12.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cycler-0.12.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

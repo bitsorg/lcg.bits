@@ -3,7 +3,7 @@ description: libgit2 portable C implementation of Git core
 version: "1.1.1"
 tag: "1.1.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libgit2-1.1.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Python

@@ -3,7 +3,7 @@ description: dask-lxplus Dask helper for CERN lxplus batch
 version: "0.3.3"
 tag: "0.3.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/dask_lxplus-0.3.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - click

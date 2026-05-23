@@ -3,7 +3,7 @@ description: BabaYaga NLO Monte Carlo generator for e+e- radiative processes
 version: "fcc1.0.0"
 tag: "fcc1.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/babayaga-fcc1.0.0.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.bz2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

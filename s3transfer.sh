@@ -3,7 +3,7 @@ description: s3transfer Amazon S3 transfer management library
 version: "0.10.3"
 tag: "0.10.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/s3transfer-0.10.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - botocore

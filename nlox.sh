@@ -3,7 +3,7 @@ description: NLox one-loop matrix element provider library
 version: "1.2.2.atlas7"
 tag: "1.2.2.atlas7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/nlox-1.2.2.atlas7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

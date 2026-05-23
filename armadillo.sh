@@ -3,7 +3,7 @@ description: Armadillo C++ linear algebra library with MATLAB-like API
 version: "11.4.2"
 tag: "11.4.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/armadillo-11.4.2.tar.xz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.xz
 requires:
   - CMake
   - blas

@@ -3,7 +3,7 @@ description: Apache Thrift scalable cross-language RPC framework
 version: "0.16.0"
 tag: "0.16.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/thrift-0.16.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - pkg_config

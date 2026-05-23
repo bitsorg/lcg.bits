@@ -3,7 +3,7 @@ description: statsmodels statistical models and tests for Python
 version: "0.14.5"
 tag: "0.14.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/statsmodels-0.14.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

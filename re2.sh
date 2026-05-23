@@ -3,7 +3,7 @@ description: RE2 fast, safe regular expression library
 version: "2023.11.01"
 tag: "2023.11.01"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/re2-2023.11.01.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - absl

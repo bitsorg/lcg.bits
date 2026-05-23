@@ -3,7 +3,7 @@ description: MPFI multiple-precision interval arithmetic library
 version: "1.5.3"
 tag: "1.5.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mpfi-1.5.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - gmp
   - mpfr

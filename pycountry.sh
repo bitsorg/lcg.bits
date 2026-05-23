@@ -3,7 +3,7 @@ description: pycountry ISO databases for countries, languages, currencies
 version: "24.6.1"
 tag: "24.6.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pycountry-24.6.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

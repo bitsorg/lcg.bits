@@ -3,7 +3,7 @@ description: imageio library for reading and writing image data
 version: "2.37.0"
 tag: "2.37.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/imageio-2.37.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pillow

@@ -3,7 +3,7 @@ description: Compilebox online compiler sandbox service
 version: "08.11"
 tag: "08.11"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-08.11.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - GSL

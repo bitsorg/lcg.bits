@@ -3,7 +3,7 @@ description: tifffile read/write TIFF files using numpy arrays
 version: "2023.4.12"
 tag: "2023.4.12"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tifffile-2023.4.12.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

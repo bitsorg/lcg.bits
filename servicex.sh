@@ -3,7 +3,7 @@ description: ServiceX data delivery service for HEP analysis
 version: "3.1.0"
 tag: "3.1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/servicex-3.1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - aiohttp

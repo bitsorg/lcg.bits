@@ -3,7 +3,7 @@ description: numcodecs buffer compression and transformation codecs
 version: "0.16.0"
 tag: "0.16.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/numcodecs-0.16.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cython

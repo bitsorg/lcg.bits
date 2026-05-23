@@ -3,7 +3,7 @@ description: XZ Utils lossless data compression (LZMA/XZ format)
 version: "5.8.2"
 tag: "5.8.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/xz-5.8.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

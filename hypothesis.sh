@@ -3,7 +3,7 @@ description: Hypothesis property-based testing library for Python
 version: "6.135.1"
 tag: "6.135.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hypothesis-6.135.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - attrs

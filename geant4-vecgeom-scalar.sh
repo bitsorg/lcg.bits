@@ -1,9 +1,9 @@
 package: Geant4-vecgeom-scalar
 description: Geant4 build variant using VecGeom scalar geometry backend
-version: "unknown"
-tag: "unknown"
+version: "11.4.1"
+tag: "11.4.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4.unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4-%(version)s.tar.gz
 requires:
   - CMake
   - XercesC

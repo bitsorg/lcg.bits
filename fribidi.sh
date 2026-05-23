@@ -3,7 +3,7 @@ description: GNU FriBidi Unicode bidirectional algorithm implementation
 version: "1.0.13"
 tag: "1.0.13"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fribidi-1.0.13.tar.xz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.xz
 requires:
   - CMake
   - meson

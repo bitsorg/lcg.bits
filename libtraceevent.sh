@@ -3,7 +3,7 @@ description: Linux kernel trace event parsing library
 version: "1.8.4"
 tag: "1.8.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libtraceevent-1.8.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

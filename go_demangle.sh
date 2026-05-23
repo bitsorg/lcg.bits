@@ -3,7 +3,7 @@ description: go-demangle Go symbol demangling library
 version: "5e5cf60"
 tag: "5e5cf60"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/go_demangle-5e5cf60.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

@@ -3,7 +3,7 @@ description: go.uuid Go UUID generation and parsing library
 version: "b2ce238"
 tag: "b2ce238"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/go.uuid-b2ce238.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

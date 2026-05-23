@@ -3,7 +3,7 @@ description: libpqxx official C++ client API for PostgreSQL
 version: "7.10.1"
 tag: "7.10.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libpqxx-7.10.1.zip
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.zip
 requires:
   - CMake
   - postgresql

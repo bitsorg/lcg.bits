@@ -3,7 +3,7 @@ description: eigen header-only C++ template library for linear algebra
 version: "3.4.1"
 tag: "3.4.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/eigen-3.4.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

@@ -3,7 +3,7 @@ description: frozendict immutable dict for Python
 version: "2.3.8"
 tag: "2.3.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/frozendict-2.3.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

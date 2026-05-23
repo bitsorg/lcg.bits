@@ -3,7 +3,7 @@ description: hepunits physical units and constants for Python (HEP)
 version: "2.4.3"
 tag: "2.4.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hepunits-2.4.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - attrs

@@ -3,7 +3,7 @@ description: ipydatawidgets Jupyter widgets for n-dimensional arrays
 version: "4.3.5"
 tag: "4.3.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ipydatawidgets-4.3.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - traittypes

@@ -3,7 +3,7 @@ description: Kubeflow Pipelines SDK for ML workflow orchestration
 version: "2.13.0"
 tag: "2.13.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/kfp-2.13.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - absl_py

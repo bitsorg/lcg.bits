@@ -3,7 +3,7 @@ description: optree optimised PyTree utilities for JAX/PyTorch
 version: "0.14.1"
 tag: "0.14.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/optree-0.14.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - typing_extensions

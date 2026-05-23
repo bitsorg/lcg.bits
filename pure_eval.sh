@@ -3,7 +3,7 @@ description: pure_eval safely evaluate Python expressions without side-effects
 version: "0.2.3"
 tag: "0.2.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pure_eval-0.2.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: Hugging Face Accelerate library for distributed/mixed precision tra
 version: "1.3.0"
 tag: "1.3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/accelerate-1.3.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

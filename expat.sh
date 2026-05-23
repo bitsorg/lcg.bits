@@ -3,7 +3,7 @@ description: Expat XML parsing library
 version: "2.7.1"
 tag: "2.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/expat-2.7.1.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 prefer_system: ".*"
 prefer_system_check:
 

@@ -3,7 +3,7 @@ description: pypdf pure-Python PDF library
 version: "3.11.0"
 tag: "3.11.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pypdf-3.11.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - typing_extensions

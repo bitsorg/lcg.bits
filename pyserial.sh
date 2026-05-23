@@ -3,7 +3,7 @@ description: pyserial Python serial port access library
 version: "3.4"
 tag: "3.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyserial-3.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: Alabaster clean Sphinx documentation theme
 version: "1.0.0"
 tag: "1.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/alabaster-1.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

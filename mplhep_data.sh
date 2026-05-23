@@ -3,7 +3,7 @@ description: mplhep-data data files (experiment logos etc.) for mplhep
 version: "0.0.4"
 tag: "0.0.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mplhep_data-0.0.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: Contur automated LHC BSM model constraint tool
 version: "3.1.3"
 tag: "3.1.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/contur-3.1.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

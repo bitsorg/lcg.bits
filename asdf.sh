@@ -3,7 +3,7 @@ description: ASDF Advanced Scientific Data Format Python library
 version: "3.5.0"
 tag: "3.5.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/asdf-3.5.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - asdf_standard

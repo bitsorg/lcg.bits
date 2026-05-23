@@ -3,7 +3,7 @@ description: nanobind lightweight C++/Python binding library
 version: "2.10.2"
 tag: "2.10.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/nanobind-2.10.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - CMake

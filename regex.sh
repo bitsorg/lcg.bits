@@ -3,7 +3,7 @@ description: Alternative Python regular expression module with advanced features
 version: "2023.5.5"
 tag: "2023.5.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/regex-2023.5.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools

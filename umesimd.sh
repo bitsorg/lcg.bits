@@ -3,7 +3,7 @@ description: "UME::SIMD explicit SIMD vector programming library"
 version: "0.8.1"
 tag: "0.8.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/umesimd-0.8.1.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:
   - CMake
 build_requires:

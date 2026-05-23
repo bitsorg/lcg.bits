@@ -3,7 +3,7 @@ description: tomlkit style-preserving TOML library for Python
 version: "0.11.8"
 tag: "0.11.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tomlkit-0.11.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

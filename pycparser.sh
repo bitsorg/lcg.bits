@@ -3,7 +3,7 @@ description: pycparser complete C99 parser in pure Python
 version: "2.22"
 tag: "2.22"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pycparser-2.22.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

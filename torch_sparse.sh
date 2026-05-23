@@ -3,7 +3,7 @@ description: torch-sparse sparse matrix operations for PyTorch
 version: "0.6.18"
 tag: "0.6.18"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torch_sparse-0.6.18.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - torch
   - scipy

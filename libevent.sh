@@ -3,7 +3,7 @@ description: libevent asynchronous event notification library
 version: "2.1.11"
 tag: "2.1.11"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libevent-2.1.11.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

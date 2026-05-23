@@ -3,7 +3,7 @@ description: astroid Python AST framework used by pylint
 version: "4.0.2"
 tag: "4.0.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/astroid-4.0.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - lazy_object_proxy

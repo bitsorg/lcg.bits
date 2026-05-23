@@ -3,7 +3,7 @@ description: JupyterLab next-generation Jupyter web-based interface
 version: "4.4.7"
 tag: "4.4.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyterlab-4.4.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - ipython
   - packaging

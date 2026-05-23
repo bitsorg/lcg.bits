@@ -3,7 +3,7 @@ description: Pythran ahead-of-time compiler for Python scientific code
 version: "0.17.0"
 tag: "0.17.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pythran-0.17.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - beniget

@@ -3,7 +3,7 @@ description: toml Python TOML file parser and encoder
 version: "0.10.2"
 tag: "0.10.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/toml-0.10.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

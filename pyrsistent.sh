@@ -3,7 +3,7 @@ description: pyrsistent immutable/persistent data structures for Python
 version: "0.18.0"
 tag: "0.18.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pyrsistent-0.18.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

@@ -3,7 +3,7 @@ description: Plotly interactive graphing library for Python
 version: "5.16.1"
 tag: "5.16.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/plotly-5.16.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

@@ -3,7 +3,7 @@ description: lz4 Python bindings for the LZ4 compression library
 version: "4.4.5"
 tag: "4.4.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/py_lz4-4.4.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools_scm

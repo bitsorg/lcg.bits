@@ -3,7 +3,7 @@ description: Python Fire generates CLIs from Python objects (Google)
 version: "0.7.1"
 tag: "0.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fire-0.7.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

@@ -3,7 +3,7 @@ description: importlib_resources backport of importlib.resources
 version: "6.5.2"
 tag: "6.5.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/importlib_resources-6.5.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - zipp

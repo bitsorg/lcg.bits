@@ -3,7 +3,7 @@ description: notebook-shim compatibility shim for Jupyter Notebook extensions
 version: "0.2.4"
 tag: "0.2.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/notebook_shim-0.2.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jupyter_server

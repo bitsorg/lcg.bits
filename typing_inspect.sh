@@ -3,7 +3,7 @@ description: typing_inspect runtime inspection of Python typing types
 version: "0.9.0"
 tag: "0.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/typing_inspect-0.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - mypy_extensions

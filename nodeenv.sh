@@ -3,7 +3,7 @@ description: nodeenv Node.js virtual environment for Python
 version: "1.9.1"
 tag: "1.9.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/nodeenv-1.9.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

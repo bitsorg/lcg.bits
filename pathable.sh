@@ -3,7 +3,7 @@ description: pathable tree-like data structure traversal by path
 version: "0.4.4"
 tag: "0.4.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pathable-0.4.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

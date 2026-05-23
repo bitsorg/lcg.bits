@@ -3,7 +3,7 @@ description: heputils HEP utility functions for Python
 version: "1.4.0"
 tag: "1.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/heputils-1.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

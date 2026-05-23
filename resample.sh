@@ -3,7 +3,7 @@ description: resample resampling algorithms for Python
 version: "1.10.1"
 tag: "1.10.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/resample-1.10.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

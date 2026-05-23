@@ -3,7 +3,7 @@ description: Plumbum shell combinators and CLI toolkit for Python
 version: "1.9.0"
 tag: "1.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/plumbum-1.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

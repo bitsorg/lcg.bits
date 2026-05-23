@@ -3,7 +3,7 @@ description: argon2-cffi-bindings low-level Argon2 CFFI bindings
 version: "21.2.0"
 tag: "21.2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/argon2_cffi_bindings-21.2.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cffi

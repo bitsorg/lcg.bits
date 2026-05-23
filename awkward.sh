@@ -3,7 +3,7 @@ description: Awkward Array manipulate jagged/nested arrays like NumPy
 version: "2.9.0"
 tag: "2.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/awkward-2.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - hatchling
   - numpy

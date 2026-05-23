@@ -3,7 +3,7 @@ description: sphinx-rtd-theme Read the Docs Sphinx theme
 version: "3.0.2"
 tag: "3.0.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/sphinx_rtd_theme-3.0.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

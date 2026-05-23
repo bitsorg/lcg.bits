@@ -3,7 +3,7 @@ description: func_adl functional analysis description language for HEP
 version: "3.4.2"
 tag: "3.4.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/func_adl-3.4.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - make_it_sync

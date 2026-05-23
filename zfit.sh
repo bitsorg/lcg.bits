@@ -3,7 +3,7 @@ description: zfit scalable Pythonic fitting library (HEP)
 version: "0.28.0"
 tag: "0.28.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/zfit-0.28.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - attrs

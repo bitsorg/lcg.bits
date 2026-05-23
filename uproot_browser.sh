@@ -3,7 +3,7 @@ description: uproot-browser TUI browser for ROOT files using uproot
 version: "0.6.7"
 tag: "0.6.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/uproot_browser-0.6.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - awkward

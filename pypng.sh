@@ -3,7 +3,7 @@ description: PyPNG pure Python PNG image read/write library
 version: "0.20220715.0"
 tag: "0.20220715.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pypng-0.20220715.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

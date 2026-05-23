@@ -3,7 +3,7 @@ description: imagesize gets image size from the file header
 version: "1.4.1"
 tag: "1.4.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/imagesize-1.4.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

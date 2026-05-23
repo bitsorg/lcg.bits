@@ -3,7 +3,7 @@ description: Pylint Python static code analysis tool
 version: "4.0.5"
 tag: "4.0.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pylint-4.0.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - astroid

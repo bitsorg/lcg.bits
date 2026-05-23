@@ -3,7 +3,7 @@ description: libpng official PNG reference library
 version: "1.6.55"
 tag: "1.6.55"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libpng-1.6.55.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/lib%(name)s-%(version)s.tar.gz
 requires:
   - zlib
 build_requires:

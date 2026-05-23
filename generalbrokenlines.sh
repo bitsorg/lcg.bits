@@ -1,9 +1,9 @@
 package: generalbrokenlines
 description: General Broken Lines track fit library
-version: "unknown"
-tag: "unknown"
+version: "04.00.03"
+tag: "04.00.03"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/generalbrokenlines-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - eigen

@@ -3,7 +3,7 @@ description: Bleach allowed-list-based HTML sanitization library
 version: "3.3.1"
 tag: "3.3.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/bleach-3.3.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - html5lib

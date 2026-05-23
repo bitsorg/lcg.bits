@@ -3,7 +3,7 @@ description: Gophernotes Go kernel for Jupyter notebooks
 version: "7c3ca4e"
 tag: "7c3ca4e"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gophernotes-7c3ca4e.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

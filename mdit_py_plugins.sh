@@ -3,7 +3,7 @@ description: mdit-py-plugins collection of plugins for markdown-it-py
 version: "0.4.0"
 tag: "0.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mdit_py_plugins-0.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - markdown_it_py

@@ -3,7 +3,7 @@ description: Multi-format archive and compression library
 version: "3.8.7"
 tag: "3.8.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libarchive-3.8.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zlib

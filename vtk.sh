@@ -3,7 +3,7 @@ description: Visualization Toolkit (VTK) for 3D graphics and data visualization
 version: "9.5.0"
 tag: "9.5.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/VTK-9.5.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - libxml2

@@ -3,7 +3,7 @@ description: svgwrite SVG drawing library for Python
 version: "1.4.3"
 tag: "1.4.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/svgwrite-1.4.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

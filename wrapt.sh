@@ -3,7 +3,7 @@ description: wrapt transparent function wrapper and decorator utility
 version: "1.16.0"
 tag: "1.16.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/wrapt-1.16.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

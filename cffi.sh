@@ -3,7 +3,7 @@ description: CFFI C Foreign Function Interface for Python
 version: "2.0.0"
 tag: "2.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cffi-2.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pycparser

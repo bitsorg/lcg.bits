@@ -3,7 +3,7 @@ description: CepGen central exclusive production event generator
 version: "1.2.5patch2"
 tag: "1.2.5patch2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/cepgen-1.2.5patch2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - apfel

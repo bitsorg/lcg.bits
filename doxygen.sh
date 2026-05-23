@@ -3,7 +3,7 @@ description: Doxygen documentation generator from annotated C++ sources
 version: "1.16.1"
 tag: "1.16.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/doxygen-1.16.1.src.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.src.tar.gz
 requires:
   - CMake
   - Python

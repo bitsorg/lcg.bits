@@ -3,7 +3,7 @@ description: nanomsg high-performance messaging library
 version: "1.1.5"
 tag: "1.1.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/nanomsg-1.1.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

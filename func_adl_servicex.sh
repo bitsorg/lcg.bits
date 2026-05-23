@@ -3,7 +3,7 @@ description: func_adl_servicex ServiceX backend for func_adl
 version: "2.1"
 tag: "2.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/func_adl_servicex-2.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - func_adl

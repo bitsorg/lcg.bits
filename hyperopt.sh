@@ -3,7 +3,7 @@ description: Hyperopt distributed hyperparameter optimization
 version: "0.2.8"
 tag: "0.2.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hyperopt-0.2.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cloudpickle

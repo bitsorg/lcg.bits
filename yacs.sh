@@ -3,7 +3,7 @@ description: YACS Yet Another Configuration System for Python
 version: "0.1.8"
 tag: "0.1.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/yacs-0.1.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML

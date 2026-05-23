@@ -3,7 +3,7 @@ description: ConfigObj Python config file reader and writer
 version: "5.0.9"
 tag: "5.0.9"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/configobj-5.0.9.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

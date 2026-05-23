@@ -3,7 +3,7 @@ description: APFEL parton distribution function evolution library
 version: "3.0.4"
 tag: "3.0.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/apfel-3.0.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - lhapdf

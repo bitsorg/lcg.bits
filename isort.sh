@@ -3,7 +3,7 @@ description: isort Python utility to sort imports alphabetically
 version: "5.12.0"
 tag: "5.12.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/isort-5.12.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

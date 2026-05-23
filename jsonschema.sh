@@ -3,7 +3,7 @@ description: jsonschema JSON Schema validator for Python
 version: "4.23.0"
 tag: "4.23.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jsonschema-4.23.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools_scm

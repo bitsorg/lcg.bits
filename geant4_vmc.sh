@@ -1,9 +1,9 @@
 package: geant4_vmc
 description: Geant4 VMC (Virtual Monte Carlo) interface library
-version: "unknown"
-tag: "unknown"
+version: "6.7.1"
+tag: "6.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4_vmc-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

@@ -3,7 +3,7 @@ description: tqdm fast, extensible progress bar for Python
 version: "4.67.1"
 tag: "4.67.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tqdm-4.67.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

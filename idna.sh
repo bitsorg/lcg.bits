@@ -3,7 +3,7 @@ description: IDNA internationalized domain names support for Python
 version: "3.10"
 tag: "3.10"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/idna-3.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

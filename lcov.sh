@@ -3,7 +3,7 @@ description: LCOV graphical front-end for GCC code coverage (HTML reports)
 version: "1.14"
 tag: "1.14"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lcov-1.14.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

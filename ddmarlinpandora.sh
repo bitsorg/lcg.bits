@@ -3,7 +3,7 @@ description: DDMarlinPandora Pandora PFA plugin for DD4hep/Marlin
 version: "HEAD"
 tag: "HEAD"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ddmarlinpandora-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ilcutil

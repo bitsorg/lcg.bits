@@ -3,7 +3,7 @@ description: GNU Debugger for C, C++, Fortran, and other languages
 version: "17.2"
 tag: "17.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gdb-17.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - texinfo
   - Python

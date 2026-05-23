@@ -3,7 +3,7 @@ description: Tornado scalable async network library for Python
 version: "6.4.1"
 tag: "6.4.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tornado-6.4.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - certifi

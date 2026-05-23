@@ -3,7 +3,7 @@ description: aiostream async generator pipelines for Python
 version: "0.4.5"
 tag: "0.4.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/aiostream-0.4.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

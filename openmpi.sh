@@ -3,7 +3,7 @@ description: OpenMPI high-performance Message Passing Interface implementation
 version: "4.1.8"
 tag: "4.1.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/openmpi-4.1.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - libevent
   - hwloc

@@ -3,7 +3,7 @@ description: GNU Texinfo documentation system
 version: "7.2"
 tag: "7.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/texinfo-7.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

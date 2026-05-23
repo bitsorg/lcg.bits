@@ -1,9 +1,9 @@
 package: mold
 description: mold modern high-speed linker for ELF
-version: "unknown"
-tag: "unknown"
+version: "2.40.4"
+tag: "2.40.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mold-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - mimalloc

@@ -3,7 +3,7 @@ description: histoprint pretty histogram printing in the terminal
 version: "2.6.0"
 tag: "2.6.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/histoprint-2.6.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - uhi

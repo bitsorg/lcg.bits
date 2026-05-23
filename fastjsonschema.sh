@@ -3,7 +3,7 @@ description: fastjsonschema fast JSON Schema validator for Python
 version: "2.17.1"
 tag: "2.17.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fastjsonschema-2.17.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

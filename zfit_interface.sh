@@ -3,7 +3,7 @@ description: zfit-interface abstract interface definitions for zfit
 version: "0.0.3"
 tag: "0.0.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/zfit_interface-0.0.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - uhi

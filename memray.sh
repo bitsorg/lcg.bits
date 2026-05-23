@@ -3,7 +3,7 @@ description: memray memory profiler for Python
 version: "1.19.2"
 tag: "1.19.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/memray-1.19.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - libunwind

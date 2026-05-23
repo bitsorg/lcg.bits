@@ -3,7 +3,7 @@ description: ipykernel IPython kernel for Jupyter
 version: "6.29.5"
 tag: "6.29.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ipykernel-6.29.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - debugpy

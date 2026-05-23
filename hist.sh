@@ -3,7 +3,7 @@ description: Hist powerful histogramming based on boost-histogram
 version: "2.10.1"
 tag: "2.10.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hist-2.10.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - hatchling

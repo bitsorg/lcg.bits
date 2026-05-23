@@ -3,7 +3,7 @@ description: prctl Linux process control utility
 version: "1.8.1"
 tag: "1.8.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/python-prctl-1.8.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/python-%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

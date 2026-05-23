@@ -3,7 +3,7 @@ description: deprecation library for marking deprecated code
 version: "2.1.0"
 tag: "2.1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/deprecation-2.1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: Event Data Model for High Energy Physics (Key4hep framework)
 version: "1.0"
 tag: "1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/EDM4hep-1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

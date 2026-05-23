@@ -3,7 +3,7 @@ description: GNU gettext internationalisation and localisation library
 version: "1.0"
 tag: "1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gettext-1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

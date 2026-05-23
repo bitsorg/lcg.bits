@@ -3,7 +3,7 @@ description: readline Go bindings for the GNU readline library
 version: "2972be2"
 tag: "2972be2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/go_readline-2972be2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

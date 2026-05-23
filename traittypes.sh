@@ -3,7 +3,7 @@ description: traittypes Numpy array trait types for traitlets
 version: "0.2.1"
 tag: "0.2.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/traittypes-0.2.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - traitlets

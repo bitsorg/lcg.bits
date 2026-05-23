@@ -3,7 +3,7 @@ description: openapi-spec-validator OpenAPI spec structural validation
 version: "0.7.1"
 tag: "0.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/openapi_spec_validator-0.7.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jsonschema

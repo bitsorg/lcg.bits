@@ -3,7 +3,7 @@ description: Kiwisolver efficient C++ implementation of Cassowary solver
 version: "1.4.5"
 tag: "1.4.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/kiwisolver-1.4.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cppy

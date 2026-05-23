@@ -3,7 +3,7 @@ description: libzip library for reading, creating and modifying ZIP archives
 version: "1.9.2"
 tag: "1.9.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/libzip-1.9.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zlib

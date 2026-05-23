@@ -3,7 +3,7 @@ description: distlib low-level Python packaging library
 version: "0.3.9"
 tag: "0.3.9"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/distlib-0.3.9.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

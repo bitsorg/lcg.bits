@@ -3,7 +3,7 @@ description: Black uncompromising Python code formatter
 version: "24.10.0"
 tag: "24.10.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/black-24.10.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - click

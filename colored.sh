@@ -3,7 +3,7 @@ description: colored simple Python library for terminal color output
 version: "2.2.3"
 tag: "2.2.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/colored-2.2.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

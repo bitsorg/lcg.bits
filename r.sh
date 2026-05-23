@@ -3,7 +3,7 @@ description: R statistical computing language and environment
 version: "4.5.0"
 tag: "4.5.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/R-4.5.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - fribidi
 build_requires:

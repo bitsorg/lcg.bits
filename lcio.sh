@@ -3,7 +3,7 @@ description: Linear Collider I/O event data model and persistence library
 version: "02.23.02"
 tag: "02.23.02"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/LCIO-02.23.02.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

@@ -3,7 +3,7 @@ description: jemalloc general-purpose scalable memory allocator
 version: "5.3.0"
 tag: "5.3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jemalloc-5.3.0.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

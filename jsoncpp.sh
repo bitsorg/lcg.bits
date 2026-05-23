@@ -3,7 +3,7 @@ description: JsonCpp JSON parser and generator for C++
 version: "1.9.3"
 tag: "1.9.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jsoncpp-1.9.3.zip
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.zip
 requires:
   - CMake
 build_requires:

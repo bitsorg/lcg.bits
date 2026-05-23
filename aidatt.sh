@@ -1,9 +1,9 @@
 package: aidatt
 description: AI-Driven Tracking toolkit for Key4hep
-version: "unknown"
-tag: "unknown"
+version: "00.12"
+tag: "00.12"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/aidatt-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ilcutil

@@ -3,7 +3,7 @@ description: Modern C++ string formatting library ({fmt})
 version: "10.2.1"
 tag: "10.2.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/fmt-10.2.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

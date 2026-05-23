@@ -3,7 +3,7 @@ description: Modern C++ unit-testing framework
 version: "3.7.1"
 tag: "3.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Catch2-3.7.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Python

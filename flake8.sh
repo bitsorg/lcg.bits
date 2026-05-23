@@ -3,7 +3,7 @@ description: Flake8 Python code style, lint and complexity checker
 version: "7.3.0"
 tag: "7.3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/flake8-7.3.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - entrypoints

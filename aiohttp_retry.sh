@@ -3,7 +3,7 @@ description: aiohttp_retry retry middleware for aiohttp
 version: "2.9.1"
 tag: "2.9.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/aiohttp_retry-2.9.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - aiohttp

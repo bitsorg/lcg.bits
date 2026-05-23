@@ -1,9 +1,9 @@
 package: bhlumi
 description: BHLUMI Monte Carlo generator for Bhabha scattering
-version: "unknown"
-tag: "unknown"
+version: "4.04linuxLHE"
+tag: "4.04linuxLHE"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/bhlumi-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

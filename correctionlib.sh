@@ -3,7 +3,7 @@ description: correctionlib schema-based correction evaluation library
 version: "2.8.0"
 tag: "2.8.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/correctionlib-2.8.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools_scm

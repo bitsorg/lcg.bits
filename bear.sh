@@ -3,7 +3,7 @@ description: Bear tool that generates a compile_commands.json database
 version: "3.1.5"
 tag: "3.1.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/bear-3.1.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - jsonmcpp

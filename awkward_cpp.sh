@@ -3,7 +3,7 @@ description: awkward-cpp compiled components for Awkward Array
 version: "52"
 tag: "52"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/awkward_cpp-52.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - numpy
   - pytest_runner

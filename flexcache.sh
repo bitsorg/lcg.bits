@@ -3,7 +3,7 @@ description: FlexCache flexible memoization with cache invalidation
 version: "0.3"
 tag: "0.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/flexcache-0.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - typing_extensions

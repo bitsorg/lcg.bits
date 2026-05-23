@@ -3,7 +3,7 @@ description: openpyxl Python library to read/write Excel 2010+ files
 version: "3.1.5"
 tag: "3.1.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/openpyxl-3.1.5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - et_xmlfile

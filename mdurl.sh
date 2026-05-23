@@ -3,7 +3,7 @@ description: mdurl URL utilities for markdown-it-py
 version: "0.1.2"
 tag: "0.1.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mdurl-0.1.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

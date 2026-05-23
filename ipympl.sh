@@ -3,7 +3,7 @@ description: ipympl interactive matplotlib backend for Jupyter
 version: "0.9.3"
 tag: "0.9.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ipympl-0.9.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - ipykernel

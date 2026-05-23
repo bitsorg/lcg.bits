@@ -3,7 +3,7 @@ description: sniffio detect which async library is being used
 version: "1.3.1"
 tag: "1.3.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/sniffio-1.3.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

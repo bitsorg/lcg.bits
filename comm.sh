@@ -3,7 +3,7 @@ description: comm Jupyter kernel communication protocol library
 version: "0.2.2"
 tag: "0.2.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/comm-0.2.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - traitlets

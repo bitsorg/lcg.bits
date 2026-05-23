@@ -3,7 +3,7 @@ description: TorchMetrics machine learning metrics for PyTorch
 version: "1.7.2"
 tag: "1.7.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torchmetrics-1.7.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - numpy
   - packaging

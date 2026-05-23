@@ -3,7 +3,7 @@ description: Ruff extremely fast Python linter and formatter (Rust-based)
 version: "0.15.9"
 tag: "0.15.9"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ruff-0.15.9.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - rust
   - Python

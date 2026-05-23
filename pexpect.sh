@@ -3,7 +3,7 @@ description: Pexpect controlling interactive console applications
 version: "4.9.0"
 tag: "4.9.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pexpect-4.9.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - ptyprocess

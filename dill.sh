@@ -3,7 +3,7 @@ description: dill extends Python's pickle for serializing lambdas etc.
 version: "0.4.0"
 tag: "0.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/dill-0.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

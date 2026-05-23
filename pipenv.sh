@@ -3,7 +3,7 @@ description: Pipenv Python virtualenv + pip workflow tool
 version: "2024.4.0"
 tag: "2024.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pipenv-2024.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - certifi

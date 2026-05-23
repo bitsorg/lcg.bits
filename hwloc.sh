@@ -3,7 +3,7 @@ description: hwloc hardware locality library for topology discovery
 version: "2.7.0"
 tag: "2.7.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hwloc-2.7.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

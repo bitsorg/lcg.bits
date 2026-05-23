@@ -3,7 +3,7 @@ description: importlib_metadata backport of importlib.metadata
 version: "9.0.0"
 tag: "9.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/importlib_metadata-9.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - setuptools_scm

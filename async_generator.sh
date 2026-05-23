@@ -3,7 +3,7 @@ description: async_generator async generators for Python 3.5+
 version: "1.10"
 tag: "1.10"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/async_generator-1.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

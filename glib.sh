@@ -3,7 +3,7 @@ description: GLib core utility library for GNOME (strings, collections, mainloop
 version: "2.86.5"
 tag: "2.86.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/glib-2.86.5.tar.xz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.xz
 requires:
   - CMake
   - libffi

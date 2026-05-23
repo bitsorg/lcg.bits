@@ -3,7 +3,7 @@ description: MinIO Python client SDK for S3-compatible object storage
 version: "7.2.15"
 tag: "7.2.15"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/minio-7.2.15.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - certifi

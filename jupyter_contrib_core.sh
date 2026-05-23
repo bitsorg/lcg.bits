@@ -1,9 +1,9 @@
 package: jupyter_contrib_core
 description: jupyter_contrib_core utilities for Jupyter contrib extensions
-version: "unknown"
-tag: "unknown"
+version: "0.4.2"
+tag: "0.4.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/jupyter_contrib_core-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - tornado
   - notebook

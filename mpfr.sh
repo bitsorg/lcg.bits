@@ -3,7 +3,7 @@ description: GNU MPFR multiple-precision floating-point library
 version: "4.2.1"
 tag: "4.2.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/mpfr-4.2.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - gmp
 build_requires:

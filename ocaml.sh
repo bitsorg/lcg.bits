@@ -3,7 +3,7 @@ description: OCaml functional programming language compiler and standard library
 version: "4.14.2"
 tag: "4.14.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ocaml-4.14.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -3,7 +3,7 @@ description: qibojit JIT-based simulation backend for Qibo
 version: "0.1.12"
 tag: "0.1.12"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/qibojit-0.1.12.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numba

@@ -3,7 +3,7 @@ description: Gunicorn Python WSGI HTTP Server for UNIX
 version: "23.0.0"
 tag: "23.0.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gunicorn-23.0.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - packaging

@@ -3,7 +3,7 @@ description: PyTorch Geometric deep learning on graphs and other irregular struc
 version: "2.6.1"
 tag: "2.6.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/torch_geometric-2.6.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - torch
   - numpy

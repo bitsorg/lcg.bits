@@ -3,7 +3,7 @@ description: WebIO Jupyter extension for interactive web I/O
 version: "0.1.0"
 tag: "0.1.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/webio_jupyter_extension-0.1.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - jupyter_packaging

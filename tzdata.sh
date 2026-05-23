@@ -3,7 +3,7 @@ description: tzdata IANA timezone data distribution for Python
 version: "2024.1"
 tag: "2024.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tzdata-2024.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

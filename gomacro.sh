@@ -3,7 +3,7 @@ description: Gomacro Go interpreter with generics/macro support
 version: "c9f381e"
 tag: "c9f381e"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/gomacro-c9f381e.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - go

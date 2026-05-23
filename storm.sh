@@ -3,7 +3,7 @@ description: Apache Storm distributed real-time computation system
 version: "0.23"
 tag: "0.23"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/storm-0.23.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:
   - Python
   - six

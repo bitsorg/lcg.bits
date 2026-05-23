@@ -3,7 +3,7 @@ description: cachetools extensible memoizing collections for Python
 version: "5.5.1"
 tag: "5.5.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/cachetools-5.5.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

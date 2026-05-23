@@ -3,7 +3,7 @@ description: PatchELF utility to patch ELF binary rpath/interpreter
 version: "0.12"
 tag: "0.12"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/patchelf-0.12.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

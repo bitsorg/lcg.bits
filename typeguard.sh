@@ -3,7 +3,7 @@ description: typeguard runtime type checking for Python
 version: "2.13.3"
 tag: "2.13.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/typeguard-2.13.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - setuptools_scm
 build_requires:

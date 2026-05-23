@@ -1,9 +1,9 @@
 package: b2luigi
 description: b2luigi workflow management based on Luigi (Belle II)
-version: "unknown"
-tag: "unknown"
+version: "1.2.6"
+tag: "1.2.6"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/b2luigi-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - luigi

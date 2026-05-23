@@ -3,7 +3,7 @@ description: Qt Widgets for Technical Applications (Qwt)
 version: "6.0.1"
 tag: "6.0.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/qwt-6.0.1.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:
   - Qt
 build_requires:

@@ -3,7 +3,7 @@ description: Apache Arrow cross-language columnar in-memory data format
 version: "23.0.1"
 tag: "23.0.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-arrow-23.0.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Boost

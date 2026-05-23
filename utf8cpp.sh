@@ -3,7 +3,7 @@ description: UTF8-CPP header-only C++ library for UTF-8 string handling
 version: "3.2.3"
 tag: "3.2.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/utf8cpp-3.2.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

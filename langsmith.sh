@@ -3,7 +3,7 @@ description: LangSmith platform client for LLM observability
 version: "0.2.10"
 tag: "0.2.10"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/langsmith-0.2.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pydantic

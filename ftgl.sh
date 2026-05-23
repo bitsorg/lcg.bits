@@ -3,7 +3,7 @@ description: FTGL OpenGL font rendering library using FreeType
 version: "2.4.0"
 tag: "2.4.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ftgl-2.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - freetype

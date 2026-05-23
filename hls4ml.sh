@@ -3,7 +3,7 @@ description: hls4ml machine learning firmware synthesis for FPGAs
 version: "1.2.0"
 tag: "1.2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/hls4ml-1.2.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - h5py

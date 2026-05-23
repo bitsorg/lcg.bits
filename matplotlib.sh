@@ -3,7 +3,7 @@ description: Matplotlib comprehensive 2D plotting library for Python
 version: "3.10.8"
 tag: "3.10.8"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/matplotlib-3.10.8.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

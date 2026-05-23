@@ -3,7 +3,7 @@ description: HTTPX fully featured async HTTP client for Python
 version: "0.28.1"
 tag: "0.28.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/httpx-0.28.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - certifi

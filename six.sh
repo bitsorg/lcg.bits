@@ -3,7 +3,7 @@ description: six Python 2 and 3 compatibility utilities
 version: "1.17.0"
 tag: "1.17.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/six-1.17.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: KerasTuner hyperparameter tuning library for Keras
 version: "1.4.7"
 tag: "1.4.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/keras_tuner-1.4.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - packaging

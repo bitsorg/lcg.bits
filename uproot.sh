@@ -3,7 +3,7 @@ description: uproot ROOT I/O in pure Python (without CERN ROOT)
 version: "5.7.1"
 tag: "5.7.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/uproot-5.7.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - hatchling
   - numpy

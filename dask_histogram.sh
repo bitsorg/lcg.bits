@@ -3,7 +3,7 @@ description: dask-histogram Dask parallelised boost-histogram
 version: "2025.2.0"
 tag: "2025.2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/dask_histogram-2025.2.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - dask

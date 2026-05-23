@@ -3,7 +3,7 @@ description: XGBoost scalable distributed gradient boosting library
 version: "2.1.3"
 tag: "2.1.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/xgboost-2.1.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy

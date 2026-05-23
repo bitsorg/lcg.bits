@@ -3,7 +3,7 @@ description: PCRE2 Perl-compatible regular expressions library (v2)
 version: "10.42"
 tag: "10.42"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pcre2-10.42.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 prefer_system: ".*"
 prefer_system_check:
 

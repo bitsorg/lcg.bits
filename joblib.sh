@@ -3,7 +3,7 @@ description: joblib tools for pipelining in Python (caching, parallelism)
 version: "1.5.3"
 tag: "1.5.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/joblib-1.5.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

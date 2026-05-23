@@ -3,7 +3,7 @@ description: pip the Python package installer
 version: "23.3.1"
 tag: "23.3.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/pip-23.3.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

@@ -3,7 +3,7 @@ description: dm-tree library for working with nested data structures
 version: "0.1.9"
 tag: "0.1.9"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/dm_tree-0.1.9.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

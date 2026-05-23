@@ -3,7 +3,7 @@ description: plotext plots data directly on terminal
 version: "5.2.7"
 tag: "5.2.7"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/plotext-5.2.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:

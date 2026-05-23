@@ -3,7 +3,7 @@ description: traitlets typed Python attributes with observability
 version: "5.14.3"
 tag: "5.14.3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/traitlets-5.14.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - six

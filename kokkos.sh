@@ -3,7 +3,7 @@ description: Kokkos performance portability programming model
 version: "4.7.01"
 tag: "4.7.01"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/kokkos-4.7.01.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - hwloc

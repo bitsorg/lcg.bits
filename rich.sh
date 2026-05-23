@@ -3,7 +3,7 @@ description: Rich Python library for rich text and beautiful formatting
 version: "13.9.4"
 tag: "13.9.4"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/rich-13.9.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - commonmark

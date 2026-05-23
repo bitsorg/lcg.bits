@@ -1,9 +1,9 @@
 package: vmc
 description: VMC (Virtual Monte Carlo) interface library
-version: "unknown"
-tag: "unknown"
+version: "2.0"
+tag: "2.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/vmc-unknown.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT

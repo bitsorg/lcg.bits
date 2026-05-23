@@ -3,7 +3,7 @@ description: PLY Python Lex-Yacc parser tools
 version: "3.11"
 tag: "3.11"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ply-3.11.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
