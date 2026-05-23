@@ -5,7 +5,8 @@ tag: "2.10.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/frontier_client__2.10.2__src.tar.gz
 requires:
-  - CMake
+  - expat
+  - pacparser
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -15,12 +16,17 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  $SHELL -c "sed -i 's#EXPAT_DIR}/lib#EXPAT_DIR}/lib64#g'  $SOURCEDIR/Makefile"
-  make ${JOBS:+-j $JOBS} -j1 dist PACPARSER_DIR=${PACPARSER_ROOT} EXPAT_DIR=${EXPAT_ROOT} ${opt_Frontier_Client} ${library_path}=${EXPAT_ROOT}/${LIBDIR_DEFAULT}:$ENV{${library_path}}
-  cmake -E copy_directory $SOURCEDIR/dist $INSTALLROOT
+  make ${JOBS:+-j $JOBS} dist \
+    PACPARSER_DIR="${PACPARSER_ROOT}" \
+    EXPAT_DIR="${EXPAT_ROOT}"
+}
+
+function MakeInstall() {
+  # 'make dist' populates a dist/ subdirectory with the install tree
+  cp -a dist/. "$INSTALLROOT/"
 }

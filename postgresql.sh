@@ -20,3 +20,9 @@ license: PostgreSQL
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  ./configure --prefix="$INSTALLROOT" \
+    --without-icu \
+    --with-gettext="${GETTEXT_ROOT}" \
+    --enable-thread-safety
+}
