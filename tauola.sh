@@ -20,10 +20,18 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Prepare() {
+  rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
+  # configure does `ARCH=$(uname)` → "Linux" → FC=g77 (GCC 3.x, gone).
+  # Redirect "Linux" to "Linux-gcc4" so the gfortran branch is taken instead,
+  # and fix the obsolete FLIBS while we're here.
+  sed -i \
+    -e 's/^export ARCH="`uname`"$/export ARCH="`uname`"\n[ "$ARCH" = Linux ] \&\& ARCH=Linux-gcc4/' \
+    -e 's/export FLIBS="-lfrtbegin -lg2c"/export FLIBS="-lgfortran"/' \
+    configure
+}
+
 function Configure() {
-  # Force the Linux-gcc4 branch in the configure script so it sets FC=gfortran
-  # instead of the default FC=g77 (GCC 3.x era, no longer available).
-  export ARCH=Linux-gcc4
   export COMPMODE=OPT
   ./configure --prefix="$INSTALLROOT" --datadir="$INSTALLROOT/data"
 }
