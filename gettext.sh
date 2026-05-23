@@ -16,7 +16,12 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT \
+  # --disable-relocatable: the relocatable build pulls in gnulib's progreloc.c
+  # which does not compile cleanly under GCC 15 / C23; bits installs to a fixed
+  # prefix so relocation support is not needed.
+  # CFLAGS -std=gnu17: keeps the rest of gnulib compatible with GCC 15.
+  ./configure --prefix="$INSTALLROOT" \
+    CFLAGS="${CFLAGS} -std=gnu17" \
     --disable-acl \
     --disable-csharp \
     --disable-curses \
@@ -25,10 +30,10 @@ function Configure() {
     --disable-java \
     --disable-native-java \
     --disable-openmp \
+    --disable-relocatable \
     --disable-rpath \
     --disable-silent-rules \
     --enable-nls \
-    --enable-relocatable \
     --enable-shared \
     --enable-static \
     --without-bzip2 \

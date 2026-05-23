@@ -1,0 +1,11 @@
+--- a/libxslt/extensions.c
++++ b/libxslt/extensions.c
+@@ -34,6 +34,8 @@
+ #include "extensions.h"
+
++/* getenv() is used below; stdlib.h is included only under _WIN32 upstream,
++   but GCC 15 / C23 requires an explicit declaration on all platforms. */
++#include <stdlib.h>
++
+ #ifdef _WIN32
+ #include <stdlib.h>             /* for _MAX_PATH */

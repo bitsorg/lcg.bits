@@ -17,7 +17,8 @@ MODULE_OPTIONS="--lib"
 ##############################
 function Make() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
-  CC=$CC make ${JOBS:+-j $JOBS} \
+  # Only forward CC if it is non-empty; giflib's Makefile defaults to 'cc'.
+  make ${CC:+CC="$CC"} ${JOBS:+-j $JOBS} \
     $(uname | grep -q Darwin && echo libgif.dylib || echo libgif.so) libgif.a
 }
 function MakeInstall() {
