@@ -11,11 +11,15 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include AutoToolsRecipe)
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
-function Make() {
-  make ${JOBS:+-j $JOBS}
-  cmake -E copy_directory $SOURCEDIR $INSTALLROOT/share/CMakeTools
+function Configure() { true; }
+function Make()      { true; }
+
+function MakeInstall() {
+  # cmaketools is a collection of .cmake modules; no build step needed.
+  mkdir -p "${INSTALLROOT}/share/CMakeTools"
+  cp -r "${SOURCEDIR}/." "${INSTALLROOT}/share/CMakeTools/"
 }
