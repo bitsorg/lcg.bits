@@ -9,8 +9,7 @@ requires:
   - Geant4
   - ROOT
   - clhep
-  - flex
-  - bison
+  - yacc-like
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

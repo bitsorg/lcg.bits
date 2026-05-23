@@ -5,8 +5,7 @@ tag: "17.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
-  - bison
-  - flex
+  - yacc-like
   - m4
   - pkg_config
   - gettext

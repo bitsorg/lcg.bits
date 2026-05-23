@@ -7,7 +7,7 @@ sources:
 requires:
   - CMake
   - Boost
-  - bison
+  - yacc-like
   - jemalloc
   - libevent
   - zlib

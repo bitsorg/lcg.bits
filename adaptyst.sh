@@ -14,8 +14,7 @@ requires:
   - libbpf
   - libnuma
   - libtraceevent
-  - flex
-  - bison
+  - yacc-like
   - Python
   - perf
 build_requires:

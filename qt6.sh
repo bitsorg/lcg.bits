@@ -8,8 +8,7 @@ requires:
   - Python
   - fontconfig
   - html5lib
-  - flex
-  - bison
+  - yacc-like
   - nodejs
   - zlib
   - ninja

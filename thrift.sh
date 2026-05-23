@@ -8,8 +8,7 @@ requires:
   - CMake
   - pkg_config
   - Boost
-  - bison
-  - flex
+  - yacc-like
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

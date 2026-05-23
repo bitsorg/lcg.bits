@@ -11,7 +11,7 @@ license: Apache-2.0 WITH LLVM-exception
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
