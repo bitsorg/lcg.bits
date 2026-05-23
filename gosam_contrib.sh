@@ -24,6 +24,16 @@ function Configure() {
     "FFLAGS=-std=legacy -fallow-argument-mismatch" \
     "FCFLAGS=-std=legacy -fallow-argument-mismatch"
     # --with-looptools=${LOOPTOOLS_ROOT}
+  # ninja-1.2.0/Makefile lists Fortran .mod files as prerequisites of all-am
+  # for installation, but automake --tag=FC only emits rules for .lo object
+  # files — .mod files are produced as silent side effects of FC compilation
+  # and have no explicit make rule.  Add no-op rules so make can resolve them.
+  {
+    printf '\nninjago_module.mod: ninjago.lo\n\t@:\n'
+    printf '\nquadninjago_module.mod: quadsources/ninjago.lo\n\t@:\n'
+    printf '\nninjavholo.mod: ninjavholo.lo\n\t@:\n'
+    printf '\nmninja.mod: mninja.lo\n\t@:\n'
+  } >> ninja-1.2.0/Makefile
 }
 
 function Make() {
