@@ -21,5 +21,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --datadir=$INSTALLROOT/data --with-pythia6=${PYTHIA6_ROOT} --with-photos=${PHOTOS_ROOT} --with-hepevt=4000
+  # Force the Linux-gcc4 branch in the configure script so it sets FC=gfortran
+  # instead of the default FC=g77 (GCC 3.x era, no longer available).
+  export ARCH=Linux-gcc4
+  export COMPMODE=OPT
+  ./configure --prefix="$INSTALLROOT" --datadir="$INSTALLROOT/data"
 }

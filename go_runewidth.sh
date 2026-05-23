@@ -5,21 +5,26 @@ tag: "703b5e6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
-  - CMake
   - go
 build_requires:
   - bits-recipe-tools
-  - "GCC-Toolchain:(?!osx)"
 license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include BinaryRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin"
 ##############################
-function Make() {
-  cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/mattn/go-runewidth
-  cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/mattn/go-runewidth
-  cmake -E chdir $INSTALLROOT/src/github.com/mattn/go-runewidth go install
+function MakeInstall() {
+  # Install Go source into GOPATH workspace layout so downstream packages
+  # can 'go build' or 'go install' this library.
+  local gopath_src="$INSTALLROOT/src/github.com/mattn/go-runewidth"
+  install -dm755 "$gopath_src"
+  cp -a *.go go.mod "$gopath_src/" 2>/dev/null || true
+
+  # Pre-compile for the host platform
+  export GOPATH="$INSTALLROOT"
+  export GOROOT="${GO_ROOT}"
+  PATH="${GO_ROOT}/bin:$PATH" go install github.com/mattn/go-runewidth 2>/dev/null || true
 }
