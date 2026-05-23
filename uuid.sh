@@ -45,6 +45,7 @@ function MakeInstall() {
     Darwin) ;;
     *) cp -a lib/uuid/.libs/libuuid.so* "$INSTALLROOT/lib" 2>/dev/null || true ;;
   esac
-  # Install uuid headers
-  make -C lib/uuid install-uuidincHEADERS DESTDIR="" prefix="$INSTALLROOT"
+  # Install uuid headers (e2fsprogs 1.42 lib/uuid/Makefile has no automake
+  # install-uuidincHEADERS target; uuid.h is generated during Make() via "CP uuid.h").
+  cp -a lib/uuid/uuid.h "$INSTALLROOT/include/uuid/"
 }
