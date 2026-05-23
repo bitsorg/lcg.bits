@@ -20,7 +20,9 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
-      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-      -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_COMPILER=""
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DKokkos_ENABLE_SERIAL=ON \
+    -DKokkos_ENABLE_OPENMP=ON
 }
