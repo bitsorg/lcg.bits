@@ -4,8 +4,6 @@ version: "16.02"
 tag: "16.02"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/p7zip_16.02_src_all.tar.bz2
-requires:
-  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -15,11 +13,16 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin"
 ##############################
 function Make() {
   make ${JOBS:+-j $JOBS} all2
-  cmake -E copy_directory $SOURCEDIR/bin $INSTALLROOT/bin
+}
+
+function MakeInstall() {
+  # install.sh creates wrapper scripts in bin/ that delegate to lib/p7zip/
+  # Pass DEST_HOME so all paths land under $INSTALLROOT
+  make install DEST_HOME="$INSTALLROOT"
 }

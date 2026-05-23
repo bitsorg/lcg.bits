@@ -15,12 +15,12 @@ license: BSL-1.0
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--cmake"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
-      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-      -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_COMPILER="" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release \
     -DUTF8_TESTS=OFF
 }
