@@ -15,5 +15,21 @@ patches:
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--lib"
 ##############################
+function Configure() {
+  # HIJING configure does not understand --prefix (it prints "wrong option.
+  # Ignored." and continues).  Export F77 so the Makefile default (g77) is
+  # overridden when we pass F77=... on the make command line.
+  export F77=${FC:-gfortran}
+  ./configure
+}
+
+function Make() {
+  make ${JOBS:+-j $JOBS} F77=${FC:-gfortran}
+  # configure ignored --prefix so install manually.
+  mkdir -p "${INSTALLROOT}/lib"
+  cp -p lib/libhijing.* "${INSTALLROOT}/lib/"
+  # Fortran COMMON-block include files, if the tarball ships them.
+  [[ -d include ]] && { mkdir -p "${INSTALLROOT}/include"; cp -rp include/. "${INSTALLROOT}/include/"; }
+}
