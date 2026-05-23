@@ -1,26 +1,80 @@
 package: jhu
-description: JHU (Johns Hopkins University) utility library
+description: JHU (Johns Hopkins University) generator for Higgs/BSM matrix elements
 version: "5.6.3"
 tag: "5.6.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/JHUGenerator.v5.6.3.tar.gz
-requires:
-  - CMake
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
-patches:
-  - jhu-5.6.3.patch
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin"
 ##############################
+function Prepare() {
+  # The JHUGenerator tarball has multiple top-level directories (JHUGenerator/,
+  # JHUGenMELA/, AnalyticMELA/) with no common prefix.  bits' auto-detection
+  # falls back to --strip-components=1, which discards those directory names and
+  # merges everything into one flat directory.  Re-extract from the original
+  # archive (still present in SOURCEDIR) with strip=0 to preserve the layout.
+  local tarball
+  tarball=$(ls "$SOURCEDIR"/JHUGenerator*.tar.gz 2>/dev/null | head -1)
+  tar xf "$tarball" --strip-components=0 -C ./
+
+  # Fix compiler name: gfort → gfortran (f95 wrapper no longer exists in GCC 15)
+  sed -i \
+    -e 's/^Comp = gfort$/Comp = gfortran/' \
+    -e 's/^ifeq ($(Comp),gfort)$/ifeq ($(Comp),gfortran)/' \
+    -e 's/^\( *\)f95 /\1gfortran /' \
+    JHUGenerator/makefile
+
+  # Replace $(PWD)-anchored paths with relative paths so the build works
+  # from any directory (the makefile used Here=$(PWD) which breaks out-of-tree)
+  sed -i \
+    -e '/^Here = \$(PWD)$/d' \
+    -e 's|^ModuleDir = \$(Here)/modules|ModuleDir = modules|' \
+    -e 's|^ObjectDir = \$(Here)/objects|ObjectDir = objects|' \
+    -e 's|^PDFDir = \$(Here)/pdfs|PDFDir = pdfs|' \
+    -e 's|^VegasDir = \$(Here)/vegas|VegasDir = vegas|' \
+    JHUGenerator/makefile
+
+  # Cteq61Pdf.f opens PDF tables with a hard-coded relative path 'pdfs/'.
+  # Change it to use $JHU_HOME so the binary works from any working directory.
+  python3 - <<'PYEOF'
+path = 'JHUGenerator/pdfs/Cteq61Pdf.f'
+with open(path) as f:
+    src = f.read()
+src = src.replace(
+    '      Data Isetmin2,Isetmax2 /200,240/\n      save\n',
+    '      Data Isetmin2,Isetmax2 /200,240/\n      CHARACTER(LEN=255) jhu_home\n      save\n',
+)
+src = src.replace(
+    "         Open(IU, File='pdfs/'//Tablefile",
+    "         CALL getenv('JHU_HOME',jhu_home)\n"
+    "         Open(IU, File=TRIM(jhu_home)//'/pdfs/'//Tablefile",
+)
+with open(path, 'w') as f:
+    f.write(src)
+PYEOF
+}
+
 function Make() {
-  make ${JOBS:+-j $JOBS} -j1 -C JHUGenerator Comp=${FC:-gfortran}
-  cmake -E make_directory $INSTALLROOT/bin
-cmake
+  # Force serial: Fortran module ordering makes parallel builds unreliable
+  make -j1 -C JHUGenerator Comp=${FC:-gfortran}
+}
+
+function MakeInstall() {
+  install -Dm755 JHUGenerator/JHUGen "$INSTALLROOT/bin/JHUGen"
+  # Install PDF/data tables referenced at runtime via $JHU_HOME
+  mkdir -p "$INSTALLROOT/share/JHUGenerator/pdfs"
+  cp -a JHUGenerator/pdfs/*.tbl JHUGenerator/pdfs/*.dat \
+    "$INSTALLROOT/share/JHUGenerator/pdfs/" 2>/dev/null || true
+}
+
+function PostInstall() {
+  echo "setenv JHU_HOME \$env(JHU_ROOT)/share/JHUGenerator" >> "$MODULEFILE"
 }
