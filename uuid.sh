@@ -34,15 +34,17 @@ function Configure() {
     --enable-libuuid
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} libuuid.la libuuid/uuid.pc install-uuidincHEADERS
+  # e2fsprogs builds uuid inside lib/uuid; there is no top-level libuuid.la target.
+  make ${JOBS:+-j $JOBS} -C lib/uuid
 }
 function MakeInstall() {
-  mkdir -p "$INSTALLROOT/lib" "$INSTALLROOT/share/pkgconfig"
-  cp -a libuuid/uuid.pc "$INSTALLROOT/share/pkgconfig"
-  cp -a .libs/libuuid.a* "$INSTALLROOT/lib" 2>/dev/null || true
+  mkdir -p "$INSTALLROOT/lib" "$INSTALLROOT/share/pkgconfig" "$INSTALLROOT/include/uuid"
+  cp -a lib/uuid/uuid.pc "$INSTALLROOT/share/pkgconfig" 2>/dev/null || true
+  cp -a lib/uuid/.libs/libuuid.a "$INSTALLROOT/lib" 2>/dev/null || true
   case $(uname) in
     Darwin) ;;
-    *) cp -a .libs/libuuid.so* "$INSTALLROOT/lib" 2>/dev/null || true ;;
+    *) cp -a lib/uuid/.libs/libuuid.so* "$INSTALLROOT/lib" 2>/dev/null || true ;;
   esac
-  rm -rf "$INSTALLROOT/man"
+  # Install uuid headers
+  make -C lib/uuid install-uuidincHEADERS DESTDIR="" prefix="$INSTALLROOT"
 }

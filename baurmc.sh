@@ -22,7 +22,9 @@ function Configure() {
   # running configure so Makeshared.subdir / Makearchive.subdir are correct.
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
     xargs --no-run-if-empty sed -i "s/\bg77\b/${F77}/g"
-  ./configure --lcgplatform=${BITS_PLATFORM:-linux} --userfflags=-fno-automatic ${baurmc_fflag} --enable-shared
+  ./configure --lcgplatform=${BITS_PLATFORM:-linux} \
+    --userfflags="-fno-automatic -fallow-argument-mismatch" \
+    ${baurmc_fflag} --enable-shared
 }
 
 function Make() {

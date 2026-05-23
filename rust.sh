@@ -3,10 +3,10 @@ description: Rust systems programming language toolchain
 version: "1.94.1"
 tag: "1.94.1"
 sources:
-  - "(*x86-64*linux*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-unknown-linux-gnu.tar.gz"
-  - "(*aarch64*linux*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-unknown-linux-gnu.tar.gz"
-  - "(*x86-64*osx*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-apple-darwin.tar.gz"
-  - "(*aarch64*osx*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-apple-darwin.tar.gz"
+  - "((?!osx).*x86-64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-unknown-linux-gnu.tar.gz"
+  - "((?!osx).*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-unknown-linux-gnu.tar.gz"
+  - "(osx.*x86-64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-apple-darwin.tar.gz"
+  - "(osx.*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-apple-darwin.tar.gz"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

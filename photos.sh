@@ -33,3 +33,11 @@ function Make() {
     xargs --no-run-if-empty sed -i "s/\bg77\b/${F77}/g"
   make ${JOBS:+-j $JOBS}
 }
+
+function MakeInstall() {
+  # PHOTOS has no 'make install' target; install manually.
+  mkdir -p "${INSTALLROOT}/lib" "${INSTALLROOT}/include"
+  cp -p lib/libphotos.so "${INSTALLROOT}/lib/"
+  [[ -f lib/archive/libphotos.a ]] && cp -p lib/archive/libphotos.a "${INSTALLROOT}/lib/"
+  [[ -d include ]] && cp -rp include/. "${INSTALLROOT}/include/"
+}
