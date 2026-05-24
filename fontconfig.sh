@@ -22,5 +22,6 @@ license: MIT
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  ./configure --disable-docs --prefix=$INSTALLROOT
+  export PKG_CONFIG_PATH="${FREETYPE_ROOT}/lib/pkgconfig:${EXPAT_ROOT}/lib/pkgconfig:${UUID_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+  ./configure --disable-docs --prefix="${INSTALLROOT}"
 }
