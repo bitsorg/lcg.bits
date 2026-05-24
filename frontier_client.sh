@@ -21,7 +21,10 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} dist \
+  # Frontier_Client's Makefile has no parallel-safe dependency between the
+  # http sub-make (which creates http/.libs) and the top-level libfrontier_client.so
+  # target that needs it.  Force serial build to avoid the race.
+  make dist \
     PACPARSER_DIR="${PACPARSER_ROOT}" \
     EXPAT_DIR="${EXPAT_ROOT}"
 }
