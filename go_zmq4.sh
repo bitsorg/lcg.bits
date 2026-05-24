@@ -5,22 +5,25 @@ tag: "7a493a6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
-  - CMake
   - go
   - zeromq
 build_requires:
   - bits-recipe-tools
-  - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include BinaryRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Make() {
-  cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/pebbe/zmq4/
-  cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/pebbe/zmq4/
-  cmake -E chdir $INSTALLROOT/src/github.com/pebbe/zmq4/ go install
+function MakeInstall() {
+  local gopath_src="${INSTALLROOT}/src/github.com/pebbe/zmq4"
+  install -dm755 "${gopath_src}"
+  cp -a "${SOURCEDIR}"/. "${gopath_src}/"
+  export GOPATH="${INSTALLROOT}"
+  export GOROOT="${GO_ROOT}"
+  export CGO_CFLAGS="-I${ZEROMQ_ROOT}/include"
+  export CGO_LDFLAGS="-L${ZEROMQ_ROOT}/lib"
+  PATH="${GO_ROOT}/bin:${PATH}" go install github.com/pebbe/zmq4
 }
