@@ -8,7 +8,6 @@ requires:
   - CMake
   - cppgsl
   - fmt
-  - Catch2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -26,5 +25,6 @@ function Configure() {
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
-    -DMP_UNITS_API_CONTRACTS=MS-GSL
+    -DMP_UNITS_API_CONTRACTS=MS-GSL \
+    -DBUILD_TESTING=OFF
 }
