@@ -35,5 +35,6 @@ function Configure() {
     -DDOWNLOAD_BOOST=1 \
     -DWITH_BOOST="$SOURCEDIR/boost" \
     -DWITH_PCRE=bundled \
-    -DMYSQL_MAINTAINER_MODE=OFF
+    -DMYSQL_MAINTAINER_MODE=OFF \
+    ${LZ4_ROOT:+-DCMAKE_C_FLAGS="-I${LZ4_ROOT}/include" -DCMAKE_CXX_FLAGS="-I${LZ4_ROOT}/include"}
 }
