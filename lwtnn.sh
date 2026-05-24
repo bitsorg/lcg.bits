@@ -23,6 +23,6 @@ function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
-    -DBOOST_INCLUDEDIR="${Boost_ROOT}/include" \
-    -DBOOST_ROOT="${Boost_ROOT}"
+    -DBOOST_ROOT="${BOOST_ROOT}" \
+    -DEIGEN3_INCLUDE_DIR="${EIGEN_ROOT}/include"
 }
