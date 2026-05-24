@@ -4,7 +4,7 @@ version: "2.4.1"
 tag: "2.4.1"
 requires:
   - Python
-  - build
+#  - build
   - virtualenv
 build_requires:
   - bits-recipe-tools

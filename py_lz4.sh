@@ -15,5 +15,6 @@ license: BSD-3-Clause
 ##############################
 . $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="lz4"
 MODULE_OPTIONS="--bin --python"
 ##############################

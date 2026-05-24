@@ -15,7 +15,7 @@ license: MIT
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --root-inc"
+MODULE_OPTIONS="--bin --lib --cmake --root-inc"
 ##############################
 function Configure() {
   cmake "${SOURCEDIR}" \
