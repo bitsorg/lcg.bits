@@ -28,7 +28,6 @@ function Configure() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_CXX_STANDARD=17 \
-    -DCMAKE_PREFIX_PATH="${ABSL_ROOT}" \
     -DBUILD_SHARED_LIBS=ON \
     -DRE2_USE_ICU=OFF
 }
