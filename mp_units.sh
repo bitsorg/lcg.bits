@@ -1,9 +1,12 @@
 package: mp_units
 description: mp-units compile-time C++ units of measurement library
-version: "bfcb26e5"
-tag: "bfcb26e5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "2.5.0"                                                                                                               
+tag: "v2.5.0"                                                                                                                   
+source: https://github.com/mpusz/mp-units.git
+#version: "bfcb26e5"
+#tag: "bfcb26e5"
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - cppgsl
