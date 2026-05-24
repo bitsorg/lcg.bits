@@ -23,14 +23,19 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   # sasl/gssapi require system libsasl2-dev which is not a bits package; omit them.
+  # mklove configure honours CFLAGS/LDFLAGS as env vars, not positional args.
+  # Guard each root so empty values don't inject bare -I/ or -L/ flags.
+  local _inc="" _lib=""
+  for _root in "${LZ4_ROOT}" "${ZSTD_ROOT}" "${OPENSSL_ROOT}"; do
+    [ -n "${_root}" ] && _inc="${_inc} -I${_root}/include" && _lib="${_lib} -L${_root}/lib"
+  done
+  CFLAGS="${CFLAGS}${_inc}" \
+  LDFLAGS="${LDFLAGS}${_lib}" \
   ./configure --prefix="${INSTALLROOT}" \
     --enable-zlib \
     --enable-zstd \
-    --enable-lz4 \
     --enable-lz4-ext \
     --enable-ssl \
     --disable-gssapi \
-    --disable-sasl \
-    CFLAGS="${CFLAGS} -I${LZ4_ROOT}/include -I${ZSTD_ROOT}/include -I${OPENSSL_ROOT}/include" \
-    LDFLAGS="${LDFLAGS} -L${LZ4_ROOT}/lib -L${ZSTD_ROOT}/lib -L${OPENSSL_ROOT}/lib"
+    --disable-sasl
 }
