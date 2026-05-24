@@ -17,3 +17,8 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
+function Configure() {
+  cmake "${SOURCEDIR}" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DBUILD_SHARED_LIBS=ON
+}
