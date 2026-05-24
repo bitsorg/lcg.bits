@@ -24,5 +24,6 @@ function Configure() {
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=Release \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"}
 }

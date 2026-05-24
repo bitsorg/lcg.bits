@@ -21,6 +21,7 @@ MODULE_OPTIONS="--bin --lib --cmake"
 function Configure() {
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
     -DEIGEN3_INCLUDE_DIR="${EIGEN_ROOT}/include/eigen3"

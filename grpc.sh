@@ -31,6 +31,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
     -G Ninja \
@@ -38,7 +39,6 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=ON \
     ${OPENSSL_ROOT:+-DOPENSSL_ROOT_DIR="$OPENSSL_ROOT"} \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DgRPC_BUILD_CODEGEN=ON \
     -DgRPC_BUILD_CSHARP_EXT:Bool=OFF \
     -DgRPC_ABSL_PROVIDER:String=package \

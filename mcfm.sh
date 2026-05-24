@@ -21,6 +21,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Duse_internal_lhapdf=OFF \
     -Dlhapdf_include_path="${LHAPDF_ROOT}/include" \

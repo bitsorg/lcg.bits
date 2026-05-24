@@ -25,6 +25,7 @@ function Configure() {
   # lz4's CMakeLists.txt is in build/cmake/, not the source root
   cmake "$SOURCEDIR/build/cmake" \
     -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release
 }

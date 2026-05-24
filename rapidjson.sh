@@ -22,6 +22,7 @@ MODULE_OPTIONS="--inc --root-inc"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
     -DRAPIDJSON_BUILD_DOC=OFF \
