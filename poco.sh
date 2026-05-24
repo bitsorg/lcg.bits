@@ -27,5 +27,7 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
-    -DPOCO_UNBUNDLED=ON
+    -DPOCO_UNBUNDLED=ON \
+    -DUTF8PROC_INCLUDE_DIR="${UTF8PROC_ROOT}/include" \
+    -DUTF8PROC_LIBRARY="${UTF8PROC_ROOT}/lib/libutf8proc.so"
 }
