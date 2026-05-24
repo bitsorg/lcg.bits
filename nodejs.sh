@@ -16,9 +16,3 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Configure() {
-  # GCC 15 defaults to gnu++23; V8's ##__VA_ARGS__ macros only work correctly
-  # under gnu++17 semantics.  Force C++17 for the whole build.
-    CXXFLAGS="-fPIC -g -O2 -std=gnu++17" \
-    ./configure --prefix "$INSTALLROOT"
-}
