@@ -45,3 +45,7 @@ function Make() {
   # Use the Makefile's default target; 'all' is not defined in this package.
   make ${JOBS:+-j $JOBS}
 }
+
+function MakeInstall() {
+  true;
+}

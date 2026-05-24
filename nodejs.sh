@@ -1,9 +1,8 @@
 package: nodejs
 description: Node.js JavaScript runtime built on V8
-version: "22.14.0"
-tag: "22.14.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/node-v22.14.0.tar.gz
+version: "24.16.0"
+tag: "v24.16.0"
+source: https://github.com/nodejs/node.git
 requires:
   - Python
 build_requires:
@@ -20,6 +19,6 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   # GCC 15 defaults to gnu++23; V8's ##__VA_ARGS__ macros only work correctly
   # under gnu++17 semantics.  Force C++17 for the whole build.
-  CXXFLAGS="-std=gnu++17" \
-  ./configure --prefix "$INSTALLROOT"
+    CXXFLAGS="-fPIC -g -O2 -std=gnu++17" \
+    ./configure --prefix "$INSTALLROOT"
 }

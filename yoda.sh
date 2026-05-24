@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/YODA-1.9.0.tar.gz
 requires:
   - Python
+  - ROOT
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
