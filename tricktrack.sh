@@ -18,3 +18,10 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
+function Configure() {
+  cmake "${SOURCEDIR}" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DEIGEN3_INCLUDE_DIR="${EIGEN_ROOT}/include/eigen3"
+}
