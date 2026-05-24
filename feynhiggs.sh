@@ -18,5 +18,6 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT F77=${FC:-gfortran} FFLAGS=-fPIC CFLAGS=-fPIC
+  ./configure --prefix="$INSTALLROOT" F77=${FC:-gfortran} \
+    "FFLAGS=-fPIC -fallow-invalid-boz -fallow-argument-mismatch" CFLAGS=-fPIC
 }

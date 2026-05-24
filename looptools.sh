@@ -22,7 +22,7 @@ function Configure() {
     x86_64) EXTRA_FLAGS="--64" ;;
     *) EXTRA_FLAGS="" ;;
   esac
-  ./configure --prefix="$INSTALLROOT" ${EXTRA_FLAGS} "FFLAGS=-fPIC -std=legacy" CFLAGS=-fPIC
+  ./configure --prefix="$INSTALLROOT" ${EXTRA_FLAGS} "FFLAGS=-fPIC -std=legacy -fallow-argument-mismatch" CFLAGS=-fPIC
 }
 function PostInstall() {
   printf 'setenv LOOPTOOLS_ROOT $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
