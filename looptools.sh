@@ -22,7 +22,14 @@ function Configure() {
     x86_64) EXTRA_FLAGS="--64" ;;
     *) EXTRA_FLAGS="" ;;
   esac
-  ./configure --prefix="$INSTALLROOT" ${EXTRA_FLAGS} "FFLAGS=-fPIC -std=legacy -fallow-argument-mismatch" CFLAGS=-fPIC
+  ./configure --prefix="$INSTALLROOT" ${EXTRA_FLAGS} "FFLAGS=-fPIC -std=legacy" CFLAGS=-fPIC
+}
+
+function Make() {
+  # configure hardcodes XFC in the generated makefile and ignores FFLAGS;
+  # inject -fallow-argument-mismatch directly into the XFC definition.
+  sed -i 's/\(XFC="[^"]*\)"/\1 -fallow-argument-mismatch"/' makefile
+  make ${JOBS:+-j $JOBS}
 }
 function PostInstall() {
   printf 'setenv LOOPTOOLS_ROOT $PKG_ROOT\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
