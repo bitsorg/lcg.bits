@@ -1,9 +1,6 @@
 package: stomppy
 description: stomp.py STOMP message protocol client for Python
-version: "6.1.0"
-tag: "6.1.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/stomp.py-6.1.0.tar.gz
+version: "9.0.0"
 requires:
   - Python
   - docopt
@@ -14,7 +11,8 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="stomp.py"
 MODULE_OPTIONS="--bin --python"
 ##############################

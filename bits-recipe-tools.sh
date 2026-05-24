@@ -1,6 +1,6 @@
 package: bits-recipe-tools
-version: "0.0.19"
-tag: "v0.0.19"
+version: "0.0.20"
+tag: "v0.0.20"
 source: https://github.com/bitsorg/bits-recipe-tools
 ---
 mkdir -p $INSTALLROOT/bin

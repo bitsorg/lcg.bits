@@ -21,7 +21,7 @@ function Prepare() {
     aarch64) ora_arch="linux.arm64" ;;
     *)       echo "Unsupported architecture: $(uname -m)"; exit 1 ;;
   esac
-  local tgz="oracle-19.19.0.0.0-${ora_arch}.tar.gz"
+  local tgz="${PKGNAME}-${PKGVERSION}-${ora_arch}.tar.gz"
   curl -fSL "https://lcgpackages.web.cern.ch/tarFiles/sources/${tgz}" -o "${tgz}"
   tar xzf "${tgz}"
   rm -f "${tgz}"

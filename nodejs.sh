@@ -16,3 +16,7 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+export CXXFLAGS="-fPIC -g -O2"
+export CFLAGS="-fPIC -g -O2"
+#unset ENABLE_IPO
+#unset CXXSTD

@@ -9,7 +9,7 @@ requires:
   - curl
   - lz4
   - zstd
-  - openssl
+  - OpenSSL
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
