@@ -3,7 +3,7 @@ description: Geneva stochastic global optimisation framework
 version: "1.0-rc3.atlas2"
 tag: "1.0-rc3.atlas2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/geneva-1.0-rc3.tar.gz
 requires:
   - CMake
   - lhapdf
