@@ -10,6 +10,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  - cython
 license: BSD-2-Clause
 ---
 #!/bin/bash -e

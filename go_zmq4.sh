@@ -23,6 +23,9 @@ function MakeInstall() {
   cp -a "${SOURCEDIR}"/. "${gopath_src}/"
   export GOPATH="${INSTALLROOT}"
   export GOROOT="${GO_ROOT}"
+  # zmq4.go uses `#cgo pkg-config: libzmq` so pkg-config must be able to
+  # find libzmq.pc regardless of CGO_CFLAGS/CGO_LDFLAGS.
+  export PKG_CONFIG_PATH="${ZEROMQ_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
   export CGO_CFLAGS="-I${ZEROMQ_ROOT}/include"
   export CGO_LDFLAGS="-L${ZEROMQ_ROOT}/lib"
   PATH="${GO_ROOT}/bin:${PATH}" go install github.com/pebbe/zmq4
