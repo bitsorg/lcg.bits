@@ -11,6 +11,7 @@ requires:
   - CMake
   - cppgsl
   - fmt
+  - Catch2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -30,4 +31,9 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DMP_UNITS_API_CONTRACTS=MS-GSL \
     -DBUILD_TESTING=OFF
+}
+function Make() {
+  # Build only library targets; runtime tests fail on GCC 15 due to
+  # ambiguity between fmt::format_to and std::format_to (mp_units 2.5.0 bug)
+  cmake --build . --target mp-units-core --target mp-units-systems ${JOBS:+-- -j$JOBS}
 }
