@@ -27,6 +27,9 @@ _pfx=""
 for _v in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1 | sort -u); do
   _d="${!_v}"; [ -d "$_d" ] && _pfx="${_pfx:+$_pfx;}$_d"
 done
+# Disable mypy stub generation — protoc-gen-mypy.py requires the Python
+# google-protobuf package which is not available in this build environment.
+export CMAKE_ARGS="${CMAKE_ARGS:+$CMAKE_ARGS }-DONNX_GEN_PB_TYPE_STUBS=OFF"
 [ -n "$_pfx" ] && export CMAKE_ARGS="${CMAKE_ARGS:+$CMAKE_ARGS }-DCMAKE_PREFIX_PATH=$_pfx"
 unset _pfx _v _d
 ##############################
