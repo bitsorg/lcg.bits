@@ -28,11 +28,12 @@ function Make() {
   # GPU_BLAS_OPTION may be set inside ifeq blocks with leading whitespace, so
   # anchor on the flag itself rather than the variable assignment.
   find . -name "*.mk" -print0 | xargs -0 sed -i 's/ *-DGPU_BLAS//g'
-  make ${JOBS:+-j $JOBS} ${CC:+CC=$CC}
-  make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} \
+  local _inc="${MPFR_ROOT:+-I${MPFR_ROOT}/include} ${GMP_ROOT:+-I${GMP_ROOT}/include}"
+  local _blas="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas"
+  make ${JOBS:+-j $JOBS} ${CC:+CC=$CC} ${_inc:+CFLAGS="$_inc"}
+  make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} ${_inc:+CFLAGS="$_inc"} \
     INSTALL_LIB=$INSTALLROOT/lib \
     INSTALL_INCLUDE=$INSTALLROOT/include \
-    BLAS="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas" \
-    LAPACK="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas"
+    BLAS="$_blas" LAPACK="$_blas"
 }
 function MakeInstall() { true; }
