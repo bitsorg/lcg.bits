@@ -32,6 +32,7 @@ function Make() {
   make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} \
     INSTALL_LIB=$INSTALLROOT/lib \
     INSTALL_INCLUDE=$INSTALLROOT/include \
-    BLAS=-lopenblas LAPACK=-lopenblas
+    BLAS="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas" \
+    LAPACK="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas"
 }
 function MakeInstall() { true; }
