@@ -22,7 +22,14 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS}
-  make ${JOBS:+-j $JOBS} install CC=$CC INSTALL_LIB=$INSTALLROOT/lib INSTALL_INCLUDE=$INSTALLROOT/include BLAS=-lopenblas LAPACK=-lopenblas
+  # GPU_BLAS_OPTION= disables CUDA/GPU support in CHOLMOD; the GPU source in
+  # 5.10.1 has typos (addUpateOnDevice, wrong cudaStream_t pointer level) that
+  # cause compilation errors when CUDA headers are present on the build host.
+  local GPU_OFF="GPU_BLAS_OPTION="
+  make ${JOBS:+-j $JOBS} ${CC:+CC=$CC} $GPU_OFF
+  make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} $GPU_OFF \
+    INSTALL_LIB=$INSTALLROOT/lib \
+    INSTALL_INCLUDE=$INSTALLROOT/include \
+    BLAS=-lopenblas LAPACK=-lopenblas
 }
 function MakeInstall() { true; }
