@@ -1,9 +1,10 @@
 package: VecGeom
 description: Vectorized geometry library for particle-transport simulations
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/VecGeom-vHEAD.tar.gz
+version: "master"
+tag: "master"
+source: https://gitlab.cern.ch/VecGeom/VecGeom.git
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/VecGeom-vHEAD.tar.gz
 requires:
   - CMake
   - Vc
