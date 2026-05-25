@@ -5,6 +5,7 @@ tag: "4.02.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v4.02.tar.gz
 requires:
+  - apfel
   - lhapdf
 build_requires:
   - bits-recipe-tools
@@ -25,8 +26,8 @@ function Make() {
   mkdir -p bin
   make ${JOBS:+-j $JOBS} \
     LHAPDFLIB="${LHAPDF_ROOT}/lib" \
-    APFELLIB="${LHAPDF_ROOT}/lib" \
-    LIBFLAGapfel="" \
+    APFELLIB="${APFEL_ROOT}/lib" \
+    LIBFLAGapfel="-lAPFEL -lAPFELevol" \
     ${FC:+FC="$FC"}
 }
 function MakeInstall() {

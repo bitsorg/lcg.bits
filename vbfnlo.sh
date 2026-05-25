@@ -20,6 +20,12 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Make() {
+  # Skip the doc subdirectory — it requires LaTeX and is not needed at runtime.
+  make ${JOBS:+-j $JOBS} -C src
+  make ${JOBS:+-j $JOBS} -C utilities
+  make install
+}
 function Configure() {
   # Touch the generated header so configure does not fail if it is missing
   cmake -E touch utilities/VBFNLOConfig.h.in 2>/dev/null || \
