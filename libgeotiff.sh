@@ -29,5 +29,6 @@ function Configure() {
     -DWITH_TIFF=ON \
     -DTIFF_DIR="${TIFF_ROOT}" \
     -DPROJ_DIR="${PROJ_ROOT}" \
-    ${PROJ_ROOT:+-DPROJ_INCLUDE_DIR="${PROJ_ROOT}/include"}
+    ${PROJ_ROOT:+-DPROJ_INCLUDE_DIR="${PROJ_ROOT}/include"} \
+    ${PROJ_ROOT:+-DCMAKE_C_FLAGS="-I${PROJ_ROOT}/include"}
 }
