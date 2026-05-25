@@ -18,3 +18,9 @@ license: LGPL-2.1-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  [ -f autogen.sh ] && ./autogen.sh
+  ./configure --prefix="${INSTALLROOT}" \
+    ${GMP_ROOT:+--with-gmp="${GMP_ROOT}"} \
+    ${MPFR_ROOT:+--with-mpfr="${MPFR_ROOT}"}
+}

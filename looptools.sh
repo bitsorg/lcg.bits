@@ -26,9 +26,10 @@ function Configure() {
 }
 
 function Make() {
-  # configure hardcodes XFC in the generated makefile and ignores FFLAGS;
-  # inject -fallow-argument-mismatch directly into the XFC definition.
-  sed -i 's/\(XFC="[^"]*\)"/\1 -fallow-argument-mismatch"/' makefile
+  # configure hardcodes XFC/XCC in the generated makefile and ignores
+  # FFLAGS/CFLAGS, so inject all required flags directly into those definitions.
+  sed -i 's/\(XFC="[^"]*\)"/\1 -fallow-argument-mismatch -fPIC"/' makefile
+  sed -i 's/\(XCC="[^"]*\)"/\1 -fPIC"/' makefile
   make ${JOBS:+-j $JOBS}
 }
 function PostInstall() {
