@@ -29,7 +29,7 @@ function Make() {
   # anchor on the flag itself rather than the variable assignment.
   find . -name "*.mk" -print0 | xargs -0 sed -i 's/ *-DGPU_BLAS//g'
   local _inc="${MPFR_ROOT:+-I${MPFR_ROOT}/include} ${GMP_ROOT:+-I${GMP_ROOT}/include}"
-  local _libs="${MPFR_ROOT:+-L${MPFR_ROOT}/lib} ${GMP_ROOT:+-L${GMP_ROOT}/lib}"
+  local _libs="-L${INSTALLROOT}/lib ${MPFR_ROOT:+-L${MPFR_ROOT}/lib} ${GMP_ROOT:+-L${GMP_ROOT}/lib}"
   local _blas="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas"
   make ${JOBS:+-j $JOBS} ${CC:+CC=$CC} ${_inc:+CFLAGS="$_inc"} ${_libs:+LDFLAGS="$_libs"}
   make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} ${_inc:+CFLAGS="$_inc"} ${_libs:+LDFLAGS="$_libs"} \
