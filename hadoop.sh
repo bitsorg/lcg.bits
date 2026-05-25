@@ -21,6 +21,7 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() { :; }
 function Make() {
   mvn package -Pdist,native -DskipTests -Dmaven.javadoc.skip=true
   mvn -f hadoop-client-modules/hadoop-client/pom.xml install -Dgpg.skip=true dependency:copy-dependencies
@@ -28,3 +29,4 @@ function Make() {
   && cmake -E copy_directory hadoop-client-modules/hadoop-client/target/hadoop-client-3.3.6 $INSTALLROOT \
   && chmod -R go+r $INSTALLROOT/share
 }
+function MakeInstall() { :; }
