@@ -3,7 +3,7 @@ description: SuperChic Monte Carlo generator for central exclusive processes
 version: "4.02.2"
 tag: "4.02.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v4.02.2.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v4.02.tar.gz
 requires:
   - CMake
   - lhapdf
