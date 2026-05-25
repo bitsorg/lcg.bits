@@ -35,3 +35,8 @@ function Configure() {
     -DVECGEOM_NAVTUPLE_MAXDEPTH=4 \
     -DVECGEOM_USE_SURF=ON
 }
+function Make() {
+  # Build only library targets; GDML test executables share names with their
+  # source subdirectories, so the linker fails with "Is a directory" on GCC 15.
+  cmake --build . --target vecgeom --target vgdml ${JOBS:+-- -j$JOBS}
+}
