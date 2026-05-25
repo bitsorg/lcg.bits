@@ -22,12 +22,15 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # GPU_BLAS_OPTION= disables CUDA/GPU support in CHOLMOD; the GPU source in
-  # 5.10.1 has typos (addUpateOnDevice, wrong cudaStream_t pointer level) that
-  # cause compilation errors when CUDA headers are present on the build host.
-  local GPU_OFF="GPU_BLAS_OPTION="
-  make ${JOBS:+-j $JOBS} ${CC:+CC=$CC} $GPU_OFF
-  make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} $GPU_OFF \
+  # Disable GPU/CUDA support in CHOLMOD: SuiteSparse 5.10.1 GPU source has
+  # typos (addUpateOnDevice) and a wrong cudaStream_t pointer level that cause
+  # compilation errors whenever CUDA headers are present on the build host.
+  # GPU_BLAS_OPTION is defined in SuiteSparse_config.mk and read by recursive
+  # sub-makes, so patching the file here is the only reliable way to disable it.
+  sed -i 's/^GPU_BLAS_OPTION *=.*/GPU_BLAS_OPTION =/' \
+    SuiteSparse_config/SuiteSparse_config.mk
+  make ${JOBS:+-j $JOBS} ${CC:+CC=$CC}
+  make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} \
     INSTALL_LIB=$INSTALLROOT/lib \
     INSTALL_INCLUDE=$INSTALLROOT/include \
     BLAS=-lopenblas LAPACK=-lopenblas

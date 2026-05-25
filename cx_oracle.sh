@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cx_Oracle-8.3.0.tar.gz
 requires:
   - Python
+  - setuptools
   - oracle
 build_requires:
   - bits-recipe-tools
