@@ -21,17 +21,16 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() { :; }
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
-  # Remove C++17-incompatible explicit template args from DynArray constructor
-  # (tinyxml2.h has CRLF line endings, so avoid patch files; sed matches fine)
+  # Remove C++17-incompatible explicit template args from DynArray constructor.
+  # tinyxml2.h has CRLF line endings so we use sed rather than a patch file.
+  # NOTE: src/Makefile already ships with the LHAPDF_HOME/Boost/fPIE fixes
+  # applied in the tarball; do NOT re-apply them or the paths double up.
   sed -i 's/DynArray< T, INIT >()/DynArray()/g' include/tinyxml2.h
-  # Point lhapdf-config via LHAPDF_HOME, add Boost include, pass CXXFLAGS,
-  # add Boost lib path, and add -fPIE for Fortran objects
-  sed -i 's/-DDROP_CGAL/-DDROP_CGAL $(CXXFLAGS)/' src/Makefile
-  sed -i 's|lhapdf-config --incdir|$(LHAPDF_HOME)/bin/lhapdf-config --incdir) -I$(BOOST_INCLUDE|' src/Makefile
-  sed -i 's|lhapdf-config --ldflags)|lhapdf-config --ldflags) -L$(BOOST_HOME)/lib|' src/Makefile
-  sed -i 's|gfortran -c alfas_functions|gfortran -fPIE -c alfas_functions|' src/Makefile
 }
 function Make() {
+  # LIBS in src/Makefile uses bare 'lhapdf-config --ldflags'; ensure it is
+  # findable without requiring the LHAPDF module to be loaded on the build host.
+  export PATH="${LHAPDF_ROOT:+$LHAPDF_ROOT/bin:}$PATH"
   make -C src ${JOBS:+-j $JOBS} all \
     LHAPDF_HOME=${LHAPDF_ROOT} \
     BOOST_INCLUDE=${Boost_home_include} \
