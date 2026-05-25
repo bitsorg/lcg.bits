@@ -12,7 +12,6 @@ requires:
   - go.uuid
   - go_liner
   - go_runewidth
-  - go_zmq4
   - gomacro
 build_requires:
   - bits-recipe-tools
@@ -25,6 +24,7 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() { :; }
 function Make() {
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/gopherdata/gophernotes
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/gopherdata/gophernotes
