@@ -25,10 +25,9 @@ function Make() {
   # Disable GPU/CUDA support in CHOLMOD: SuiteSparse 5.10.1 GPU source has
   # typos (addUpateOnDevice) and a wrong cudaStream_t pointer level that cause
   # compilation errors whenever CUDA headers are present on the build host.
-  # GPU_BLAS_OPTION is defined in SuiteSparse_config.mk and read by recursive
-  # sub-makes, so patching the file here is the only reliable way to disable it.
-  sed -i 's/^GPU_BLAS_OPTION *=.*/GPU_BLAS_OPTION =/' \
-    SuiteSparse_config/SuiteSparse_config.mk
+  # GPU_BLAS_OPTION may be set inside ifeq blocks with leading whitespace, so
+  # anchor on the flag itself rather than the variable assignment.
+  find . -name "*.mk" -print0 | xargs -0 sed -i 's/ *-DGPU_BLAS//g'
   make ${JOBS:+-j $JOBS} ${CC:+CC=$CC}
   make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} \
     INSTALL_LIB=$INSTALLROOT/lib \
