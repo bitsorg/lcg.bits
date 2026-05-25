@@ -26,3 +26,4 @@ function Make() {
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/cosmos72/gomacro/
   cmake -E chdir $INSTALLROOT/src/github.com/cosmos72/gomacro/ go install
 }
+function MakeInstall() { :; }

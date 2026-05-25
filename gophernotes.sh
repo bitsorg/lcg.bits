@@ -30,3 +30,4 @@ function Make() {
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/gopherdata/gophernotes
   cmake -E chdir $INSTALLROOT/src/github.com/gopherdata/gophernotes go install
 }
+function MakeInstall() { :; }

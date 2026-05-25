@@ -25,3 +25,4 @@ function Make() {
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/chzyer/readline/
   cmake -E chdir $INSTALLROOT/src/github.com/chzyer/readline/ go install
 }
+function MakeInstall() { :; }
