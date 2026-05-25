@@ -5,6 +5,7 @@ tag: "1.1.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TAUOLA.1.1.6-LHC.tar.gz
 requires:
+  - hepmc
   - lhapdf
 build_requires:
   - bits-recipe-tools
@@ -18,5 +19,9 @@ license: LicenseRef-TAUOLA++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-pic --with-tau-spinner --with-lhapdf=${LHAPDF_ROOT}
+  ./configure --prefix=$INSTALLROOT \
+    --with-pic \
+    --with-tau-spinner \
+    ${HEPMC_ROOT:+--with-hepmc="${HEPMC_ROOT}"} \
+    ${LHAPDF_ROOT:+--with-lhapdf="${LHAPDF_ROOT}"}
 }
