@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Pillow-11.2.1.tar.gz
 requires:
   - Python
+  - jpeg
   - freetype
   - zlib
   - libffi
@@ -16,8 +17,8 @@ build_requires:
 license: HPND
 ---
 #!/bin/bash -e
-export CFLAGS="-I${ZLIB_ROOT}/include ${CFLAGS:-}"
-export LDFLAGS="-L${ZLIB_ROOT}/lib ${LDFLAGS:-}"
+export CFLAGS="-I${ZLIB_ROOT}/include ${JPEG_ROOT:+-I${JPEG_ROOT}/include} ${CFLAGS:-}"
+export LDFLAGS="-L${ZLIB_ROOT}/lib ${JPEG_ROOT:+-L${JPEG_ROOT}/lib} ${LDFLAGS:-}"
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
