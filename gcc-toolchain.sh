@@ -14,6 +14,7 @@ prefer_system_check: |
   which make || { echo "make missing"; exit 1; }
   which gfortran || { echo "gfortran missing"; exit 1; }
   case $REQUESTED_VERSION in
+    v15*) MIN_GCC_VERSION=150200 ;;
     v14*) MIN_GCC_VERSION=140200 ;;
     v13*) MIN_GCC_VERSION=130200 ;;
     v12*) MIN_GCC_VERSION=120100 ;;

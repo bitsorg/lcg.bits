@@ -15,5 +15,6 @@ license: Apache-2.0
 ##############################
 . $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="arrow"
 MODULE_OPTIONS="--bin --python"
 ##############################

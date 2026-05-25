@@ -15,5 +15,5 @@ license: LGPL-3.0-or-later
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --include --pkgconfig"
 ##############################

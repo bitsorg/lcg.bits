@@ -5,7 +5,7 @@ tag: "1.1.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TAUOLA.1.1.6-LHC.tar.gz
 requires:
-  - hepmc
+  - HepMC
   - lhapdf
 build_requires:
   - bits-recipe-tools
