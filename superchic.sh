@@ -5,26 +5,32 @@ tag: "4.02.2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v4.02.tar.gz
 requires:
-  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-SuperChic
-patches:
-  - superchic-4.02.2.patch
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Configure() {
-  cmake "${SOURCEDIR}" \
-      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
-      -DCMAKE_BUILD_TYPE=Release \
-    -DLHAPDF_DIR="${LHAPDF_ROOT}" \
-    -DSUPERCHIC_ENABLE_TESTS=OFF
+function Make() {
+  # superchic v4 uses a plain Fortran makefile with hardcoded LHAPDFLIB and
+  # optional APFEL paths.  Override both; clear APFEL link flags since apfel
+  # is not a required dependency.  Setting APFELLIB to LHAPDF_ROOT/lib avoids
+  # a bare -L flag in the link command when the variable is empty.
+  mkdir -p bin
+  make ${JOBS:+-j $JOBS} \
+    LHAPDFLIB="${LHAPDF_ROOT}/lib" \
+    APFELLIB="${LHAPDF_ROOT}/lib" \
+    LIBFLAGapfel="" \
+    ${FC:+FC="$FC"}
+}
+function MakeInstall() {
+  install -d "$INSTALLROOT/bin" "$INSTALLROOT/lib"
+  install -m 755 bin/init bin/superchic "$INSTALLROOT/bin/"
+  install -m 644 lib/libsuperchic.so lib/libsuperchic.a "$INSTALLROOT/lib/"
 }
