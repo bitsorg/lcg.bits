@@ -26,22 +26,16 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   # configure uses pkg-config to locate glib-2.0, freetype2, cairo, etc.
-  # All non-system dep lib dirs must be in PKG_CONFIG_PATH (so pkg-config
-  # finds them) and LD_LIBRARY_PATH (so the configure compile-and-link tests
-  # can actually run the produced binaries against the shared libs).
-  export PKG_CONFIG_PATH="\
-${GLIB_ROOT:+${GLIB_ROOT}/lib/pkgconfig}\
-${FREETYPE_ROOT:+:${FREETYPE_ROOT}/lib/pkgconfig}\
-${CAIRO_ROOT:+:${CAIRO_ROOT}/lib/pkgconfig}\
-${LIBFFI_ROOT:+:${LIBFFI_ROOT}/lib/pkgconfig}\
-${GETTEXT_ROOT:+:${GETTEXT_ROOT}/lib/pkgconfig}\
-${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
-  export LD_LIBRARY_PATH="\
-${GLIB_ROOT:+${GLIB_ROOT}/lib}\
-${FREETYPE_ROOT:+:${FREETYPE_ROOT}/lib}\
-${CAIRO_ROOT:+:${CAIRO_ROOT}/lib}\
-${LIBFFI_ROOT:+:${LIBFFI_ROOT}/lib}\
-${GETTEXT_ROOT:+:${GETTEXT_ROOT}/lib}\
-${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+  # Collect PKG_CONFIG_PATH and LD_LIBRARY_PATH from every *_ROOT so that
+  # transitive deps (pixman, fontconfig, pcre2, …) are also reachable — both
+  # for pkg-config .pc resolution and for the configure link-test binaries.
+  for _hb_root_var in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1 | sort -u); do
+    _hb_root="${!_hb_root_var}"
+    [ -d "${_hb_root}/lib/pkgconfig" ] && \
+      export PKG_CONFIG_PATH="${_hb_root}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+    [ -d "${_hb_root}/lib" ] && \
+      export LD_LIBRARY_PATH="${_hb_root}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+  done
+  export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}/usr/share/pkgconfig"
   ./configure --prefix="${INSTALLROOT}" --with-cairo --with-freetype --with-glib
 }
