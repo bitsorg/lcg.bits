@@ -3,7 +3,7 @@ description: HepMCAnalysis generator-level analysis tools using HepMC
 version: "3.4.14"
 tag: "3.4.14"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/HepMCAnalysis-3.4.14.tgz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/HepMCAnalysis-00-03-04-14.tgz
 requires:
   - CMake
   - HepMC
