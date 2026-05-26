@@ -1,8 +1,9 @@
 package: Gaudi
 description: Gaudi software framework for HEP data processing applications
-version: "%(tag_basename)s"
+version: "v40r2"
 tag: "v40r2"
-source: https://gitlab.cern.ch/gaudi/Gaudi.git
+sources:
+  - https://gitlab.cern.ch/gaudi/Gaudi/-/archive/%(tag)s/Gaudi-%(tag)s.tar.gz
 license: Apache-2.0
 requires:
   - CMake
