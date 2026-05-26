@@ -3,7 +3,7 @@ description: GNU Readline command-line editing and history library
 version: "8.3"
 tag: "8.3"
 sources:
-  - ftp://ftp.cwru.edu/pub/bash/%(name)s-%(version)s.tar.gz
+  - https://ftp.gnu.org/gnu/%(name)s/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -15,3 +15,7 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  [ -f autogen.sh ] && ./autogen.sh
+  ./configure --prefix="$INSTALLROOT" --enable-shared 
+}
