@@ -1,9 +1,9 @@
 package: absl
 description: Abseil common C++ library collection (Google)
-version: "20240116.0"
-tag: "20240116.0"
+version: "20240722.1"
+tag: "20240722.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/abseil-cpp-20240116.0.tar.gz
+  - https://github.com/abseil/abseil-cpp/archive/refs/tags/%(version)s.tar.gz
 requires:
   - CMake
 build_requires:

@@ -23,6 +23,7 @@ requires:
   - gl2ps
   - jsonmcpp
   - jsoncpp
+  - Qt5
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
