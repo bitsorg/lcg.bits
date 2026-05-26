@@ -5,7 +5,6 @@ tag: "20.12.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kcachegrind-20.12.1.tar.gz
 requires:
-  - CMake
   - Qt5
   - valgrind
 build_requires:
@@ -15,14 +14,18 @@ license: GPL-2.0-only
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include MakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin"
 ##############################
 function Make() {
-  "${Qt5_ROOT}/bin/qmake"
+  # The kcachegrind tarball contains both kcachegrind (needs KDE ECM) and
+  # qcachegrind (plain Qt5 qmake build).  Build only the qcachegrind subdir.
+  cd qcachegrind
+  "${Qt5_ROOT}/bin/qmake" PREFIX="${INSTALLROOT}"
   make ${JOBS:+-j $JOBS}
-  make ${JOBS:+-j $JOBS} \
-  && cmake -E make_directory $INSTALLROOT/bin
-cmake
+}
+function MakeInstall() {
+  install -d "${INSTALLROOT}/bin"
+  install -m 755 qcachegrind/qcachegrind "${INSTALLROOT}/bin/qcachegrind"
 }
