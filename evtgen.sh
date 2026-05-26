@@ -3,7 +3,7 @@ description: EvtGen Monte Carlo generator for B/D meson decays
 version: "1.7.0"
 tag: "1.7.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-<evtgen_1.7.0_tag>.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-R01-07-00.tar.gz
 requires:
   - CMake
   - pythia8
@@ -28,11 +28,11 @@ function Configure() {
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DEVTGEN_PHOTOS=ON \
-    -DPHOTOSPP_ROOT_DIR="${photos++_home}" \
+    ${PHOTOSCPP_ROOT:+-DPHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}"} \
     -DEVTGEN_PYTHIA=ON \
-    -DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}" \
+    ${PYTHIA8_ROOT:+-DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}"} \
     -DEVTGEN_TAUOLA=ON \
-    -DTAUOLAPP_ROOT_DIR="${tauola++_home}"
+    ${TAUOLACPP_ROOT:+-DTAUOLAPP_ROOT_DIR="${TAUOLACPP_ROOT}"}
 }
 function Make() {
   cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} FLIBS=${FORTRAN_LIBRARY}
