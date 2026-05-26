@@ -23,3 +23,10 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  ./configure --prefix="${INSTALLROOT}" \
+    ${GMP_ROOT:+--with-gmp="${GMP_ROOT}"} \
+    ${MPFR_ROOT:+--with-mpfr="${MPFR_ROOT}"} \
+    ${MPFI_ROOT:+--with-mpfi="${MPFI_ROOT}"} \
+    ${FPLLL_ROOT:+--with-fplll="${FPLLL_ROOT}"}
+}

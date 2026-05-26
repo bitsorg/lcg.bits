@@ -3,7 +3,7 @@ description: MadGraph5_aMC@NLO automated leading and next-to-leading order gener
 version: "3.3.1.atlas1"
 tag: "3.3.1.atlas1"
 sources:
-  - https://launchpad.net/mg5amcnlo/2.0/2.1.0/+download/MG5_aMC_v3.3.1.atlas1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MG5_aMC_v3.3.1.tar.gz
 requires:
   - Python
   - syscalc
