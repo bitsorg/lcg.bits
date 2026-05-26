@@ -8,6 +8,7 @@ requires:
   - CMake
   - cmaketools
   - ROOT
+  - clhep
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
