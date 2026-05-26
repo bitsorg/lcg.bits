@@ -22,7 +22,7 @@ function Make() {
   # The kcachegrind tarball contains both kcachegrind (needs KDE ECM) and
   # qcachegrind (plain Qt5 qmake build).  Build only the qcachegrind subdir.
   cd qcachegrind
-  "${Qt5_ROOT}/bin/qmake" PREFIX="${INSTALLROOT}"
+  "${QT5_ROOT}/bin/qmake" PREFIX="${INSTALLROOT}"
   make ${JOBS:+-j $JOBS}
 }
 function MakeInstall() {

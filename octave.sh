@@ -29,7 +29,7 @@ function Configure() {
 ${READLINE_ROOT:+ -I${READLINE_ROOT}/include}\
 ${FFTW_ROOT:+ -I${FFTW_ROOT}/include}\
 ${PCRE2_ROOT:+ -I${PCRE2_ROOT}/include}\
-${Qt5_ROOT:+ -I${Qt5_ROOT}/include}"
+${QT5_ROOT:+ -I${QT5_ROOT}/include}"
   local _ldflags="${BLAS_ROOT:+-L${BLAS_ROOT}/lib}\
 ${READLINE_ROOT:+ -L${READLINE_ROOT}/lib}\
 ${FFTW_ROOT:+ -L${FFTW_ROOT}/lib}\
