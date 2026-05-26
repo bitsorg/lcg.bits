@@ -13,10 +13,19 @@ build_requires:
 license: LGPL-2.1-only OR MPL-1.1
 ---
 #!/bin/bash -e
-export PKG_CONFIG_PATH="/usr/share/pkgconfig:${PKG_CONFIG_PATH:-}"
-[ "$(uname -s)" = "Darwin" ] && export CPPFLAGS="-I/opt/X11/include ${CPPFLAGS:-}"
 ##############################
 . $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+function Prepare() {
+  # pycairo uses meson as its build backend; meson calls pkg-config to find
+  # cairo.  Expose CAIRO_ROOT's pkg-config, headers and libs so pip's isolated
+  # build environment can locate them.
+  export PKG_CONFIG_PATH="\
+${CAIRO_ROOT:+${CAIRO_ROOT}/lib/pkgconfig}\
+${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}:/usr/share/pkgconfig"
+  export C_INCLUDE_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/include}${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}"
+  export LIBRARY_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
+  [ "$(uname -s)" = "Darwin" ] && export CPPFLAGS="-I/opt/X11/include ${CPPFLAGS:-}"
+}
