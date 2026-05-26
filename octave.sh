@@ -24,6 +24,16 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # configure runs dynamic-linker tests; readline.so needs ncurses symbols at
+  # runtime (UP etc.), so all dep lib dirs must be in LD_LIBRARY_PATH.
+  export LD_LIBRARY_PATH="\
+${NCURSES_ROOT:+${NCURSES_ROOT}/lib}\
+${READLINE_ROOT:+:${READLINE_ROOT}/lib}\
+${BLAS_ROOT:+:${BLAS_ROOT}/lib}\
+${FFTW_ROOT:+:${FFTW_ROOT}/lib}\
+${PCRE2_ROOT:+:${PCRE2_ROOT}/lib}\
+${QT5_ROOT:+:${QT5_ROOT}/lib}\
+${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
   # Let pkg-config find pcre2-8, fftw3, readline, etc. from non-system deps.
   export PKG_CONFIG_PATH="\
 ${PCRE2_ROOT:+${PCRE2_ROOT}/lib/pkgconfig}\

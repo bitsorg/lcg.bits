@@ -23,6 +23,10 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # The evtgen-1.7.0.patch removes the CXX=g++ default so that the configure
+  # script honours the caller's CXX.  Ensure it is set before we call it.
+  export CXX="${CXX:-g++}"
+  export FC="${FC:-gfortran}"
   ./configure \
     --prefix="${INSTALLROOT}" \
     ${HEPMC_ROOT:+--hepmcdir="${HEPMC_ROOT}"} \
