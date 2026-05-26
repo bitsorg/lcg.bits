@@ -23,5 +23,14 @@ license: MIT
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-cairo --with-freetype --with-glib
+  # configure uses pkg-config to locate glib-2.0, freetype2, cairo, etc.
+  # All non-system deps must be on PKG_CONFIG_PATH so the checks pass.
+  export PKG_CONFIG_PATH="\
+${GLIB_ROOT:+${GLIB_ROOT}/lib/pkgconfig}\
+${FREETYPE_ROOT:+:${FREETYPE_ROOT}/lib/pkgconfig}\
+${CAIRO_ROOT:+:${CAIRO_ROOT}/lib/pkgconfig}\
+${LIBFFI_ROOT:+:${LIBFFI_ROOT}/lib/pkgconfig}\
+${GETTEXT_ROOT:+:${GETTEXT_ROOT}/lib/pkgconfig}\
+${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+  ./configure --prefix="${INSTALLROOT}" --with-cairo --with-freetype --with-glib
 }
