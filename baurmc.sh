@@ -36,7 +36,9 @@ function Make() {
   # does not use a standard FFLAGS variable; anchor the injection on
   # -fno-automatic (set via --userfflags in Configure) which we know
   # appears in the compile command regardless of the variable name used.
+  # configure writes the final FFLAGS value to config.mk (not Makefile).
+  # Patch all files that may carry -fno-automatic.
   sed -i 's/-fno-automatic/-fno-automatic -fallow-argument-mismatch/g' \
-    Makefile Makeshared.subdir Makearchive.subdir 2>/dev/null || true
+    config.mk Makefile Makeshared.subdir Makearchive.subdir 2>/dev/null || true
   make ${JOBS:+-j $JOBS}
 }
