@@ -31,8 +31,12 @@ function Configure() {
   # for pkg-config .pc resolution and for the configure link-test binaries.
   for _hb_root_var in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1 | sort -u); do
     _hb_root="${!_hb_root_var}"
-    [ -d "${_hb_root}/lib/pkgconfig" ] && \
-      export PKG_CONFIG_PATH="${_hb_root}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+    # Check lib/pkgconfig and multiarch variants (e.g. lib/x86_64-linux-gnu/pkgconfig)
+    for _hb_pc_dir in "${_hb_root}/lib/pkgconfig" "${_hb_root}/share/pkgconfig" \
+                      "${_hb_root}"/lib/*/pkgconfig; do
+      [ -d "${_hb_pc_dir}" ] && \
+        export PKG_CONFIG_PATH="${_hb_pc_dir}${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+    done
     [ -d "${_hb_root}/lib" ] && \
       export LD_LIBRARY_PATH="${_hb_root}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
   done

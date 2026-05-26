@@ -19,9 +19,13 @@ license: LGPL-2.1-only OR MPL-1.1
 # be resolved by pkg-config even before those deps have been rebuilt with
 # an updated init.sh.  The same pattern is used by PythonRecipe for PYTHONPATH.
 for _pc_root_var in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1 | sort -u); do
-  _pc_dir="${!_pc_root_var}/lib/pkgconfig"
-  [ -d "${_pc_dir}" ] || continue
-  export PKG_CONFIG_PATH="${_pc_dir}${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+  _pc_root="${!_pc_root_var}"
+  # Check lib/pkgconfig, share/pkgconfig, and multiarch variants (e.g. lib/x86_64-linux-gnu/pkgconfig)
+  for _pc_dir in "${_pc_root}/lib/pkgconfig" "${_pc_root}/share/pkgconfig" \
+                 "${_pc_root}"/lib/*/pkgconfig; do
+    [ -d "${_pc_dir}" ] || continue
+    export PKG_CONFIG_PATH="${_pc_dir}${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+  done
 done
 export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}/usr/share/pkgconfig"
 export C_INCLUDE_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/include}${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}"
