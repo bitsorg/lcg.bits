@@ -10,10 +10,12 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Libpng
+prepend_path:
+  PKG_CONFIG_PATH: "$PNG_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################

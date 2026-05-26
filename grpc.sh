@@ -25,6 +25,8 @@ build_requires:
 license: Apache-2.0
 #patches:
 #  - grpc-1.62.3.patch
+prepend_path:
+  PKG_CONFIG_PATH: "$GRPC_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

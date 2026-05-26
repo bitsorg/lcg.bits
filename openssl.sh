@@ -26,6 +26,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+prepend_path:
+  PKG_CONFIG_PATH: "$OPENSSL_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

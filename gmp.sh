@@ -10,12 +10,14 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-or-later OR LGPL-3.0-or-later
+prepend_path:
+  PKG_CONFIG_PATH: "$GMP_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   # C23 compatibility fix (gcc 15+: void g(){} is no longer valid)

@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: FTL OR GPL-2.0-or-later
+prepend_path:
+  PKG_CONFIG_PATH: "$FREETYPE_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

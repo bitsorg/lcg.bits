@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
+prepend_path:
+  PKG_CONFIG_PATH: "$PANGO_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

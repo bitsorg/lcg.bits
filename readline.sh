@@ -8,12 +8,14 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
+prepend_path:
+  PKG_CONFIG_PATH: "$READLINE_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   [ -f autogen.sh ] && ./autogen.sh

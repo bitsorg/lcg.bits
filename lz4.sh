@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
+prepend_path:
+  PKG_CONFIG_PATH: "$LZ4_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################
