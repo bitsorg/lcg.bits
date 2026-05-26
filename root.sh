@@ -63,7 +63,10 @@ function Configure() {
   ROOT_TESTING=${ROOT_TESTING:-OFF}
 
   # Detect C++ standard from environment before unsetting flags
-  CMAKE_CXX_STANDARD=17
+  # Default to C++20: podio and other modern packages require it.
+  # Still honour any explicit -std=c++NN in CXXFLAGS so stacks that
+  # deliberately pin an older standard are not silently upgraded.
+  CMAKE_CXX_STANDARD=20
   [[ "$CXXFLAGS" == *'-std=c++11'* ]] && CMAKE_CXX_STANDARD=11 || true
   [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14 || true
   [[ "$CXXFLAGS" == *'-std=c++17'* ]] && CMAKE_CXX_STANDARD=17 || true
