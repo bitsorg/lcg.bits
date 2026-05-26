@@ -4,6 +4,10 @@ version: "1.17.1"
 tag: "1.17.1"
 requires:
   - Python
+  - numpy
+  - pybind11
+  - pythran
+  - meson_python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -5,6 +5,7 @@ tag: "7c3ca4e"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
+  - CMake
   - go
   - pkg_config
   - zeromq

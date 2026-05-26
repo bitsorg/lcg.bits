@@ -4,7 +4,12 @@ version: "0.1.10"
 tag: "0.1.10"
 requires:
   - Python
-
+  - six
+  - absl_py
+  - attrs
+  - numpy
+  - wrapt
+build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0

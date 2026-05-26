@@ -4,6 +4,14 @@ version: "0.2.7"
 tag: "0.2.7"
 requires:
   - Python
+  - arrow
+  - cloudpickle
+  - networkx
+  - numpy
+  - py4j
+  - scipy
+  - six
+  - tqdm
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
