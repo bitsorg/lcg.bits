@@ -1,9 +1,9 @@
 package: GarfieldCPP
 description: Garfield++ toolkit for detailed simulation of gaseous particle detectors
-version: "HEAD"
-tag: "HEAD"
+version: "78fe1bd3"
+tag: "78fe1bd3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/garfieldpp-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/garfieldpp-%(version)s.tar.gz
 requires:
   - ROOT
   - Geant4
