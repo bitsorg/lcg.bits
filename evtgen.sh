@@ -5,7 +5,7 @@ tag: "1.7.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-R01-07-00.tar.gz
 requires:
-  - CMake
+  - HepMC
   - pythia8
   - photoscpp
   - tauolacpp
@@ -18,22 +18,15 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+. $(bits-include AutoToolsRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake "${SOURCEDIR}" \
-      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
-      -DCMAKE_BUILD_TYPE=Release \
-    -DEVTGEN_PHOTOS=ON \
-    ${PHOTOSCPP_ROOT:+-DPHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}"} \
-    -DEVTGEN_PYTHIA=ON \
-    ${PYTHIA8_ROOT:+-DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}"} \
-    -DEVTGEN_TAUOLA=ON \
-    ${TAUOLACPP_ROOT:+-DTAUOLAPP_ROOT_DIR="${TAUOLACPP_ROOT}"}
-}
-function Make() {
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} FLIBS=${FORTRAN_LIBRARY}
+  ./configure \
+    --prefix="${INSTALLROOT}" \
+    ${HEPMC_ROOT:+--hepmcdir="${HEPMC_ROOT}"} \
+    ${PYTHIA8_ROOT:+--pythiadir="${PYTHIA8_ROOT}"} \
+    ${PHOTOSCPP_ROOT:+--photosdir="${PHOTOSCPP_ROOT}"} \
+    ${TAUOLACPP_ROOT:+--tauoladir="${TAUOLACPP_ROOT}"}
 }
