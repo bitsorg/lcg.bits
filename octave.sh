@@ -24,6 +24,13 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # Let pkg-config find pcre2-8, fftw3, readline, etc. from non-system deps.
+  export PKG_CONFIG_PATH="\
+${PCRE2_ROOT:+${PCRE2_ROOT}/lib/pkgconfig}\
+${FFTW_ROOT:+:${FFTW_ROOT}/lib/pkgconfig}\
+${READLINE_ROOT:+:${READLINE_ROOT}/lib/pkgconfig}\
+${BLAS_ROOT:+:${BLAS_ROOT}/lib/pkgconfig}\
+${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
   # Collect include/library paths for all non-system deps.
   local _cppflags="${BLAS_ROOT:+-I${BLAS_ROOT}/include}\
 ${READLINE_ROOT:+ -I${READLINE_ROOT}/include}\
