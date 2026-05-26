@@ -1,7 +1,7 @@
 package: DD4hep
 description: Detector Description for HEP (generic detector description toolkit)
-version: "master"
-tag: "master"
+version: "v01-35"
+tag: "v01-35"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -17,8 +17,10 @@ function Prepare() {
   # The CERN mirror tarball is double-gzipped: the outer .tar.gz decompresses
   # to an inner gzip-compressed .tar (not a plain tar), so bits' standard
   # tar xf fails.  Download and unpack both layers manually.
+  # Note: %(version)s interpolation only works in YAML sources: fields;
+  # hardcode the version here as is done in other manual-fetch recipes.
   curl -fSL \
-    "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/chaplin-%(version)s.tar.gz" \
+    "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/chaplin-1.2.tar.gz" \
     -o chaplin.tar.gz
   gunzip chaplin.tar.gz          # outer layer → chaplin.tar (still gzip-compressed)
   mv chaplin.tar chaplin.tar.gz  # rename so tar -xzf can read the inner gzip layer
