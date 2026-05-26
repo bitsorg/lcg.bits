@@ -27,5 +27,5 @@ ${CAIRO_ROOT:+${CAIRO_ROOT}/lib/pkgconfig}\
 ${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}:/usr/share/pkgconfig"
   export C_INCLUDE_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/include}${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}"
   export LIBRARY_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
-  [ "$(uname -s)" = "Darwin" ] && export CPPFLAGS="-I/opt/X11/include ${CPPFLAGS:-}"
+  [ "$(uname -s)" = "Darwin" ] && export CPPFLAGS="-I/opt/X11/include ${CPPFLAGS:-}" || true
 }
