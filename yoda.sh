@@ -19,5 +19,10 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT CXXFLAGS=-Wno-register --with-boost=${Boost_ROOT}
+  # Pass PYTHON explicitly so configure doesn't try to find "python$PYTHON_VERSION"
+  # (e.g. python3.13.11) when PYTHON_VERSION is set to the full version string.
+  # YODA 1.9.0 does not use Boost; drop the unrecognised --with-boost option.
+  ./configure --prefix=$INSTALLROOT \
+    CXXFLAGS=-Wno-register \
+    PYTHON="${PYTHON_ROOT:+${PYTHON_ROOT}/bin/python3}"
 }

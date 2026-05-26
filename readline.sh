@@ -19,11 +19,11 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   [ -f autogen.sh ] && ./autogen.sh
-  # --with-curses forces readline to link against ncurses rather than the
-  # bare termcap interface.  Without it, the linker may drop the ncurses
-  # DT_NEEDED entry (--as-needed), leaving the terminfo globals (UP, BC, …)
-  # unresolved in the shared library.  Those undefined symbols then cause
-  # failures in unrelated programs (e.g. awk) that load libreadline.so via
-  # LD_LIBRARY_PATH.
-  ./configure --prefix="$INSTALLROOT" --enable-shared --with-curses
+  # --with-curses selects ncurses over the bare termcap interface.
+  # LIBS=-lncurses ensures ncurses appears in DT_NEEDED even when the
+  # linker uses --as-needed; without it the terminfo globals (UP, BC, …)
+  # are left unresolved in libreadline.so and crash unrelated programs
+  # (e.g. awk) that load readline via LD_LIBRARY_PATH.
+  ./configure --prefix="$INSTALLROOT" --enable-shared --with-curses \
+    LIBS=-lncurses
 }
