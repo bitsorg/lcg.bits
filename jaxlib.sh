@@ -1,15 +1,15 @@
 package: jaxlib
 description: jaxlib compiled XLA-based backend for JAX
-version: "${jax_native_version}"
-tag: "${jax_native_version}"
+version: 0.10.1
+tag: 0.10.1
 requires:
   - Python
-  - flatbuffers
-  - scipy
-  - numpy
-  - absl_py
-  - six
-  - ml_dtypes
+#  - flatbuffers
+#  - scipy
+#  - numpy
+#  - absl_py
+#  - six
+#  - ml_dtypes
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

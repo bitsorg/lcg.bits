@@ -44,5 +44,5 @@ function Configure() {
     ${RAPIDJSON_ROOT:+-DRapidJSON_ROOT="$RAPIDJSON_ROOT"} \
     ${LZ4_ROOT:+-DLZ4_ROOT="$LZ4_ROOT"} \
     ${SNAPPY_ROOT:+-DSnappy_ROOT="$SNAPPY_ROOT"} \
-    -DARROW_XSIMD_SOURCE=BUNDLED
+    -Dxsimd_SOURCE="BUNDLED"
 }

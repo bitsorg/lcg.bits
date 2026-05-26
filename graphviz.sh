@@ -10,8 +10,6 @@ requires:
   - fontconfig
   - png
   - gettext
-  # optional:
-  # - pango
 prefer_system: ".*"
 prefer_system_check:
 
