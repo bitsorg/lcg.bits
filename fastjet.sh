@@ -1,9 +1,9 @@
 package: fastjet
 description: FastJet package for jet finding in particle physics
-version: "3.5.1"
-tag: "3.5.1"
+version: "3.5.2"
+tag: "3.5.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+  - https://fastjet.fr/repo/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

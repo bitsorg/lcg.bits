@@ -41,3 +41,6 @@ function Make() {
   cmake -E copy_directory ./lib "${INSTALLROOT}/lib"
   cmake -E copy_directory ./include "${INSTALLROOT}/include"
 }
+function Install() {
+  : # no-op — Make() already copies lib/ and include/ to INSTALLROOT
+}
