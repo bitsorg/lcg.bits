@@ -34,3 +34,18 @@ function Configure() {
     ${PHOTOSCPP_ROOT:+--photosdir="${PHOTOSCPP_ROOT}"} \
     ${TAUOLACPP_ROOT:+--tauoladir="${TAUOLACPP_ROOT}"}
 }
+function Make() {
+  # Belt-and-suspenders: patch config.mk after configure in case CXX was still
+  # empty (configure's version detection can fail on GCC > 6).
+  sed -i "s|^CXX = .*|CXX = ${CXX:-g++}|" config.mk
+  # -lfrtbegin/-lg2c are GCC 2/3 relics; modern Fortran only needs -lgfortran.
+  sed -i 's|^FLIBS = .*|FLIBS = -lgfortran|' config.mk
+  # Run targets sequentially: all four share the same tmp/ object directory, so
+  # parallel top-level invocations cause races.  Pass JOBS to each sub-make.
+  make lib_shared    ${JOBS:+-j $JOBS}
+  make lib_archive   ${JOBS:+-j $JOBS}
+  if grep -q "^EVTGEN_EXTERNAL = 1" config.mk; then
+    make libext_shared  ${JOBS:+-j $JOBS}
+    make libext_archive ${JOBS:+-j $JOBS}
+  fi
+}
