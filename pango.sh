@@ -26,3 +26,15 @@ MODULE_OPTIONS="--lib --pkgconfig"
 MESON_WRAP_MODE="nofallback"
 MESON_EXTRA_OPTIONS="-Dintrospection=disabled"
 ##############################
+function Configure() {
+  # freetype is a system package (--disable=freetype); its .pc lives at a
+  # system path that bits does not include in PKG_CONFIG_PATH.  Inject the
+  # standard system pkg-config dirs so that fontconfig's "Requires: freetype2"
+  # resolves correctly when meson queries it.
+  export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig"
+  meson setup _build \
+    --prefix="${INSTALLROOT}" \
+    ${MESON_EXTRA_OPTIONS} \
+    --wrap-mode="${MESON_WRAP_MODE:-default}"
+}
+##############################
