@@ -14,20 +14,19 @@ build_requires:
 license: LGPL-2.1-only OR MPL-1.1
 ---
 #!/bin/bash -e
-# Collect PKG_CONFIG_PATH from every available *_ROOT variable so that
-# cairo.pc's transitive Requires (pixman-1, freetype2, fontconfig, …) can
-# be resolved by pkg-config even before those deps have been rebuilt with
-# an updated init.sh.  The same pattern is used by PythonRecipe for PYTHONPATH.
+# Collect PKG_CONFIG_PATH from every bits-managed *_ROOT so that cairo.pc's
+# transitive Requires: (pixman-1, fontconfig, …) can be resolved.  Module
+# prepend_path only adds directly required packages; indirect deps may be
+# missing.  The multiarch glob (lib/*/pkgconfig) also covers old builds that
+# landed at lib/x86_64-linux-gnu/pkgconfig before --libdir=lib was enforced.
 for _pc_root_var in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1 | sort -u); do
   _pc_root="${!_pc_root_var}"
-  # Check lib/pkgconfig, share/pkgconfig, and multiarch variants (e.g. lib/x86_64-linux-gnu/pkgconfig)
   for _pc_dir in "${_pc_root}/lib/pkgconfig" "${_pc_root}/share/pkgconfig" \
                  "${_pc_root}"/lib/*/pkgconfig; do
     [ -d "${_pc_dir}" ] || continue
     export PKG_CONFIG_PATH="${_pc_dir}${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
   done
 done
-export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}/usr/share/pkgconfig"
 export C_INCLUDE_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/include}${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}"
 export LIBRARY_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 [ "$(uname -s)" = "Darwin" ] && export CPPFLAGS="-I/opt/X11/include ${CPPFLAGS:-}" || true
