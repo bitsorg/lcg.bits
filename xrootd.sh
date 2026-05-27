@@ -12,7 +12,7 @@ requires:
   - curl
   - Davix
   - libzip
-  - readline
+# - readline
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -24,6 +24,8 @@ license: LGPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
+#    -DREADLINE_ROOT_DIR="${READLINE_ROOT}" \
+#    -DREADLINE_INCLUDE_DIR="${READLINE_ROOT}/include" \
 function Configure() {
   PKG_CONFIG_PATH="${LIBZIP_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}" \
   cmake "${SOURCEDIR}" \
@@ -31,12 +33,10 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
       ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+    -DENABLE_READLINE=FALSE \
     -DFORCE_ENABLED=ON \
     -DENABLE_FUSE=FALSE \
     -DENABLE_KRB5=TRUE \
-    -DENABLE_READLINE=TRUE \
-    -DREADLINE_ROOT_DIR="${READLINE_ROOT}" \
-    -DREADLINE_INCLUDE_DIR="${READLINE_ROOT}/include" \
     -DENABLE_PYTHON=TRUE \
     -DENABLE_VOMS=FALSE \
     -DENABLE_HTTP=TRUE \

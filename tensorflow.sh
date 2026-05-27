@@ -18,8 +18,8 @@ requires:
   - typing_extensions
   - jax
   - packaging
-  # optional:
-  # - TensorRT
+# optional:
+# - TensorRT
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

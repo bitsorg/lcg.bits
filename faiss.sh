@@ -15,7 +15,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonPipRecipe)
+. $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --python"
+MODULE_OPTIONS="--bin --lib --cmake"
 ##############################

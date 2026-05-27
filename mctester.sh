@@ -7,7 +7,7 @@ sources:
 requires:
   - ROOT
   - HepMC
-  - HepMC3
+  - hepmc3
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

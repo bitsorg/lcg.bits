@@ -1,7 +1,7 @@
 package: PyHEADTAIL
 description: PyHEADTAIL macroparticle tracking code for accelerator beams
-version: "1.16.4"
-tag: "1.16.4"
+version: "1.16.5"
+tag: "1.16.5"
 requires:
   - Python
   - numpy

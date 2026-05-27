@@ -24,6 +24,5 @@ function Configure() {
   # linker uses --as-needed; without it the terminfo globals (UP, BC, …)
   # are left unresolved in libreadline.so and crash unrelated programs
   # (e.g. awk) that load readline via LD_LIBRARY_PATH.
-  ./configure --prefix="$INSTALLROOT" --enable-shared --with-curses \
-    LIBS=-lncurses
+  ./configure --prefix="$INSTALLROOT" -enable-static -q --with-shared-termcap-library
 }

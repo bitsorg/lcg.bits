@@ -10,7 +10,7 @@ requires:
   - Qt5
   - gnuplot
   - texinfo
-  - readline
+# - readline
   - fftw
 build_requires:
   - bits-recipe-tools
@@ -24,41 +24,7 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # configure runs dynamic-linker tests; readline.so needs ncurses symbols at
-  # runtime (UP etc.), so all dep lib dirs must be in LD_LIBRARY_PATH.
-  export LD_LIBRARY_PATH="\
-${NCURSES_ROOT:+${NCURSES_ROOT}/lib}\
-${READLINE_ROOT:+:${READLINE_ROOT}/lib}\
-${BLAS_ROOT:+:${BLAS_ROOT}/lib}\
-${FFTW_ROOT:+:${FFTW_ROOT}/lib}\
-${PCRE2_ROOT:+:${PCRE2_ROOT}/lib}\
-${QT5_ROOT:+:${QT5_ROOT}/lib}\
-${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-  # Let pkg-config find pcre2-8, fftw3, readline, etc. from non-system deps.
-  export PKG_CONFIG_PATH="\
-${PCRE2_ROOT:+${PCRE2_ROOT}/lib/pkgconfig}\
-${FFTW_ROOT:+:${FFTW_ROOT}/lib/pkgconfig}\
-${READLINE_ROOT:+:${READLINE_ROOT}/lib/pkgconfig}\
-${BLAS_ROOT:+:${BLAS_ROOT}/lib/pkgconfig}\
-${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
-  # Collect include/library paths for all non-system deps.
-  local _cppflags="${BLAS_ROOT:+-I${BLAS_ROOT}/include}\
-${READLINE_ROOT:+ -I${READLINE_ROOT}/include}\
-${FFTW_ROOT:+ -I${FFTW_ROOT}/include}\
-${PCRE2_ROOT:+ -I${PCRE2_ROOT}/include}\
-${QT5_ROOT:+ -I${QT5_ROOT}/include}"
-  local _ldflags="${BLAS_ROOT:+-L${BLAS_ROOT}/lib}\
-${READLINE_ROOT:+ -L${READLINE_ROOT}/lib}\
-${FFTW_ROOT:+ -L${FFTW_ROOT}/lib}\
-${PCRE2_ROOT:+ -L${PCRE2_ROOT}/lib}"
-  # readline links against ncurses for terminal symbols (UP, etc.)
-  _ldflags="${_ldflags}${NCURSES_ROOT:+ -L${NCURSES_ROOT}/lib} -lncurses"
-
-  ./configure --prefix="${INSTALLROOT}" \
-    "CPPFLAGS=${_cppflags}" \
-    "LDFLAGS=${_ldflags}" \
-    ${BLAS_ROOT:+--with-blas=openblas --with-lapack=openblas} \
-    --with-qt=5 \
-    --libdir="${INSTALLROOT}/lib" \
-    --disable-rpath
+  export LDFLAGS="-L${BLAS_ROOT}/lib"
+  export LIBS="-lopenblas"
+ ./configure --prefix="${INSTALLROOT}" --with-blas=openblas --with-lapack=openblas --disable-readline --with-qt=5 --disable-rpath
 }
