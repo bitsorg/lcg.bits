@@ -23,18 +23,25 @@ prepend_path:
 . $(bits-include MesonRecipe)
 ##############################
 MODULE_OPTIONS="--lib --pkgconfig"
-MESON_WRAP_MODE="nofallback"
 MESON_EXTRA_OPTIONS="-Dintrospection=disabled"
 ##############################
 function Configure() {
-  # freetype is a system package (--disable=freetype); its .pc lives at a
-  # system path that bits does not include in PKG_CONFIG_PATH.  Inject the
-  # standard system pkg-config dirs so that fontconfig's "Requires: freetype2"
-  # resolves correctly when meson queries it.
-  export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig"
-  meson setup _build \
+  _meson_fixenv
+  # freetype has prefer_system so its .pc lives at a system multiarch path
+  # outside bits' managed PKG_CONFIG_PATH.  Pass system pkg-config dirs to
+  # meson via --pkg-config-path (meson appends these when calling pkg-config
+  # subprocesses) so that fontconfig's transitive "Requires: freetype2"
+  # resolves.  Do NOT touch PKG_CONFIG_PATH itself — bits uses it for
+  # bits-built packages (glib, harfbuzz, etc.) and modifying it breaks them.
+  local _triple
+  _triple=$(gcc -dumpmachine 2>/dev/null || echo "x86_64-linux-gnu")
+  meson setup "${MESON_BUILDDIR}" \
     --prefix="${INSTALLROOT}" \
-    ${MESON_EXTRA_OPTIONS} \
-    --wrap-mode="${MESON_WRAP_MODE:-default}"
+    --libdir=lib \
+    --wrap-mode=nofallback \
+    --pkg-config-path="/usr/lib/${_triple}/pkgconfig" \
+    --pkg-config-path="/usr/lib/pkgconfig" \
+    --pkg-config-path="/usr/share/pkgconfig" \
+    ${MESON_EXTRA_OPTIONS}
 }
 ##############################
