@@ -30,5 +30,5 @@ function Configure() {
   _meson_fixenv
   CPPFLAGS="-I${GETTEXT_ROOT}/include" \
   LDFLAGS="-L${GETTEXT_ROOT}/lib" \
-  meson setup "${MESON_BUILDDIR}" --prefix="${INSTALLROOT}" ${MESON_EXTRA_OPTIONS}
+  meson setup "${MESON_BUILDDIR}" --prefix="${INSTALLROOT}" --libdir=lib ${MESON_EXTRA_OPTIONS}
 }
