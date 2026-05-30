@@ -29,9 +29,18 @@ function Make() {
   # HYDJET++ uses a plain Makefile with no configure step.
   # root-config must be on PATH; F77LIBSO points to the gfortran shared library
   # (the Makefile auto-detects gfortran but not its library path under GCC-Toolchain).
+  #
+  # The bundled PYQUEN Fortran (e.g. progs_fortran.f) is nonconforming legacy
+  # code: it calls SPLINE(N,X,Y,B,C,D) — whose dummies are DIMENSION X(100) … —
+  # with shorter actual arrays.  gfortran >= 10 rejects this with
+  # "Actual argument contains too few elements".  -fallow-argument-mismatch
+  # downgrades it back to a warning (the same remedy lcgcmake applies to crmc for
+  # gcc > 9); -std=legacy covers other old constructs.  The Makefile's default
+  # F77FLAGS is "-fPIC", which we preserve.
   PATH="${ROOT_ROOT:+$ROOT_ROOT/bin:}$PATH" \
     make ${JOBS:+-j $JOBS} \
-    F77LIBSO="$(${FC:-gfortran} -print-file-name=libgfortran.so)"
+    F77LIBSO="$(${FC:-gfortran} -print-file-name=libgfortran.so)" \
+    F77FLAGS="-fPIC -std=legacy -fallow-argument-mismatch"
 }
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin" "$INSTALLROOT/share/hydjetcpp"
