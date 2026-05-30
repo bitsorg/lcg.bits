@@ -41,6 +41,10 @@ function Configure() {
     Linux) LOCAL_LDFLAGS="-Wl,--no-as-needed" ;;
   esac
 
+  # gcc 15 / libstdc++ no longer transitively include <cstdint>, and
+  # Rivet/Tools/RivetSTL.hh uses uintptr_t without including it
+  # ("error: 'uintptr_t' does not name a type").  Force-include <cstdint> for
+  # every translation unit; keep the stack's existing CXXFLAGS (e.g. -std=c++20).
   # Rivet requires FastJet Contrib headers (fastjet/contrib/SoftDrop.hh) and
   # libs, which bits ships as the separate fjcontrib package; point Rivet at it
   # with --with-fjcontrib (mirrors lcgcmake's rivet --with-fjcontrib).
@@ -51,6 +55,7 @@ function Configure() {
     ${YODA_ROOT:+--with-yoda="$YODA_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"} \
     ${FJCONTRIB_ROOT:+--with-fjcontrib="$FJCONTRIB_ROOT"} \
+    CXXFLAGS="${CXXFLAGS} -include cstdint" \
     LDFLAGS="$LOCAL_LDFLAGS"
   )
 }
