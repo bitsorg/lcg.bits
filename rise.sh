@@ -1,7 +1,7 @@
 package: rise
 description: RISE Jupyter/IPython Slideshow extension
-version: "5.7.2.2"
-tag: "5.7.2.2"
+version: "5.7.1"
+tag: "5.7.1"
 requires:
   - Python
   - notebook

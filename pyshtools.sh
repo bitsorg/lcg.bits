@@ -1,7 +1,7 @@
 package: pyshtools
 description: pyshtools spherical harmonic analysis and synthesis
-version: "4.13.1"
-tag: "4.13.1"
+version: "4.14.1"
+tag: "4.14.1"
 requires:
   - Python
   - proj
