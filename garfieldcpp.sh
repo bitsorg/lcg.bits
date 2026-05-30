@@ -25,6 +25,7 @@ function Configure() {
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
       -DGARFIELD_WITH_EXAMPLES=OFF \
+      -DGARFIELD_WITH_CUDA=OFF \
       ${ROOT_ROOT:+-DROOT_DIR="${ROOT_ROOT}/cmake"} \
       ${GEANT4_ROOT:+-DGeant4_DIR="${GEANT4_ROOT}/lib/Geant4-${GEANT4_VERSION}"} \
       ${GSL_ROOT:+-DGSL_ROOT_DIR="${GSL_ROOT}"}
