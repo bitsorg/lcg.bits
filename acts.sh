@@ -24,6 +24,20 @@ license: MPL-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function SetBuildEnv() {
+  _SetBuildEnvBase
+  # ACTS runs Python codegen scripts at build time (sympy stepper math, particle
+  # data table) that import numpy/sympy/particle.  The build env exposes each
+  # dependency's $*_ROOT but not its Python site-packages, so the scripts fail
+  # with "ModuleNotFoundError: No module named 'numpy'/'particle'".  Add every
+  # dependency's site-packages to PYTHONPATH (the codegen venv honours it).
+  local _pyver _r _sp
+  _pyver=$(python3 -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null)
+  for _r in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1); do
+    _sp="${!_r}/lib/python${_pyver}/site-packages"
+    [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
+  done
+}
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
