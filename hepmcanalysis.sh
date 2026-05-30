@@ -47,6 +47,9 @@ function Make() {
   cmake -E copy_directory ./lib "${INSTALLROOT}/lib"
   cmake -E copy_directory ./include "${INSTALLROOT}/include"
 }
-function Install() {
-  : # no-op — Make() already copies lib/ and include/ to INSTALLROOT
+function MakeInstall() {
+  : # no-op — Make() already copies lib/ and include/ to INSTALLROOT.
+  # (CMakeRecipe's Run() calls MakeInstall, not Install; the base MakeInstall
+  # runs `cmake --install .`, which fails here since this is a plain Makefile
+  # project with no cmake_install.cmake.)
 }
