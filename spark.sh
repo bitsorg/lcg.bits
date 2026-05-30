@@ -21,7 +21,20 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+# Spark ships as a prebuilt binary distribution (bin/, sbin/, jars/, yarn/,
+# python/) — not a pip-installable package — so install the unpacked tree
+# verbatim with BinaryRecipe.  (PythonRecipe's `pip install .` fails: the dist
+# has no top-level setup.py/pyproject.toml; pyspark lives under python/.)
+. $(bits-include BinaryRecipe)
 ##############################
-MODULE_OPTIONS="--bin --python"
+MODULE_OPTIONS="--bin"
 ##############################
+function PostInstall() {
+  # Expose the Spark home, its sbin scripts, and the bundled pyspark sources.
+  # py4j comes from its own package (a runtime dependency) via PYTHONPATH.
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
+setenv SPARK_HOME $PKG_ROOT
+prepend-path PATH $PKG_ROOT/sbin
+prepend-path PYTHONPATH $PKG_ROOT/python
+EOF
+}
