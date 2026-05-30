@@ -3,10 +3,6 @@ description: Intel Threading Building Blocks parallel programming library
 version: "v2021.5.0"
 tag: v2021.5.0
 source: https://github.com/uxlfoundation/oneTBB
-#version: "2022.2.0"
-#tag: "2022.2.0"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/tbb2022.2.0oss_src.tgz
 requires:
   - CMake
 build_requires:

@@ -11,8 +11,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only WITH GCC-exception-2.0
-prepend_path:
-  PKG_CONFIG_PATH: "$LIBGIT2_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

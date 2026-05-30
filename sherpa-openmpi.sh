@@ -22,5 +22,5 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS} "LDFLAGS=-L${OPENMPI_ROOT}/lib -lmpi -lmpi_cxx" PATH=${OPENMPI_ROOT}/bin:$PATH LIBRARY_PATH=${LHAPDF_ROOT}/lib ${library_path}=${OPENMPI_ROOT}/lib:${OPENMPI_ROOT}/lib/openmpi:${BLACKHAT_ROOT}/lib:$ENV{${library_path}}
+  make ${JOBS:+-j $JOBS} "LDFLAGS=-L${OPENMPI_ROOT}/lib -lmpi -lmpi_cxx" PATH=${OPENMPI_ROOT}/bin:$PATH LIBRARY_PATH=${LHAPDF_ROOT}/lib LD_LIBRARY_PATH=${OPENMPI_ROOT}/lib:${OPENMPI_ROOT}/lib/openmpi:${BLACKHAT_ROOT}/lib:$LD_LIBRARY_PATH
 }

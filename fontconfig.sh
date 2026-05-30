@@ -14,28 +14,15 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
-prepend_path:
-  PKG_CONFIG_PATH: "$FONTCONFIG_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  # Build pkg-config search path from available dep roots; fall back to common
-  # system paths for packages that may be provided by the OS (e.g. freetype
-  # when bits is invoked with --disable=freetype).
-  local _pc=""
-  for _root in "${FREETYPE_ROOT}" "${EXPAT_ROOT}" "${UUID_ROOT}"; do
-    [ -n "${_root}" ] && _pc="${_pc:+${_pc}:}${_root}/lib/pkgconfig"
-  done
-  # Append system fallback paths for anything not found above.
-  local _triple
-  _triple=$(gcc -dumpmachine 2>/dev/null || echo "x86_64-linux-gnu")
-  _pc="${_pc:+${_pc}:}/usr/lib/${_triple}/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig"
-  export PKG_CONFIG_PATH="${_pc}${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
   ./configure --disable-docs --prefix="${INSTALLROOT}"
 }
 
@@ -54,7 +41,7 @@ function PostInstall() {
   [ -f "${INSTALLROOT}/lib/pkgconfig/freetype2.pc" ] && return 0
   [ -f "${FREETYPE_ROOT}/lib/pkgconfig/freetype2.pc" ] && return 0  # bits-built: already findable
   local _triple
-  _triple=$(gcc -dumpmachine 2>/dev/null || echo "x86_64-linux-gnu")
+  _triple=$(bits_triple)
   for _dir in "/usr/lib/${_triple}/pkgconfig" "/usr/lib/pkgconfig" "/usr/share/pkgconfig"; do
     if [ -f "${_dir}/freetype2.pc" ]; then
       cp "${_dir}/freetype2.pc" "${INSTALLROOT}/lib/pkgconfig/freetype2.pc"

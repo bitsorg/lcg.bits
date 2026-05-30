@@ -8,8 +8,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
-prepend_path:
-  PKG_CONFIG_PATH: "$UUID_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

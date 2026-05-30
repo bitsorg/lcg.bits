@@ -13,8 +13,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: blessing
-prepend_path:
-  PKG_CONFIG_PATH: "$SQLITE_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

@@ -4,10 +4,6 @@ version: "1.80.0"
 tag: "v1.80.0"
 sources:
   - https://github.com/%(name)s/%(name)s/archive/refs/tags/v%(version)s.tar.gz
-#version: "1.62.3"
-#tag: "1.62.3"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - absl
@@ -23,10 +19,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-#patches:
-#  - grpc-1.62.3.patch
-prepend_path:
-  PKG_CONFIG_PATH: "$GRPC_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

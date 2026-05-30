@@ -10,8 +10,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
-prepend_path:
-  PKG_CONFIG_PATH: "$ZSTD_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

@@ -21,5 +21,4 @@ function Prepare() {
   # gcc picks these up automatically via C_INCLUDE_PATH / LIBRARY_PATH.
   export C_INCLUDE_PATH="${GRAPHVIZ_ROOT:+${GRAPHVIZ_ROOT}/include}${C_INCLUDE_PATH:+:${C_INCLUDE_PATH}}"
   export LIBRARY_PATH="${GRAPHVIZ_ROOT:+${GRAPHVIZ_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
-  export PKG_CONFIG_PATH="${GRAPHVIZ_ROOT:+${GRAPHVIZ_ROOT}/lib/pkgconfig}${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
 }

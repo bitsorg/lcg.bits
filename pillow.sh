@@ -2,8 +2,6 @@ package: pillow
 description: Pillow the friendly PIL (Python Imaging Library) fork
 version: "12.2.0"
 tag: "12.2.0"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/Pillow-11.2.1.tar.gz
 requires:
   - Python
   - freetype

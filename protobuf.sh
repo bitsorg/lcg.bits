@@ -15,8 +15,6 @@ build_requires:
 license: BSD-3-Clause
 patches:
   - protobuf-5.28.3.patch
-prepend_path:
-  PKG_CONFIG_PATH: "$PROTOBUF_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

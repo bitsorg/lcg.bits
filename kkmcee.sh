@@ -25,5 +25,5 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake -E create_symlink dizet-6.45 dizet
   autoreconf --force --install
-  ./configure --with-photos=${photos___home} --prefix=$INSTALLROOT
+  ./configure --with-photos=${PHOTOSCPP_ROOT} --prefix=$INSTALLROOT
 }

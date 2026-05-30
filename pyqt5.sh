@@ -2,8 +2,6 @@ package: pyqt5
 description: PyQt5 Python bindings for Qt5
 version: "5.15.10"
 tag: "5.15.10"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/PyQt5_gpl-5.15.10.tar.gz
 requires:
   - Python
   - Qt5

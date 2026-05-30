@@ -14,6 +14,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -26,7 +27,7 @@ function Configure() {
   # /usr/lib64/pkgconfig is added for RHEL/CentOS compatibility; non-existent
   # paths are silently ignored by pkg-config.
   local _triple
-  _triple=$(gcc -dumpmachine 2>/dev/null || echo "x86_64-linux-gnu")
+  _triple=$(bits_triple)
   ./configure --with-internal-glib --prefix=$INSTALLROOT \
     --with-system-include-path=/usr/include \
     --with-pc-path="/usr/lib/${_triple}/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig"

@@ -12,15 +12,12 @@ license: LicenseRef-Oracle
 #!/bin/bash -e
 ##############################
 . $(bits-include BinaryRecipe)
+. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS=""
 ##############################
 function Prepare() {
-  case "$(uname -m)" in
-    x86_64)  ora_arch="linux.x64" ;;
-    aarch64) ora_arch="linux.arm64" ;;
-    *)       echo "Unsupported architecture: $(uname -m)"; exit 1 ;;
-  esac
+  local ora_arch; ora_arch="linux.$(bits_arch_select x64 arm64)"
   local tgz="${PKGNAME}-${PKGVERSION}-${ora_arch}.tar.gz"
   curl -fSL "https://lcgpackages.web.cern.ch/tarFiles/sources/${tgz}" -o "${tgz}"
   tar xzf "${tgz}"

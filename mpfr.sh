@@ -10,12 +10,10 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-3.0-or-later
-prepend_path:
-  PKG_CONFIG_PATH: "$MPFR_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --include --pkgconfig"
+MODULE_OPTIONS="--bin --lib --inc --pkgconfig"
 ##############################

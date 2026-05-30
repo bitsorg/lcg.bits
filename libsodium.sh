@@ -10,8 +10,6 @@ build_requires:
 license: ISC
 patches:
   - libsodium-1.0.21.patch
-prepend_path:
-  PKG_CONFIG_PATH: "$LIBSODIUM_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

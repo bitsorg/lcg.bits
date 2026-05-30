@@ -3,10 +3,6 @@ description: Open Asset Import Library for 3D model formats
 version: "6.0.5"
 tag: "v6.0.5"
 source: https://github.com/assimp/assimp
-#version: "5.0.1"
-#tag: "5.0.1"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - Boost

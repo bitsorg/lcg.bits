@@ -43,7 +43,6 @@ ${GO_RUNEWIDTH_ROOT:+:${GO_RUNEWIDTH_ROOT}}"
   # zmq4 uses cgo — make sure its headers/libs are visible to the compiler.
   export CGO_CFLAGS="${ZEROMQ_ROOT:+-I${ZEROMQ_ROOT}/include}"
   export CGO_LDFLAGS="${ZEROMQ_ROOT:+-L${ZEROMQ_ROOT}/lib}"
-  export PKG_CONFIG_PATH="${ZEROMQ_ROOT:+${ZEROMQ_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}}"
   PATH="${GO_ROOT}/bin:${PATH}" go install github.com/gopherdata/gophernotes
 }
 function MakeInstall() { :; }

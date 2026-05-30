@@ -13,7 +13,7 @@ license: GPL-2.0-only
 ##############################
 . $(bits-include AutoToolsRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   ./configure --prefix=$INSTALLROOT --enable-shared --enable-threads

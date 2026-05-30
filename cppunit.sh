@@ -16,5 +16,5 @@ license: LGPL-2.1-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix $INSTALLROOT ${libtoolpatch} 
+  ./configure --prefix $INSTALLROOT
 }

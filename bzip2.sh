@@ -10,8 +10,6 @@ build_requires:
 license: LicenseRef-bzip2
 patches:
   - bzip2-1.0.6.patch
-prepend_path:
-  PKG_CONFIG_PATH: "$BZIP2_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

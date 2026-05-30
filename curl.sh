@@ -11,8 +11,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: curl
-prepend_path:
-  PKG_CONFIG_PATH: "$CURL_ROOT/lib/pkgconfig"
 ---
 #!/bin/bash -e
 ##############################

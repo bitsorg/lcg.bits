@@ -15,7 +15,7 @@ build_requires:
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --cmake"
+MODULE_OPTIONS="--bin --lib --cmake --pkgconfig"
 ##############################
 function Configure() {
   cmake $SOURCEDIR                          \
