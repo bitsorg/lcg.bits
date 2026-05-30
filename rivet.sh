@@ -15,6 +15,10 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  # Cython regenerates the pyext core.cpp from core.pyx: the shipped core.cpp
+  # was produced by an old Cython and #includes longintrepr.h, removed in
+  # Python 3.12+.
+  - cython
 license: GPL-3.0-only
 patches:
   - rivet-3.1.5p1.patch
@@ -39,6 +43,18 @@ function Configure() {
   # copy is included first wins and the second is skipped.
   sed -i 's/__STRICT_FSTREAM_HPP/BXZSTR_STRICT_FSTREAM_HPP/g' \
     src/Core/zstr/strict_fstream.hpp
+
+  # The shipped Cython-generated pyext (pyext/rivet/core.cpp) #includes
+  # longintrepr.h, which Python 3.12+ removed.  Make the bits Cython importable
+  # and on PATH so configure detects "Cython >= 0.24" and regenerates core.cpp
+  # from core.pyx; drop the stale core.cpp so it is actually rebuilt.  (Build-
+  # time env exposes $CYTHON_ROOT but not its site-packages, so set PYTHONPATH.)
+  if [[ -n "$CYTHON_ROOT" ]]; then
+    _pyver=$("${PYTHON_ROOT:-/usr}/bin/python3" -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || echo 3)
+    export PATH="${CYTHON_ROOT}/bin:${PATH}"
+    export PYTHONPATH="${CYTHON_ROOT}/lib/python${_pyver}/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
+    rm -f pyext/rivet/core.cpp
+  fi
 
   autoreconf -ivf
 
