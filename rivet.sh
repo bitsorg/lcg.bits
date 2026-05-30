@@ -11,6 +11,7 @@ requires:
   - hepmc3
   - yoda
   - fastjet
+  - fjcontrib
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -40,12 +41,16 @@ function Configure() {
     Linux) LOCAL_LDFLAGS="-Wl,--no-as-needed" ;;
   esac
 
+  # Rivet requires FastJet Contrib headers (fastjet/contrib/SoftDrop.hh) and
+  # libs, which bits ships as the separate fjcontrib package; point Rivet at it
+  # with --with-fjcontrib (mirrors lcgcmake's rivet --with-fjcontrib).
   ./configure --prefix="$INSTALLROOT" \
     --disable-silent-rules \
     --disable-doxygen \
     ${HEPMC3_ROOT:+--with-hepmc3="$HEPMC3_ROOT"} \
     ${YODA_ROOT:+--with-yoda="$YODA_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"} \
+    ${FJCONTRIB_ROOT:+--with-fjcontrib="$FJCONTRIB_ROOT"} \
     LDFLAGS="$LOCAL_LDFLAGS"
   )
 }
