@@ -19,5 +19,6 @@ license: MIT
 ##############################
 . $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="TFPWA"
 MODULE_OPTIONS="--bin --python"
 ##############################
