@@ -21,6 +21,20 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function SetBuildEnv() {
+  _SetBuildEnvBase
+  # podio's datamodel code generator (invoked during the EDM4hep build via
+  # podioMacros) imports jinja2/markupsafe/yaml.  bits' build env exposes each
+  # dependency's $*_ROOT but not its Python site-packages, so the generator
+  # fails with "ModuleNotFoundError: No module named 'jinja2'".  Add every
+  # dependency's site-packages to PYTHONPATH (same scan PythonRecipe uses).
+  local _pyver _r _sp
+  _pyver=$(python3 -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null)
+  for _r in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1); do
+    _sp="${!_r}/lib/python${_pyver}/site-packages"
+    [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
+  done
+}
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
