@@ -29,6 +29,17 @@ function Configure() {
 
   (
   unset PYTHON_VERSION
+
+  # HepMC3 3.3.x exposes its vendored bxzstr (namespace strict_fstream) through
+  # ReaderFactory.h -> CompressedIO.h; Rivet vendors its own zstr/strict_fstream
+  # in the same namespace but with a different include guard
+  # (__STRICT_FSTREAM_HPP vs bxzstr's BXZSTR_STRICT_FSTREAM_HPP), so translation
+  # units that include both (e.g. RivetHepMC_3.cc) fail with "redefinition of
+  # class strict_fstream::...".  Unify Rivet's guard with bxzstr's so whichever
+  # copy is included first wins and the second is skipped.
+  sed -i 's/__STRICT_FSTREAM_HPP/BXZSTR_STRICT_FSTREAM_HPP/g' \
+    src/Core/zstr/strict_fstream.hpp
+
   autoreconf -ivf
 
   # Discover dep prefixes via config tools if env vars are not set
