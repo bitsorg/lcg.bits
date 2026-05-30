@@ -3,7 +3,10 @@ description: Rivet Monte Carlo analysis toolkit
 version: "3.1.5p1"
 tag: "3.1.5p1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-3.1.5p1.tar.bz2
+  # The "p1" is an LCG patch-level label on the version, not part of the
+  # upstream filename (cf. lcgcmake's Rivet-<author>.tar.bz2). The hosted
+  # tarball is Rivet-3.1.5.tar.bz2; Rivet-3.1.5p1.tar.bz2 returns HTTP 404.
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-3.1.5.tar.bz2
 requires:
   - hepmc3
   - yoda
