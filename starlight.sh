@@ -7,7 +7,6 @@ sources:
 requires:
   - CMake
   - hepmc3
-  - dpmjet
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -20,8 +19,12 @@ license: LicenseRef-STARLIGHT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # FindDPMJet.cmake reads $ENV{DPMJET_DIR} — export before cmake runs
-  [[ -n "$DPMJET_ROOT" ]] && export DPMJET_DIR="$DPMJET_ROOT"
+  # Built standalone (DPMJet disabled), matching lcgcmake's Starlight recipe.
+  # starlight r330's optional DPMJet interface (dpmjet/dpmjetint.f) does
+  # INCLUDE 'inc/dtflka' and expects the modern DPMJET-III layout with separate
+  # Fortran include files under include/dpmjet/inc/.  The DPMJet 3.0-6 tarball
+  # bits builds is a flat set of monolithic .f files with no such headers, so
+  # -DENABLE_DPMJET=ON cannot compile.  lcgcmake never enables this combination.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -29,7 +32,6 @@ function Configure() {
     -DCMAKE_CXX_FLAGS="-Wno-array-parameter -Wno-unused-but-set-variable -Wno-unknown-warning-option" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DENABLE_HEPMC3=ON \
-    ${DPMJET_ROOT:+-DENABLE_DPMJET=ON} \
     -DBUILD_SHARED_LIB=ON \
     ${HEPMC3_ROOT:+-DHepMC3_DIR="$HEPMC3_ROOT"}
 }
