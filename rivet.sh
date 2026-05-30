@@ -45,6 +45,10 @@ function Configure() {
   # Rivet/Tools/RivetSTL.hh uses uintptr_t without including it
   # ("error: 'uintptr_t' does not name a type").  Force-include <cstdint> for
   # every translation unit; keep the stack's existing CXXFLAGS (e.g. -std=c++20).
+  # -fpermissive: gcc 15's new -Wtemplate-body diagnoses errors in template
+  # definitions (e.g. Rivet's bundled old Eigen3 Transpositions.h "has no member
+  # named 'derived'"); -fpermissive downgrades these to warnings so the
+  # vendored Eigen still compiles.
   # Rivet requires FastJet Contrib headers (fastjet/contrib/SoftDrop.hh) and
   # libs, which bits ships as the separate fjcontrib package; point Rivet at it
   # with --with-fjcontrib (mirrors lcgcmake's rivet --with-fjcontrib).
@@ -55,7 +59,7 @@ function Configure() {
     ${YODA_ROOT:+--with-yoda="$YODA_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"} \
     ${FJCONTRIB_ROOT:+--with-fjcontrib="$FJCONTRIB_ROOT"} \
-    CXXFLAGS="${CXXFLAGS} -include cstdint" \
+    CXXFLAGS="${CXXFLAGS} -include cstdint -fpermissive" \
     LDFLAGS="$LOCAL_LDFLAGS"
   )
 }
