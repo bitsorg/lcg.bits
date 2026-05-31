@@ -1066,16 +1066,15 @@
 +   15 1.777000e+00 # ymtau 
 --- a/madgraph/various/banner.py
 +++ b/madgraph/various/banner.py
-@@ -4219,7 +4219,8 @@
+@@ -4682,6 +4682,7 @@
          # for lepton-lepton collisions, ignore 'pdlabel' and 'lhaid'
          if abs(self['lpp1'])!=1 or abs(self['lpp2'])!=1:
              if self['lpp1'] == 1 or self['lpp2']==1:
 -                raise InvalidRunCard('Process like Deep Inelastic scattering not supported at NLO accuracy.')
 +                logger.critical("Such type of computation are normally forbidden within the official version of MG5aMC. Use at your own risk. The authors of MG5aMC will not provide any support on such run and the result of such run might not be reproducible in the version of the code supporting officially such computation.")
 +#               raise InvalidRunCard('Process like Deep Inelastic scattering not supported at NLO accuracy.')
-             
-             if self['pdlabel']!='nn23nlo' or self['reweight_pdf']:
-                 self['pdlabel']='nn23nlo'
+         
+             if self['lpp1'] == 0  == self['lpp2']:
 --- a/bin/.compile.py
 +++ b/bin/.compile.py
 @@ -26,7 +26,7 @@
