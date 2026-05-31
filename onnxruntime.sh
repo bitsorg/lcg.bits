@@ -53,7 +53,8 @@ function Make() {
     --compile_no_warning_as_error \
     --cmake_extra_defines \
       CMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-      onnxruntime_BUILD_UNIT_TESTS=OFF
+      onnxruntime_BUILD_UNIT_TESTS=OFF \
+      FETCHCONTENT_TRY_FIND_PACKAGE_MODE=NEVER
 }
 function MakeInstall() {
   mkdir -p "${SITE_PACKAGES}"
