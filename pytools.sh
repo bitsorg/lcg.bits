@@ -68,3 +68,19 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+function MakeInstall() {
+  mkdir -p "${SITE_PACKAGES}"
+  # With pip build isolation, the overlay build env fails to provide a working
+  # backend ("BackendUnavailable: Cannot import 'setuptools.build_meta'").
+  # pytools is pure Python; install with --no-build-isolation so pip uses the
+  # bits Python's own setuptools/wheel (both present in the base env).
+  "${PYTHON_EXE}" -m pip install \
+    --no-deps --no-build-isolation --ignore-installed \
+    --root=/ --prefix="${INSTALLROOT}" \
+    "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"
+  if [ -z "$(ls -A "${SITE_PACKAGES}" 2>/dev/null)" ]; then
+    echo "pytools: pip exited 0 but ${SITE_PACKAGES} is empty" >&2
+    return 1
+  fi
+}
+##############################

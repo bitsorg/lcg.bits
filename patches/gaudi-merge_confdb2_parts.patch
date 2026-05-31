@@ -1,20 +1,26 @@
 --- a/GaudiKernel/scripts/merge_confdb2_parts
 +++ b/GaudiKernel/scripts/merge_confdb2_parts
-@@ -22,9 +22,14 @@
+@@ -22,9 +22,20 @@
      (3, 13, 0) <= sys.version_info <= (3, 13, 7) or sys.version_info[:3] == (3, 14, 0)
  ) and sys.platform.startswith("linux"):
      import dbm
 -    import dbm.gnu
 -
 -    dbm._defaultmod = dbm.gnu
-+    try:
-+        import dbm.gnu
-+        dbm._defaultmod = dbm.gnu
-+    except ImportError:
-+        # gdbm unavailable; explicitly use dumbdbm, which creates
-+        # <name>.dat — matching the cmake install target (.confdb2.dat)
-+        import dbm.dumb
-+        dbm._defaultmod = dbm.dumb
++    # gdbm default-selection removed; replaced by the unconditional "dumb"
++    # backend override below so the merge output is always *.confdb2.dat.
++    pass
++
++# Force the pure-python "dumb" dbm backend for ALL Python versions: it writes
++# <name>.dat (+ .dir/.bak) -- the file GaudiToolbox.cmake (patched) declares as
++# the merge output and installs (Gaudi.confdb2.dat).  The guard above only fires
++# for 3.13.0-3.13.7 / 3.14.0 (not the 3.13.11 used here), and the host default
++# backend is gdbm, which writes "Gaudi.confdb2" with no .dat suffix, so install
++# would fail with "cannot find .../Gaudi.confdb2.dat".
++import dbm
++import dbm.dumb
++
++dbm._defaultmod = dbm.dumb
  
  from GaudiKernel.DataHandle import DataHandle  # noqa: F401
  from GaudiKernel.GaudiHandles import *  # noqa: F401 F403
