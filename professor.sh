@@ -23,6 +23,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -31,12 +32,7 @@ MODULE_OPTIONS="--bin --lib"
 # its build also imports numpy.  bits exposes each dependency's $*_ROOT but not
 # its Python site-packages, so put every dependency's site-packages on PYTHONPATH
 # at recipe scope (applies to both Configure and Make).
-_prof_pyver=$("${PYTHON_ROOT:-${Python_ROOT:-/usr}}/bin/python3" -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || echo 3)
-for _prof_r in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1); do
-  _prof_sp="${!_prof_r}/lib/python${_prof_pyver}/site-packages"
-  [ -d "${_prof_sp}" ] && export PYTHONPATH="${_prof_sp}${PYTHONPATH:+:${PYTHONPATH}}"
-done
-unset _prof_r _prof_sp
+bits_pythonpath_from_deps
 ##############################
 function Configure() {
   ./configure --prefix=$INSTALLROOT --with-eigen=${EIGEN_ROOT} URL ${gen_url}/professor-2.5.6.tar.gz

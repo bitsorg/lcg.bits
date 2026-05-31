@@ -27,19 +27,15 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 # Rivet regenerates its pyext core.cpp from core.pyx during `make` (the shipped
-# core.cpp #includes longintrepr.h, removed in Python 3.12+).  The `cython`
-# launcher needs the Cython module importable, but the build env exposes only
-# $CYTHON_ROOT, not its site-packages.  Export PATH/PYTHONPATH at recipe scope
-# (NOT inside Configure's subshell) so they also apply to the Make step.
-if [[ -n "$CYTHON_ROOT" ]]; then
-  _rivet_pyver=$("${PYTHON_ROOT:-/usr}/bin/python3" -c 'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || echo 3)
-  export PATH="${CYTHON_ROOT}/bin:${PATH}"
-  export PYTHONPATH="${CYTHON_ROOT}/lib/python${_rivet_pyver}/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
-fi
+# core.cpp #includes longintrepr.h, removed in Python 3.12+).  Put the bits-built
+# Cython on PATH/PYTHONPATH at RECIPE SCOPE (NOT inside Configure's subshell) so
+# it also reaches the Make step where regeneration happens.
+bits_enable_cython
 ##############################
 function Configure() {
 

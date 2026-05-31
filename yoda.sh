@@ -19,6 +19,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
@@ -34,13 +35,9 @@ function Configure() {
   # The cure is to regenerate it from the .pyx with a modern Cython (bits ships
   # Cython 3.2.4).  YODA's configure rebuilds the C++ only when it detects
   # "Cython >= 0.24" — both importable by $PYTHON and as a `cython` executable —
-  # so put the bits-built Cython on PATH and PYTHONPATH first.  (Build-time env
-  # does not expose a dependency's site-packages automatically, unlike the
-  # runtime modulefile, so we set PYTHONPATH explicitly here.)
-  local _pyver
-  _pyver=$("${PYTHON_ROOT}/bin/python3" -c 'import sys; print("%d.%d" % sys.version_info[:2])')
-  export PATH="${CYTHON_ROOT}/bin:${PATH}"
-  export PYTHONPATH="${CYTHON_ROOT}/lib/python${_pyver}/site-packages${PYTHONPATH:+:${PYTHONPATH}}"
+  # so put the bits-built Cython on PATH and PYTHONPATH first.  YODA's Configure()
+  # is not a subshell, so this export reaches the Make step too.
+  bits_enable_cython
   # configure's "force rebuild" only touches core.pyx, which would leave
   # util.cpp / rootcompat.cpp stale.  Remove every generated file so make
   # re-runs Cython for all of them (and fails loudly if Cython is somehow
