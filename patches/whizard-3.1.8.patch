@@ -1,0 +1,14 @@
+--- a/src/system/system_dependencies.f90.in
++++ b/src/system/system_dependencies.f90.in
+@@ -147,9 +147,9 @@
+   character(*), parameter :: INCLUDEDIR = &
+        "@includedir@"
+   character(*), parameter :: DATAROOTDIR = &
+        "@datarootdir@"
+-  character(*), parameter :: FMODDIR = &
+-       "@FMODDIR@"
++  character(*), parameter :: FMODDIR = &
++       "${prefix}/lib/mod"
+
+   character(*), parameter :: PKGLIBDIR = LIBDIR  // "/whizard"
+   character(*), parameter :: PKGDATADIR = DATAROOTDIR // "/whizard"

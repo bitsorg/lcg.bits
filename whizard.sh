@@ -23,6 +23,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-or-later
+patches:
+  - whizard-3.1.8.patch
 ---
 #!/bin/bash -e
 ##############################

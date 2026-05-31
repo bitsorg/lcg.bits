@@ -1,0 +1,13 @@
+diff --git a/ProdDigest/HisNorm.cxx b/ProdDigest/HisNorm.cxx
+index ff8f872..bab4c27 100755
+--- a/ProdDigest/HisNorm.cxx
++++ b/ProdDigest/HisNorm.cxx
+@@ -5,6 +5,8 @@
+ /////////////////////////////////////////////////////////////////////
+ #include "HisNorm.h"
+ 
++#include <cmath>
++
+ double sqr( const Double_t x ){ return x*x;};
+ 
+ 

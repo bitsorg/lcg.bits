@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-KKMC-ee
+patches:
+  - kkmcee-5.01.00.patch
 ---
 #!/bin/bash -e
 ##############################

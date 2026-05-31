@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
+patches:
+  - bdsim-1.7.8-rc1.patch
 ---
 #!/bin/bash -e
 ##############################

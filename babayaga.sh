@@ -8,6 +8,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-BabaYaga
+patches:
+  - babayaga-fcc1.0.0.patch
 ---
 #!/bin/bash -e
 ##############################

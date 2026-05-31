@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+patches:
+  - tensorflow_model_optimization-0.8.0.patch
 ---
 #!/bin/bash -e
 ##############################

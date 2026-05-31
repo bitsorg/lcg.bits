@@ -8,6 +8,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-BHLUMI
+patches:
+  - bhlumi-4.04linuxLHE.patch
 ---
 #!/bin/bash -e
 ##############################
