@@ -1,6 +1,7 @@
 package: rivet
 description: Rivet Monte Carlo analysis toolkit
 version: "3.1.5p1"
+mem_per_job: 1500
 tag: "3.1.5p1"
 sources:
   # The "p1" is an LCG patch-level label on the version, not part of the

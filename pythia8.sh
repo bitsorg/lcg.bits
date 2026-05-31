@@ -1,6 +1,7 @@
 package: pythia8
 description: Pythia 8 Monte Carlo event generator for high-energy physics
 version: "306"
+mem_per_job: 1500
 tag: "306"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/pythia8306.tgz

@@ -1,6 +1,7 @@
 package: Gaudi
 description: Gaudi software framework for HEP data processing applications
 version: "v40r2"
+mem_per_job: 1500
 tag: "v40r2"
 sources:
   - https://gitlab.cern.ch/gaudi/Gaudi/-/archive/%(tag)s/Gaudi-%(tag)s.tar.gz

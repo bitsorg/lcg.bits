@@ -1,6 +1,7 @@
 package: Geant4-vecgeom-scalar
 description: Geant4 build variant using VecGeom scalar geometry backend
 version: "11.4.1"
+mem_per_job: 1500
 tag: "11.4.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4.%(version)s.tar.gz

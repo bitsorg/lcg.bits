@@ -1,6 +1,7 @@
 package: Davix
 description: High-performance HTTP/WebDAV/S3/cloud storage I/O library
 version: "0.8.10"
+mem_per_job: 1024
 tag: "0.8.10"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/davix-0.8.10.tar.gz

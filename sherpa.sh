@@ -1,6 +1,7 @@
 package: sherpa
 description: Sherpa multi-purpose Monte Carlo event generator
 version: "2.2.11p2"
+mem_per_job: 1500
 tag: "2.2.11p2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SHERPA-MC-2.2.11.tar.gz

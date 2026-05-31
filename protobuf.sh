@@ -1,6 +1,7 @@
 package: protobuf
 description: Google Protocol Buffers serialization library
 version: "5.28.3"
+mem_per_job: 1500
 tag: "5.28.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-all-5.28.3.tar.gz
