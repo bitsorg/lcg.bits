@@ -21,10 +21,16 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # Skip the doc subdirectory — it requires LaTeX and is not needed at runtime.
-  make ${JOBS:+-j $JOBS} -C src
-  make ${JOBS:+-j $JOBS} -C utilities
-  make install
+  # The top-level SUBDIRS includes 'doc', whose Manual.pdf is built with LaTeX
+  # (needs cite.sty, which we neither ship nor need at runtime) — that was the
+  # only fatal failure; the libraries and the vbfnlo binary build fine.  Remove
+  # 'doc' from SUBDIRS so the recursive build here AND the subsequent
+  # `make install` (AutoToolsRecipe.MakeInstall) both skip it.  The previous
+  # `make -C src/-C utilities` pre-builds were also wrong (they ran before
+  # lib/util were built, hence the spurious "No rule .../libVBFNLO.la" and
+  # missing .mod/.inc errors) — a normal recursive build honours SUBDIRS order.
+  sed -i '/^SUBDIRS[[:space:]]*=/ s/\bdoc\b//g' Makefile
+  make ${JOBS:+-j $JOBS}
 }
 function Configure() {
   # Touch the generated header so configure does not fail if it is missing
