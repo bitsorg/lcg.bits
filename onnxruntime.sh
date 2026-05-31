@@ -22,10 +22,54 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
+# PythonRecipe gives us PYTHON_EXE, SITE_PACKAGES and a PYTHONPATH built from
+# every dependency's site-packages (needed: numpy/onnx/packaging/wheel for the
+# wheel build).  We override the build steps below: onnxruntime cannot be
+# `pip install .`-ed, because its setup.py only packages an already-built tree
+# (it needs onnxruntime/capi/build_and_package_info.py and libonnxruntime.so,
+# produced by onnxruntime's own CMake build via tools/ci_build/build.py).
 . $(bits-include PythonRecipe)
 ##############################
-MODULE_OPTIONS="--bin --python"
+MODULE_OPTIONS="--bin --lib --python"
 ##############################
+_ORT_CONFIG="Release"
+_ORT_BUILDDIR="build"
+##############################
+function Make() {
+  # Drive onnxruntime's build: configure (CMake, fetching abseil/protobuf/onnx/
+  # flatbuffers/re2/...), compile libonnxruntime.so, generate the capi build
+  # info, and build the python wheel.  Run with the bits Python so the wheel
+  # build sees our numpy/packaging/wheel via PYTHONPATH.
+  "${PYTHON_EXE}" tools/ci_build/build.py \
+    --build_dir "${_ORT_BUILDDIR}" \
+    --config "${_ORT_CONFIG}" \
+    --update --build \
+    --parallel "${JOBS:-$(nproc)}" \
+    --skip_submodule_sync \
+    --skip_tests \
+    --build_shared_lib \
+    --build_wheel \
+    --allow_running_as_root \
+    --compile_no_warning_as_error \
+    --cmake_extra_defines \
+      CMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      onnxruntime_BUILD_UNIT_TESTS=OFF
+}
+function MakeInstall() {
+  mkdir -p "${SITE_PACKAGES}"
+  # Install the C++ shared library + headers (CMAKE_INSTALL_PREFIX was set above).
+  cmake --install "${_ORT_BUILDDIR}/${_ORT_CONFIG}"
+  # Install the python wheel that --build_wheel produced.
+  local _whl
+  _whl=$(ls -t "${_ORT_BUILDDIR}/${_ORT_CONFIG}/dist/"*.whl 2>/dev/null | head -1)
+  if [ -z "${_whl}" ]; then
+    echo "onnxruntime: no wheel found under ${_ORT_BUILDDIR}/${_ORT_CONFIG}/dist" >&2
+    return 1
+  fi
+  "${PYTHON_EXE}" -m pip install \
+    --no-deps --no-build-isolation --ignore-installed \
+    --root=/ --prefix="${INSTALLROOT}" "${_whl}"
+}
 function PostInstall() {
   printf 'prepend-path ROOT_INCLUDE_PATH $PKG_ROOT/include/onnxruntime\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }
