@@ -27,3 +27,23 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+function MakeInstall() {
+  mkdir -p "${SITE_PACKAGES}"
+  # The default PyPI torch Linux wheel is CUDA-enabled: importing it preloads
+  # libcudart/libcublasLt and hard-fails on a CPU-only host (and pulls the
+  # nvidia-* packages bits does not provide).  This stack is CPU-only (no cuda
+  # package; cuda is optional/commented in the torch_* recipes), so install the
+  # CPU build from PyTorch's CPU index.  "==${PKGVERSION}" matches the
+  # "${PKGVERSION}+cpu" local-version wheel published there (PEP 440).
+  "${PYTHON_EXE}" -m pip install \
+    --no-deps --ignore-installed \
+    --root=/ --prefix="${INSTALLROOT}" \
+    --index-url https://download.pytorch.org/whl/cpu \
+    "torch==${PKGVERSION}"
+  if [ -z "$(ls -A "${SITE_PACKAGES}" 2>/dev/null)" ]; then
+    echo "torch: pip exited 0 but ${SITE_PACKAGES} is empty" >&2
+    echo "torch: check that torch==${PKGVERSION} (CPU) exists on https://download.pytorch.org/whl/cpu" >&2
+    return 1
+  fi
+}
+##############################
