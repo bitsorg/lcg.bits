@@ -28,6 +28,7 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 patches:
   - gaudi-GaudiToolbox.cmake.patch
+  - gaudi-merge_confdb2_parts.patch
 ---
 #!/bin/bash -e
 ##############################
