@@ -18,5 +18,8 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-xerces=${XercesC_ROOT} --disable-rpath
+  # The build env exports the dependency prefix as XERCESC_ROOT (uppercase);
+  # the mixed-case ${XercesC_ROOT} expands empty, so configure could not find
+  # the Xerces-C include directory.
+  ./configure --prefix=$INSTALLROOT --with-xerces=${XERCESC_ROOT} --disable-rpath
 }

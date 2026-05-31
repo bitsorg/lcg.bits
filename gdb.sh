@@ -21,5 +21,8 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  $SOURCEDIR/configure --prefix=$INSTALLROOT  --enable-install-libiberty
+  # gdb 17.2 requires GMP 4.2+ and MPFR 3.1.0+; point configure at the
+  # bits-built deps (their prefixes are not on the default search path).
+  $SOURCEDIR/configure --prefix=$INSTALLROOT --enable-install-libiberty \
+    --with-gmp="${GMP_ROOT}" --with-mpfr="${MPFR_ROOT}"
 }

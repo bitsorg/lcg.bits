@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/include-what-you-use-%(version)s.src.tar.gz
 requires:
   - CMake
+  - Clang
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

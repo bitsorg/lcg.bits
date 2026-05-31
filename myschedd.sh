@@ -18,5 +18,5 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  "" GODEBUG=netdns=cgo go build
+  GODEBUG=netdns=cgo go build
 }

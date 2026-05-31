@@ -38,6 +38,11 @@ function Make() {
   # configure ignored --prefix so install manually.
   mkdir -p "${INSTALLROOT}/lib"
   cp -p lib/libhijing.* "${INSTALLROOT}/lib/"
-  # Fortran COMMON-block include files, if the tarball ships them.
-  [[ -d include ]] && { mkdir -p "${INSTALLROOT}/include"; cp -rp include/. "${INSTALLROOT}/include/"; }
+  # Fortran COMMON-block include files, if the tarball ships them.  Use an
+  # if-block (not `[[ ]] && {...}`) so a missing include/ dir does not make
+  # Make() return non-zero and abort the build under `set -e`.
+  if [[ -d include ]]; then
+    mkdir -p "${INSTALLROOT}/include"
+    cp -rp include/. "${INSTALLROOT}/include/"
+  fi
 }

@@ -17,3 +17,9 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  # 0.7.1 builds the xkbcommon-x11 sub-library by default, which needs
+  # xcb-xkb >= 1.10 / xorg-macros that are not in this stack.  This stack only
+  # needs the core library, so disable X11 (and the doc build).
+  ./configure --prefix="$INSTALLROOT" --disable-x11 --disable-docs
+}
