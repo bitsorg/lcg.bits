@@ -34,6 +34,10 @@ function SetBuildEnv() {
     _sp="${!_r}/lib/python${_pyver}/site-packages"
     [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
   done
+  # The loop's last `[ -d ] && export` is non-zero when the final dependency has
+  # no site-packages; Run() calls SetBuildEnv standalone under `set -e`, so a
+  # non-zero return would abort the build silently before Configure.  Force 0.
+  return 0
 }
 function Configure() {
   cmake "${SOURCEDIR}" \
