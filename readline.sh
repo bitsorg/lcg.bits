@@ -17,10 +17,14 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
   [ -f autogen.sh ] && ./autogen.sh
-  # --with-curses selects ncurses over the bare termcap interface.
-  # LIBS=-lncurses ensures ncurses appears in DT_NEEDED even when the
-  # linker uses --as-needed; without it the terminfo globals (UP, BC, …)
-  # are left unresolved in libreadline.so and crash unrelated programs
-  # (e.g. awk) that load readline via LD_LIBRARY_PATH.
-  ./configure --prefix="$INSTALLROOT" -enable-static -q --with-shared-termcap-library
+  # Stopgap so the bits libreadline.so is not broken (the stack otherwise prefers
+  # the system readline).  --with-curses selects ncurses over the bare termcap
+  # interface; SHLIB_LIBS controls what is linked INTO the shared object, so
+  # forcing -lncurses there (plus LIBS for the static/test side) puts ncurses in
+  # libreadline.so's DT_NEEDED.  Without it the terminfo globals (UP, BC, PC, …)
+  # are left unresolved and any program that loads readline via LD_LIBRARY_PATH
+  # (e.g. the system awk used in autoconf configure probes) crashes with
+  # "symbol lookup error: … undefined symbol: UP".
+  ./configure --prefix="$INSTALLROOT" --enable-static -q --with-curses \
+    SHLIB_LIBS=-lncurses LIBS=-lncurses
 }

@@ -19,3 +19,12 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
+function PostInstall() {
+  # Downstream Pandora packages (pandorasdk, pandoramonitoring, lccontent, …)
+  # set CMAKE_MODULE_PATH=$PANDORAPFA_ROOT/cmakemodules and do
+  # include(PandoraCMakeSettings) / PANDORA_GENERATE_PACKAGE_CONFIGURATION_FILES.
+  # PandoraPFA's own cmake install does not ship these modules, so install them
+  # explicitly (mirrors lcgcmake's copy_directory cmakemodules).
+  [ -d "${SOURCEDIR}/cmakemodules" ] && cp -r "${SOURCEDIR}/cmakemodules" "${INSTALLROOT}/cmakemodules"
+  return 0
+}

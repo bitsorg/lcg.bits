@@ -7,6 +7,7 @@ sources:
 requires:
   - GSL
   - lhapdf
+  - fastjet
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
