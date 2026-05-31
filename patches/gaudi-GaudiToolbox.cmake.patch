@@ -1,14 +1,5 @@
 --- a/cmake/GaudiToolbox.cmake
 +++ b/cmake/GaudiToolbox.cmake
-@@ -1452,7 +1452,7 @@
-         if(APPLE)
-             set(output_files ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.confdb2 ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.confdb2.db)
-         else()
--            set(output_files ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.confdb2)
-+            set(output_files ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.confdb2.dat)
-         endif()
-         add_custom_command(OUTPUT ${output_files}
-             COMMAND run merge_confdb2_parts $<TARGET_PROPERTY:${merge_target},fragments>
 @@ -1534,7 +1534,7 @@
      endforeach()
      string(TOLOWER "${CMAKE_PROJECT_NAME}env.sh" _env_file)
