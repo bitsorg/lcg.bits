@@ -8,8 +8,6 @@ requires:
   - google_auth
   - six
   - uritemplate
-  - google_auth_httplib2
-  - httplib2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

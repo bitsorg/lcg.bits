@@ -6,7 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/SoQt-1.5.0.tar.gz
 requires:
   - coin3d
-  - Qt
+  - Qt6
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -19,5 +19,5 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no --with-coin=${COIN3D_ROOT} --with-qt=${Qt_ROOT} QTDIR=${Qt_ROOT}
+  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no --with-coin=${COIN3D_ROOT} --with-qt=${Qt6_ROOT} QTDIR=${Qt6_ROOT}
 }

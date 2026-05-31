@@ -5,7 +5,7 @@ tag: "6.0.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:
-  - Qt
+  - Qt6
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -20,7 +20,7 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  ${Qt_ROOT}/bin/qmake QWT_INSTALL_PREFIX=$INSTALLROOT
+  ${Qt6_ROOT}/bin/qmake QWT_INSTALL_PREFIX=$INSTALLROOT
   make ${JOBS:+-j $JOBS}
   make install
 }
