@@ -17,8 +17,17 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# Excludes so the downloaded source archive and bits' extraction/patch sentinels
+# never reach the build copy or the install tree (this recipe installs by copying
+# the whole tree).  Archive patterns are root-anchored.
+_BITS_SRC_EXCLUDES=(
+  --exclude '.bits_extracted' --exclude '.bits_patched' --exclude '*.downloading'
+  --exclude '/*.tar'     --exclude '/*.tar.gz'  --exclude '/*.tgz'
+  --exclude '/*.tar.bz2' --exclude '/*.tbz2'    --exclude '/*.tar.xz' --exclude '/*.txz'
+  --exclude '/*.tar.zst' --exclude '/*.zip'
+)
 function Prepare() {
-  rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
+  rsync -av --delete --exclude '**/.git' "${_BITS_SRC_EXCLUDES[@]}" --delete-excluded "${SOURCEDIR}"/ ./
 }
 
 function Make() {
@@ -31,5 +40,7 @@ function Make() {
 }
 
 function MakeInstall() {
-  cp -a . "$INSTALLROOT/"
+  # rsync -a (== cp -a semantics) but lets us drop the source archive/sentinels.
+  mkdir -p "$INSTALLROOT"
+  rsync -a --exclude '**/.git' "${_BITS_SRC_EXCLUDES[@]}" --delete-excluded ./ "$INSTALLROOT/"
 }

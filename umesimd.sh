@@ -19,7 +19,14 @@ MODULE_OPTIONS="--inc"
 ##############################
 function Make() {
   make ${JOBS:+-j $JOBS}
-  cmake -E make_directory $INSTALLROOT/include \
-  && cmake -E make_directory $INSTALLROOT/include/umesimd \
-  && cmake -E copy_directory $SOURCEDIR $INSTALLROOT/include/umesimd/
+  mkdir -p "$INSTALLROOT/include/umesimd"
+  # Header-only install: copy the source tree but drop the downloaded archive
+  # and bits' extraction/patch sentinels (otherwise they land in the install
+  # tree).  Archive patterns are root-anchored so only the top-level download
+  # is dropped.
+  rsync -a --exclude '**/.git' \
+    --exclude '.bits_extracted' --exclude '.bits_patched' --exclude '*.downloading' \
+    --exclude '/*.tgz' --exclude '/*.tar' --exclude '/*.tar.gz' \
+    --exclude '/*.tar.bz2' --exclude '/*.tar.xz' --exclude '/*.zip' \
+    "$SOURCEDIR"/ "$INSTALLROOT/include/umesimd/"
 }
