@@ -16,5 +16,10 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix $INSTALLROOT
+  # gcc 15 defaults to C23, where an empty parameter list '()' means "no
+  # arguments" (not the old K&R "unspecified"). libedit 3.1's examples
+  # (examples/fileman.c) use K&R-style forward declarations and then call those
+  # functions with arguments, which is a hard error under C23. Build as C17 to
+  # restore the pre-C23 empty-paren semantics.
+  ./configure --prefix "$INSTALLROOT" CFLAGS="${CFLAGS:-} -std=gnu17"
 }

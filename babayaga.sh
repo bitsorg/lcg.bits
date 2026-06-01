@@ -27,6 +27,12 @@ export CMAKE_POLICY_VERSION_MINIMUM=3.5
 ##############################
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin"
-  chmod +x "$SOURCEDIR/babayaga-fcc"
-  cp "$SOURCEDIR/babayaga-fcc" "$INSTALLROOT/bin/"
+  # MakeRecipe builds out-of-source: Prepare() rsyncs $SOURCEDIR into the build
+  # directory and make runs there, so the linked executable is in the build dir
+  # (cwd), not $SOURCEDIR. Locate it in the build tree.
+  local bin
+  bin=$(find . -maxdepth 3 -name babayaga-fcc -type f | head -1)
+  : "${bin:?babayaga-fcc was not produced by the build}"
+  chmod +x "$bin"
+  cp "$bin" "$INSTALLROOT/bin/"
 }
