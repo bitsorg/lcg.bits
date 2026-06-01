@@ -21,5 +21,11 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --disable-printing --prefix $INSTALLROOT
+  # Motif is ancient X11 C code. gcc 15 defaults to C23 (an empty '()' now means
+  # "no arguments", breaking K&R-style declarations -> "too many arguments to
+  # function 'headerproc[abi]'") and promotes -Wincompatible-pointer-types to a
+  # hard error. Build as gnu17 with -fcommon and downgrade those to warnings so
+  # the legacy code (and its makestrs build tool) compile.
+  ./configure --disable-printing --prefix "$INSTALLROOT" \
+    CFLAGS="${CFLAGS:-} -std=gnu17 -fcommon -Wno-error -Wno-incompatible-pointer-types"
 }
