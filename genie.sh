@@ -22,6 +22,21 @@ license: LGPL-2.1-only
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# GENIE's generated Makefiles reference $GENIE (the source root) and need ROOT
+# in ROOTSYS/PATH. These must be set for the build and install steps too -- the
+# old Configure set GENIE only inside its `$SHELL -c` subshell, so `make` ran
+# with $GENIE unset and looked for /src/make/Make.include. Export at recipe
+# scope; bits runs every phase in the same build directory ($PWD).
+export GENIE="$PWD"
+export ROOTSYS="${ROOT_ROOT}"
+export PATH="${ROOT_ROOT}/bin:$PATH"
+##############################
 function Configure() {
-  $SHELL -c "export ROOTSYS=${ROOT_ROOT} GENIE=\$PWD PATH=${ROOT_ROOT}/bin:\$PATH && ./configure --prefix=$INSTALLROOT --enable-lhapdf --enable-validation-tools --enable-test --enable-numi --enable-atmo --enable-nucleon-decay --enable-rwght --enable-pythia6 --enable-mathmore --with-pythia6-lib=${PYTHIA6_ROOT}/lib --with-lhapdf-lib=${LHAPDF_ROOT}/lib --with-lhapdf-inc=${LHAPDF_ROOT}/include --with-log4cpp-inc=${LOG4CPP_ROOT}/include --with-log4cpp-lib=${LOG4CPP_ROOT}/lib --with-libxml2-lib=${LIBXML2_ROOT}/lib --with-libxml2-inc=${LIBXML2_ROOT}/include/libxml2"
+  ./configure --prefix="$INSTALLROOT" --enable-lhapdf --enable-validation-tools \
+    --enable-test --enable-numi --enable-atmo --enable-nucleon-decay --enable-rwght \
+    --enable-pythia6 --enable-mathmore \
+    --with-pythia6-lib=${PYTHIA6_ROOT}/lib \
+    --with-lhapdf-lib=${LHAPDF_ROOT}/lib --with-lhapdf-inc=${LHAPDF_ROOT}/include \
+    --with-log4cpp-inc=${LOG4CPP_ROOT}/include --with-log4cpp-lib=${LOG4CPP_ROOT}/lib \
+    --with-libxml2-lib=${LIBXML2_ROOT}/lib --with-libxml2-inc=${LIBXML2_ROOT}/include/libxml2
 }

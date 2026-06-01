@@ -27,5 +27,20 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure -no-separate-debug-info -release --prefix=$INSTALLROOT -nomake examples -nomake tests --opensource --confirm-license
+  # Mirror lcgcmake: skip qtwebengine (heavy, needs nodejs/html5lib and is the
+  # source of the html5lib import error) and let configure find system .pc files.
+  export PKG_CONFIG_PATH="/usr/share/pkgconfig:${PKG_CONFIG_PATH}"
+  ./configure -no-separate-debug-info -release --prefix=$INSTALLROOT \
+    -nomake examples -nomake tests --opensource --confirm-license \
+    -skip qtwebengine
+}
+
+function Make() {
+  # Qt 6.x generates a Ninja build, not a Makefile -- the default `make` step
+  # fails with "No targets specified and no makefile found". Build with ninja.
+  ninja ${JOBS:+-j$JOBS}
+}
+
+function MakeInstall() {
+  ninja install
 }
