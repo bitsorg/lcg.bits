@@ -25,3 +25,13 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+# python-sollya's Makefile (driven by the pip build) defaults to PYTHON=python2
+# (hence "python2: Permission denied") and needs the sollya/mpfi/mpfr/gmp
+# locations. lcgcmake passes these explicitly on the make line; export them so
+# the build uses Python 3 and finds the libraries.
+export PYTHON="${PYTHON_ROOT}/bin/python"
+export SOLLYA_DIR="${SOLLYA_ROOT}"
+export MPFI_DIR="${MPFI_ROOT}"
+[ -n "${MPFR_ROOT}" ] && export MPFR_DIR="${MPFR_ROOT}"
+[ -n "${GMP_ROOT}" ]  && export GMP_DIR="${GMP_ROOT}"
+##############################

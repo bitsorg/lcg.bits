@@ -31,6 +31,11 @@ function Prepare() {
 }
 
 function Make() {
+  # Build the main OpenLoops library (libopenloops.so) first. lcgcmake runs
+  # ./scons before any libinstall; without it only the process libraries are
+  # produced and consumers (herwig3, whizard, sherpa) fail with
+  # "libopenloops.so ... not found".
+  ./scons
   ./openloops libinstall --jobs=${JOBS:-5} ${openloops_public_proc} compile_extra=1
   sed -i 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS/' pyol/config/default.cfg
   ./openloops libinstall --jobs=${JOBS:-5} all.coll compile_extra=1

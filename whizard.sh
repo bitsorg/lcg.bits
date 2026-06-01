@@ -33,6 +33,12 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# WHIZARD's circe2 is written in OCaml; without CAMLLIB the OCaml compiler can't
+# find its standard library and the build fails with "Unbound module Stdlib".
+# lcgcmake sets CAMLLIB=${ocaml_home}/lib/ocaml as build ENVIRONMENT; export it
+# at recipe scope so both configure and make see it.
+export CAMLLIB="${OCAML_ROOT}/lib/ocaml"
+##############################
 function Configure() {
   cmake -E make_directory $INSTALLROOT/tmppdfsets
   ${LHAPDF_ROOT}/bin/lhapdf --pdfdir=$INSTALLROOT/tmppdfsets --listdir=${LHAPDF_ROOT}/share/LHAPDF install cteq6l1 CT10
