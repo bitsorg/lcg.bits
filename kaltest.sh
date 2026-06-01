@@ -1,7 +1,7 @@
 package: kaltest
 description: KalTest Kalman-filter track fit library
-version: "master"
-tag: "master"
+version: "02.05.02"
+tag: "v02-05-02"
 source: https://github.com/iLCSoft/KalTest.git
 requires:
   - CMake

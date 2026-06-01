@@ -1,7 +1,7 @@
 package: fccanalyses
 description: FCCAnalyses analysis framework for FCC experiments
-version: "main"
-tag: "main"
+version: "0.12.0"
+tag: "v0.12.0"
 source: https://github.com/HEP-FCC/FCCAnalyses.git
 requires:
   - CMake

@@ -1,7 +1,7 @@
 package: ildperformance
 description: ILDPerformance ILC detector performance study package
-version: "master"
-tag: "master"
+version: "01.12.01"
+tag: "v01-12-01"
 source: https://github.com/iLCSoft/ILDPerformance.git
 requires:
   - CMake

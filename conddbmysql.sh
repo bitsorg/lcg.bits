@@ -1,7 +1,7 @@
 package: conddbmysql
 description: CondDB MySQL backend for conditions database access
-version: "master"
-tag: "master"
+version: "0.9.7"
+tag: "v0.9.7"
 source: https://github.com/iLCSoft/CondDBMySQL.git
 requires:
   - CMake

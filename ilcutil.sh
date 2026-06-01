@@ -1,7 +1,7 @@
 package: ilcutil
 description: ILCUtil utility library for ILC software packages
-version: "master"
-tag: "master"
+version: "01.09"
+tag: "v01-09"
 source: https://github.com/iLCSoft/ilcutil.git
 requires:
   - CMake

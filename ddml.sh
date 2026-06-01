@@ -1,7 +1,7 @@
 package: ddml
 description: DDML Machine Learning integration for DD4hep
-version: "main"
-tag: "main"
+version: "0.2.0"
+tag: "v0.2.0"
 source: https://github.com/key4hep/DDML.git
 requires:
   - CMake

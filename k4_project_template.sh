@@ -1,7 +1,7 @@
 package: k4_project_template
 description: Key4hep project CMake template
-version: "main"
-tag: "main"
+version: "0.7.0"
+tag: "v0.7.0"
 source: https://github.com/key4hep/k4-project-template.git
 requires:
   - CMake

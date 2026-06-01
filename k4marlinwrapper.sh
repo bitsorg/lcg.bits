@@ -1,7 +1,7 @@
 package: k4marlinwrapper
 description: Key4hep Gaudi wrapper for Marlin processors
-version: "main"
-tag: "main"
+version: "00.14"
+tag: "v00-14"
 source: https://github.com/key4hep/k4MarlinWrapper.git
 requires:
   - CMake

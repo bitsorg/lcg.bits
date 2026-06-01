@@ -1,7 +1,7 @@
 package: k4actstracking
 description: Key4hep ACTS tracking integration
-version: "main"
-tag: "main"
+version: "0.3"
+tag: "v0.3"
 source: https://github.com/key4hep/k4ActsTracking.git
 requires:
   - CMake

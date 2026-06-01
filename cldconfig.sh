@@ -1,7 +1,7 @@
 package: cldconfig
 description: cldconfig dynamic linker configuration utility
-version: "main"
-tag: "main"
+version: "2025.11.07"
+tag: "v2025.11.07"
 source: https://github.com/key4hep/CLDConfig.git
 requires:
   - CMake

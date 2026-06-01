@@ -1,7 +1,7 @@
 package: k4mljettagger
 description: Key4hep ML-based jet flavor tagger
-version: "main"
-tag: "main"
+version: "0.1.1"
+tag: "v0.1.1"
 source: https://github.com/key4hep/k4MLJetTagger.git
 requires:
   - CMake

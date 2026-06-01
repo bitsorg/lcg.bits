@@ -1,7 +1,7 @@
 package: marlin
 description: Marlin modular analysis and reconstruction framework for ILC
-version: "master"
-tag: "master"
+version: "01.19.06"
+tag: "v01-19-06"
 source: https://github.com/iLCSoft/marlin.git
 requires:
   - CMake

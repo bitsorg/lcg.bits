@@ -1,7 +1,7 @@
 package: cedviewer
 description: CEDViewer Marlin processor for ILC event display
-version: "master"
-tag: "master"
+version: "01.21"
+tag: "v01-21"
 source: https://github.com/iLCSoft/CEDViewer.git
 requires:
   - CMake

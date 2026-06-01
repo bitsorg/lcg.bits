@@ -1,7 +1,7 @@
 package: forwardtracking
 description: Forward tracking algorithm Marlin processor for ILC
-version: "master"
-tag: "master"
+version: "01.14.02"
+tag: "v01-14-02"
 source: https://github.com/iLCSoft/ForwardTracking.git
 requires:
   - CMake

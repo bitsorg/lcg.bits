@@ -1,7 +1,7 @@
 package: fcc_config
 description: FCC (Future Circular Collider) detector configuration files
-version: "main"
-tag: "main"
+version: "0.3.0"
+tag: "v0.3.0"
 source: https://github.com/HEP-FCC/FCC-config.git
 requires:
   - CMake

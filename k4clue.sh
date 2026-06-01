@@ -1,7 +1,7 @@
 package: k4clue
 description: Key4hep CLUE clustering algorithm
-version: "main"
-tag: "main"
+version: "01.01.00"
+tag: "v01-01-00"
 source: https://github.com/key4hep/k4Clue.git
 requires:
   - CMake

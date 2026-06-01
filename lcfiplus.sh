@@ -1,7 +1,7 @@
 package: lcfiplus
 description: LCFIPlus flavor tagging package for ILC/CLICdp
-version: "master"
-tag: "master"
+version: "00.11.01"
+tag: "v00-11-01"
 source: https://github.com/lcfiplus/LCFIPlus.git
 requires:
   - CMake

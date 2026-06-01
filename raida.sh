@@ -1,7 +1,7 @@
 package: raida
 description: RAIDA ROOT-based implementation of the AIDA analysis interface
-version: "master"
-tag: "master"
+version: "01.12"
+tag: "v01-12"
 source: https://github.com/iLCSoft/RAIDA.git
 requires:
   - CMake

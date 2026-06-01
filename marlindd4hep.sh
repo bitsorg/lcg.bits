@@ -1,7 +1,7 @@
 package: marlindd4hep
 description: MarlinDD4hep DD4hep geometry integration for Marlin
-version: "master"
-tag: "master"
+version: "00.06.02"
+tag: "v00-06-02"
 source: https://github.com/iLCSoft/MarlinDD4hep.git
 requires:
   - CMake

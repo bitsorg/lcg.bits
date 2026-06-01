@@ -1,7 +1,7 @@
 package: k4reccalorimeter
 description: Key4hep calorimeter reconstruction algorithms
-version: "main"
-tag: "main"
+version: "0.1.0pre18"
+tag: "v0.1.0pre18"
 source: https://github.com/HEP-FCC/k4RecCalorimeter.git
 requires:
   - CMake

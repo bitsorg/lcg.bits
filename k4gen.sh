@@ -1,7 +1,7 @@
 package: k4gen
 description: Key4hep generator wrapper algorithms
-version: "main"
-tag: "main"
+version: "0.1pre15"
+tag: "v0.1pre15"
 source: https://github.com/key4hep/k4gen.git
 requires:
   - CMake

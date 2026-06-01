@@ -1,7 +1,7 @@
 package: marlinutil
 description: MarlinUtil utility library for Marlin processors
-version: "master"
-tag: "master"
+version: "01.18.02"
+tag: "v01-18-02"
 source: https://github.com/iLCSoft/MarlinUtil.git
 requires:
   - CMake

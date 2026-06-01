@@ -1,7 +1,7 @@
 package: lctuple
 description: LCTuple Marlin processor writing ROOT ntuples from LCIO
-version: "master"
-tag: "master"
+version: "01.14"
+tag: "v01-14"
 source: https://github.com/iLCSoft/LCTuple.git
 requires:
   - CMake

@@ -1,7 +1,7 @@
 package: kitrack
 description: KiTrack combinatorial track finder for ILC
-version: "master"
-tag: "master"
+version: "01.10.01"
+tag: "v01-10-01"
 source: https://github.com/iLCSoft/KiTrack.git
 requires:
   - CMake

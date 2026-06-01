@@ -1,7 +1,7 @@
 package: k4reco
 description: Key4hep reconstruction framework
-version: "main"
-tag: "main"
+version: "0.3.0"
+tag: "v0.3.0"
 source: https://github.com/key4hep/k4Reco.git
 requires:
   - CMake

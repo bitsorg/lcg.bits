@@ -1,7 +1,7 @@
 package: k4generatorsconfig
 description: Key4hep generator configuration package
-version: "main"
-tag: "main"
+version: "1.0.1-alpha"
+tag: "v1.0.1-alpha"
 source: https://github.com/key4hep/k4GeneratorsConfig.git
 requires:
   - CMake

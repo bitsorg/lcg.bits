@@ -1,7 +1,7 @@
 package: ced
 description: CED (CEDViewer Event Display) for ILC experiments
-version: "master"
-tag: "master"
+version: "01.10"
+tag: "v01-10"
 source: https://github.com/iLCSoft/CED.git
 requires:
   - CMake

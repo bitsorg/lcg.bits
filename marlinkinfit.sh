@@ -1,7 +1,7 @@
 package: marlinkinfit
 description: MarlinKinFit kinematic fitting library for Marlin
-version: "master"
-tag: "master"
+version: "00.07"
+tag: "v00-07"
 source: https://github.com/iLCSoft/MarlinKinfit.git
 requires:
   - CMake

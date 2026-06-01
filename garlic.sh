@@ -1,7 +1,7 @@
 package: garlic
 description: GARLIC Geant4-based calorimeter photon veto simulation
-version: "master"
-tag: "master"
+version: "03.01"
+tag: "v03-01"
 source: https://github.com/iLCSoft/Garlic.git
 requires:
   - CMake

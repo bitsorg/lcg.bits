@@ -1,7 +1,7 @@
 package: gear
 description: GEAR detector description toolkit for ILC experiments
-version: "master"
-tag: "master"
+version: "01.09.06"
+tag: "v01-09-06"
 source: https://github.com/iLCSoft/gear.git
 requires:
   - CMake

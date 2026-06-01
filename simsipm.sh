@@ -1,7 +1,7 @@
 package: simsipm
 description: SimSiPM fast SiPM (silicon photomultiplier) simulation library
-version: "main"
-tag: "main"
+version: "2.1.0"
+tag: "v2.1.0"
 source: https://github.com/EdoPro98/SimSiPM.git
 requires:
   - CMake

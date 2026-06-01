@@ -1,7 +1,7 @@
 package: marlintrk
 description: MarlinTrk track fitting framework for Marlin
-version: "master"
-tag: "master"
+version: "02.09.02"
+tag: "v02-09-02"
 source: https://github.com/iLCSoft/MarlinTrk.git
 requires:
   - CMake

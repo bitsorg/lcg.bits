@@ -1,7 +1,7 @@
 package: marlinkinfitprocessors
 description: MarlinKinFitProcessors Marlin processors using kinematic fitting
-version: "master"
-tag: "master"
+version: "00.05.01"
+tag: "v00-05-01"
 source: https://github.com/iLCSoft/MarlinKinfitProcessors.git
 requires:
   - CMake

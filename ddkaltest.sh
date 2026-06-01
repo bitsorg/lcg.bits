@@ -1,7 +1,7 @@
 package: ddkaltest
 description: DDKalTest Kalman-filter track fit for DD4hep geometry
-version: "master"
-tag: "master"
+version: "01.07.01"
+tag: "v01-07-01"
 source: https://github.com/iLCSoft/DDKalTest.git
 requires:
   - CMake
