@@ -39,6 +39,18 @@ MODULE_OPTIONS="--bin --lib"
 # at recipe scope so both configure and make see it.
 export CAMLLIB="${OCAML_ROOT}/lib/ocaml"
 ##############################
+# WHIZARD bundles StdHEP/mcfio (contrib/mcfio) whose XDR I/O includes
+# <rpc/types.h>. glibc dropped the Sun RPC headers years ago; on modern distros
+# (Ubuntu 25.10 here) they are provided by libtirpc under /usr/include/tirpc.
+# Put the tirpc include dir on CPPFLAGS and link -ltirpc so mcfio compiles
+# ("rpc/types.h: No such file or directory"). Requires the system libtirpc-dev
+# package; prefer pkg-config and fall back to the conventional path.
+_tirpc_cflags="$(pkg-config --cflags libtirpc 2>/dev/null || echo -I/usr/include/tirpc)"
+_tirpc_libs="$(pkg-config --libs libtirpc 2>/dev/null || echo -ltirpc)"
+export CPPFLAGS="${CPPFLAGS:-} ${_tirpc_cflags}"
+export CFLAGS="${CFLAGS:-} ${_tirpc_cflags}"
+export LDFLAGS="${LDFLAGS:-} ${_tirpc_libs}"
+##############################
 function Configure() {
   cmake -E make_directory $INSTALLROOT/tmppdfsets
   ${LHAPDF_ROOT}/bin/lhapdf --pdfdir=$INSTALLROOT/tmppdfsets --listdir=${LHAPDF_ROOT}/share/LHAPDF install cteq6l1 CT10

@@ -26,6 +26,12 @@ function Configure() {
   # function 'headerproc[abi]'") and promotes -Wincompatible-pointer-types to a
   # hard error. Build as gnu17 with -fcommon and downgrade those to warnings so
   # the legacy code (and its makestrs build tool) compile.
+  #
+  # The bundled libXpm sources (lib/Xpm) call strcpy/strncpy/strlen/strcmp
+  # without including <string.h>; since gcc 14 an implicit function declaration
+  # is an error by default (-Werror=implicit-function-declaration) regardless of
+  # -std, and the blanket -Wno-error does not cover it in every sub-make. Add an
+  # explicit -Wno-implicit-function-declaration so those legacy calls compile.
   ./configure --disable-printing --prefix "$INSTALLROOT" \
-    CFLAGS="${CFLAGS:-} -std=gnu17 -fcommon -Wno-error -Wno-incompatible-pointer-types"
+    CFLAGS="${CFLAGS:-} -std=gnu17 -fcommon -Wno-error -Wno-incompatible-pointer-types -Wno-implicit-function-declaration"
 }
