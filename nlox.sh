@@ -39,3 +39,15 @@ function Configure() {
     -DNLOX_ENABLE_QCDLOOP2=OFF \
     -DNLOX_ENABLE_QCDLOOP=ON
 }
+
+function Make() {
+  # QCDLoop is built as a CMake ExternalProject, and its Makefile has a Fortran
+  # module-order race: test.o is compiled before qldiffi2.mod is produced. Under
+  # a parallel build the GNU make jobserver propagates into QCDLoop's nested make
+  # and triggers it ("Cannot open module file 'qldiffi2.mod'"). Build the bulk
+  # (the C++ process code) in parallel for speed, then run a serial pass that
+  # finishes QCDLoop without the race. The serial pass is authoritative, so a
+  # genuine error still fails the build.
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} || true
+  cmake --build . -- ${CMAKE_OPTIONS} -j1
+}
