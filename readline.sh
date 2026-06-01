@@ -25,6 +25,11 @@ function Configure() {
   # are left unresolved and any program that loads readline via LD_LIBRARY_PATH
   # (e.g. the system awk used in autoconf configure probes) crashes with
   # "symbol lookup error: … undefined symbol: UP".
+  # The unresolved terminfo globals (UP, BC, PC, …) live in libtinfo on modern
+  # split-ncurses systems (Debian/Ubuntu), not in libncurses, so -lncurses alone
+  # leaves them undefined. Add -ltinfo so libreadline.so carries the terminfo
+  # symbols (and a correct DT_NEEDED) and programs loading it don't crash with
+  # "undefined symbol: UP".
   ./configure --prefix="$INSTALLROOT" --enable-static -q --with-curses \
-    SHLIB_LIBS=-lncurses LIBS=-lncurses
+    SHLIB_LIBS="-lncurses -ltinfo" LIBS="-lncurses -ltinfo"
 }
