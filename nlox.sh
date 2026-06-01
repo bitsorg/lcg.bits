@@ -18,11 +18,18 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  $SHELL -c "sed -i \
-     -e 's/set(NLOX_PROCESSES [^)]*)/' \
-'set(NLOX_PROCESSES pp_Wpttbar pp_Zttbar_as3ae1 pp_ttbarepem_as3ae2 pp_Wmttbar)/' \
-     -e 's|helac-phegas/tar-files|tar-files|' \
-     $SOURCEDIR/CMakeLists.txt"
+  # NOTE: the previous combined sed was malformed -- the NLOX_PROCESSES
+  # replacement string was split across two separate shell words by the line
+  # continuation, so neither substitution applied (the OneLOop download URL was
+  # left with the dead duplicate 'helac-phegas/' path component -> 404). Run the
+  # two substitutions as well-formed, separate commands instead.
+  #
+  # 1) Restrict the built process list to the ones this stack needs.
+  sed -i 's/set(NLOX_PROCESSES [^)]*)/set(NLOX_PROCESSES pp_Wpttbar pp_Zttbar_as3ae1 pp_ttbarepem_as3ae2 pp_Wmttbar)/' \
+    "$SOURCEDIR/CMakeLists.txt"
+  # 2) Fix the OneLOop/QCDLoop download URL: the site dropped the duplicate
+  #    'helac-phegas/' path component (helac-phegas.web.cern.ch/tar-files/...).
+  sed -i 's|helac-phegas/tar-files|tar-files|g' "$SOURCEDIR/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

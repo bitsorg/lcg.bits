@@ -25,3 +25,10 @@ function Make() {
   && mv -f $INSTALLROOT/usr/include $INSTALLROOT/ \
   && rm -rf $INSTALLROOT/usr
 }
+
+function MakeInstall() {
+  # The install (make -C src install) is done in Make() above; libbpf's
+  # top-level Makefile has no 'install' target, so the MakeRecipe default
+  # (make install) would fail. Nothing more to do here.
+  true
+}

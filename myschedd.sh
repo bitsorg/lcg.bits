@@ -18,5 +18,12 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  GODEBUG=netdns=cgo go build
+  GODEBUG=netdns=cgo go build -o myschedd
+}
+
+function MakeInstall() {
+  # myschedd has no 'install' target; install the go-built binary so the
+  # MakeRecipe default (make install) is not used.
+  mkdir -p "$INSTALLROOT/bin"
+  cp -p myschedd "$INSTALLROOT/bin/"
 }
