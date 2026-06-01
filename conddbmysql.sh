@@ -1,7 +1,10 @@
 package: conddbmysql
 description: CondDB MySQL backend for conditions database access
-version: "0.9.7"
-tag: "v0.9.7"
+# The derived v0.9.7 tag does not exist upstream; track the default branch.
+# (iLCSoft/CondDBMySQL is a legacy repo on 'master'; flip to 'main' if checkout
+# still fails.)
+version: "master"
+tag: "master"
 source: https://github.com/iLCSoft/CondDBMySQL.git
 requires:
   - CMake

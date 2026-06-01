@@ -1,7 +1,9 @@
 package: cldconfig
 description: cldconfig dynamic linker configuration utility
-version: "2025.11.07"
-tag: "v2025.11.07"
+# CLDConfig follows the Key4hep nightlies and has no stable release tag, so
+# track the default branch (matches --defaults dev4 / HEAD).
+version: "main"
+tag: "main"
 source: https://github.com/key4hep/CLDConfig.git
 requires:
   - CMake

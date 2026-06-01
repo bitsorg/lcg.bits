@@ -1,7 +1,9 @@
 package: k4actstracking
 description: Key4hep ACTS tracking integration
-version: "0.3"
-tag: "v0.3"
+# The derived v0.3 tag does not exist upstream; track the default branch
+# (matches --defaults dev4 / HEAD).
+version: "main"
+tag: "main"
 source: https://github.com/key4hep/k4ActsTracking.git
 requires:
   - CMake
