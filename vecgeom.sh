@@ -10,8 +10,8 @@ requires:
   - Vc
   - veccore
   - XercesC
-  # optional:
-  # - cuda
+  # CUDA (conditional: only --defaults cuda builds, arch tagged -cuda):
+  - "cuda:.*-cuda$"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -24,10 +24,18 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # Enable the CUDA backend only under --defaults cuda. ENABLE_CUDA is set
+  # (to ON) by defaults-cuda; an unset value is treated as OFF.
+  local cuda_opts=()
+  if [ "${ENABLE_CUDA:-OFF}" = "ON" ]; then
+    cuda_opts+=(-DVECGEOM_ENABLE_CUDA=ON)
+    [ -n "${CMAKE_CUDA_ARCHITECTURES:-}" ] && cuda_opts+=(-DCMAKE_CUDA_ARCHITECTURES="${CMAKE_CUDA_ARCHITECTURES}")
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
+    "${cuda_opts[@]}" \
     -DVECGEOM_GEANT4=OFF \
     -DVECGEOM_ROOT=OFF \
     -DVECGEOM_BUILTIN_VECCORE=OFF \
