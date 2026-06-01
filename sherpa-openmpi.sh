@@ -3,7 +3,10 @@ description: Sherpa Monte Carlo event generator built with OpenMPI
 version: "2.2.11p2.openmpi3"
 tag: "2.2.11p2.openmpi3"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SHERPA-MC-2.2.11p2.openmpi3.tar.gz
+  # The "p2"/".openmpi3" are LCG patch/build labels, not part of the upstream
+  # filename — the hosted tarball is SHERPA-MC-2.2.11.tar.gz (same source as the
+  # regular sherpa recipe); OpenMPI is enabled at build time, not a separate source.
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SHERPA-MC-2.2.11.tar.gz
 requires:
   - lhapdf
   - openmpi
