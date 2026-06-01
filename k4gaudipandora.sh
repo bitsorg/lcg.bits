@@ -1,8 +1,8 @@
 package: k4gaudipandora
 description: Key4hep Gaudi-Pandora PFA integration
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4gaudipandora.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4gaudipandora.git
 requires:
   - CMake
   - podio

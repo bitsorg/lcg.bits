@@ -1,8 +1,8 @@
 package: marlinreco
 description: MarlinReco reconstruction Marlin processors for ILC
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/MarlinReco.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/MarlinReco.git
 requires:
   - CMake
   - ilcutil

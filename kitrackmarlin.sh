@@ -1,8 +1,8 @@
 package: kitrackmarlin
 description: KiTrackMarlin Marlin processor wrapper for KiTrack
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/KiTrackMarlin.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/KiTrackMarlin.git
 requires:
   - CMake
   - kitrack

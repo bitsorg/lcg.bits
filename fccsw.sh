@@ -1,8 +1,8 @@
 package: fccsw
 description: FCCSW Future Circular Collider Software framework
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/HEP-FCC/FCCSW.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/HEP-FCC/FCCSW.git
 requires:
   - CMake
   - DD4hep

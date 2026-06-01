@@ -1,8 +1,8 @@
 package: k4rectracker
 description: Key4hep tracker reconstruction algorithms
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4RecTracker.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4RecTracker.git
 requires:
   - CMake
   - k4fwcore

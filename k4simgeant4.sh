@@ -1,8 +1,8 @@
 package: k4simgeant4
 description: Key4hep Geant4 full simulation framework
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4SimGeant4.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4SimGeant4.git
 requires:
   - CMake
   - k4fwcore

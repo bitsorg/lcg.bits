@@ -1,8 +1,8 @@
 package: k4marlinwrapper
 description: Key4hep Gaudi wrapper for Marlin processors
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4MarlinWrapper.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4MarlinWrapper.git
 requires:
   - CMake
   - k4edm4hep2lcioconv

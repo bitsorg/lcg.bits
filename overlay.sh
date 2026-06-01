@@ -1,8 +1,8 @@
 package: overlay
 description: overlay custom package overlay/patching utility
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/Overlay.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/Overlay.git
 requires:
   - CMake
   - ilcutil

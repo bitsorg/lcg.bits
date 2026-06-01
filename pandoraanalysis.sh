@@ -1,8 +1,8 @@
 package: pandoraanalysis
 description: PandoraAnalysis validation for Pandora PFA
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/PandoraPFA/LCPandoraAnalysis.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/PandoraPFA/LCPandoraAnalysis.git
 requires:
   - CMake
   - ilcutil

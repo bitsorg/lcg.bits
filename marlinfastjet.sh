@@ -1,8 +1,8 @@
 package: marlinfastjet
 description: MarlinFastJet FastJet jet finding Marlin processor
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/MarlinFastjet.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/MarlinFastjet.git
 requires:
   - CMake
   - ilcutil

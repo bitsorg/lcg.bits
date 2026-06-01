@@ -1,8 +1,8 @@
 package: vecmath
 description: Vecmath Java 3D vector math library (geometry utilities)
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/root-project/vecmath.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/root-project/vecmath.git
 requires:
   - CMake
   - veccore

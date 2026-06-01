@@ -1,8 +1,8 @@
 package: fcalclusterer
 description: FcalClusterer forward calorimeter clustering for ILC
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/FCalSW/FCalClusterer.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/FCalSW/FCalClusterer.git
 requires:
   - CMake
   - ilcutil

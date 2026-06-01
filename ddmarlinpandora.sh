@@ -1,8 +1,8 @@
 package: ddmarlinpandora
 description: DDMarlinPandora Pandora PFA plugin for DD4hep/Marlin
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/DDMarlinPandora.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/DDMarlinPandora.git
 requires:
   - CMake
   - ilcutil

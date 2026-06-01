@@ -1,8 +1,8 @@
 package: k4reco
 description: Key4hep reconstruction framework
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4Reco.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4Reco.git
 requires:
   - CMake
   - k4fwcore

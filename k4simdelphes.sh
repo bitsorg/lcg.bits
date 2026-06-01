@@ -1,8 +1,8 @@
 package: k4simdelphes
 description: Key4hep Delphes fast simulation wrapper
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4SimDelphes.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4SimDelphes.git
 requires:
   - CMake
   - k4fwcore

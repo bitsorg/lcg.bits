@@ -1,8 +1,8 @@
 package: cldconfig
 description: cldconfig dynamic linker configuration utility
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/CLDConfig.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/CLDConfig.git
 requires:
   - CMake
   - k4fwcore

@@ -1,8 +1,8 @@
 package: clicperformance
 description: CLICPerformance performance study tools for CLIC detector
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/ClicPerformance.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/ClicPerformance.git
 requires:
   - CMake
   - ilcutil

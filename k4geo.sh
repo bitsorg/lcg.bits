@@ -1,8 +1,8 @@
 package: k4geo
 description: Key4hep detector geometry descriptions (DD4hep)
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4geo.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4geo.git
 requires:
   - CMake
   - DD4hep

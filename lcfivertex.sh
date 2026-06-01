@@ -1,8 +1,8 @@
 package: lcfivertex
 description: LCFIVertex vertex finder Marlin processor
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/LCFIVertex.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/LCFIVertex.git
 requires:
   - CMake
   - LCIO

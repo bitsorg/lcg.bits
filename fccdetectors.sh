@@ -1,8 +1,8 @@
 package: fccdetectors
 description: FCC detector geometry descriptions for simulation
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/HEP-FCC/FCCDetectors.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/HEP-FCC/FCCDetectors.git
 requires:
   - CMake
   - DD4hep

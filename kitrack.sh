@@ -1,8 +1,8 @@
 package: kitrack
 description: KiTrack combinatorial track finder for ILC
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/KiTrack.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/KiTrack.git
 requires:
   - CMake
   - ilcutil

@@ -1,8 +1,8 @@
 package: opendatadetector
 description: Open Data Detector ACTS tracking geometry for benchmarks
-version: "HEAD"
-tag: "HEAD"
-source: git+https://gitlab.cern.ch/acts/OpenDataDetector.git?obj=main
+version: "main"
+tag: "main"
+source: https://gitlab.cern.ch/acts/OpenDataDetector.git
 requires:
   - CMake
   - DD4hep

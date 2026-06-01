@@ -1,8 +1,8 @@
 package: k4edm4hep2lcioconv
 description: Key4hep EDM4hep↔LCIO event-data model converter
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4EDM4hep2LCIOConv.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4EDM4hep2LCIOConv.git
 requires:
   - CMake
   - EDM4hep

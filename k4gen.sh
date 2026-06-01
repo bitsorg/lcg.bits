@@ -1,8 +1,8 @@
 package: k4gen
 description: Key4hep generator wrapper algorithms
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4gen.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4gen.git
 requires:
   - CMake
   - podio

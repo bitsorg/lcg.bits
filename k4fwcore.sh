@@ -1,8 +1,8 @@
 package: k4fwcore
 description: Key4hep Gaudi-based core framework
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4FWCore.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4FWCore.git
 requires:
   - CMake
   - ROOT

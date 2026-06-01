@@ -1,8 +1,8 @@
 package: conformaltracking
 description: Conformal tracking algorithm for CLIC detector studies
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/ConformalTracking.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/ConformalTracking.git
 requires:
   - CMake
   - ilcutil

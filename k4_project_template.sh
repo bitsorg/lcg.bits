@@ -1,8 +1,8 @@
 package: k4_project_template
 description: Key4hep project CMake template
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/key4hep/k4-project-template.git?obj=main
+version: "main"
+tag: "main"
+source: https://github.com/key4hep/k4-project-template.git
 requires:
   - CMake
   - k4fwcore

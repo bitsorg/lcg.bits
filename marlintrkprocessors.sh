@@ -1,8 +1,8 @@
 package: marlintrkprocessors
 description: MarlinTrkProcessors track finding/fitting Marlin processors
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/MarlinTrkProcessors.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/MarlinTrkProcessors.git
 requires:
   - CMake
   - marlintrk

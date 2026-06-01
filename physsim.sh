@@ -1,8 +1,8 @@
 package: physsim
 description: PhysSim physics generator library for ILC studies
-version: "HEAD"
-tag: "HEAD"
-source: git+https://github.com/iLCSoft/Physsim.git?obj=master
+version: "master"
+tag: "master"
+source: https://github.com/iLCSoft/Physsim.git
 requires:
   - CMake
   - ilcutil
