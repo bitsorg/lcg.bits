@@ -20,13 +20,16 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # asiofi configure builds a bundled FairCMakeModules via a nested cmake
-  # invocation (cmake/asiofiBundlePackageHelper.cmake).  That sub-project sets a
-  # cmake_minimum_required below 3.5, which CMake 3.30 now rejects, so the nested
-  # build exits 1 ("Building bundled FairCMakeModules" -> error).  Export the
-  # compatibility floor so the nested cmake (which inherits the environment)
-  # accepts the old minimum.  NOTE: confirm against build/extern/FairCMakeModules/
-  # build.log; if the failure is different this will need revisiting.
+  # asiofi vendors FairCMakeModules as a GIT SUBMODULE (extern/FairCMakeModules)
+  # and, when find_package(FairCMakeModules) fails, falls back to building that
+  # bundled copy (cmake/asiofiBundlePackageHelper.cmake -> build_bundled). Built
+  # from a source tarball the submodule directory is EMPTY (submodules are not
+  # shipped in tarballs), so the bundle's git step fails:
+  #   error: pathspec '.../extern/FairCMakeModules' did not match any file(s)
+  # The real fix is to make an external FairCMakeModules discoverable so the
+  # bundle path is never taken (see the faircmakemodules dependency). The policy
+  # floor below is still exported because FairCMakeModules' own cmake predates
+  # the CMake>=4 minimum.
   export CMAKE_POLICY_VERSION_MINIMUM=3.5
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
