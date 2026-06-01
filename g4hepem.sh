@@ -7,8 +7,9 @@ sources:
 requires:
   - CMake
   - Geant4
-  # CUDA is pulled in only for --defaults cuda builds (arch tagged -cuda).
-  - "cuda:.*-cuda$"
+  # CUDA is pulled in only when the active defaults set variable `cuda` truthy
+  # (defaults-cuda); a plain build leaves `cuda` unset and skips this dependency.
+  - "cuda:(?cuda)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

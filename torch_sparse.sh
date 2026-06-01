@@ -6,8 +6,8 @@ requires:
   - torch
   - scipy
   - sympy
-  # CUDA (conditional: only --defaults cuda builds, arch tagged -cuda):
-  - "cuda:.*-cuda$"
+  # CUDA (conditional: only when defaults set variable `cuda` truthy):
+  - "cuda:(?cuda)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
