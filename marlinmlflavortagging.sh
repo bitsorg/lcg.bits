@@ -2,8 +2,7 @@ package: marlinmlflavortagging
 description: MarlinML ML-based flavor tagging for ILC
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://gitlab.desy.de/ilcsoft/MarlinMLFlavorTagging.git?obj=main
 requires:
   - CMake
   - LCIO

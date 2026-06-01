@@ -2,8 +2,7 @@ package: fcc_config
 description: FCC (Future Circular Collider) detector configuration files
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/HEP-FCC/FCC-config.git?obj=main
 requires:
   - CMake
   - DD4hep

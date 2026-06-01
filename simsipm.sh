@@ -2,8 +2,7 @@ package: simsipm
 description: SimSiPM fast SiPM (silicon photomultiplier) simulation library
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/EdoPro98/SimSiPM.git?obj=master
 requires:
   - CMake
 build_requires:

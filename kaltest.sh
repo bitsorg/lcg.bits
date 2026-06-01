@@ -2,8 +2,7 @@ package: kaltest
 description: KalTest Kalman-filter track fit library
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/KalTest.git?obj=master
 requires:
   - CMake
   - ilcutil

@@ -2,8 +2,7 @@ package: cedviewer
 description: CEDViewer Marlin processor for ILC event display
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/CEDViewer.git?obj=master
 requires:
   - CMake
   - ilcutil

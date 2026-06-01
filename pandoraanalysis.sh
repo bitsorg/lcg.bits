@@ -2,8 +2,7 @@ package: pandoraanalysis
 description: PandoraAnalysis validation for Pandora PFA
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/PandoraPFA/LCPandoraAnalysis.git?obj=master
 requires:
   - CMake
   - ilcutil

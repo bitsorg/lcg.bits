@@ -2,8 +2,7 @@ package: k4reccalorimeter
 description: Key4hep calorimeter reconstruction algorithms
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/HEP-FCC/k4RecCalorimeter.git?obj=main
 requires:
   - CMake
   - podio

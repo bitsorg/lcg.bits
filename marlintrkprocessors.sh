@@ -2,8 +2,7 @@ package: marlintrkprocessors
 description: MarlinTrkProcessors track finding/fitting Marlin processors
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/MarlinTrkProcessors.git?obj=master
 requires:
   - CMake
   - marlintrk

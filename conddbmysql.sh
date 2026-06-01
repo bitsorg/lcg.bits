@@ -2,8 +2,7 @@ package: conddbmysql
 description: CondDB MySQL backend for conditions database access
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/CondDBMySQL.git?obj=master
 requires:
   - CMake
   - mysql

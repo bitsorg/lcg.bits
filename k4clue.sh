@@ -2,8 +2,7 @@ package: k4clue
 description: Key4hep CLUE clustering algorithm
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/key4hep/k4Clue.git?obj=main
 requires:
   - CMake
   - DD4hep

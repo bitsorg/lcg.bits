@@ -2,8 +2,7 @@ package: kitrack
 description: KiTrack combinatorial track finder for ILC
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/KiTrack.git?obj=master
 requires:
   - CMake
   - ilcutil

@@ -2,8 +2,7 @@ package: marlin
 description: Marlin modular analysis and reconstruction framework for ILC
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/marlin.git?obj=master
 requires:
   - CMake
   - LCIO

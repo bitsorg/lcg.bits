@@ -2,8 +2,7 @@ package: marlinfastjet
 description: MarlinFastJet FastJet jet finding Marlin processor
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/MarlinFastjet.git?obj=master
 requires:
   - CMake
   - ilcutil

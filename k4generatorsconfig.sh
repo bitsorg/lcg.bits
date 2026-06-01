@@ -2,8 +2,7 @@ package: k4generatorsconfig
 description: Key4hep generator configuration package
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/key4hep/k4GeneratorsConfig.git?obj=main
 requires:
   - CMake
   - podio

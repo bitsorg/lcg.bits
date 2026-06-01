@@ -2,8 +2,7 @@ package: k4actstracking
 description: Key4hep ACTS tracking integration
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/key4hep/k4ActsTracking.git?obj=main
 requires:
   - CMake
   - podio

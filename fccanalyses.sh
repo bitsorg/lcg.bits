@@ -2,8 +2,7 @@ package: fccanalyses
 description: FCCAnalyses analysis framework for FCC experiments
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/HEP-FCC/FCCAnalyses.git?obj=main
 requires:
   - CMake
   - EDM4hep

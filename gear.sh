@@ -2,8 +2,7 @@ package: gear
 description: GEAR detector description toolkit for ILC experiments
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/gear.git?obj=master
 requires:
   - CMake
   - ilcutil

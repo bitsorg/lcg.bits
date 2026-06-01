@@ -2,8 +2,7 @@ package: marlinkinfitprocessors
 description: MarlinKinFitProcessors Marlin processors using kinematic fitting
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/MarlinKinfitProcessors.git?obj=master
 requires:
   - CMake
   - ilcutil

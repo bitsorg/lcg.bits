@@ -2,8 +2,7 @@ package: marlindd4hep
 description: MarlinDD4hep DD4hep geometry integration for Marlin
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/iLCSoft/MarlinDD4hep.git?obj=master
 requires:
   - CMake
   - ilcutil

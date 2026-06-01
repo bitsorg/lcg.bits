@@ -2,8 +2,7 @@ package: k4simgeant4
 description: Key4hep Geant4 full simulation framework
 version: "HEAD"
 tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: git+https://github.com/key4hep/k4SimGeant4.git?obj=main
 requires:
   - CMake
   - k4fwcore
