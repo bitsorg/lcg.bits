@@ -23,6 +23,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  ""/compile_perf.sh $INSTALLROOT COMPILE
-  ""/compile_perf.sh $INSTALLROOT INSTALL
+  # compile_perf.sh ships in the source tree (rsynced into the build dir by
+  # MakeRecipe's Prepare); the empty "" prefix made this "/compile_perf.sh".
+  chmod +x ./compile_perf.sh 2>/dev/null || true
+  ./compile_perf.sh "$INSTALLROOT" COMPILE
+  ./compile_perf.sh "$INSTALLROOT" INSTALL
 }
