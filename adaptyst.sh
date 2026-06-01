@@ -1,9 +1,10 @@
 package: adaptyst
 description: Adaptyst performance profiling framework (CERN)
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# Adaptyst has no release tarball on the LCG mirror (adaptyst-HEAD.tar.gz 404s);
+# under dev4 (HEAD) track the upstream git default branch.
+version: "main"
+tag: "main"
+source: https://github.com/Adaptyst/Adaptyst.git
 requires:
   - CMake
   - Boost
