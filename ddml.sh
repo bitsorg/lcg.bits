@@ -22,6 +22,12 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # DDML's CMake does find_package(MPI). OpenMPI is a dependency, but cmake's
+  # FindMPI locates the wrappers via mpicxx on PATH, which bits doesn't add by
+  # default -> "Could NOT find MPI (missing: MPI_CXX_FOUND)". Put OpenMPI's bin
+  # on PATH and set OPAL_PREFIX (its runtime root), mirroring lcgcmake.
+  export PATH="${OPENMPI_ROOT}/bin:${PATH}"
+  export OPAL_PREFIX="${OPENMPI_ROOT}"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
