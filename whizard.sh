@@ -41,15 +41,26 @@ export CAMLLIB="${OCAML_ROOT}/lib/ocaml"
 ##############################
 # WHIZARD bundles StdHEP/mcfio (contrib/mcfio) whose XDR I/O includes
 # <rpc/types.h>. glibc dropped the Sun RPC headers years ago; on modern distros
-# (Ubuntu 25.10 here) they are provided by libtirpc under /usr/include/tirpc.
-# Put the tirpc include dir on CPPFLAGS and link -ltirpc so mcfio compiles
-# ("rpc/types.h: No such file or directory"). Requires the system libtirpc-dev
-# package; prefer pkg-config and fall back to the conventional path.
-_tirpc_cflags="$(pkg-config --cflags libtirpc 2>/dev/null || echo -I/usr/include/tirpc)"
-_tirpc_libs="$(pkg-config --libs libtirpc 2>/dev/null || echo -ltirpc)"
-export CPPFLAGS="${CPPFLAGS:-} ${_tirpc_cflags}"
-export CFLAGS="${CFLAGS:-} ${_tirpc_cflags}"
-export LDFLAGS="${LDFLAGS:-} ${_tirpc_libs}"
+# (Ubuntu 25.10 here) they are provided by the system libtirpc-dev package under
+# /usr/include/tirpc. When libtirpc is present, add its include dir and library
+# so mcfio compiles ("rpc/types.h: No such file or directory").
+#
+# IMPORTANT: only inject these flags when pkg-config can actually see libtirpc.
+# A bare "-ltirpc" added unconditionally poisons LDFLAGS on a host without the
+# package, so even configure's "can the C compiler create executables?" probe
+# fails ("C compiler cannot create executables"). If libtirpc is missing we
+# leave the flags alone and let mcfio surface the real "install libtirpc-dev"
+# requirement rather than breaking every link.
+if pkg-config --exists libtirpc 2>/dev/null; then
+  _tirpc_cflags="$(pkg-config --cflags libtirpc)"
+  _tirpc_libs="$(pkg-config --libs libtirpc)"
+  export CPPFLAGS="${CPPFLAGS:-} ${_tirpc_cflags}"
+  export CFLAGS="${CFLAGS:-} ${_tirpc_cflags}"
+  export LDFLAGS="${LDFLAGS:-} ${_tirpc_libs}"
+else
+  echo "whizard: libtirpc not found via pkg-config; contrib/mcfio needs <rpc/types.h>." >&2
+  echo "         Install the system package (Ubuntu/Debian: apt install libtirpc-dev)." >&2
+fi
 ##############################
 function Configure() {
   cmake -E make_directory $INSTALLROOT/tmppdfsets
