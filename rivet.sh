@@ -1,28 +1,24 @@
 package: rivet
 description: Rivet Monte Carlo analysis toolkit
-version: "3.1.5p1"
+version: "4.1.2"
 mem_per_job: 1500
-tag: "3.1.5p1"
+tag: "4.1.2"
 sources:
-  # The "p1" is an LCG patch-level label on the version, not part of the
-  # upstream filename (cf. lcgcmake's Rivet-<author>.tar.bz2). The hosted
-  # tarball is Rivet-3.1.5.tar.bz2; Rivet-3.1.5p1.tar.bz2 returns HTTP 404.
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-3.1.5.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-4.1.2.tar.bz2
 requires:
   - hepmc3
   - yoda
   - fastjet
   - fjcontrib
+  # Rivet 4 builds its Python bindings with SWIG (lcgcmake passes SWIG_LIB).
+  - swig
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-  # Cython regenerates the pyext core.cpp from core.pyx: the shipped core.cpp
-  # was produced by an old Cython and #includes longintrepr.h, removed in
-  # Python 3.12+.
+  # Cython regenerates the pyext C++ from .pyx; the shipped sources use CPython
+  # internals removed in Python 3.12+.
   - cython
 license: GPL-3.0-only
-patches:
-  - rivet-3.1.5p1.patch
 ---
 #!/bin/bash -e
 ##############################
@@ -31,64 +27,29 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# Rivet regenerates its pyext core.cpp from core.pyx during `make` (the shipped
-# core.cpp #includes longintrepr.h, removed in Python 3.12+).  Put the bits-built
-# Cython on PATH/PYTHONPATH at RECIPE SCOPE (NOT inside Configure's subshell) so
-# it also reaches the Make step where regeneration happens.
+# Put the bits Cython on PATH/PYTHONPATH at RECIPE SCOPE (reaches the Make step,
+# not just Configure's subshell) so the pyext is regenerated for Python 3.13.
 bits_enable_cython
+# SWIG and its runtime library directory, as lcgcmake passes to Rivet 4.
+export SWIG="${SWIG_ROOT}/bin/swig"
+export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 ##############################
 function Configure() {
-
   (
   unset PYTHON_VERSION
-
-  # HepMC3 3.3.x exposes its vendored bxzstr (namespace strict_fstream) through
-  # ReaderFactory.h -> CompressedIO.h; Rivet vendors its own zstr/strict_fstream
-  # in the same namespace but with a different include guard
-  # (__STRICT_FSTREAM_HPP vs bxzstr's BXZSTR_STRICT_FSTREAM_HPP), so translation
-  # units that include both (e.g. RivetHepMC_3.cc) fail with "redefinition of
-  # class strict_fstream::...".  Unify Rivet's guard with bxzstr's so whichever
-  # copy is included first wins and the second is skipped.
-  sed -i 's/__STRICT_FSTREAM_HPP/BXZSTR_STRICT_FSTREAM_HPP/g' \
-    src/Core/zstr/strict_fstream.hpp
-
-  # Drop the stale Cython-generated pyext source so configure (which detects the
-  # bits Cython put on PATH/PYTHONPATH at recipe scope above) regenerates it
-  # from core.pyx instead of compiling the longintrepr.h-using shipped copy.
-  [[ -n "$CYTHON_ROOT" ]] && rm -f pyext/rivet/core.cpp
-
-  autoreconf -ivf
-
-  # Discover dep prefixes via config tools if env vars are not set
-  [[ -z "$HEPMC3_ROOT"  ]] && HEPMC3_ROOT=$(HepMC3-config --prefix 2>/dev/null)   || true
-  [[ -z "$YODA_ROOT"    ]] && YODA_ROOT=$(yoda-config --prefix 2>/dev/null)        || true
-  [[ -z "$FASTJET_ROOT" ]] && FASTJET_ROOT=$(fastjet-config --prefix 2>/dev/null)  || true
-
-  LOCAL_LDFLAGS=""
-  case $(uname) in
-    Linux) LOCAL_LDFLAGS="-Wl,--no-as-needed" ;;
-  esac
-
-  # gcc 15 / libstdc++ no longer transitively include <cstdint>, and
-  # Rivet/Tools/RivetSTL.hh uses uintptr_t without including it
-  # ("error: 'uintptr_t' does not name a type").  Force-include <cstdint> for
-  # every translation unit; keep the stack's existing CXXFLAGS (e.g. -std=c++20).
-  # -fpermissive: gcc 15's new -Wtemplate-body diagnoses errors in template
-  # definitions (e.g. Rivet's bundled old Eigen3 Transpositions.h "has no member
-  # named 'derived'"); -fpermissive downgrades these to warnings so the
-  # vendored Eigen still compiles.
-  # Rivet requires FastJet Contrib headers (fastjet/contrib/SoftDrop.hh) and
-  # libs, which bits ships as the separate fjcontrib package; point Rivet at it
-  # with --with-fjcontrib (mirrors lcgcmake's rivet --with-fjcontrib).
+  # Regenerate the Cython pyext rather than compiling the shipped *.cpp.
+  [[ -n "$CYTHON_ROOT" ]] && rm -f pyext/rivet/*.cpp
+  # gcc 15 / libstdc++ no longer transitively include <cstdint>; force-include it
+  # (Rivet uses uintptr_t etc. via RivetSTL.hh). Keep the stack CXXFLAGS.
   ./configure --prefix="$INSTALLROOT" \
     --disable-silent-rules \
-    --disable-doxygen \
+    --disable-pdfmanual \
     ${HEPMC3_ROOT:+--with-hepmc3="$HEPMC3_ROOT"} \
     ${YODA_ROOT:+--with-yoda="$YODA_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"} \
     ${FJCONTRIB_ROOT:+--with-fjcontrib="$FJCONTRIB_ROOT"} \
-    CXXFLAGS="${CXXFLAGS} -include cstdint -fpermissive" \
-    LDFLAGS="$LOCAL_LDFLAGS"
+    CXXFLAGS="${CXXFLAGS} -include cstdint" \
+    SWIG_LIB="$SWIG_LIB"
   )
 }
 function PostInstall() {
