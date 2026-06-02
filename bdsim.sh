@@ -24,10 +24,14 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Mirror lcgcmake's bdsim build (BUILD_TESTING=OFF, standard args). The
-  # example-copy macro (bdsim_macros.cmake -> ADD_CUSTOM_COMMAND) trips CMake
-  # 3.28+'s stricter custom-command policy, so set the policy floor to restore
-  # the old behaviour. Sphinx is optional (docs) and only warns.
+  # bdsim copies its examples into the build tree at configure time. Built from a
+  # tarball (no .git) it calls copy_examples_no_git(), whose ADD_CUSTOM_COMMAND
+  # (bdsim_macros.cmake) is rejected by CMake >= 3.28 and aborts configure
+  # (CMAKE_POLICY_VERSION_MINIMUM=3.5 does not relax it). We don't need the
+  # examples (BUILD_TESTING=OFF), so neutralise the copy_examples[/_no_git] calls
+  # in the source CMakeLists before configuring. (Sphinx is optional; only warns.)
+  sed -i -E 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
+    "${SOURCEDIR}/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
