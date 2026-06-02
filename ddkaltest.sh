@@ -32,3 +32,16 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }
+function PostInstall() {
+  # Upstream CMakeLists installs public headers via FILE(GLOB "ILD/include/*.h"),
+  # but in this version the headers live under include/DDKalTest/, so the glob
+  # matches nothing and NO headers are installed. The generated
+  # DDKalTestConfig.cmake then can't resolve DDKalTest_INCLUDE_DIRS
+  # (FIND_PATH NAMES DDKalTest/DDVMeasLayer.h PATHS ${DDKalTest_ROOT}/include),
+  # so every consumer (marlintrk, ...) fails with "Could NOT find DDKalTest".
+  # Install the headers where the config actually looks.
+  if [ -d "${SOURCEDIR}/include/DDKalTest" ]; then
+    mkdir -p "${INSTALLROOT}/include/DDKalTest"
+    cp -a "${SOURCEDIR}/include/DDKalTest/." "${INSTALLROOT}/include/DDKalTest/"
+  fi
+}

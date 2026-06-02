@@ -31,11 +31,22 @@ function Configure() {
   # FairCMakeModules' own cmake predates the minimum CMake >= 4 will accept; the
   # env var lets the nested cmake configure with the old policy floor.
   export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
+  # asiofi's vendored cmake/FindOFI.cmake locates libfabric via pkg-config. It
+  # tries to add OFI's pkgconfig dir to PKG_CONFIG_PATH from CMAKE_PREFIX_PATH in
+  # a foreach loop that overwrites the variable each iteration (CMake's
+  # set(ENV{...}) keeps only the first arg), so it ends up pointing at the wrong
+  # prefix and libfabric.pc is never found — the version check then fails against
+  # an empty OFI_VERSION ("Required is at least version 1.6.0"). Passing OFI_ROOT
+  # as a *cmake variable* (bits only exports the env var) triggers the dedicated
+  # if(OFI_ROOT) block, which runs last and sets PKG_CONFIG_PATH to OFI's own
+  # pkgconfig dir, so pkg-config finds libfabric.pc and reports 1.22.0.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DOFI_ROOT="${OFI_ROOT}" \
     -DBUILD_SHARED_LIBS=ON
 }
