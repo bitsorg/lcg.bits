@@ -1,8 +1,8 @@
 package: xrootd
 description: XRootD high-performance, fault-tolerant access to data
-version: "6.0.1"
+version: "5.9.1"
 mem_per_job: 1024
-tag: "6.0.1"
+tag: "5.9.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
