@@ -5,7 +5,6 @@ tag: "1.1.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TAUOLA.1.1.6-LHC.tar.gz
 requires:
-  - HepMC
   - hepmc3
   - lhapdf
 build_requires:
@@ -20,13 +19,15 @@ license: LicenseRef-TAUOLA++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Build the HepMC3 interface library too (libTauolaCppHepMC3 / TAUOLAPP_HEPMC3)
-  # -- cepgen's PhotosTauola wrapper requires it; with only --with-hepmc it was
-  # never built.
+  # Build against HepMC3 only (libTauolaCppHepMC3 / TAUOLAPP_HEPMC3), required by
+  # cepgen's PhotosTauola wrapper and EvtGen 2.x. lcgcmake builds tauola++ with
+  # exactly one HepMC flavour: passing both --with-hepmc (HepMC2) and
+  # --with-hepmc3 did not produce the HepMC3 interface library. Mirror lcgcmake's
+  # modern config: --with-hepmc3 + --without-hepmc.
   ./configure --prefix=$INSTALLROOT \
     --with-pic \
     --with-tau-spinner \
-    ${HEPMC_ROOT:+--with-hepmc="${HEPMC_ROOT}"} \
-    ${HEPMC3_ROOT:+--with-hepmc3="${HEPMC3_ROOT}"} \
+    --without-hepmc \
+    --with-hepmc3="${HEPMC3_ROOT}" \
     ${LHAPDF_ROOT:+--with-lhapdf="${LHAPDF_ROOT}"}
 }

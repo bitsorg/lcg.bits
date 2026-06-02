@@ -5,7 +5,6 @@ tag: "3.61"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/PHOTOS.3.61-LHC.tar.gz
 requires:
-  - HepMC
   - hepmc3
 build_requires:
   - bits-recipe-tools
@@ -19,11 +18,13 @@ license: LicenseRef-PHOTOS++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Build BOTH the HepMC2 and HepMC3 interface libraries. The HepMC3 variant
-  # (libPhotosppHepMC3) is required by kkmcee and cepgen; with only --with-hepmc
-  # it was never built, so those packages could not find it.
+  # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee, cepgen and
+  # EvtGen 2.x. lcgcmake builds photos++ with exactly one HepMC flavour: passing
+  # both --with-hepmc (HepMC2) and --with-hepmc3 did not produce the HepMC3
+  # interface library, so consumers could not find libPhotosppHepMC3. Mirror
+  # lcgcmake's modern config: --with-hepmc3 + --without-hepmc.
   ./configure --prefix="${INSTALLROOT}" \
-    --with-hepmc="${HEPMC_ROOT}" \
-    ${HEPMC3_ROOT:+--with-hepmc3="${HEPMC3_ROOT}"} \
+    --with-hepmc3="${HEPMC3_ROOT}" \
+    --without-hepmc \
     CFLAGS=-O2 FFLAGS=-O2 F77="${FC:-gfortran}" CXXFLAGS="-O2"
 }
