@@ -1,9 +1,9 @@
 package: tauolacpp
 description: TAUOLA++ C++ version of TAUOLA tau decay generator
-version: "1.1.6"
-tag: "1.1.6"
+version: "1.1.9"
+tag: "1.1.9"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TAUOLA.1.1.6-LHC.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TAUOLA.1.1.9-LHC.tar.gz
 requires:
   - hepmc3
   - lhapdf
