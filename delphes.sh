@@ -1,7 +1,7 @@
 package: delphes
 description: Delphes fast detector response simulation framework
-version: "3.5.1"
-tag: "3.5.1"
+version: "3.5.1pre14"
+tag: "3.5.1pre14"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

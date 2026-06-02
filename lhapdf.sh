@@ -1,9 +1,9 @@
 package: lhapdf
 description: LHAPDF parton density function interpolation library
-version: "6.2.3"
-tag: "6.2.3"
+version: "6.5.5"
+tag: "6.5.5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/LHAPDF-6.2.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/LHAPDF-6.5.5.tar.gz
 requires:
   - Python
   - cython

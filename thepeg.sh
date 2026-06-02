@@ -1,9 +1,9 @@
 package: thepeg
 description: ThePEG Toolkit for High Energy Physics Event Generation
-version: "2.2.1"
-tag: "2.2.1"
+version: "2.3.0"
+tag: "2.3.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/ThePEG-2.2.1.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/ThePEG-2.3.0.tar.bz2
 requires:
   - GSL
   - lhapdf
