@@ -49,8 +49,15 @@ function Configure() {
     -DDD4HEP_USE_LCIO=ON \
     -DDD4HEP_USE_TBB=ON \
     -DDD4HEP_USE_HEPMC3=ON \
-    -DDD4HEP_USE_EDM4HEP=ON \
     -DDD4HEP_LOAD_ASSIMP=OFF \
     -DDD4HEP_BUILD_EXAMPLES=OFF \
     -DBUILD_DOCS=OFF
 }
+# NOTE: DD4HEP_USE_EDM4HEP is intentionally OFF. DD4hep v01-35's EDM4hep I/O
+# (DDG4/edm4hep, DDDigi) targets an older podio API -- against this stack's podio
+# it fails to compile ("no matching function for podio::GenericParameters::
+# getKeys<int>()", "edm4hep_read_frame_t(std::unique_ptr<podio::ROOTFrameData>)").
+# The DDG4 simulation component that downstream key4hep packages need (k4geo etc.)
+# does not depend on DD4hep's EDM4hep reader, so we drop that backend rather than
+# fail the whole build. Re-enabling it requires aligning the DD4hep and podio
+# versions (newer DD4hep, or the podio that v01-35 expects).
