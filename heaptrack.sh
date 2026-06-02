@@ -10,6 +10,8 @@ requires:
   - libunwind
   - zlib
   - gdb
+  # libdw/libelf for the interpret tool -- system_requirement, taken from /usr.
+  - elfutils
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -27,3 +27,16 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 }
+function PostInstall() {
+  # Delphes consumers (FCCAnalyses, k4simdelphes) use a vendored FindDelphes.cmake
+  # that locates the bundled TrackCovariance headers (TrkUtil.h, installed under
+  # include/TrackCovariance/) ONLY via $DELPHES_DIR. The other Delphes vars
+  # resolve through CMAKE_PREFIX_PATH, but the TKCOV header sits one directory
+  # deeper than FindDelphes' suffix search reaches, so without DELPHES_DIR it
+  # fails with "missing DELPHES_EXTERNALS_TKCOV_INCLUDE_DIR". bits exports
+  # DELPHES_ROOT, not DELPHES_DIR, so publish it via the modulefile (this is what
+  # lcgcmake passes on the consumer's command line).
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
+setenv DELPHES_DIR $PKG_ROOT
+EOF
+}
