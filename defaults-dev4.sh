@@ -8,10 +8,8 @@ override:
 
 disable:
   - Gaudi
-  # k4actstracking is the only acts consumer; in LCG_109 the key4hep layer
-  # (heptools-devkey) builds it against acts 44.4.0, but this stack pins the
-  # dev-base value acts 26.0.0. Rather than bump acts (a large jump that would
-  # ripple through every ACTS consumer), drop k4actstracking from the build.
-  - k4actstracking
+  # k4actstracking is re-enabled: key4hep.sh now pins acts = 44.4.0 and
+  # k4actstracking = v00-02 (the LCG_109 heptools-devkey combo), so it builds
+  # against the matching ACTS rather than the dev-base acts 26.0.0.
 ---
 
