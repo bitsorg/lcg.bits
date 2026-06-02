@@ -25,19 +25,25 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # MARLIN_AIDA defaults ON: Marlin then does FIND_PACKAGE(AIDA) and SEND_ERRORs
-  # if not found ("AIDA not found ..."). AIDA 3.2.1 ships no AIDAConfig.cmake, so
-  # config-mode find_package(AIDA) can only succeed via a FindAIDA.cmake module +
-  # aida-config, which the current ilcutil/AIDA no longer provides — so the build
-  # aborts. AIDA in Marlin is legacy/optional (no package in this stack uses the
-  # AIDAProcessor), so disable it. CLHEP/LCCD stay enabled and are satisfied by
-  # the clhep/lccd dependencies (both ship CMake configs).
+  # MARLIN_AIDA must stay ON: the installed MarlinConfig.h does
+  # `#cmakedefine MARLIN_AIDA`, and marlin/AIDAProcessor.h gates the whole
+  # AIDAProcessor class on that macro. Building Marlin with AIDA OFF compiles the
+  # class out for EVERY downstream consumer (clupatra, conformaltracking,
+  # ildperformance, lcfivertex, marlinkinfitprocessors, marlinreco,
+  # marlintrkprocessors, overlay), which then fail to compile with
+  # "'AIDAProcessor' has not been declared; did you mean 'AIDAProcessor_h'?".
+  #
+  # Marlin does a plain FIND_PACKAGE(AIDA); there is no FindAIDA.cmake module so
+  # it falls back to config mode. RAIDA (the AIDA implementation, already a
+  # dependency) installs AIDAConfig.cmake under lib/cmake/RAIDA, so point AIDA_DIR
+  # there. CLHEP/LCCD stay enabled and are satisfied by the clhep/lccd deps.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
-    -DMARLIN_AIDA=OFF \
+    -DMARLIN_AIDA=ON \
+    -DAIDA_DIR="${RAIDA_ROOT}/lib/cmake/RAIDA" \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }
