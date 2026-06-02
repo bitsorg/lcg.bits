@@ -1,9 +1,9 @@
 package: VecGeom
 description: Vectorized geometry library for particle-transport simulations
-version: "master"
+version: "2.0.0"
 mem_per_job: 2048
 mem_utilisation: 0.85
-tag: "master"
+tag: "v2.0.0"
 source: https://gitlab.cern.ch/VecGeom/VecGeom.git
 requires:
   - CMake

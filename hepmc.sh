@@ -1,9 +1,9 @@
 package: HepMC
 description: HepMC Monte Carlo event record (version 2)
-version: "2.06.09.alice"
-tag: "2.06.09.alice"
+version: "2.06.11"
+tag: "2.06.11"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC-2.06.09.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC-2.06.11.tar.gz
 requires:
   - CMake
 build_requires:
