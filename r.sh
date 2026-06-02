@@ -19,14 +19,10 @@ license: GPL-2.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Use the bits readline (now linked against -ltinfo so its terminfo symbols
-  # resolve). Point R's configure at it via CPPFLAGS/LDFLAGS. If readline still
-  # cannot be found/linked, build without it: replace the readline lines with
-  #   --without-readline
-  # (R then builds fine, just without interactive command-line editing).
+  # readline is now a system dependency (see readline.sh): the bits build is
+  # gone, so we use the OS readline, which R's configure finds in the default
+  # /usr search paths. No READLINE_ROOT / CPPFLAGS / LDFLAGS overrides needed.
   ./configure --prefix=$INSTALLROOT --disable-R-framework --enable-R-shlib \
     --without-x --with-cairo --with-libpng --with-libtiff --with-jpeglib \
-    --with-readline \
-    CPPFLAGS="-I${READLINE_ROOT}/include ${CPPFLAGS:-}" \
-    LDFLAGS="-L${READLINE_ROOT}/lib ${LDFLAGS:-}"
+    --with-readline
 }

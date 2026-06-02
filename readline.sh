@@ -1,35 +1,21 @@
 package: readline
-description: GNU Readline command-line editing and history library
-version: "8.3"
-tag: "8.3"
-sources:
-  - https://ftp.gnu.org/gnu/%(name)s/%(name)s-%(version)s.tar.gz
-build_requires:
-  - bits-recipe-tools
-  - "GCC-Toolchain:(?!osx)"
+description: GNU Readline (used from the system; bits never builds it)
+version: "system"
 license: GPL-3.0-or-later
+# Readline is taken from the system -- bits never builds it. The bits-built
+# libreadline.so.8 left the terminfo globals (UP, BC, PC, ...) unresolved, so any
+# program that loaded it via LD_LIBRARY_PATH during a build -- notably the gawk
+# used in autoconf configure scripts -- crashed with
+# "symbol lookup error: ... undefined symbol: UP", breaking unrelated packages
+# (e.g. R). Using the OS readline avoids polluting LD_LIBRARY_PATH with a broken
+# library. If a consumer needs it, the system readline is found in the default
+# compiler/pkg-config search paths.
+system_requirement_missing: |
+  System readline development files not found.
+    * Install the system readline development package, e.g.
+        RHEL/Alma:  dnf install readline-devel
+        Ubuntu:     apt install libreadline-dev
+system_requirement: ".*"
+system_requirement_check: |
+  pkg-config --exists readline 2>/dev/null || [ -e /usr/include/readline/readline.h ]
 ---
-#!/bin/bash -e
-##############################
-. $(bits-include AutoToolsRecipe)
-##############################
-MODULE_OPTIONS="--bin --lib --pkgconfig"
-##############################
-function Configure() {
-  [ -f autogen.sh ] && ./autogen.sh
-  # Stopgap so the bits libreadline.so is not broken (the stack otherwise prefers
-  # the system readline).  --with-curses selects ncurses over the bare termcap
-  # interface; SHLIB_LIBS controls what is linked INTO the shared object, so
-  # forcing -lncurses there (plus LIBS for the static/test side) puts ncurses in
-  # libreadline.so's DT_NEEDED.  Without it the terminfo globals (UP, BC, PC, …)
-  # are left unresolved and any program that loads readline via LD_LIBRARY_PATH
-  # (e.g. the system awk used in autoconf configure probes) crashes with
-  # "symbol lookup error: … undefined symbol: UP".
-  # The unresolved terminfo globals (UP, BC, PC, …) live in libtinfo on modern
-  # split-ncurses systems (Debian/Ubuntu), not in libncurses, so -lncurses alone
-  # leaves them undefined. Add -ltinfo so libreadline.so carries the terminfo
-  # symbols (and a correct DT_NEEDED) and programs loading it don't crash with
-  # "undefined symbol: UP".
-  ./configure --prefix="$INSTALLROOT" --enable-static -q --with-curses \
-    SHLIB_LIBS="-lncurses -ltinfo" LIBS="-lncurses -ltinfo"
-}
