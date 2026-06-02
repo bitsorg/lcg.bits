@@ -1,67 +1,72 @@
 package: sherpa-openmpi
 description: Sherpa Monte Carlo event generator built with OpenMPI
-version: "2.2.11p2.openmpi3"
+version: "3.0.3.openmpi3"
 mem_per_job: 1500
-tag: "2.2.11p2.openmpi3"
+tag: "3.0.3.openmpi3"
 sources:
-  # The "p2"/".openmpi3" are LCG patch/build labels, not part of the upstream
-  # filename — the hosted tarball is SHERPA-MC-2.2.11.tar.gz (same source as the
-  # regular sherpa recipe); OpenMPI is enabled at build time, not a separate source.
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SHERPA-MC-2.2.11.tar.gz
+  # ".openmpi3" is a build label, not part of the upstream filename — same
+  # source tarball as the regular sherpa recipe; MPI is enabled at build time.
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.3.tar.gz
 requires:
-  - lhapdf
+  - CMake
+  - Python
+  - swig
   - openmpi
-  - fastjet
   - openloops
+  - pythia8
+  - rivet
+  - ROOT
+  - lhapdf
+  - libzip
+  - mcfm
+  - hepmc3
+  - fastjet
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: GPL-2.0-or-later
-patches:
-  - sherpa-2.2.11p2.patch
+license: GPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include AutoToolsRecipe)
+. $(bits-include CMakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+export SWIG="${SWIG_ROOT}/bin/swig"
+export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+# Put OpenMPI's compilers on PATH so Sherpa's find_package(MPI) locates mpicxx.
+export PATH="${OPENMPI_ROOT}/bin:${PATH}"
+##############################
 function Configure() {
-  # Mirror the (working) sherpa recipe, but enable MPI. The previous recipe
-  # used MakeRecipe and only overrode Make(), so ./configure never ran and
-  # there was no Makefile ("No targets specified and no makefile found").
-
-  # Exclude building Manual (requires LaTeX)
-  sed -i.bak '/Manual/d' Makefile.am 2>/dev/null || true
-  rm -f Makefile.am.bak
-
-  autoreconf -ivf
-
-  # Sherpa's configure uses wget; provide a curl-based shim. Put OpenMPI first
-  # so configure picks up mpic++ for the MPI build.
-  mkdir -p fakewget
-  printf '#!/bin/sh\nexec curl -fO "$1"\n' > fakewget/wget
-  chmod +x fakewget/wget
-  export PATH="${OPENMPI_ROOT}/bin:$PWD/fakewget:$PATH"
-
-  ./configure --prefix="$INSTALLROOT" \
-    --enable-mpi \
-    ${LHAPDF_ROOT:+--enable-lhapdf=$LHAPDF_ROOT} \
-    ${FASTJET_ROOT:+--enable-fastjet=$FASTJET_ROOT} \
-    ${OPENLOOPS_ROOT:+--enable-openloops=$OPENLOOPS_ROOT}
+  # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
+  # plain sherpa recipe; see sherpa.sh.
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+      -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DSHERPA_ENABLE_MPI=ON \
+    -DSHERPA_ENABLE_TESTING=OFF \
+    -DSHERPA_ENABLE_MANUAL=OFF \
+    -DSHERPA_ENABLE_LHOLE=ON \
+    -DSHERPA_ENABLE_LHAPDF=ON \
+    -DSHERPA_ENABLE_OPENLOOPS=ON \
+    -DSHERPA_ENABLE_PYTHIA8=ON \
+    -DSHERPA_ENABLE_PYTHON=ON \
+    -DPython_ROOT_DIR="${PYTHON_ROOT}" \
+    -DPython_EXECUTABLE="${PYTHON_ROOT}/bin/python3" \
+    -DSHERPA_ENABLE_RIVET=ON \
+    -DSHERPA_ENABLE_ROOT=ON \
+    -DSHERPA_ENABLE_UFO=ON \
+    -DSHERPA_ENABLE_BINRELOC=ON \
+    -DSHERPA_ENABLE_ANALYSIS=ON \
+    -DSHERPA_ENABLE_EWSUD=ON \
+    -DSHERPA_ENABLE_MCFM=ON \
+    -DSHERPA_ENABLE_HEPMC3=ON \
+    -DSHERPA_ENABLE_HEPMC3_ROOT=ON
 }
-
-function Make() {
-  make ${JOBS:+-j $JOBS} \
-    "LDFLAGS=-L${OPENMPI_ROOT}/lib -lmpi -lmpi_cxx" \
-    PATH="${OPENMPI_ROOT}/bin:$PATH" \
-    LIBRARY_PATH="${LHAPDF_ROOT}/lib" \
-    LD_LIBRARY_PATH="${OPENMPI_ROOT}/lib:${OPENMPI_ROOT}/lib/openmpi:$LD_LIBRARY_PATH"
-}
-
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
-setenv SHERPA_ROOT $PKG_ROOT
 setenv SHERPA_INSTALL_PATH $PKG_ROOT/lib/SHERPA-MC
 setenv SHERPA_SHARE_PATH $PKG_ROOT/share/SHERPA-MC
 EOF

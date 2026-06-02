@@ -1,11 +1,11 @@
 package: superchic
 description: SuperChic Monte Carlo generator for central exclusive processes
-version: "4.02.2"
-tag: "4.02.2"
+version: "5.6.1"
+tag: "5.6.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v4.02.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v5.6.1.tar.gz
 requires:
-  - apfel
+  - CMake
   - lhapdf
 build_requires:
   - bits-recipe-tools
@@ -14,24 +14,18 @@ license: LicenseRef-SuperChic
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include MakeRecipe)
+. $(bits-include CMakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Make() {
-  # superchic v4 uses a plain Fortran makefile with hardcoded LHAPDFLIB and
-  # optional APFEL paths.  Override both; clear APFEL link flags since apfel
-  # is not a required dependency.  Setting APFELLIB to LHAPDF_ROOT/lib avoids
-  # a bare -L flag in the link command when the variable is empty.
-  mkdir -p bin
-  make ${JOBS:+-j $JOBS} \
-    LHAPDFLIB="${LHAPDF_ROOT}/lib" \
-    APFELLIB="${APFEL_ROOT}/lib" \
-    LIBFLAGapfel="-lAPFEL -lAPFELevol" \
-    ${FC:+FC="$FC"}
-}
-function MakeInstall() {
-  install -d "$INSTALLROOT/bin" "$INSTALLROOT/lib"
-  install -m 755 bin/init bin/superchic "$INSTALLROOT/bin/"
-  install -m 644 lib/libsuperchic.so lib/libsuperchic.a "$INSTALLROOT/lib/"
+function Configure() {
+  # SuperChic 5 switched from a plain Fortran makefile to CMake. Flags mirror
+  # lcgcmake's superchic build (LHAPDF_DIR, tests off, long Fortran lines).
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+      -DCMAKE_BUILD_TYPE=Release \
+    -DLHAPDF_DIR="${LHAPDF_ROOT}" \
+    -DSUPERCHIC_ENABLE_TESTS=OFF \
+    -DCMAKE_Fortran_FLAGS="-ffree-line-length-none"
 }
