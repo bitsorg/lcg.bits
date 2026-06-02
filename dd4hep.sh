@@ -14,10 +14,16 @@ requires:
   - pytest
   - LCIO
   - tbb
+  # Geant4 is required for the DDG4 simulation component. Without it DD4hep does
+  # not build/install DDG4, so every downstream key4hep package that does
+  # find_package(DD4hep COMPONENTS ... DDG4) fails with
+  # "Did not find required component: DDG4" (k4geo, k4mljettagger, ...).
+  - Geant4
+  # EDM4hep / HepMC3 I/O backends, enabled in the LCG key4hep stack.
+  - EDM4hep
+  - hepmc3
   # optional:
   # - assimp
-  # - hepmc3
-  # - EDM4hep
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -38,5 +44,13 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DDD4HEP_USE_XERCESC=ON \
     -DXERCESC_ROOT_DIR="${XercesC_ROOT}" \
-    -DROOTSYS="${ROOT_ROOT}"
+    -DROOTSYS="${ROOT_ROOT}" \
+    -DDD4HEP_USE_GEANT4=ON \
+    -DDD4HEP_USE_LCIO=ON \
+    -DDD4HEP_USE_TBB=ON \
+    -DDD4HEP_USE_HEPMC3=ON \
+    -DDD4HEP_USE_EDM4HEP=ON \
+    -DDD4HEP_LOAD_ASSIMP=OFF \
+    -DDD4HEP_BUILD_EXAMPLES=OFF \
+    -DBUILD_DOCS=OFF
 }
