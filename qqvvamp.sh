@@ -19,9 +19,18 @@ license: LicenseRef-QQVVAMP
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # qqvvamp is a single huge machine-generated translation unit. Under the -dbg
+  # profile the inherited CXXFLAGS carry full '-g', so libqqvvamp.so's
+  # .debug_loclists/.debug_info sections overflow the 32-bit relocation range and
+  # the link dies with "relocation truncated to fit: R_X86_64_32 against
+  # `.debug_info'". Cap debug to -g1 (no location lists -> no overflowing
+  # relocations, and no var-tracking blow-up either) for this generated code,
+  # where full local-variable debug info has no value. -g1 wins over any earlier
+  # -g in CXXFLAGS; drop to -g0 if a future revision still overflows.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS="${CXXFLAGS:-} -g1" \
     -DGiNaC_DIR="${GINAC_ROOT}"
 }
