@@ -1,51 +1,38 @@
 package: evtgen
 description: EvtGen Monte Carlo generator for B/D meson decays
-version: "1.7.0"
-tag: "1.7.0"
+version: "2.2.1"
+tag: "R02-02-01"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-R01-07-00.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-%(tag)s.tar.gz
 requires:
-  - HepMC
+  - CMake
   - pythia8
   - photoscpp
   - tauolacpp
+  - hepmc3
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
-patches:
-  - evtgen-1.7.0.patch
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include AutoToolsRecipe)
+. $(bits-include CMakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# EvtGen >= 2.0 ships a CMake build that installs EvtGenConfig.cmake, which the
+# key4hep packages need (k4gen, k4simdelphes call find_package(EvtGen)). The old
+# 1.7.0 autotools build installed no CMake config, so those find_package calls
+# failed ("Could not find a package configuration file provided by EvtGen").
+# Flags mirror lcgcmake's evtgen >= 2.0 branch; EvtGen 2.x uses HepMC3.
 function Configure() {
-  # The evtgen-1.7.0.patch removes the CXX=g++ default so that the configure
-  # script honours the caller's CXX.  Ensure it is set before we call it.
-  export CXX="${CXX:-g++}"
-  export FC="${FC:-gfortran}"
-  ./configure \
-    --prefix="${INSTALLROOT}" \
-    ${HEPMC_ROOT:+--hepmcdir="${HEPMC_ROOT}"} \
-    ${PYTHIA8_ROOT:+--pythiadir="${PYTHIA8_ROOT}"} \
-    ${PHOTOSCPP_ROOT:+--photosdir="${PHOTOSCPP_ROOT}"} \
-    ${TAUOLACPP_ROOT:+--tauoladir="${TAUOLACPP_ROOT}"}
-}
-function Make() {
-  # Belt-and-suspenders: patch config.mk after configure in case CXX was still
-  # empty (configure's version detection can fail on GCC > 6).
-  sed -i "s|^CXX = .*|CXX = ${CXX:-g++}|" config.mk
-  # -lfrtbegin/-lg2c are GCC 2/3 relics; modern Fortran only needs -lgfortran.
-  sed -i 's|^FLIBS = .*|FLIBS = -lgfortran|' config.mk
-  # Run targets sequentially: all four share the same tmp/ object directory, so
-  # parallel top-level invocations cause races.  Pass JOBS to each sub-make.
-  make lib_shared    ${JOBS:+-j $JOBS}
-  make lib_archive   ${JOBS:+-j $JOBS}
-  if grep -q "^EVTGEN_EXTERNAL = 1" config.mk; then
-    make libext_shared  ${JOBS:+-j $JOBS}
-    make libext_archive ${JOBS:+-j $JOBS}
-  fi
+  cmake "${SOURCEDIR}" \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+      -DCMAKE_BUILD_TYPE=Release \
+    -DEVTGEN_PHOTOS=ON  -DPHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}" \
+    -DEVTGEN_PYTHIA=ON  -DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}" \
+    -DEVTGEN_TAUOLA=ON  -DTAUOLAPP_ROOT_DIR="${TAUOLACPP_ROOT}" \
+    -DEVTGEN_HEPMC3=ON  -DHEPMC3_ROOT_DIR="${HEPMC3_ROOT}"
 }
