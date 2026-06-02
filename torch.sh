@@ -46,4 +46,16 @@ function MakeInstall() {
     return 1
   fi
 }
+function PostInstall() {
+  # PyTorch ships its CMake package config (TorchConfig.cmake) inside the pip
+  # site-packages tree, not under the usual <prefix>/{lib,share}/cmake. bits'
+  # CMAKE_PREFIX_PATH only points at $TORCH_ROOT, so downstream
+  # find_package(Torch) fails (k4rectracker, marlinmlflavortagging, ddml,
+  # torch_geometric, ...). Export Torch_DIR via the modulefile so consumers find
+  # it. PYVER is resolved here (install time) since the path is version-specific.
+  PYVER=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])' 2>/dev/null || echo python3)
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << MODEOF
+setenv Torch_DIR \$PKG_ROOT/lib/${PYVER}/site-packages/torch/share/cmake/Torch
+MODEOF
+}
 ##############################
