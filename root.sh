@@ -1,7 +1,7 @@
 package: ROOT
 description: CERN ROOT data analysis framework
-version: "v6.36.04"
-tag: "v6-36-04"
+version: "v6.38.00"
+tag: "v6-38-00"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
 requires:

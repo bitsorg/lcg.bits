@@ -4,7 +4,7 @@ append_arch: dev4
 
 override:
   ROOT:
-    tag: 'v6-36-00-patches'
+    tag: 'v6-38-00-patches'
 
 disable:
   - Gaudi
