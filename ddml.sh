@@ -28,6 +28,11 @@ function Configure() {
   # on PATH and set OPAL_PREFIX (its runtime root), mirroring lcgcmake.
   export PATH="${OPENMPI_ROOT}/bin:${PATH}"
   export OPAL_PREFIX="${OPENMPI_ROOT}"
+  # PyTorch ships its CMake config inside the pip site-packages tree; point
+  # find_package(Torch) at the real dir (the modulefile Torch_DIR doesn't reach
+  # the build env, and a <prefix>/share/cmake symlink breaks Caffe2's prefix).
+  _pyver=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])')
+  export Torch_DIR="${TORCH_ROOT}/lib/${_pyver}/site-packages/torch/share/cmake/Torch"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

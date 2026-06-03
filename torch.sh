@@ -47,22 +47,17 @@ function MakeInstall() {
   fi
 }
 function PostInstall() {
-  # PyTorch ships its CMake package config (TorchConfig.cmake + the Caffe2
-  # configs it pulls in) inside the pip site-packages tree, not under the usual
-  # <prefix>/{lib,share}/cmake, so downstream find_package(Torch) fails
-  # (k4rectracker, marlinmlflavortagging, ddml, torch_geometric, ...).
+  # PyTorch ships its CMake config (TorchConfig.cmake + the Caffe2 configs it
+  # pulls in) inside the pip site-packages tree, not under <prefix>/{lib,share}/
+  # cmake. Consumers must point find_package(Torch) directly at that dir via
+  # Torch_DIR (see the torch consumer recipes), because:
+  #   * a dependency's modulefile setenv does NOT reach a consumer's *build* env;
+  #   * a symlink under <prefix>/share/cmake makes find_package locate the config
+  #     but breaks Caffe2Targets.cmake, which derives its install prefix by going
+  #     UP from the cmake dir and would then look for the libs under <prefix>/lib
+  #     instead of the real .../site-packages/torch/lib.
+  # Expose Torch_DIR via the modulefile here for runtime `module load` use.
   PYVER=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])' 2>/dev/null || echo python3)
-
-  # Build-time fix: bits puts $TORCH_ROOT on the consumers' CMAKE_PREFIX_PATH and
-  # CMake searches <prefix>/share/cmake/<pkg>/. Symlink that standard location at
-  # the pip cmake dir (which holds Torch/ and Caffe2/) so find_package(Torch)
-  # resolves with no Torch_DIR needed. A dependency's modulefile setenv does NOT
-  # reach a consumer's *build* environment, so the modulefile alone is not
-  # enough. Relative symlink => relocation-safe.
-  mkdir -p "$INSTALLROOT/share"
-  ln -sfn "../lib/${PYVER}/site-packages/torch/share/cmake" "$INSTALLROOT/share/cmake"
-
-  # Runtime fix: also expose Torch_DIR via the modulefile for `module load`.
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << MODEOF
 setenv Torch_DIR \$PKG_ROOT/lib/${PYVER}/site-packages/torch/share/cmake/Torch
 MODEOF
