@@ -13,6 +13,9 @@ requires:
   - delphes
   - onnxruntime
   - torch
+  # podio's datamodel generator (PODIO_GENERATE_DATAMODEL for DCHdigi) imports
+  # jinja2/markupsafe/yaml at configure time.
+  - Jinja2
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -21,9 +24,17 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function SetBuildEnv() {
+  _SetBuildEnvBase
+  # podio's datamodel code generator (invoked via podioMacros while configuring
+  # DCHdigi) imports jinja2/markupsafe/yaml. bits exposes each dependency's
+  # $*_ROOT but not its Python site-packages, so add them to PYTHONPATH.
+  bits_pythonpath_from_deps
+}
 function Configure() {
   # PyTorch ships its CMake config inside the pip site-packages tree; point
   # find_package(Torch) at the real dir. The modulefile Torch_DIR doesn't reach
@@ -35,7 +46,7 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=20 \
+    -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }
