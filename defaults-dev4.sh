@@ -12,11 +12,8 @@ disable:
   # k4actstracking = v00-02 (the LCG_109 heptools-devkey combo), so it builds
   # against the matching ACTS rather than the dev-base acts 26.0.0.
   #
-  # perf cannot build: its recipe calls ./compile_perf.sh, which ships in neither
-  # the linux-dev tarball nor the perf patch (the patch only edits setup.py /
-  # Makefile.config), and LCG_109 has no perf package at all. adaptyst is perf's
-  # only consumer, so disable both. Drop these once perf provides compile_perf.sh.
-  - perf
-  - adaptyst
+  # (perf is no longer disabled here: it is now a system_requirement -- see
+  # perf.sh -- so a missing system perf yields an actionable hint + clean exit
+  # rather than a build failure, and adaptyst can use the system perf.)
 ---
 
