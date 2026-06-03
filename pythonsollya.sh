@@ -34,4 +34,11 @@ export SOLLYA_DIR="${SOLLYA_ROOT}"
 export MPFI_DIR="${MPFI_ROOT}"
 [ -n "${MPFR_ROOT}" ] && export MPFR_DIR="${MPFR_ROOT}"
 [ -n "${GMP_ROOT}" ]  && export GMP_DIR="${GMP_ROOT}"
+# The *_DIR vars only reach the Makefile's CPPFLAGS; the actual cython->C
+# compile is driven by pip/setup.py and never sees them, so it fails with
+# "sollya.h: No such file or directory". CPATH/LIBRARY_PATH are honoured by
+# every gcc/cpp invocation regardless of build system, so the cython step finds
+# the headers and libraries.
+export CPATH="${SOLLYA_ROOT}/include:${MPFI_ROOT}/include${MPFR_ROOT:+:${MPFR_ROOT}/include}${GMP_ROOT:+:${GMP_ROOT}/include}${CPATH:+:${CPATH}}"
+export LIBRARY_PATH="${SOLLYA_ROOT}/lib:${MPFI_ROOT}/lib${MPFR_ROOT:+:${MPFR_ROOT}/lib}${GMP_ROOT:+:${GMP_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 ##############################
