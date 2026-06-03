@@ -26,6 +26,12 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # FCCAnalyses' FindDelphes.cmake reaches the bundled TrackCovariance headers
+  # (TrkUtil.h, one dir deeper than the suffix search) only via $DELPHES_DIR.
+  # bits exports DELPHES_ROOT to the build env (not DELPHES_DIR, and the
+  # delphes modulefile's setenv only applies at runtime, not at build time), so
+  # map it here. Without this: "missing DELPHES_EXTERNALS_TKCOV_INCLUDE_DIR".
+  export DELPHES_DIR="${DELPHES_ROOT}"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
