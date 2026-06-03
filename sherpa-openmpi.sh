@@ -35,7 +35,11 @@ MODULE_OPTIONS="--bin --lib"
 export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 # Put OpenMPI's compilers on PATH so Sherpa's find_package(MPI) locates mpicxx.
+# PATH alone isn't enough: FindMPI also runs a compile+link test (MPI_*_WORKS),
+# and the relocated mpicc/mpicxx/mpifort wrappers can't find their plugins/config
+# without OPAL_PREFIX, so the test fails ("Could NOT find MPI ... MPI_*_WORKS").
 export PATH="${OPENMPI_ROOT}/bin:${PATH}"
+export OPAL_PREFIX="${OPENMPI_ROOT}"
 ##############################
 function Configure() {
   # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
@@ -62,6 +66,7 @@ function Configure() {
     -DSHERPA_ENABLE_ANALYSIS=ON \
     -DSHERPA_ENABLE_EWSUD=ON \
     -DSHERPA_ENABLE_MCFM=ON \
+    -DMCFM_ROOT_DIR="${MCFM_ROOT}" \
     -DSHERPA_ENABLE_HEPMC3=ON \
     -DSHERPA_ENABLE_HEPMC3_ROOT=ON
 }
