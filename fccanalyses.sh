@@ -12,8 +12,12 @@ requires:
   - DD4hep
   - delphes
   - vdt
-  # optional:
-  # - onnxruntime
+  # FCCAnalyses' WITH_ONNX defaults to AUTO: it find_package(onnxruntime)s and,
+  # if a partial match is found, links analyzers against it. onnxruntime (1.24.4,
+  # > the required 1.17.1) is in this stack already (ddml uses it), but unless
+  # it's a dependency here it isn't on CMAKE_PREFIX_PATH, so the find half-fails
+  # and the link breaks. Make it a real dependency so ONNX analyzers build.
+  - onnxruntime
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
