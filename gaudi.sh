@@ -1,8 +1,12 @@
 package: Gaudi
 description: Gaudi software framework for HEP data processing applications
-version: "v40r2"
+# v40r4 (lcgcmake master's Gaudi) rather than the LCG_109 v40r2: the key4hep
+# packages this stack tracks (k4simgeant4 main, k4reccalorimeter pre18, ...) are
+# HEAD-dev and are built against v40r4 upstream. v40r2 fails to compile them
+# under gcc15 (IInterface cast<> template / Property.h operator=).
+version: "v40r4"
 mem_per_job: 1500
-tag: "v40r2"
+tag: "v40r4"
 sources:
   - https://gitlab.cern.ch/gaudi/Gaudi/-/archive/%(tag)s/Gaudi-%(tag)s.tar.gz
 license: Apache-2.0
