@@ -32,10 +32,12 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 patches:
-  # gaudi-GaudiToolbox.cmake.patch dropped for v40r4: its sh->bash change is now
-  # upstream (env.sh / run are generated with #!/usr/bin/env bash) and its
-  # confdb2 output_files hunk is a no-op on Linux (the non-Apple branch already
-  # yields a single <Project>.confdb2). The patch only applied against v40r2.
+  # The GaudiToolbox patch (sh->bash for the generated env.sh/run + confdb2
+  # output_files) is only needed and only applies for v40r2: v40r4 already
+  # generates those scripts with #!/usr/bin/env bash and changed the surrounding
+  # layout so the patch no longer applies. Gate it on the version so a build that
+  # pins Gaudi back to v40r2 still gets it.
+  - "gaudi-GaudiToolbox.cmake.patch:version=v40r2"
   - gaudi-merge_confdb2_parts.patch
 ---
 #!/bin/bash -e
