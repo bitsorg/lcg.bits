@@ -10,6 +10,7 @@ requires:
   - Boost
   - jsonmcpp
   - poco
+  - utf8proc
   - cli11
   - libarchive
   - libbpf
@@ -30,6 +31,14 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # Poco is built POCO_UNBUNDLED=ON against external utf8proc, so its exported
+  # PocoFoundationConfig.cmake does find_dependency(Utf8Proc). That re-search
+  # uses Poco's FindUtf8Proc module, which needs the UTF8PROC_* cache vars set
+  # (Poco's own build passed them) -- otherwise consumers fail with "Could NOT
+  # find Utf8Proc". Pre-set them here, exactly as poco.sh does.
+  #
+  # perf is now a system_requirement (no PERF_ROOT exported), so point PERF_DIR
+  # at the system prefix where the distro 'perf' lives (/usr/bin/perf).
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -37,5 +46,7 @@ function Configure() {
     -DADAPTYST_SCRIPT_PATH="$INSTALLROOT/share/adaptyst" \
     -DADAPTYST_CONFIG_PATH="$INSTALLROOT/etc/adaptyst.conf" \
     -DCMAKE_CXX_STANDARD=17 \
-    -DPERF_DIR="${PERF_ROOT}"
+    -DUTF8PROC_INCLUDE_DIR="${UTF8PROC_ROOT}/include" \
+    -DUTF8PROC_LIBRARY="${UTF8PROC_ROOT}/lib/libutf8proc.so" \
+    -DPERF_DIR="${PERF_ROOT:-/usr}"
 }
