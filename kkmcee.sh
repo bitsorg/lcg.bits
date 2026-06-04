@@ -34,5 +34,10 @@ function Configure() {
   export ACLOCAL_PATH="${LIBTOOL_ROOT}/share/aclocal:${AUTOMAKE_ROOT}/share/aclocal:${ACLOCAL_PATH}"
   libtoolize --install --copy --force
   autoreconf --force --install
-  ./configure --with-photos=${PHOTOSCPP_ROOT} --prefix=$INSTALLROOT
+  # photoscpp's Log.h constructs std::string from nullptr, which is a deleted
+  # overload in C++23 (basic_string(nullptr_t) = delete). Build kkmcee at C++20:
+  # the trailing -std=c++20 overrides the stack-default -std=c++23 inherited from
+  # CXXFLAGS (last -std wins).
+  ./configure --with-photos=${PHOTOSCPP_ROOT} --prefix=$INSTALLROOT \
+    CXXFLAGS="${CXXFLAGS} -std=c++20"
 }

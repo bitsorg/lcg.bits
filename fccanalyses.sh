@@ -36,10 +36,15 @@ function Configure() {
   # delphes modulefile's setenv only applies at runtime, not at build time), so
   # map it here. Without this: "missing DELPHES_EXTERNALS_TKCOV_INCLUDE_DIR".
   export DELPHES_DIR="${DELPHES_ROOT}"
+  # FCCAnalyses' CMakeLists hard-rejects C++23 ("Unsupported C++ standard: 23").
+  # Pin it to C++20: -DCMAKE_CXX_STANDARD=20 satisfies the gate and the trailing
+  # -std=c++20 makes the actual compile C++20 (overriding the -std=c++23 from the
+  # stack-default CXXFLAGS).
+  export CXXFLAGS="${CXXFLAGS} -std=c++20"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
+    -DCMAKE_CXX_STANDARD=20 \
     -DWITH_DD4HEP=ON
 }
