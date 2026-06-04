@@ -25,19 +25,23 @@ function Prepare() {
 function Make() {
   # -std=legacy matches the flag used by lcgcmake; needed for old Fortran-77 code
   local fflags="-std=legacy -O2 -fPIC"
+  # macOS shared libraries are .dylib built with -dynamiclib, not .so/-shared.
+  local _so=so _shared=-shared
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; fi
   ${FC:-gfortran} $fflags -c hydjet1_8.f -o hydjet.o
-  ${FC:-gfortran} $fflags -shared -o libhydjet.so hydjet.o
+  ${FC:-gfortran} $fflags $_shared -o libhydjet.$_so hydjet.o
   ${AR:-ar} crs libhydjet.a hydjet.o
 
   ${FC:-gfortran} $fflags -c jetset_73.f -o jetset.o
-  ${FC:-gfortran} $fflags -shared -o libjetset73hydjet.so jetset.o
+  ${FC:-gfortran} $fflags $_shared -o libjetset73hydjet.$_so jetset.o
   ${AR:-ar} crs libjetset73hydjet.a jetset.o
 }
 
 function MakeInstall() {
+  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
-  install -m755 libhydjet.so "$INSTALLROOT/lib/"
+  install -m755 libhydjet.$_so "$INSTALLROOT/lib/"
   install -m644 libhydjet.a  "$INSTALLROOT/lib/"
-  install -m755 libjetset73hydjet.so "$INSTALLROOT/lib/"
+  install -m755 libjetset73hydjet.$_so "$INSTALLROOT/lib/"
   install -m644 libjetset73hydjet.a  "$INSTALLROOT/lib/"
 }

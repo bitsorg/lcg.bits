@@ -37,9 +37,11 @@ function Make() {
   # downgrades it back to a warning (the same remedy lcgcmake applies to crmc for
   # gcc > 9); -std=legacy covers other old constructs.  The Makefile's default
   # F77FLAGS is "-fPIC", which we preserve.
+  # gfortran's shared runtime is libgfortran.dylib on macOS, .so on Linux.
+  _libgf=libgfortran.so; [ "$(uname)" = Darwin ] && _libgf=libgfortran.dylib
   PATH="${ROOT_ROOT:+$ROOT_ROOT/bin:}$PATH" \
     make ${JOBS:+-j $JOBS} \
-    F77LIBSO="$(${FC:-gfortran} -print-file-name=libgfortran.so)" \
+    F77LIBSO="$(${FC:-gfortran} -print-file-name=${_libgf})" \
     F77FLAGS="-fPIC -std=legacy -fallow-argument-mismatch"
 }
 function MakeInstall() {
