@@ -33,6 +33,11 @@ MODULE_OPTIONS="--bin --lib"
 # its Python site-packages, so put every dependency's site-packages on PYTHONPATH
 # at recipe scope (applies to both Configure and Make).
 bits_pythonpath_from_deps
+# professor's Makefile forms the C++ standard flag as `-std=$(CXXSTD)`, but bits
+# exports CXXSTD as a bare number (e.g. 23, for -DCMAKE_CXX_STANDARD), so g++
+# sees the invalid `-std=23`. Hand professor the `c++NN` token its Makefile
+# expects (this matches the c++23 that ROOT, a dependency, is built with).
+export CXXSTD="c++${CXXSTD:-17}"
 ##############################
 function Configure() {
   ./configure --prefix=$INSTALLROOT --with-eigen=${EIGEN_ROOT} URL ${gen_url}/professor-2.5.6.tar.gz
