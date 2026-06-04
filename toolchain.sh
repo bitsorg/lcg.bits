@@ -3,22 +3,27 @@ version: "%(tag_basename)s"
 tag: v1.0
 build_requires:
   - "GCC-Toolchain:(?!osx)"
-# On Linux the toolchain (incl. gfortran) comes from GCC-Toolchain above. macOS
-# ships no Fortran compiler and GCC-Toolchain is osx-disabled, so Fortran
-# packages rely on a system/Homebrew gfortran being on PATH. Declare it a
-# system_requirement on osx only: when gfortran is present the package is taken
-# from the system (the body below is not run); when it is missing the build
-# stops up front with an actionable message instead of failing deep in a
-# Fortran package.
+# On Linux the toolchain (incl. gfortran) comes from GCC-Toolchain above. On
+# macOS GCC-Toolchain is osx-disabled, so the build relies on the system
+# toolchain: the Xcode Command Line Tools (clang + SDK) for C/C++, and a
+# system/Homebrew gfortran for Fortran (macOS ships none). Declare these a
+# system_requirement on osx only: when both are present the package is taken
+# from the system (the body below is not run); when either is missing the build
+# stops up front with an actionable message instead of failing deep in a build.
 system_requirement: "osx"
 system_requirement_check: |
+  # Xcode Command Line Tools installed, and clang/SDK actually compile.
+  xcode-select -p >/dev/null 2>&1 || exit 1
+  printf 'int main(void){return 0;}\n' | cc -xc - -o /dev/null 2>/dev/null || exit 1
+  # A Fortran compiler (macOS has no built-in one).
   command -v gfortran >/dev/null 2>&1
 system_requirement_missing: |
-  gfortran was not found on this macOS system, but the LCG/key4hep Fortran
-  packages need it (macOS has no built-in Fortran compiler).
-    * Install Homebrew's GCC, which provides gfortran:
+  The macOS developer toolchain is incomplete. The build needs both:
+    * Xcode Command Line Tools (clang + SDK):
+        xcode-select --install
+    * gfortran (macOS has no built-in Fortran compiler), via Homebrew GCC:
         brew install gcc
-    * Make sure `gfortran` is on your PATH, then re-run the build.
+  Install whichever is missing, ensure both are on PATH, then re-run the build.
 ---
 mkdir -p $INSTALLROOT/etc/modulefiles
 cp $GCC_TOOLCHAIN_ROOT/etc/modulefiles/GCC-Toolchain $INSTALLROOT/etc/modulefiles/GCC-${GCC_TOOLCHAIN_VERSION//-*}
