@@ -2,8 +2,6 @@ package: awkward_cpp
 description: awkward-cpp compiled components for Awkward Array
 version: "52"
 tag: "52"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - numpy
   - pytest_runner
@@ -17,7 +15,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

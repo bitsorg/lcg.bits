@@ -17,3 +17,14 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig --cmake"
 ##############################
+function Configure() {
+  cmake "${SOURCEDIR}/build/cmake" \
+    -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DZSTD_BUILD_SHARED=ON \
+    -DZSTD_BUILD_STATIC=ON \
+    -DZSTD_BUILD_PROGRAMS=ON \
+    -DZSTD_BUILD_TESTS=OFF
+}

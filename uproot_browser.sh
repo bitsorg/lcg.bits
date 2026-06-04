@@ -2,8 +2,6 @@ package: uproot_browser
 description: uproot-browser TUI browser for ROOT files using uproot
 version: "0.6.7"
 tag: "0.6.7"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - awkward
@@ -22,7 +20,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

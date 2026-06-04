@@ -19,8 +19,10 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() { :; }
 function Make() {
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/chzyer/readline/
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/chzyer/readline/
   cmake -E chdir $INSTALLROOT/src/github.com/chzyer/readline/ go install
 }
+function MakeInstall() { :; }

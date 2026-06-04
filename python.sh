@@ -1,7 +1,7 @@
 package: Python
 description: CPython interpreter and standard library
-version: "3.14.0"
-tag: "3.14.0"
+version: "3.13.11"
+tag: "3.13.11"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 build_requires:

@@ -1,9 +1,8 @@
 package: fcalclusterer
 description: FcalClusterer forward calorimeter clustering for ILC
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "01.01"
+tag: "v01-01"
+source: https://github.com/FCalSW/FCalClusterer.git
 requires:
   - CMake
   - ilcutil
@@ -27,6 +26,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \

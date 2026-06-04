@@ -18,6 +18,8 @@ license: LGPL-2.1-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Configure() {
-  ./configure --prefix=$INSTALLROOT --with-mpfr=${MPFR_ROOT}
+function Configure() { 
+    ./autogen.sh
+    CXXFLAGS="-fPIC -g -O2 -std=c++17" \
+    ./configure --prefix=$INSTALLROOT --with-mpfr=${MPFR_ROOT}
 }

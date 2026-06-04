@@ -2,8 +2,6 @@ package: jupyter_latex_envs
 description: Jupyter extension for LaTeX environments in notebooks
 version: "1.4.6"
 tag: "1.4.6"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - ipython
@@ -18,7 +16,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

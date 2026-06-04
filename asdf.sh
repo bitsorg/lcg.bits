@@ -2,8 +2,6 @@ package: asdf
 description: ASDF Advanced Scientific Data Format Python library
 version: "3.5.0"
 tag: "3.5.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - asdf_standard
@@ -22,7 +20,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

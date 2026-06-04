@@ -18,5 +18,5 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no ${coin3d_config_opts} ${libtoolpatch}
+  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no
 }

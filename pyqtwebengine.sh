@@ -1,9 +1,7 @@
 package: pyqtwebengine
 description: PyQtWebEngine Python bindings for Qt WebEngine
-version: "5.12.1"
-tag: "5.12.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/PyQtWebEngine_gpl-5.12.1.tar.gz
+version: "5.15.7"
+tag: "5.15.7"
 requires:
   - Python
   - pyqt5
@@ -14,7 +12,8 @@ license: GPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="PyQtWebEngine"
 MODULE_OPTIONS="--bin --python"
 ##############################

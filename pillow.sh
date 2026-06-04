@@ -1,9 +1,7 @@
 package: pillow
 description: Pillow the friendly PIL (Python Imaging Library) fork
-version: "11.2.1"
-tag: "11.2.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Pillow-11.2.1.tar.gz
+version: "12.2.0"
+tag: "12.2.0"
 requires:
   - Python
   - freetype
@@ -19,7 +17,7 @@ license: HPND
 export CFLAGS="-I${ZLIB_ROOT}/include ${CFLAGS:-}"
 export LDFLAGS="-L${ZLIB_ROOT}/lib ${LDFLAGS:-}"
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

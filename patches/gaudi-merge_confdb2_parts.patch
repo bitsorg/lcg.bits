@@ -1,20 +1,25 @@
 --- a/GaudiKernel/scripts/merge_confdb2_parts
 +++ b/GaudiKernel/scripts/merge_confdb2_parts
-@@ -22,9 +22,14 @@
+@@ -22,9 +22,19 @@
      (3, 13, 0) <= sys.version_info <= (3, 13, 7) or sys.version_info[:3] == (3, 14, 0)
  ) and sys.platform.startswith("linux"):
      import dbm
 -    import dbm.gnu
 -
 -    dbm._defaultmod = dbm.gnu
-+    try:
-+        import dbm.gnu
-+        dbm._defaultmod = dbm.gnu
-+    except ImportError:
-+        # gdbm unavailable; explicitly use dumbdbm, which creates
-+        # <name>.dat — matching the cmake install target (.confdb2.dat)
-+        import dbm.dumb
-+        dbm._defaultmod = dbm.dumb
++    import dbm.gnu
++    dbm._defaultmod = dbm.gnu
++
++# Force the sqlite3 dbm backend (the default since Python 3.13, pure-stdlib so
++# always present) so the merged confdb2 is a single file named exactly
++# <Project>.confdb2 on every platform -- matching the cmake install rule and
++# the runtime reader, not the platform-dependent default dbm backend.
++import dbm
++try:
++    import dbm.sqlite3
++    dbm._defaultmod = dbm.sqlite3
++except ImportError:
++    pass
  
  from GaudiKernel.DataHandle import DataHandle  # noqa: F401
  from GaudiKernel.GaudiHandles import *  # noqa: F401 F403

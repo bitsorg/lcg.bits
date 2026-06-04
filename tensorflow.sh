@@ -18,8 +18,8 @@ requires:
   - typing_extensions
   - jax
   - packaging
-  # optional:
-  # - TensorRT
+# optional:
+# - TensorRT
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -27,7 +27,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

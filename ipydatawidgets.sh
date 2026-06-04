@@ -2,8 +2,6 @@ package: ipydatawidgets
 description: ipydatawidgets Jupyter widgets for n-dimensional arrays
 version: "4.3.5"
 tag: "4.3.5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - traittypes
@@ -17,7 +15,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

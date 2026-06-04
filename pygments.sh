@@ -2,8 +2,6 @@ package: pygments
 description: Pygments generic syntax highlighter for Python
 version: "2.18.0"
 tag: "2.18.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Pygments-2.18.0.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: BSD-2-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

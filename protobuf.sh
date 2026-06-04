@@ -1,6 +1,7 @@
 package: protobuf
 description: Google Protocol Buffers serialization library
 version: "5.28.3"
+mem_per_job: 1500
 tag: "5.28.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-all-5.28.3.tar.gz
@@ -25,6 +26,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -Dprotobuf_BUILD_SHARED_LIBS=OFF \

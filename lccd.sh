@@ -1,9 +1,8 @@
 package: lccd
 description: LCCD (Linear Collider Conditions Data) library
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "01.05.03"
+tag: "v01-05-03"
+source: https://github.com/iLCSoft/lccd.git
 requires:
   - CMake
   - LCIO
@@ -23,6 +22,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \

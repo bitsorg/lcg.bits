@@ -2,8 +2,6 @@ package: kfp
 description: Kubeflow Pipelines SDK for ML workflow orchestration
 version: "2.13.0"
 tag: "2.13.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - absl_py
@@ -33,7 +31,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

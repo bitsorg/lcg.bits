@@ -3,7 +3,7 @@ description: Geneva stochastic global optimisation framework
 version: "1.0-rc3.atlas2"
 tag: "1.0-rc3.atlas2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/geneva-1.0-rc3.tar.gz
 requires:
   - CMake
   - lhapdf
@@ -27,6 +27,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Dgeneva_enable_hepmc=OFF \
     -Dgeneva_enable_lhapdf=ON \

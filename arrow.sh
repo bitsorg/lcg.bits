@@ -32,6 +32,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "$SOURCEDIR/cpp" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -G Ninja \
     -DARROW_DEPENDENCY_SOURCE=SYSTEM \
     -DBUILD_SHARED_LIBS=TRUE \
@@ -41,6 +42,7 @@ function Configure() {
     ${PYTHON_ROOT:+-DPYTHON_EXECUTABLE="$PYTHON_ROOT/bin/python3"} \
     ${FLATBUFFERS_ROOT:+-DFlatbuffers_ROOT="$FLATBUFFERS_ROOT"} \
     ${RAPIDJSON_ROOT:+-DRapidJSON_ROOT="$RAPIDJSON_ROOT"} \
-    ${LZ4_ROOT:+-DLZ4_ROOT="$LZ4_ROOT"} \ 
-    ${SNAPPY_ROOT:+-DSnappy_ROOT="$SNAPPY_ROOT"}
+    ${LZ4_ROOT:+-DLZ4_ROOT="$LZ4_ROOT"} \
+    ${SNAPPY_ROOT:+-DSnappy_ROOT="$SNAPPY_ROOT"} \
+    -Dxsimd_SOURCE="BUNDLED"
 }

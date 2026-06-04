@@ -1,9 +1,8 @@
 package: k4simdelphes
 description: Key4hep Delphes fast simulation wrapper
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "00.07.06"
+tag: "v00-07-06"
+source: https://github.com/key4hep/k4SimDelphes.git
 requires:
   - CMake
   - k4fwcore
@@ -23,10 +22,15 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # Delphes' FindDelphes.cmake needs $DELPHES_DIR (the build env exports
+  # DELPHES_ROOT; the delphes modulefile setenv only applies at runtime). Map it
+  # so the bundled TrackCovariance headers resolve.
+  export DELPHES_DIR="${DELPHES_ROOT}"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=17 \
+    -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
     -DBUILD_TESTING=OFF \
     -DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}" \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"

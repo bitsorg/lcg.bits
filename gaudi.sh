@@ -1,8 +1,14 @@
 package: Gaudi
 description: Gaudi software framework for HEP data processing applications
-version: "%(tag_basename)s"
-tag: "v40r2"
-source: https://gitlab.cern.ch/gaudi/Gaudi.git
+# v40r4 (lcgcmake master's Gaudi) rather than the LCG_109 v40r2: the key4hep
+# packages this stack tracks (k4simgeant4 main, k4reccalorimeter pre18, ...) are
+# HEAD-dev and are built against v40r4 upstream. v40r2 fails to compile them
+# under gcc15 (IInterface cast<> template / Property.h operator=).
+version: "v40r4"
+mem_per_job: 1500
+tag: "v40r4"
+sources:
+  - https://gitlab.cern.ch/gaudi/Gaudi/-/archive/%(tag)s/Gaudi-%(tag)s.tar.gz
 license: Apache-2.0
 requires:
   - CMake
@@ -26,7 +32,12 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 patches:
-  - gaudi-GaudiToolbox.cmake.patch
+  # The GaudiToolbox patch (sh->bash for the generated env.sh/run + confdb2
+  # output_files) is only needed and only applies for v40r2: v40r4 already
+  # generates those scripts with #!/usr/bin/env bash and changed the surrounding
+  # layout so the patch no longer applies. Gate it on the version so a build that
+  # pins Gaudi back to v40r2 still gets it.
+  - "gaudi-GaudiToolbox.cmake.patch:version=v40r2"
   - gaudi-merge_confdb2_parts.patch
 ---
 #!/bin/bash -e
@@ -38,8 +49,9 @@ MODULE_OPTIONS="--bin --lib --cmake --python"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-      -DCMAKE_CXX_STANDARD=20 \
+      -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
       -DCMAKE_FIND_FRAMEWORK=LAST \
       -DGAUDI_USE_DOXYGEN=OFF \
       ${CPPGSL_ROOT:+-DCPPGSL_INCLUDE_DIR="${CPPGSL_ROOT}/include"} \

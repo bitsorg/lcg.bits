@@ -2,8 +2,6 @@ package: dask_histogram
 description: dask-histogram Dask parallelised boost-histogram
 version: "2025.2.0"
 tag: "2025.2.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - dask
@@ -16,7 +14,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

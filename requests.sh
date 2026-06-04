@@ -2,8 +2,6 @@ package: requests
 description: Requests elegant HTTP library for Python
 version: "2.32.3"
 tag: "2.32.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - charset_normalizer
@@ -18,7 +16,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

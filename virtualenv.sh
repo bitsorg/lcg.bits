@@ -2,8 +2,6 @@ package: virtualenv
 description: virtualenv tool to create isolated Python environments
 version: "20.28.0"
 tag: "20.28.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - appdirs
@@ -18,7 +16,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

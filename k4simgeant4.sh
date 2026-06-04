@@ -1,9 +1,8 @@
 package: k4simgeant4
 description: Key4hep Geant4 full simulation framework
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "0.1.0pre17"
+tag: "v0.1.0pre17"
+source: https://github.com/key4hep/k4SimGeant4.git
 requires:
   - CMake
   - k4fwcore
@@ -20,11 +19,29 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function SetBuildEnv() {
+  _SetBuildEnvBase
+  # After linking the Gaudi component libraries, the build runs genconf, which
+  # dlopens SimG4Components; that triggers Geant4 static initialisers
+  # (G4NuclideTable) which abort ("G4ENSDFSTATEDATA environment variable must be
+  # set") unless the Geant4 data env vars are present. Geant4's runtime
+  # modulefile sets them but that does not reach the build env, so source
+  # Geant4's own environment script (installed with GEANT4_INSTALL_DATA=ON). Fall
+  # back to setting G4ENSDFSTATEDATA directly if the script is absent.
+  if [ -f "${GEANT4_ROOT}/bin/geant4.sh" ]; then
+    . "${GEANT4_ROOT}/bin/geant4.sh" || true
+  fi
+  if [ -z "${G4ENSDFSTATEDATA:-}" ]; then
+    _g4ensdf=$(ls -d "${GEANT4_ROOT}"/share/Geant4*/data/G4ENSDFSTATE* 2>/dev/null | head -1)
+    [ -n "${_g4ensdf}" ] && export G4ENSDFSTATEDATA="${_g4ensdf}"
+  fi
+}
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_STANDARD=17 \
+    -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
     -DBUILD_TESTING=OFF \
     -DBUILD_DOCS=OFF \
     -DPython_ROOT_DIR="${Python_ROOT}" \

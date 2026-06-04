@@ -3,7 +3,11 @@ description: EPOS4 hadronic interaction and heavy-ion event generator
 version: "4.0.3.atlas1"
 tag: "4.0.3.atlas1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/epos4.0.3.atlas1.tgz
+  # Upstream tarball is named for the base version (4.0.3); the ".atlas1" suffix
+  # is only the LCG version label, not part of the filename.  In lcgcmake this
+  # comes from "author=4.0.3" in the epos4 package declaration, giving
+  # epos<author>.tgz = epos4.0.3.tgz.
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/epos4.0.3.tgz
 requires:
   - CMake
   - ROOT
@@ -25,6 +29,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \

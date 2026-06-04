@@ -2,8 +2,6 @@ package: cffi
 description: CFFI C Foreign Function Interface for Python
 version: "2.0.0"
 tag: "2.0.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pycparser
@@ -16,7 +14,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

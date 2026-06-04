@@ -2,8 +2,6 @@ package: httpcore
 description: httpcore minimal HTTP client implementation
 version: "1.0.7"
 tag: "1.0.7"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - anyio
@@ -17,7 +15,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

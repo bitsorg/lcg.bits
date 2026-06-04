@@ -2,8 +2,6 @@ package: markdown
 description: Markdown Python implementation of Markdown
 version: "3.7"
 tag: "3.7"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/Markdown-3.7.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

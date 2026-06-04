@@ -10,7 +10,7 @@ requires:
   - Qt5
   - gnuplot
   - texinfo
-  - readline
+# - readline
   - fftw
 build_requires:
   - bits-recipe-tools
@@ -24,5 +24,7 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT "CPPFLAGS=${OCTAVE_CPP_FLAGS}" "LDFLAGS=${OCTAVE_LD_FLAGS} ${BLASPATH}" "--with-blas=${BLASLIB}" "--with-lapack=${BLASLIB}" ${with_qt_flag} --libdir=$INSTALLROOT/lib --disable-rpath
+  export LDFLAGS="-L${BLAS_ROOT}/lib"
+  export LIBS="-lopenblas"
+ ./configure --prefix="${INSTALLROOT}" --with-blas=openblas --with-lapack=openblas --disable-readline --with-qt=5 --disable-rpath
 }

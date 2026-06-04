@@ -1,9 +1,8 @@
 package: marlinreco
 description: MarlinReco reconstruction Marlin processors for ILC
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "01.38"
+tag: "v01-38"
+source: https://github.com/iLCSoft/MarlinReco.git
 requires:
   - CMake
   - ilcutil
@@ -30,8 +29,10 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
+    -DAIDA_DIR="${RAIDA_ROOT}/lib/cmake/RAIDA" \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }

@@ -1,9 +1,8 @@
 package: clupatra
 description: Clupatra Kalman-filter track finding for ILC/CLICdp
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "01.04"
+tag: "v01-04"
+source: https://github.com/iLCSoft/Clupatra.git
 requires:
   - CMake
   - ilcutil

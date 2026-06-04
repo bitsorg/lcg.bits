@@ -1,9 +1,8 @@
 package: assimp
 description: Open Asset Import Library for 3D model formats
-version: "5.0.1"
-tag: "5.0.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "6.0.5"
+tag: "v6.0.5"
+source: https://github.com/assimp/assimp
 requires:
   - CMake
   - Boost
@@ -21,6 +20,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="-Wno-tautological-compare -Wno-sizeof-pointer-memaccess" \
     -DCMAKE_CXX_STANDARD=17 \

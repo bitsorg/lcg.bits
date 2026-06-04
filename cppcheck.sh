@@ -5,6 +5,8 @@ tag: "2.20.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
+  - CMake
+  - Python
   - pcre2
   - pygments
 build_requires:
@@ -16,7 +18,7 @@ patches:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --python"
+MODULE_OPTIONS="--bin"
 ##############################

@@ -1,7 +1,8 @@
 package: xrootd
 description: XRootD high-performance, fault-tolerant access to data
-version: "6.0.1"
-tag: "6.0.1"
+version: "5.9.1"
+mem_per_job: 1024
+tag: "5.9.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
@@ -12,7 +13,7 @@ requires:
   - curl
   - Davix
   - libzip
-  - readline
+# - readline
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -25,18 +26,15 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  PKG_CONFIG_PATH="${LIBZIP_ROOT}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}" \
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
-      -DCMAKE_PREFIX_PATH="${LIBZIP_ROOT}" \
+      ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+    -DENABLE_READLINE=FALSE \
     -DFORCE_ENABLED=ON \
     -DENABLE_FUSE=FALSE \
     -DENABLE_KRB5=TRUE \
-    -DENABLE_READLINE=TRUE \
-    -DREADLINE_ROOT_DIR="${READLINE_ROOT}" \
-    -DREADLINE_INCLUDE_DIR="${READLINE_ROOT}/include" \
     -DENABLE_PYTHON=TRUE \
     -DENABLE_VOMS=FALSE \
     -DENABLE_HTTP=TRUE \

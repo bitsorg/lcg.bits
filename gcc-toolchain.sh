@@ -14,6 +14,7 @@ prefer_system_check: |
   which make || { echo "make missing"; exit 1; }
   which gfortran || { echo "gfortran missing"; exit 1; }
   case $REQUESTED_VERSION in
+    v15*) MIN_GCC_VERSION=150200 ;;
     v14*) MIN_GCC_VERSION=140200 ;;
     v13*) MIN_GCC_VERSION=130200 ;;
     v12*) MIN_GCC_VERSION=120100 ;;
@@ -126,12 +127,6 @@ pushd build-gcc
   # GCC creates c++, but not cc
   ln -nfs gcc "$INSTALLROOT/bin/cc"
   rm -rf "$INSTALLROOT/lib/pkg-config"
-
-  # Provide a custom specs file if needed
-  #SPEC="$(dirname $(gcc -print-libgcc-file-name))/specs"
-  #gcc -dumpspecs > $SPEC
-  #perl -pe '++$x and next if /^\*link:/; $x-- and s/^(.*)$/\1 -rpath-link \/lib64:\/lib/ if $x' $SPEC > $SPEC.0
-  #mv $SPEC.0 $SPEC
 
   rm -f "$INSTALLROOT"/lib/*.la \
         "$INSTALLROOT"/lib64/*.la

@@ -2,8 +2,6 @@ package: notebook
 description: Jupyter Notebook web application for interactive computing
 version: "7.4.5"
 tag: "7.4.5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - Jinja2
@@ -32,7 +30,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

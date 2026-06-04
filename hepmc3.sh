@@ -1,9 +1,9 @@
 package: hepmc3
 description: HepMC3 Monte Carlo event record library
-version: "HEAD"
-tag: "HEAD"
+version: "3.3.1"
+tag: "3.3.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC3-HEAD.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC3-%(version)s.tar.gz
 requires:
   - CMake
   - ROOT
@@ -21,6 +21,7 @@ MODULE_OPTIONS="--bin --lib --root-inc"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DROOT_DIR="${ROOT_ROOT}" \
     -DHEPMC3_INSTALL_INTERFACES=ON \

@@ -1,9 +1,8 @@
 package: simsipm
 description: SimSiPM fast SiPM (silicon photomultiplier) simulation library
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "2.1.0"
+tag: "v2.1.0"
+source: https://github.com/EdoPro98/SimSiPM.git
 requires:
   - CMake
 build_requires:
@@ -20,6 +19,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \

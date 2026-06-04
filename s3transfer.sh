@@ -2,8 +2,6 @@ package: s3transfer
 description: s3transfer Amazon S3 transfer management library
 version: "0.10.3"
 tag: "0.10.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - botocore
@@ -16,7 +14,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

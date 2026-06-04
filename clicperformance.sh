@@ -1,9 +1,8 @@
 package: clicperformance
 description: CLICPerformance performance study tools for CLIC detector
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "02.05.01"
+tag: "v02-05-01"
+source: https://github.com/iLCSoft/ClicPerformance.git
 requires:
   - CMake
   - ilcutil
@@ -29,8 +28,10 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
+    -DAIDA_DIR="${RAIDA_ROOT}/lib/cmake/RAIDA" \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }

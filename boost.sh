@@ -1,6 +1,7 @@
 package: Boost
 description: Boost C++ portable peer-reviewed libraries
 version: "1.90.0"
+mem_per_job: 1024
 tag: "1.90.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/boost_1_90_0.tar.gz

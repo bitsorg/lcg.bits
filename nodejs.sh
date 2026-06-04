@@ -1,9 +1,8 @@
 package: nodejs
 description: Node.js JavaScript runtime built on V8
-version: "22.14.0"
-tag: "22.14.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/node-v22.14.0.tar.gz
+version: "24.16.0"
+tag: "v24.16.0"
+source: https://github.com/nodejs/node.git
 requires:
   - Python
 build_requires:
@@ -17,6 +16,7 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Configure() {
-  ./configure --prefix $INSTALLROOT
-}
+export CXXFLAGS="-fPIC -g -O2"
+export CFLAGS="-fPIC -g -O2"
+#unset ENABLE_IPO
+#unset CXXSTD

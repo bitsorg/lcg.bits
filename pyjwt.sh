@@ -2,8 +2,6 @@ package: PyJWT
 description: PyJWT JSON Web Token implementation for Python
 version: "2.8.0"
 tag: "2.8.0"
-sources:
-  - https://files.pythonhosted.org/packages/source/P/PyJWT/%(name)s-%(version)s.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

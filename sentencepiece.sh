@@ -1,15 +1,13 @@
 package: sentencepiece
 description: SentencePiece unsupervised text tokenizer
-version: "0.2.0"
-tag: "0.2.0"
+version: "0.2.1"
+tag: "0.2.1"
 requires:
   - Python
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-#patches:
-#  - sentencepiece-0.2.0.patch
 ---
 #!/bin/bash -e
 ##############################

@@ -2,8 +2,6 @@ package: DecayLanguage
 description: DecayLanguage toolkit for decay descriptor parsing (HEP)
 version: "0.20.0"
 tag: "0.20.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/decaylanguage-0.20.0.tar.gz
 requires:
   - Python
   - attrs
@@ -21,7 +19,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

@@ -10,8 +10,8 @@ Subject: [PATCH 1/7] fix(draw_current_rcl): update LaTeX package from axodraw
 
 diff --git a/src/util/draw_current_rcl.f90 b/src/util/draw_current_rcl.f90
 index cc44ab5..3be4973 100644
---- src/util/draw_current_rcl.f90
-+++ src/util/draw_current_rcl.f90
+--- a/src/util/draw_current_rcl.f90
++++ b/src/util/draw_current_rcl.f90
 @@ -42,7 +42,7 @@ module draw_current_rcl
  
        write(99,'(a)') '\documentclass[11pt]{article}'
@@ -42,8 +42,8 @@ Subject: [PATCH 2/7] Add two small routines which allow to access the
 
 diff --git a/include/recola.h b/include/recola.h
 index db6f2f5..90b5052 100644
---- include/recola.h
-+++ include/recola.h
+--- a/include/recola.h
++++ b/include/recola.h
 @@ -173,6 +173,10 @@ void RCLMOD(input,reset_ctcouplings)
       ();
  void RCLMOD(input,print_collier_statistics)
@@ -72,8 +72,8 @@ index db6f2f5..90b5052 100644
  /**********************************************
 diff --git a/include/recola.hpp b/include/recola.hpp
 index 9cc7047..628f893 100644
---- include/recola.hpp
-+++ include/recola.hpp
+--- a/include/recola.hpp
++++ b/include/recola.hpp
 @@ -1008,6 +1008,16 @@ ivoid print_collier_statistics_rcl
  {
    RCLMOD(input,print_collier_statistics)();
@@ -93,8 +93,8 @@ index 9cc7047..628f893 100644
  /**********************************
 diff --git a/src/api/input_rcl.f90 b/src/api/input_rcl.f90
 index 004e313..76f868a 100644
---- src/api/input_rcl.f90
-+++ src/api/input_rcl.f90
+--- a/src/api/input_rcl.f90
++++ b/src/api/input_rcl.f90
 @@ -717,6 +717,23 @@ module input_rcl
  
  !------------------------------------------------------------------------------!
@@ -121,8 +121,8 @@ index 004e313..76f868a 100644
                           get_particle_id_mdl,          &
 diff --git a/src/pyrecola/pyrecola.c b/src/pyrecola/pyrecola.c
 index 1d92806..e1eb5df 100644
---- src/pyrecola/pyrecola.c
-+++ src/pyrecola/pyrecola.c
+--- a/src/pyrecola/pyrecola.c
++++ b/src/pyrecola/pyrecola.c
 @@ -1377,6 +1377,32 @@ print_collier_statistics_py(PyObject *self, PyObject *args)
    Py_INCREF(Py_None);
    return Py_None;
@@ -167,8 +167,8 @@ index 1d92806..e1eb5df 100644
    {"set_compute_selfenergy_offshell_rcl", set_compute_selfenergy_offshell_py, METH_VARARGS},
 diff --git a/src/recola.f90 b/src/recola.f90
 index dcc436b..8762143 100644
---- src/recola.f90
-+++ src/recola.f90
+--- a/src/recola.f90
++++ b/src/recola.f90
 @@ -60,6 +60,8 @@
        scale_coupling4_rcl,                   &
        switchoff_coupling3_rcl,               &
@@ -194,8 +194,8 @@ Subject: [PATCH 3/7] fix a few minor typos.
 
 diff --git a/src/core/amplitude_rcl.f90 b/src/core/amplitude_rcl.f90
 index 11b898c..462c06d 100644
---- src/core/amplitude_rcl.f90
-+++ src/core/amplitude_rcl.f90
+--- a/src/core/amplitude_rcl.f90
++++ b/src/core/amplitude_rcl.f90
 @@ -28,7 +28,7 @@ module amplitude_rcl
                         get_coupling_value_mdl,get_order_id_mdl,             &
                         get_particle_type2_mdl,get_recola_base_mdl,          &
@@ -216,8 +216,8 @@ index 11b898c..462c06d 100644
        write(nx,*)
 diff --git a/src/pyrecola/pyrecola.c b/src/pyrecola/pyrecola.c
 index e1eb5df..e41ee9a 100644
---- src/pyrecola/pyrecola.c
-+++ src/pyrecola/pyrecola.c
+--- a/src/pyrecola/pyrecola.c
++++ b/src/pyrecola/pyrecola.c
 @@ -910,7 +910,7 @@ switchon_resonant_selfenergies_py(PyObject *self, PyObject *args)
  }
  PyDoc_STRVAR(switchoff_resonant_selfenergies_doc,
@@ -243,8 +243,8 @@ Subject: [PATCH 4/7] feat(wave_functions_rcl): add auxiliary polarisation
 
 diff --git a/src/core/wave_functions_rcl.f90 b/src/core/wave_functions_rcl.f90
 index 53b05a1..89cbbb5 100644
---- src/core/wave_functions_rcl.f90
-+++ src/core/wave_functions_rcl.f90
+--- a/src/core/wave_functions_rcl.f90
++++ b/src/core/wave_functions_rcl.f90
 @@ -37,7 +37,7 @@ module wave_functions_rcl
    complex (dp), intent (out) :: wp(0:3)
  
@@ -311,8 +311,8 @@ Subject: [PATCH 5/7] feat(currents_rcl, globals_rcl,process_definition): add
 
 diff --git a/src/api/process_definition_rcl.f90 b/src/api/process_definition_rcl.f90
 index 2d54f65..2cb70bf 100644
---- src/api/process_definition_rcl.f90
-+++ src/api/process_definition_rcl.f90
+--- a/src/api/process_definition_rcl.f90
++++ b/src/api/process_definition_rcl.f90
 @@ -39,6 +39,7 @@ module process_definition_rcl
                              crossprocess,otter_mode
    integer, allocatable   :: pa(:),paT(:),he(:),heT(:),relperm(:)
@@ -381,8 +381,8 @@ index 2d54f65..2cb70bf 100644
  
 diff --git a/src/core/currents_rcl.f90 b/src/core/currents_rcl.f90
 index 791f5da..be793f0 100644
---- src/core/currents_rcl.f90
-+++/src/core/currents_rcl.f90
+--- a/src/core/currents_rcl.f90
++++ b/src/core/currents_rcl.f90
 @@ -621,6 +621,37 @@ module currents_rcl
          end if
        end do
@@ -423,8 +423,8 @@ index 791f5da..be793f0 100644
        else
 diff --git a/src/core/globals_rcl.f90.in b/src/core/globals_rcl.f90.in
 index 23a5641..427daec 100644
---- src/core/globals_rcl.f90.in
-+++ src/core/globals_rcl.f90.in
+--- a/src/core/globals_rcl.f90.in
++++ b/src/core/globals_rcl.f90.in
 @@ -298,6 +298,11 @@ module globals_rcl
      integer, allocatable :: binRes(:)      ! Resonances (propagator ids)
      integer, allocatable :: parRes(:)      ! Resonances (particle ids)
@@ -470,8 +470,8 @@ Subject: [PATCH 6/7] feat(polarisation): add internal projection functions and
 
 diff --git a/include/recola.h b/include/recola.h
 index 90b5052..aacc916 100644
---- include/recola.h
-+++ include/recola.h
+--- a/include/recola.h
++++ b/include/recola.h
 @@ -163,6 +163,10 @@ void RCLMOD(input,set_renoscheme)
  // get_renoscheme_rcl -> wrapper
  void RCLMOD(input,set_resonant_particle)
@@ -502,8 +502,8 @@ index 90b5052..aacc916 100644
  {
 diff --git a/include/recola.hpp b/include/recola.hpp
 index 628f893..5789b76 100644
---- include/recola.hpp
-+++ include/recola.hpp
+--- a/include/recola.hpp
++++ b/include/recola.hpp
 @@ -983,6 +983,16 @@ ivoid set_resonant_particle_rcl
  {
    RCLMOD(input,set_resonant_particle)(pa.c_str(),pa.length());
@@ -523,8 +523,8 @@ index 628f893..5789b76 100644
  {
 diff --git a/src/api/input_rcl.f90 b/src/api/input_rcl.f90
 index 76f868a..65bc5e6 100644
---- src/api/input_rcl.f90
-+++ src/api/input_rcl.f90
+--- a/src/api/input_rcl.f90
++++ b/src/api/input_rcl.f90
 @@ -1243,6 +1243,110 @@ module input_rcl
  
    end subroutine set_resonant_particle_rcl
@@ -638,8 +638,8 @@ index 76f868a..65bc5e6 100644
    subroutine set_quarkline_rcl (npr,q1,q2)
 diff --git a/src/pyrecola/pyrecola.c b/src/pyrecola/pyrecola.c
 index e41ee9a..6b8053a 100644
---- src/pyrecola/pyrecola.c
-+++ src/pyrecola/pyrecola.c
+--- a/src/pyrecola/pyrecola.c
++++ b/src/pyrecola/pyrecola.c
 @@ -1294,6 +1294,61 @@ set_resonant_particle_py(PyObject *self, PyObject *args)
    Py_INCREF(Py_None);
    return Py_None;
@@ -713,8 +713,8 @@ index e41ee9a..6b8053a 100644
    {"reset_couplings_rcl", reset_couplings_py, METH_VARARGS, reset_couplings_doc},
 diff --git a/src/recola.f90 b/src/recola.f90
 index 8762143..56da205 100644
---- src/recola.f90
-+++ src/recola.f90
+--- a/src/recola.f90
++++ b/src/recola.f90
 @@ -85,6 +85,8 @@
        set_renoscheme_rcl,                    &
        get_renoscheme_rcl,                    &
@@ -740,8 +740,8 @@ Subject: [PATCH 7/7] feat(amplitude_rcl): add polarization handling for
 
 diff --git a/src/core/amplitude_rcl.f90 b/src/core/amplitude_rcl.f90
 index 462c06d..323b1ea 100644
---- src/core/amplitude_rcl.f90
-+++ src/core/amplitude_rcl.f90
+--- a/src/core/amplitude_rcl.f90
++++ b/src/core/amplitude_rcl.f90
 @@ -30,6 +30,7 @@ module amplitude_rcl
                         get_particle_mass_id_mdl,get_particle_name_mdl,      &
                         is_resonant_particle_id_mdl,                         &

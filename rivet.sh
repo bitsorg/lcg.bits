@@ -1,49 +1,55 @@
 package: rivet
 description: Rivet Monte Carlo analysis toolkit
-version: "3.1.5p1"
-tag: "3.1.5p1"
+version: "4.1.2"
+mem_per_job: 1500
+tag: "4.1.2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-3.1.5p1.tar.bz2
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-4.1.2.tar.bz2
 requires:
   - hepmc3
   - yoda
   - fastjet
+  - fjcontrib
+  # Rivet 4 builds its Python bindings with SWIG (lcgcmake passes SWIG_LIB).
+  - swig
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  # Cython regenerates the pyext C++ from .pyx; the shipped sources use CPython
+  # internals removed in Python 3.12+.
+  - cython
 license: GPL-3.0-only
-patches:
-  - rivet-3.1.5p1.patch
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# Put the bits Cython on PATH/PYTHONPATH at RECIPE SCOPE (reaches the Make step,
+# not just Configure's subshell) so the pyext is regenerated for Python 3.13.
+bits_enable_cython
+# SWIG and its runtime library directory, as lcgcmake passes to Rivet 4.
+export SWIG="${SWIG_ROOT}/bin/swig"
+export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+##############################
 function Configure() {
-
   (
   unset PYTHON_VERSION
-  autoreconf -ivf
-
-  # Discover dep prefixes via config tools if env vars are not set
-  [[ -z "$HEPMC3_ROOT"  ]] && HEPMC3_ROOT=$(HepMC3-config --prefix 2>/dev/null)   || true
-  [[ -z "$YODA_ROOT"    ]] && YODA_ROOT=$(yoda-config --prefix 2>/dev/null)        || true
-  [[ -z "$FASTJET_ROOT" ]] && FASTJET_ROOT=$(fastjet-config --prefix 2>/dev/null)  || true
-
-  LOCAL_LDFLAGS=""
-  case $(uname) in
-    Linux) LOCAL_LDFLAGS="-Wl,--no-as-needed" ;;
-  esac
-
+  # Regenerate the Cython pyext rather than compiling the shipped *.cpp.
+  [[ -n "$CYTHON_ROOT" ]] && rm -f pyext/rivet/*.cpp
+  # gcc 15 / libstdc++ no longer transitively include <cstdint>; force-include it
+  # (Rivet uses uintptr_t etc. via RivetSTL.hh). Keep the stack CXXFLAGS.
   ./configure --prefix="$INSTALLROOT" \
     --disable-silent-rules \
-    --disable-doxygen \
+    --disable-pdfmanual \
     ${HEPMC3_ROOT:+--with-hepmc3="$HEPMC3_ROOT"} \
     ${YODA_ROOT:+--with-yoda="$YODA_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"} \
-    LDFLAGS="$LOCAL_LDFLAGS"
+    ${FJCONTRIB_ROOT:+--with-fjcontrib="$FJCONTRIB_ROOT"} \
+    CXXFLAGS="${CXXFLAGS} -include cstdint" \
+    SWIG_LIB="$SWIG_LIB"
   )
 }
 function PostInstall() {

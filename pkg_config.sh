@@ -14,9 +14,21 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure  --with-internal-glib --prefix=$INSTALLROOT --with-system-include-path=/usr/include
+  # Determine the multiarch triple so the compiled-in PC_PATH includes the
+  # Ubuntu multiarch pkgconfig directory (e.g. /usr/lib/x86_64-linux-gnu/pkgconfig).
+  # Without this, bits-built pkg-config silently misses .pc files installed by
+  # system packages (those built with prefer_system), forcing every recipe that
+  # depends on a system package to carry ad hoc PKG_CONFIG_PATH workarounds.
+  # /usr/lib64/pkgconfig is added for RHEL/CentOS compatibility; non-existent
+  # paths are silently ignored by pkg-config.
+  local _triple
+  _triple=$(bits_triple)
+  ./configure --with-internal-glib --prefix=$INSTALLROOT \
+    --with-system-include-path=/usr/include \
+    --with-pc-path="/usr/lib/${_triple}/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig"
 }

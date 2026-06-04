@@ -9,8 +9,8 @@ requires:
   - torch
   - sympy
   - scipy
-  # optional:
-  # - cuda
+  # CUDA (conditional: only when defaults set variable `cuda` truthy):
+  - "cuda:(?cuda)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

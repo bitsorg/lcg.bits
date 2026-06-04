@@ -2,8 +2,6 @@ package: hepunits
 description: hepunits physical units and constants for Python (HEP)
 version: "2.4.3"
 tag: "2.4.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - attrs
@@ -15,7 +13,7 @@ license: LGPL-3.0-or-later
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

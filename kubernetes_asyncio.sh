@@ -2,8 +2,6 @@ package: kubernetes_asyncio
 description: kubernetes_asyncio async Kubernetes Python client
 version: "21.7.1"
 tag: "21.7.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - PyYAML
@@ -19,7 +17,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

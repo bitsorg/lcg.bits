@@ -2,8 +2,6 @@ package: alembic
 description: Alembic database schema migration tool for SQLAlchemy
 version: "1.16.5"
 tag: "1.16.5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - mako
@@ -16,7 +14,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

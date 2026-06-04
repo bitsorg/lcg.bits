@@ -23,7 +23,6 @@ function Configure() {
     "FC=${FC:-gfortran}" \
     "FFLAGS=-std=legacy -fallow-argument-mismatch" \
     "FCFLAGS=-std=legacy -fallow-argument-mismatch"
-    # --with-looptools=${LOOPTOOLS_ROOT}
   # ninja-1.2.0/Makefile lists Fortran .mod files as prerequisites of all-am
   # for installation, but automake --tag=FC only emits rules for .lo object
   # files — .mod files are produced as silent side effects of FC compilation

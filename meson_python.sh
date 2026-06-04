@@ -18,5 +18,7 @@ license: MIT
 ##############################
 . $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="meson-python"
+##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

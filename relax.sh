@@ -8,6 +8,7 @@ requires:
   - CMake
   - cmaketools
   - ROOT
+  - clhep
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -22,6 +23,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_MODULE_PATH="${CMAKETOOLS_MODULES}" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"

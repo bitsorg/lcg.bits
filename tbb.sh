@@ -3,10 +3,6 @@ description: Intel Threading Building Blocks parallel programming library
 version: "v2021.5.0"
 tag: v2021.5.0
 source: https://github.com/uxlfoundation/oneTBB
-#version: "2022.2.0"
-#tag: "2022.2.0"
-#sources:
-#  - https://lcgpackages.web.cern.ch/tarFiles/sources/tbb2022.2.0oss_src.tgz
 requires:
   - CMake
 build_requires:
@@ -25,6 +21,7 @@ MODULE_OPTIONS="--bin --lib --root-inc"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DTBB_TEST=OFF
 }

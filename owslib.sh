@@ -2,8 +2,6 @@ package: OWSLib
 description: OWSLib Python package for OGC Web Services
 version: "0.34.1"
 tag: "0.34.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - lxml
@@ -18,7 +16,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

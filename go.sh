@@ -9,15 +9,12 @@ license: BSD-3-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include BinaryRecipe)
+. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
 function Prepare() {
-  case $(uname -m) in
-    x86_64)  goarch=amd64 ;;
-    aarch64) goarch=arm64 ;;
-    *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
-  esac
+  local goarch; goarch=$(bits_goarch)
   local url="https://dl.google.com/go/go${PKGVERSION}.linux-${goarch}.tar.gz"
   # The official Go tarball has a single top-level 'go/' directory; strip it.
   curl -fSL "$url" | tar -xz --strip-components=1 -C ./

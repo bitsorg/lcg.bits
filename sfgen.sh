@@ -20,12 +20,16 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() { :; }
 function Make() {
+  # SFGen has no CMakeLists.txt; build with plain make, then install manually.
+  # Outputs land in the build dir (after Prepare rsync), not SOURCEDIR.
   make ${JOBS:+-j $JOBS} FC=${FC:-gfortran}
-  cmake -E copy_directory $SOURCEDIR/lib $INSTALLROOT/lib \
-  && cmake -E copy_directory $SOURCEDIR/bin $INSTALLROOT/bin \
-  && cmake -E copy_directory $SOURCEDIR/doc $INSTALLROOT/doc \
-  && cmake -E copy_directory $SOURCEDIR/src $INSTALLROOT/src \
+  cmake -E copy_directory lib $INSTALLROOT/lib \
+  && cmake -E copy_directory bin $INSTALLROOT/bin \
+  && cmake -E copy_directory doc $INSTALLROOT/doc \
+  && cmake -E copy_directory src $INSTALLROOT/src \
   && chmod -R go+r $INSTALLROOT/src \
   && chmod -R go+r $INSTALLROOT/bin/input.DAT
 }
+function MakeInstall() { :; }

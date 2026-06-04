@@ -20,8 +20,9 @@ MODULE_OPTIONS="--bin --python"
 ##############################
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/lib/python$(python3 -c 'import sys; print("%d.%d"%sys.version_info[:2])')/site-packages"
-  # Pass the Berkeley DB C library location via environment variable
+  # Pass the Berkeley DB C library location and acknowledge AGPL3 license
   BERKELEYDB_DIR="${LIBDB_ROOT}" \
+  YES_I_HAVE_THE_RIGHT_TO_USE_THIS_BERKELEY_DB_VERSION=1 \
   python3 -m pip install \
     --no-deps --no-build-isolation --ignore-installed \
     --root=/ --prefix="$INSTALLROOT" .

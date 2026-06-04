@@ -2,8 +2,6 @@ package: charset_normalizer
 description: charset-normalizer alternative to chardet for encoding detection
 version: "3.4.0"
 tag: "3.4.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/charset-normalizer-3.4.0.tar.gz
 requires:
   - Python
 build_requires:
@@ -13,7 +11,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

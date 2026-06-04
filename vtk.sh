@@ -1,6 +1,8 @@
 package: VTK
 description: Visualization Toolkit (VTK) for 3D graphics and data visualization
 version: "9.5.0"
+mem_per_job: 2048
+mem_utilisation: 0.85
 tag: "9.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
@@ -23,6 +25,7 @@ requires:
   - gl2ps
   - jsonmcpp
   - jsoncpp
+  - Qt5
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -37,8 +40,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_C_COMPILER="" \
-    -DCMAKE_CXX_COMPILER="" \
     -DVTK_GROUP_ENABLE_Qt=YES
 }

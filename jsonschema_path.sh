@@ -2,8 +2,6 @@ package: jsonschema_path
 description: jsonschema-path path-based JSON Schema traversal
 version: "0.3.3"
 tag: "0.3.3"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - pathable
@@ -17,7 +15,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

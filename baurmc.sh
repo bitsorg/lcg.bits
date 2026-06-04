@@ -36,7 +36,23 @@ function Make() {
   # does not use a standard FFLAGS variable; anchor the injection on
   # -fno-automatic (set via --userfflags in Configure) which we know
   # appears in the compile command regardless of the variable name used.
+  # configure writes the final FFLAGS value to config.mk (not Makefile).
+  # Patch all files that may carry -fno-automatic.
   sed -i 's/-fno-automatic/-fno-automatic -fallow-argument-mismatch/g' \
-    Makefile Makeshared.subdir Makearchive.subdir 2>/dev/null || true
+    config.mk Makefile Makeshared.subdir Makearchive.subdir 2>/dev/null || true
   make ${JOBS:+-j $JOBS}
+}
+
+function MakeInstall() {
+  # baurmc's LCG build system has no `install` target (default `make install`
+  # fails with "No rule to make target 'install'"); install the built libraries
+  # (and headers if any) manually.
+  mkdir -p "$INSTALLROOT/lib"
+  find . -maxdepth 4 \( -name 'lib*.so*' -o -name 'lib*.a' \) \
+    -exec cp -p {} "$INSTALLROOT/lib/" \; 2>/dev/null || true
+  if [ -d include ]; then
+    mkdir -p "$INSTALLROOT/include"
+    cp -rp include/. "$INSTALLROOT/include/"
+  fi
+  return 0
 }

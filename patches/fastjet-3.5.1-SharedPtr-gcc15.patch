@@ -1,0 +1,224 @@
+--- a/include/fastjet/SharedPtr.hh	2025-07-01 12:31:45.000000000 +0000
++++ b/include/fastjet/SharedPtr.hh	2026-05-26 19:56:10.727007752 +0000
+@@ -84,8 +84,45 @@
+ template<class T>
+ class SharedPtr{
+ public:
+-  /// forward declaration of the counting container
+-  class __SharedCountingPtr;
++  /**
++   * \if internal_doc
++   * \class __SharedCountingPtr
++   * A reference-counting pointer
++   *
++   * This is implemented as a container for that pointer together with
++   * reference counting.
++   * The pointer is deleted when the number of counts goes to 0;
++   * \endif
++   */
++  class __SharedCountingPtr : public std::atomic<long>{
++  public:
++    /// default ctor
++    __SharedCountingPtr() : std::atomic<long>(0), _ptr(NULL){} 
++    
++    /// ctor with initialisation
++    template<class Y> explicit __SharedCountingPtr(Y* ptr)
++      : std::atomic<long>(1), _ptr(ptr){}
++    
++    /// default dtor
++    ~__SharedCountingPtr(){ 
++      // force the deletion of the object we keep track of
++      if (_ptr!=NULL){ delete _ptr;}
++    }
++
++    /// return a pointer to the object
++    inline T* get() const {return _ptr;}
++
++    /// return the count
++    inline long use_count() const {return (long)(*this);}
++
++    /// force the count to be set to a specified value
++    ///   \param count   the value that we ned to reset to
++    inline void set_count(const long & count){ store(count);}
++
++  private:
++    T *_ptr;               ///< the pointer we're counting the references to
++  };
++
+ 
+   /// default ctor
+   SharedPtr() : _ptr(NULL){}
+@@ -229,44 +266,6 @@
+     _ptr->set_count(count);
+   }
+ 
+-  /**
+-   * \if internal_doc
+-   * \class __SharedCountingPtr
+-   * A reference-counting pointer
+-   *
+-   * This is implemented as a container for that pointer together with
+-   * reference counting.
+-   * The pointer is deleted when the number of counts goes to 0;
+-   * \endif
+-   */
+-  class __SharedCountingPtr : public std::atomic<long>{
+-  public:
+-    /// default ctor
+-    __SharedCountingPtr() : std::atomic<long>(0), _ptr(NULL){} 
+-    
+-    /// ctor with initialisation
+-    template<class Y> explicit __SharedCountingPtr(Y* ptr)
+-      : std::atomic<long>(1), _ptr(ptr){}
+-    
+-    /// default dtor
+-    ~__SharedCountingPtr(){ 
+-      // force the deletion of the object we keep track of
+-      if (_ptr!=NULL){ delete _ptr;}
+-    }
+-
+-    /// return a pointer to the object
+-    inline T* get() const {return _ptr;}
+-
+-    /// return the count
+-    inline long use_count() const {return (long)(*this);}
+-
+-    /// force the count to be set to a specified value
+-    ///   \param count   the value that we ned to reset to
+-    inline void set_count(const long & count){ store(count);}
+-
+-  private:
+-    T *_ptr;               ///< the pointer we're counting the references to
+-  };
+ 
+ private:
+   /// return the common container
+@@ -340,8 +339,63 @@
+ template<class T>
+ class SharedPtr{
+ public:
+-  /// forward declaration of the counting container
+-  class __SharedCountingPtr;
++  /**
++   * \if internal_doc
++   * \class __SharedCountingPtr
++   * A reference-counting pointer
++   *
++   * This is implemented as a container for that pointer together with
++   * reference counting.
++   * The pointer is deleted when the number of counts goes to 0;
++   * \endif
++   */
++  class __SharedCountingPtr{
++  public:
++    /// default ctor
++    __SharedCountingPtr() : _ptr(NULL), _count(0){}
++    
++    /// ctor with initialisation
++    template<class Y> explicit __SharedCountingPtr(Y* ptr) : _ptr(ptr), _count(1){}
++    
++    /// default dtor
++    ~__SharedCountingPtr(){ 
++      // force the deletion of the object we keep track of
++      if (_ptr!=NULL){ delete _ptr;}
++    }
++
++    /// return a pointer to the object
++    inline T* get() const {return _ptr;}
++
++    /// return the count
++    inline long use_count() const {return _count;}
++
++    /// prefix increment operator
++    inline long operator++(){return ++_count;}
++
++    /// prefix decrement operator
++    inline long operator--(){return --_count;}
++
++    /// postfix increment operator
++    /// The "dummy" int argument is just a C++ trick to differentiate
++    /// it from the prefix increment
++    inline long operator++(int){return _count++;}
++
++    /// postfix decrement operator
++    /// The "dummy" int argument is just a C++ trick to differentiate
++    /// it from the prefix decrement
++    inline long operator--(int){return _count--;}
++
++    /// force the count to be set to a specified value
++    ///   \param count   the value that we ned to reset to
++    void set_count(const long & count){
++      _count = count;
++    }
++
++  private:
++    T *_ptr;      ///< the pointer we're counting the references to
++    long _count;  ///< the number of references
++  };
++
+ 
+   /// default ctor
+   SharedPtr() : _ptr(NULL){}
+@@ -509,62 +563,6 @@
+     _ptr->set_count(count);
+   }
+ 
+-  /**
+-   * \if internal_doc
+-   * \class __SharedCountingPtr
+-   * A reference-counting pointer
+-   *
+-   * This is implemented as a container for that pointer together with
+-   * reference counting.
+-   * The pointer is deleted when the number of counts goes to 0;
+-   * \endif
+-   */
+-  class __SharedCountingPtr{
+-  public:
+-    /// default ctor
+-    __SharedCountingPtr() : _ptr(NULL), _count(0){}
+-    
+-    /// ctor with initialisation
+-    template<class Y> explicit __SharedCountingPtr(Y* ptr) : _ptr(ptr), _count(1){}
+-    
+-    /// default dtor
+-    ~__SharedCountingPtr(){ 
+-      // force the deletion of the object we keep track of
+-      if (_ptr!=NULL){ delete _ptr;}
+-    }
+-
+-    /// return a pointer to the object
+-    inline T* get() const {return _ptr;}
+-
+-    /// return the count
+-    inline long use_count() const {return _count;}
+-
+-    /// prefix increment operator
+-    inline long operator++(){return ++_count;}
+-
+-    /// prefix decrement operator
+-    inline long operator--(){return --_count;}
+-
+-    /// postfix increment operator
+-    /// The "dummy" int argument is just a C++ trick to differentiate
+-    /// it from the prefix increment
+-    inline long operator++(int){return _count++;}
+-
+-    /// postfix decrement operator
+-    /// The "dummy" int argument is just a C++ trick to differentiate
+-    /// it from the prefix decrement
+-    inline long operator--(int){return _count--;}
+-
+-    /// force the count to be set to a specified value
+-    ///   \param count   the value that we ned to reset to
+-    void set_count(const long & count){
+-      _count = count;
+-    }
+-
+-  private:
+-    T *_ptr;      ///< the pointer we're counting the references to
+-    long _count;  ///< the number of references
+-  };
+ 
+ private:
+   /// return the common container

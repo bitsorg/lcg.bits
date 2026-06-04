@@ -1,6 +1,7 @@
 package: recola
 description: RECOLA recursive one-loop amplitude generator
 version: "2.2.4.atlas1"
+mem_per_job: 1024
 tag: "2.2.4.atlas1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/recola2-2.2.4.tar.gz
@@ -24,6 +25,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Dcollier_path="${COLLIER_ROOT}/lib" \
     -Dmodel=SM \

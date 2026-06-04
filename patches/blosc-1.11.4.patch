@@ -1,5 +1,5 @@
---- blosc/c-blosc/blosc/shuffle.c
-+++ blosc/c-blosc/blosc/shuffle.c
+--- a/blosc/c-blosc/blosc/shuffle.c
++++ b/blosc/c-blosc/blosc/shuffle.c
 @@ -20,16 +20,6 @@
  #include <pthread.h>
  #endif

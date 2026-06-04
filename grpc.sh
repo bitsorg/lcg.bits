@@ -1,9 +1,10 @@
 package: grpc
 description: gRPC high-performance open-source universal RPC framework
-version: "1.62.3"
-tag: "1.62.3"
+version: "1.80.0"
+mem_per_job: 1500
+tag: "v1.80.0"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+  - https://github.com/%(name)s/%(name)s/archive/refs/tags/v%(version)s.tar.gz
 requires:
   - CMake
   - absl
@@ -19,8 +20,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-patches:
-  - grpc-1.62.3.patch
 ---
 #!/bin/bash -e
 ##############################
@@ -31,6 +30,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
     -G Ninja \
@@ -38,7 +38,6 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=ON \
     ${OPENSSL_ROOT:+-DOPENSSL_ROOT_DIR="$OPENSSL_ROOT"} \
-    ${ABSEIL_ROOT:+-DCMAKE_PREFIX_PATH="$ABSEIL_ROOT${PROTOBUF_ROOT:+:$PROTOBUF_ROOT}"} \
     -DgRPC_BUILD_CODEGEN=ON \
     -DgRPC_BUILD_CSHARP_EXT:Bool=OFF \
     -DgRPC_ABSL_PROVIDER:String=package \

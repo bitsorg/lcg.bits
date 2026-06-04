@@ -2,8 +2,6 @@ package: pypi_arrow
 description: pypi-arrow PyPI package status tracker
 version: "1.3.0"
 tag: "1.3.0"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - types_python_dateutil
@@ -15,7 +13,8 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="arrow"
 MODULE_OPTIONS="--bin --python"
 ##############################

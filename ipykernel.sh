@@ -2,8 +2,6 @@ package: ipykernel
 description: ipykernel IPython kernel for Jupyter
 version: "6.29.5"
 tag: "6.29.5"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - debugpy
@@ -26,7 +24,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

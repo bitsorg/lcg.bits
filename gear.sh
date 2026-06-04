@@ -1,9 +1,8 @@
 package: gear
 description: GEAR detector description toolkit for ILC experiments
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "01.09.06"
+tag: "v01-09-06"
+source: https://github.com/iLCSoft/gear.git
 requires:
   - CMake
   - ilcutil
@@ -23,6 +22,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DINSTALL_DOC=OFF \

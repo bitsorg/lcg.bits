@@ -20,8 +20,10 @@ license: MPL-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() { :; }
 function Make() {
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/cosmos72/gomacro/
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/cosmos72/gomacro/
   cmake -E chdir $INSTALLROOT/src/github.com/cosmos72/gomacro/ go install
 }
+function MakeInstall() { :; }

@@ -2,8 +2,6 @@ package: itkwidgets
 description: itkwidgets Jupyter widget for ITK image visualization
 version: "1.0a53"
 tag: "1.0a53"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - colorcet
   - itk_core
@@ -25,7 +23,7 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

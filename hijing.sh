@@ -35,9 +35,19 @@ function Make() {
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
     xargs --no-run-if-empty sed -i "s/g77/${F77}/g"
   make ${JOBS:+-j $JOBS}
-  # configure ignored --prefix so install manually.
+}
+
+function MakeInstall() {
+  # HIJING's Makefile has no 'install' target and configure ignored --prefix,
+  # so the default `make install` fails ("No rule to make target 'install'").
+  # Install the built library (and optional COMMON-block headers) manually.
   mkdir -p "${INSTALLROOT}/lib"
   cp -p lib/libhijing.* "${INSTALLROOT}/lib/"
-  # Fortran COMMON-block include files, if the tarball ships them.
-  [[ -d include ]] && { mkdir -p "${INSTALLROOT}/include"; cp -rp include/. "${INSTALLROOT}/include/"; }
+  # Fortran COMMON-block include files, if the tarball ships them.  Use an
+  # if-block (not `[[ ]] && {...}`) so a missing include/ dir does not make
+  # MakeInstall() return non-zero and abort the build under `set -e`.
+  if [[ -d include ]]; then
+    mkdir -p "${INSTALLROOT}/include"
+    cp -rp include/. "${INSTALLROOT}/include/"
+  fi
 }

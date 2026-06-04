@@ -29,18 +29,23 @@ function Prepare() {
   rm -f "${tgz}"
 
   # alpgen.f: ctime() returns 26 chars but declared as char*24; use a literal.
-  sed -i \
+  find . -name alpgen.f -exec sed -i \
     -e "s/      character\*24 CTIME,now/      character\*25 now/" \
     -e "s/^c      now='Day Mon XX hh:mm:ss yyyy'/      now='Day Mon XX hh:mm:ss yyyy'/" \
     -e "s/^      now=ctime(time())/c      now=ctime(time())/" \
-    alpgen.f
+    {} \;
   # alputi.f: same char*24 NOW → char*25 (two subroutine variants)
-  sed -i \
+  find . -name alputi.f -exec sed -i \
     -e 's/CHARACTER TITLE\*25,BOOK\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,NOW*25/' \
     -e 's/CHARACTER TITLE\*25,BOOK\*3,SCALE\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,SCALE*3,NOW*25/' \
-    alplib/alputi.f
+    {} \;
 }
 
 function Make() {
-  make ${JOBS:+-j $JOBS} all
+  # Use the Makefile's default target; 'all' is not defined in this package.
+  make ${JOBS:+-j $JOBS}
+}
+
+function MakeInstall() {
+  true;
 }

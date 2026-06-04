@@ -2,8 +2,6 @@ package: tf_pwa
 description: tf-pwa TensorFlow-based partial wave analysis toolkit
 version: "0.2.2"
 tag: "0.2.2"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/tf-pwa-0.2.2.tar.gz
 requires:
   - Python
   - tensorflow
@@ -19,7 +17,8 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
+PYPI_NAME="TFPWA"
 MODULE_OPTIONS="--bin --python"
 ##############################

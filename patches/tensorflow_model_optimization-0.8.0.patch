@@ -1,0 +1,10 @@
+--- a/tensorflow_model_optimization/__init__.py
++++ b/tensorflow_model_optimization/__init__.py
+@@ -58 +58 @@
+-  import distutils.version
++  from looseversion import LooseVersion
+@@ -65,2 +65,2 @@
+-  if (distutils.version.LooseVersion(tf.version.VERSION) <
+-      distutils.version.LooseVersion(required_tensorflow_version)):
++  if (LooseVersion(tf.version.VERSION) <
++      LooseVersion(required_tensorflow_version)):

@@ -3,7 +3,7 @@ description: CRMC cosmic ray Monte Carlo interface package
 version: "2.0.1p5"
 tag: "2.0.1p5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/crmc.v2.0.1p5.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/crmc.v2.0.1.tar.gz
 requires:
   - CMake
   - Boost
@@ -23,6 +23,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DBOOST_ROOT="${Boost_ROOT}" \
     -DBOOST_INCLUDE_DIR="${Boost_home_include}" \

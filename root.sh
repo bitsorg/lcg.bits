@@ -1,7 +1,7 @@
 package: ROOT
 description: CERN ROOT data analysis framework
-version: "v6.36.04"
-tag: "v6-36-04"
+version: "v6.38.00"
+tag: "v6-38-00"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
 requires:
@@ -63,7 +63,10 @@ function Configure() {
   ROOT_TESTING=${ROOT_TESTING:-OFF}
 
   # Detect C++ standard from environment before unsetting flags
-  CMAKE_CXX_STANDARD=17
+  # Default to C++20: podio and other modern packages require it.
+  # Still honour any explicit -std=c++NN in CXXFLAGS so stacks that
+  # deliberately pin an older standard are not silently upgraded.
+  CMAKE_CXX_STANDARD=20
   [[ "$CXXFLAGS" == *'-std=c++11'* ]] && CMAKE_CXX_STANDARD=11 || true
   [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14 || true
   [[ "$CXXFLAGS" == *'-std=c++17'* ]] && CMAKE_CXX_STANDARD=17 || true
@@ -143,7 +146,7 @@ function Configure() {
   if _ver_ge "$_root_ver" "6.40.00"; then
     _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
   else
-    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
+    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
   fi
 
   # < 6.36.99: explicit pgsql=OFF; >= 6.36.99: roottest flag replaces it
@@ -234,7 +237,7 @@ function Configure() {
     -Dtmva-gpu=OFF                                                          \
     -Dtmva-sofie=OFF                                                        \
     -Dunfold=ON                                                             \
-    -Dunuran=OFF                                                            \
+    -Dunuran=ON                                                             \
     -Dbuiltin_vdt=OFF                                                       \
     -Dvdt=OFF                                                               \
     -Dvc=OFF                                                                \

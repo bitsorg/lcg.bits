@@ -8,6 +8,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-BHLUMI
+patches:
+  - bhlumi-4.04linuxLHE.patch
 ---
 #!/bin/bash -e
 ##############################
@@ -22,5 +24,10 @@ function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin"
   chmod +x ./4.x-cpc/demo2.exe
   cp ./4.x-cpc/demo2.exe "$INSTALLROOT/bin/BHLUMI.exe"
-  cp "${SOURCEDIR}/../bhlumi/BHLUMI" "$INSTALLROOT/bin/"
+  # The optional BHLUMI steering script is not present in this tarball layout
+  # (${SOURCEDIR}/../bhlumi/ does not exist); copy it only if it is there so the
+  # install does not fail.
+  if [ -f "${SOURCEDIR}/../bhlumi/BHLUMI" ]; then
+    cp "${SOURCEDIR}/../bhlumi/BHLUMI" "$INSTALLROOT/bin/"
+  fi
 }

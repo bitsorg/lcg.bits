@@ -2,8 +2,6 @@ package: pytransport
 description: PyTransport numerical transport equation solver for inflation
 version: "2.0.2"
 tag: "2.0.2"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - numpy
@@ -17,7 +15,7 @@ license: LicenseRef-PyTransport
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

@@ -1,6 +1,7 @@
 package: Davix
 description: High-performance HTTP/WebDAV/S3/cloud storage I/O library
 version: "0.8.10"
+mem_per_job: 1024
 tag: "0.8.10"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/davix-0.8.10.tar.gz
@@ -23,6 +24,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
       ${OPENSSL_ROOT:+-DOPENSSL_ROOT_DIR="$OPENSSL_ROOT"} \

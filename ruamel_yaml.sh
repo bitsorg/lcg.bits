@@ -2,8 +2,6 @@ package: ruamel_yaml
 description: ruamel.yaml YAML parser/emitter with roundtrip preservation
 version: "0.18.10"
 tag: "0.18.10"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ruamel.yaml-0.18.10.tar.gz
 requires:
   - Python
   - ruamel_yaml_clib
@@ -14,7 +12,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

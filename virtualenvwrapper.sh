@@ -1,9 +1,7 @@
 package: virtualenvwrapper
 description: virtualenvwrapper extensions to virtualenv
-version: "4.8.4"
-tag: "4.8.4"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "6.1.1"
+tag: "6.1.1"
 requires:
   - Python
   - virtualenv
@@ -16,7 +14,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

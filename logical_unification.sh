@@ -2,8 +2,6 @@ package: logical_unification
 description: logical-unification unification of Python objects
 version: "0.4.6"
 tag: "0.4.6"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/logical-unification-0.4.6.tar.gz
 requires:
   - Python
   - toolz
@@ -15,7 +13,7 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

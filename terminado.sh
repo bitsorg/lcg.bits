@@ -2,8 +2,6 @@ package: terminado
 description: terminado tornado and gevent WebSocket terminal server
 version: "0.18.1"
 tag: "0.18.1"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - tornado
@@ -15,7 +13,7 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include PythonRecipe)
+. $(bits-include PythonPipRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################

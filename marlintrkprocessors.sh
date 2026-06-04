@@ -1,9 +1,8 @@
 package: marlintrkprocessors
 description: MarlinTrkProcessors track finding/fitting Marlin processors
-version: "HEAD"
-tag: "HEAD"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "02.12.08"
+tag: "v02-12-08"
+source: https://github.com/iLCSoft/MarlinTrkProcessors.git
 requires:
   - CMake
   - marlintrk
@@ -29,6 +28,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \

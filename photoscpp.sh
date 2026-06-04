@@ -1,11 +1,11 @@
 package: photoscpp
 description: PHOTOS++ C++ version of PHOTOS radiative corrections
-version: "3.61"
-tag: "3.61"
+version: "3.64"
+tag: "3.64"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/PHOTOS.3.61-LHC.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/PHOTOS.3.64-LHC.tar.gz
 requires:
-  - HepMC  
+  - hepmc3
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -18,9 +18,22 @@ license: LicenseRef-PHOTOS++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Build without HepMC event-record support; HepMC is not a declared dependency.
-  # Pass --without-hepmc explicitly because the configure script requires one of
-  # --with-hepmc=<path> or --without-hepmc and aborts if neither is given.
-  ./configure --prefix=$INSTALLROOT \ # --without-hepmc \
-    CFLAGS=-O2 FFLAGS=-O2 F77=${FC:-gfortran} "CXXFLAGS=${PHOTOS_CXX_FLAGS} -O2"
+  # Log.h's convenience overload does `Fatal(NULL,code)`, calling
+  # Fatal(std::string text, ...). Constructing std::string from NULL is the
+  # deleted basic_string(nullptr_t) overload in C++23, so any consumer that
+  # instantiates it (e.g. kkmcee's ROOT dictionary) fails to compile. Pass an
+  # empty string instead. (The char* Assert(...,NULL) default is unaffected.)
+  #
+  # AutoToolsRecipe's Prepare() rsyncs SOURCEDIR into the build dir (cwd) and
+  # ./configure builds *that* copy, so patch the copy under cwd, not SOURCEDIR.
+  find . -path '*utilities/Log.h' -exec sed -i 's/Fatal(NULL,code)/Fatal("",code)/' {} + 2>/dev/null || true
+  # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee, cepgen and
+  # EvtGen 2.x. lcgcmake builds photos++ with exactly one HepMC flavour: passing
+  # both --with-hepmc (HepMC2) and --with-hepmc3 did not produce the HepMC3
+  # interface library, so consumers could not find libPhotosppHepMC3. Mirror
+  # lcgcmake's modern config: --with-hepmc3 + --without-hepmc.
+  ./configure --prefix="${INSTALLROOT}" \
+    --with-hepmc3="${HEPMC3_ROOT}" \
+    --without-hepmc \
+    CFLAGS=-O2 FFLAGS=-O2 F77="${FC:-gfortran}" CXXFLAGS="-O2"
 }
