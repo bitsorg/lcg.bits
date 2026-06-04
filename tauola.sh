@@ -25,9 +25,8 @@ function Prepare() {
   # configure does `ARCH=$(uname)` → "Linux" → FC=g77 (GCC 3.x, gone).
   # Redirect "Linux" to "Linux-gcc4" so the gfortran branch is taken instead,
   # and fix the obsolete FLIBS while we're here.
-  sed -i \
-    -e 's/^export ARCH="`uname`"$/export ARCH="`uname`"\n[ "$ARCH" = Linux ] \&\& ARCH=Linux-gcc4/' \
-    -e 's/export FLIBS="-lfrtbegin -lg2c"/export FLIBS="-lgfortran"/' \
+  perl -i -pe \
+    's/^export ARCH="`uname`"$/export ARCH="`uname`"\n[ "\$ARCH" = Linux ] && ARCH=Linux-gcc4/; s/export FLIBS="-lfrtbegin -lg2c"/export FLIBS="-lgfortran"/' \
     configure
 }
 

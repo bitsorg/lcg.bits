@@ -29,15 +29,12 @@ function Prepare() {
   rm -f "${tgz}"
 
   # alpgen.f: ctime() returns 26 chars but declared as char*24; use a literal.
-  find . -name alpgen.f -exec sed -i \
-    -e "s/      character\*24 CTIME,now/      character\*25 now/" \
-    -e "s/^c      now='Day Mon XX hh:mm:ss yyyy'/      now='Day Mon XX hh:mm:ss yyyy'/" \
-    -e "s/^      now=ctime(time())/c      now=ctime(time())/" \
+  find . -name alpgen.f -exec perl -i -pe \
+    "s/      character\*24 CTIME,now/      character\*25 now/; s/^c      now='Day Mon XX hh:mm:ss yyyy'/      now='Day Mon XX hh:mm:ss yyyy'/; s/^      now=ctime(time())/c      now=ctime(time())/" \
     {} \;
   # alputi.f: same char*24 NOW → char*25 (two subroutine variants)
-  find . -name alputi.f -exec sed -i \
-    -e 's/CHARACTER TITLE\*25,BOOK\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,NOW*25/' \
-    -e 's/CHARACTER TITLE\*25,BOOK\*3,SCALE\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,SCALE*3,NOW*25/' \
+  find . -name alputi.f -exec perl -i -pe \
+    's/CHARACTER TITLE\*25,BOOK\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,NOW*25/; s/CHARACTER TITLE\*25,BOOK\*3,SCALE\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,SCALE*3,NOW*25/' \
     {} \;
 }
 

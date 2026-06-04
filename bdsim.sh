@@ -30,7 +30,7 @@ function Configure() {
   # (CMAKE_POLICY_VERSION_MINIMUM=3.5 does not relax it). We don't need the
   # examples (BUILD_TESTING=OFF), so neutralise the copy_examples[/_no_git] calls
   # in the source CMakeLists before configuring. (Sphinx is optional; only warns.)
-  sed -i -E 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
+  perl -i -pe 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
     "${SOURCEDIR}/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

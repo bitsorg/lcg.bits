@@ -26,9 +26,9 @@ function MakeInstall() {
   mv -f $INSTALLROOT/usr/local/lib64  $INSTALLROOT/
   mv -f $INSTALLROOT/usr/local/include $INSTALLROOT/
   # fix pkg-config paths
-  sed -i "s@/usr/local@$INSTALLROOT@" \
+  perl -i -pe "s@/usr/local@$INSTALLROOT@" \
     $INSTALLROOT/usr/lib64/pkgconfig/libtraceevent.pc
-  sed -i "s@lib64@lib@" \
+  perl -i -pe "s@lib64@lib@" \
     $INSTALLROOT/usr/lib64/pkgconfig/libtraceevent.pc
   # perf expects libtraceevent in lib; keep lib64 for plugin discovery
   mv -f $INSTALLROOT/usr/lib64/pkgconfig $INSTALLROOT/lib64

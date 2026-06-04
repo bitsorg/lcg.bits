@@ -38,6 +38,6 @@ function PostInstall() {
   local _aida
   _aida="$(find "${INSTALLROOT}" -name AIDAConfig.cmake -print -quit 2>/dev/null)"
   if [ -n "${_aida}" ]; then
-    sed -i 's#INCLUDE( *"[^"]*/RAIDAConfig.cmake" *)#INCLUDE( "${CMAKE_CURRENT_LIST_DIR}/RAIDAConfig.cmake" )#' "${_aida}"
+    perl -i -pe 's#INCLUDE\( *"[^"]*/RAIDAConfig.cmake" *\)#INCLUDE( "\${CMAKE_CURRENT_LIST_DIR}/RAIDAConfig.cmake" )#' "${_aida}"
   fi
 }

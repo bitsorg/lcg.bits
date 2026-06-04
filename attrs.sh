@@ -23,7 +23,7 @@ function MakeInstall() {
   # publishing to PyPI — it is not available on the CERN tarball mirror and
   # is not needed for installation.  Remove it from build-system requires so
   # pip (--no-build-isolation) does not try to fetch it from the internet.
-  sed -i 's/[,[:space:]]*"hatch-fancy-pypi-readme[^"]*"//g;
+  perl -i -pe 's/[,[:space:]]*"hatch-fancy-pypi-readme[^"]*"//g;
           s/"hatch-fancy-pypi-readme[^"]*"[,[:space:]]*//g' pyproject.toml
   mkdir -p "${SITE_PACKAGES}"
   "${PYTHON_EXE}" -m pip install \

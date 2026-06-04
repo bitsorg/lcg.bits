@@ -21,7 +21,7 @@ function Configure() {
   # Replace hardcoded g77 in configure and generated build files before
   # running configure so Makeshared.subdir / Makearchive.subdir are correct.
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
-    xargs --no-run-if-empty sed -i "s/\bg77\b/${F77}/g"
+    xargs perl -i -pe "s/\bg77\b/${F77}/g"
   ./configure --lcgplatform=${BITS_PLATFORM:-linux} \
     --userfflags=-fno-automatic \
     ${baurmc_fflag} --enable-shared
@@ -30,7 +30,7 @@ function Configure() {
 function Make() {
   # Belt-and-suspenders: replace any g77 still present in generated files.
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
-    xargs --no-run-if-empty sed -i "s/\bg77\b/${F77}/g"
+    xargs perl -i -pe "s/\bg77\b/${F77}/g"
   # GCC 15 enforces argument rank consistency; allow the legacy Fortran
   # mismatch (scalar vs rank-1 RANMAR calls).  baurmc's LCG build system
   # does not use a standard FFLAGS variable; anchor the injection on
@@ -38,7 +38,7 @@ function Make() {
   # appears in the compile command regardless of the variable name used.
   # configure writes the final FFLAGS value to config.mk (not Makefile).
   # Patch all files that may carry -fno-automatic.
-  sed -i 's/-fno-automatic/-fno-automatic -fallow-argument-mismatch/g' \
+  perl -i -pe 's/-fno-automatic/-fno-automatic -fallow-argument-mismatch/g' \
     config.mk Makefile Makeshared.subdir Makearchive.subdir 2>/dev/null || true
   make ${JOBS:+-j $JOBS}
 }

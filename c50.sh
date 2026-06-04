@@ -32,9 +32,9 @@ function Prepare() {
     rm -f "${tgz}"
   fi
   # Makefile: remove csh dependency (not available on modern systems)
-  find . -name Makefile -exec sed -i 's|^SHELL  = /bin/csh$|#SHELL  = /bin/csh|' {} \;
+  find . -name Makefile -exec perl -i -pe 's|^SHELL  = /bin/csh$|#SHELL  = /bin/csh|' {} \;
   # report.c: add headers required by GCC 15 (implicit declarations are errors)
-  find . -name report.c -exec sed -i '/#include <stdlib\.h>/a #include <ctype.h>\n#include <string.h>' {} \;
+  find . -name report.c -exec perl -i -pe '$_ .= "#include <ctype.h>\n#include <string.h>\n" if m{#include <stdlib\.h>}' {} \;
 }
 
 function Make() {

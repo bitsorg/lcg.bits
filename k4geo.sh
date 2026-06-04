@@ -29,7 +29,7 @@ function Configure() {
   # sed is idempotent (no-op once the line is gone) and guarded so a future
   # upstream rename can't silently re-introduce the failure unnoticed.
   if grep -q 'plugins/Geant4Output2EDM4hep_DRC.cpp' "${SOURCEDIR}/CMakeLists.txt"; then
-    sed -i '\#\./plugins/Geant4Output2EDM4hep_DRC\.cpp#d' "${SOURCEDIR}/CMakeLists.txt"
+    perl -i -ne 'print unless m#\./plugins/Geant4Output2EDM4hep_DRC\.cpp#' "${SOURCEDIR}/CMakeLists.txt"
   fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

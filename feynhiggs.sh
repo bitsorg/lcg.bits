@@ -21,7 +21,7 @@ function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
   # Several .F files pass O'155' (octal BOZ = 109 decimal) as subroutine arguments;
   # GCC 15 rejects this even with -fallow-invalid-boz.  Replace with the decimal value.
-  find . -name '*.F' -exec sed -i "s/O'155'/109/g" {} \;
+  find . -name '*.F' -exec perl -i -pe "s/O'155'/109/g" {} \;
 }
 function Configure() {
   ./configure --prefix="$INSTALLROOT" F77=${FC:-gfortran} \

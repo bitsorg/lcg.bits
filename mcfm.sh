@@ -51,10 +51,11 @@ function PostInstall() {
   # in the build directory, so search it (and the install lib) for libmcfm.so.
   mkdir -p "${INSTALLROOT}/include" "${INSTALLROOT}/lib"
   [ -d "${SOURCEDIR}/src/Inc/MCFM" ] && cp -rf "${SOURCEDIR}/src/Inc/MCFM" "${INSTALLROOT}/include/"
-  local _lib
-  _lib="$(find . "${INSTALLROOT}/lib" -name 'libmcfm.so' -print -quit 2>/dev/null)"
+  local _ext _lib
+  _ext=so; [ "$(uname)" = Darwin ] && _ext=dylib
+  _lib="$(find . "${INSTALLROOT}/lib" \( -name 'libmcfm.so' -o -name 'libmcfm.dylib' \) -print -quit 2>/dev/null)"
   if [ -n "${_lib}" ]; then
-    cp -f "${_lib}" "${INSTALLROOT}/lib/libmcfm.so"
-    cp -f "${_lib}" "${INSTALLROOT}/lib/libMCFM.so"
+    cp -f "${_lib}" "${INSTALLROOT}/lib/libmcfm.${_ext}"
+    cp -f "${_lib}" "${INSTALLROOT}/lib/libMCFM.${_ext}"
   fi
 }

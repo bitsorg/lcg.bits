@@ -42,5 +42,5 @@ function Prepare() {
   # setup.py asserts that .pyi stubs were generated even when
   # ONNX_GEN_PB_TYPE_STUBS=OFF skips protoc-gen-mypy.  Remove the assertion
   # so the wheel builds without the google-protobuf Python package.
-  sed -i 's/assert.*No generated python stubs found.*/pass  # stubs disabled/' setup.py
+  perl -i -pe 's/assert.*No generated python stubs found.*/pass  # stubs disabled/' setup.py
 }

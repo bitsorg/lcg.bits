@@ -27,7 +27,7 @@ function Make() {
   # compilation errors whenever CUDA headers are present on the build host.
   # GPU_BLAS_OPTION may be set inside ifeq blocks with leading whitespace, so
   # anchor on the flag itself rather than the variable assignment.
-  find . -name "*.mk" -print0 | xargs -0 sed -i 's/ *-DGPU_BLAS//g'
+  find . -name "*.mk" -print0 | xargs -0 perl -i -pe 's/ *-DGPU_BLAS//g'
   local _inc="${MPFR_ROOT:+-I${MPFR_ROOT}/include} ${GMP_ROOT:+-I${GMP_ROOT}/include}"
   local _libs="-L${INSTALLROOT}/lib ${MPFR_ROOT:+-L${MPFR_ROOT}/lib} ${GMP_ROOT:+-L${GMP_ROOT}/lib}"
   local _blas="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas"

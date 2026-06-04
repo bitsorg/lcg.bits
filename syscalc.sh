@@ -23,9 +23,9 @@ function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
   # Remove C++17-incompatible explicit template args from DynArray constructor.
   # tinyxml2.h has CRLF line endings so we use sed rather than a patch file.
-  sed -i 's/DynArray< T, INIT >()/DynArray()/g' include/tinyxml2.h
+  perl -i -pe 's/DynArray< T, INIT >\(\)/DynArray()/g' include/tinyxml2.h
   # Add -fPIE to the gfortran rule so alfas_functions.o is position-independent.
-  sed -i 's|gfortran -c alfas_functions|gfortran -fPIE -c alfas_functions|' src/Makefile
+  perl -i -pe 's|gfortran -c alfas_functions|gfortran -fPIE -c alfas_functions|' src/Makefile
 }
 function Make() {
   # Override INCLUDES and LIBS on the make command line so the Makefile's

@@ -34,7 +34,7 @@ function Configure() {
   # 3.27+ removed backward compat with VERSION < 3.5 and hard-errors on it.
   # Bump all VERSION 2.x lines in gloo's CMakeLists.txt to 3.5.
   find third_party/gloo -name CMakeLists.txt \
-    -exec sed -i 's/cmake_minimum_required(VERSION 2\.[0-9.]*/cmake_minimum_required(VERSION 3.5/' {} \;
+    -exec perl -i -pe 's/cmake_minimum_required(VERSION 2\.[0-9.]*/cmake_minimum_required(VERSION 3.5/' {} \;
 
   # Point horovod's internal cmake at the bits openmpi so FindMPI succeeds.
   # OPAL_PREFIX overrides openmpi's compiled-in prefix for the wrapper scripts.

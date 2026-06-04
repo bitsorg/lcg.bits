@@ -28,5 +28,5 @@ function Configure() {
   # per-warning '-Werror=...' flags into the makefiles *after* CFLAGS, so a
   # CFLAGS=-Wno-error cannot override them. Strip every -Werror* token from the
   # generated makefiles so those (false-positive) warnings stay non-fatal.
-  find . -name Makefile -exec sed -i 's/-Werror[^[:space:]]*//g' {} +
+  find . -name Makefile -exec perl -i -pe 's/-Werror[^[:space:]]*//g' {} +
 }

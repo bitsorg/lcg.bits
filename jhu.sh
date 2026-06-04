@@ -26,20 +26,20 @@ function Prepare() {
   tar xf "$tarball" --strip-components=0 -C ./
 
   # Fix compiler name: gfort → gfortran (f95 wrapper no longer exists in GCC 15)
-  sed -i \
-    -e 's/^Comp = gfort$/Comp = gfortran/' \
-    -e 's/^ifeq ($(Comp),gfort)$/ifeq ($(Comp),gfortran)/' \
-    -e 's/^\( *\)f95 /\1gfortran /' \
+  perl -i -pe \
+    's/^Comp = gfort$/Comp = gfortran/; s/^ifeq \(\$\(Comp\),gfort\)$/ifeq (\$(Comp),gfortran)/; s/^( *)f95 /$1gfortran /' \
     JHUGenerator/makefile
 
   # Replace $(PWD)-anchored paths with relative paths so the build works
   # from any directory (the makefile used Here=$(PWD) which breaks out-of-tree)
-  sed -i \
-    -e '/^Here = \$(PWD)$/d' \
-    -e 's|^ModuleDir = \$(Here)/modules|ModuleDir = modules|' \
-    -e 's|^ObjectDir = \$(Here)/objects|ObjectDir = objects|' \
-    -e 's|^PDFDir = \$(Here)/pdfs|PDFDir = pdfs|' \
-    -e 's|^VegasDir = \$(Here)/vegas|VegasDir = vegas|' \
+  perl -i -ne '
+    next if /^Here = \$\(PWD\)$/;
+    s|^ModuleDir = \$\(Here\)/modules|ModuleDir = modules|;
+    s|^ObjectDir = \$\(Here\)/objects|ObjectDir = objects|;
+    s|^PDFDir = \$\(Here\)/pdfs|PDFDir = pdfs|;
+    s|^VegasDir = \$\(Here\)/vegas|VegasDir = vegas|;
+    print;
+  ' \
     JHUGenerator/makefile
 
   # Cteq61Pdf.f opens PDF tables with a hard-coded relative path 'pdfs/'.
