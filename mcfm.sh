@@ -27,6 +27,16 @@ function Configure() {
     -Dlhapdf_include_path="${LHAPDF_ROOT}/include" \
     -Dwith_library=ON
 }
+function Make() {
+  # handyG (built as a CMake sub-project of MCFM) has a missing Fortran-module
+  # dependency: under parallel make, gpl_module.f is compiled before
+  # maths_functions.mod has finished being written, giving
+  #   File 'build/maths_functions.mod' ... is not a GNU Fortran module file
+  # The sub-project makes inherit the parent's -j through the make jobserver, so
+  # there is no way to parallelise MCFM while keeping handyG serial. Build the
+  # whole package serially (confirmed: -j1 builds cleanly, any -j races).
+  cmake --build . -- ${CMAKE_OPTIONS} -j1
+}
 function PostInstall() {
   # MCFM's own cmake install does not expose the library/headers the way
   # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
