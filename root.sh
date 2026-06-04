@@ -105,7 +105,9 @@ function Configure() {
   COMPILER_CXX=c++
   case $(uname) in
     Darwin)
-      ENABLE_COCOA="-Dcocoa=ON"
+      # Use the native Cocoa GUI backend and turn off X11 so ROOT does not need
+      # XQuartz on macOS (general X11/GL packages still use XQuartz separately).
+      ENABLE_COCOA="-Dcocoa=ON -Dx11=OFF"
       COMPILER_CXX=clang++
       COMPILER_CC=clang
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
