@@ -6,7 +6,7 @@ source: https://github.com/root-project/vecmath.git
 requires:
   - CMake
   - veccore
-  - vdt
+  - "vdt:(?!osx)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

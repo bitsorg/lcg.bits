@@ -11,7 +11,7 @@ requires:
   - eigen
   - DD4hep
   - delphes
-  - vdt
+  - "vdt:(?!osx)"
   # FCCAnalyses' WITH_ONNX defaults to AUTO: it find_package(onnxruntime)s and,
   # if a partial match is found, links analyzers against it. onnxruntime (1.24.4,
   # > the required 1.17.1) is in this stack already (ddml uses it), but unless

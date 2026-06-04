@@ -17,7 +17,7 @@ requires:
   - blas
   - zlib
   - libxml2
-  - vdt
+  - "vdt:(?!osx)"
   - xz
   - cfitsio
   - jsonmcpp

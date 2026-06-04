@@ -16,7 +16,7 @@ requires:
   - HepMC
   - hepmc3
   - tbb
-  - vdt
+  - "vdt:(?!osx)"
   - photoscpp
   - tauolacpp
   - Python
