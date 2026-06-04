@@ -18,6 +18,12 @@ license: LicenseRef-PHOTOS++
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # Log.h's convenience overload does `Fatal(NULL,code)`, calling
+  # Fatal(std::string text, ...). Constructing std::string from NULL is the
+  # deleted basic_string(nullptr_t) overload in C++23, so any consumer that
+  # instantiates it (e.g. kkmcee's ROOT dictionary) fails to compile. Pass an
+  # empty string instead. (The char* Assert(...,NULL) default is unaffected.)
+  sed -i 's/Fatal(NULL,code)/Fatal("",code)/' "${SOURCEDIR}/src/utilities/Log.h" 2>/dev/null || true
   # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee, cepgen and
   # EvtGen 2.x. lcgcmake builds photos++ with exactly one HepMC flavour: passing
   # both --with-hepmc (HepMC2) and --with-hepmc3 did not produce the HepMC3

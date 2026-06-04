@@ -21,16 +21,19 @@ MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
   # gcc15 emits new -Wparentheses warnings (assignment used as truth value) in
-  # PandoraSDK's headers, and Pandora's cmake settings force -Werror, making them
-  # fatal. Strip -Werror (and any -Werror=... token) from the bundled cmake files
-  # so the warnings stay warnings. Idempotent; re-running on an already-stripped
-  # tree is a no-op.
-  grep -rlZ -- '-Werror' "${SOURCEDIR}" 2>/dev/null \
-    | xargs -0 -r sed -i 's/-Werror[^ "]*//g' 2>/dev/null || true
+  # PandoraSDK's sources, and PandoraSDK's CMakeLists forces -Werror via
+  #   set(CMAKE_CXX_FLAGS "-Wall ... -Werror ... -std=c++17 ${CMAKE_CXX_FLAGS}")
+  # appending the incoming flags last. PandoraPFA's superbuild forwards
+  # CMAKE_CXX_FLAGS to the PandoraSDK ExternalProject, so passing -Wno-error here
+  # lands after -Werror and disables it -- the same pattern the standalone
+  # pandorasdk / lccontent / larcontent recipes already use. (Seding the source
+  # doesn't work: the superbuild extracts PandoraSDK at build time, after
+  # Configure.)
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_FLAGS="-Wno-error" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"}
 }
 function PostInstall() {
