@@ -23,7 +23,10 @@ function Configure() {
   # deleted basic_string(nullptr_t) overload in C++23, so any consumer that
   # instantiates it (e.g. kkmcee's ROOT dictionary) fails to compile. Pass an
   # empty string instead. (The char* Assert(...,NULL) default is unaffected.)
-  sed -i 's/Fatal(NULL,code)/Fatal("",code)/' "${SOURCEDIR}/src/utilities/Log.h" 2>/dev/null || true
+  #
+  # AutoToolsRecipe's Prepare() rsyncs SOURCEDIR into the build dir (cwd) and
+  # ./configure builds *that* copy, so patch the copy under cwd, not SOURCEDIR.
+  find . -path '*utilities/Log.h' -exec sed -i 's/Fatal(NULL,code)/Fatal("",code)/' {} + 2>/dev/null || true
   # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee, cepgen and
   # EvtGen 2.x. lcgcmake builds photos++ with exactly one HepMC flavour: passing
   # both --with-hepmc (HepMC2) and --with-hepmc3 did not produce the HepMC3
