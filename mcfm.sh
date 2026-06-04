@@ -28,14 +28,20 @@ function Configure() {
     -Dwith_library=ON
 }
 function Make() {
-  # handyG (built as a CMake sub-project of MCFM) has a missing Fortran-module
-  # dependency: under parallel make, gpl_module.f is compiled before
-  # maths_functions.mod has finished being written, giving
+  # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
+  # under parallel make, gpl_module.f is compiled before maths_functions.mod has
+  # finished being written, giving
   #   File 'build/maths_functions.mod' ... is not a GNU Fortran module file
-  # The sub-project makes inherit the parent's -j through the make jobserver, so
-  # there is no way to parallelise MCFM while keeping handyG serial. Build the
-  # whole package serially (confirmed: -j1 builds cleanly, any -j races).
-  cmake --build . -- ${CMAKE_OPTIONS} -j1
+  # Build only handyG (and its bundled qd) serially, then the rest of MCFM --
+  # which parallelises fine (e.g. vvamp) -- with the full job count. If the
+  # 'handyg' target name is ever unavailable, fall back to a fully serial build
+  # (the known-good behaviour) rather than failing.
+  if cmake --build . --target handyg -- -j1; then
+    cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
+  else
+    echo "bits: 'handyg' target unavailable; falling back to a full serial build" >&2
+    cmake --build . -- ${CMAKE_OPTIONS} -j1
+  fi
 }
 function PostInstall() {
   # MCFM's own cmake install does not expose the library/headers the way
