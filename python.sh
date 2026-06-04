@@ -8,6 +8,11 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Python-2.0
+# PostInstall bootstraps setuptools/wheel/etc. via `pip install --upgrade`,
+# which needs outbound network. The macOS sandbox-exec wrapper blocks network
+# by default (DNS fails: "nodename nor servname provided"), so allow it here.
+# No-op on Linux, where recipe sandboxing is off entirely.
+sandbox_network: "off"
 ---
 #!/bin/bash -e
 ##############################
