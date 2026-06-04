@@ -47,7 +47,7 @@ function MakeInstall() {
   # Build isolation creates a fresh env where setuptools is not available.
   # Patch all generated cmake_install.cmake files in the build tree before install.
   find . -name 'cmake_install.cmake' \
-    -exec sed -i 's/pip install /pip install --no-build-isolation /g' {} +
+    -exec perl -i -pe 's/pip install /pip install --no-build-isolation /g' {} +
   cmake --install .
 }
 function PostInstall() {

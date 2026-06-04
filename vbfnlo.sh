@@ -34,7 +34,7 @@ function Make() {
   # (The old `make -C src/-C utilities` pre-builds were also wrong — they ran
   #  before lib/utilities existed, hence the spurious "No rule .../libVBFNLO.la"
   #  and missing .mod/.inc errors; a normal recursive build honours SUBDIRS order.)
-  sed -i -E '/^(DIST_)?SUBDIRS[[:space:]]*=/ s/\bdoc\b//g' Makefile
+  perl -i -pe 's/\bdoc\b//g if /^(DIST_)?SUBDIRS[[:space:]]*=/' Makefile
   if [ -f doc/Makefile ]; then
     printf '%s\n\t%s\n' \
       'all install install-am install-exec install-data installcheck check clean distclean mostlyclean maintainer-clean dvi pdf ps html info tags ctags:' \
