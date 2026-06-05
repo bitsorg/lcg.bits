@@ -108,7 +108,6 @@ function Configure() {
       # Use the native Cocoa GUI backend and turn off X11 so ROOT does not need
       # XQuartz on macOS (general X11/GL packages still use XQuartz separately).
       ENABLE_COCOA=1 # "-Dcocoa=ON -Dx11=OFF"
-      USE_BUILTIN_GLEW=1
       COMPILER_CXX=clang++
       COMPILER_CC=clang
       COMPILER_LD=clang
