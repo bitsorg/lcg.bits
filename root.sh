@@ -1,7 +1,7 @@
 package: ROOT
 description: CERN ROOT data analysis framework
-version: "v6.38.00"
-tag: "v6-38-00"
+version: "v6.40.00"
+tag: "v6-40-00"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
 requires:
@@ -107,9 +107,14 @@ function Configure() {
     Darwin)
       # Use the native Cocoa GUI backend and turn off X11 so ROOT does not need
       # XQuartz on macOS (general X11/GL packages still use XQuartz separately).
-      ENABLE_COCOA="-Dcocoa=ON -Dx11=OFF"
+      ENABLE_COCOA=1 # "-Dcocoa=ON -Dx11=OFF"
+      USE_BUILTIN_GLEW=1
       COMPILER_CXX=clang++
       COMPILER_CC=clang
+      COMPILER_LD=clang
+      SONAME=dylib
+      [[ ! $GSL_ROOT ]] && GSL_ROOT=$(brew --prefix gsl)
+      [[ ! $LIBPNG_ROOT ]] && LIBPNG_ROOT=$(brew --prefix libpng)
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
       ;;
   esac
@@ -144,9 +149,14 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # < 6.40: use builtin copies; >= 6.40: switch to external packages + curl
+  # Use ROOT's bundled copies of these libraries (they are not provided as
+  # separate bits packages, and -Dfail-on-missing=ON turns a missing external
+  # into a fatal configure error). ROOT 6.40 still ships and supports all these
+  # builtin_* options — it only flipped their default to OFF (prefer system) —
+  # EXCEPT builtin_glew, which 6.40 removed (GLEW/the old GL viewer was dropped),
+  # and 6.40 also needs -Dcurl=ON.
   if _ver_ge "$_root_ver" "6.40.00"; then
-    _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
+    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON -Dcurl=ON"
   else
     _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
   fi
