@@ -6,7 +6,11 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kcachegrind-20.12.1.tar.gz
 requires:
   - Qt5
-  - valgrind
+  # Valgrind has no Apple Silicon support, so it cannot be built on macOS.
+  # qcachegrind is its only consumer in the stack; gate the requirement to
+  # non-osx so valgrind drops out of the macOS dependency graph entirely (the
+  # GUI itself still builds, it just visualises callgrind output). Linux keeps it.
+  - "valgrind:(?!osx)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
