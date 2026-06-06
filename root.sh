@@ -1,7 +1,10 @@
 package: ROOT
 description: CERN ROOT data analysis framework
 version: "%(tag_basename)s"
-tag: "v6-40-00"
+# Default (non-macOS) ROOT version. macOS is pinned to v6.40.00 via the
+# "ROOT:osx" arch-gated override in stacks defaults-dev4.sh, because Apple
+# clang / recent Xcode need 6.40; other platforms stay on this stable tag.
+tag: "v6-38-00"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
 requires:
@@ -90,8 +93,11 @@ function Configure() {
   [[ "$CXXFLAGS" == *'-std=c++20'* ]] && CMAKE_CXX_STANDARD=20 || true
   [[ "$CXXFLAGS" == *'-std=c++23'* ]] && CMAKE_CXX_STANDARD=23 || true
 
-  # Version-gated cmake flags (strip leading 'v' from PKGVERSION for sorting)
-  _root_ver="${PKGVERSION#v}"
+  # Version-gated cmake flags. Strip the leading 'v' AND normalise '-' to '.'
+  # so dash-form tag versions (e.g. v6-40-00 -> 6.40.00) compare correctly with
+  # the dotted thresholds below; sort -V mis-orders mixed '-'/'.' otherwise
+  # (it even ranks 6-40-00 below 6.36.99).
+  _root_ver="${PKGVERSION#v}"; _root_ver="${_root_ver//-/.}"
   # _ver_ge A B: true if version A >= version B
   _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
 
