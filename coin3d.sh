@@ -18,5 +18,12 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no
+  # macOS: by default Coin builds a Mac "Inventor.framework" and its
+  # install-data-local target writes it into the system path /Library/Frameworks
+  # (mkdir fails: "Operation not permitted") rather than $INSTALLROOT.
+  # --disable-framework selects the UNIX-style install (normal lib/include under
+  # the prefix), which is what a relocatable bits package needs. No-op on Linux.
+  _fw=""
+  [ "$(uname)" = Darwin ] && _fw="--disable-framework"
+  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no ${_fw}
 }
