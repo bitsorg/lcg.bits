@@ -21,7 +21,14 @@ function Configure() {
   # --with-texdir redirects the gnuplot LaTeX package files (gnuplot.sty etc.)
   # from the system texmf tree (/usr/local/share/texmf/...) into INSTALLROOT,
   # avoiding a Permission denied failure during make install.
+  #
+  # --without-qt: gnuplot does not declare a Qt dependency, so don't let
+  # configure auto-build the interactive Qt terminal against whatever Qt happens
+  # to be on the host (non-reproducible). On macOS it picks up Homebrew Qt6,
+  # whose headers need C++17 while gnuplot compiles qtterminal/ with an older
+  # standard, breaking the build. The cairo/png/svg/x11 terminals are unaffected.
   ./configure --prefix="$INSTALLROOT" \
+    --without-qt \
     --with-texdir="${INSTALLROOT}/share/texmf/tex/latex/gnuplot"
 }
 ##############################
