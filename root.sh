@@ -58,6 +58,20 @@ function Prepare() {
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
     perl -i -pe 's|^find_package\(PkgConfig\)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root \${DAVIX_ROOT})\n  else()\n    set(_davix_root \$ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS \${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS \${_davix_root}/lib \${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS \${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES \${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY \${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: \${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
+
+  # macOS RTTI fix for cling: cling is compiled -fno-rtti, and unlike GCC (which
+  # still emits a class's typeinfo for its vtable), Clang with -fno-rtti emits
+  # NONE. So 'typeinfo for cling::InterpreterCallbacks' is absent, and linking
+  # rootcling_stage1 fails because ROOT core (TRootClingCallbacks, compiled with
+  # RTTI) references it. Emit it by compiling just that one TU with -frtti — the
+  # key function (~InterpreterCallbacks) lives there — exactly as cling already
+  # does for Exception.cpp. Darwin-only; guarded; a no-op if the line is absent.
+  _cling_cm="${SOURCEDIR}/interpreter/cling/lib/Interpreter/CMakeLists.txt"
+  if [ "$(uname)" = Darwin ] && [ -f "${_cling_cm}" ] \
+     && ! grep -q 'bits: InterpreterCallbacks rtti' "${_cling_cm}"; then
+    perl -i -pe 's{^(\s*set_source_files_properties\(Exception\.cpp COMPILE_FLAGS.*\))}{$1\n  # bits: InterpreterCallbacks rtti (Clang -fno-rtti omits typeinfo; GCC keeps it)\n  set_source_files_properties(InterpreterCallbacks.cpp COMPILE_FLAGS "-frtti")}' "${_cling_cm}"
+  fi
+
   # rsync last: copies the already-patched source into the build dir
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}/" ./
 }
