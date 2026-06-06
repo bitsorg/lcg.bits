@@ -1,6 +1,6 @@
 package: ROOT
 description: CERN ROOT data analysis framework
-version: "v6.40.00"
+version: "%(tag_basename)s"
 tag: "v6-40-00"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
@@ -25,6 +25,9 @@ requires:
   - protobuf
   - jpeg
   - tiff
+  # ROOT >= 6.40 builds with -Dcurl=ON (see Configure); older versions do not
+  # need it. Gate the dependency on the building package's own version.
+  - "curl:version>=v6.40.00"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
