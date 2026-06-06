@@ -18,6 +18,10 @@ license: GPL-3.0-or-later
 #     passed (BITS_BREW=1), otherwise it fails and the recipe body below prints
 #     how to install it.
 prefer_system: ".*"
+# Marks readline as Homebrew-sourced so `bits brew` lists it in the generated
+# Brewfile. The formula name happens to equal the package name, so HomebrewRecipe
+# picks it up by default and the replacement body need not set HOMEBREW_FORMULA.
+homebrew_formula: readline
 prefer_system_check: |
   #!/bin/bash
   case "$(uname)" in
@@ -51,7 +55,6 @@ prefer_system_replacement_specs:
     recipe: |
       #!/bin/bash -e
       MODULE_OPTIONS="--lib --inc --pkgconfig"
-      HOMEBREW_FORMULA=readline
       . $(bits-include HomebrewRecipe)
 ---
 #!/bin/bash -e
