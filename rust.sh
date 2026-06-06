@@ -6,7 +6,10 @@ sources:
   - "((?!osx).*x86-64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-unknown-linux-gnu.tar.gz"
   - "((?!osx).*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-unknown-linux-gnu.tar.gz"
   - "(osx.*x86-64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-apple-darwin.tar.gz"
-  - "(osx.*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-apple-darwin.tar.gz"
+  # macOS arm uses the architecture token 'arm64' (Apple naming), not 'aarch64'
+  # (that is the Linux token), so the gate must match arm64. The download still
+  # uses Rust's aarch64-apple-darwin triple.
+  - "(osx.*arm64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-apple-darwin.tar.gz"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
