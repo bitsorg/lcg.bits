@@ -4,7 +4,9 @@ version: "1.19.2"
 tag: "1.19.2"
 requires:
   - Python
-  - libunwind
+  # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on
+  # macOS; gate the requirement so it drops from the osx graph.
+  - "libunwind:(?!osx)"
   - lz4
   - Jinja2
   - rich
