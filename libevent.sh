@@ -23,5 +23,12 @@ function Configure() {
   # _evthread_lock_fns_, _evutil_closesocket, ..."). Allow flat-namespace lazy
   # resolution so the sub-dylibs link, matching the ELF behaviour.
   [ "$(uname)" = Darwin ] && export LDFLAGS="-Wl,-undefined,dynamic_lookup${LDFLAGS:+ ${LDFLAGS}}"
+  # macOS lacks the Linux-only syscalls pipe2(2) and accept4(2), but libevent's
+  # configure misdetects pipe2 as present under modern clang (autoconf function
+  # probes false-positive), so it compiles the `#if defined(EVENT__HAVE_PIPE2)`
+  # path in evutil.c and fails: "call to undeclared function 'pipe2'". Force the
+  # autoconf cache vars off so configure selects the portable pipe()/accept()
+  # fallbacks. No effect on Linux, where these functions genuinely exist.
+  [ "$(uname)" = Darwin ] && export ac_cv_func_pipe2=no ac_cv_func_accept4=no
   ./configure --prefix $INSTALLROOT
 }
