@@ -9,6 +9,11 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  # macOS ships an ancient /usr/bin/bison (2.3, 2008) that cannot parse
+  # libxkbcommon's parser.y ("syntax error, unexpected type"). On Linux a modern
+  # bison comes from GCC-Toolchain (osx-disabled above); on macOS pull in the
+  # bits bison so a current bison is first on PATH for the YACC step.
+  - "bison:osx"
 license: MIT
 ---
 #!/bin/bash -e
