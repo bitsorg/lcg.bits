@@ -13,6 +13,31 @@ requires:
   - nodejs
   - zlib
   - ninja
+# macOS: source Qt6 from Homebrew (formula qt, currently 6.11.x). prefer_system
+# gated osx.* so Linux keeps building 6.8.3 from source below. NOTE: Homebrew qt
+# is a few minor versions ahead of the pinned 6.8.3 — qwt/soqt (its consumers)
+# may need attention if a Qt6 API they use changed.
+prefer_system: "osx.*"
+homebrew_formula: qt
+prefer_system_check: |
+  #!/bin/bash
+  # Only runs on macOS (osx.* gate). Install on demand with `bits --brew`;
+  # otherwise HomebrewRecipe reports the missing formula at build time.
+  if [ "${BITS_BREW:-}" = "1" ] && ! brew --prefix qt >/dev/null 2>&1; then
+    brew install qt >&2 || true
+  fi
+  echo "bits_system_replace: Qt6"
+prefer_system_replacement_specs:
+  Qt6:
+    version: "homebrew"
+    build_requires:
+      - bits-recipe-tools
+    recipe: |
+      #!/bin/bash -e
+      MODULE_OPTIONS="--bin --lib --cmake"
+      HOMEBREW_FORMULA=qt
+      HOMEBREW_LINK_DIRS="bin lib include share mkspecs plugins qml libexec"
+      . $(bits-include HomebrewRecipe)
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
