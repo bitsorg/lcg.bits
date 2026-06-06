@@ -16,6 +16,21 @@ license: AGPL-3.0-only
 MODULE_OPTIONS="--lib"
 ##############################
 function Configure() {
+  # macOS/clang: Berkeley DB's src/dbinc/atomic.h #defines a macro named
+  # `atomic_init`. With libc++, db_cxx.cpp's <iostream> transitively pulls in
+  # <atomic> (iostream -> ... -> string_view -> atomic), where the macro clobbers
+  # libc++'s std::atomic_init declaration and mangles the SDK header
+  # ("error: expected ')'", "no variable template matches partial
+  # specialization"). Every atomic_init token in BDB source is BDB's own macro
+  # (it never calls the stdlib one), so renaming them all is complete and safe.
+  # Linux/libstdc++ does NOT pull <atomic> into that TU, so it is unaffected and
+  # this stays Darwin-gated.
+  if [ "$(uname)" = Darwin ]; then
+    for _f in $(grep -rl atomic_init src 2>/dev/null); do
+      perl -i -pe 's/\batomic_init\b/__db_atomic_init/g' "$_f"
+    done
+  fi
+
   # Berkeley DB requires an out-of-tree build from dist/configure.
   # Force C11 dialect: Berkeley DB 6.x uses K&R-style function definitions
   # throughout; GCC 15 treats these as errors in C23 (its default standard).
