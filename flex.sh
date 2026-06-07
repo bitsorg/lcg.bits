@@ -25,11 +25,15 @@ function Configure() {
   # architecture arm64: _yylex"). Allow flat-namespace lazy resolution so libfl
   # links, matching the ELF behaviour.
   [ "$(uname)" = Darwin ] && export LDFLAGS="-Wl,-undefined,dynamic_lookup${LDFLAGS:+ ${LDFLAGS}}"
-  # macOS: configure detects reallocarray() (the symbol exists since Big Sur) so
-  # flex uses it, but <stdlib.h> only *declares* it under _DARWIN_C_SOURCE -- so
-  # clang errors with "call to undeclared function 'reallocarray'" in misc.c.
-  # Define the feature macro to expose the declaration. No effect on Linux.
-  [ "$(uname)" = Darwin ] && export CFLAGS="-D_DARWIN_C_SOURCE${CFLAGS:+ ${CFLAGS}}"
+  # macOS: configure detects the reallocarray() *symbol* (it links) and sets
+  # HAVE_REALLOCARRAY, so misc.c calls the system reallocarray -- but the current
+  # macOS SDK does not *declare* it in <stdlib.h> (not even under
+  # _DARWIN_C_SOURCE), so clang errors "call to undeclared function
+  # 'reallocarray'". Force HAVE_REALLOCARRAY off so flex uses its own bundled
+  # overflow-checked fallback (flexdef.h declares it; misc.c has the #else path)
+  # and never touches the undeclared system one. No effect on Linux (glibc
+  # declares reallocarray).
+  [ "$(uname)" = Darwin ] && export ac_cv_func_reallocarray=no
   # Build in-source (AutoToolsRecipe rsyncs the source into cwd), matching
   # lcgcmake's flex (configure --prefix; make; make install; BUILD_IN_SOURCE).
   ./configure --prefix="$INSTALLROOT"
