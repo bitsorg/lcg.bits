@@ -22,6 +22,14 @@ prefer_system_check: |
 prefer_system_replacement_specs:
   go:
     version: "homebrew"
+    # Exported into the build environment of go_* consumers (a dependency's
+    # env: block propagates to dependents' builds; modulefile setenv does not).
+    # GO111MODULE=off keeps the GOPATH-style `go install <importpath>` recipes
+    # working under modern Go; GOCACHE moves Go's build cache out of the home
+    # dir (~/Library/Caches/go-build is outside the build sandbox).
+    env:
+      GO111MODULE: "off"
+      GOCACHE: "/tmp/bits-go-build"
     build_requires:
       - bits-recipe-tools
     recipe: |
