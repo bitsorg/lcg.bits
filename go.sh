@@ -46,6 +46,10 @@ prefer_system_replacement_specs:
       {
         echo 'setenv GOROOT $env(GO_ROOT)'
         echo 'setenv GO111MODULE off'
+        # Go's default build cache is ~/Library/Caches/go-build, outside the
+        # build sandbox ("operation not permitted"). Redirect it to a sandbox-
+        # writable path so the go_* recipes' `go install` can write the cache.
+        echo 'setenv GOCACHE /tmp/bits-go-build'
       } >> "$_mf"
 build_requires:
   - bits-recipe-tools
