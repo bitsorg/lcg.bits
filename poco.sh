@@ -23,10 +23,6 @@ license: BSL-1.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # The unbundled utf8proc library has a platform-specific suffix: .so on Linux,
-  # .dylib on macOS. Hardcoding .so makes make fail on macOS ("No rule to make
-  # target .../libutf8proc.so").
-  local shlib=so; [ "$(uname)" = Darwin ] && shlib=dylib
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -34,5 +30,5 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DPOCO_UNBUNDLED=ON \
     -DUTF8PROC_INCLUDE_DIR="${UTF8PROC_ROOT}/include" \
-    -DUTF8PROC_LIBRARY="${UTF8PROC_ROOT}/lib/libutf8proc.${shlib}"
+    -DUTF8PROC_LIBRARY="${UTF8PROC_ROOT}/lib/libutf8proc.so"
 }
