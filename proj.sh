@@ -21,17 +21,10 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: CMake searches *.framework first by default, so FindSQLite3 picked up
-  # an ancient SQLite (3.7.13) bundled in /Library/Frameworks/Mono.framework
-  # instead of the real one, failing proj's "SQLite3 >= 3.11 required" check.
-  # Search frameworks last so the SDK/bits sqlite3 is found. No effect on Linux.
-  _find_fw=""
-  [ "$(uname)" = Darwin ] && _find_fw="-DCMAKE_FIND_FRAMEWORK=LAST"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
-    ${_find_fw} \
     -DBUILD_SHARED_LIBS=ON
 }

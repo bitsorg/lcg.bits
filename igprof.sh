@@ -6,9 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
-  # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on
-  # macOS; gate the requirement so it drops from the osx graph.
-  - "libunwind:(?!osx)"
+  - libunwind
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
