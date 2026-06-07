@@ -18,8 +18,17 @@ license: LGPL-2.1-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Configure() { 
-    ./autogen.sh
+function Configure() {
+    # The release tarball already ships a working ./configure; ./autogen.sh is
+    # not always present (it is absent on macOS, where it errored "No such file
+    # or directory"), so run it only if present and don't fail if it isn't.
+    [ -x ./autogen.sh ] && ./autogen.sh || true
+    # macOS: fplll's configure probes for GMP on the default search paths and
+    # fails ("GMP version >= 4.2.0 needed") because the bits gmp dependency is
+    # not there. Point it at GMP_ROOT explicitly. On Linux the bits dep env puts
+    # GMP on the default paths, so the line stays unchanged.
+    local _gmp=""
+    [ "$(uname)" = Darwin ] && _gmp="--with-gmp=${GMP_ROOT}"
     CXXFLAGS="-fPIC -g -O2 -std=c++17" \
-    ./configure --prefix=$INSTALLROOT --with-mpfr=${MPFR_ROOT}
+    ./configure --prefix=$INSTALLROOT --with-mpfr=${MPFR_ROOT} ${_gmp}
 }
