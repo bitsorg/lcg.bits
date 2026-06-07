@@ -30,6 +30,17 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: arrow_create_merged_static_lib (for the bundled-dependencies static
+  # lib) requires Apple's cctools `libtool` to merge static archives, and
+  # explicitly rejects GNU libtool ("libtool found appears not to be Apple's
+  # libtool"). The bits `libtool` package is Homebrew's GNU libtool (aliased as
+  # `libtool` on PATH), which collides with that name, so force CMAKE_LIBTOOL to
+  # the genuine Apple libtool resolved via xcrun. Linux never hits this branch.
+  local _extra=()
+  if [ "$(uname)" = Darwin ]; then
+    local _applelt; _applelt=$(xcrun -f libtool 2>/dev/null || echo /usr/bin/libtool)
+    _extra+=(-DCMAKE_LIBTOOL="$_applelt")
+  fi
   cmake "$SOURCEDIR/cpp" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -44,5 +55,6 @@ function Configure() {
     ${RAPIDJSON_ROOT:+-DRapidJSON_ROOT="$RAPIDJSON_ROOT"} \
     ${LZ4_ROOT:+-DLZ4_ROOT="$LZ4_ROOT"} \
     ${SNAPPY_ROOT:+-DSnappy_ROOT="$SNAPPY_ROOT"} \
-    -Dxsimd_SOURCE="BUNDLED"
+    -Dxsimd_SOURCE="BUNDLED" \
+    "${_extra[@]}"
 }
