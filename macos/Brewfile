@@ -3,6 +3,7 @@
 # Regenerate with:  bits brew -a osx_arm64 -o <this file>
 # Install with:     brew bundle --file <this file>
 
+brew "bear"
 brew "cairo"
 brew "doxygen"
 brew "fontconfig"
