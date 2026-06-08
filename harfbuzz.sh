@@ -55,6 +55,11 @@ function Configure() {
     # resolution entirely. (brew freetype headers live under include/freetype2.)
     export FREETYPE_CFLAGS="-I${FREETYPE_ROOT}/include/freetype2 -I${FREETYPE_ROOT}/include"
     export FREETYPE_LIBS="-L${FREETYPE_ROOT}/lib -lfreetype"
+    # hb-ft.cc casts void(*)(FT_Face) to FT_Generic_Finalizer (void(*)(void*)),
+    # which newer clang flags under -Wcast-function-type-strict; with harfbuzz's
+    # -Werror this aborts the build. Disable just that warning on macOS (CXXFLAGS
+    # is appended after harfbuzz's own flags, so this wins).
+    export CXXFLAGS="${CXXFLAGS:+${CXXFLAGS} }-Wno-cast-function-type-strict"
   fi
   ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
 }
