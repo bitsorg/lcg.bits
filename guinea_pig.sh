@@ -19,11 +19,19 @@ license: LicenseRef-GuineaPig
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: gridCPP.h uses the legacy `register` storage-class specifier, which
+  # Apple clang rejects as a hard error in C++17 ("ISO C++17 does not allow
+  # 'register' ..."), while GCC on Linux only warns. The diagnostic is gated by
+  # -Wregister, so -Wno-register lets clang accept the old keyword. Darwin-only
+  # to keep the Linux build byte-identical.
+  local _cxxflags=()
+  [ "$(uname)" = Darwin ] && _cxxflags=(-DCMAKE_CXX_FLAGS="-Wno-register")
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
-    -DFFTW3=ON
+    -DFFTW3=ON \
+    "${_cxxflags[@]}"
 }
