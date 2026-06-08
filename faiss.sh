@@ -10,6 +10,9 @@ requires:
   - numpy
   - swig
   - packaging
+  # macOS: Apple clang has no OpenMP; faiss does find_package(OpenMP REQUIRED).
+  # Pull in Homebrew's libomp on macOS only (Linux uses GCC's built-in libgomp).
+  - "libomp:osx"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -22,6 +25,21 @@ license: MIT
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
+  # macOS: Apple clang has no built-in OpenMP, so CMake's FindOpenMP fails
+  # ("Could NOT find OpenMP_CXX"). Point it at Homebrew's keg-only libomp and use
+  # the Apple-clang spelling (-Xclang -fopenmp, not plain -fopenmp). LIBOMP_ROOT
+  # comes from the libomp:osx dependency. Linux uses GCC's libgomp and skips this.
+  local _omp=()
+  if [ "$(uname)" = Darwin ]; then
+    local _lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"
+    _omp+=(
+      -DOpenMP_C_FLAGS="-Xclang -fopenmp -I${_lomp}/include"
+      -DOpenMP_C_LIB_NAMES=omp
+      -DOpenMP_CXX_FLAGS="-Xclang -fopenmp -I${_lomp}/include"
+      -DOpenMP_CXX_LIB_NAMES=omp
+      -DOpenMP_omp_LIBRARY="${_lomp}/lib/libomp.dylib"
+    )
+  fi
   # CPU-only build (this stack has no CUDA); generic SIMD level for portability.
   # Mirrors lcgcmake's faiss flags.
   cmake "${SOURCEDIR}" \
@@ -32,5 +50,6 @@ function Configure() {
     -DFAISS_ENABLE_PYTHON=OFF \
     -DFAISS_OPT_LEVEL=generic \
     -DBUILD_TESTING=OFF \
-    -DBUILD_SHARED_LIBS=ON
+    -DBUILD_SHARED_LIBS=ON \
+    "${_omp[@]}"
 }
