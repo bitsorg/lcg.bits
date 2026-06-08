@@ -56,13 +56,15 @@ function Configure() {
     export FREETYPE_CFLAGS="-I${FREETYPE_ROOT}/include/freetype2 -I${FREETYPE_ROOT}/include"
     export FREETYPE_LIBS="-L${FREETYPE_ROOT}/lib -lfreetype"
     # hb-ft.cc casts void(*)(FT_Face) to FT_Generic_Finalizer (void(*)(void*)),
-    # which newer clang flags under -Wcast-function-type-strict; harfbuzz promotes
-    # it to an error via its own warning flags, and a CXXFLAGS -Wno-... switch
-    # does not reliably override those. Silence it at the source with a file-scope
-    # diagnostic pragma, which wins regardless of -Werror / flag order. (Source is
-    # rsynced into the build dir, so edit it in place; Darwin-only.)
+    # which newer clang flags under -Wcast-function-type-strict. harfbuzz's own
+    # header hb.hh does `#pragma GCC diagnostic error "-Wcast-function-type"`, so
+    # the cast is a hard error and neither a CXXFLAGS -Wno-... switch nor a
+    # file-top pragma survives (hb.hh is included afterwards and re-enables it).
+    # Insert the ignore pragmas immediately AFTER the `#include "hb.hh"` line, so
+    # they take effect for the casts that follow. Darwin-only; the source is
+    # rsynced into the build dir, so edit it in place (idempotent via the grep).
     if [ -f src/hb-ft.cc ] && ! grep -q 'cast-function-type-strict' src/hb-ft.cc; then
-      perl -i -pe 'print "#pragma clang diagnostic ignored \"-Wcast-function-type-strict\"\n" if $. == 1' src/hb-ft.cc
+      perl -i -pe 's{^(\s*#include "hb\.hh".*)$}{$1\n#pragma clang diagnostic ignored "-Wcast-function-type"\n#pragma clang diagnostic ignored "-Wcast-function-type-strict"}' src/hb-ft.cc
     fi
   fi
   ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
