@@ -19,15 +19,14 @@ license: LicenseRef-POWHEG
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Prepare() {
+  # macOS: POWHEG-BOX-V2 is not yet ported to macOS — it is a 100+ process,
+  # Intel/GNU-ld-flavoured build (Intel -limf, -Wl,--print-map, per-process
+  # fastjet/lhapdf interface objects that don't compile under Apple clang). Gate
+  # it off here so a whole-stack macOS build doesn't fail on it; it produces an
+  # empty package (the Make() guard below + MakeModule). Builds normally on
+  # Linux. Remove this guard (and finish the port) to re-enable macOS.
+  [ "$(uname)" = Darwin ] && return 0
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
-  # macOS: the process Makefiles link against Intel's libimf (-limf), which does
-  # not exist on macOS (the gfortran stack uses the system libm). Strip it from
-  # every process Makefile so the link can proceed; GNU-ld-only tricks that a few
-  # processes use (e.g. -Wl,--print-map in ttb_dec/Z2jet/W2jet/VBF_HJJJ) are left
-  # to fail per-process, which the wrapper below tolerates. Linux keeps -limf.
-  if [ "$(uname)" = Darwin ]; then
-    find . -maxdepth 2 -name Makefile -exec perl -i -pe 's/(^|\s)-limf\b//g' {} +
-  fi
   # Makefile.lhcb (the LHCb-custom top-level wrapper) is not in the tarball.
   # Generate one that builds all process subdirectories (tolerating per-process
   # failures) and installs whatever succeeds.
@@ -44,7 +43,7 @@ all:
 	  $(MAKE) --no-print-directory -C "$$p" \
 	    FCOMP="$(FCOMP)" CCOMP="$(CCOMP)" \
 	    LHAPDF="$(LHAPDF)" FASTJET="$(FASTJET)" \
-	    pwhg_main 2>&1 | tail -50 || true; \
+	    pwhg_main 2>&1 | tail -3 || true; \
 	done
 
 install:
@@ -58,6 +57,9 @@ install:
 MKEOF
 }
 function Make() {
+  # macOS: gated off (see Prepare). Emit an empty install root so MakeModule has
+  # somewhere to write the modulefile, and stop.
+  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb \
     FCOMP="${FC:-gfortran}" CCOMP="${CXX}" \
     LHAPDF="${LHAPDF_ROOT}" FASTJET="${FASTJET_ROOT}"
