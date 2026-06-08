@@ -36,10 +36,12 @@ function Configure() {
   # Darwin so the (unchanged) Linux path is byte-identical.
   local _py=()
   if [ "$(uname)" = Darwin ]; then
-    local _pyexe="${Python_ROOT}/bin/python3"
+    # NB: the bits env var is PYTHON_ROOT (uppercase); the original
+    # ${Python_ROOT} references above are a typo and expand empty.
+    local _pyexe="${PYTHON_ROOT}/bin/python3"
     local _pyver _pynodot
     _pyver=$("$_pyexe" -c 'import sys;print("%d.%d"%sys.version_info[:2])' 2>/dev/null)
-    [ -z "$_pyver" ] && _pyver=$(basename "$(ls -d "${Python_ROOT}"/lib/python3.* 2>/dev/null | head -1)" | sed 's/python//')
+    [ -z "$_pyver" ] && _pyver=$(basename "$(ls -d "${PYTHON_ROOT}"/lib/python3.* 2>/dev/null | head -1)" | sed 's/python//')
     _pynodot=${_pyver//./}
     _py+=(
       -DPython_EXECUTABLE="${_pyexe}"
