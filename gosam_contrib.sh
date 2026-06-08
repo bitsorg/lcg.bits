@@ -53,5 +53,19 @@ function Configure() {
 }
 
 function Make() {
+  # macOS: patch the *generated* libtool scripts, not just configure. On an
+  # incremental/resumed build bits does not re-run Configure, so the
+  # configure-time widening of _lt_dar_allow_undefined above never executes and
+  # the libtool scripts produced by the first (pre-fix) configure still carry
+  # allow_undefined_flag="" — the MACOSX_DEPLOYMENT_TARGET version case left it
+  # empty for target 14.0. The libgolem dylib link (gcc -dynamiclib, --tag=CC)
+  # then omits -undefined dynamic_lookup and macOS's two-level namespace rejects
+  # the libgfortran runtime symbols (__gfortran_concat_string, ...). Patching
+  # every generated libtool here applies the fix whether or not configure
+  # re-ran. Idempotent; Linux has no such libtool scripts to match.
+  if [ "$(uname)" = Darwin ]; then
+    find . -name libtool -type f -exec perl -i -pe \
+      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
+  fi
   make ${JOBS:+-j $JOBS}
 }
