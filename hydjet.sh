@@ -26,14 +26,18 @@ function Make() {
   # -std=legacy matches the flag used by lcgcmake; needed for old Fortran-77 code
   local fflags="-std=legacy -O2 -fPIC"
   # macOS shared libraries are .dylib built with -dynamiclib, not .so/-shared.
-  local _so=so _shared=-shared
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; fi
+  # libhydjet references JETSET/PYTHIA routines (pyevnt_, pyinit_, gauss_, ...)
+  # that live in the other library; macOS's two-level namespace rejects such
+  # undefined symbols in a dylib, whereas Linux's flat namespace allows them.
+  # Allow flat-namespace lazy resolution (matching the ELF behaviour) on macOS.
+  local _so=so _shared=-shared _undef=
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup"; fi
   ${FC:-gfortran} $fflags -c hydjet1_8.f -o hydjet.o
-  ${FC:-gfortran} $fflags $_shared -o libhydjet.$_so hydjet.o
+  ${FC:-gfortran} $fflags $_shared $_undef -o libhydjet.$_so hydjet.o
   ${AR:-ar} crs libhydjet.a hydjet.o
 
   ${FC:-gfortran} $fflags -c jetset_73.f -o jetset.o
-  ${FC:-gfortran} $fflags $_shared -o libjetset73hydjet.$_so jetset.o
+  ${FC:-gfortran} $fflags $_shared $_undef -o libjetset73hydjet.$_so jetset.o
   ${AR:-ar} crs libjetset73hydjet.a jetset.o
 }
 
