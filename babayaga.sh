@@ -25,6 +25,19 @@ MODULE_OPTIONS="--bin --lib"
 # export it for the whole build.
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 ##############################
+function Make() {
+  # arm64 (Apple Silicon): the Makefile hardcodes RLXOPT=-DSSE2, which selects
+  # c_ranlux's x86 SSE inline assembly (xmm registers). Those registers do not
+  # exist on arm64, so the build fails ("unknown register name 'xmm3' in asm").
+  # Override RLXOPT to empty so the portable C fallback (the #else branch in
+  # ranlux_common.c) is compiled instead. x86 hosts (Linux) keep -DSSE2.
+  local _rlx=()
+  case "$(uname -m)" in
+    arm64 | aarch64) _rlx=(RLXOPT=) ;;
+  esac
+  make ${JOBS:+-j $JOBS} "${_rlx[@]}"
+}
+##############################
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin"
   # MakeRecipe builds out-of-source: Prepare() rsyncs $SOURCEDIR into the build
