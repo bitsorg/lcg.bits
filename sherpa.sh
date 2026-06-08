@@ -9,7 +9,10 @@ requires:
   - CMake
   - Python
   - swig
-  - openloops
+  # openloops is a heavy one-loop provider; gate it behind the `openloops`
+  # flavour so it is only pulled in (and only built) with `--flavour openloops`.
+  # Off by default on every platform; Sherpa builds fine without it.
+  - "openloops:(?openloops)"
   - pythia8
   - rivet
   - ROOT
@@ -37,6 +40,9 @@ export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 function Configure() {
   # Sherpa 3.x switched from autotools to CMake. Flags mirror lcgcmake's
   # sherpa>=3 build. C++17 even on a C++20 stack (lcgcmake forces 17 here).
+  # OpenLoops is gated behind the `openloops` flavour. When it is off the
+  # dependency is dropped and OPENLOOPS_ROOT is unset, so disable it in CMake.
+  local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -46,7 +52,7 @@ function Configure() {
     -DSHERPA_ENABLE_MANUAL=OFF \
     -DSHERPA_ENABLE_LHOLE=ON \
     -DSHERPA_ENABLE_LHAPDF=ON \
-    -DSHERPA_ENABLE_OPENLOOPS=ON \
+    -DSHERPA_ENABLE_OPENLOOPS=$_ol \
     -DSHERPA_ENABLE_PYTHIA8=ON \
     -DSHERPA_ENABLE_PYTHON=ON \
     -DPython_ROOT_DIR="${PYTHON_ROOT}" \

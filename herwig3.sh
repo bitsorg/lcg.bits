@@ -12,7 +12,10 @@ requires:
   - GSL
   - fastjet
   - vbfnlo
-  - openloops
+  # Gated behind the `openloops` flavour (off by default). The Configure body
+  # already wraps --with-openloops in ${OPENLOOPS_ROOT:+...}, so Herwig builds
+  # without it when the flavour is off.
+  - "openloops:(?openloops)"
   - madgraph5amc
   - njet
   - gosam

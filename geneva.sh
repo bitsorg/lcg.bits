@@ -7,7 +7,8 @@ sources:
 requires:
   - CMake
   - lhapdf
-  - openloops
+  # Gated behind the `openloops` flavour (off by default); see sherpa.sh.
+  - "openloops:(?openloops)"
   - zlib
   - GSL
   - Python
@@ -25,16 +26,19 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # OpenLoops is gated behind the `openloops` flavour. When off, OPENLOOPS_ROOT
+  # is unset; disable it in CMake and drop the openloops_ROOT hint.
+  local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Dgeneva_enable_hepmc=OFF \
     -Dgeneva_enable_lhapdf=ON \
-    -Dgeneva_enable_openloops=ON \
+    -Dgeneva_enable_openloops=$_ol \
     -Dgeneva_enable_pythia8=OFF \
     -Dgeneva_enable_python=ON \
-    -Dopenloops_ROOT="${OPENLOOPS_ROOT}" \
+    ${OPENLOOPS_ROOT:+-Dopenloops_ROOT="${OPENLOOPS_ROOT}"} \
     -Dlhapdf_ROOT="${LHAPDF_ROOT}"
 }
 function Make() {

@@ -19,7 +19,9 @@ requires:
   - automake
   - libtool
   - LCIO
-  - openloops
+  # Gated behind the `openloops` flavour (off by default); WHIZARD builds
+  # without it when `--flavour openloops` is not given.
+  - "openloops:(?openloops)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -69,6 +71,7 @@ function Configure() {
     HOPPET_DIR=${HOPPET_ROOT} LHAPDF_DIR=${LHAPDF_ROOT} HEPMC_DIR=${HEPMC3_ROOT} \
     ./configure --enable-hepmc --enable-fastjet --with-fastjet=${FASTJET_ROOT} \
       --enable-hoppet --enable-gosam --with-gosam=${GOSAM_ROOT}/bin \
-      --enable-looptools --enable-openloops --with-openloops=${OPENLOOPS_ROOT} \
+      --enable-looptools \
+      ${OPENLOOPS_ROOT:+--enable-openloops --with-openloops=${OPENLOOPS_ROOT}} \
       --prefix=$INSTALLROOT
 }

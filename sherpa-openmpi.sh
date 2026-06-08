@@ -12,7 +12,8 @@ requires:
   - Python
   - swig
   - openmpi
-  - openloops
+  # Gated behind the `openloops` flavour (off by default); see sherpa.sh.
+  - "openloops:(?openloops)"
   - pythia8
   - rivet
   - ROOT
@@ -54,7 +55,7 @@ function Configure() {
     -DSHERPA_ENABLE_MANUAL=OFF \
     -DSHERPA_ENABLE_LHOLE=ON \
     -DSHERPA_ENABLE_LHAPDF=ON \
-    -DSHERPA_ENABLE_OPENLOOPS=ON \
+    -DSHERPA_ENABLE_OPENLOOPS=$_ol \
     -DSHERPA_ENABLE_PYTHIA8=ON \
     -DSHERPA_ENABLE_PYTHON=ON \
     -DPython_ROOT_DIR="${PYTHON_ROOT}" \

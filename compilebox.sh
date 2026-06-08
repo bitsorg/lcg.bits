@@ -16,7 +16,10 @@ requires:
   - ggvvamp
   - lhapdf
   - nlox
-  - openloops
+  # Gated behind the `openloops` flavour (off by default). compilebox passes no
+  # explicit OpenLoops flag to CMake, so when the flavour is off it is simply
+  # absent from CMAKE_PREFIX_PATH.
+  - "openloops:(?openloops)"
   - photoscpp
   - pythia8
   - qqvvamp
