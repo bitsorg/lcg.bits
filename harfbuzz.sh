@@ -56,10 +56,14 @@ function Configure() {
     export FREETYPE_CFLAGS="-I${FREETYPE_ROOT}/include/freetype2 -I${FREETYPE_ROOT}/include"
     export FREETYPE_LIBS="-L${FREETYPE_ROOT}/lib -lfreetype"
     # hb-ft.cc casts void(*)(FT_Face) to FT_Generic_Finalizer (void(*)(void*)),
-    # which newer clang flags under -Wcast-function-type-strict; with harfbuzz's
-    # -Werror this aborts the build. Disable just that warning on macOS (CXXFLAGS
-    # is appended after harfbuzz's own flags, so this wins).
-    export CXXFLAGS="${CXXFLAGS:+${CXXFLAGS} }-Wno-cast-function-type-strict"
+    # which newer clang flags under -Wcast-function-type-strict; harfbuzz promotes
+    # it to an error via its own warning flags, and a CXXFLAGS -Wno-... switch
+    # does not reliably override those. Silence it at the source with a file-scope
+    # diagnostic pragma, which wins regardless of -Werror / flag order. (Source is
+    # rsynced into the build dir, so edit it in place; Darwin-only.)
+    if [ -f src/hb-ft.cc ] && ! grep -q 'cast-function-type-strict' src/hb-ft.cc; then
+      perl -i -pe 'print "#pragma clang diagnostic ignored \"-Wcast-function-type-strict\"\n" if $. == 1' src/hb-ft.cc
+    fi
   fi
   ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
 }
