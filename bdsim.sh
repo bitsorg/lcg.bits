@@ -42,6 +42,15 @@ function Configure() {
   # system flex is fine. On Linux the system bison is recent enough; unchanged.
   local _bison=()
   [ "$(uname)" = Darwin ] && _bison+=(-DBISON_EXECUTABLE="${BISON_ROOT}/bin/bison")
+  # macOS: with USE_BOOST off (the default), BDSBH4DLinkDef.hh is empty (its whole
+  # body is #ifdef USE_BOOST), yet ROOT.cmake still globs it and generates
+  # BDSBH4DDict — which rootcling (ROOT 6.40) rejects ("No selection rules
+  # specified"). Enabling USE_BOOST is not viable (its cmake forces C++14, which
+  # conflicts with ROOT 6.40's C++17 requirement). Drop BDSBH4DLinkDef.hh from the
+  # LinkDef glob when USE_BOOST is off so the empty dictionary is not generated.
+  if [ "$(uname)" = Darwin ] && ! grep -q 'REMOVE_ITEM linkHeaders' "${SOURCEDIR}/cmake/ROOT.cmake"; then
+    perl -i -pe 's{^(\s*file\(GLOB linkHeaders .*)$}{$1\nif(NOT USE_BOOST)\n  list(REMOVE_ITEM linkHeaders \${CMAKE_CURRENT_SOURCE_DIR}/include/BDSBH4DLinkDef.hh)\nendif()}' "${SOURCEDIR}/cmake/ROOT.cmake"
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
