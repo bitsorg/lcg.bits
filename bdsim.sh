@@ -32,11 +32,26 @@ function Configure() {
   # in the source CMakeLists before configuring. (Sphinx is optional; only warns.)
   perl -i -pe 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
     "${SOURCEDIR}/CMakeLists.txt"
+  # macOS: the parser needs bison >= 2.4 (find_package(BISON 2.4)), but the system
+  # bison at /usr/bin/bison is 2.3 (Apple's), which CMake finds first. Point CMake
+  # at Homebrew's keg-only bison (3.8). flex has no version requirement, so the
+  # system flex is fine. On Linux the system bison is recent enough; unchanged.
+  local _bison=()
+  if [ "$(uname)" = Darwin ]; then
+    local _bison_exe; _bison_exe="$(brew --prefix bison 2>/dev/null)/bin/bison"
+    if [ ! -x "$_bison_exe" ]; then
+      echo "bdsim: bison >= 2.4 required; macOS system bison is 2.3." >&2
+      echo "bdsim:   brew install bison   (or: brew bundle --file lcg.bits/macos/Brewfile)" >&2
+      exit 1
+    fi
+    _bison+=(-DBISON_EXECUTABLE="$_bison_exe")
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    "${_bison[@]}"
 }
