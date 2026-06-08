@@ -4,7 +4,6 @@
 # Install with:     brew bundle --file <this file>
 
 brew "bear"
-brew "bison"
 brew "cairo"
 brew "doxygen"
 brew "fontconfig"
