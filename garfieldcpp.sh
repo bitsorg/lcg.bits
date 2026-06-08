@@ -28,7 +28,15 @@ function Configure() {
   # On Linux libstdc++ has the std:: functions, so leave the default (OFF) and the
   # build is unchanged there.
   local _gsl=()
-  [ "$(uname)" = Darwin ] && _gsl+=(-DGARFIELD_WITH_GSL=ON)
+  if [ "$(uname)" = Darwin ]; then
+    _gsl+=(-DGARFIELD_WITH_GSL=ON)
+    # libc++ does not pull in <stdlib.h> as transitively as GNU's libstdc++, so
+    # some NeBem sources (Isles.c, Vector.c) that call exit()/etc. without
+    # including it fail to compile ("use of undeclared identifier 'exit'").
+    # Pre-include <stdlib.h> for the whole build — harmless for a standard C
+    # header — so those declarations are always available.
+    _gsl+=(-DCMAKE_CXX_FLAGS="-include stdlib.h")
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
