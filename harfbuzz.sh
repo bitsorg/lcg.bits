@@ -46,18 +46,15 @@ function Configure() {
     # cairo integration is only used by the hb-view utility; the shaping library
     # that pango links needs only freetype/glib, so build without cairo.
     _cairo="--without-cairo"
-    # brew freetype2.pc has transitive Requires (zlib, bzip2, libpng, brotli)
-    # whose .pc files live in the Homebrew prefix, the keg-only prefixes, and the
-    # macOS SDK, none of which are on PKG_CONFIG_PATH here. Without them
-    # `pkg-config --exists freetype2` fails ("Package 'zlib', required by
-    # 'freetype2', not found"). Add those pkgconfig dirs so the probe resolves.
-    for _hb_extra in "$(brew --prefix 2>/dev/null)/lib/pkgconfig" \
-                     "$(brew --prefix zlib 2>/dev/null)/lib/pkgconfig" \
-                     "$(brew --prefix bzip2 2>/dev/null)/lib/pkgconfig" \
-                     "$(xcrun --show-sdk-path 2>/dev/null)/usr/lib/pkgconfig"; do
-      [ -d "${_hb_extra}" ] && \
-        export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}${_hb_extra}"
-    done
+    # brew freetype2.pc lists transitive Requires (zlib, bzip2, libpng, brotli)
+    # whose .pc files are not on PKG_CONFIG_PATH (zlib has no .pc at all on macOS),
+    # so `pkg-config --exists freetype2` fails ("Package 'zlib', required by
+    # 'freetype2', not found"). Bypass the probe: autoconf's PKG_CHECK_MODULES
+    # uses FREETYPE_CFLAGS/FREETYPE_LIBS verbatim when they are set, so point them
+    # at the freetype dependency directly and skip pkg-config's transitive
+    # resolution entirely. (brew freetype headers live under include/freetype2.)
+    export FREETYPE_CFLAGS="-I${FREETYPE_ROOT}/include/freetype2 -I${FREETYPE_ROOT}/include"
+    export FREETYPE_LIBS="-L${FREETYPE_ROOT}/lib -lfreetype"
   fi
   ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
 }
