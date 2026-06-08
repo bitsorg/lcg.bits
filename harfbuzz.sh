@@ -39,12 +39,25 @@ function Configure() {
     [ -d "${_hb_root}/lib" ] && \
       export LD_LIBRARY_PATH="${_hb_root}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
   done
-  # macOS: --with-cairo *requires* cairo, whose Homebrew .pc pulls in transitive
-  # Requires (pixman-1, fontconfig, ...) not all on PKG_CONFIG_PATH, so configure
-  # aborts "cairo support requested but not found". harfbuzz's cairo integration
-  # is only used by the hb-view utility; the shaping library that pango links
-  # does not need it, so build without cairo on macOS. Linux keeps --with-cairo.
   local _cairo="--with-cairo"
-  [ "$(uname)" = Darwin ] && _cairo="--without-cairo"
+  if [ "$(uname)" = Darwin ]; then
+    # macOS: --with-cairo *requires* cairo, whose Homebrew .pc pulls in transitive
+    # Requires (pixman-1, fontconfig, ...) not all on PKG_CONFIG_PATH. harfbuzz's
+    # cairo integration is only used by the hb-view utility; the shaping library
+    # that pango links needs only freetype/glib, so build without cairo.
+    _cairo="--without-cairo"
+    # brew freetype2.pc has transitive Requires (zlib, bzip2, libpng, brotli)
+    # whose .pc files live in the Homebrew prefix, the keg-only prefixes, and the
+    # macOS SDK, none of which are on PKG_CONFIG_PATH here. Without them
+    # `pkg-config --exists freetype2` fails ("Package 'zlib', required by
+    # 'freetype2', not found"). Add those pkgconfig dirs so the probe resolves.
+    for _hb_extra in "$(brew --prefix 2>/dev/null)/lib/pkgconfig" \
+                     "$(brew --prefix zlib 2>/dev/null)/lib/pkgconfig" \
+                     "$(brew --prefix bzip2 2>/dev/null)/lib/pkgconfig" \
+                     "$(xcrun --show-sdk-path 2>/dev/null)/usr/lib/pkgconfig"; do
+      [ -d "${_hb_extra}" ] && \
+        export PKG_CONFIG_PATH="${PKG_CONFIG_PATH:+${PKG_CONFIG_PATH}:}${_hb_extra}"
+    done
+  fi
   ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
 }
