@@ -25,13 +25,21 @@ function Prepare() {
 }
 
 function Make() {
+  # macOS shared libraries are .dylib built with -dynamiclib, not .so/-shared.
+  # PYQUEN calls PYTHIA routines (pyp_, pyjets common, ...) that are not in this
+  # object; macOS's two-level namespace rejects such undefined symbols in a dylib
+  # whereas Linux's flat namespace allows them. Allow flat-namespace lazy
+  # resolution on macOS (matching the ELF behaviour).
+  local _so=so _shared=-shared _undef=
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup"; fi
   ${FC:-gfortran} -O2 -fPIC -c pyquen.f -o pyquen.o
-  ${FC:-gfortran} -O2 -shared -o libpyquen.so pyquen.o
+  ${FC:-gfortran} -O2 $_shared $_undef -o libpyquen.$_so pyquen.o
   ${AR:-ar} crs libpyquen.a pyquen.o
 }
 
 function MakeInstall() {
+  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
-  install -m755 libpyquen.so "$INSTALLROOT/lib/"
+  install -m755 libpyquen.$_so "$INSTALLROOT/lib/"
   install -m644 libpyquen.a "$INSTALLROOT/lib/"
 }

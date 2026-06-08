@@ -23,13 +23,21 @@ function Prepare() {
 
 function Make() {
   local fflags="-std=legacy -fallow-argument-mismatch -O2 -fPIC"
+  # macOS shared libraries are .dylib built with -dynamiclib, not .so/-shared.
+  # PYTHIA6 references external PDF routines (structm_, pdfset_, ...) not in this
+  # object; macOS's two-level namespace rejects such undefined symbols in a dylib
+  # whereas Linux's flat namespace allows them. Allow flat-namespace lazy
+  # resolution on macOS (matching the ELF behaviour).
+  local _so=so _shared=-shared _undef=
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup"; fi
   ${FC:-gfortran} $fflags -c pythia6.f -o pythia6.o
-  ${FC:-gfortran} $fflags -shared -o libpythia6.so pythia6.o
+  ${FC:-gfortran} $fflags $_shared $_undef -o libpythia6.$_so pythia6.o
   ${AR:-ar} crs libpythia6.a pythia6.o
 }
 
 function MakeInstall() {
+  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
-  install -m755 libpythia6.so "$INSTALLROOT/lib/"
+  install -m755 libpythia6.$_so "$INSTALLROOT/lib/"
   install -m644 libpythia6.a  "$INSTALLROOT/lib/"
 }
