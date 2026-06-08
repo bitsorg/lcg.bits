@@ -27,7 +27,7 @@ function Prepare() {
 
   # Fix compiler name: gfort → gfortran (f95 wrapper no longer exists in GCC 15)
   perl -i -pe \
-    's/^Comp = gfort$/Comp = gfortran/; s/^ifeq \(\$\(Comp\),gfort\)$/ifeq (\$(Comp),gfortran)/; s/^( *)f95 /$1gfortran /' \
+    's/^Comp = gfort$/Comp = gfortran/; s/^ifeq \(\$\(Comp\),gfort\)$/ifeq (\$(Comp),gfortran)/; s/(fcomp\s*=\s*)f95\b/${1}gfortran/' \
     JHUGenerator/makefile
 
   # Replace $(PWD)-anchored paths with relative paths so the build works
