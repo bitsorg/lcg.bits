@@ -20,6 +20,14 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
+  # macOS: the process Makefiles link against Intel's libimf (-limf), which does
+  # not exist on macOS (the gfortran stack uses the system libm). Strip it from
+  # every process Makefile so the link can proceed; GNU-ld-only tricks that a few
+  # processes use (e.g. -Wl,--print-map in ttb_dec/Z2jet/W2jet/VBF_HJJJ) are left
+  # to fail per-process, which the wrapper below tolerates. Linux keeps -limf.
+  if [ "$(uname)" = Darwin ]; then
+    find . -maxdepth 2 -name Makefile -exec perl -i -pe 's/(^|\s)-limf\b//g' {} +
+  fi
   # Makefile.lhcb (the LHCb-custom top-level wrapper) is not in the tarball.
   # Generate one that builds all process subdirectories (tolerating per-process
   # failures) and installs whatever succeeds.
@@ -36,7 +44,7 @@ all:
 	  $(MAKE) --no-print-directory -C "$$p" \
 	    FCOMP="$(FCOMP)" CCOMP="$(CCOMP)" \
 	    LHAPDF="$(LHAPDF)" FASTJET="$(FASTJET)" \
-	    pwhg_main 2>&1 | tail -3 || true; \
+	    pwhg_main 2>&1 | tail -50 || true; \
 	done
 
 install:
