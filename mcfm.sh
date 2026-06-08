@@ -7,6 +7,10 @@ sources:
 requires:
   - CMake
   - lhapdf
+  # macOS: MCFM's C++ uses OpenMP (qcdloop, CXX_Wrapper, cxx11_random) via
+  # unguarded omp_* calls; Apple clang has no OpenMP runtime, so pull in
+  # Homebrew's keg-only libomp on macOS only (Linux uses gfortran's libgomp).
+  - "libomp:osx"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -19,13 +23,47 @@ license: LicenseRef-MCFM
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: MCFM's CMakeLists only accepts GNU/Intel for C and C++ and aborts on
+  # AppleClang ("Unsupported C++ compiler"). The rest of the stack — and MCFM's
+  # std::-typed CXX_Interface consumers (Sherpa) — use AppleClang/libc++, so we
+  # build C/C++ with AppleClang too. Teach the CMake checks the Clang spelling
+  # (-Xclang -fopenmp), and supply OpenMP from Homebrew's keg-only libomp
+  # (LIBOMP_ROOT, via the libomp:osx dependency), since Apple clang ships none.
+  # The Fortran side keeps gfortran + libgomp. Idempotent (guarded on the marker).
+  local _omp=()
+  if [ "$(uname)" = Darwin ]; then
+    python3 - "${SOURCEDIR}/CMakeLists.txt" <<'PY'
+import sys
+p = sys.argv[1]
+s = open(p).read()
+# (compiler-id language, flags var, message label); the C++ message says "C++".
+blocks = (("CXX", "CMAKE_CXX_FLAGS", "C++"), ("C", "CMAKE_C_FLAGS", "C"))
+if 'MATCHES "Clang"' not in s:
+    for idlang, fv, label in blocks:
+        needle = 'else()\n    message( FATAL_ERROR "Unsupported %s compiler' % label
+        repl = ('elseif (CMAKE_%s_COMPILER_ID MATCHES "Clang")\n'
+                '    set(%s "${%s} -Xclang -fopenmp")\n'
+                'else()\n    message( FATAL_ERROR "Unsupported %s compiler'
+                % (idlang, fv, fv, label))
+        s = s.replace(needle, repl, 1)
+    open(p, "w").write(s)
+PY
+    local _lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"
+    _omp=(
+      -DCMAKE_C_FLAGS="-I${_lomp}/include"
+      -DCMAKE_CXX_FLAGS="-I${_lomp}/include"
+      -DCMAKE_EXE_LINKER_FLAGS="-L${_lomp}/lib -lomp -Wl,-headerpad_max_install_names"
+      -DCMAKE_SHARED_LINKER_FLAGS="-L${_lomp}/lib -lomp -Wl,-headerpad_max_install_names"
+    )
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Duse_internal_lhapdf=OFF \
     -Dlhapdf_include_path="${LHAPDF_ROOT}/include" \
-    -Dwith_library=ON
+    -Dwith_library=ON \
+    "${_omp[@]}"
 }
 function Make() {
   # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
