@@ -22,14 +22,6 @@ patches:
 . $(bits-include PythonRecipe)
 ##############################
 MODULE_OPTIONS="--bin --python"
-##############################
-# macOS (case-insensitive filesystem): the source ships a Bazel "BUILD" file at
-# its root, which collides with setuptools' "build/" output directory during the
-# wheel build ("could not create 'build/lib/...': Not a directory"). The BUILD
-# file is Bazel-only and unused by the setuptools build, so remove it on macOS.
-# Configure runs after Prepare (rsync into cwd) and before the pip install.
-function Configure() {
-  [ "$(uname)" = Darwin ] && rm -f BUILD
-  true
-}
+# (The macOS Bazel-"BUILD"-vs-"build/" case-insensitivity collision is handled
+#  generically in PythonRecipe's Prepare.)
 ##############################
