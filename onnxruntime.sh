@@ -40,17 +40,23 @@ function Make() {
   # flatbuffers/re2/...), compile libonnxruntime.so, generate the capi build
   # info, and build the python wheel.  Run with the bits Python so the wheel
   # build sees our numpy/packaging/wheel via PYTHONPATH.
+  # --allow_running_as_root is defined only in build.py's add_linux_specific_args,
+  # so it is unrecognized on macOS (where the build runs as the user, not root,
+  # and the flag is unnecessary). Pass it on non-Darwin only. Also: nproc does not
+  # exist on macOS — getconf works on both (and is only used if JOBS is unset).
+  local _extra=()
+  [ "$(uname)" != Darwin ] && _extra+=(--allow_running_as_root)
   "${PYTHON_EXE}" tools/ci_build/build.py \
     --build_dir "${_ORT_BUILDDIR}" \
     --config "${_ORT_CONFIG}" \
     --update --build \
-    --parallel "${JOBS:-$(nproc)}" \
+    --parallel "${JOBS:-$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)}" \
     --skip_submodule_sync \
     --skip_tests \
     --build_shared_lib \
     --build_wheel \
-    --allow_running_as_root \
     --compile_no_warning_as_error \
+    "${_extra[@]}" \
     --cmake_extra_defines \
       CMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       onnxruntime_BUILD_UNIT_TESTS=OFF \
