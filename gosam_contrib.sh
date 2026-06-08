@@ -18,6 +18,23 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: the bundled libtool computes _lt_dar_allow_undefined from a
+  # MACOSX_DEPLOYMENT_TARGET version case whose last branch is `10.*)`. On
+  # modern macOS the target is 14.0, which matches no branch, so the variable
+  # is left empty and the dylib link (gcc -dynamiclib, e.g. libgolem) carries
+  # no -undefined flag. golem95's Fortran objects then leave libgfortran
+  # runtime symbols (__gfortran_concat_string, __gfortran_matmul_c8, ...)
+  # undefined, which macOS's two-level namespace rejects ("symbol(s) not found
+  # for architecture arm64"). Linux's flat namespace resolves them at runtime.
+  # Widen that final branch `10.*)` -> `*)` so any modern target selects
+  # `-undefined dynamic_lookup`, restoring the Linux behaviour. Targeted to the
+  # branch immediately preceding the dynamic_lookup assignment so the other
+  # `10.*)` version checks in configure are untouched. Linux is unaffected.
+  if [ "$(uname)" = Darwin ]; then
+    perl -0777 -i -pe \
+      's/(\n\s+)10\.\*\)(\n\s+_lt_dar_allow_undefined='"'"'\$wl-undefined \$\{wl\}dynamic_lookup'"'"')/${1}*)${2}/g' \
+      configure
+  fi
   ./configure --prefix=$INSTALLROOT \
     "F77=${FC:-gfortran}" \
     "FC=${FC:-gfortran}" \
