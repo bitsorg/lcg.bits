@@ -31,15 +31,31 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   # macOS: arrow_create_merged_static_lib (for the bundled-dependencies static
-  # lib) requires Apple's cctools `libtool` to merge static archives, and
-  # explicitly rejects GNU libtool ("libtool found appears not to be Apple's
-  # libtool"). The bits `libtool` package is Homebrew's GNU libtool (aliased as
-  # `libtool` on PATH), which collides with that name, so force CMAKE_LIBTOOL to
-  # the genuine Apple libtool resolved via xcrun. Linux never hits this branch.
+  # lib) requires Apple's cctools `libtool` and verifies it by matching
+  # "cctools-<ver>" in `libtool -V` output. On recent macOS even the genuine
+  # /usr/bin/libtool fails that regex (the version string format changed), so the
+  # check aborts ("libtool found appears not to be Apple's libtool"). Wrap the
+  # real Apple libtool: answer `-V` with a cctools version (passing the real
+  # output through if it already contains one), and forward every other call
+  # (notably `-static`) to the genuine tool. Linux never hits this branch.
   local _extra=()
   if [ "$(uname)" = Darwin ]; then
     local _applelt; _applelt=$(xcrun -f libtool 2>/dev/null || echo /usr/bin/libtool)
-    _extra+=(-DCMAKE_LIBTOOL="$_applelt")
+    local _wrap="${PWD}/.apple-libtool-wrapper"
+    cat > "$_wrap" <<EOF
+#!/bin/bash
+if [ "\$1" = "-V" ]; then
+  out=\$("$_applelt" -V 2>&1)
+  case "\$out" in
+    *cctools-[0-9]*) printf '%s\n' "\$out" ;;
+    *) echo "Apple Inc. version cctools-1024.0" ;;
+  esac
+  exit 0
+fi
+exec "$_applelt" "\$@"
+EOF
+    chmod +x "$_wrap"
+    _extra+=(-DCMAKE_LIBTOOL="$_wrap")
   fi
   cmake "$SOURCEDIR/cpp" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
