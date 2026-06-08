@@ -30,8 +30,12 @@ function Make() {
   # that live in the other library; macOS's two-level namespace rejects such
   # undefined symbols in a dylib, whereas Linux's flat namespace allows them.
   # Allow flat-namespace lazy resolution (matching the ELF behaviour) on macOS.
+  # -headerpad_max_install_names reserves space in the Mach-O header so bits'
+  # relocate-me.sh can rewrite the (short) LC_ID_DYLIB install name to the long
+  # absolute store path via install_name_tool — without it the unpack/relocate
+  # step fails ("larger updated load commands do not fit").
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup"; fi
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"; fi
   ${FC:-gfortran} $fflags -c hydjet1_8.f -o hydjet.o
   ${FC:-gfortran} $fflags $_shared $_undef -o libhydjet.$_so hydjet.o
   ${AR:-ar} crs libhydjet.a hydjet.o

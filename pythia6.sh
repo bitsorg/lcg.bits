@@ -28,8 +28,11 @@ function Make() {
   # object; macOS's two-level namespace rejects such undefined symbols in a dylib
   # whereas Linux's flat namespace allows them. Allow flat-namespace lazy
   # resolution on macOS (matching the ELF behaviour).
+  # -headerpad_max_install_names reserves Mach-O header space so bits'
+  # relocate-me.sh can rewrite the LC_ID_DYLIB install name to the long store
+  # path via install_name_tool (else the unpack/relocate step fails).
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup"; fi
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"; fi
   ${FC:-gfortran} $fflags -c pythia6.f -o pythia6.o
   ${FC:-gfortran} $fflags $_shared $_undef -o libpythia6.$_so pythia6.o
   ${AR:-ar} crs libpythia6.a pythia6.o

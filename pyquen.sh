@@ -30,8 +30,11 @@ function Make() {
   # object; macOS's two-level namespace rejects such undefined symbols in a dylib
   # whereas Linux's flat namespace allows them. Allow flat-namespace lazy
   # resolution on macOS (matching the ELF behaviour).
+  # -headerpad_max_install_names reserves Mach-O header space so bits'
+  # relocate-me.sh can rewrite the LC_ID_DYLIB install name to the long store
+  # path via install_name_tool (else the unpack/relocate step fails).
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup"; fi
+  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"; fi
   ${FC:-gfortran} -O2 -fPIC -c pyquen.f -o pyquen.o
   ${FC:-gfortran} -O2 $_shared $_undef -o libpyquen.$_so pyquen.o
   ${AR:-ar} crs libpyquen.a pyquen.o
