@@ -39,5 +39,12 @@ function Configure() {
     [ -d "${_hb_root}/lib" ] && \
       export LD_LIBRARY_PATH="${_hb_root}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
   done
-  ./configure --prefix="${INSTALLROOT}" --with-cairo --with-freetype --with-glib
+  # macOS: --with-cairo *requires* cairo, whose Homebrew .pc pulls in transitive
+  # Requires (pixman-1, fontconfig, ...) not all on PKG_CONFIG_PATH, so configure
+  # aborts "cairo support requested but not found". harfbuzz's cairo integration
+  # is only used by the hb-view utility; the shaping library that pango links
+  # does not need it, so build without cairo on macOS. Linux keeps --with-cairo.
+  local _cairo="--with-cairo"
+  [ "$(uname)" = Darwin ] && _cairo="--without-cairo"
+  ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
 }
