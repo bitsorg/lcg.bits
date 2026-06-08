@@ -7,10 +7,6 @@ sources:
 requires:
   - CMake
   - lhapdf
-  # macOS: MCFM's C++ uses OpenMP (qcdloop, CXX_Wrapper, cxx11_random) via
-  # unguarded omp_* calls; Apple clang has no OpenMP runtime, so pull in
-  # Homebrew's keg-only libomp on macOS only (Linux uses gfortran's libgomp).
-  - "libomp:osx"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -22,50 +18,27 @@ license: LicenseRef-MCFM
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# macOS: MCFM is not yet ported to macOS. Its bundled precision-math libraries
+# pin it to GCC — qcdloop needs GCC's quadmath.h / libquadmath / __float128
+# (unsupported by Apple clang on arm64) and qd's configure fails under
+# AppleClang — while its std::-typed CXX_Interface (consumed by Sherpa) wants
+# the stack's AppleClang/libc++, so neither all-clang nor all-GNU is clean.
+# Gate it off on Darwin (empty package via the guards below + MakeModule) so a
+# whole-stack macOS build doesn't fail on it; consumers gate the edge with
+# "mcfm:(?!osx)". Builds normally on Linux. Remove the guards to resume the port.
+##############################
 function Configure() {
-  # macOS: MCFM's CMakeLists only accepts GNU/Intel for C and C++ and aborts on
-  # AppleClang ("Unsupported C++ compiler"). The rest of the stack — and MCFM's
-  # std::-typed CXX_Interface consumers (Sherpa) — use AppleClang/libc++, so we
-  # build C/C++ with AppleClang too. Teach the CMake checks the Clang spelling
-  # (-Xclang -fopenmp), and supply OpenMP from Homebrew's keg-only libomp
-  # (LIBOMP_ROOT, via the libomp:osx dependency), since Apple clang ships none.
-  # The Fortran side keeps gfortran + libgomp. Idempotent (guarded on the marker).
-  local _omp=()
-  if [ "$(uname)" = Darwin ]; then
-    python3 - "${SOURCEDIR}/CMakeLists.txt" <<'PY'
-import sys
-p = sys.argv[1]
-s = open(p).read()
-# (compiler-id language, flags var, message label); the C++ message says "C++".
-blocks = (("CXX", "CMAKE_CXX_FLAGS", "C++"), ("C", "CMAKE_C_FLAGS", "C"))
-if 'MATCHES "Clang"' not in s:
-    for idlang, fv, label in blocks:
-        needle = 'else()\n    message( FATAL_ERROR "Unsupported %s compiler' % label
-        repl = ('elseif (CMAKE_%s_COMPILER_ID MATCHES "Clang")\n'
-                '    set(%s "${%s} -Xclang -fopenmp")\n'
-                'else()\n    message( FATAL_ERROR "Unsupported %s compiler'
-                % (idlang, fv, fv, label))
-        s = s.replace(needle, repl, 1)
-    open(p, "w").write(s)
-PY
-    local _lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"
-    _omp=(
-      -DCMAKE_C_FLAGS="-I${_lomp}/include"
-      -DCMAKE_CXX_FLAGS="-I${_lomp}/include"
-      -DCMAKE_EXE_LINKER_FLAGS="-L${_lomp}/lib -lomp -Wl,-headerpad_max_install_names"
-      -DCMAKE_SHARED_LINKER_FLAGS="-L${_lomp}/lib -lomp -Wl,-headerpad_max_install_names"
-    )
-  fi
+  [ "$(uname)" = Darwin ] && { mkdir -p "${INSTALLROOT}"; return 0; }
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Duse_internal_lhapdf=OFF \
     -Dlhapdf_include_path="${LHAPDF_ROOT}/include" \
-    -Dwith_library=ON \
-    "${_omp[@]}"
+    -Dwith_library=ON
 }
 function Make() {
+  [ "$(uname)" = Darwin ] && return 0
   # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
   # under parallel make, gpl_module.f is compiled before maths_functions.mod has
   # finished being written, giving
@@ -81,7 +54,12 @@ function Make() {
     cmake --build . -- ${CMAKE_OPTIONS} -j1
   fi
 }
+function MakeInstall() {
+  [ "$(uname)" = Darwin ] && return 0
+  cmake --install .
+}
 function PostInstall() {
+  [ "$(uname)" = Darwin ] && return 0
   # MCFM's own cmake install does not expose the library/headers the way
   # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
   # library named 'mcfm' or 'MCFM'). Mirror lcgcmake: install the CXX interface

@@ -18,7 +18,8 @@ requires:
   - ROOT
   - lhapdf
   - libzip
-  - mcfm
+  # mcfm is not yet ported to macOS (qcdloop needs GCC quadmath); gate the edge.
+  - "mcfm:(?!osx)"
   - hepmc3
   - fastjet
 build_requires:
@@ -43,6 +44,9 @@ function Configure() {
   # OpenLoops is gated behind the `openloops` flavour. When it is off the
   # dependency is dropped and OPENLOOPS_ROOT is unset, so disable it in CMake.
   local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
+  # MCFM is gated off on macOS (qcdloop needs GCC quadmath); when its edge is
+  # dropped, MCFM_ROOT is unset, so disable it here.
+  local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -63,8 +67,8 @@ function Configure() {
     -DSHERPA_ENABLE_BINRELOC=ON \
     -DSHERPA_ENABLE_ANALYSIS=ON \
     -DSHERPA_ENABLE_EWSUD=ON \
-    -DSHERPA_ENABLE_MCFM=ON \
-    -DMCFM_ROOT_DIR="${MCFM_ROOT}" \
+    -DSHERPA_ENABLE_MCFM=$_mcfm \
+    ${MCFM_ROOT:+-DMCFM_ROOT_DIR="${MCFM_ROOT}"} \
     -DSHERPA_ENABLE_HEPMC3=ON \
     -DSHERPA_ENABLE_HEPMC3_ROOT=ON
 }

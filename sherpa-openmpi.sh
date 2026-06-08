@@ -19,7 +19,8 @@ requires:
   - ROOT
   - lhapdf
   - libzip
-  - mcfm
+  # mcfm is not yet ported to macOS (qcdloop needs GCC quadmath); gate the edge.
+  - "mcfm:(?!osx)"
   - hepmc3
   - fastjet
 build_requires:
@@ -45,6 +46,9 @@ export OPAL_PREFIX="${OPENMPI_ROOT}"
 function Configure() {
   # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
   # plain sherpa recipe; see sherpa.sh.
+  # MCFM is gated off on macOS (qcdloop needs GCC quadmath); disable it when the
+  # edge is dropped (MCFM_ROOT unset).
+  local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -66,8 +70,8 @@ function Configure() {
     -DSHERPA_ENABLE_BINRELOC=ON \
     -DSHERPA_ENABLE_ANALYSIS=ON \
     -DSHERPA_ENABLE_EWSUD=ON \
-    -DSHERPA_ENABLE_MCFM=ON \
-    -DMCFM_ROOT_DIR="${MCFM_ROOT}" \
+    -DSHERPA_ENABLE_MCFM=$_mcfm \
+    ${MCFM_ROOT:+-DMCFM_ROOT_DIR="${MCFM_ROOT}"} \
     -DSHERPA_ENABLE_HEPMC3=ON \
     -DSHERPA_ENABLE_HEPMC3_ROOT=ON
 }
