@@ -27,18 +27,23 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # EPOS4's bundled legacy Fortran (src/TP/models.f) calls routines such as
-  # SIB_SIGMA_HP with inconsistent argument kinds (REAL(8) vs REAL(4)) across
-  # call sites. gfortran >= 10 rejects this as an error ("Type mismatch between
-  # actual argument ... (REAL(8)/REAL(4))"). EPOS4's CMake adds -std=legacy but
-  # not -fallow-argument-mismatch, which downgrades the mismatch to a warning.
-  # Inject it via CMAKE_Fortran_FLAGS (combined with the project's own
-  # FORTRAN_COMPILE_FLAGS). Harmless where it was already only a warning.
+  # EPOS4's CMake applies its Fortran flag set (FORTRAN_COMPILE_FLAGS: -cpp,
+  # -std=legacy, -mcmodel=large, -fno-automatic, ...) to the TP/UR/HQ targets via
+  # target_compile_options, but NOT to the KW target (src/KW only gets -D__ROOT__
+  # added to the list, never applied). So KW's huge legacy file src/KW/bas.f
+  # compiles WITHOUT -cpp: its `#include "ems.h"` / `#if __TP__` are never
+  # preprocessed, leaving parameters like kollmx undefined ("Automatic object ...
+  # cannot appear in COMMON", "Variable 'kollmx' cannot appear in the
+  # expression"), and without -std=legacy/-mcmodel=large. Inject the full set via
+  # CMAKE_Fortran_FLAGS, which DOES reach every Fortran target (KW included). Also
+  # add -fallow-argument-mismatch for the legacy REAL(8)/REAL(4) call mismatches
+  # (gfortran >= 10 errors on these; the project never adds it). Modules that
+  # already get these flags just receive them twice, which is harmless.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_Fortran_FLAGS="-fallow-argument-mismatch" \
+    -DCMAKE_Fortran_FLAGS="-fallow-argument-mismatch -cpp -std=legacy -fno-automatic -mcmodel=large" \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \
     -DFASTSYS="${FASTJET_ROOT}" \
