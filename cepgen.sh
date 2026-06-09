@@ -29,6 +29,7 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -57,44 +58,23 @@ if pat.search(s):
 else:
     print("cepgen: anonymous-namespace block not found (already patched / upstream changed)")
 PY
-  # macOS: CepGen/CMakeLists.txt globs every CepGen subdirectory into
-  # `core_includes` and passes them as per-subdir -I include paths
-  # (EXT_HEADERS ${core_includes}). On macOS's case-insensitive filesystem those
-  # paths make libc++'s `#include <math.h>` (from <cmath>) resolve to CepGen's
-  # own CepGen/Utils/Math.h instead of the SDK header (likewise String.h/Limits.h
-  # etc.), so every translation unit fails with "<cmath> tried including <math.h>
-  # but didn't find libc++'s <math.h>". All CepGen code includes its headers
-  # fully qualified ("CepGen/Utils/Math.h") via the project-root include
-  # (include_directories(${PROJECT_SOURCE_DIR})), so the per-subdir paths are
-  # redundant. Point EXT_HEADERS at the project root instead (already on the
-  # include path; no header there shadows a standard one). Linux's case-sensitive
-  # FS never had the collision and is unaffected (the patch is Darwin-only).
-  [ "$(uname)" = Darwin ] && perl -i -pe \
-    's/EXT_HEADERS \$\{core_includes\}/EXT_HEADERS \$\{PROJECT_SOURCE_DIR\}/' \
-    "${SOURCEDIR}/CepGen/CMakeLists.txt"
-  # macOS: CepGen links libstdc++fs (EXT_LIBS ... stdc++fs) for std::filesystem.
-  # That separate library only exists for old GCC/libstdc++; Apple clang's libc++
-  # has std::filesystem built in and ships no libstdc++fs, so every wrapper link
-  # fails with "ld: library 'stdc++fs' not found" (EXT_LIBS is PUBLIC, so it also
-  # propagates from libCepGen to all the CepGenAddOns). Drop the stdc++fs token
-  # on Darwin; std::filesystem still resolves from libc++. Linux keeps it.
-  if [ "$(uname)" = Darwin ]; then
-    perl -i -pe 's/ ?\bstdc\+\+fs\b//g' \
-      "${SOURCEDIR}/CepGen/CMakeLists.txt" \
-      "${SOURCEDIR}/CepGenAddOns/MadGraphWrapper/CMakeLists.txt"
-    # macOS: the PhotosTauola wrapper's TauolaFilter.cpp calls the TAUOLA RANMAR
-    # seeding routine rmarin_ (Fortran), but the wrapper's CMakeLists only finds
-    # and links TauolaCxxInterface + TauolaHepMC3 -- not libTauolaFortran, which
-    # defines rmarin_ (and the other Fortran routines). Linux's flat namespace
-    # resolves the undefined symbol at load time; macOS's two-level namespace
-    # rejects it at link ("Undefined symbols: _rmarin_"). Find and link
-    # TauolaFortran too. Guarded so it is injected only once (idempotent on
-    # resumed builds). Linux keeps the upstream link set.
-    _ptw="${SOURCEDIR}/CepGenAddOns/PhotosTauolaWrapper/CMakeLists.txt"
-    if ! grep -q TAUOLAPP_FORTRAN "${_ptw}"; then
-      perl -i -pe 's{^(find_library\(TAUOLAPP_HEPMC3 TauolaHepMC3 .*)$}{$1\nfind_library(TAUOLAPP_FORTRAN TauolaFortran HINTS \$ENV{TAUOLAPP_DIR} \${TAUOLAPP_DIR} PATH_SUFFIXES lib)}' "${_ptw}"
-      perl -i -pe 's{list\(APPEND EXT_LIBS \$\{TAUOLAPP\} \$\{TAUOLAPP_HEPMC3\}\)}{list(APPEND EXT_LIBS \${TAUOLAPP} \${TAUOLAPP_HEPMC3} \${TAUOLAPP_FORTRAN})}' "${_ptw}"
-    fi
+  # macOS: CepGen globs every subdir onto the include path; on a case-insensitive
+  # FS that makes libc++'s <math.h> resolve to CepGen/Utils/Math.h. All CepGen
+  # code includes its headers fully qualified, so point EXT_HEADERS at the project
+  # root. Also drop -lstdc++fs (Apple libc++ has std::filesystem built in), and
+  # link libTauolaFortran into the PhotosTauola wrapper (it defines rmarin_, which
+  # the wrapper otherwise leaves undefined).
+  if bits_is_macos; then
+    local _ptw="${SOURCEDIR}/CepGenAddOns/PhotosTauolaWrapper/CMakeLists.txt"
+    bits_file_replace "${SOURCEDIR}/CepGen/CMakeLists.txt" \
+      'EXT_HEADERS ${core_includes}' 'EXT_HEADERS ${PROJECT_SOURCE_DIR}'
+    bits_strip_token "${SOURCEDIR}/CepGen/CMakeLists.txt" \
+      "${SOURCEDIR}/CepGenAddOns/MadGraphWrapper/CMakeLists.txt" stdc++fs
+    bits_file_insert_after "${_ptw}" '^find_library\(TAUOLAPP_HEPMC3 ' \
+      'find_library(TAUOLAPP_FORTRAN TauolaFortran HINTS $ENV{TAUOLAPP_DIR} ${TAUOLAPP_DIR} PATH_SUFFIXES lib)'
+    bits_file_replace "${_ptw}" \
+      'list(APPEND EXT_LIBS ${TAUOLAPP} ${TAUOLAPP_HEPMC3})' \
+      'list(APPEND EXT_LIBS ${TAUOLAPP} ${TAUOLAPP_HEPMC3} ${TAUOLAPP_FORTRAN})'
   fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
