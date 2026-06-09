@@ -28,17 +28,22 @@ function Configure() {
   # Tests and the build-time PDF download are disabled (the latter needs network
   # and is only required to run APFEL's test suite).
   export SWIG="${SWIG_ROOT}/bin/swig"
-  export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
-  # macOS: CMake's find_package(SWIG) ignores the SWIG/SWIG_LIB env vars and
-  # searches PATH, then fails to derive SWIG_DIR ("Could NOT find SWIG (missing:
-  # SWIG_DIR)"). Point it at the bits swig executable and its library directory
-  # explicitly. Darwin-gated so Linux's (working) PATH-based detection is
-  # untouched.
   local _swig=()
-  [ "$(uname)" = Darwin ] && _swig=(
-    -DSWIG_EXECUTABLE="${SWIG_ROOT}/bin/swig"
-    -DSWIG_DIR="$(${SWIG_ROOT}/bin/swig -swiglib)"
-  )
+  if [ "$(uname)" = Darwin ]; then
+    # macOS: `swig -swiglib` reports swig's build-time INSTALLROOT path, which no
+    # longer exists after relocation, so both swig itself and CMake's
+    # find_package(SWIG) get an invalid SWIG_LIB/SWIG_DIR ("Could NOT find SWIG
+    # (missing: SWIG_DIR)"). Use the relocated swiglib under SWIG_ROOT instead,
+    # and hand CMake the executable + dir explicitly (find_package(SWIG) ignores
+    # the env vars). Linux keeps its working `swig -swiglib` + PATH detection.
+    local _swigdir
+    _swigdir=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
+    _swigdir=${_swigdir%/}
+    export SWIG_LIB="${_swigdir}"
+    _swig=(-DSWIG_EXECUTABLE="${SWIG_ROOT}/bin/swig" -DSWIG_DIR="${_swigdir}")
+  else
+    export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
