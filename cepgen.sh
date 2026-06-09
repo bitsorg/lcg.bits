@@ -72,6 +72,17 @@ PY
   [ "$(uname)" = Darwin ] && perl -i -pe \
     's/EXT_HEADERS \$\{core_includes\}/EXT_HEADERS \$\{PROJECT_SOURCE_DIR\}/' \
     "${SOURCEDIR}/CepGen/CMakeLists.txt"
+  # macOS: CepGen links libstdc++fs (EXT_LIBS ... stdc++fs) for std::filesystem.
+  # That separate library only exists for old GCC/libstdc++; Apple clang's libc++
+  # has std::filesystem built in and ships no libstdc++fs, so every wrapper link
+  # fails with "ld: library 'stdc++fs' not found" (EXT_LIBS is PUBLIC, so it also
+  # propagates from libCepGen to all the CepGenAddOns). Drop the stdc++fs token
+  # on Darwin; std::filesystem still resolves from libc++. Linux keeps it.
+  if [ "$(uname)" = Darwin ]; then
+    perl -i -pe 's/ ?\bstdc\+\+fs\b//g' \
+      "${SOURCEDIR}/CepGen/CMakeLists.txt" \
+      "${SOURCEDIR}/CepGenAddOns/MadGraphWrapper/CMakeLists.txt"
+  fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
