@@ -27,10 +27,18 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # EPOS4's bundled legacy Fortran (src/TP/models.f) calls routines such as
+  # SIB_SIGMA_HP with inconsistent argument kinds (REAL(8) vs REAL(4)) across
+  # call sites. gfortran >= 10 rejects this as an error ("Type mismatch between
+  # actual argument ... (REAL(8)/REAL(4))"). EPOS4's CMake adds -std=legacy but
+  # not -fallow-argument-mismatch, which downgrades the mismatch to a warning.
+  # Inject it via CMAKE_Fortran_FLAGS (combined with the project's own
+  # FORTRAN_COMPILE_FLAGS). Harmless where it was already only a warning.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_Fortran_FLAGS="-fallow-argument-mismatch" \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \
     -DFASTSYS="${FASTJET_ROOT}" \
