@@ -25,28 +25,22 @@ license: GPL-3.0-or-later
 ##############################
 . $(bits-include AutoToolsRecipe)
 . $(bits-include BitsPython)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  # Put the bits Cython on PATH/PYTHONPATH so configure rebuilds the pyext C++
-  # from the .pyx (the shipped *.cpp use CPython internals removed in 3.12/3.13).
+  # bits Cython on PATH/PYTHONPATH so configure rebuilds the pyext C++ from the
+  # .pyx (the shipped *.cpp use CPython internals removed in 3.12/3.13).
   bits_enable_cython
   # Remove every generated pyext source so make re-runs Cython for all of them
   # (configure's "force rebuild" only touches core.pyx, leaving the rest stale).
   rm -f pyext/yoda/*.cpp pyext/yoda/*.h
-  # macOS: the recipe's own build succeeds (libYODA.dylib + core.so/util.so),
-  # but bits' post-build relocation then fails: it runs
-  # `install_name_tool -id <long final path>` on the Python extensions, and
-  # YODA links those via build.py's single `g++ -shared` command with no Mach-O
-  # header padding, so the longer install name overflows the load commands
-  # ("doesn't fit"). bits reports BUILD FAILED even though the recipe log ends in
-  # `return 0`. Reserve the header pad via CXXFLAGS, which flows through
-  # PYEXT_CXXFLAGS into the extension link. (-Wl,... is harmless at compile and
-  # is needed at the .so link.) -Wno-register is still required for the
-  # Cython-generated C++. Linux uses GNU ld and must not get this macOS flag.
-  local _cxxflags=-Wno-register
-  [ "$(uname)" = Darwin ] && _cxxflags="-Wno-register -Wl,-headerpad_max_install_names"
+  # macOS: the pyext .so are linked via build.py's g++ -shared with no header
+  # pad, so bits' relocation install_name_tool overflows the load commands and
+  # fails silently. Pass the pad via CXXFLAGS (flows into PYEXT_CXXFLAGS).
+  # -Wno-register is needed for the Cython-generated C++.
+  local _cxxflags="-Wno-register $(bits_macos_relocatable_ldflags)"
   # Flags mirror lcgcmake's YODA >= 2.1.0 build.
   ./configure --prefix=$INSTALLROOT \
     CXXFLAGS="$_cxxflags" \
