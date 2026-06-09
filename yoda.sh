@@ -29,11 +29,6 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  # macOS: gated off on request (builds were failing on the clang-21 / macOS-26
-  # SDK toolchain). Produce an empty package; remove the guards here (and in
-  # Make/MakeInstall) to resume. NOTE: yoda is required by rivet, professor and
-  # fastnlo_toolkit, which will not build against an empty yoda on macOS.
-  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
   # Put the bits Cython on PATH/PYTHONPATH so configure rebuilds the pyext C++
   # from the .pyx (the shipped *.cpp use CPython internals removed in 3.12/3.13).
   bits_enable_cython
@@ -47,12 +42,4 @@ function Configure() {
     --with-hdf5="${HDF5_ROOT}/bin/h5cc" \
     --with-highfive="${HIGHFIVE_ROOT}" \
     PYTHON="${PYTHON_ROOT:+${PYTHON_ROOT}/bin/python3}"
-}
-function Make() {
-  [ "$(uname)" = Darwin ] && return 0
-  make ${JOBS:+-j $JOBS}
-}
-function MakeInstall() {
-  [ "$(uname)" = Darwin ] && return 0
-  make install
 }
