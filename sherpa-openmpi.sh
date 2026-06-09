@@ -31,21 +31,14 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# SWIG/SWIG_LIB for the Python bindings; bits_swig_lib returns the relocated
+# swiglib on macOS (see sherpa.sh).
 export SWIG="${SWIG_ROOT}/bin/swig"
-# macOS: `swig -swiglib` reports swig's build-time INSTALLROOT path, which no
-# longer exists after relocation, so swig cannot find its library files at the
-# final wrapper-generation stage ("Unable to find 'swig.swg' / 'python.swg' /
-# 'std_vector.i'"). Use the relocated swiglib under SWIG_ROOT instead. Linux
-# keeps its working `swig -swiglib`. (Same fix as apfel/sherpa.)
-if [ "$(uname)" = Darwin ]; then
-  _swigdir=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
-  export SWIG_LIB="${_swigdir%/}"
-else
-  export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
-fi
+export SWIG_LIB="$(bits_swig_lib)"
 # Put OpenMPI's compilers on PATH so Sherpa's find_package(MPI) locates mpicxx.
 # PATH alone isn't enough: FindMPI also runs a compile+link test (MPI_*_WORKS),
 # and the relocated mpicc/mpicxx/mpifort wrappers can't find their plugins/config

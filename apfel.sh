@@ -17,33 +17,19 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --python"
 ##############################
 function Configure() {
-  # APFEL >= 3.1.0 switched from autotools to CMake (the old AutoTools recipe
-  # ran ./configure, which no longer exists -> "./configure: No such file or
-  # directory"). Mirror lcgcmake LCG_109: CMake with the Python (SWIG) wrapper
-  # and LHAPDF enabled. SWIG/SWIG_LIB must be visible for the python bindings.
-  # Tests and the build-time PDF download are disabled (the latter needs network
-  # and is only required to run APFEL's test suite).
+  # APFEL >= 3.1.0 builds with CMake (mirror lcgcmake LCG_109): Python (SWIG)
+  # wrapper + LHAPDF on, tests and the network PDF download off.
   export SWIG="${SWIG_ROOT}/bin/swig"
+  export SWIG_LIB="$(bits_swig_lib)"
+  # macOS: find_package(SWIG) ignores the env vars and swig's compiled-in dir is
+  # the gone build INSTALLROOT, so pass the relocated SWIG_DIR explicitly.
   local _swig=()
-  if [ "$(uname)" = Darwin ]; then
-    # macOS: `swig -swiglib` reports swig's build-time INSTALLROOT path, which no
-    # longer exists after relocation, so both swig itself and CMake's
-    # find_package(SWIG) get an invalid SWIG_LIB/SWIG_DIR ("Could NOT find SWIG
-    # (missing: SWIG_DIR)"). Use the relocated swiglib under SWIG_ROOT instead,
-    # and hand CMake the executable + dir explicitly (find_package(SWIG) ignores
-    # the env vars). Linux keeps its working `swig -swiglib` + PATH detection.
-    local _swigdir
-    _swigdir=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
-    _swigdir=${_swigdir%/}
-    export SWIG_LIB="${_swigdir}"
-    _swig=(-DSWIG_EXECUTABLE="${SWIG_ROOT}/bin/swig" -DSWIG_DIR="${_swigdir}")
-  else
-    export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
-  fi
+  bits_is_macos && _swig=(-DSWIG_EXECUTABLE="${SWIG}" -DSWIG_DIR="${SWIG_LIB}")
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
