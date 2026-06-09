@@ -39,8 +39,18 @@ function Make() {
   # F77FLAGS is "-fPIC", which we preserve.
   # gfortran's shared runtime is libgfortran.dylib on macOS, .so on Linux.
   _libgf=libgfortran.so; [ "$(uname)" = Darwin ] && _libgf=libgfortran.dylib
+  # macOS: the Makefile detects the Fortran compiler by globbing a hardcoded
+  # BINDIRS (. /bin /usr/bin /usr/local/bin) for `gfortran`, but Homebrew's
+  # gfortran lives in /opt/homebrew/bin, so detection fails ("Fortran compiler
+  # not found"). Prepend gfortran's actual directory to BINDIRS. On Linux
+  # gfortran is in /usr/bin (already covered), so this is Darwin-only.
+  local _bindirs=()
+  if [ "$(uname)" = Darwin ]; then
+    local _fcdir; _fcdir=$(dirname "$(command -v ${FC:-gfortran})")
+    _bindirs=(BINDIRS="${_fcdir} . /bin /usr/bin /usr/local/bin")
+  fi
   PATH="${ROOT_ROOT:+$ROOT_ROOT/bin:}$PATH" \
-    make ${JOBS:+-j $JOBS} \
+    make ${JOBS:+-j $JOBS} "${_bindirs[@]}" \
     F77LIBSO="$(${FC:-gfortran} -print-file-name=${_libgf})" \
     F77FLAGS="-fPIC -std=legacy -fallow-argument-mismatch"
 }
