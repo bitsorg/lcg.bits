@@ -25,6 +25,15 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# macOS: Geneva's Python extension is compiled by setup.py (build_ext), which
+# invokes Apple clang WITHOUT -isysroot — unlike the CMake build, which adds it
+# automatically. Without a sysroot, clang can't find the macOS SDK's libc++
+# headers ("GenevaWrapper.hpp: fatal error: 'string' file not found"). Export
+# SDKROOT (which clang uses as the sysroot when -isysroot is absent) at recipe
+# scope so it is active for the Make step where the extension is built. Linux
+# leaves it unset.
+[ "$(uname)" = Darwin ] && export SDKROOT="$(xcrun --show-sdk-path 2>/dev/null)"
+##############################
 function Configure() {
   # OpenLoops is gated behind the `openloops` flavour. When off, OPENLOOPS_ROOT
   # is unset; disable it in CMake and drop the openloops_ROOT hint.
