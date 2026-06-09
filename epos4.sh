@@ -27,6 +27,21 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: gated off. EPOS4's static COMMON blocks total more than 4 GB; on
+  # x86_64 that is addressed with -mcmodel=large, but arm64 gfortran has not
+  # implemented the large code model ("f951: sorry, unimplemented: code model
+  # 'large'"), so the default (small) model is the only option and its ADRP
+  # ±4 GB reach cannot span the COMMON section: the final link of libepos.dylib
+  # /Xepos fails with "ld: fixup error (arm64_was_adrp_ldr_got_elide_got) ...
+  # ADRP out of range ... ('_files_')". The GNU-ld -Wl,--no-relax that suppresses
+  # the equivalent GOT-elision has no Apple-ld counterpart. No toolchain flag
+  # makes >4 GB of static Fortran COMMON addressable on Apple Silicon today.
+  # EPOS4 is a leaf package (no dependents), so produce an empty package on
+  # Darwin; remove the guards here and in Make/MakeInstall/PostInstall to resume
+  # the port (e.g. once arm64 gfortran gains a large code model, or after
+  # shrinking COMMON). Everything below builds cleanly up to that final link.
+  # Linux is unchanged.
+  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
   # EPOS4's CMake applies its Fortran flag set (FORTRAN_COMPILE_FLAGS: -cpp,
   # -std=legacy, -mcmodel=large, -fno-automatic, ...) to the TP/UR/HQ targets via
   # target_compile_options, but NOT to the KW target (src/KW only gets -D__ROOT__
@@ -68,7 +83,19 @@ function Configure() {
     -DFASTSYS="${FASTJET_ROOT}" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
+function Make() {
+  # macOS: gated off (see Configure).
+  [ "$(uname)" = Darwin ] && return 0
+  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
+}
+function MakeInstall() {
+  # macOS: gated off (see Configure).
+  [ "$(uname)" = Darwin ] && return 0
+  cmake --install .
+}
 function PostInstall() {
+  # macOS: gated off (see Configure) - no build artefacts or runtime env to set.
+  [ "$(uname)" = Darwin ] && return 0
   # Copy data files (excluding source and build artefacts)
   rsync -a \
     --exclude='**/CMakeModules' \
