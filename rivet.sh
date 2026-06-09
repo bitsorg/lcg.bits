@@ -34,17 +34,21 @@ bits_enable_cython
 export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 ##############################
-# macOS: fastjet-config --libs reports -lemutls_w -lheapt_w (libgcc's emulated-
-# TLS and heap-trace helper archives, dragged in by fastjet's gfortran Fortran
-# plugins). Those archives live in Homebrew gcc's internal target lib dir, which
-# is not on the linker's default search path, so Rivet's FastJet configure test
-# (and the later link) fail with "ld: library 'emutls_w' not found". Add that
-# gcc lib dir to LDFLAGS at recipe scope (reaches both configure and make) so
-# -lemutls_w/-lheapt_w resolve to the real archives. Linux is unaffected (these
-# libs are already on its default search path).
+# macOS: fastjet-config --libs reports the gcc runtime libs -lemutls_w -lheapt_w
+# -lgfortran -lquadmath (dragged in by fastjet's gfortran Fortran plugins). The
+# compiler here is Apple clang (g++ is a clang symlink), which does not know any
+# of Homebrew gcc's lib dirs, so Rivet's FastJet configure test (and the later
+# link) fail with "ld: library 'emutls_w' not found" / "'gfortran' not found".
+# These libs live in two gcc dirs: the static helper archives (libemutls_w.a,
+# libheapt_w.a, libgcc.a) under the internal target dir, and the shared
+# libgfortran/libquadmath dylibs one level up under lib/gcc/current/. Add both to
+# LDFLAGS at recipe scope (reaches configure and make) so all resolve. Linux is
+# unaffected (its real gcc already has these on the default search path).
 if [ "$(uname)" = Darwin ]; then
   _gcclib=$(dirname "$(${FC:-gfortran} -print-libgcc-file-name 2>/dev/null)" 2>/dev/null)
+  _fclib=$(dirname "$(${FC:-gfortran} -print-file-name=libgfortran.dylib 2>/dev/null)" 2>/dev/null)
   [ -n "$_gcclib" ] && [ -d "$_gcclib" ] && export LDFLAGS="-L$_gcclib ${LDFLAGS:-}"
+  [ -n "$_fclib" ] && [ -d "$_fclib" ] && export LDFLAGS="-L$_fclib ${LDFLAGS:-}"
 fi
 ##############################
 function Configure() {
