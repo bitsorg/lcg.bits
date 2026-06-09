@@ -32,6 +32,16 @@ function Make() {
   if grep -q '^class TString;' base/include/UEvent.h 2>/dev/null; then
     perl -i -pe 's{^class TString;}{#include "TString.h"}' base/include/UEvent.h
   fi
+  # macOS: libTasks.so references URun/UTask from libUniGen but the Makefile does
+  # not link -lUniGen (those symbols are meant to resolve at load time, the way
+  # ROOT loads the libraries together). Linux's flat namespace allows undefined
+  # symbols in a shared library; macOS's two-level namespace rejects them at link
+  # ("symbol(s) not found for architecture arm64"). Append -undefined
+  # dynamic_lookup to the shared LDFLAGS (config/Makearch) so they resolve at
+  # load, matching Linux. Harmless for libUniGen (self-contained). Idempotent.
+  if [ "$(uname)" = Darwin ]; then
+    perl -i -pe 's{^(LDFLAGS=.*)$}{$1 -Wl,-undefined,dynamic_lookup} unless /dynamic_lookup/' config/Makearch
+  fi
   make ${JOBS:+-j $JOBS}
   make ${JOBS:+-j $JOBS} DESTDIR=$INSTALLROOT install
 }
