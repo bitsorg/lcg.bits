@@ -19,6 +19,7 @@ license: LGPL-2.1-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include MesonRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib --pkgconfig"
 MESON_EXTRA_OPTIONS="-Dintrospection=disabled"
@@ -28,5 +29,5 @@ MESON_EXTRA_OPTIONS="-Dintrospection=disabled"
 # DocBook XSL over the network ("failed with status 5"). Disable doc generation
 # for pango and the harfbuzz subproject. Darwin-only so the Linux build (which
 # finds system harfbuzz and builds no subproject) is unchanged.
-[ "$(uname)" = Darwin ] && MESON_EXTRA_OPTIONS="${MESON_EXTRA_OPTIONS} -Dgtk_doc=false -Dharfbuzz:docs=disabled"
+bits_is_macos && MESON_EXTRA_OPTIONS="${MESON_EXTRA_OPTIONS} -Dgtk_doc=false -Dharfbuzz:docs=disabled"
 ##############################

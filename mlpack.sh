@@ -17,6 +17,7 @@ license: BSD-3-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -27,7 +28,7 @@ function Configure() {
   # the third-party header-only cereal code compiles. Linux's GCC has no such
   # warning, so the flag is macOS-only and the build there is unchanged.
   local _cxxflags=()
-  [ "$(uname)" = Darwin ] && _cxxflags+=(-DCMAKE_CXX_FLAGS="-Wno-missing-template-arg-list-after-template-kw")
+  bits_is_macos && _cxxflags+=(-DCMAKE_CXX_FLAGS="-Wno-missing-template-arg-list-after-template-kw")
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

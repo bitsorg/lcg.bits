@@ -15,6 +15,7 @@ license: LicenseRef-SysCalc
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -38,7 +39,7 @@ function Make() {
   # 'gfortran' not found"). On Linux the bits GCC-Toolchain puts it on the
   # default link path; on macOS gfortran comes from Homebrew gcc, so ask the
   # Fortran compiler for libgfortran's directory and add -L for it.
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     local _fc="${FC:-gfortran}"
     local _gfpath; _gfpath=$("$_fc" -print-file-name=libgfortran.dylib 2>/dev/null)
     case "$_gfpath" in

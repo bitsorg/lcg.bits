@@ -14,6 +14,7 @@ license: LicenseRef-gnuplot
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -34,7 +35,7 @@ function Configure() {
   # gnuplot's builtin line-editing on macOS rather than fighting editline vs the
   # keg-only Homebrew GNU readline. Linux keeps GNU readline (which has rl_getc).
   _readline=""
-  [ "$(uname)" = Darwin ] && _readline="--with-readline=builtin"
+  bits_is_macos && _readline="--with-readline=builtin"
   ./configure --prefix="$INSTALLROOT" \
     --without-qt \
     ${_readline} \

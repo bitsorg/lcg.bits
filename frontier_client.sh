@@ -17,6 +17,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -27,7 +28,7 @@ function Make() {
   # Homebrew's keg-only openssl@3. On Linux OPENSSL_DIR stays unset and the build
   # picks up the system OpenSSL exactly as before (byte-identical).
   local openssl_dir="" make_extra=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     openssl_dir=$(brew --prefix openssl@3 2>/dev/null) || openssl_dir=/opt/homebrew/opt/openssl@3
     if [ ! -f "$openssl_dir/include/openssl/md5.h" ]; then
       echo "Frontier_Client: Homebrew openssl@3 not found at $openssl_dir." >&2

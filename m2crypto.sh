@@ -18,6 +18,7 @@ license: BSD-2-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--python"
 ##############################
@@ -33,7 +34,7 @@ function MakeInstall() {
   # the actual build_ext include/lib) and add its include/lib to CFLAGS/LDFLAGS
   # (for the preprocess probe and the link). Linux uses system OpenSSL on the
   # default paths, so this branch never runs there.
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     _ossl=$(brew --prefix openssl@3 2>/dev/null) || _ossl=/opt/homebrew/opt/openssl@3
     export OPENSSL_PATH="$_ossl"
     export CFLAGS="-I${_ossl}/include${CFLAGS:+ ${CFLAGS}}"

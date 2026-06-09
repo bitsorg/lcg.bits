@@ -14,6 +14,7 @@ license: BSD-3-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -24,7 +25,7 @@ function Configure() {
   # registry is not needed (bits consumers find gflags via CMAKE_PREFIX_PATH),
   # so disable both registry registrations. No-op on Linux (Darwin-gated).
   _gflags_noreg=""
-  [ "$(uname)" = Darwin ] && _gflags_noreg="-DREGISTER_INSTALL_PREFIX=OFF -DREGISTER_BUILD_PREFIX=OFF"
+  bits_is_macos && _gflags_noreg="-DREGISTER_INSTALL_PREFIX=OFF -DREGISTER_BUILD_PREFIX=OFF"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

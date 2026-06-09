@@ -22,6 +22,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -32,7 +33,7 @@ MODULE_OPTIONS="--bin --lib"
 # SDKROOT (which clang uses as the sysroot when -isysroot is absent) at recipe
 # scope so it is active for the Make step where the extension is built. Linux
 # leaves it unset.
-[ "$(uname)" = Darwin ] && export SDKROOT="$(xcrun --show-sdk-path 2>/dev/null)"
+bits_is_macos && export SDKROOT="$(xcrun --show-sdk-path 2>/dev/null)"
 ##############################
 function Configure() {
   # OpenLoops is gated behind the `openloops` flavour. When off, OPENLOOPS_ROOT

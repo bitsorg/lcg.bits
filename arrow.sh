@@ -26,6 +26,7 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -39,7 +40,7 @@ function Configure() {
   # output through if it already contains one), and forward every other call
   # (notably `-static`) to the genuine tool. Linux never hits this branch.
   local _extra=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     local _applelt; _applelt=$(xcrun -f libtool 2>/dev/null || echo /usr/bin/libtool)
     local _wrap="${PWD}/.apple-libtool-wrapper"
     cat > "$_wrap" <<EOF

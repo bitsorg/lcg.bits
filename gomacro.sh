@@ -17,6 +17,7 @@ license: MPL-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -24,7 +25,7 @@ function Configure() { :; }
 function Make() {
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/cosmos72/gomacro/
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/cosmos72/gomacro/
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     # macOS Go is the modern Homebrew toolchain with GO111MODULE=off (set by the
     # go recipe), so `go install` runs in GOPATH mode and looks under the default
     # ~/go instead of this package — failing to resolve the self-import

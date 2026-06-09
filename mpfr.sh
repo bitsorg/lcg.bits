@@ -14,6 +14,7 @@ license: LGPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --inc --pkgconfig"
 ##############################
@@ -24,6 +25,6 @@ function Configure() {
   # configure fails with "gmp.h can't be found". Point it at the bits gmp
   # explicitly. No-op on Linux, where gmp.h is already found.
   _with_gmp=""
-  [ "$(uname)" = Darwin ] && _with_gmp="--with-gmp=${GMP_ROOT}"
+  bits_is_macos && _with_gmp="--with-gmp=${GMP_ROOT}"
   ./configure --prefix="$INSTALLROOT" ${_with_gmp}
 }

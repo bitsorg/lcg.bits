@@ -24,6 +24,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
@@ -33,6 +34,6 @@ MODULE_OPTIONS="--bin --python"
 # file is Bazel-only and unused by the setuptools build, so remove it on macOS.
 # Configure runs after Prepare (rsync into cwd) and before the pip install.
 function Configure() {
-  [ "$(uname)" = Darwin ] && rm -f BUILD
+  bits_is_macos && rm -f BUILD
   true
 }

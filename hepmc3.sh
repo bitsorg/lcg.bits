@@ -21,6 +21,7 @@ license: LGPL-2.1-only
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
@@ -35,7 +36,7 @@ function Configure() {
   # the bindings build for the bits Python and install into INSTALLROOT. Gated to
   # Darwin so the (unchanged) Linux path is byte-identical.
   local _py=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     # NB: the bits env var is PYTHON_ROOT (uppercase); the original
     # ${Python_ROOT} references above are a typo and expand empty.
     local _pyexe="${PYTHON_ROOT}/bin/python3"

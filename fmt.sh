@@ -14,6 +14,7 @@ license: MIT
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake --root-inc"
 ##############################
@@ -24,7 +25,7 @@ function Configure() {
   # library itself is fine; only the tests break, and bits does not need them.
   # Disable the test build on Darwin. (Linux still builds the tests as before.)
   _fmt_test=""
-  [ "$(uname)" = Darwin ] && _fmt_test="-DFMT_TEST=OFF"
+  bits_is_macos && _fmt_test="-DFMT_TEST=OFF"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

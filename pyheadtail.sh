@@ -19,6 +19,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include PythonPipRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
@@ -29,7 +30,7 @@ MODULE_OPTIONS="--bin --python"
 # on link, then execs the real clang. Set CC/CXX so pip's isolated build uses it.
 # LIBOMP_ROOT comes from the libomp:osx dependency. Linux uses GCC (native
 # -fopenmp) and never enters this branch.
-if [ "$(uname)" = Darwin ]; then
+if bits_is_macos; then
   _ph_lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"
   _ph_wrap="$(mktemp -d)"
   for _ph_pair in "cc:/usr/bin/clang" "c++:/usr/bin/clang++"; do

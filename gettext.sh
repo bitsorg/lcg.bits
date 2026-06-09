@@ -25,6 +25,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -42,7 +43,7 @@ function Configure() {
   # the cache var to accept it. (The proper alternative is GNU libiconv.) No
   # effect on Linux, where glibc iconv passes the probe.
   _iconv_works=""
-  [ "$(uname)" = Darwin ] && _iconv_works="am_cv_func_iconv_works=yes"
+  bits_is_macos && _iconv_works="am_cv_func_iconv_works=yes"
   ./configure --prefix="$INSTALLROOT" \
     ${_iconv_works} \
     CFLAGS="${CFLAGS} -std=gnu17" \

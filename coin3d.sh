@@ -14,6 +14,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -24,6 +25,6 @@ function Configure() {
   # --disable-framework selects the UNIX-style install (normal lib/include under
   # the prefix), which is what a relocatable bits package needs. No-op on Linux.
   _fw=""
-  [ "$(uname)" = Darwin ] && _fw="--disable-framework"
+  bits_is_macos && _fw="--disable-framework"
   ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no ${_fw}
 }

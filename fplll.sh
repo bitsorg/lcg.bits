@@ -15,6 +15,7 @@ license: LGPL-2.1-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -28,7 +29,7 @@ function Configure() {
     # not there. Point it at GMP_ROOT explicitly. On Linux the bits dep env puts
     # GMP on the default paths, so the line stays unchanged.
     local _gmp=""
-    [ "$(uname)" = Darwin ] && _gmp="--with-gmp=${GMP_ROOT}"
+    bits_is_macos && _gmp="--with-gmp=${GMP_ROOT}"
     CXXFLAGS="-fPIC -g -O2 -std=c++17" \
     ./configure --prefix=$INSTALLROOT --with-mpfr=${MPFR_ROOT} ${_gmp}
 }

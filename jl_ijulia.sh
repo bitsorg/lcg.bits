@@ -12,6 +12,7 @@ license: MIT
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS=""
 ##############################
@@ -25,7 +26,7 @@ function Make() {
   # the kernelspec is written inside the package; PostInstall adds JUPYTER_PATH
   # to the module so Jupyter finds it at runtime. (Linux writes to the builder
   # home as before, so its behaviour is unchanged.)
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     export JUPYTER_DATA_DIR="$INSTALLROOT/share/jupyter"
     mkdir -p "$JUPYTER_DATA_DIR"
   fi
@@ -46,5 +47,5 @@ function PostInstall() {
   echo 'prepend-path JULIA_DEPOT_PATH $PREFIX' >> "$MODULEFILE"
   # macOS: the kernelspec lives under the package (see Make()); expose it so
   # Jupyter discovers the Julia kernel at runtime.
-  [ "$(uname)" = Darwin ] && echo 'prepend-path JUPYTER_PATH $PREFIX/share/jupyter' >> "$MODULEFILE"
+  bits_is_macos && echo 'prepend-path JUPYTER_PATH $PREFIX/share/jupyter' >> "$MODULEFILE"
 }

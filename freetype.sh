@@ -12,7 +12,7 @@ prefer_system: ".*"
 homebrew_formula: freetype
 prefer_system_check: |
   #!/bin/bash
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     # Install on demand with `bits --brew`; otherwise HomebrewRecipe reports the
     # missing formula at build time.
     if [ "${BITS_BREW:-}" = "1" ] && ! brew --prefix freetype >/dev/null 2>&1; then
@@ -42,6 +42,7 @@ license: FTL OR GPL-2.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################

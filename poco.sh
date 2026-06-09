@@ -19,6 +19,7 @@ license: BSL-1.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -26,7 +27,7 @@ function Configure() {
   # The unbundled utf8proc library has a platform-specific suffix: .so on Linux,
   # .dylib on macOS. Hardcoding .so makes make fail on macOS ("No rule to make
   # target .../libutf8proc.so").
-  local shlib=so; [ "$(uname)" = Darwin ] && shlib=dylib
+  local shlib=so; bits_is_macos && shlib=dylib
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

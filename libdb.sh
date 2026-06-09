@@ -12,6 +12,7 @@ license: AGPL-3.0-only
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -25,7 +26,7 @@ function Configure() {
   # (it never calls the stdlib one), so renaming them all is complete and safe.
   # Linux/libstdc++ does NOT pull <atomic> into that TU, so it is unaffected and
   # this stays Darwin-gated.
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     for _f in $(grep -rl atomic_init src 2>/dev/null); do
       perl -i -pe 's/\batomic_init\b/__db_atomic_init/g' "$_f"
     done

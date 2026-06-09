@@ -45,6 +45,7 @@ prepend_path:
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake --pylib"
 ##############################
@@ -70,7 +71,7 @@ function Prepare() {
   # key function (~InterpreterCallbacks) lives there — exactly as cling already
   # does for Exception.cpp. Darwin-only; guarded; a no-op if the line is absent.
   _cling_cm="${SOURCEDIR}/interpreter/cling/lib/Interpreter/CMakeLists.txt"
-  if [ "$(uname)" = Darwin ] && [ -f "${_cling_cm}" ] \
+  if bits_is_macos && [ -f "${_cling_cm}" ] \
      && ! grep -q 'bits: InterpreterCallbacks rtti' "${_cling_cm}"; then
     perl -i -pe 's{^(\s*set_source_files_properties\(Exception\.cpp COMPILE_FLAGS.*\))}{$1\n  # bits: InterpreterCallbacks rtti (Clang -fno-rtti omits typeinfo; GCC keeps it)\n  set_source_files_properties(InterpreterCallbacks.cpp COMPILE_FLAGS "-frtti")}' "${_cling_cm}"
   fi

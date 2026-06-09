@@ -19,6 +19,7 @@ license: MIT
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
@@ -40,7 +41,7 @@ function Configure() {
       export LD_LIBRARY_PATH="${_hb_root}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
   done
   local _cairo="--with-cairo"
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     # macOS: --with-cairo *requires* cairo, whose Homebrew .pc pulls in transitive
     # Requires (pixman-1, fontconfig, ...) not all on PKG_CONFIG_PATH. harfbuzz's
     # cairo integration is only used by the hb-view utility; the shaping library

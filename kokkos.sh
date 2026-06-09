@@ -15,6 +15,7 @@ license: BSD-3-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -24,7 +25,7 @@ function Configure() {
   # backend instead — real host parallelism via std::thread, no libomp needed.
   # Linux keeps the OpenMP backend (libgomp ships with gcc).
   _kokkos_host="-DKokkos_ENABLE_OPENMP=ON"
-  [ "$(uname)" = Darwin ] && _kokkos_host="-DKokkos_ENABLE_OPENMP=OFF -DKokkos_ENABLE_THREADS=ON"
+  bits_is_macos && _kokkos_host="-DKokkos_ENABLE_OPENMP=OFF -DKokkos_ENABLE_THREADS=ON"
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

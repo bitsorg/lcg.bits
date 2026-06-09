@@ -21,6 +21,7 @@ license: MIT
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
@@ -30,7 +31,7 @@ function Configure() {
   # the Apple-clang spelling (-Xclang -fopenmp, not plain -fopenmp). LIBOMP_ROOT
   # comes from the libomp:osx dependency. Linux uses GCC's libgomp and skips this.
   local _omp=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     local _lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"
     _omp+=(
       -DOpenMP_C_FLAGS="-Xclang -fopenmp -I${_lomp}/include"

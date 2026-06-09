@@ -16,6 +16,7 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
@@ -28,7 +29,7 @@ function Configure() {
   # On Linux libstdc++ has the std:: functions, so leave the default (OFF) and the
   # build is unchanged there.
   local _gsl=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     _gsl+=(-DGARFIELD_WITH_GSL=ON)
     # libc++ does not pull in <stdlib.h> as transitively as GNU's libstdc++, so
     # some NeBem sources (Isles.c, Vector.c) that call exit()/etc. without

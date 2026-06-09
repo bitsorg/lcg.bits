@@ -14,6 +14,7 @@ license: GPL-2.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
@@ -40,7 +41,7 @@ function Prepare() {
   # symbol does not exist at link time. c50gt.c/getdata.c/subset.c use it. Map
   # finite -> the C99 isfinite() macro on the Makefile's $(CC) (used by both the
   # c5.0 target and the .c.o rule). No-op on Linux (Darwin-gated).
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     find . -name Makefile -exec perl -i -pe 's{^(CC\s*=\s*gcc)}{$1 -Dfinite=isfinite}' {} \;
   fi
 }

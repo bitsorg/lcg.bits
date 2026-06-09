@@ -19,6 +19,7 @@ license: GPL-2.0-only
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
@@ -33,7 +34,7 @@ function Make() {
     # expects does not exist ("No such file or directory"). CONFIG-=app_bundle
     # makes qmake emit a plain Unix executable instead. No-op on Linux.
     _nobundle=""
-    [ "$(uname)" = Darwin ] && _nobundle="CONFIG-=app_bundle"
+    bits_is_macos && _nobundle="CONFIG-=app_bundle"
     "${QT5_ROOT}/bin/qmake" PREFIX="${INSTALLROOT}" ${_nobundle}
     make ${JOBS:+-j $JOBS}
   )
