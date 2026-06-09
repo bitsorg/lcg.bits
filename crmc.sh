@@ -17,21 +17,15 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: the EPOS Fortran objects in the CrmcBasic/Epos shared libraries
-  # reference model routines (inimodel_, drangen_, crseaamodel_, ...) defined in
-  # sibling model libraries and only resolved once CRMC loads them all together.
-  # Linux's flat namespace allows such undefined symbols in a shared library;
-  # macOS's two-level namespace rejects them at link ("symbol(s) not found for
-  # architecture arm64"). Allow them to be resolved at load time
-  # (-undefined dynamic_lookup), restoring the Linux behaviour, and reserve
-  # Mach-O header pad for bits' install-name relocation. Applies to all SHARED
-  # targets via CMAKE_SHARED_LINKER_FLAGS. Linux leaves it unset.
-  local _lflags=()
-  [ "$(uname)" = Darwin ] && _lflags=(-DCMAKE_SHARED_LINKER_FLAGS="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names")
+  # macOS: the EPOS Fortran objects in CRMC's shared libraries reference sibling
+  # model routines resolved only when CRMC loads them together; the two-level
+  # namespace rejects undefined symbols at link, so allow them (dynamic_lookup).
+  local _lf; _lf=$(bits_macos_undefined_ldflags)
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -39,5 +33,5 @@ function Configure() {
     -DBOOST_ROOT="${Boost_ROOT}" \
     -DBOOST_INCLUDE_DIR="${Boost_home_include}" \
     -DBoost_NO_SYSTEM_PATHS=TRUE \
-    "${_lflags[@]}"
+    ${_lf:+-DCMAKE_SHARED_LINKER_FLAGS="$_lf"}
 }

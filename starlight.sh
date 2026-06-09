@@ -15,35 +15,23 @@ license: LicenseRef-STARLIGHT
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Built standalone (DPMJet disabled), matching lcgcmake's Starlight recipe.
-  # starlight r330's optional DPMJet interface (dpmjet/dpmjetint.f) does
-  # INCLUDE 'inc/dtflka' and expects the modern DPMJET-III layout with separate
-  # Fortran include files under include/dpmjet/inc/.  The DPMJet 3.0-6 tarball
-  # bits builds is a flat set of monolithic .f files with no such headers, so
-  # -DENABLE_DPMJET=ON cannot compile.  lcgcmake never enables this combination.
+  # Built standalone (DPMJet disabled), matching lcgcmake: the bundled flat
+  # DPMJet 3.0-6 .f files lack the modern DPMJET-III include layout that
+  # -DENABLE_DPMJET expects, so that combination can't compile.
   #
-  # macOS: starlight's CMakeLists does `set(CMAKE_CXX_FLAGS "-Wall -Wextra
-  # -Werror ...")` (overwrite, not append), so the -DCMAKE_CXX_FLAGS passed below
-  # is clobbered and cannot relax warnings. Apple clang then errors on warnings
-  # gcc never emits (e.g. C++ variable-length arrays, -Wvla-cxx-extension, in
-  # inputParser.cpp / starlightStandalone.cpp). Strip -Werror from the CMakeLists
-  # so those stay warnings. Linux keeps -Werror (gcc doesn't trip on this code).
-  [ "$(uname)" = Darwin ] && perl -i -pe 's/ -Werror\b//g' "${SOURCEDIR}/CMakeLists.txt"
-  # macOS: starlight links HepMC3 only into the `starlight` executable
-  # (target_link_libraries(starlight ... ${optionalLibs})), but hepmc3writer.cpp
-  # is compiled into libStarlib, which is never linked against libHepMC3. Linux's
-  # flat namespace leaves those HepMC3:: symbols undefined in the .so and resolves
-  # them at load time (the executable pulls in HepMC3); macOS's two-level
-  # namespace rejects them at link ("Undefined symbols ... HepMC3::GenEvent...").
-  # Allow dynamic_lookup so the dylib link tolerates them, matching Linux; the
-  # executable still links HepMC3 so they resolve at run. -headerpad lets bits'
-  # post-build install_name_tool relocation rewrite the long install path.
-  local _lflags=()
-  [ "$(uname)" = Darwin ] && _lflags=(-DCMAKE_SHARED_LINKER_FLAGS="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names")
+  # macOS: starlight's CMakeLists overwrites CMAKE_CXX_FLAGS with "... -Werror",
+  # clobbering the -DCMAKE_CXX_FLAGS below; Apple clang then errors on warnings
+  # gcc never emits (C++ VLAs). Strip -Werror so they stay warnings.
+  bits_is_macos && bits_strip_token "${SOURCEDIR}/CMakeLists.txt" -Werror
+  # macOS: hepmc3writer.cpp goes into libStarlib but HepMC3 is linked only into
+  # the executable, so the .so has undefined HepMC3:: symbols; allow them
+  # (dynamic_lookup), as Linux's flat namespace does (resolved at load time).
+  local _lf; _lf=$(bits_macos_undefined_ldflags)
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -52,7 +40,7 @@ function Configure() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DENABLE_HEPMC3=ON \
     -DBUILD_SHARED_LIB=ON \
-    "${_lflags[@]}" \
+    ${_lf:+-DCMAKE_SHARED_LINKER_FLAGS="$_lf"} \
     ${HEPMC3_ROOT:+-DHepMC3_DIR="$HEPMC3_ROOT"}
 }
 function PostInstall() {
