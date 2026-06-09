@@ -48,6 +48,11 @@ function Configure() {
   # ADRP/GOT and handles EPOS's COMMON blocks without it, so drop it on arm64.
   local _fflags="-fallow-argument-mismatch -cpp -std=legacy -fno-automatic"
   [ "$(uname -m)" != arm64 ] && _fflags="$_fflags -mcmodel=large"
+  # macOS has no <malloc.h>; malloc lives in <stdlib.h>. src/KWb/time.c is the
+  # only file that includes it, and it only uses ftime/times (not malloc), so
+  # <stdlib.h> is a safe portable replacement. Idempotent; Linux keeps malloc.h.
+  [ "$(uname)" = Darwin ] && perl -i -pe 's{^#include <malloc\.h>}{#include <stdlib.h>}' \
+    "${SOURCEDIR}/src/KWb/time.c"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
