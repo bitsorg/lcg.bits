@@ -51,6 +51,13 @@ export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 # LDFLAGS at recipe scope (reaches configure and make) so all resolve. Linux is
 # unaffected (its real gcc already has these on the default search path).
 if [ "$(uname)" = Darwin ]; then
+  # Reserve Mach-O header pad on every Rivet link (libRivet via libtool and the
+  # pyext core.so via g++ -shared). bits' post-build relocation runs
+  # `install_name_tool -id <long final path>` on the installed libraries; without
+  # padding the longer install name overflows the load commands and relocation
+  # fails silently - the recipe log ends in `return 0` but bits reports BUILD
+  # FAILED and no .build-hash is written. Linux uses GNU ld and ignores this.
+  export LDFLAGS="-Wl,-headerpad_max_install_names ${LDFLAGS:-}"
   _gcclib=$(dirname "$(${FC:-gfortran} -print-libgcc-file-name 2>/dev/null)" 2>/dev/null)
   _fclib=$(dirname "$(${FC:-gfortran} -print-file-name=libgfortran.dylib 2>/dev/null)" 2>/dev/null)
   [ -n "$_gcclib" ] && [ -d "$_gcclib" ] && export LDFLAGS="-L$_gcclib ${LDFLAGS:-}"
