@@ -82,6 +82,19 @@ PY
     perl -i -pe 's/ ?\bstdc\+\+fs\b//g' \
       "${SOURCEDIR}/CepGen/CMakeLists.txt" \
       "${SOURCEDIR}/CepGenAddOns/MadGraphWrapper/CMakeLists.txt"
+    # macOS: the PhotosTauola wrapper's TauolaFilter.cpp calls the TAUOLA RANMAR
+    # seeding routine rmarin_ (Fortran), but the wrapper's CMakeLists only finds
+    # and links TauolaCxxInterface + TauolaHepMC3 -- not libTauolaFortran, which
+    # defines rmarin_ (and the other Fortran routines). Linux's flat namespace
+    # resolves the undefined symbol at load time; macOS's two-level namespace
+    # rejects it at link ("Undefined symbols: _rmarin_"). Find and link
+    # TauolaFortran too. Guarded so it is injected only once (idempotent on
+    # resumed builds). Linux keeps the upstream link set.
+    _ptw="${SOURCEDIR}/CepGenAddOns/PhotosTauolaWrapper/CMakeLists.txt"
+    if ! grep -q TAUOLAPP_FORTRAN "${_ptw}"; then
+      perl -i -pe 's{^(find_library\(TAUOLAPP_HEPMC3 TauolaHepMC3 .*)$}{$1\nfind_library(TAUOLAPP_FORTRAN TauolaFortran HINTS \$ENV{TAUOLAPP_DIR} \${TAUOLAPP_DIR} PATH_SUFFIXES lib)}' "${_ptw}"
+      perl -i -pe 's{list\(APPEND EXT_LIBS \$\{TAUOLAPP\} \$\{TAUOLAPP_HEPMC3\}\)}{list(APPEND EXT_LIBS \${TAUOLAPP} \${TAUOLAPP_HEPMC3} \${TAUOLAPP_FORTRAN})}' "${_ptw}"
+    fi
   fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
