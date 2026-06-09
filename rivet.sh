@@ -12,6 +12,12 @@ requires:
   - fjcontrib
   # Rivet 4 builds its Python bindings with SWIG (lcgcmake passes SWIG_LIB).
   - swig
+  # macOS only: hdf5 is a transitive dependency via YODA (libYODA references
+  # @rpath/libhdf5.NNN.dylib). Declaring it here on Darwin exports HDF5_ROOT so
+  # the recipe can bake an rpath to it into the pyext core.so (the build-time
+  # import test otherwise fails: "Library not loaded: @rpath/libhdf5.310.dylib").
+  # Arch-gated to osx so Linux's resolved dependency set (and hash) is unchanged.
+  - "hdf5:osx"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -49,6 +55,12 @@ if [ "$(uname)" = Darwin ]; then
   _fclib=$(dirname "$(${FC:-gfortran} -print-file-name=libgfortran.dylib 2>/dev/null)" 2>/dev/null)
   [ -n "$_gcclib" ] && [ -d "$_gcclib" ] && export LDFLAGS="-L$_gcclib ${LDFLAGS:-}"
   [ -n "$_fclib" ] && [ -d "$_fclib" ] && export LDFLAGS="-L$_fclib ${LDFLAGS:-}"
+  # Bake an rpath to hdf5 into everything Rivet links (notably the pyext core.so):
+  # libYODA references @rpath/libhdf5.NNN.dylib transitively, but Rivet only adds
+  # rpaths for its direct deps (yoda/fastjet/hepmc3), not hdf5, so the build-time
+  # `import rivet` test fails to dlopen core.so ("Library not loaded:
+  # @rpath/libhdf5.310.dylib"). HDF5_ROOT is exported via the osx-gated require.
+  [ -n "${HDF5_ROOT:-}" ] && export LDFLAGS="-Wl,-rpath,${HDF5_ROOT}/lib ${LDFLAGS:-}"
 fi
 ##############################
 function Configure() {
