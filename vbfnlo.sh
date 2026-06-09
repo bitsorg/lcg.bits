@@ -17,23 +17,14 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # Suppress the documentation build entirely.  doc/Manual.pdf is built with
-  # LaTeX (needs cite.sty, which we neither ship nor need at runtime) and was the
-  # only fatal failure; the libraries and the vbfnlo binary build fine.  Two
-  # independent guards so docs are never built or installed, regardless of how
-  # the doc subdir is wired into the generated Makefiles:
-  #   1) drop 'doc' from the top-level (DIST_)SUBDIRS so the recursive `make` and
-  #      `make install` (AutoToolsRecipe.MakeInstall) never descend into it;
-  #   2) belt-and-braces: if doc is still reached (e.g. added via a conditional
-  #      am__append rather than a literal SUBDIRS token), neutralise doc/Makefile
-  #      so every recursive target there is a no-op.
-  # (The old `make -C src/-C utilities` pre-builds were also wrong — they ran
-  #  before lib/utilities existed, hence the spurious "No rule .../libVBFNLO.la"
-  #  and missing .mod/.inc errors; a normal recursive build honours SUBDIRS order.)
+  # Suppress the LaTeX doc build (needs cite.sty, not shipped/needed): drop 'doc'
+  # from (DIST_)SUBDIRS, and neutralise doc/Makefile in case it's reached via a
+  # conditional am__append. The libraries and the vbfnlo binary build fine.
   perl -i -pe 's/\bdoc\b//g if /^(DIST_)?SUBDIRS[[:space:]]*=/' Makefile
   if [ -f doc/Makefile ]; then
     printf '%s\n\t%s\n' \
@@ -41,17 +32,9 @@ function Make() {
       '@:' > doc/Makefile
   fi
   # macOS: the VBFNLO shared libraries cross-reference each other's Fortran
-  # routines (e.g. libHELAS uses dotcc_/dotrc_ defined in another VBFNLO lib),
-  # resolved at load time. Linux's flat namespace allows undefined symbols in a
-  # shared library; macOS's two-level namespace rejects them. The bundled libtool
-  # left allow_undefined_flag="" because its MACOSX_DEPLOYMENT_TARGET version case
-  # does not match 14.0, so the dylib link omits the flag. Patch the generated
-  # libtool(s) to allow undefined symbols (dynamic_lookup), matching Linux.
-  # Idempotent; Linux has no such libtool lines to match.
-  if [ "$(uname)" = Darwin ]; then
-    find . -name libtool -type f -exec perl -i -pe \
-      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
-  fi
+  # routines, resolved at load time; the two-level namespace rejects undefined
+  # symbols at link, so allow them (dynamic_lookup) as Linux's flat namespace does.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }
 function Configure() {

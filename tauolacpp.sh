@@ -15,15 +15,12 @@ license: LicenseRef-TAUOLA++
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Build against HepMC3 only (libTauolaCppHepMC3 / TAUOLAPP_HEPMC3), required by
-  # cepgen's PhotosTauola wrapper and EvtGen 2.x. lcgcmake builds tauola++ with
-  # exactly one HepMC flavour: passing both --with-hepmc (HepMC2) and
-  # --with-hepmc3 did not produce the HepMC3 interface library. Mirror lcgcmake's
-  # modern config: --with-hepmc3 + --without-hepmc.
+  # HepMC3 only (libTauolaCppHepMC3), as lcgcmake: build a single HepMC flavour.
   ./configure --prefix=$INSTALLROOT \
     --with-pic \
     --with-tau-spinner \
@@ -32,17 +29,9 @@ function Configure() {
     ${LHAPDF_ROOT:+--with-lhapdf="${LHAPDF_ROOT}"}
 }
 function Make() {
-  # macOS: libTauolaFortran references Fortran routines (_choice_, _dcdmas_, ...)
-  # defined in a sibling TAUOLA library, resolved at load time. Linux's flat
-  # namespace allows such undefined symbols in a shared library; macOS's
-  # two-level namespace rejects them at link. The bundled libtool left
-  # allow_undefined_flag="" (its MACOSX_DEPLOYMENT_TARGET version case does not
-  # match 14.0), so the dylib link omits the flag. Patch the generated libtool to
-  # allow undefined symbols (dynamic_lookup), matching Linux. Idempotent; Linux
-  # has no such libtool lines to match.
-  if [ "$(uname)" = Darwin ]; then
-    find . -name libtool -type f -exec perl -i -pe \
-      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
-  fi
+  # macOS: libTauolaFortran references sibling-library Fortran routines resolved
+  # at load time; the two-level namespace rejects undefined symbols at link, so
+  # allow them (dynamic_lookup) as Linux's flat namespace does.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }
