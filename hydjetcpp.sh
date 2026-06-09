@@ -12,6 +12,7 @@ license: LicenseRef-HYDJET++
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
@@ -38,14 +39,14 @@ function Make() {
   # gcc > 9); -std=legacy covers other old constructs.  The Makefile's default
   # F77FLAGS is "-fPIC", which we preserve.
   # gfortran's shared runtime is libgfortran.dylib on macOS, .so on Linux.
-  _libgf=libgfortran.so; [ "$(uname)" = Darwin ] && _libgf=libgfortran.dylib
+  _libgf=libgfortran.so; bits_is_macos && _libgf=libgfortran.dylib
   # macOS: the Makefile detects the Fortran compiler by globbing a hardcoded
   # BINDIRS (. /bin /usr/bin /usr/local/bin) for `gfortran`, but Homebrew's
   # gfortran lives in /opt/homebrew/bin, so detection fails ("Fortran compiler
   # not found"). Prepend gfortran's actual directory to BINDIRS. On Linux
   # gfortran is in /usr/bin (already covered), so this is Darwin-only.
   local _bindirs=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     local _fcdir; _fcdir=$(dirname "$(command -v ${FC:-gfortran})")
     _bindirs=(BINDIRS="${_fcdir} . /bin /usr/bin /usr/local/bin")
   fi

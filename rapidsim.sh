@@ -15,24 +15,20 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # arm64 (Apple Silicon): RapidSim's CMakeLists.txt hardcodes x86 SIMD flags
-  # (-msse -msse2 -msse3 -m3dnow) into CMAKE_CXX_FLAGS, which clang rejects on
-  # arm64 ("unsupported option '-msse'"). Strip them on aarch64; x86 builds
-  # (Linux, Intel macOS) keep them. Idempotent.
+  # arm64: RapidSim's CMakeLists hardcodes x86 SIMD flags clang rejects on arm64;
+  # strip them (x86 Linux/Intel macOS keep them).
   case "$(uname -m)" in
     arm64 | aarch64)
-      perl -i -pe 's/ -msse -msse2 -msse3 -m3dnow//' "${SOURCEDIR}/CMakeLists.txt"
-      ;;
+      bits_file_replace "${SOURCEDIR}/CMakeLists.txt" ' -msse -msse2 -msse3 -m3dnow' '' ;;
   esac
-  # macOS: RapidSim compiles with -Werror, but Apple clang emits warnings from
-  # ROOT v6.40's own headers (e.g. RooLinkedListIter.h, -Wmissing-noreturn) that
-  # gcc on Linux does not, making them fatal. Drop -Werror on Darwin so warnings
-  # from dependency headers don't break the build. Idempotent; Linux keeps it.
-  [ "$(uname)" = Darwin ] && perl -i -pe 's/ -Werror\b//' "${SOURCEDIR}/CMakeLists.txt"
+  # macOS: -Werror turns Apple clang's warnings from ROOT v6.40 headers fatal;
+  # drop it so dependency-header warnings don't break the build.
+  bits_is_macos && bits_strip_token "${SOURCEDIR}/CMakeLists.txt" -Werror
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

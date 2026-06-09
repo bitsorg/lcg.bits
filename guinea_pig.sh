@@ -15,6 +15,7 @@ license: LicenseRef-GuineaPig
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -25,7 +26,7 @@ function Configure() {
   # -Wregister, so -Wno-register lets clang accept the old keyword. Darwin-only
   # to keep the Linux build byte-identical.
   local _cxxflags=()
-  [ "$(uname)" = Darwin ] && _cxxflags=(-DCMAKE_CXX_FLAGS="-Wno-register")
+  bits_is_macos && _cxxflags=(-DCMAKE_CXX_FLAGS="-Wno-register")
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

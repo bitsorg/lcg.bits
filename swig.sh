@@ -20,7 +20,7 @@ prefer_system_check: |
       [  "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
   }
   # macOS: install swig from Homebrew on demand when run with `bits --brew`.
-  if [ "$(uname)" = Darwin ] && [ "${BITS_BREW:-}" = "1" ] && ! which swig >/dev/null 2>&1; then
+  if bits_is_macos && [ "${BITS_BREW:-}" = "1" ] && ! which swig >/dev/null 2>&1; then
     brew install swig >&2 || true
   fi
   which swig && verge "$PKGVERSION" $(swig -version | grep Version | sed -e 's/[^0-9]*//')
@@ -33,6 +33,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
@@ -44,6 +45,6 @@ function Configure() {
   # consumer (apfel, ...). Add an rpath to pcre2's lib dir. PCRE2_ROOT is the
   # canonical /sw/<arch>/pcre2/<ver> path, which is relocation-stable, so the
   # rpath remains valid after install. Linux is unaffected (ELF rpath/ld.so).
-  [ "$(uname)" = Darwin ] && export LDFLAGS="-Wl,-rpath,${PCRE2_ROOT}/lib ${LDFLAGS:-}"
+  bits_is_macos && export LDFLAGS="-Wl,-rpath,${PCRE2_ROOT}/lib ${LDFLAGS:-}"
   $SOURCEDIR/configure --prefix=$INSTALLROOT --with-pcre-prefix=${PCRE2_ROOT} PCRE_LIBS=${PCRE2_ROOT}/lib/libpcre.a --with-boost=${Boost_ROOT}
 }

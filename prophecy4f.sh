@@ -14,6 +14,7 @@ license: LicenseRef-Prophecy4f
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -30,7 +31,7 @@ function MakeInstall() {
   # mode string"). GNU find in turn no longer accepts +111. Pick per platform;
   # Linux keeps the exact /111 form.
   local _perm=/111
-  [ "$(uname)" = Darwin ] && _perm=+111
+  bits_is_macos && _perm=+111
   find . -maxdepth 2 -type f -perm "$_perm" ! -name '*.so' \
     -exec install -m755 {} "${INSTALLROOT}/bin/" \;
 }
