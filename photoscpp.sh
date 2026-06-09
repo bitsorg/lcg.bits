@@ -37,3 +37,18 @@ function Configure() {
     --without-hepmc \
     CFLAGS=-O2 FFLAGS=-O2 F77="${FC:-gfortran}" CXXFLAGS="-O2"
 }
+function Make() {
+  # macOS: libPhotosppHepMC3 references HepMC3 symbols (GenParticle::set_status,
+  # end_vertex, ...) but the interface library does not link libHepMC3 — they are
+  # resolved at load time when the consumer (which links HepMC3) pulls it in.
+  # Linux's flat namespace allows such undefined symbols in a shared library;
+  # macOS's two-level namespace rejects them at link. The bundled libtool left
+  # allow_undefined_flag="" (its MACOSX_DEPLOYMENT_TARGET version case does not
+  # match 14.0), so the dylib link omits the flag. Patch the generated libtool to
+  # allow undefined symbols (dynamic_lookup), matching Linux. Idempotent.
+  if [ "$(uname)" = Darwin ]; then
+    find . -name libtool -type f -exec perl -i -pe \
+      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
+  fi
+  make ${JOBS:+-j $JOBS}
+}
