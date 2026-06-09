@@ -23,6 +23,21 @@ MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
 
+  # macOS: very new Apple clang (clang 21 / Xcode 26) defaults to typed C++
+  # new/delete (-ftyped-cxx-new-delete). ThePEG calls operator new in a static
+  # initializer — exercised when setupThePEG builds ThePEGDefaults.rpo — which
+  # aborts under that feature ("Terminating due to typed operator new being
+  # invoked before its static initializer in libcxx", Abort trap: 6). Disable it
+  # when the compiler understands the flag (a no-op on Linux / older clang).
+  if [ "$(uname)" = Darwin ]; then
+    local _tmo=-fno-typed-cxx-new-delete _d
+    _d="$(mktemp -d)"; printf 'int main(){}\n' > "$_d/t.cpp"
+    if "${CXX:-c++}" "$_tmo" "$_d/t.cpp" -o "$_d/t.out" >/dev/null 2>&1; then
+      export CXXFLAGS="${CXXFLAGS:-} $_tmo"
+    fi
+    rm -rf "$_d"
+  fi
+
   # ThePEG's configure tries to invoke perl for documentation; fake it
   mkdir -p fakeperl/bin
   ln -nfs /usr/bin/perl fakeperl/bin/perl
