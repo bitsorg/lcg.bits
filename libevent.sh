@@ -12,6 +12,7 @@ license: BSD-3-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -22,7 +23,7 @@ function Configure() {
   # dylib ("Undefined symbols for architecture arm64: _event_pending,
   # _evthread_lock_fns_, _evutil_closesocket, ..."). Allow flat-namespace lazy
   # resolution so the sub-dylibs link, matching the ELF behaviour.
-  [ "$(uname)" = Darwin ] && export LDFLAGS="-Wl,-undefined,dynamic_lookup${LDFLAGS:+ ${LDFLAGS}}"
+  bits_is_macos && export LDFLAGS="$(bits_macos_undefined_ldflags)${LDFLAGS:+ ${LDFLAGS}}"
   # macOS lacks the Linux-only syscalls (pipe2, accept4) and the Linux/Solaris
   # event backends (epoll, eventfd, signalfd, timerfd, evport). Under modern
   # clang, libevent's autoconf probes false-positive several of these, so it
@@ -31,7 +32,7 @@ function Configure() {
   # found"). macOS uses the kqueue backend; force every Linux/Solaris-only probe
   # off so configure selects kqueue + the portable pipe()/accept() fallbacks. No
   # effect on Linux, where these genuinely exist.
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     export ac_cv_func_pipe2=no ac_cv_func_accept4=no \
            ac_cv_func_epoll_create=no ac_cv_func_epoll_create1=no ac_cv_func_epoll_ctl=no \
            ac_cv_header_sys_epoll_h=no \

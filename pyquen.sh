@@ -13,6 +13,7 @@ license: LicenseRef-PYQUEN
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -34,14 +35,14 @@ function Make() {
   # relocate-me.sh can rewrite the LC_ID_DYLIB install name to the long store
   # path via install_name_tool (else the unpack/relocate step fails).
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"; fi
+  if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} -O2 -fPIC -c pyquen.f -o pyquen.o
   ${FC:-gfortran} -O2 $_shared $_undef -o libpyquen.$_so pyquen.o
   ${AR:-ar} crs libpyquen.a pyquen.o
 }
 
 function MakeInstall() {
-  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
   install -m755 libpyquen.$_so "$INSTALLROOT/lib/"
   install -m644 libpyquen.a "$INSTALLROOT/lib/"

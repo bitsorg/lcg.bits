@@ -10,6 +10,7 @@ license: LicenseRef-HYDJET
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -35,7 +36,7 @@ function Make() {
   # absolute store path via install_name_tool — without it the unpack/relocate
   # step fails ("larger updated load commands do not fit").
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"; fi
+  if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} $fflags -c hydjet1_8.f -o hydjet.o
   ${FC:-gfortran} $fflags $_shared $_undef -o libhydjet.$_so hydjet.o
   ${AR:-ar} crs libhydjet.a hydjet.o
@@ -46,7 +47,7 @@ function Make() {
 }
 
 function MakeInstall() {
-  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
   install -m755 libhydjet.$_so "$INSTALLROOT/lib/"
   install -m644 libhydjet.a  "$INSTALLROOT/lib/"

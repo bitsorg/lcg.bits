@@ -14,6 +14,7 @@ license: BSD-2-Clause
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -24,7 +25,7 @@ function Configure() {
   # the dylib; macOS's two-level namespace rejects it ("Undefined symbols for
   # architecture arm64: _yylex"). Allow flat-namespace lazy resolution so libfl
   # links, matching the ELF behaviour.
-  [ "$(uname)" = Darwin ] && export LDFLAGS="-Wl,-undefined,dynamic_lookup${LDFLAGS:+ ${LDFLAGS}}"
+  bits_is_macos && export LDFLAGS="$(bits_macos_undefined_ldflags)${LDFLAGS:+ ${LDFLAGS}}"
   # macOS: configure detects the reallocarray() *symbol* (it links) and sets
   # HAVE_REALLOCARRAY, so misc.c calls the system reallocarray -- but the current
   # macOS SDK does not *declare* it in <stdlib.h> (not even under
@@ -33,7 +34,7 @@ function Configure() {
   # overflow-checked fallback (flexdef.h declares it; misc.c has the #else path)
   # and never touches the undeclared system one. No effect on Linux (glibc
   # declares reallocarray).
-  [ "$(uname)" = Darwin ] && export ac_cv_func_reallocarray=no
+  bits_is_macos && export ac_cv_func_reallocarray=no
   # Build in-source (AutoToolsRecipe rsyncs the source into cwd), matching
   # lcgcmake's flex (configure --prefix; make; make install; BUILD_IN_SOURCE).
   ./configure --prefix="$INSTALLROOT"

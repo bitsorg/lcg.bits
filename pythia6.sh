@@ -10,6 +10,7 @@ license: LicenseRef-Pythia6
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -32,14 +33,14 @@ function Make() {
   # relocate-me.sh can rewrite the LC_ID_DYLIB install name to the long store
   # path via install_name_tool (else the unpack/relocate step fails).
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then _so=dylib; _shared=-dynamiclib; _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"; fi
+  if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} $fflags -c pythia6.f -o pythia6.o
   ${FC:-gfortran} $fflags $_shared $_undef -o libpythia6.$_so pythia6.o
   ${AR:-ar} crs libpythia6.a pythia6.o
 }
 
 function MakeInstall() {
-  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
   install -m755 libpythia6.$_so "$INSTALLROOT/lib/"
   install -m644 libpythia6.a  "$INSTALLROOT/lib/"
