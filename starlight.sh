@@ -33,6 +33,17 @@ function Configure() {
   # inputParser.cpp / starlightStandalone.cpp). Strip -Werror from the CMakeLists
   # so those stay warnings. Linux keeps -Werror (gcc doesn't trip on this code).
   [ "$(uname)" = Darwin ] && perl -i -pe 's/ -Werror\b//g' "${SOURCEDIR}/CMakeLists.txt"
+  # macOS: starlight links HepMC3 only into the `starlight` executable
+  # (target_link_libraries(starlight ... ${optionalLibs})), but hepmc3writer.cpp
+  # is compiled into libStarlib, which is never linked against libHepMC3. Linux's
+  # flat namespace leaves those HepMC3:: symbols undefined in the .so and resolves
+  # them at load time (the executable pulls in HepMC3); macOS's two-level
+  # namespace rejects them at link ("Undefined symbols ... HepMC3::GenEvent...").
+  # Allow dynamic_lookup so the dylib link tolerates them, matching Linux; the
+  # executable still links HepMC3 so they resolve at run. -headerpad lets bits'
+  # post-build install_name_tool relocation rewrite the long install path.
+  local _lflags=()
+  [ "$(uname)" = Darwin ] && _lflags=(-DCMAKE_SHARED_LINKER_FLAGS="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names")
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -41,6 +52,7 @@ function Configure() {
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DENABLE_HEPMC3=ON \
     -DBUILD_SHARED_LIB=ON \
+    "${_lflags[@]}" \
     ${HEPMC3_ROOT:+-DHepMC3_DIR="$HEPMC3_ROOT"}
 }
 function PostInstall() {
