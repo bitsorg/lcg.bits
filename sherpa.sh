@@ -36,7 +36,17 @@ MODULE_OPTIONS="--bin --lib"
 # Sherpa 3 builds Python bindings with SWIG; lcgcmake passes SWIG/SWIG_LIB to
 # both configure and make, so set them at recipe scope.
 export SWIG="${SWIG_ROOT}/bin/swig"
-export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+# macOS: `swig -swiglib` reports swig's build-time INSTALLROOT path, which no
+# longer exists after relocation, so swig cannot find its library files at the
+# final wrapper-generation stage ("Unable to find 'swig.swg' / 'python.swg' /
+# 'std_vector.i'"). Use the relocated swiglib under SWIG_ROOT instead. Linux
+# keeps its working `swig -swiglib`. (Same fix as apfel.)
+if [ "$(uname)" = Darwin ]; then
+  _swigdir=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
+  export SWIG_LIB="${_swigdir%/}"
+else
+  export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+fi
 ##############################
 function Configure() {
   # Sherpa 3.x switched from autotools to CMake. Flags mirror lcgcmake's
