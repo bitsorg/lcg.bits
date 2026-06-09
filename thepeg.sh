@@ -22,6 +22,13 @@ patches:
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
+  # macOS: gated off. ThePEG builds, but setupThePEG/runThePEG abort at startup
+  # from a clang-21 / macOS-26-SDK libc++ bug (typed operator new invoked in a
+  # static initializer before libc++abi init) that -fno-typed-cxx-new-delete does
+  # not fix — so ThePEG (and its consumers herwig3, thep8i) cannot run on this
+  # toolchain. Produce an empty package; remove the guards (here, Make,
+  # MakeInstall, PostInstall) to resume the port once the toolchain is fixed.
+  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
 
   # macOS: very new Apple clang (clang 21 / Xcode 26) defaults to typed C++
   # new/delete (-ftyped-cxx-new-delete). ThePEG calls operator new in a static
@@ -61,6 +68,15 @@ function Configure() {
     ${LHAPDF_ROOT:+--with-lhapdf="$LHAPDF_ROOT"} \
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"}
 }
+function Make() {
+  [ "$(uname)" = Darwin ] && return 0
+  make ${JOBS:+-j $JOBS}
+}
+function MakeInstall() {
+  [ "$(uname)" = Darwin ] && return 0
+  make install
+}
 function PostInstall() {
+  [ "$(uname)" = Darwin ] && return 0
   printf 'setenv ThePEG_INSTALL_PATH $PKG_ROOT/lib/ThePEG\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }
