@@ -29,7 +29,7 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-Wno-array-parameter -Wno-unused-but-set-variable -Wno-unknown-warning-option" \
+    -DCMAKE_CXX_FLAGS="-Wno-array-parameter -Wno-unused-but-set-variable -Wno-unknown-warning-option -Wno-vla-cxx-extension" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DENABLE_HEPMC3=ON \
     -DBUILD_SHARED_LIB=ON \
