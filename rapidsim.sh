@@ -28,6 +28,11 @@ function Configure() {
       perl -i -pe 's/ -msse -msse2 -msse3 -m3dnow//' "${SOURCEDIR}/CMakeLists.txt"
       ;;
   esac
+  # macOS: RapidSim compiles with -Werror, but Apple clang emits warnings from
+  # ROOT v6.40's own headers (e.g. RooLinkedListIter.h, -Wmissing-noreturn) that
+  # gcc on Linux does not, making them fatal. Drop -Werror on Darwin so warnings
+  # from dependency headers don't break the build. Idempotent; Linux keeps it.
+  [ "$(uname)" = Darwin ] && perl -i -pe 's/ -Werror\b//' "${SOURCEDIR}/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
