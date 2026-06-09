@@ -37,5 +37,13 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
+  # macOS: swig links pcre2 dynamically (pcre2 provides no static .a here), and
+  # pcre2's install name is @rpath/libpcre2-8.0.dylib. The swig binary is built
+  # with no LC_RPATH, so it cannot launch ("Library not loaded:
+  # @rpath/libpcre2-8.0.dylib ... no LC_RPATH's found"), which breaks every swig
+  # consumer (apfel, ...). Add an rpath to pcre2's lib dir. PCRE2_ROOT is the
+  # canonical /sw/<arch>/pcre2/<ver> path, which is relocation-stable, so the
+  # rpath remains valid after install. Linux is unaffected (ELF rpath/ld.so).
+  [ "$(uname)" = Darwin ] && export LDFLAGS="-Wl,-rpath,${PCRE2_ROOT}/lib ${LDFLAGS:-}"
   $SOURCEDIR/configure --prefix=$INSTALLROOT --with-pcre-prefix=${PCRE2_ROOT} PCRE_LIBS=${PCRE2_ROOT}/lib/libpcre.a --with-boost=${Boost_ROOT}
 }
