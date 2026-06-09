@@ -29,6 +29,16 @@ function Configure() {
   # and is only required to run APFEL's test suite).
   export SWIG="${SWIG_ROOT}/bin/swig"
   export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+  # macOS: CMake's find_package(SWIG) ignores the SWIG/SWIG_LIB env vars and
+  # searches PATH, then fails to derive SWIG_DIR ("Could NOT find SWIG (missing:
+  # SWIG_DIR)"). Point it at the bits swig executable and its library directory
+  # explicitly. Darwin-gated so Linux's (working) PATH-based detection is
+  # untouched.
+  local _swig=()
+  [ "$(uname)" = Darwin ] && _swig=(
+    -DSWIG_EXECUTABLE="${SWIG_ROOT}/bin/swig"
+    -DSWIG_DIR="$(${SWIG_ROOT}/bin/swig -swiglib)"
+  )
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -37,5 +47,6 @@ function Configure() {
     -DAPFEL_ENABLE_LHAPDF=ON \
     -DAPFEL_ENABLE_TESTS=OFF \
     -DAPFEL_DOWNLOAD_PDFS=OFF \
-    -DAPFEL_Python_SITEARCH=autoprefix
+    -DAPFEL_Python_SITEARCH=autoprefix \
+    "${_swig[@]}"
 }
