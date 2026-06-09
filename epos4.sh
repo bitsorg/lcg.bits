@@ -53,6 +53,11 @@ function Configure() {
   # <stdlib.h> is a safe portable replacement. Idempotent; Linux keeps malloc.h.
   [ "$(uname)" = Darwin ] && perl -i -pe 's{^#include <malloc\.h>}{#include <stdlib.h>}' \
     "${SOURCEDIR}/src/KWb/time.c"
+  # EPOS links the epos/Xepos targets with -Wl,--no-relax (GNU ld linker-
+  # relaxation control). Apple's ld does not implement it ("ld: unknown options:
+  # --no-relax") and there is no equivalent or need on arm64, so strip it from
+  # the two set_target_properties LINK_FLAGS lines on Darwin. Linux keeps it.
+  [ "$(uname)" = Darwin ] && perl -i -pe 's/-Wl,--no-relax//g' "${SOURCEDIR}/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
