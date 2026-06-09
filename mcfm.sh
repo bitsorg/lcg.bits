@@ -15,6 +15,7 @@ license: LicenseRef-MCFM
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -28,7 +29,7 @@ MODULE_OPTIONS="--bin --lib"
 # "mcfm:(?!osx)". Builds normally on Linux. Remove the guards to resume the port.
 ##############################
 function Configure() {
-  [ "$(uname)" = Darwin ] && { mkdir -p "${INSTALLROOT}"; return 0; }
+  bits_is_macos && { mkdir -p "${INSTALLROOT}"; return 0; }
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -38,7 +39,7 @@ function Configure() {
     -Dwith_library=ON
 }
 function Make() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
   # under parallel make, gpl_module.f is compiled before maths_functions.mod has
   # finished being written, giving
@@ -55,11 +56,11 @@ function Make() {
   fi
 }
 function MakeInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   cmake --install .
 }
 function PostInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   # MCFM's own cmake install does not expose the library/headers the way
   # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
   # library named 'mcfm' or 'MCFM'). Mirror lcgcmake: install the CXX interface
@@ -68,7 +69,7 @@ function PostInstall() {
   mkdir -p "${INSTALLROOT}/include" "${INSTALLROOT}/lib"
   [ -d "${SOURCEDIR}/src/Inc/MCFM" ] && cp -rf "${SOURCEDIR}/src/Inc/MCFM" "${INSTALLROOT}/include/"
   local _ext _lib
-  _ext=so; [ "$(uname)" = Darwin ] && _ext=dylib
+  _ext=so; bits_is_macos && _ext=dylib
   _lib="$(find . "${INSTALLROOT}/lib" \( -name 'libmcfm.so' -o -name 'libmcfm.dylib' \) -print -quit 2>/dev/null)"
   if [ -n "${_lib}" ]; then
     cp -f "${_lib}" "${INSTALLROOT}/lib/libmcfm.${_ext}"

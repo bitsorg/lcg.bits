@@ -32,6 +32,7 @@ env:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -40,7 +41,7 @@ function Configure() {
   # (its setupThePEG/runThePEG abort on the clang-21/macOS-26-SDK libc++ bug), so
   # Herwig cannot build or run here. Produce an empty package; remove the guards
   # (here, Make, MakeInstall, PostInstall) to resume once ThePEG works on macOS.
-  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   [[ -n "$THEPEG_ROOT" ]] && export LD_LIBRARY_PATH="$THEPEG_ROOT/lib/ThePEG:$LD_LIBRARY_PATH"
 
   # Pre-install a minimal PDF set so configure tests can run
@@ -76,7 +77,7 @@ function Configure() {
     "FFLAGS=$fflags"
 }
 function Make() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   local fflags="-std=legacy"
   [[ "$(uname -m)" == aarch64 ]] && fflags="$fflags -fdefault-integer-8"
   make ${JOBS:+-j $JOBS} all "FFLAGS=$fflags"
@@ -89,7 +90,7 @@ function Make() {
   fi
 }
 function MakeInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   make install LHAPDF_DATA_PATH="$INSTALLROOT/tmppdfsets"
   if [[ -n "$RIVET_ROOT" ]]; then
     make -C MatrixElement/FxFx HERWIGINSTALL="$INSTALLROOT" install
@@ -97,7 +98,7 @@ function MakeInstall() {
   rm -rf "$INSTALLROOT/tmppdfsets"
 }
 function PostInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
 setenv HERWIG3_ROOT $PKG_ROOT
 EOF

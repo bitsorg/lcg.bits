@@ -15,6 +15,7 @@ license: LicenseRef-POWHEG
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -25,7 +26,7 @@ function Prepare() {
   # it off here so a whole-stack macOS build doesn't fail on it; it produces an
   # empty package (the Make() guard below + MakeModule). Builds normally on
   # Linux. Remove this guard (and finish the port) to re-enable macOS.
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
   # Makefile.lhcb (the LHCb-custom top-level wrapper) is not in the tarball.
   # Generate one that builds all process subdirectories (tolerating per-process
@@ -59,7 +60,7 @@ MKEOF
 function Make() {
   # macOS: gated off (see Prepare). Emit an empty install root so MakeModule has
   # somewhere to write the modulefile, and stop.
-  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb \
     FCOMP="${FC:-gfortran}" CCOMP="${CXX}" \
     LHAPDF="${LHAPDF_ROOT}" FASTJET="${FASTJET_ROOT}"

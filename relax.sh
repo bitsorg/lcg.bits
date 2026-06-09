@@ -17,6 +17,7 @@ license: MIT
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -28,7 +29,7 @@ function Configure() {
   # under Apple clang / the macOS-26 SDK that no flag can downgrade. RELAX has no
   # dependents, so produce an empty package; remove the guards (here, Make,
   # MakeInstall) to resume the port. Linux unchanged.
-  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -37,10 +38,10 @@ function Configure() {
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"
 }
 function Make() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
 }
 function MakeInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   cmake --install .
 }

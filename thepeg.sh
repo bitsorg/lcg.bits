@@ -18,6 +18,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
@@ -28,7 +29,7 @@ function Configure() {
   # not fix — so ThePEG (and its consumers herwig3, thep8i) cannot run on this
   # toolchain. Produce an empty package; remove the guards (here, Make,
   # MakeInstall, PostInstall) to resume the port once the toolchain is fixed.
-  [ "$(uname)" = Darwin ] && { mkdir -p "$INSTALLROOT"; return 0; }
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
 
   # macOS: very new Apple clang (clang 21 / Xcode 26) defaults to typed C++
   # new/delete (-ftyped-cxx-new-delete). ThePEG calls operator new in a static
@@ -36,7 +37,7 @@ function Configure() {
   # aborts under that feature ("Terminating due to typed operator new being
   # invoked before its static initializer in libcxx", Abort trap: 6). Disable it
   # when the compiler understands the flag (a no-op on Linux / older clang).
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     local _tmo=-fno-typed-cxx-new-delete _d
     _d="$(mktemp -d)"; printf 'int main(){}\n' > "$_d/t.cpp"
     if "${CXX:-c++}" "$_tmo" "$_d/t.cpp" -o "$_d/t.out" >/dev/null 2>&1; then
@@ -69,14 +70,14 @@ function Configure() {
     ${FASTJET_ROOT:+--with-fastjet="$FASTJET_ROOT"}
 }
 function Make() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   make ${JOBS:+-j $JOBS}
 }
 function MakeInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   make install
 }
 function PostInstall() {
-  [ "$(uname)" = Darwin ] && return 0
+  bits_is_macos && return 0
   printf 'setenv ThePEG_INSTALL_PATH $PKG_ROOT/lib/ThePEG\n' >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
 }
