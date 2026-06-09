@@ -34,6 +34,19 @@ bits_enable_cython
 export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 ##############################
+# macOS: fastjet-config --libs reports -lemutls_w -lheapt_w (libgcc's emulated-
+# TLS and heap-trace helper archives, dragged in by fastjet's gfortran Fortran
+# plugins). Those archives live in Homebrew gcc's internal target lib dir, which
+# is not on the linker's default search path, so Rivet's FastJet configure test
+# (and the later link) fail with "ld: library 'emutls_w' not found". Add that
+# gcc lib dir to LDFLAGS at recipe scope (reaches both configure and make) so
+# -lemutls_w/-lheapt_w resolve to the real archives. Linux is unaffected (these
+# libs are already on its default search path).
+if [ "$(uname)" = Darwin ]; then
+  _gcclib=$(dirname "$(${FC:-gfortran} -print-libgcc-file-name 2>/dev/null)" 2>/dev/null)
+  [ -n "$_gcclib" ] && [ -d "$_gcclib" ] && export LDFLAGS="-L$_gcclib ${LDFLAGS:-}"
+fi
+##############################
 function Configure() {
   (
   unset PYTHON_VERSION
