@@ -7,7 +7,9 @@ sources:
 requires:
   - CMake
   - Boost
-  - libunwind
+  # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on
+  # macOS; gate the requirement so it drops from the osx graph.
+  - "libunwind:(?!osx)"
   - zlib
   - gdb
   # libdw/libelf for the interpret tool -- system_requirement, taken from /usr.
