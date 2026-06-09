@@ -67,6 +67,21 @@ fi
 function Configure() {
   cmake -E make_directory $INSTALLROOT/tmppdfsets
   ${LHAPDF_ROOT}/bin/lhapdf --pdfdir=$INSTALLROOT/tmppdfsets --listdir=${LHAPDF_ROOT}/share/LHAPDF install cteq6l1 CT10
+  # macOS: the HepMC3 in this stack is built with the ROOT interface, so
+  # whizard's configure probe ("checking if HepMC3 is built with ROOT
+  # interface... yes") defines HEPMC3_ROOTIO and compiles src/hepmc3/
+  # HepMC3Wrap.cpp against ROOT v6.40 headers. Those headers do not compile under
+  # Apple clang 21 / the macOS-26 SDK: TClass has std::atomic members whose copy
+  # constructor is deleted (the same wall that gates RELAX), and HepMC3Wrap.cpp
+  # is compiled without -std=c++17 so ROOT's "requires C++17" #error fires too.
+  # whizard uses ROOT only for the optional HepMC3 RootTree event format, so
+  # force the rootIO probe to "no" on Darwin: HepMC3Wrap.cpp then skips the
+  # #ifdef HEPMC3_ROOTIO ROOT includes and whizard builds with the Ascii/HEPEVT
+  # HepMC3 writers. Idempotent (the original test line is consumed). Linux keeps
+  # full ROOT support.
+  [ "$(uname)" = Darwin ] && perl -i -pe \
+    's{^\s*if \$\{hepmcconfig\} --rootIO \| grep rootIO >/dev/null 2>&1; then}{   if false; then}' \
+    configure
   LCIO_DIR=${LCIO_ROOT} LOOPTOOLS_DIR=${LOOPTOOLS_ROOT}/lib64 LHAPDF_DATA_PATH=$INSTALLROOT/tmppdfsets \
     HOPPET_DIR=${HOPPET_ROOT} LHAPDF_DIR=${LHAPDF_ROOT} HEPMC_DIR=${HEPMC3_ROOT} \
     ./configure --enable-hepmc --enable-fastjet --with-fastjet=${FASTJET_ROOT} \
