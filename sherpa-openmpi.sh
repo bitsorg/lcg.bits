@@ -56,6 +56,11 @@ export OPAL_PREFIX="${OPENMPI_ROOT}"
 function Configure() {
   # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
   # plain sherpa recipe; see sherpa.sh.
+  # OpenLoops is gated behind the `openloops` flavour. When it is off the
+  # dependency is dropped and OPENLOOPS_ROOT is unset, so disable it in CMake.
+  # (Passing an empty -DSHERPA_ENABLE_OPENLOOPS= makes Sherpa's ConfigLogger.cmake
+  # fail: `if( STREQUAL "ON")` -> "Unknown arguments".)
+  local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
   # MCFM is gated off on macOS (qcdloop needs GCC quadmath); disable it when the
   # edge is dropped (MCFM_ROOT unset).
   local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
