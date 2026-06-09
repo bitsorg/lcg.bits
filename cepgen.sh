@@ -57,6 +57,21 @@ if pat.search(s):
 else:
     print("cepgen: anonymous-namespace block not found (already patched / upstream changed)")
 PY
+  # macOS: CepGen/CMakeLists.txt globs every CepGen subdirectory into
+  # `core_includes` and passes them as per-subdir -I include paths
+  # (EXT_HEADERS ${core_includes}). On macOS's case-insensitive filesystem those
+  # paths make libc++'s `#include <math.h>` (from <cmath>) resolve to CepGen's
+  # own CepGen/Utils/Math.h instead of the SDK header (likewise String.h/Limits.h
+  # etc.), so every translation unit fails with "<cmath> tried including <math.h>
+  # but didn't find libc++'s <math.h>". All CepGen code includes its headers
+  # fully qualified ("CepGen/Utils/Math.h") via the project-root include
+  # (include_directories(${PROJECT_SOURCE_DIR})), so the per-subdir paths are
+  # redundant. Point EXT_HEADERS at the project root instead (already on the
+  # include path; no header there shadows a standard one). Linux's case-sensitive
+  # FS never had the collision and is unaffected (the patch is Darwin-only).
+  [ "$(uname)" = Darwin ] && perl -i -pe \
+    's/EXT_HEADERS \$\{core_includes\}/EXT_HEADERS \$\{PROJECT_SOURCE_DIR\}/' \
+    "${SOURCEDIR}/CepGen/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
