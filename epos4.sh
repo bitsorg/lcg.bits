@@ -39,11 +39,20 @@ function Configure() {
   # add -fallow-argument-mismatch for the legacy REAL(8)/REAL(4) call mismatches
   # (gfortran >= 10 errors on these; the project never adds it). Modules that
   # already get these flags just receive them twice, which is harmless.
+  #
+  # -mcmodel=large is x86_64-only here: EPOS's huge static COMMON blocks need the
+  # large code model on Linux/x86_64, but arm64 gfortran has not implemented it
+  # ("f951: sorry, unimplemented: code model 'large' not supported yet"), and it
+  # would fail CMake's Fortran compiler-detection TryCompile before any EPOS file
+  # is built. AArch64's default (small) code model addresses static data via
+  # ADRP/GOT and handles EPOS's COMMON blocks without it, so drop it on arm64.
+  local _fflags="-fallow-argument-mismatch -cpp -std=legacy -fno-automatic"
+  [ "$(uname -m)" != arm64 ] && _fflags="$_fflags -mcmodel=large"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_Fortran_FLAGS="-fallow-argument-mismatch -cpp -std=legacy -fno-automatic -mcmodel=large" \
+    -DCMAKE_Fortran_FLAGS="$_fflags" \
     -DCOMPILE_OPTION=BASIC \
     -DCOMPILE_LIBRARY=ON \
     -DFASTSYS="${FASTJET_ROOT}" \
