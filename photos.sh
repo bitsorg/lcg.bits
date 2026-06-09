@@ -14,6 +14,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -31,16 +32,12 @@ function Make() {
   # Belt-and-suspenders: replace any g77 remaining in generated build files.
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
     xargs perl -i -pe "s/\bg77\b/${F77}/g"
-  # macOS: Makeshared.subdir links libphotos with `$(CXX) ... -shared`, which does
-  # not pull in libgfortran, so the Fortran objects' libgfortran runtime symbols
-  # (__gfortran_st_write, ...) are undefined. Linux's flat namespace leaves them
-  # undefined (resolved at runtime); macOS's two-level namespace rejects them.
-  # Add -undefined dynamic_lookup to restore the Linux behaviour, plus
-  # -headerpad_max_install_names so bits' relocate-me.sh can rewrite the install
-  # name. Idempotent via the grep guard. Linux unchanged.
-  if [ "$(uname)" = Darwin ] && ! grep -q 'dynamic_lookup' Makeshared.subdir; then
-    perl -i -pe 's/-o \$\@ -shared\s*$/-o \$\@ -shared -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names/' Makeshared.subdir
-  fi
+  # macOS: Makeshared.subdir's `-shared` link leaves libphotos' Fortran objects'
+  # libgfortran symbols undefined, which the two-level namespace rejects. Add
+  # -undefined dynamic_lookup (+ headerpad for relocation), as Linux resolves
+  # them at runtime via its flat namespace.
+  bits_is_macos && bits_file_sub Makeshared.subdir '-o \$\@ -shared\s*$' \
+    '-o $@ -shared -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names'
   make ${JOBS:+-j $JOBS}
 }
 

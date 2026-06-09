@@ -17,6 +17,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -50,15 +51,13 @@ function Make() {
   # the gfortran branch via the configure ARCH redirect in Prepare() and keeps
   # the ELF link. Idempotent via the grep guard.
   local _cc=()
-  if [ "$(uname)" = Darwin ]; then
-    if ! grep -q 'dynamiclib' Makeshared.subdir; then
-      perl -i -pe 's/-shared -Wl,-soname,\$\(notdir \$\@\)/-dynamiclib -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names/g' \
-        Makeshared.subdir
-    fi
-    # gfortran -M lexes the source, so the `$(CC) -M` dependency step also needs
-    # -ffixed-line-length-132 or it truncates lines at column 72 and prints
-    # spurious "Missing ')'" errors (those are swallowed by the .d rule, but
-    # keep the log clean). CC is used only for that step (no .c sources).
+  if bits_is_macos; then
+    # Rewrite Makeshared.subdir's ELF shared-link (-shared -Wl,-soname, which
+    # Apple ld rejects) to Mach-O (-dynamiclib + dynamic_lookup + headerpad).
+    bits_file_sub Makeshared.subdir '-shared -Wl,-soname,\$\(notdir \$\@\)' \
+      '-dynamiclib -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names'
+    # clang infers Fortran for .F and fails the `$(CC) -M` dep step; point CC at
+    # gfortran (-ffixed-line-length-132 to match the source layout).
     _cc=(FC=gfortran "CC=gfortran -ffixed-line-length-132")
   fi
   # GCC 15 rejects rank mismatches (scalar IDUM passed where DADMPI/DADMKK

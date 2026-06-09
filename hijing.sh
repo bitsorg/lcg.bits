@@ -14,6 +14,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -34,15 +35,11 @@ function Make() {
   # Fortran source files (.f/.F) are excluded.
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
     xargs perl -i -pe "s/g77/${F77}/g"
-  # macOS: the vendored Makeshared.subdir links the shared lib with ELF flags
-  # ($(CXX) ... -shared -Wl,-soname,...), which macOS ld rejects ("unknown
-  # options: -soname"). Rewrite that link to macOS conventions: -dynamiclib,
-  # allow undefined symbols (two-level namespace), and reserve Mach-O header pad
-  # so bits' relocate-me.sh can rewrite the install name. Linux keeps the ELF
-  # flags. Idempotent via the grep guard.
-  if [ "$(uname)" = Darwin ] && ! grep -q 'dynamiclib' Makeshared.subdir; then
-    perl -i -pe 's/-shared -Wl,-soname,.*$/-dynamiclib -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names/' Makeshared.subdir
-  fi
+  # macOS: rewrite Makeshared.subdir's ELF shared-lib link (-shared -Wl,-soname,
+  # which Apple ld rejects) to macOS conventions (-dynamiclib + dynamic_lookup +
+  # headerpad).
+  bits_is_macos && bits_file_sub Makeshared.subdir '-shared -Wl,-soname,.*$' \
+    '-dynamiclib -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names'
   make ${JOBS:+-j $JOBS}
 }
 
