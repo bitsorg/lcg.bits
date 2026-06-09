@@ -25,6 +25,14 @@ function Configure() {
   # Fortran include files under include/dpmjet/inc/.  The DPMJet 3.0-6 tarball
   # bits builds is a flat set of monolithic .f files with no such headers, so
   # -DENABLE_DPMJET=ON cannot compile.  lcgcmake never enables this combination.
+  #
+  # macOS: starlight's CMakeLists does `set(CMAKE_CXX_FLAGS "-Wall -Wextra
+  # -Werror ...")` (overwrite, not append), so the -DCMAKE_CXX_FLAGS passed below
+  # is clobbered and cannot relax warnings. Apple clang then errors on warnings
+  # gcc never emits (e.g. C++ variable-length arrays, -Wvla-cxx-extension, in
+  # inputParser.cpp / starlightStandalone.cpp). Strip -Werror from the CMakeLists
+  # so those stay warnings. Linux keeps -Werror (gcc doesn't trip on this code).
+  [ "$(uname)" = Darwin ] && perl -i -pe 's/ -Werror\b//g' "${SOURCEDIR}/CMakeLists.txt"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
