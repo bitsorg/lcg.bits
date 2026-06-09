@@ -40,6 +40,18 @@ function Make() {
       'all install install-am install-exec install-data installcheck check clean distclean mostlyclean maintainer-clean dvi pdf ps html info tags ctags:' \
       '@:' > doc/Makefile
   fi
+  # macOS: the VBFNLO shared libraries cross-reference each other's Fortran
+  # routines (e.g. libHELAS uses dotcc_/dotrc_ defined in another VBFNLO lib),
+  # resolved at load time. Linux's flat namespace allows undefined symbols in a
+  # shared library; macOS's two-level namespace rejects them. The bundled libtool
+  # left allow_undefined_flag="" because its MACOSX_DEPLOYMENT_TARGET version case
+  # does not match 14.0, so the dylib link omits the flag. Patch the generated
+  # libtool(s) to allow undefined symbols (dynamic_lookup), matching Linux.
+  # Idempotent; Linux has no such libtool lines to match.
+  if [ "$(uname)" = Darwin ]; then
+    find . -name libtool -type f -exec perl -i -pe \
+      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
+  fi
   make ${JOBS:+-j $JOBS}
 }
 function Configure() {
