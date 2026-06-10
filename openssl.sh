@@ -36,9 +36,20 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --root-inc --pkgconfig"
 ##############################
 function Configure() {
-  # platform-conditional: ./Configure darwin64-""-cc ELSE ./config no-shared -fPIC  --prefix=$INSTALLROOT --openssldir=$INSTALLROOT/etc/openssl -I${ZLIB_ROOT}/include -L${ZLIB_ROOT}/lib
+  # OpenSSL uses its own ./config (autodetect) / ./Configure (explicit target),
+  # not ./configure, so the AutoToolsRecipe default doesn't apply. Build static
+  # (no-shared, -fPIC); macOS needs the explicit darwin64 target.
+  local _common=(no-shared -fPIC
+    --prefix="$INSTALLROOT" --openssldir="$INSTALLROOT/etc/openssl"
+    -I"${ZLIB_ROOT}/include" -L"${ZLIB_ROOT}/lib")
+  if bits_is_macos; then
+    ./Configure "darwin64-$(uname -m)-cc" "${_common[@]}"
+  else
+    ./config "${_common[@]}"
+  fi
 }
