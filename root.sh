@@ -52,13 +52,6 @@ function Prepare() {
   # All source patches must come BEFORE rsync: ROOT's cmake copies LLVM headers
   # from the rsync'd build tree, so patching after rsync uses the unpatched copy.
 
-  # ROOT's CMakeLists.txt resets CMAKE_MODULE_PATH, so we patch the source instead.
-  # FindDavix.cmake uses only pkg_check_modules; prepend a find_library fallback via
-  # DAVIX_ROOT for when davix.pc is absent. Guard prevents double-patching.
-  if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
-    perl -i -pe 's|^find_package\(PkgConfig\)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root \${DAVIX_ROOT})\n  else()\n    set(_davix_root \$ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS \${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS \${_davix_root}/lib \${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS \${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES \${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY \${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: \${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
-  fi
-
   # macOS RTTI fix: cling is built -fno-rtti and Clang (unlike GCC) then emits no
   # typeinfo for cling::InterpreterCallbacks, so linking rootcling_stage1 fails. Compile
   # that one TU with -frtti, as cling already does for Exception.cpp. Guarded.
@@ -217,7 +210,6 @@ function Configure() {
     ${XZ_ROOT:+-DLIBLZMA_ROOT="$XZ_ROOT"}                                     \
     -Ddavix=ON                                                              \
     -Dbuiltin_davix=OFF                                                     \
-    ${DAVIX_ROOT:+-DDAVIX_ROOT="$DAVIX_ROOT"}                                 \
     ${JSONMCPP_ROOT:+-Dnlohmann_json_ROOT="$JSONMCPP_ROOT"}                   \
     -Dbuiltin_nlohmannjson=OFF                                              \
     ${GL2PS_ROOT:+-Dgl2ps_ROOT="$GL2PS_ROOT"}                                 \
