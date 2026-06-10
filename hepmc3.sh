@@ -7,11 +7,8 @@ sources:
 requires:
   - CMake
   - ROOT
-  # Direct dependency so Python_ROOT and Python_config_version_twodigit[_nodot]
-  # are exported into the build env (ROOT only pulls Python transitively, which
-  # does not propagate those vars). Without them the SITEARCH / PYTHON_VERSIONS /
-  # Python_EXECUTABLE overrides below expand empty and CMake picks the Homebrew
-  # system Python instead, installing the bindings outside INSTALLROOT.
+  # Direct dep so Python_ROOT and Python_config_version_twodigit[_nodot] reach
+  # the build env (ROOT only pulls Python transitively, not propagating them).
   - Python
 build_requires:
   - bits-recipe-tools
@@ -26,15 +23,9 @@ license: LGPL-2.1-only
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  # macOS: CMake's find_package(Python) prefers Homebrew's system Python (3.14)
-  # over the bits Python, so HepMC3 builds the bindings for 3.14 and installs them
-  # into /opt/homebrew/lib/python3.14/site-packages (EPERM). Worse, the existing
-  # SITEARCH/PYTHON_VERSIONS overrides reference ${Python_config_version_twodigit}
-  # — a variable that is defined nowhere, so they always expand empty and HepMC3
-  # falls back to the detected interpreter's site-packages. On Darwin: pin the
-  # interpreter to the bits Python and compute the version from Python_ROOT, so
-  # the bindings build for the bits Python and install into INSTALLROOT. Gated to
-  # Darwin so the (unchanged) Linux path is byte-identical.
+  # macOS: find_package(Python) prefers Homebrew Python (installs bindings to an
+  # unwritable path), and the existing SITEARCH/version overrides expand empty.
+  # On Darwin pin the bits Python and compute its version explicitly.
   local _py=()
   if bits_is_macos; then
     # NB: the bits env var is PYTHON_ROOT (uppercase); the original

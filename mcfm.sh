@@ -19,14 +19,10 @@ license: LicenseRef-MCFM
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# macOS: MCFM is not yet ported to macOS. Its bundled precision-math libraries
-# pin it to GCC — qcdloop needs GCC's quadmath.h / libquadmath / __float128
-# (unsupported by Apple clang on arm64) and qd's configure fails under
-# AppleClang — while its std::-typed CXX_Interface (consumed by Sherpa) wants
-# the stack's AppleClang/libc++, so neither all-clang nor all-GNU is clean.
-# Gate it off on Darwin (empty package via the guards below + MakeModule) so a
-# whole-stack macOS build doesn't fail on it; consumers gate the edge with
-# "mcfm:(?!osx)". Builds normally on Linux. Remove the guards to resume the port.
+# macOS: not ported. qcdloop needs GCC quadmath/__float128 (no Apple clang
+# arm64) while the std:: CXX_Interface wants libc++, so neither toolchain is
+# clean. Gate off (empty package via the guards below); consumers gate the edge
+# "mcfm:(?!osx)". Remove the guards to resume the port.
 ##############################
 function Configure() {
   bits_is_macos && { mkdir -p "${INSTALLROOT}"; return 0; }
@@ -40,14 +36,9 @@ function Configure() {
 }
 function Make() {
   bits_is_macos && return 0
-  # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
-  # under parallel make, gpl_module.f is compiled before maths_functions.mod has
-  # finished being written, giving
-  #   File 'build/maths_functions.mod' ... is not a GNU Fortran module file
-  # Build only handyG (and its bundled qd) serially, then the rest of MCFM --
-  # which parallelises fine (e.g. vvamp) -- with the full job count. If the
-  # 'handyg' target name is ever unavailable, fall back to a fully serial build
-  # (the known-good behaviour) rather than failing.
+  # handyG has a missing Fortran-module dep that breaks parallel make; build it
+  # (and its bundled qd) serially, then the rest with full -j. Fall back to a
+  # fully serial build if the 'handyg' target is unavailable.
   if cmake --build . --target handyg -- -j1; then
     cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
   else
@@ -61,11 +52,9 @@ function MakeInstall() {
 }
 function PostInstall() {
   bits_is_macos && return 0
-  # MCFM's own cmake install does not expose the library/headers the way
-  # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
-  # library named 'mcfm' or 'MCFM'). Mirror lcgcmake: install the CXX interface
-  # headers under include/MCFM and the library under BOTH names. PostInstall runs
-  # in the build directory, so search it (and the install lib) for libmcfm.so.
+  # MCFM's install doesn't expose the lib/headers as Sherpa's FindMCFM expects;
+  # mirror lcgcmake: install CXX_Interface headers under include/MCFM and the lib
+  # under both libmcfm and libMCFM.
   mkdir -p "${INSTALLROOT}/include" "${INSTALLROOT}/lib"
   [ -d "${SOURCEDIR}/src/Inc/MCFM" ] && cp -rf "${SOURCEDIR}/src/Inc/MCFM" "${INSTALLROOT}/include/"
   local _ext _lib

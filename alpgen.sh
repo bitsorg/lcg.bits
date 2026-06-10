@@ -18,15 +18,9 @@ MODULE_OPTIONS="--bin --lib"
 function Prepare() {
   local tgz="alpgen_v214.tgz"
   curl -fSL "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/${tgz}" -o "${tgz}"
-  # Strip a single wrapping directory only if the tarball has exactly one
-  # top-level entry. The previous "head -1 | cut" heuristic is order-dependent:
-  # it picked the first listed entry as the prefix, which under macOS bsdtar
-  # (whose listing order differs from GNU tar) was a sub-directory file. That
-  # made it --strip-components=1 the ALPGEN tarball — which has many top-level
-  # entries (compile.mk, alplib/, *work/, ...) and NO wrapping dir — flattening
-  # alplib/ and the process dirs together and dropping compile.mk
-  # ("../compile.mk: No such file"). Counting distinct top-level components is
-  # order-independent and matches the (correct) GNU-tar behaviour on Linux.
+  # Strip a wrapping dir only if the tarball has exactly one top-level entry.
+  # (The old head -1 heuristic was order-dependent and mis-stripped under macOS
+  # bsdtar, flattening ALPGEN's many top-level dirs and dropping compile.mk.)
   local ntop
   ntop=$(tar tzf "${tgz}" | sed -e 's#/.*##' | sort -u | grep -c .)
   if [ "${ntop}" -eq 1 ]; then
