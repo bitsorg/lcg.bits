@@ -14,11 +14,9 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Prepare() {
-  # The CERN mirror tarball is double-gzipped: the outer .tar.gz decompresses
-  # to an inner gzip-compressed .tar (not a plain tar), so bits' standard
-  # tar xf fails.  Download and unpack both layers manually.
-  # Note: %(version)s interpolation only works in YAML sources: fields;
-  # hardcode the version here as is done in other manual-fetch recipes.
+  # The CERN mirror tarball is double-gzipped (outer .tar.gz holds a still-gzip'd
+  # .tar), so bits' standard tar xf fails; fetch and unpack both layers manually.
+  # Version is hardcoded: %(version)s interpolation works only in YAML sources:.
   curl -fSL \
     "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/chaplin-1.2.tar.gz" \
     -o chaplin.tar.gz

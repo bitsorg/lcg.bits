@@ -28,13 +28,9 @@ function Configure() {
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }
 function PostInstall() {
-  # RAIDA's generated AIDAConfig.cmake pulls in RAIDAConfig.cmake via
-  # INCLUDE("@CMAKE_INSTALL_PREFIX@/RAIDAConfig.cmake"), but the config files are
-  # actually installed under lib/cmake/RAIDA/. The hardcoded prefix path doesn't
-  # exist, so every consumer that does find_package(AIDA) — all of Marlin via
-  # MARLIN_AIDA=ON — fails with "INCLUDE could not find requested file". Repoint
-  # the include at the sibling RAIDAConfig.cmake using CMAKE_CURRENT_LIST_DIR,
-  # which is resolved when the consumer loads the config and is relocation-safe.
+  # AIDAConfig.cmake INCLUDEs RAIDAConfig.cmake via a hardcoded @CMAKE_INSTALL_PREFIX@
+  # path that doesn't exist (configs land in lib/cmake/RAIDA/), breaking find_package(AIDA)
+  # consumers (Marlin). Repoint it at the sibling via relocation-safe CMAKE_CURRENT_LIST_DIR.
   local _aida
   _aida="$(find "${INSTALLROOT}" -name AIDAConfig.cmake -print -quit 2>/dev/null)"
   if [ -n "${_aida}" ]; then

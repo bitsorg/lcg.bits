@@ -22,12 +22,9 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-# PythonRecipe gives us PYTHON_EXE, SITE_PACKAGES and a PYTHONPATH built from
-# every dependency's site-packages (needed: numpy/onnx/packaging/wheel for the
-# wheel build).  We override the build steps below: onnxruntime cannot be
-# `pip install .`-ed, because its setup.py only packages an already-built tree
-# (it needs onnxruntime/capi/build_and_package_info.py and libonnxruntime.so,
-# produced by onnxruntime's own CMake build via tools/ci_build/build.py).
+# PythonRecipe gives PYTHON_EXE/SITE_PACKAGES and a PYTHONPATH from deps' site-
+# packages (numpy/onnx/packaging/wheel). We override the build steps: setup.py
+# only packages an already-built tree, so drive tools/ci_build/build.py instead.
 . $(bits-include PythonRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib --python"
@@ -36,14 +33,10 @@ _ORT_CONFIG="Release"
 _ORT_BUILDDIR="build"
 ##############################
 function Make() {
-  # Drive onnxruntime's build: configure (CMake, fetching abseil/protobuf/onnx/
-  # flatbuffers/re2/...), compile libonnxruntime.so, generate the capi build
-  # info, and build the python wheel.  Run with the bits Python so the wheel
-  # build sees our numpy/packaging/wheel via PYTHONPATH.
-  # --allow_running_as_root is defined only in build.py's add_linux_specific_args,
-  # so it is unrecognized on macOS (where the build runs as the user, not root,
-  # and the flag is unnecessary). Pass it on non-Darwin only. Also: nproc does not
-  # exist on macOS — getconf works on both (and is only used if JOBS is unset).
+  # Drive onnxruntime's build (CMake configure, compile, capi info, python wheel)
+  # with the bits Python so the wheel sees our deps via PYTHONPATH.
+  # --allow_running_as_root is Linux-only in build.py, so pass it on non-Darwin
+  # only. getconf replaces nproc (which is absent on macOS).
   local _extra=()
   [ "$(uname)" != Darwin ] && _extra+=(--allow_running_as_root)
   "${PYTHON_EXE}" tools/ci_build/build.py \

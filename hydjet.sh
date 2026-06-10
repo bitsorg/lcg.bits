@@ -26,15 +26,9 @@ function Prepare() {
 function Make() {
   # -std=legacy matches the flag used by lcgcmake; needed for old Fortran-77 code
   local fflags="-std=legacy -O2 -fPIC"
-  # macOS shared libraries are .dylib built with -dynamiclib, not .so/-shared.
-  # libhydjet references JETSET/PYTHIA routines (pyevnt_, pyinit_, gauss_, ...)
-  # that live in the other library; macOS's two-level namespace rejects such
-  # undefined symbols in a dylib, whereas Linux's flat namespace allows them.
-  # Allow flat-namespace lazy resolution (matching the ELF behaviour) on macOS.
-  # -headerpad_max_install_names reserves space in the Mach-O header so bits'
-  # relocate-me.sh can rewrite the (short) LC_ID_DYLIB install name to the long
-  # absolute store path via install_name_tool — without it the unpack/relocate
-  # step fails ("larger updated load commands do not fit").
+  # macOS: build .dylib with -dynamiclib; libhydjet references JETSET/PYTHIA routines
+  # in the other lib, so allow flat-namespace lazy resolution (the -headerpad in
+  # bits_macos_undefined_ldflags also reserves Mach-O space for relocate-me.sh).
   local _so=so _shared=-shared _undef=
   if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} $fflags -c hydjet1_8.f -o hydjet.o

@@ -34,11 +34,9 @@ function Make() {
   # -I that consumes the hardcoded -c flag, turning compiles into link steps.
   local _inc="-I../include${LHAPDF_ROOT:+ -I${LHAPDF_ROOT}/include}"
   local _libs="${LHAPDF_ROOT:+$("${LHAPDF_ROOT}/bin/lhapdf-config" --ldflags)}"
-  # macOS: sys_calc links Fortran objects with clang++, which requests
-  # -lgfortran but doesn't know where libgfortran lives ("ld: library
-  # 'gfortran' not found"). On Linux the bits GCC-Toolchain puts it on the
-  # default link path; on macOS gfortran comes from Homebrew gcc, so ask the
-  # Fortran compiler for libgfortran's directory and add -L for it.
+  # macOS: sys_calc links Fortran objects with clang++ but doesn't know where
+  # Homebrew gcc's libgfortran lives; ask the Fortran compiler for its directory
+  # and add -L for it.
   if bits_is_macos; then
     local _fc="${FC:-gfortran}"
     local _gfpath; _gfpath=$("$_fc" -print-file-name=libgfortran.dylib 2>/dev/null)

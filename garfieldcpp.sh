@@ -21,21 +21,15 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
-  # macOS: with C++>=17, Garfield's NeBem assumes std::comp_ellint_1/2 exist and
-  # uses them instead of GSL (defining WITHOUT_GSL). But libc++ (Apple's C++ std
-  # lib) does not implement the C++17 special math functions, so Isles.c fails
-  # ("no member named 'comp_ellint_1' in namespace 'std'"). Force the GSL code
-  # path (GSL is already a dependency and Isles.c uses gsl_sf_ellint_Kcomp/Ecomp).
-  # On Linux libstdc++ has the std:: functions, so leave the default (OFF) and the
-  # build is unchanged there.
+  # macOS: with C++>=17 NeBem uses std::comp_ellint_1/2 instead of GSL, but
+  # libc++ lacks the C++17 special math functions, so Isles.c fails. Force the
+  # GSL code path (GSL is already a dep; Isles.c uses gsl_sf_ellint_Kcomp/Ecomp).
   local _gsl=()
   if bits_is_macos; then
     _gsl+=(-DGARFIELD_WITH_GSL=ON)
-    # libc++ does not pull in <stdlib.h> as transitively as GNU's libstdc++, so
-    # some NeBem sources (Isles.c, Vector.c) that call exit()/etc. without
-    # including it fail to compile ("use of undeclared identifier 'exit'").
-    # Pre-include <stdlib.h> for the whole build — harmless for a standard C
-    # header — so those declarations are always available.
+    # libc++ doesn't transitively include <stdlib.h> like libstdc++, so NeBem
+    # sources (Isles.c, Vector.c) calling exit() without it fail to compile.
+    # Pre-include <stdlib.h> for the whole build (harmless standard C header).
     _gsl+=(-DCMAKE_CXX_FLAGS="-include stdlib.h")
   fi
   cmake "${SOURCEDIR}" \

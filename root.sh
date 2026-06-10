@@ -1,9 +1,8 @@
 package: ROOT
 description: CERN ROOT data analysis framework
 version: "%(tag_basename)s"
-# Default (non-macOS) ROOT version. macOS is pinned to v6.40.00 via the
-# "ROOT:osx" arch-gated override in stacks defaults-dev4.sh, because Apple
-# clang / recent Xcode need 6.40; other platforms stay on this stable tag.
+# Default (non-macOS) ROOT version. macOS is pinned to v6.40.00 via the "ROOT:osx"
+# override in stacks defaults-dev4.sh (Apple clang needs 6.40).
 tag: "v6-38-00"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
@@ -50,26 +49,19 @@ prepend_path:
 MODULE_OPTIONS="--bin --lib --cmake --pylib"
 ##############################
 function Prepare() {
-  # All source patches must come BEFORE rsync.  ROOT's cmake copies LLVM headers
-  # from the build dir's rsync'd tree (not from SOURCEDIR) into its own build/
-  # subtree; if we patch after rsync, the build dir gets the unpatched copy.
+  # All source patches must come BEFORE rsync: ROOT's cmake copies LLVM headers
+  # from the rsync'd build tree, so patching after rsync uses the unpatched copy.
 
-  # ROOT's CMakeLists.txt does set(CMAKE_MODULE_PATH ...) which replaces any
-  # -DCMAKE_MODULE_PATH passed on the command line, so we must patch the source.
-  # FindDavix.cmake uses only pkg_check_modules; prepend a find_library fallback
-  # via DAVIX_ROOT so discovery works even when davix.pc is absent or misplaced.
-  # Guard prevents double-patching on reruns.
+  # ROOT's CMakeLists.txt resets CMAKE_MODULE_PATH, so we patch the source instead.
+  # FindDavix.cmake uses only pkg_check_modules; prepend a find_library fallback via
+  # DAVIX_ROOT for when davix.pc is absent. Guard prevents double-patching.
   if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
     perl -i -pe 's|^find_package\(PkgConfig\)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root \${DAVIX_ROOT})\n  else()\n    set(_davix_root \$ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS \${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS \${_davix_root}/lib \${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS \${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES \${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY \${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: \${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
   fi
 
-  # macOS RTTI fix for cling: cling is compiled -fno-rtti, and unlike GCC (which
-  # still emits a class's typeinfo for its vtable), Clang with -fno-rtti emits
-  # NONE. So 'typeinfo for cling::InterpreterCallbacks' is absent, and linking
-  # rootcling_stage1 fails because ROOT core (TRootClingCallbacks, compiled with
-  # RTTI) references it. Emit it by compiling just that one TU with -frtti — the
-  # key function (~InterpreterCallbacks) lives there — exactly as cling already
-  # does for Exception.cpp. Darwin-only; guarded; a no-op if the line is absent.
+  # macOS RTTI fix: cling is built -fno-rtti and Clang (unlike GCC) then emits no
+  # typeinfo for cling::InterpreterCallbacks, so linking rootcling_stage1 fails. Compile
+  # that one TU with -frtti, as cling already does for Exception.cpp. Guarded.
   _cling_cm="${SOURCEDIR}/interpreter/cling/lib/Interpreter/CMakeLists.txt"
   if bits_is_macos && [ -f "${_cling_cm}" ] \
      && ! grep -q 'bits: InterpreterCallbacks rtti' "${_cling_cm}"; then
@@ -83,10 +75,8 @@ function Configure() {
   # Default ROOT_TESTING to OFF unless set externally
   ROOT_TESTING=${ROOT_TESTING:-OFF}
 
-  # Detect C++ standard from environment before unsetting flags
-  # Default to C++20: podio and other modern packages require it.
-  # Still honour any explicit -std=c++NN in CXXFLAGS so stacks that
-  # deliberately pin an older standard are not silently upgraded.
+  # Detect C++ standard before unsetting flags. Default to C++20 (podio etc. need it),
+  # but honour any explicit -std=c++NN in CXXFLAGS so a pinned standard isn't upgraded.
   CMAKE_CXX_STANDARD=20
   [[ "$CXXFLAGS" == *'-std=c++11'* ]] && CMAKE_CXX_STANDARD=11 || true
   [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14 || true
@@ -94,10 +84,8 @@ function Configure() {
   [[ "$CXXFLAGS" == *'-std=c++20'* ]] && CMAKE_CXX_STANDARD=20 || true
   [[ "$CXXFLAGS" == *'-std=c++23'* ]] && CMAKE_CXX_STANDARD=23 || true
 
-  # Version-gated cmake flags. Strip the leading 'v' AND normalise '-' to '.'
-  # so dash-form tag versions (e.g. v6-40-00 -> 6.40.00) compare correctly with
-  # the dotted thresholds below; sort -V mis-orders mixed '-'/'.' otherwise
-  # (it even ranks 6-40-00 below 6.36.99).
+  # Version-gated flags: strip leading 'v' and normalise '-' to '.' so dash-form
+  # tags (v6-40-00 -> 6.40.00) compare correctly (sort -V mis-orders mixed '-'/'.').
   _root_ver="${PKGVERSION#v}"; _root_ver="${_root_ver//-/.}"
   # _ver_ge A B: true if version A >= version B
   _ver_ge() { [[ "$(printf '%s\n' "$1" "$2" | sort -V | head -1)" == "$2" ]]; }
@@ -142,24 +130,13 @@ function Configure() {
       ;;
   esac
 
-  # Python discovery: do NOT pass Python3_ROOT_DIR or Python3_EXECUTABLE to cmake.
-  # ROOT's cmake uses FindPython3 with COMPONENTS Interpreter Development NumPy.
-  # When Python3_ROOT_DIR is set, cmake enables NO_DEFAULT_PATH and bypasses the
-  # sysconfig-based library search; this breaks library discovery for non-standard
-  # Python builds (e.g. Python 3.14 on macOS).
-  # Instead, rely on PATH: the Python module's --bin flag prepends $PYTHON_ROOT/bin,
-  # so cmake finds the right python3 on PATH and uses sysconfig to discover the
-  # include dir and libpython location automatically — exactly as lcgcmake does.
+  # Python discovery: do NOT pass Python3_ROOT_DIR/Python3_EXECUTABLE — that makes
+  # FindPython3 use NO_DEFAULT_PATH and skip the sysconfig library search, breaking
+  # non-standard builds. Rely on PATH (--bin prepends $PYTHON_ROOT/bin), as lcgcmake does.
 
-  # Build PYTHONPATH before calling cmake.  bits' init.sh automatically adds
-  # $PKG_ROOT/bin to PATH and $PKG_ROOT/lib to LD_LIBRARY_PATH for every dep,
-  # but does NOT propagate lib/pythonX.Y/site-packages to PYTHONPATH (that is
-  # only done in the TCL module files used post-install, not during builds).
-  # Without PYTHONPATH, cmake's FindPython3 cannot run
-  #   "import numpy; numpy.get_include()"
-  # and the NumPy component detection fails, blocking tmva-pymva.
-  # We replicate PythonRecipe's approach: query the interpreter for the exact
-  # version, then scan every *_ROOT env var for a matching site-packages dir.
+  # Build PYTHONPATH before cmake: init.sh doesn't propagate deps' site-packages
+  # during builds, so FindPython3's `import numpy` fails (blocks tmva-pymva). Query
+  # the interpreter version, then scan every *_ROOT for a matching site-packages dir.
   if [[ -n "${PYTHON_ROOT}" ]]; then
     _pyver=$("${PYTHON_ROOT}/bin/python3" -c \
       'import sys; print("%d.%d" % sys.version_info[:2])' 2>/dev/null || true)
@@ -172,12 +149,9 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # Use ROOT's bundled copies of these libraries (they are not provided as
-  # separate bits packages, and -Dfail-on-missing=ON turns a missing external
-  # into a fatal configure error). ROOT 6.40 still ships and supports all these
-  # builtin_* options — it only flipped their default to OFF (prefer system) —
-  # EXCEPT builtin_glew, which 6.40 removed (GLEW/the old GL viewer was dropped),
-  # and 6.40 also needs -Dcurl=ON.
+  # Use ROOT's bundled copies (no bits package, and -Dfail-on-missing makes a
+  # missing external fatal). 6.40 still supports these builtin_* options (just
+  # defaults them OFF) EXCEPT builtin_glew (removed in 6.40); 6.40 also needs -Dcurl=ON.
   if _ver_ge "$_root_ver" "6.40.00"; then
     _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON -Dcurl=ON"
   else
@@ -191,11 +165,9 @@ function Configure() {
     _test_flags="-Dpgsql=OFF"
   fi
 
-  # SOFIE ONNX model importer: enabled when protobuf is available.
-  # Also pass Protobuf_ROOT and absl_ROOT so protobuf's cmake config can resolve
-  # find_dependency(absl) and create the absl::strings target required by
-  # utf8_range-targets.cmake.  absl is a transitive dep (via protobuf) so
-  # ABSL_ROOT is set in the environment but invisible to cmake due to CMP0144.
+  # SOFIE ONNX importer: enabled when protobuf is available. Also pass Protobuf_ROOT
+  # and absl_ROOT so protobuf's config resolves find_dependency(absl) (absl is a
+  # transitive dep, so ABSL_ROOT is set but invisible to cmake under CMP0144).
   _sofie_flag=""
   if [[ -n "${PROTOBUF_ROOT}" ]]; then
     _sofie_flag="-Dtmva-sofie=ON -DProtobuf_ROOT="${PROTOBUF_ROOT}""
@@ -315,10 +287,9 @@ EOF
   done
   rm -fv "$INSTALLROOT"/bin/*.bak
 
-  # Append ROOT-specific env vars to the ModuleRecipe-generated modulefile.
-  # ModuleRecipe (--bin --lib --cmake --pylib) already adds PATH, LD_LIBRARY_PATH,
-  # CMAKE_PREFIX_PATH, PYTHONPATH, ROOT_ROOT, and ROOT_INCLUDE_DIR.
-  # We append the variables that ROOT users and dependent packages additionally need.
+  # Append ROOT-specific env vars to the ModuleRecipe-generated modulefile
+  # (it already adds PATH, LD_LIBRARY_PATH, CMAKE_PREFIX_PATH, PYTHONPATH,
+  # ROOT_ROOT, ROOT_INCLUDE_DIR); add the ones ROOT users/dependents also need.
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
 setenv ROOTSYS $PKG_ROOT
 setenv ROOT_RELEASE $version

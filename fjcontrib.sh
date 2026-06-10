@@ -21,10 +21,8 @@ function Configure() {
   ./configure --prefix=$INSTALLROOT --fastjet-config=${FASTJET_ROOT}/bin/fastjet-config
 }
 function Make() {
-  # Build the static contrib libs and the "fragile" shared library
-  # (libfastjetcontribfragile.so).  Rivet links -lfastjetcontribfragile, so the
-  # shared variant must exist; the default `make` only produces the static lib.
-  # Mirrors lcgcmake's fjcontrib: `make all` + `make fragile-shared`.
+  # Rivet links -lfastjetcontribfragile, but the default `make` builds only the
+  # static lib. Add fragile-shared to also produce libfastjetcontribfragile.so.
   make ${JOBS:+-j $JOBS}
   make fragile-shared
 }

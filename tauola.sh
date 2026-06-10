@@ -37,19 +37,10 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: configure does ARCH=$(uname)="Darwin", which matches none of its
-  # Linux / Linux-gcc4 branches, so it falls through to the legacy defaults
-  # FC=g77 (gone) and CC=gcc. On macOS `gcc` is clang, and the dependency rule
-  # `$(CC) -M file.F` makes clang infer Fortran for the `.F` extension and fail
-  # ("invalid value 'f95' in '-x f95'"). There are no .c sources, so CC is used
-  # only for that .F dependency step; point both FC and CC at gfortran (which
-  # preprocesses `.F` and supports -M). Also rewrite the vendored shared-link
-  # recipe in Makeshared.subdir from ELF conventions (`-shared -Wl,-soname`,
-  # which macOS ld rejects) to Mach-O: -dynamiclib, allow the libgfortran
-  # runtime symbols to resolve at load time (two-level namespace), and reserve
-  # header pad for bits' install-name relocation. Linux is untouched: it takes
-  # the gfortran branch via the configure ARCH redirect in Prepare() and keeps
-  # the ELF link. Idempotent via the grep guard.
+  # macOS: configure's ARCH=Darwin falls through to legacy FC=g77/CC=gcc; gcc is
+  # clang, and the `$(CC) -M file.F` dep rule makes clang infer Fortran and fail.
+  # Point FC and CC at gfortran, and rewrite Makeshared.subdir's ELF shared-link
+  # (-shared -Wl,-soname) to Mach-O. Idempotent via the grep guard.
   local _cc=()
   if bits_is_macos; then
     # Rewrite Makeshared.subdir's ELF shared-link (-shared -Wl,-soname, which
@@ -67,14 +58,9 @@ function Make() {
 }
 
 function MakeInstall() {
-  # tauola's upstream `install` make target wraps a multi-line shell `if … fi`
-  # whose disabled lines are commented with `#` *inside* a backslash-continued
-  # block. /bin/sh then treats the closing `fi` as part of the comment and
-  # aborts ("syntax error: unexpected end of file") — fatal on macOS. Install
-  # the same tree the active part of that rule produces, directly and portably:
-  # config.mk + headers + libraries, with the static archives symlinked into
-  # lib/. Replaces the fragile `make install` on every platform; the installed
-  # tree is identical to the upstream rule's, so Linux is unaffected.
+  # Replace tauola's fragile upstream `install` target (a backslash-continued
+  # shell `if…fi` with `#` comments inside that /bin/sh mis-parses). Install the
+  # same tree directly: config.mk + headers + libs, static archives symlinked into lib/.
   mkdir -p "$INSTALLROOT"
   cp -rf config.mk include lib "$INSTALLROOT/"
   ( cd "$INSTALLROOT/lib" && ls -1 archive/*.a 2>/dev/null | xargs -n 1 ln -sf ) || true

@@ -28,11 +28,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # heaptrack's interpret tool needs elfutils (libdw/libelf >= 0.158), which is
-  # taken from the system. Make sure the system pkg-config dirs are searched so
-  # FindElfutils locates the system libdw.pc even when bits has set a
-  # bits-only PKG_CONFIG_PATH. Also expose the system include/lib roots to
-  # CMake's search so find_path/find_library can see /usr.
+  # The interpret tool needs system elfutils (libdw/libelf); add system pkg-config
+  # dirs so FindElfutils sees libdw.pc, and CMAKE_SYSTEM_PREFIX_PATH=/usr below
+  # so find_path/find_library reach /usr despite the bits-only PKG_CONFIG_PATH.
   export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

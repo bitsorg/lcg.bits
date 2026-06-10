@@ -22,13 +22,9 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: gated off. RELAX builds Reflex/ROOT dictionaries whose generated code
-  # makes the compiler synthesize TClass's copy constructor, which ROOT v6.40
-  # deletes (its std::atomic members are non-copyable): "copying member subobject
-  # of type 'std::atomic<...>' invokes deleted constructor". That is a hard error
-  # under Apple clang / the macOS-26 SDK that no flag can downgrade. RELAX has no
-  # dependents, so produce an empty package; remove the guards (here, Make,
-  # MakeInstall) to resume the port. Linux unchanged.
+  # macOS: gated off. RELAX's Reflex/ROOT dictionaries synthesize TClass's copy ctor,
+  # which ROOT v6.40 deletes (non-copyable std::atomic) — a hard Apple-clang error.
+  # No dependents; empty package. Remove guards (here, Make, MakeInstall) to resume.
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

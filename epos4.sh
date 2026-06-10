@@ -3,10 +3,8 @@ description: EPOS4 hadronic interaction and heavy-ion event generator
 version: "4.0.3.atlas1"
 tag: "4.0.3.atlas1"
 sources:
-  # Upstream tarball is named for the base version (4.0.3); the ".atlas1" suffix
-  # is only the LCG version label, not part of the filename.  In lcgcmake this
-  # comes from "author=4.0.3" in the epos4 package declaration, giving
-  # epos<author>.tgz = epos4.0.3.tgz.
+  # Tarball is named for the base version (epos4.0.3.tgz); the ".atlas1" suffix
+  # is only the LCG version label, not part of the filename.
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/epos4.0.3.tgz
 requires:
   - CMake
@@ -28,10 +26,9 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: gated off. EPOS4's >4 GB static Fortran COMMON can't be addressed by
-  # arm64's code model (no large model in arm64 gfortran), so the final
-  # libepos/Xepos link fails (ADRP out of range). Leaf package -> empty package;
-  # remove this guard + the Make/MakeInstall/PostInstall ones to resume the port.
+  # macOS: gated off. EPOS4's >4 GB static Fortran COMMON exceeds arm64's code
+  # model (no large model in arm64 gfortran), so the libepos/Xepos link fails.
+  # Leaf pkg -> empty pkg; drop this + the Make/MakeInstall/PostInstall gates to port.
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   # The project's CMake doesn't give KW's bas.f EPOS's Fortran flags, so inject
   # them via CMAKE_Fortran_FLAGS (reaches every target) + -fallow-argument-

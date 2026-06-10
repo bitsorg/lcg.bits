@@ -22,19 +22,15 @@ patches:
 MODULE_OPTIONS="--bin"
 ##############################
 function Make() {
-  # MadGraph5_aMC is a Python application that runs in place from its own root;
-  # the only thing to pre-build is the vendored NLO loop-reduction tool CutTools
-  # (built serially -- its makefile is not parallel-safe).  Everything else
-  # MadGraph compiles on demand at run time into the user's output directory
-  # (the ATLAS CVMFS_PATCH plugin redirects that away from the read-only install).
+  # MadGraph runs in place from its own root; only pre-build the vendored CutTools
+  # (serial -- its makefile is not parallel-safe). Everything else compiles at run
+  # time into the user's output dir.
   make -C vendor/CutTools
 }
 function MakeInstall() {
-  # "Install" by relocating the whole patched + partially-built tree into the
-  # prefix; bin/mg5_aMC discovers MG5DIR relative to itself.  MakeRecipe's
-  # default `make install` does not apply (MadGraph has no install target).
-  # First rewrite the build path recorded in the config files to the prefix so
-  # the relocated tree is self-consistent.
+  # No install target: relocate the whole built tree into the prefix (bin/mg5_aMC
+  # finds MG5DIR relative to itself). First rewrite the build path recorded in the
+  # config files to the prefix so the relocated tree is self-consistent.
   local cfg
   for cfg in input/mg5_configuration.txt input/.mg5_configuration_default.txt; do
     [ -f "${cfg}" ] || continue
@@ -46,8 +42,7 @@ function MakeInstall() {
         ./ "${INSTALLROOT}/"
 }
 function PostInstall() {
-  # bin/ is already on PATH via MODULE_OPTIONS=--bin; also expose the MG5 root
-  # for downstream tools that look it up by environment.
+  # Expose the MG5 root for downstream tools that look it up by environment.
   cat >> "${INSTALLROOT}/etc/modulefiles/${PKGNAME}" <<'EOF'
 setenv MADPATH $PKG_ROOT
 setenv MADGRAPH5AMC_ROOT $PKG_ROOT

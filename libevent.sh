@@ -17,21 +17,13 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: libevent's extra / pthreads / openssl sub-libraries reference
-  # libevent_core symbols without linking core. Linux (ELF) resolves these at
-  # load time, but macOS's two-level namespace rejects undefined symbols in a
-  # dylib ("Undefined symbols for architecture arm64: _event_pending,
-  # _evthread_lock_fns_, _evutil_closesocket, ..."). Allow flat-namespace lazy
-  # resolution so the sub-dylibs link, matching the ELF behaviour.
+  # macOS: the extra/pthreads/openssl sub-libs reference libevent_core symbols
+  # without linking core; allow flat-namespace lazy resolution so the sub-dylibs
+  # link (the two-level namespace would reject the undefined symbols).
   bits_is_macos && export LDFLAGS="$(bits_macos_undefined_ldflags)${LDFLAGS:+ ${LDFLAGS}}"
-  # macOS lacks the Linux-only syscalls (pipe2, accept4) and the Linux/Solaris
-  # event backends (epoll, eventfd, signalfd, timerfd, evport). Under modern
-  # clang, libevent's autoconf probes false-positive several of these, so it
-  # compiles backends whose headers don't exist on macOS ("call to undeclared
-  # function 'pipe2'", "'sys/epoll.h' file not found", "'port.h' file not
-  # found"). macOS uses the kqueue backend; force every Linux/Solaris-only probe
-  # off so configure selects kqueue + the portable pipe()/accept() fallbacks. No
-  # effect on Linux, where these genuinely exist.
+  # macOS: clang autoconf probes false-positive Linux/Solaris syscalls and event
+  # backends (pipe2, accept4, epoll, eventfd, signalfd, timerfd, evport). Force
+  # every such probe off so configure picks kqueue + pipe()/accept() fallbacks.
   if bits_is_macos; then
     export ac_cv_func_pipe2=no ac_cv_func_accept4=no \
            ac_cv_func_epoll_create=no ac_cv_func_epoll_create1=no ac_cv_func_epoll_ctl=no \

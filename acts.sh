@@ -29,11 +29,9 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function SetBuildEnv() {
   _SetBuildEnvBase
-  # ACTS runs Python codegen scripts at build time (sympy stepper math, particle
-  # data table) that import numpy/sympy/particle.  The build env exposes each
-  # dependency's $*_ROOT but not its Python site-packages, so add every one to
-  # PYTHONPATH (the codegen venv honours it).  bits_pythonpath_from_deps returns
-  # 0, so SetBuildEnv stays success-valued under Run()'s `set -e`.
+  # ACTS runs Python codegen (sympy/particle) at build time, but the build env
+  # exposes deps' $*_ROOT not their site-packages; add each to PYTHONPATH.
+  # bits_pythonpath_from_deps returns 0 so SetBuildEnv stays success under set -e.
   bits_pythonpath_from_deps
 }
 function Configure() {

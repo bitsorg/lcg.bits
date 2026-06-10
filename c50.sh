@@ -36,11 +36,9 @@ function Prepare() {
   find . -name Makefile -exec perl -i -pe 's|^SHELL  = /bin/csh$|#SHELL  = /bin/csh|' {} \;
   # report.c: add headers required by GCC 15 (implicit declarations are errors)
   find . -name report.c -exec perl -i -pe '$_ .= "#include <ctype.h>\n#include <string.h>\n" if m{#include <stdlib\.h>}' {} \;
-  # macOS/clang: finite() (obsolete BSD) was removed from macOS <math.h>; glibc
-  # still declares it, but clang errors on the implicit declaration AND the
-  # symbol does not exist at link time. c50gt.c/getdata.c/subset.c use it. Map
-  # finite -> the C99 isfinite() macro on the Makefile's $(CC) (used by both the
-  # c5.0 target and the .c.o rule). No-op on Linux (Darwin-gated).
+  # macOS: finite() (obsolete BSD) was removed from <math.h>, so c50gt/getdata/
+  # subset.c fail to compile and link. Map finite -> the C99 isfinite() macro
+  # via the Makefile's $(CC).
   if bits_is_macos; then
     find . -name Makefile -exec perl -i -pe 's{^(CC\s*=\s*gcc)}{$1 -Dfinite=isfinite}' {} \;
   fi

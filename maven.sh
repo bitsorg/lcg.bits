@@ -21,10 +21,9 @@ function Configure() {
   # settings.xml is distributed with CRLF line endings; strip CR first so
   # that all subsequent sed patterns match cleanly.
   perl -i -pe 's/\r//' conf/settings.xml
-  # Comment out the maven-default-http-blocker mirror (added in Maven 3.8.1+).
-  # It unconditionally blocks all plain-HTTP repositories, including CERN's.
-  # Locate the unique id string and target the <mirror> tag exactly one line
-  # above it; then close the comment after the following </mirror>.
+  # Comment out the maven-default-http-blocker mirror (Maven 3.8.1+); it blocks
+  # all plain-HTTP repos including CERN's. Wrap the <mirror>...</mirror> block
+  # located relative to its unique id string.
   local blocker_line
   blocker_line=$(grep -n "maven-default-http-blocker" conf/settings.xml | cut -d: -f1)
   perl -i -pe "s|<mirror>|<!-- <mirror>| if \$. == $((blocker_line - 1))" conf/settings.xml

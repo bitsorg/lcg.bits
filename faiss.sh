@@ -26,10 +26,9 @@ license: MIT
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
-  # macOS: Apple clang has no built-in OpenMP, so CMake's FindOpenMP fails
-  # ("Could NOT find OpenMP_CXX"). Point it at Homebrew's keg-only libomp and use
-  # the Apple-clang spelling (-Xclang -fopenmp, not plain -fopenmp). LIBOMP_ROOT
-  # comes from the libomp:osx dependency. Linux uses GCC's libgomp and skips this.
+  # macOS: Apple clang has no built-in OpenMP, so FindOpenMP fails. Point it at
+  # Homebrew's keg-only libomp (LIBOMP_ROOT) with the Apple-clang spelling
+  # (-Xclang -fopenmp, not plain -fopenmp).
   local _omp=()
   if bits_is_macos; then
     local _lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"

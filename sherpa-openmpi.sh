@@ -39,20 +39,16 @@ MODULE_OPTIONS="--bin --lib"
 # swiglib on macOS (see sherpa.sh).
 export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(bits_swig_lib)"
-# Put OpenMPI's compilers on PATH so Sherpa's find_package(MPI) locates mpicxx.
-# PATH alone isn't enough: FindMPI also runs a compile+link test (MPI_*_WORKS),
-# and the relocated mpicc/mpicxx/mpifort wrappers can't find their plugins/config
-# without OPAL_PREFIX, so the test fails ("Could NOT find MPI ... MPI_*_WORKS").
+# Put OpenMPI's compilers on PATH so find_package(MPI) locates mpicxx. OPAL_PREFIX
+# is also needed: FindMPI runs a compile+link probe and the relocated mpi*
+# wrappers can't find their plugins/config without it.
 export PATH="${OPENMPI_ROOT}/bin:${PATH}"
 export OPAL_PREFIX="${OPENMPI_ROOT}"
 ##############################
 function Configure() {
-  # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
-  # plain sherpa recipe; see sherpa.sh.
-  # OpenLoops is gated behind the `openloops` flavour. When it is off the
-  # dependency is dropped and OPENLOOPS_ROOT is unset, so disable it in CMake.
-  # (Passing an empty -DSHERPA_ENABLE_OPENLOOPS= makes Sherpa's ConfigLogger.cmake
-  # fail: `if( STREQUAL "ON")` -> "Unknown arguments".)
+  # Sherpa 3 (CMake) with the MPI backend; otherwise identical to sherpa.sh.
+  # OpenLoops gated behind the `openloops` flavour: when off, OPENLOOPS_ROOT is
+  # unset, so disable it (an empty -DSHERPA_ENABLE_OPENLOOPS= breaks ConfigLogger).
   local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
   # MCFM is gated off on macOS (qcdloop needs GCC quadmath); disable it when the
   # edge is dropped (MCFM_ROOT unset).

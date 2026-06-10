@@ -22,11 +22,9 @@ license: LGPL-2.1-only
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# GENIE's generated Makefiles reference $GENIE (the source root) and need ROOT
-# in ROOTSYS/PATH. These must be set for the build and install steps too -- the
-# old Configure set GENIE only inside its `$SHELL -c` subshell, so `make` ran
-# with $GENIE unset and looked for /src/make/Make.include. Export at recipe
-# scope; bits runs every phase in the same build directory ($PWD).
+# GENIE's generated Makefiles reference $GENIE (source root) and need ROOT in
+# ROOTSYS/PATH for build and install too. Export at recipe scope; bits runs
+# every phase in the same build directory ($PWD).
 export GENIE="$PWD"
 export ROOTSYS="${ROOT_ROOT}"
 export PATH="${ROOT_ROOT}/bin:$PATH"

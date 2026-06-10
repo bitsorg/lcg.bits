@@ -26,14 +26,9 @@ function Prepare() {
 }
 
 function Make() {
-  # macOS shared libraries are .dylib built with -dynamiclib, not .so/-shared.
-  # PYQUEN calls PYTHIA routines (pyp_, pyjets common, ...) that are not in this
-  # object; macOS's two-level namespace rejects such undefined symbols in a dylib
-  # whereas Linux's flat namespace allows them. Allow flat-namespace lazy
-  # resolution on macOS (matching the ELF behaviour).
-  # -headerpad_max_install_names reserves Mach-O header space so bits'
-  # relocate-me.sh can rewrite the LC_ID_DYLIB install name to the long store
-  # path via install_name_tool (else the unpack/relocate step fails).
+  # macOS: build .dylib (-dynamiclib). PYQUEN references PYTHIA routines absent from
+  # this object; bits_macos_undefined_ldflags allows flat-namespace lazy resolution
+  # (two-level namespace rejects them) and adds -headerpad for install_name_tool.
   local _so=so _shared=-shared _undef=
   if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} -O2 -fPIC -c pyquen.f -o pyquen.o

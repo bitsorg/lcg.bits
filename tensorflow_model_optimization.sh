@@ -24,11 +24,9 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
-# macOS (case-insensitive filesystem): the source ships a Bazel "BUILD" file at
-# its root, which collides with setuptools' "build/" output directory during the
-# wheel build ("could not create 'build/lib/...': Not a directory"). The BUILD
-# file is Bazel-only and unused by the setuptools build, so remove it on macOS.
-# Configure runs after Prepare (rsync into cwd) and before the pip install.
+# macOS (case-insensitive FS): the root Bazel "BUILD" file collides with
+# setuptools' "build/" output dir during the wheel build. It's Bazel-only and
+# unused here, so remove it (Configure runs after Prepare, before pip install).
 function Configure() {
   bits_is_macos && rm -f BUILD
   true

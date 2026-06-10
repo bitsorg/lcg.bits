@@ -19,21 +19,13 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: libfl.dylib is built from libmain.o, whose main() references yylex --
-  # a symbol libfl deliberately leaves undefined (the consumer's generated
-  # scanner provides it). Linux's flat namespace permits the undefined symbol in
-  # the dylib; macOS's two-level namespace rejects it ("Undefined symbols for
-  # architecture arm64: _yylex"). Allow flat-namespace lazy resolution so libfl
-  # links, matching the ELF behaviour.
+  # macOS: libfl.dylib references yylex, which libfl deliberately leaves
+  # undefined (the consumer's generated scanner provides it). macOS's two-level
+  # namespace rejects it, so allow flat-namespace lazy resolution.
   bits_is_macos && export LDFLAGS="$(bits_macos_undefined_ldflags)${LDFLAGS:+ ${LDFLAGS}}"
-  # macOS: configure detects the reallocarray() *symbol* (it links) and sets
-  # HAVE_REALLOCARRAY, so misc.c calls the system reallocarray -- but the current
-  # macOS SDK does not *declare* it in <stdlib.h> (not even under
-  # _DARWIN_C_SOURCE), so clang errors "call to undeclared function
-  # 'reallocarray'". Force HAVE_REALLOCARRAY off so flex uses its own bundled
-  # overflow-checked fallback (flexdef.h declares it; misc.c has the #else path)
-  # and never touches the undeclared system one. No effect on Linux (glibc
-  # declares reallocarray).
+  # macOS: configure finds the reallocarray() symbol and sets HAVE_REALLOCARRAY,
+  # but the SDK doesn't declare it in <stdlib.h>, so clang errors on the
+  # undeclared call. Force it off so flex uses its bundled fallback.
   bits_is_macos && export ac_cv_func_reallocarray=no
   # Build in-source (AutoToolsRecipe rsyncs the source into cwd), matching
   # lcgcmake's flex (configure --prefix; make; make install; BUILD_IN_SOURCE).

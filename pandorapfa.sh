@@ -20,15 +20,9 @@ patches:
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
-  # gcc15 emits new -Wparentheses warnings (assignment used as truth value) in
-  # PandoraSDK's sources, and PandoraSDK's CMakeLists forces -Werror via
-  #   set(CMAKE_CXX_FLAGS "-Wall ... -Werror ... -std=c++17 ${CMAKE_CXX_FLAGS}")
-  # appending the incoming flags last. PandoraPFA's superbuild forwards
-  # CMAKE_CXX_FLAGS to the PandoraSDK ExternalProject, so passing -Wno-error here
-  # lands after -Werror and disables it -- the same pattern the standalone
-  # pandorasdk / lccontent / larcontent recipes already use. (Seding the source
-  # doesn't work: the superbuild extracts PandoraSDK at build time, after
-  # Configure.)
+  # PandoraSDK's CMakeLists forces -Werror, appending incoming flags last; the
+  # superbuild forwards CMAKE_CXX_FLAGS to the PandoraSDK ExternalProject, so
+  # -Wno-error here lands after -Werror and disables it (gcc15 -Wparentheses).
   cmake "${SOURCEDIR}" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -DCMAKE_INSTALL_LIBDIR=lib \
@@ -37,11 +31,9 @@ function Configure() {
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"}
 }
 function PostInstall() {
-  # Downstream Pandora packages (pandorasdk, pandoramonitoring, lccontent, …)
-  # set CMAKE_MODULE_PATH=$PANDORAPFA_ROOT/cmakemodules and do
-  # include(PandoraCMakeSettings) / PANDORA_GENERATE_PACKAGE_CONFIGURATION_FILES.
-  # PandoraPFA's own cmake install does not ship these modules, so install them
-  # explicitly (mirrors lcgcmake's copy_directory cmakemodules).
+  # Downstream Pandora packages need $PANDORAPFA_ROOT/cmakemodules (include
+  # PandoraCMakeSettings), which PandoraPFA's cmake install doesn't ship; install
+  # them explicitly (mirrors lcgcmake's copy_directory cmakemodules).
   [ -d "${SOURCEDIR}/cmakemodules" ] && cp -r "${SOURCEDIR}/cmakemodules" "${INSTALLROOT}/cmakemodules"
   return 0
 }

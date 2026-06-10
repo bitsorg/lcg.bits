@@ -17,20 +17,15 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# babayaga's Makefile builds a bundled recola/COLLIER via a *nested* CMake whose
-# cmake_minimum_required() predates the floor CMake >= 4 accepts, so the nested
-# configure fails ("Compatibility with CMake < 3.5 has been removed"). A
-# top-level -D cannot reach the nested cmake, but the CMAKE_POLICY_VERSION_MINIMUM
-# environment variable is honoured by every cmake invocation (CMake 3.31+), so
-# export it for the whole build.
+# babayaga's bundled recola/COLLIER uses a nested CMake whose
+# cmake_minimum_required() predates the floor CMake >= 4 accepts. A top-level -D
+# can't reach it, so export CMAKE_POLICY_VERSION_MINIMUM (honoured by all cmake).
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 ##############################
 function Make() {
-  # arm64 (Apple Silicon): the Makefile hardcodes RLXOPT=-DSSE2, which selects
-  # c_ranlux's x86 SSE inline assembly (xmm registers). Those registers do not
-  # exist on arm64, so the build fails ("unknown register name 'xmm3' in asm").
-  # Override RLXOPT to empty so the portable C fallback (the #else branch in
-  # ranlux_common.c) is compiled instead. x86 hosts (Linux) keep -DSSE2.
+  # arm64: the Makefile hardcodes RLXOPT=-DSSE2, selecting c_ranlux's x86 SSE
+  # asm (xmm registers) that don't exist on arm64. Empty RLXOPT so the portable
+  # C fallback in ranlux_common.c is compiled; x86 keeps -DSSE2.
   local _rlx=()
   case "$(uname -m)" in
     arm64 | aarch64) _rlx=(RLXOPT=) ;;
@@ -40,9 +35,8 @@ function Make() {
 ##############################
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin"
-  # MakeRecipe builds out-of-source: Prepare() rsyncs $SOURCEDIR into the build
-  # directory and make runs there, so the linked executable is in the build dir
-  # (cwd), not $SOURCEDIR. Locate it in the build tree.
+  # MakeRecipe builds out-of-source, so the linked executable lands in the build
+  # dir (cwd), not $SOURCEDIR. Locate it in the build tree.
   local bin
   bin=$(find . -maxdepth 3 -name babayaga-fcc -type f | head -1)
   : "${bin:?babayaga-fcc was not produced by the build}"

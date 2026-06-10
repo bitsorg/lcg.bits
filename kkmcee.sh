@@ -26,17 +26,14 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake -E create_symlink dizet-6.45 dizet
-  # configure.ac uses the obsolete AC_PROG_LIBTOOL; autoreconf fails with
-  # "undefined or overquoted macro" because aclocal cannot find libtool's m4
-  # macros, and then "cannot find config.guess/config.sub/...".  Put the bits
-  # libtool/automake aclocal dirs on ACLOCAL_PATH and run libtoolize so the
-  # macros are found and the auxiliary files are installed.
+  # configure.ac uses obsolete AC_PROG_LIBTOOL; autoreconf can't find libtool's m4
+  # macros or aux files. Put bits libtool/automake aclocal dirs on ACLOCAL_PATH
+  # and run libtoolize so the macros are found and aux files installed.
   export ACLOCAL_PATH="${LIBTOOL_ROOT}/share/aclocal:${AUTOMAKE_ROOT}/share/aclocal:${ACLOCAL_PATH}"
   libtoolize --install --copy --force
   autoreconf --force --install
-  # photoscpp's Log.h constructs std::string from nullptr, which is a deleted
-  # overload in C++23 (basic_string(nullptr_t) = delete). Build kkmcee at C++20:
-  # the trailing -std=c++20 overrides the stack-default -std=c++23 inherited from
+  # photoscpp's Log.h builds std::string from nullptr, a deleted overload in C++23.
+  # Build at C++20: the trailing -std=c++20 overrides the stack-default c++23 in
   # CXXFLAGS (last -std wins).
   ./configure --with-photos=${PHOTOSCPP_ROOT} --prefix=$INSTALLROOT \
     CXXFLAGS="${CXXFLAGS} -std=c++20"

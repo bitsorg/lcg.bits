@@ -9,11 +9,9 @@ requires:
   - Python
   - Boost
 prefer_system: ".*"
-# macOS: source swig from Homebrew (build-time code generator; consumers only
-# need the `swig` binary, nothing links a swig library). brew swig is 4.4.1 vs
-# the pinned 4.4.0 — same minor, compatible — so listing it here puts it in the
-# Brewfile and lets `bits --brew` install it on demand. Linux keeps the existing
-# prefer_system-or-build-from-source behaviour unchanged.
+# macOS: source swig from Homebrew (build-time generator; consumers need only the
+# `swig` binary). brew swig 4.4.1 vs pinned 4.4.0 is compatible; listing it here
+# adds it to the Brewfile for `bits --brew`.
 homebrew_formula: swig
 prefer_system_check: |
   verge() {
@@ -38,13 +36,9 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  # macOS: swig links pcre2 dynamically (pcre2 provides no static .a here), and
-  # pcre2's install name is @rpath/libpcre2-8.0.dylib. The swig binary is built
-  # with no LC_RPATH, so it cannot launch ("Library not loaded:
-  # @rpath/libpcre2-8.0.dylib ... no LC_RPATH's found"), which breaks every swig
-  # consumer (apfel, ...). Add an rpath to pcre2's lib dir. PCRE2_ROOT is the
-  # canonical /sw/<arch>/pcre2/<ver> path, which is relocation-stable, so the
-  # rpath remains valid after install. Linux is unaffected (ELF rpath/ld.so).
+  # macOS: swig links pcre2 dynamically (@rpath/libpcre2-8.0.dylib) but the binary
+  # has no LC_RPATH, so it can't launch and breaks every consumer. Add an rpath to
+  # PCRE2_ROOT/lib (relocation-stable canonical path).
   bits_is_macos && export LDFLAGS="-Wl,-rpath,${PCRE2_ROOT}/lib ${LDFLAGS:-}"
   $SOURCEDIR/configure --prefix=$INSTALLROOT --with-pcre-prefix=${PCRE2_ROOT} PCRE_LIBS=${PCRE2_ROOT}/lib/libpcre.a --with-boost=${Boost_ROOT}
 }

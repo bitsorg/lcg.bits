@@ -26,10 +26,8 @@ function Make() {
 }
 function MakeInstall() {
   install -dm755 "${INSTALLROOT}/bin"
-  # "any execute bit set" is spelled differently by GNU vs BSD find: GNU uses
-  # `-perm /111`, BSD/macOS uses `-perm +111` (and rejects /111 as an "illegal
-  # mode string"). GNU find in turn no longer accepts +111. Pick per platform;
-  # Linux keeps the exact /111 form.
+  # "any execute bit set" differs: GNU find wants `-perm /111`, BSD/macOS wants
+  # `+111` (each rejects the other's form). Pick per platform.
   local _perm=/111
   bits_is_macos && _perm=+111
   find . -maxdepth 2 -type f -perm "$_perm" ! -name '*.so' \

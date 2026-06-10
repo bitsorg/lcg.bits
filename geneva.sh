@@ -26,13 +26,9 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# macOS: Geneva's Python extension is compiled by setup.py (build_ext), which
-# invokes Apple clang WITHOUT -isysroot — unlike the CMake build, which adds it
-# automatically. Without a sysroot, clang can't find the macOS SDK's libc++
-# headers ("GenevaWrapper.hpp: fatal error: 'string' file not found"). Export
-# SDKROOT (which clang uses as the sysroot when -isysroot is absent) at recipe
-# scope so it is active for the Make step where the extension is built. Linux
-# leaves it unset.
+# macOS: Geneva's Python extension is built by setup.py, which invokes Apple
+# clang without -isysroot, so it can't find the SDK's libc++ headers. Export
+# SDKROOT (clang's fallback sysroot) at recipe scope so the Make step picks it up.
 bits_is_macos && export SDKROOT="$(xcrun --show-sdk-path 2>/dev/null)"
 ##############################
 function Configure() {

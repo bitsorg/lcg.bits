@@ -95,10 +95,8 @@ case $ARCHITECTURE in
     ln -sf "$(xcrun --show-sdk-path)/usr/include/c++" "$INSTALLROOT/include/c++" ;;
 esac
 
-# We do not want to have the clang executables in path
-# to avoid issues with system clang on macOS.
-# We **MUST NOT** add bin-safe to the build path. Runtime
-# path is fine.
+# Keep clang executables out of PATH to avoid clashing with system clang on macOS.
+# MUST NOT add bin-safe to the build path (runtime path is fine).
 mkdir "$INSTALLROOT/bin-safe"
 mv "$INSTALLROOT"/bin/clang* "$INSTALLROOT/bin-safe/"
 mv "$INSTALLROOT"/bin/llvm-spirv* "$INSTALLROOT/bin-safe/" # Install llvm-spirv tool

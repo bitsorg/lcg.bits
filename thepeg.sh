@@ -23,20 +23,14 @@ patches:
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  # macOS: gated off. ThePEG builds, but setupThePEG/runThePEG abort at startup
-  # from a clang-21 / macOS-26-SDK libc++ bug (typed operator new invoked in a
-  # static initializer before libc++abi init) that -fno-typed-cxx-new-delete does
-  # not fix — so ThePEG (and its consumers herwig3, thep8i) cannot run on this
-  # toolchain. Produce an empty package; remove the guards (here, Make,
-  # MakeInstall, PostInstall) to resume the port once the toolchain is fixed.
+  # macOS: gated off. ThePEG builds, but setupThePEG/runThePEG abort from a
+  # clang-21/macOS-26-SDK libc++ bug -fno-typed-cxx-new-delete doesn't fix.
+  # Produce an empty package; remove the guards (Make/MakeInstall/PostInstall) once fixed.
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
 
-  # macOS: very new Apple clang (clang 21 / Xcode 26) defaults to typed C++
-  # new/delete (-ftyped-cxx-new-delete). ThePEG calls operator new in a static
-  # initializer — exercised when setupThePEG builds ThePEGDefaults.rpo — which
-  # aborts under that feature ("Terminating due to typed operator new being
-  # invoked before its static initializer in libcxx", Abort trap: 6). Disable it
-  # when the compiler understands the flag (a no-op on Linux / older clang).
+  # macOS: Apple clang 21 (Xcode 26) defaults to typed C++ new/delete; ThePEG
+  # calls operator new in a static initializer (building ThePEGDefaults.rpo),
+  # which aborts. Disable via -fno-typed-cxx-new-delete when the flag is supported.
   if bits_is_macos; then
     local _tmo=-fno-typed-cxx-new-delete _d
     _d="$(mktemp -d)"; printf 'int main(){}\n' > "$_d/t.cpp"

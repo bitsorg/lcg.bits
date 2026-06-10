@@ -36,10 +36,9 @@ function SetBuildEnv() {
   bits_pythonpath_from_deps
 }
 function Configure() {
-  # PyTorch ships its CMake config inside the pip site-packages tree; point
-  # find_package(Torch) at the real dir. The modulefile Torch_DIR doesn't reach
-  # the build env, and a <prefix>/share/cmake symlink breaks Caffe2Targets'
-  # prefix derivation (it would look for the libs under <prefix>/lib).
+  # PyTorch's CMake config lives in its pip site-packages; point find_package(Torch)
+  # there directly. The modulefile Torch_DIR doesn't reach the build env, and a
+  # <prefix>/share/cmake symlink breaks Caffe2Targets' prefix derivation.
   _pyver=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])')
   export Torch_DIR="${TORCH_ROOT}/lib/${_pyver}/site-packages/torch/share/cmake/Torch"
   cmake "${SOURCEDIR}" \

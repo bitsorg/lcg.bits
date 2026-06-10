@@ -19,13 +19,9 @@ license: LicenseRef-GGVVAMP
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # ggvvamp is a set of huge machine-generated translation units (p0NNN.cpp).
-  # Under the -dbg profile the inherited CXXFLAGS carry full '-g', which triggers
-  # "variable tracking size limit exceeded" and, at link, .debug_* sections that
-  # overflow the 32-bit relocation range ("relocation truncated to fit:
-  # R_X86_64_32 against `.debug_info'"). Cap debug to -g1 (no location lists, no
-  # var-tracking) for this generated code, where full debug info has no value.
-  # -g1 wins over any earlier -g in CXXFLAGS; drop to -g0 if it still overflows.
+  # ggvvamp is huge machine-generated TUs (p0NNN.cpp). Full '-g' from the -dbg
+  # profile overflows var-tracking and the 32-bit .debug_* relocation range, so
+  # cap to -g1 (wins over earlier -g; drop to -g0 if it still overflows).
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

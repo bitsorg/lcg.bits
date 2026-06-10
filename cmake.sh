@@ -25,11 +25,7 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
-# CMake builds itself out-of-source: the default Configure() runs
-# `cmake "$SOURCEDIR"` with build/ (cwd) as the binary dir. The base
-# CMakeRecipe.Prepare() copies the source into build/ for in-source recipes,
-# but for CMake-the-package that leftover copy under build/Source/ collides on
-# the include path with the real source headers (#pragma once keys on file
-# identity) and fails with "redefinition of 'cmGccStyleDependency'". Override
-# Prepare to a no-op so the binary dir stays clean.
+# CMake builds out-of-source, but CMakeRecipe.Prepare() copies the source into
+# build/, whose leftover build/Source/ headers collide (#pragma once on file
+# identity) with the real ones. Override Prepare to a no-op to keep build/ clean.
 function Prepare() { true; }

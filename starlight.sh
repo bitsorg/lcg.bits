@@ -20,17 +20,13 @@ license: LicenseRef-STARLIGHT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Built standalone (DPMJet disabled), matching lcgcmake: the bundled flat
-  # DPMJet 3.0-6 .f files lack the modern DPMJET-III include layout that
-  # -DENABLE_DPMJET expects, so that combination can't compile.
-  #
-  # macOS: starlight's CMakeLists overwrites CMAKE_CXX_FLAGS with "... -Werror",
-  # clobbering the -DCMAKE_CXX_FLAGS below; Apple clang then errors on warnings
-  # gcc never emits (C++ VLAs). Strip -Werror so they stay warnings.
+  # Built standalone (DPMJet disabled, matching lcgcmake): the bundled flat
+  # DPMJet 3.0-6 .f files lack the DPMJET-III include layout -DENABLE_DPMJET wants.
+  # macOS: CMakeLists adds -Werror, clobbering our flags; strip it so Apple
+  # clang's C++-VLA warnings (gcc never emits these) stay warnings.
   bits_is_macos && bits_strip_token "${SOURCEDIR}/CMakeLists.txt" -Werror
-  # macOS: hepmc3writer.cpp goes into libStarlib but HepMC3 is linked only into
-  # the executable, so the .so has undefined HepMC3:: symbols; allow them
-  # (dynamic_lookup), as Linux's flat namespace does (resolved at load time).
+  # macOS: hepmc3writer.cpp goes into libStarlib but HepMC3 links only into the
+  # executable, so the .so has undefined HepMC3:: symbols; allow them (dynamic_lookup).
   local _lf; _lf=$(bits_macos_undefined_ldflags)
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

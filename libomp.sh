@@ -2,11 +2,9 @@ package: libomp
 description: LLVM OpenMP runtime (libomp) — sourced from Homebrew on macOS
 version: "1.0.0"
 tag: "1.0.0"
-# macOS only: Apple clang ships no OpenMP runtime, so OpenMP-using packages
-# (faiss, ...) need Homebrew's keg-only libomp. This recipe sources it from brew
-# on macOS and exposes LIBOMP_ROOT (+ a Brewfile entry / on-demand `--brew`
-# install). It is pulled in by consumers as "libomp:osx" only, and is never built
-# on Linux, where GCC's libgomp provides OpenMP.
+# macOS only: Apple clang ships no OpenMP runtime, so consumers (gated "libomp:osx")
+# source Homebrew's keg-only libomp here and get LIBOMP_ROOT. Never built on Linux,
+# where GCC's libgomp provides OpenMP.
 prefer_system: "osx.*"
 homebrew_formula: libomp
 prefer_system_check: |

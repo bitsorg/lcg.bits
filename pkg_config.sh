@@ -20,20 +20,14 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Determine the multiarch triple so the compiled-in PC_PATH includes the
-  # Ubuntu multiarch pkgconfig directory (e.g. /usr/lib/x86_64-linux-gnu/pkgconfig).
-  # Without this, bits-built pkg-config silently misses .pc files installed by
-  # system packages (those built with prefer_system), forcing every recipe that
-  # depends on a system package to carry ad hoc PKG_CONFIG_PATH workarounds.
-  # /usr/lib64/pkgconfig is added for RHEL/CentOS compatibility; non-existent
-  # paths are silently ignored by pkg-config.
+  # Bake the multiarch triple into PC_PATH so bits pkg-config finds system .pc
+  # files (prefer_system packages) without per-recipe PKG_CONFIG_PATH hacks.
+  # /usr/lib64/pkgconfig covers RHEL/CentOS; missing paths are ignored.
   local _triple
   _triple=$(bits_triple)
-  # macOS/Xcode 16 clang promotes -Wint-conversion (and implicit function
-  # declarations) to hard errors, which breaks pkg-config's vendored glib 2.x
-  # (gatomic.c: "incompatible integer to pointer conversion passing 'gsize' to
-  # 'gpointer'"). Downgrade those two to warnings so --with-internal-glib still
-  # compiles. No effect on Linux/gcc.
+  # macOS/Xcode 16 clang makes -Wint-conversion and implicit-function-declaration
+  # hard errors, breaking the vendored glib 2.x. Downgrade both to warnings so
+  # --with-internal-glib still compiles.
   bits_is_macos && export CFLAGS="${CFLAGS:+$CFLAGS }-Wno-error=int-conversion -Wno-error=implicit-function-declaration"
   ./configure --with-internal-glib --prefix=$INSTALLROOT \
     --with-system-include-path=/usr/include \

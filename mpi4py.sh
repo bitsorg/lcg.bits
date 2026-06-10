@@ -20,11 +20,8 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin --python"
 ##############################
 function Configure() {
-  # mpi4py is a compiled C extension that must link against the bits openmpi.
-  # The mpicc wrapper stores its installation prefix at compile time; when bits
-  # deploys openmpi to sw/ (a different path from the build INSTALLROOT) the
-  # wrapper can no longer find mpicc-wrapper-data.txt.  Setting OPAL_PREFIX
-  # overrides the compiled-in prefix so the wrapper locates its data files.
+  # mpicc stores its prefix at compile time; bits deploys openmpi to a different
+  # path, so set OPAL_PREFIX to override it and let the wrapper find its data files.
   export MPICC="${OPENMPI_ROOT}/bin/mpicc"
   export MPICXX="${OPENMPI_ROOT}/bin/mpicxx"
   export OPAL_PREFIX="${OPENMPI_ROOT}"

@@ -32,10 +32,8 @@ function Make() {
   # Belt-and-suspenders: replace any g77 remaining in generated build files.
   grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
     xargs perl -i -pe "s/\bg77\b/${F77}/g"
-  # macOS: Makeshared.subdir's `-shared` link leaves libphotos' Fortran objects'
-  # libgfortran symbols undefined, which the two-level namespace rejects. Add
-  # -undefined dynamic_lookup (+ headerpad for relocation), as Linux resolves
-  # them at runtime via its flat namespace.
+  # macOS: the `-shared` link leaves libgfortran symbols undefined, which the
+  # two-level namespace rejects. Add -undefined dynamic_lookup (+ headerpad).
   bits_is_macos && bits_file_sub Makeshared.subdir '-o \$\@ -shared\s*$' \
     '-o $@ -shared -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names'
   make ${JOBS:+-j $JOBS}

@@ -2,25 +2,12 @@ package: readline
 description: GNU Readline (taken from the system / Homebrew; bits never builds it)
 version: "system"
 license: GPL-3.0-or-later
-# Readline is never built by bits. The bits-built libreadline.so.8 left the
-# terminfo globals (UP, BC, PC, ...) unresolved, so any program that loaded it
-# via LD_LIBRARY_PATH during a build -- notably the gawk used in autoconf
-# configure scripts -- crashed with "symbol lookup error: ... undefined symbol:
-# UP", breaking unrelated packages (e.g. R). So:
-#
-#   * Linux: use the OS readline-devel package (default include / pkg-config
-#     search paths). prefer_system_check succeeds with no replacement -> system
-#     package, exactly as before.
-#   * macOS: use the keg-only Homebrew readline. The check echoes a replacement
-#     so the Homebrew prefix is symlinked into the install root via
-#     HomebrewRecipe (downstream finds it through *_ROOT / PKG_CONFIG_PATH).
-#     If the formula is missing the check installs it when `bits --brew` was
-#     passed (BITS_BREW=1), otherwise it fails and the recipe body below prints
-#     how to install it.
+# Never built by bits: a bits-built libreadline left terminfo globals (UP, BC, ...)
+# unresolved, crashing gawk/configure (and packages like R). Use system readline-devel
+# (Linux) or keg-only Homebrew readline (macOS, via HomebrewRecipe; on --brew/BITS_BREW=1).
 prefer_system: ".*"
-# Marks readline as Homebrew-sourced so `bits brew` lists it in the generated
-# Brewfile. The formula name happens to equal the package name, so HomebrewRecipe
-# picks it up by default and the replacement body need not set HOMEBREW_FORMULA.
+# Marks readline as Homebrew-sourced for `bits brew`. Formula name equals the
+# package name, so HomebrewRecipe picks it up by default (no HOMEBREW_FORMULA).
 homebrew_formula: readline
 prefer_system_check: |
   #!/bin/bash
@@ -58,10 +45,8 @@ prefer_system_replacement_specs:
       . $(bits-include HomebrewRecipe)
 ---
 #!/bin/bash -e
-# Reached only when prefer_system_check could not satisfy readline (Linux without
-# the dev package, or macOS without Homebrew readline and without `bits --brew`).
-# There is no buildable fallback (a bits-built readline breaks gawk/configure), so
-# fail with actionable guidance instead of installing a broken library.
+# Reached only when prefer_system_check could not satisfy readline. No buildable
+# fallback (a bits-built readline breaks gawk/configure), so fail with guidance.
 echo "ERROR: readline development files were not found." >&2
 case "$(uname)" in
   Darwin)

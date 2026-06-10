@@ -34,14 +34,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # gcc15 fix: CepGen wraps the extern "C" declarations of its Fortran COMMON
-  # blocks (ktkin_, kincuts_, genparams_, evtkin_, constants_) in an anonymous
-  # namespace. Under gcc15 that gives them internal C++ linkage
-  # ((anonymous namespace)::ktkin_) instead of the plain C symbols the Fortran
-  # side (Process/Fortran/cepgen_print.f) defines, so libCepGen.so ends up with
-  # undefined references to them. Unwrap that one anonymous-namespace block so
-  # the externs regain C linkage. Idempotent (the regex only matches the wrapped
-  # form) and whitespace-tolerant.
+  # gcc15: CepGen wraps the extern "C" Fortran COMMON-block decls in an anonymous
+  # namespace, giving them internal C++ linkage instead of the plain C symbols
+  # the Fortran side defines -> undefined refs. Unwrap that one block (idempotent).
   python3 - "${SOURCEDIR}/CepGen/Process/FortranFactorisedProcess.cpp" <<'PY'
 import re, sys
 f = sys.argv[1]
@@ -58,12 +53,9 @@ if pat.search(s):
 else:
     print("cepgen: anonymous-namespace block not found (already patched / upstream changed)")
 PY
-  # macOS: CepGen globs every subdir onto the include path; on a case-insensitive
-  # FS that makes libc++'s <math.h> resolve to CepGen/Utils/Math.h. All CepGen
-  # code includes its headers fully qualified, so point EXT_HEADERS at the project
-  # root. Also drop -lstdc++fs (Apple libc++ has std::filesystem built in), and
-  # link libTauolaFortran into the PhotosTauola wrapper (it defines rmarin_, which
-  # the wrapper otherwise leaves undefined).
+  # macOS: CepGen's subdir include globs make <math.h> resolve to Utils/Math.h on
+  # a case-insensitive FS, so point EXT_HEADERS at the project root. Also drop
+  # -lstdc++fs (in Apple libc++) and link libTauolaFortran (rmarin_) into PhotosTauola.
   if bits_is_macos; then
     local _ptw="${SOURCEDIR}/CepGenAddOns/PhotosTauolaWrapper/CMakeLists.txt"
     bits_file_replace "${SOURCEDIR}/CepGen/CMakeLists.txt" \

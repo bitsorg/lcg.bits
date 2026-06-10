@@ -16,11 +16,9 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin"
 ##############################
 function Prepare() {
-  # The JHUGenerator tarball has multiple top-level directories (JHUGenerator/,
-  # JHUGenMELA/, AnalyticMELA/) with no common prefix.  bits' auto-detection
-  # falls back to --strip-components=1, which discards those directory names and
-  # merges everything into one flat directory.  Re-extract from the original
-  # archive (still present in SOURCEDIR) with strip=0 to preserve the layout.
+  # The tarball has multiple top-level dirs with no common prefix; bits' default
+  # --strip-components=1 would flatten them. Re-extract with strip=0 to keep the
+  # layout (original archive is still in SOURCEDIR).
   local tarball
   tarball=$(ls "$SOURCEDIR"/JHUGenerator*.tar.gz 2>/dev/null | head -1)
   tar xf "$tarball" --strip-components=0 -C ./

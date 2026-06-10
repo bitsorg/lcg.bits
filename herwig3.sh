@@ -37,10 +37,9 @@ env:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: gated off — Herwig hard-requires ThePEG, which is gated off on macOS
-  # (its setupThePEG/runThePEG abort on the clang-21/macOS-26-SDK libc++ bug), so
-  # Herwig cannot build or run here. Produce an empty package; remove the guards
-  # (here, Make, MakeInstall, PostInstall) to resume once ThePEG works on macOS.
+  # macOS: gated off — Herwig hard-requires ThePEG, itself gated off on macOS, so
+  # produce an empty package. Remove the guards (here, Make, MakeInstall,
+  # PostInstall) to resume once ThePEG works on macOS.
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   [[ -n "$THEPEG_ROOT" ]] && export LD_LIBRARY_PATH="$THEPEG_ROOT/lib/ThePEG:$LD_LIBRARY_PATH"
 

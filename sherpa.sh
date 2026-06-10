@@ -41,10 +41,9 @@ export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(bits_swig_lib)"
 ##############################
 function Configure() {
-  # Sherpa 3.x switched from autotools to CMake. Flags mirror lcgcmake's
-  # sherpa>=3 build. C++17 even on a C++20 stack (lcgcmake forces 17 here).
-  # OpenLoops is gated behind the `openloops` flavour. When it is off the
-  # dependency is dropped and OPENLOOPS_ROOT is unset, so disable it in CMake.
+  # Sherpa 3.x uses CMake; flags mirror lcgcmake's sherpa>=3 build. C++17 even on
+  # a C++20 stack (lcgcmake forces 17). OpenLoops gated behind the `openloops`
+  # flavour: when off, OPENLOOPS_ROOT is unset, so disable it.
   local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
   # MCFM is gated off on macOS (qcdloop needs GCC quadmath); when its edge is
   # dropped, MCFM_ROOT is unset, so disable it here.

@@ -25,11 +25,9 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function SetBuildEnv() {
   _SetBuildEnvBase
-  # podio's datamodel code generator (invoked during the EDM4hep build via
-  # podioMacros) imports jinja2/markupsafe/yaml.  bits' build env exposes each
-  # dependency's $*_ROOT but not its Python site-packages, so add every one to
-  # PYTHONPATH.  bits_pythonpath_from_deps returns 0, so SetBuildEnv stays
-  # success-valued under Run()'s `set -e`.
+  # podio's datamodel generator (via podioMacros) imports jinja2/markupsafe/yaml.
+  # bits' build env exposes each dep's $*_ROOT but not its site-packages, so add
+  # every one to PYTHONPATH.
   bits_pythonpath_from_deps
 }
 function Configure() {

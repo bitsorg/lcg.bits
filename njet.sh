@@ -18,11 +18,9 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # njet's NGluon code uses std::allocator<T>::construct/destroy, deprecated in
-  # C++17 and REMOVED in C++20, so it cannot compile at the stack default C++23.
-  # njet has no ROOT/key4hep dependency, so pin it to C++17. The trailing
-  # -std=c++17 overrides the -std=c++23 inherited from the global CXXFLAGS
-  # (last -std on the command line wins).
+  # njet's NGluon uses std::allocator::construct/destroy, removed in C++20, so it
+  # can't build at the stack default C++23. Trailing -std=c++17 overrides the
+  # inherited -std=c++23 (last -std wins).
   ./configure --prefix="$INSTALLROOT" \
     --disable-autoflags \
     ${QD_ROOT:+--with-qd="$QD_ROOT"} \

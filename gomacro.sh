@@ -26,12 +26,9 @@ function Make() {
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/cosmos72/gomacro/
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/cosmos72/gomacro/
   if bits_is_macos; then
-    # macOS Go is the modern Homebrew toolchain with GO111MODULE=off (set by the
-    # go recipe), so `go install` runs in GOPATH mode and looks under the default
-    # ~/go instead of this package — failing to resolve the self-import
-    # github.com/cosmos72/gomacro/cmd. Point GOPATH at this INSTALLROOT (plus the
-    # go_* dependency roots), mirroring go_liner / gophernotes. Linux keeps its
-    # existing (working) invocation untouched.
+    # macOS Go runs GOPATH mode (GO111MODULE=off) and defaults to ~/go, failing
+    # the self-import github.com/cosmos72/gomacro/cmd. Point GOPATH at this
+    # INSTALLROOT plus the go_* dep roots, mirroring go_liner / gophernotes.
     export GOROOT="${GO_ROOT}"
     export GOPATH="${INSTALLROOT}${GO_LINER_ROOT:+:${GO_LINER_ROOT}}${GO_RUNEWIDTH_ROOT:+:${GO_RUNEWIDTH_ROOT}}"
     ( cd "$INSTALLROOT/src/github.com/cosmos72/gomacro/" && PATH="${GO_ROOT}/bin:${PATH}" go install )

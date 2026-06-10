@@ -8,10 +8,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Python-2.0
-# PostInstall bootstraps setuptools/wheel/etc. via `pip install --upgrade`,
-# which needs outbound network. The macOS sandbox-exec wrapper blocks network
-# by default (DNS fails: "nodename nor servname provided"), so allow it here.
-# No-op on Linux, where recipe sandboxing is off entirely.
+# PostInstall's `pip install --upgrade` needs outbound network, which the macOS
+# sandbox-exec wrapper blocks by default; allow it here.
 sandbox_network: "off"
 ---
 #!/bin/bash -e
@@ -50,10 +48,8 @@ function PostInstall() {
       [[ ! -e python ]] && ln -nfs "$(basename "$d")" python
     done
   popd
-  # Bootstrap setuptools and wheel into the Python installation itself.
-  # Since Python 3.12, ensurepip no longer bundles setuptools; without it
-  # any pip call using build isolation (the default) cannot find the
-  # setuptools build backend — e.g. XRootD's cmake_install.cmake.
+  # Bootstrap setuptools/wheel: since 3.12 ensurepip no longer bundles setuptools,
+  # so pip build isolation can't find the setuptools backend (e.g. XRootD).
   preload="setuptools wheel hatchling hatch-vcs hatch-fancy-pypi-readme flit flit_core pytest pytest_cov PyYAML"
   env LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"  $INSTALLROOT/bin/python3 -m pip install --upgrade $preload
 }

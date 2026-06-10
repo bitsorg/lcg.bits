@@ -19,10 +19,9 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # bits exports dependency roots upper-cased (pkg_to_shell_id), so the Qt6 root
-  # is $QT6_ROOT, not $Qt6_ROOT. With the wrong name QTDIR was empty and SoQt's
-  # configure could not find the 'moc' pre-processor. Put Qt6's tool dir on PATH
-  # as well so moc/uic/rcc are found regardless of the QTDIR layout.
+  # bits exports dep roots upper-cased (pkg_to_shell_id), so it's $QT6_ROOT; with
+  # the wrong name QTDIR was empty and configure couldn't find 'moc'. Also put
+  # Qt6's tool dir on PATH so moc/uic/rcc are found regardless of QTDIR layout.
   export PATH="${QT6_ROOT}/bin:${QT6_ROOT}/libexec:${PATH}"
   ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no \
     --with-coin="${COIN3D_ROOT}" --with-qt="${QT6_ROOT}" QTDIR="${QT6_ROOT}"

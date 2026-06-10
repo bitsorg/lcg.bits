@@ -20,17 +20,13 @@ license: LicenseRef-POWHEG
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Prepare() {
-  # macOS: POWHEG-BOX-V2 is not yet ported to macOS — it is a 100+ process,
-  # Intel/GNU-ld-flavoured build (Intel -limf, -Wl,--print-map, per-process
-  # fastjet/lhapdf interface objects that don't compile under Apple clang). Gate
-  # it off here so a whole-stack macOS build doesn't fail on it; it produces an
-  # empty package (the Make() guard below + MakeModule). Builds normally on
-  # Linux. Remove this guard (and finish the port) to re-enable macOS.
+  # macOS: not ported — 100+ process Intel/GNU-ld build (-limf, -Wl,--print-map,
+  # per-process fastjet/lhapdf objects) won't compile under Apple clang. Gate off
+  # to an empty package (with Make() guard); remove to finish the port.
   bits_is_macos && return 0
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
-  # Makefile.lhcb (the LHCb-custom top-level wrapper) is not in the tarball.
-  # Generate one that builds all process subdirectories (tolerating per-process
-  # failures) and installs whatever succeeds.
+  # Makefile.lhcb (LHCb-custom top-level wrapper) is not in the tarball. Generate
+  # one that builds all process subdirs (tolerating failures) and installs successes.
   cat > Makefile.lhcb << 'MKEOF'
 FCOMP   ?= gfortran
 CCOMP   ?= g++
@@ -58,8 +54,7 @@ install:
 MKEOF
 }
 function Make() {
-  # macOS: gated off (see Prepare). Emit an empty install root so MakeModule has
-  # somewhere to write the modulefile, and stop.
+  # macOS: gated off (see Prepare). Emit empty install root for MakeModule.
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb \
     FCOMP="${FC:-gfortran}" CCOMP="${CXX}" \

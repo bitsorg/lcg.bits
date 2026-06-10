@@ -21,10 +21,9 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-# Spark ships as a prebuilt binary distribution (bin/, sbin/, jars/, yarn/,
-# python/) — not a pip-installable package — so install the unpacked tree
-# verbatim with BinaryRecipe.  (PythonRecipe's `pip install .` fails: the dist
-# has no top-level setup.py/pyproject.toml; pyspark lives under python/.)
+# Spark ships as a prebuilt binary distribution, not a pip package, so install
+# the unpacked tree verbatim with BinaryRecipe (PythonRecipe's `pip install .`
+# fails: no top-level setup.py/pyproject.toml; pyspark lives under python/).
 . $(bits-include BinaryRecipe)
 ##############################
 MODULE_OPTIONS="--bin"

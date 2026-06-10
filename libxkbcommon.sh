@@ -9,10 +9,8 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-  # macOS ships an ancient /usr/bin/bison (2.3, 2008) that cannot parse
-  # libxkbcommon's parser.y ("syntax error, unexpected type"). On Linux a modern
-  # bison comes from GCC-Toolchain (osx-disabled above); on macOS pull in the
-  # bits bison so a current bison is first on PATH for the YACC step.
+  # macOS /usr/bin/bison (2.3) can't parse parser.y; pull in a current bits
+  # bison so it's first on PATH for the YACC step.
   - "bison:osx"
 license: MIT
 ---
@@ -23,15 +21,11 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # 0.7.1 builds the xkbcommon-x11 sub-library by default, which needs
-  # xcb-xkb >= 1.10 / xorg-macros that are not in this stack.  This stack only
-  # needs the core library, so disable X11 (and the doc build).
+  # xkbcommon-x11 needs xcb-xkb>=1.10/xorg-macros not in this stack; only the
+  # core library is needed, so disable X11 (and docs).
   ./configure --prefix="$INSTALLROOT" --disable-x11 --disable-docs
 
-  # gcc 15's stricter analysis turns warnings in this 2017-era code into hard
-  # errors (e.g. -Warray-bounds in src/xkbcomp/ast-build.c). The build hard-codes
-  # per-warning '-Werror=...' flags into the makefiles *after* CFLAGS, so a
-  # CFLAGS=-Wno-error cannot override them. Strip every -Werror* token from the
-  # generated makefiles so those (false-positive) warnings stay non-fatal.
+  # gcc15 makes -Warray-bounds etc. fatal; the build hard-codes -Werror=* after
+  # CFLAGS so -Wno-error can't override. Strip -Werror* from generated makefiles.
   find . -name Makefile -exec perl -i -pe 's/-Werror[^[:space:]]*//g' {} +
 }

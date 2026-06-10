@@ -32,11 +32,9 @@ function Configure() {
   : # no-op — hepmcanalysis uses a plain Makefile, not cmake
 }
 function Make() {
-  # config.mk hardcodes CXXFLAGS with -ansi (i.e. C++98) and never adds
-  # root-config --cflags, so ROOT 6.36 headers abort with "ROOT requires
-  # support for C++17 or higher".  Override CXXFLAGS on the make command line
-  # (which beats the plain assignment in config.mk), replacing -ansi with
-  # -std=c++17 and keeping the project's other flags.
+  # config.mk forces -ansi (C++98); ROOT 6.36 headers need C++17. Override
+  # CXXFLAGS on the command line (beats config.mk's plain assignment), swapping
+  # -ansi for -std=c++17 and keeping the project's other flags.
   make ${JOBS:+-j $JOBS} \
     CXXFLAGS="-pthread -pipe -std=c++17 -fPIC -W -Wall -Wno-deprecated -Wno-empty-body" \
     HepMCdir="${HEPMC_ROOT}" \

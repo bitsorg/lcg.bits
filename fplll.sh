@@ -24,10 +24,8 @@ function Configure() {
     # not always present (it is absent on macOS, where it errored "No such file
     # or directory"), so run it only if present and don't fail if it isn't.
     [ -x ./autogen.sh ] && ./autogen.sh || true
-    # macOS: fplll's configure probes for GMP on the default search paths and
-    # fails ("GMP version >= 4.2.0 needed") because the bits gmp dependency is
-    # not there. Point it at GMP_ROOT explicitly. On Linux the bits dep env puts
-    # GMP on the default paths, so the line stays unchanged.
+    # macOS: configure probes GMP on default paths and fails because the bits
+    # gmp dep isn't there; point it at GMP_ROOT explicitly.
     local _gmp=""
     bits_is_macos && _gmp="--with-gmp=${GMP_ROOT}"
     CXXFLAGS="-fPIC -g -O2 -std=c++17" \

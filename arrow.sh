@@ -31,14 +31,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: arrow_create_merged_static_lib (for the bundled-dependencies static
-  # lib) requires Apple's cctools `libtool` and verifies it by matching
-  # "cctools-<ver>" in `libtool -V` output. On recent macOS even the genuine
-  # /usr/bin/libtool fails that regex (the version string format changed), so the
-  # check aborts ("libtool found appears not to be Apple's libtool"). Wrap the
-  # real Apple libtool: answer `-V` with a cctools version (passing the real
-  # output through if it already contains one), and forward every other call
-  # (notably `-static`) to the genuine tool. Linux never hits this branch.
+  # macOS: arrow's merged-static-lib step verifies libtool by matching
+  # "cctools-<ver>" in `libtool -V`, which recent /usr/bin/libtool no longer emits.
+  # Wrap Apple libtool to answer -V with a cctools version, forwarding -static etc.
   local _extra=()
   if bits_is_macos; then
     local _applelt; _applelt=$(xcrun -f libtool 2>/dev/null || echo /usr/bin/libtool)

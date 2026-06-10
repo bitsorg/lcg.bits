@@ -31,14 +31,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Poco is built POCO_UNBUNDLED=ON against external utf8proc, so its exported
-  # PocoFoundationConfig.cmake does find_dependency(Utf8Proc). That re-search
-  # uses Poco's FindUtf8Proc module, which needs the UTF8PROC_* cache vars set
-  # (Poco's own build passed them) -- otherwise consumers fail with "Could NOT
-  # find Utf8Proc". Pre-set them here, exactly as poco.sh does.
-  #
-  # perf is now a system_requirement (no PERF_ROOT exported), so point PERF_DIR
-  # at the system prefix where the distro 'perf' lives (/usr/bin/perf).
+  # Poco (POCO_UNBUNDLED=ON) does find_dependency(Utf8Proc) via its FindUtf8Proc,
+  # which needs the UTF8PROC_* cache vars pre-set (as poco.sh does).
+  # perf is a system_requirement (no PERF_ROOT), so point PERF_DIR at /usr.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

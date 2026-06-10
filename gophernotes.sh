@@ -29,10 +29,9 @@ function Make() {
   local gopath_src="${INSTALLROOT}/src/github.com/gopherdata/gophernotes"
   cmake -E make_directory "${INSTALLROOT}/bin" "${INSTALLROOT}/pkg" "${gopath_src}"
   cmake -E copy_directory "${SOURCEDIR}" "${gopath_src}"
-  # GOPATH-based build: each Go dep package installs its source + compiled
-  # archive under its own INSTALLROOT.  Assemble them all into GOPATH so that
-  # 'go install' can find github.com/cosmos72/gomacro, github.com/pebbe/zmq4,
-  # github.com/satori/go.uuid, etc.
+  # GOPATH build: each Go dep installs source + archive under its own INSTALLROOT.
+  # Assemble them all into GOPATH so 'go install' can resolve gomacro, zmq4,
+  # go.uuid, etc.
   export GOROOT="${GO_ROOT}"
   export GOPATH="${INSTALLROOT}\
 ${GOMACRO_ROOT:+:${GOMACRO_ROOT}}\

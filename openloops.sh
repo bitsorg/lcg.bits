@@ -73,11 +73,9 @@ OLPATCH
 }
 
 function Make() {
-  # OpenLoops build configuration.  Without the gfortran free-line-length and
-  # $-ok flags the Fortran sources fail to compile under modern gfortran (gcc15)
-  # and ./scons never produces libopenloops.so — which is exactly the failure
-  # consumers (herwig3, sherpa, whizard) hit as "libopenloops.so ... not found".
-  # Mirrors lcgcmake's openloops-213.cfg.
+  # Without the gfortran free-line-length and $-ok flags the Fortran sources fail
+  # to compile under gcc15 and ./scons never produces libopenloops.so. Mirrors
+  # lcgcmake's openloops-213.cfg.
   cat > openloops.cfg <<'CFG'
 [OpenLoops]
 gfortran_f_flags =   -ffree-line-length-none -fdollar-ok

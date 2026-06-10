@@ -38,10 +38,6 @@ function Configure() {
     -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON \
     ${ABSL_ROOT:+-Dabsl_ROOT="$ABSL_ROOT"}
 }
-# protoc links Abseil as SHARED libs, but bits' macOS relocation only rewrites a
-# package's own rpaths — it never adds an rpath to a *dependency* package's lib
-# dir, and DYLD_LIBRARY_PATH is unset during builds. So the installed protoc
-# could not load @rpath/libabsl_*.dylib (it aborts with SIGABRT, which broke
-# ROOT's TMVA-SOFIE protoc step). CMAKE_INSTALL_RPATH_USE_LINK_PATH bakes the
-# linked libraries' dirs (incl. absl's lib) into the install rpath so protoc
-# finds Abseil without DYLD_LIBRARY_PATH.
+# protoc links Abseil as SHARED libs, but bits' macOS relocation never adds an rpath
+# to a dependency's lib dir, so installed protoc can't load @rpath/libabsl_*.dylib
+# (broke ROOT's TMVA-SOFIE). CMAKE_INSTALL_RPATH_USE_LINK_PATH bakes absl's dir in.

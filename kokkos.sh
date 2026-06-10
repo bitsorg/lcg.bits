@@ -20,10 +20,8 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: Apple's system clang ships no OpenMP runtime, so the OpenMP backend's
-  # find_package(OpenMP) fails ("Could NOT find OpenMP_CXX"). Use the C++ Threads
-  # backend instead — real host parallelism via std::thread, no libomp needed.
-  # Linux keeps the OpenMP backend (libgomp ships with gcc).
+  # macOS: Apple clang ships no OpenMP runtime, so find_package(OpenMP) fails;
+  # use the C++ Threads backend (std::thread, no libomp) instead.
   _kokkos_host="-DKokkos_ENABLE_OPENMP=ON"
   bits_is_macos && _kokkos_host="-DKokkos_ENABLE_OPENMP=OFF -DKokkos_ENABLE_THREADS=ON"
   cmake "${SOURCEDIR}" \

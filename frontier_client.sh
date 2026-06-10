@@ -22,11 +22,8 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # macOS ships no system OpenSSL headers (openssl/md5.h), so the build fails
-  # with "'openssl/md5.h' file not found". The Frontier Makefile honours
-  # OPENSSL_DIR (adds -I$OPENSSL_DIR/include and -L$OPENSSL_DIR/lib); point it at
-  # Homebrew's keg-only openssl@3. On Linux OPENSSL_DIR stays unset and the build
-  # picks up the system OpenSSL exactly as before (byte-identical).
+  # macOS ships no system OpenSSL headers, so point OPENSSL_DIR (which the
+  # Makefile honours) at Homebrew's keg-only openssl@3.
   local openssl_dir="" make_extra=()
   if bits_is_macos; then
     openssl_dir=$(brew --prefix openssl@3 2>/dev/null) || openssl_dir=/opt/homebrew/opt/openssl@3
@@ -35,20 +32,14 @@ function Make() {
       echo "Frontier_Client:   brew install openssl@3   (or re-run bits with --brew)" >&2
       exit 1
     fi
-    # The Makefile ships a complete macOS dylib build path but auto-selects it
-    # with `[ -f /usr/lib/libc.dylib ]`, a file that no longer exists on modern
-    # macOS (dyld shared cache), so it falls back to the ELF .so path and emits
-    # -Wl,-soname, which macOS ld rejects ("unknown options: -soname"). Force
-    # DYLIBTYPE=dylib to take the -dynamiclib/-install_name path the Makefile
-    # already implements. Also strip -lrt: there is no librt on macOS
-    # (clock_gettime lives in libSystem). Both are macOS-only; Linux is untouched.
+    # The Makefile auto-selects its macOS dylib path via `[ -f /usr/lib/libc.dylib ]`,
+    # gone on modern macOS, so it falls to the ELF .so path emitting -Wl,-soname
+    # (rejected by macOS ld). Force DYLIBTYPE=dylib; also strip -lrt (no librt on
+    # macOS — clock_gettime is in libSystem).
     make_extra+=(DYLIBTYPE=dylib)
-    # The dylib's LC_ID_DYLIB is the bare name "libfrontier_client.X.Y.dylib";
-    # bits' relocate-me.sh rewrites it to a long absolute store path via
-    # install_name_tool. Without reserved header padding that rewrite fails
-    # ("larger updated load commands do not fit"), which surfaces as
-    # "Unpacking Frontier_Client: failed". Link with
-    # -headerpad_max_install_names so the install name can grow.
+    # bits' relocate-me.sh rewrites the dylib's bare LC_ID_DYLIB to a long
+    # absolute store path; without reserved header padding that rewrite fails, so
+    # link with -headerpad_max_install_names to let the install name grow.
     sed -i.bak \
       -e 's/ -lrt//g' \
       -e 's/-dynamiclib/-dynamiclib -headerpad_max_install_names/' \

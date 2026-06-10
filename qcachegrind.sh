@@ -6,10 +6,8 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kcachegrind-20.12.1.tar.gz
 requires:
   - Qt5
-  # Valgrind has no Apple Silicon support, so it cannot be built on macOS.
-  # qcachegrind is its only consumer in the stack; gate the requirement to
-  # non-osx so valgrind drops out of the macOS dependency graph entirely (the
-  # GUI itself still builds, it just visualises callgrind output). Linux keeps it.
+  # Valgrind has no Apple Silicon support; gate the requirement to non-osx so it
+  # drops out of the macOS dep graph (the GUI still builds without it).
   - "valgrind:(?!osx)"
 build_requires:
   - bits-recipe-tools
@@ -29,10 +27,8 @@ function Make() {
   # Use a subshell so the cd does not change CWD for MakeInstall().
   (
     cd qcachegrind
-    # macOS: Qt builds a .app bundle by default (qcachegrind.app/Contents/MacOS/
-    # qcachegrind), so the plain `qcachegrind/qcachegrind` the install step
-    # expects does not exist ("No such file or directory"). CONFIG-=app_bundle
-    # makes qmake emit a plain Unix executable instead. No-op on Linux.
+    # macOS: Qt builds a .app bundle by default, so the plain qcachegrind binary
+    # the install step expects is missing. CONFIG-=app_bundle emits a plain exe.
     _nobundle=""
     bits_is_macos && _nobundle="CONFIG-=app_bundle"
     "${QT5_ROOT}/bin/qmake" PREFIX="${INSTALLROOT}" ${_nobundle}

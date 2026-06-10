@@ -22,11 +22,8 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: newer clang makes -Wmissing-template-arg-list-after-template-kw a
-  # default error, which fires inside the cereal 1.3.2 dependency headers
-  # (cereal/types/tuple.hpp) that mlpack includes. Disable that one diagnostic so
-  # the third-party header-only cereal code compiles. Linux's GCC has no such
-  # warning, so the flag is macOS-only and the build there is unchanged.
+  # macOS: clang makes -Wmissing-template-arg-list-after-template-kw a default
+  # error, firing inside cereal 1.3.2 headers. Disable that one diagnostic.
   local _cxxflags=()
   bits_is_macos && _cxxflags+=(-DCMAKE_CXX_FLAGS="-Wno-missing-template-arg-list-after-template-kw")
   cmake "${SOURCEDIR}" \

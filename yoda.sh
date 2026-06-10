@@ -15,9 +15,8 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-  # Cython is needed at build time to regenerate the pyext C++ from the .pyx
-  # sources: the *.cpp shipped in the tarball target an old CPython C API and do
-  # not compile against Python >= 3.12 (3.13 here).
+  # Cython regenerates the pyext C++ from .pyx: the shipped *.cpp target an old
+  # CPython C API and don't compile against Python >= 3.12.
   - cython
 license: GPL-3.0-or-later
 ---
@@ -36,9 +35,8 @@ function Configure() {
   # Remove every generated pyext source so make re-runs Cython for all of them
   # (configure's "force rebuild" only touches core.pyx, leaving the rest stale).
   rm -f pyext/yoda/*.cpp pyext/yoda/*.h
-  # macOS: the pyext .so are linked via build.py's g++ -shared with no header
-  # pad, so bits' relocation install_name_tool overflows the load commands and
-  # fails silently. Pass the pad via CXXFLAGS (flows into PYEXT_CXXFLAGS).
+  # macOS: build.py's g++ -shared links the pyext .so with no header pad, so bits'
+  # relocation install_name_tool overflows silently; pass the pad via CXXFLAGS.
   # -Wno-register is needed for the Cython-generated C++.
   local _cxxflags="-Wno-register $(bits_macos_relocatable_ldflags)"
   # Flags mirror lcgcmake's YODA >= 2.1.0 build.

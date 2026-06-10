@@ -19,11 +19,9 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: gflags registers its prefix in CMake's *user* package registry,
-  # writing ~/.cmake/packages/gflags at install time. That path is outside the
-  # build sandbox, so the install fails ("file cannot create directory"). The
-  # registry is not needed (bits consumers find gflags via CMAKE_PREFIX_PATH),
-  # so disable both registry registrations. No-op on Linux (Darwin-gated).
+  # macOS: gflags writes ~/.cmake/packages/gflags (user package registry) at
+  # install, outside the sandbox, so install fails. The registry isn't needed
+  # (consumers find gflags via CMAKE_PREFIX_PATH), so disable both registrations.
   _gflags_noreg=""
   bits_is_macos && _gflags_noreg="-DREGISTER_INSTALL_PREFIX=OFF -DREGISTER_BUILD_PREFIX=OFF"
   cmake "${SOURCEDIR}" \
