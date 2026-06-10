@@ -43,6 +43,9 @@ function PostInstall() {
   # Julia finds this depot at runtime.  PostInstall runs after MakeModule.
   echo 'prepend-path JULIA_DEPOT_PATH $PREFIX' >> "$MODULEFILE"
   # macOS: the kernelspec lives under the package (see Make()); expose it so
-  # Jupyter discovers the Julia kernel at runtime.
-  bits_is_macos && echo 'prepend-path JUPYTER_PATH $PREFIX/share/jupyter' >> "$MODULEFILE"
+  # Jupyter discovers the Julia kernel at runtime. Use if/fi, not `&& ...`: a
+  # trailing `&&` that short-circuits on Linux makes PostInstall return 1.
+  if bits_is_macos; then
+    echo 'prepend-path JUPYTER_PATH $PREFIX/share/jupyter' >> "$MODULEFILE"
+  fi
 }
