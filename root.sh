@@ -75,14 +75,16 @@ function Configure() {
   # Default ROOT_TESTING to OFF unless set externally
   ROOT_TESTING=${ROOT_TESTING:-OFF}
 
-  # Detect C++ standard before unsetting flags. Default to C++20 (podio etc. need it),
-  # but honour any explicit -std=c++NN in CXXFLAGS so a pinned standard isn't upgraded.
+  # Default to C++20 (podio etc. need it), but honour an explicit -std=c++NN in
+  # CXXFLAGS so a pinned standard isn't upgraded.
   CMAKE_CXX_STANDARD=20
-  [[ "$CXXFLAGS" == *'-std=c++11'* ]] && CMAKE_CXX_STANDARD=11 || true
-  [[ "$CXXFLAGS" == *'-std=c++14'* ]] && CMAKE_CXX_STANDARD=14 || true
-  [[ "$CXXFLAGS" == *'-std=c++17'* ]] && CMAKE_CXX_STANDARD=17 || true
-  [[ "$CXXFLAGS" == *'-std=c++20'* ]] && CMAKE_CXX_STANDARD=20 || true
-  [[ "$CXXFLAGS" == *'-std=c++23'* ]] && CMAKE_CXX_STANDARD=23 || true
+  case "$CXXFLAGS" in
+    *-std=c++11*) CMAKE_CXX_STANDARD=11 ;;
+    *-std=c++14*) CMAKE_CXX_STANDARD=14 ;;
+    *-std=c++17*) CMAKE_CXX_STANDARD=17 ;;
+    *-std=c++20*) CMAKE_CXX_STANDARD=20 ;;
+    *-std=c++23*) CMAKE_CXX_STANDARD=23 ;;
+  esac
 
   # Version-gated flags: strip leading 'v' and normalise '-' to '.' so dash-form
   # tags (v6-40-00 -> 6.40.00) compare correctly (sort -V mis-orders mixed '-'/'.').
@@ -117,9 +119,8 @@ function Configure() {
   COMPILER_CXX=c++
   case $(uname) in
     Darwin)
-      # Use the native Cocoa GUI backend and turn off X11 so ROOT does not need
-      # XQuartz on macOS (general X11/GL packages still use XQuartz separately).
-      ENABLE_COCOA=1 # "-Dcocoa=ON -Dx11=OFF"
+      # Native Cocoa GUI backend, X11 off, so ROOT doesn't need XQuartz on macOS.
+      ENABLE_COCOA="-Dcocoa=ON -Dx11=OFF"
       COMPILER_CXX=clang++
       COMPILER_CC=clang
       COMPILER_LD=clang
@@ -130,9 +131,8 @@ function Configure() {
       ;;
   esac
 
-  # Python discovery: do NOT pass Python3_ROOT_DIR/Python3_EXECUTABLE — that makes
-  # FindPython3 use NO_DEFAULT_PATH and skip the sysconfig library search, breaking
-  # non-standard builds. Rely on PATH (--bin prepends $PYTHON_ROOT/bin), as lcgcmake does.
+  # Don't pass Python3_ROOT_DIR/Python3_EXECUTABLE: they force NO_DEFAULT_PATH and
+  # skip FindPython3's sysconfig search. Rely on PATH ($PYTHON_ROOT/bin), as lcgcmake.
 
   # Build PYTHONPATH before cmake: init.sh doesn't propagate deps' site-packages
   # during builds, so FindPython3's `import numpy` fails (blocks tmva-pymva). Query
@@ -176,6 +176,18 @@ function Configure() {
 
   unset DYLD_LIBRARY_PATH
 
+  # GCC-specific warning flags; on macOS (clang) drop -fpermissive (unknown to
+  # clang) and silence clang's "unknown warning option" for the gcc -W flags.
+  _cxx_extra=" -fpermissive -Wno-stringop-overread -Wno-stringop-overflow -Wno-deprecated-declarations "
+  _c_extra=" -Wno-stringop-overread -Wno-stringop-overflow "
+  if bits_is_macos; then
+    _cxx_extra=" -Wno-deprecated-declarations -Wno-unknown-warning-option "
+    _c_extra=" -Wno-unknown-warning-option "
+  fi
+
+  # vdt is OFF unless its dep is present (gated :(?!osx), so always OFF on macOS).
+  _vdt=OFF; [[ -n "${VDT_ROOT}" ]] && _vdt=ON
+
   cmake "${SOURCEDIR}"                                                      \
     ${CMAKE_GENERATOR:+-G "${CMAKE_GENERATOR}"}                             \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
@@ -183,8 +195,8 @@ function Configure() {
     -DCMAKE_INSTALL_LIBDIR=lib                                              \
     -DCMAKE_CXX_STANDARD="${CMAKE_CXX_STANDARD}"                             \
     -DCMAKE_C_STANDARD=17                                                   \
-    -DCMAKE_CXX_FLAGS=" -fpermissive -Wno-stringop-overread -Wno-stringop-overflow -Wno-deprecated-declarations " \
-    -DCMAKE_C_FLAGS=" -Wno-stringop-overread -Wno-stringop-overflow "       \
+    -DCMAKE_CXX_FLAGS="${_cxx_extra}"                                       \
+    -DCMAKE_C_FLAGS="${_c_extra}"                                           \
     -DCMAKE_CXX_COMPILER="${COMPILER_CXX}"                                   \
     -DCMAKE_C_COMPILER="${COMPILER_CC}"                                      \
     ${ENABLE_COCOA}                                                         \
@@ -246,12 +258,11 @@ function Configure() {
     -Dunfold=ON                                                             \
     -Dunuran=ON                                                             \
     -Dbuiltin_vdt=OFF                                                       \
-    -Dvdt=OFF                                                               \
+    -Dvdt="${_vdt}"                                                         \
     -Dvc=OFF                                                                \
     -Dxft=ON                                                                \
     -Dxml=ON                                                                \
     -Dzlib=ON                                                               \
-    ${VDT_ROOT:+-Dvdt=ON}                                                   \
     ${_sofie_flag}                                                          \
     ${_test_flags}
 }
@@ -269,8 +280,12 @@ Unix.*.Root.DynamicPath: .:$(ROOT_DYN_PATH):
 EOF
   mv system.rootrc.0 "$INSTALLROOT/etc/system.rootrc"
 
-  # Make some CMake files used by other projects relocatable
-  sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
+  # Make some CMake files used by other projects relocatable. Guard on BUILDDIR:
+  # an empty pattern would corrupt every .cmake. Clean up sed's .deleteme backups.
+  if [ -n "$BUILDDIR" ]; then
+    sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
+    find "$INSTALLROOT" -name '*.cmake.deleteme' -delete
+  fi
 
   rm -vf "$INSTALLROOT/LICENSE"
 
