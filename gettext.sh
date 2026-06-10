@@ -30,18 +30,11 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # --disable-relocatable: the relocatable build pulls in gnulib's progreloc.c
-  # which does not compile cleanly under GCC 15 / C23; bits installs to a fixed
-  # prefix so relocation support is not needed.
-  # CFLAGS -std=gnu17: keeps the rest of gnulib compatible with GCC 15.
-  #
-  # macOS: gnulib's strict "working iconv" probe rejects the system iconv over a
-  # known minor round-trip bug (am_cv_func_iconv_works=no), leaving HAVE_ICONV
-  # undefined -> iconv_ostream_create is compiled out of libtextstyle while
-  # libtextstyle.sym still exports it -> "Undefined symbols: _iconv_ostream_create".
-  # The system iconv is fine for the UTF-8 conversions this stack needs, so force
-  # the cache var to accept it. (The proper alternative is GNU libiconv.) No
-  # effect on Linux, where glibc iconv passes the probe.
+  # --disable-relocatable: gnulib progreloc.c breaks under gcc15/C23, and bits
+  # installs to a fixed prefix; -std=gnu17 keeps the rest of gnulib gcc15-clean.
+  # macOS: gnulib's iconv probe wrongly rejects the adequate system iconv,
+  # dropping iconv_ostream_create while .sym still exports it (link error) ->
+  # force am_cv_func_iconv_works=yes.
   _iconv_works=""
   bits_is_macos && _iconv_works="am_cv_func_iconv_works=yes"
   ./configure --prefix="$INSTALLROOT" \

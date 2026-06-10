@@ -50,17 +50,9 @@ function Configure() {
 }
 
 function PostInstall() {
-  # freetype has prefer_system, so its freetype2.pc lives at an OS multiarch
-  # path (e.g. /usr/lib/x86_64-linux-gnu/pkgconfig/) that is NOT in bits'
-  # PKG_CONFIG_PATH.  Every downstream pkg-config consumer of fontconfig.pc
-  # (pango, harfbuzz, cairo, …) will fail resolving "Requires: freetype2"
-  # unless freetype2.pc is reachable through a bits-managed pkgconfig dir.
-  #
-  # Solution: if freetype2.pc is not already accessible from FREETYPE_ROOT
-  # (i.e. freetype is a system package), copy the system freetype2.pc into
-  # our own lib/pkgconfig/.  Since $FONTCONFIG_ROOT/lib/pkgconfig is
-  # prepended to PKG_CONFIG_PATH by the fontconfig module, every consumer
-  # automatically finds freetype2 without any per-package workaround.
+  # freetype is prefer_system, so freetype2.pc sits at an OS multiarch path not on
+  # bits' PKG_CONFIG_PATH; copy it into our lib/pkgconfig so downstream consumers
+  # of fontconfig.pc (pango/harfbuzz/cairo) can resolve "Requires: freetype2".
   [ -f "${INSTALLROOT}/lib/pkgconfig/freetype2.pc" ] && return 0
   [ -f "${FREETYPE_ROOT}/lib/pkgconfig/freetype2.pc" ] && return 0  # bits-built: already findable
   local _triple

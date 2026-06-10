@@ -17,9 +17,8 @@ license: LicenseRef-HYDJET++
 MODULE_OPTIONS="--bin"
 ##############################
 function Prepare() {
-  # The HYDJET++ ZIP has all files directly at the archive root (no wrapping
-  # directory).  bits would extract with strip=1 and skip root-level files.
-  # Download and unzip manually into the build directory.
+  # The ZIP has all files at the archive root (no wrapping dir); bits' strip=1
+  # would drop them, so download + unzip manually.
   curl -fSL \
     "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/HYDJET++2_1.ZIP" \
     -o HYDJET++2_1.ZIP
@@ -27,24 +26,13 @@ function Prepare() {
   rm -f HYDJET++2_1.ZIP
 }
 function Make() {
-  # HYDJET++ uses a plain Makefile with no configure step.
-  # root-config must be on PATH; F77LIBSO points to the gfortran shared library
-  # (the Makefile auto-detects gfortran but not its library path under GCC-Toolchain).
-  #
-  # The bundled PYQUEN Fortran (e.g. progs_fortran.f) is nonconforming legacy
-  # code: it calls SPLINE(N,X,Y,B,C,D) — whose dummies are DIMENSION X(100) … —
-  # with shorter actual arrays.  gfortran >= 10 rejects this with
-  # "Actual argument contains too few elements".  -fallow-argument-mismatch
-  # downgrades it back to a warning (the same remedy lcgcmake applies to crmc for
-  # gcc > 9); -std=legacy covers other old constructs.  The Makefile's default
-  # F77FLAGS is "-fPIC", which we preserve.
-  # gfortran's shared runtime is libgfortran.dylib on macOS, .so on Linux.
+  # Plain Makefile: root-config must be on PATH and F77LIBSO must point at the
+  # gfortran shared lib (the Makefile finds gfortran but not its lib path).
+  # -std=legacy -fallow-argument-mismatch lets the nonconforming bundled PYQUEN
+  # Fortran (rank/shape mismatches) compile under gfortran >= 10.
   _libgf=libgfortran.so; bits_is_macos && _libgf=libgfortran.dylib
-  # macOS: the Makefile detects the Fortran compiler by globbing a hardcoded
-  # BINDIRS (. /bin /usr/bin /usr/local/bin) for `gfortran`, but Homebrew's
-  # gfortran lives in /opt/homebrew/bin, so detection fails ("Fortran compiler
-  # not found"). Prepend gfortran's actual directory to BINDIRS. On Linux
-  # gfortran is in /usr/bin (already covered), so this is Darwin-only.
+  # macOS: the Makefile globs a hardcoded BINDIRS for gfortran, missing Homebrew's
+  # /opt/homebrew/bin; prepend gfortran's actual directory.
   local _bindirs=()
   if bits_is_macos; then
     local _fcdir; _fcdir=$(dirname "$(command -v ${FC:-gfortran})")
