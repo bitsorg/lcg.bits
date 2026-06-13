@@ -27,14 +27,10 @@ license: GPL-3.0-only
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsPython)
 . $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# bits Cython on PATH/PYTHONPATH at recipe scope (reaches Make) so the pyext is
-# regenerated for Python 3.13.
-bits_enable_cython
 # SWIG + runtime lib dir, as lcgcmake passes to Rivet 4 (relocated on macOS).
 export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(bits_swig_lib)"

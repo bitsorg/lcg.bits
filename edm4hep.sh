@@ -19,17 +19,9 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
-. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function SetBuildEnv() {
-  _SetBuildEnvBase
-  # podio's datamodel generator (via podioMacros) imports jinja2/markupsafe/yaml.
-  # bits' build env exposes each dep's $*_ROOT but not its site-packages, so add
-  # every one to PYTHONPATH.
-  bits_pythonpath_from_deps
-}
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

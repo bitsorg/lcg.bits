@@ -23,17 +23,9 @@ license: MPL-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
-. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function SetBuildEnv() {
-  _SetBuildEnvBase
-  # ACTS runs Python codegen (sympy/particle) at build time, but the build env
-  # exposes deps' $*_ROOT not their site-packages; add each to PYTHONPATH.
-  # bits_pythonpath_from_deps returns 0 so SetBuildEnv stays success under set -e.
-  bits_pythonpath_from_deps
-}
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

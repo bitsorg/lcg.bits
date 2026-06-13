@@ -23,15 +23,11 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsPython)
 . $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  # bits Cython on PATH/PYTHONPATH so configure rebuilds the pyext C++ from the
-  # .pyx (the shipped *.cpp use CPython internals removed in 3.12/3.13).
-  bits_enable_cython
   # Remove every generated pyext source so make re-runs Cython for all of them
   # (configure's "force rebuild" only touches core.pyx, leaving the rest stale).
   rm -f pyext/yoda/*.cpp pyext/yoda/*.h

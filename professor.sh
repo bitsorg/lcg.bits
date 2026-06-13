@@ -23,14 +23,9 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# professor's Makefile aborts if Cython/numpy aren't importable. bits exposes
-# each dep's $*_ROOT but not its site-packages, so put them all on PYTHONPATH at
-# recipe scope (reaches Configure and Make).
-bits_pythonpath_from_deps
 # professor's Makefile forms `-std=$(CXXSTD)`, but bits exports CXXSTD as a bare
 # number (e.g. 23), giving invalid `-std=23`. Hand it the `c++NN` token instead
 # (matches the c++23 of dependency ROOT).

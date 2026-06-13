@@ -24,17 +24,9 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
-. $(bits-include BitsPython)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function SetBuildEnv() {
-  _SetBuildEnvBase
-  # podio's datamodel code generator (invoked via podioMacros while configuring
-  # DCHdigi) imports jinja2/markupsafe/yaml. bits exposes each dependency's
-  # $*_ROOT but not its Python site-packages, so add them to PYTHONPATH.
-  bits_pythonpath_from_deps
-}
 function Configure() {
   # PyTorch's CMake config lives in its pip site-packages; point find_package(Torch)
   # there directly. The modulefile Torch_DIR doesn't reach the build env, and a
