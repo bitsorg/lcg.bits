@@ -181,6 +181,8 @@ function Configure() {
   # vdt is OFF unless its dep is present (gated :(?!osx), so always OFF on macOS).
   _vdt=OFF; [[ -n "${VDT_ROOT}" ]] && _vdt=ON
 
+  CMAKE_GENERATOR=${CMAKE_GENERATOR:-Ninja}
+
   cmake "${SOURCEDIR}"                                                      \
     ${CMAKE_GENERATOR:+-G "${CMAKE_GENERATOR}"}                             \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
