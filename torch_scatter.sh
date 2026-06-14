@@ -20,14 +20,10 @@ MODULE_OPTIONS="--bin --python"
 ##############################
 function MakeInstall() {
   mkdir -p "${SITE_PACKAGES}"
-  # setup.py imports torch at build time, so: --no-build-isolation (use bits'
-  # build env where torch lives, not a fresh overlay) and add each dep's
-  # site-packages to PYTHONPATH (the build env exposes $*_ROOT but not those).
-  local _r _sp
-  for _r in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1); do
-    _sp="${!_r}/lib/python${PYTHON_MAJOR_MINOR}/site-packages"
-    [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
-  done
+  # setup.py imports torch at build time, so --no-build-isolation: use bits'
+  # build env where torch lives, not a fresh overlay. The dependency
+  # site-packages are already on PYTHONPATH via each dep's init.sh (the
+  # from-modules default), so no manual reconstruction is needed here.
   "${PYTHON_EXE}" -m pip install \
     --no-deps --no-build-isolation --ignore-installed \
     --root=/ --prefix="${INSTALLROOT}" \
