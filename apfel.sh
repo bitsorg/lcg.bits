@@ -32,7 +32,6 @@ function Configure() {
   bits_is_macos && _swig=(-DSWIG_EXECUTABLE="${SWIG}" -DSWIG_DIR="${SWIG_LIB}")
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DAPFEL_ENABLE_PYTHON=ON \
     -DAPFEL_ENABLE_LHAPDF=ON \

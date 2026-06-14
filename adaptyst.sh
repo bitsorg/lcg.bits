@@ -36,7 +36,6 @@ function Configure() {
   # perf is a system_requirement (no PERF_ROOT), so point PERF_DIR at /usr.
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DADAPTYST_SCRIPT_PATH="$INSTALLROOT/share/adaptyst" \
     -DADAPTYST_CONFIG_PATH="$INSTALLROOT/etc/adaptyst.conf" \

@@ -33,7 +33,6 @@ function Configure() {
   fi
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     "${cuda_opts[@]}" \
     -DVECGEOM_GEANT4=OFF \

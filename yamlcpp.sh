@@ -20,7 +20,6 @@ MODULE_OPTIONS="--bin --lib --cmake --root"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DYAML_BUILD_SHARED_LIBS=ON \
     -DYAML_CPP_BUILD_TESTS=OFF \

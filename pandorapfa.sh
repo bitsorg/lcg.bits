@@ -27,8 +27,7 @@ function Configure() {
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="-Wno-error" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"}
+    -DCMAKE_CXX_FLAGS="-Wno-error"
 }
 function PostInstall() {
   # Downstream Pandora packages need $PANDORAPFA_ROOT/cmakemodules (include

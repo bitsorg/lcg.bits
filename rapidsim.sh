@@ -31,7 +31,6 @@ function Configure() {
   bits_is_macos && bits_strip_token "${SOURCEDIR}/CMakeLists.txt" -Werror
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DROOTSYS="${ROOT_ROOT}"
 }

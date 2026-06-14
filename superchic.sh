@@ -23,7 +23,6 @@ function Configure() {
   # lcgcmake's superchic build (LHAPDF_DIR, tests off, long Fortran lines).
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DLHAPDF_DIR="${LHAPDF_ROOT}" \
     -DSUPERCHIC_ENABLE_TESTS=OFF \

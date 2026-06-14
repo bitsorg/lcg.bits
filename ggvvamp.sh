@@ -24,7 +24,6 @@ function Configure() {
   # cap to -g1 (wins over earlier -g; drop to -g0 if it still overflows).
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="${CXXFLAGS:-} -g1" \
     -DGiNaC_DIR="${GINAC_ROOT}"

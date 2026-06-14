@@ -19,7 +19,6 @@ MODULE_OPTIONS="--bin --lib --cmake --pkgconfig"
 ##############################
 function Configure() {
   cmake $SOURCEDIR                          \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -G Ninja                            \
       -DENABLE_WS=OFF                     \
       -DBUILD_TESTS=OFF                   \

@@ -40,7 +40,6 @@ function Make() {
 function Configure() {
   # Touch the generated header so configure does not fail if it is missing
   cmake -E touch utilities/VBFNLOConfig.h.in 2>/dev/null || \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     mkdir -p utilities && touch utilities/VBFNLOConfig.h.in
   ./configure --prefix="$INSTALLROOT" \
     ${GSL_ROOT:+--with-gsl="$GSL_ROOT"} \

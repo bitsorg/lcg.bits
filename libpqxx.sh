@@ -21,7 +21,6 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DSKIP_BUILD_TEST=ON \
     -DBUILD_SHARED_LIBS=ON \

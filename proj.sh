@@ -29,7 +29,6 @@ function Configure() {
   bits_is_macos && _find_fw="-DCMAKE_FIND_FRAMEWORK=LAST"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     ${_find_fw} \

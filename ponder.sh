@@ -24,7 +24,6 @@ function Configure() {
   # BUILD_TEST_EXAMPLES, BUILD_DOC (the PONDER_BUILD_* names were wrong).
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_TEST=OFF \
     -DBUILD_TEST_EXAMPLES=OFF \

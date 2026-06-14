@@ -28,7 +28,6 @@ function Configure() {
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_MODULE_PATH="${CMAKETOOLS_MODULES}" \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS"

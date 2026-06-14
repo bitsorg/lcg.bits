@@ -34,7 +34,6 @@ function Configure() {
   export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_SYSTEM_PREFIX_PATH=/usr \
       -DCMAKE_BUILD_TYPE=Release \
     -DHEAPTRACK_BUILD_INTERPRET=ON

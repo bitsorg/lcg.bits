@@ -37,7 +37,6 @@ function Configure() {
   local _ol=OFF; [ -n "${OPENLOOPS_ROOT:-}" ] && _ol=ON
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Dgeneva_enable_hepmc=OFF \
     -Dgeneva_enable_lhapdf=ON \
