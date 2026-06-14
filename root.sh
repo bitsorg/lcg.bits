@@ -5,7 +5,7 @@ version: "%(tag_basename)s"
 # override in stacks defaults-dev4.sh (Apple clang needs 6.40).
 tag: "v6-38-00"
 source: https://github.com/root-project/root.git
-mem_per_job: 1500
+mem_per_job: 1250
 requires:
   - CMake
   - Python
