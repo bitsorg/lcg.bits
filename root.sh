@@ -5,7 +5,7 @@ version: "%(tag_basename)s"
 # override in stacks defaults-dev4.sh (Apple clang needs 6.40).
 tag: "v6-38-00"
 source: https://github.com/root-project/root.git
-mem_per_job: 1250
+mem_per_job: 1000
 requires:
   - CMake
   - Python
@@ -18,6 +18,7 @@ requires:
   - tbb
   - blas
   - zlib
+  - zstd
   - libxml2
   - "vdt:(?!osx)"
   - xz
@@ -142,13 +143,17 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # Use ROOT's bundled copies (no bits package, and -Dfail-on-missing makes a
-  # missing external fatal). 6.40 still supports these builtin_* options (just
-  # defaults them OFF) EXCEPT builtin_glew (removed in 6.40); 6.40 also needs -Dcurl=ON.
+  # Use ROOT's bundled copies for externals with no bits package (-Dfail-on-missing
+  # makes a missing external fatal). 6.40 still supports these builtin_* options
+  # (just defaults them OFF) EXCEPT builtin_glew (removed in 6.40); 6.40 also needs
+  # -Dcurl=ON. zstd is the exception: it HAS a bits package (lcg.bits/zstd.sh, in
+  # requires, shipping zdict.h), so we use the external one (-Dbuiltin_zstd=OFF) --
+  # ROOT 6.40's ZipZSTD.cxx #includes zdict.h, which the builtin path didn't expose
+  # while the external zstd was already on CMAKE_PREFIX_PATH via xrootd/Davix.
   if _ver_ge "$_root_ver" "6.40.00"; then
-    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON -Dcurl=ON"
+    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=OFF -Dcurl=ON"
   else
-    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
+    _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=OFF"
   fi
 
   # < 6.36.99: explicit pgsql=OFF; >= 6.36.99: roottest flag replaces it
