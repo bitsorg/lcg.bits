@@ -13,6 +13,7 @@ requires:
   - curl
   - Davix
   - libzip
+  - uuid
 # - readline
 build_requires:
   - bits-recipe-tools
@@ -26,11 +27,18 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
+  # libuuid (uuid/uuid.h) — same dependency Davix needs; point FindUUID at the
+  # uuid package explicitly. Linux ships libuuid.so; the uuid recipe ships only
+  # a static lib on macOS.
+  local libuuid_ext=so
+  [[ $ARCHITECTURE == osx* ]] && libuuid_ext=a
   cmake "${SOURCEDIR}" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
       ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
+      ${UUID_ROOT:+-DUUID_LIBRARY="$UUID_ROOT/lib/libuuid.$libuuid_ext"} \
+      ${UUID_ROOT:+-DUUID_INCLUDE_DIR="$UUID_ROOT/include"} \
     -DENABLE_READLINE=FALSE \
     -DFORCE_ENABLED=ON \
     -DENABLE_FUSE=FALSE \

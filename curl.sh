@@ -19,11 +19,9 @@ license: curl
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  # GSS-API/Kerberos is disabled: the build environment ships no krb5 dev
-  # library, and ROOT's use of curl does not need SPNEGO/Kerberos auth. Use
-  # --without-gssapi explicitly so detection is deterministic regardless of
-  # what happens to be present in the container.
+  # GSS-API/Kerberos requires krb5 (gssapi headers) to be present in the build
+  # container — see the slc9-builder image, which installs krb5-devel.
   ./configure --prefix="$INSTALLROOT" \
     --with-openssl \
-    --without-gssapi --without-libidn2 --without-libpsl
+    --with-gssapi --without-libidn2 --without-libpsl
 }
