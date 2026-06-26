@@ -31,6 +31,12 @@ prefer_system_check: |
   EOF
 env:
   CCACHE_CONFIGPATH: "$GCC_TOOLCHAIN_ROOT/etc/ccache.conf"
+  # Highest C++ standard this compiler supports, exported as a bare number for
+  # downstream recipes (e.g. -DCMAKE_CXX_STANDARD=$CXXSTD). When built from
+  # source the recipe records it in etc/cxxstd; on the prefer_system path that
+  # file is absent, so probe the system g++/c++ directly. No '%' or '"' chars,
+  # so bits' env templating leaves the command substitution intact.
+  CXXSTD: "$( f=$GCC_TOOLCHAIN_ROOT/etc/cxxstd; if [ -r $f ]; then cat $f; else c=$(command -v g++ || command -v c++ || echo g++); r=23; for s in 26 23 20 17; do printf 'int main(){}' | $c -std=c++$s -fsyntax-only -x c++ - >/dev/null 2>&1 && { r=$s; break; }; done; echo $r; fi )"
 ---
 # Fix syntax highlight
 cat <<EOF
@@ -55,6 +61,18 @@ case $ARCHITECTURE in
 esac
 
 rsync -a --exclude='**/.git' --delete --delete-excluded "$SOURCEDIR/" ./
+
+# The C++17 ISL test files use isl::id(ctx,name,user_ptr) and .try_user<T>()/
+# .user<T>(), which are only declared in isl/cpp.h under __cplusplus>=201703L.
+# GCC's top-level bootstrap pins CXX to -std=c++14, but these check_PROGRAMS
+# get compiled during `all`, so they fail to find the C++17-only API. They are
+# self-tests and irrelevant to the produced compiler, so strip their references
+# from Makefile.am and the pre-generated Makefile.in (so autoreconf is not
+# required). See bits-build isl_test_cpp17 failure.
+for _isl_mk in gcc/isl/Makefile.am gcc/isl/Makefile.in; do
+  [[ -f "$_isl_mk" ]] && sed -i '/isl_test_cpp17/d' "$_isl_mk" || true
+done
+unset _isl_mk
 
 if [ -e autoconf-archive ]; then
   (cd autoconf-archive && autoreconf -ivf )
@@ -269,6 +287,21 @@ rm -fr "$INSTALLROOT"/include/sim
 # If fixincludes is not desired, see:
 # http://ewontfix.com/12/
 # https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/eclass/toolchain.eclass?view=markup&sortby=log#l1524
+
+# Record the highest C++ standard the freshly built compiler accepts, so the
+# package environment can export CXXSTD to downstream recipes (single source of
+# truth, instead of hardcoding -std/CXXSTD in the defaults profile). Probe from
+# newest to oldest and keep the first that compiles.
+mkdir -p "$INSTALLROOT/etc"
+_cxxstd=23
+for _s in 26 23 20 17; do
+  if printf 'int main(){}' | "$INSTALLROOT/bin/g++" -std=c++$_s -fsyntax-only -x c++ - >/dev/null 2>&1; then
+    _cxxstd=$_s
+    break
+  fi
+done
+echo "$_cxxstd" > "$INSTALLROOT/etc/cxxstd"
+unset _cxxstd _s
 
 # Modulefile
 MODULEDIR="$INSTALLROOT/etc/modulefiles"
