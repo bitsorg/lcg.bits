@@ -54,7 +54,7 @@ function MakeInstall() {
   # XRootD 6.0.1 cmake_install.cmake calls pip without --no-build-isolation.
   # Build isolation creates a fresh env where setuptools is not available.
   # Patch all generated cmake_install.cmake files in the build tree before install.
-  find . -name 'cmake_install.cmake' \
+  find "$BITS_CMAKE_BUILD" -name 'cmake_install.cmake' \
     -exec sed -i 's/pip install /pip install --no-build-isolation /g' {} +
   cmake --install "$BITS_CMAKE_BUILD"
 }

@@ -23,11 +23,12 @@ license: LGPL-2.1-or-later
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 # Davix's cmake/modules/buildCurl.cmake applies the bundled-curl CVE patches in
-# place under CMAKE_SOURCE_DIR/deps/curl. To keep that off the shared SOURCES
-# tree we build out-of-source FROM THE PRIVATE rsync'd copy (cwd, '.') rather
-# than from "$SOURCEDIR": then CMAKE_SOURCE_DIR is the copy, and Davix patches
-# the copy, never SOURCES. (This also lets the shared SOURCES tree be mounted
-# read-only.) Binary dir is obj/ — explicit, so no `cd` leaks into later stages.
+# place under CMAKE_SOURCE_DIR/deps/curl. The framework now builds every CMake
+# recipe out-of-source from the private rsync'd copy (BITS_CMAKE_SRC=".",
+# CMAKE_SOURCE_DIR = the copy), so Davix patches the copy, never the shared
+# SOURCES tree — exactly the case this migration exists for. Configure only needs
+# the reverse-patch reset + uuid hints; Make/MakeInstall use the framework
+# defaults (binary dir BITS_CMAKE_BUILD="build").
 function Configure() {
   # Reset the bundled-curl patch targets in the copy so Davix's forward git apply
   # starts pristine (no-op the first time; reverts a prior apply on an
@@ -45,7 +46,7 @@ function Configure() {
   # ships only a static lib on macOS.
   local libuuid_ext=so
   [[ $ARCHITECTURE == osx* ]] && libuuid_ext=a
-  cmake -S . -B obj \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -57,5 +58,3 @@ function Configure() {
     -DDAVIX_TESTS=OFF \
     -DEMBEDDED_RAPIDJSON=ON
 }
-function Make()        { cmake --build obj -- ${JOBS:+-j$JOBS}; }
-function MakeInstall() { cmake --install obj; }
