@@ -28,8 +28,8 @@ function Configure() {
   # niche DRC-only writer; drop just that one file from the G4 plugin list. The
   # sed is idempotent (no-op once the line is gone) and guarded so a future
   # upstream rename can't silently re-introduce the failure unnoticed.
-  if grep -q 'plugins/Geant4Output2EDM4hep_DRC.cpp' "${SOURCEDIR}/CMakeLists.txt"; then
-    sed -i '\#\./plugins/Geant4Output2EDM4hep_DRC\.cpp#d' "${SOURCEDIR}/CMakeLists.txt"
+  if grep -q 'plugins/Geant4Output2EDM4hep_DRC.cpp' "$BITS_CMAKE_SRC/CMakeLists.txt"; then
+    sed -i '\#\./plugins/Geant4Output2EDM4hep_DRC\.cpp#d' "$BITS_CMAKE_SRC/CMakeLists.txt"
   fi
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

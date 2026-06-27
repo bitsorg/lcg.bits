@@ -43,20 +43,20 @@ prepend_path:
 MODULE_OPTIONS="--bin --lib --cmake --pylib"
 ##############################
 function Prepare() {
-  # All source patches must come BEFORE rsync.  ROOT's cmake copies LLVM headers
-  # from the build dir's rsync'd tree (not from SOURCEDIR) into its own build/
-  # subtree; if we patch after rsync, the build dir gets the unpatched copy.
+  # Build out-of-source from this private copy (framework cmake -S .), so every
+  # source patch is applied to the COPY after rsync — never the shared, read-only
+  # SOURCES tree. ROOT's cmake reads FindDavix.cmake and copies its bundled LLVM
+  # headers from this copy, so patching here is exactly what the build sees.
+  rsync -av --delete --exclude '**/.git' --delete-excluded --exclude '/build/' "${SOURCEDIR}/" ./
 
   # ROOT's CMakeLists.txt does set(CMAKE_MODULE_PATH ...) which replaces any
   # -DCMAKE_MODULE_PATH passed on the command line, so we must patch the source.
   # FindDavix.cmake uses only pkg_check_modules; prepend a find_library fallback
   # via DAVIX_ROOT so discovery works even when davix.pc is absent or misplaced.
   # Guard prevents double-patching on reruns.
-  if ! grep -q 'bits: direct fallback' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"; then
-    sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' "${SOURCEDIR}/cmake/modules/FindDavix.cmake"
+  if ! grep -q 'bits: direct fallback' cmake/modules/FindDavix.cmake; then
+    sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' cmake/modules/FindDavix.cmake
   fi
-  # rsync last: copies the already-patched source into the build dir
-  rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}/" ./
 }
 function Configure() {
   # Default ROOT_TESTING to OFF unless set externally

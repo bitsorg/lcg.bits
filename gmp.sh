@@ -18,11 +18,13 @@ license: GPL-2.0-or-later OR LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  # C23 compatibility fix (gcc 15+: void g(){} is no longer valid)
-  sed -i.orig 's/void g(){}/void g(int p1,t1 const* p2,t1 p3,t2 p4,t1 const* p5,int p6){}/' "$SOURCEDIR/acinclude.m4" || true
-  sed -i.orig 's/void g(){}/void g(int p1,t1 const* p2,t1 p3,t2 p4,t1 const* p5,int p6){}/' "$SOURCEDIR/configure" || true
-
   rsync -a --delete --exclude '**/.git' "$SOURCEDIR"/ .
+
+  # C23 compatibility fix (gcc 15+: void g(){} is no longer valid). Patch the
+  # rsync'd copy in cwd (where ./configure runs), never the shared read-only
+  # SOURCES tree.
+  sed -i.orig 's/void g(){}/void g(int p1,t1 const* p2,t1 p3,t2 p4,t1 const* p5,int p6){}/' acinclude.m4 || true
+  sed -i.orig 's/void g(){}/void g(int p1,t1 const* p2,t1 p3,t2 p4,t1 const* p5,int p6){}/' configure || true
 
   case $(uname -m) in
     x86_64) MARCH="core2" ;;

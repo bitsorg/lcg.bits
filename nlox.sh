@@ -26,10 +26,10 @@ function Configure() {
   #
   # 1) Restrict the built process list to the ones this stack needs.
   sed -i 's/set(NLOX_PROCESSES [^)]*)/set(NLOX_PROCESSES pp_Wpttbar pp_Zttbar_as3ae1 pp_ttbarepem_as3ae2 pp_Wmttbar)/' \
-    "$SOURCEDIR/CMakeLists.txt"
+    "$BITS_CMAKE_SRC/CMakeLists.txt"
   # 2) Fix the OneLOop/QCDLoop download URL: the site dropped the duplicate
   #    'helac-phegas/' path component (helac-phegas.web.cern.ch/tar-files/...).
-  sed -i 's|helac-phegas/tar-files|tar-files|g' "$SOURCEDIR/CMakeLists.txt"
+  sed -i 's|helac-phegas/tar-files|tar-files|g' "$BITS_CMAKE_SRC/CMakeLists.txt"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
