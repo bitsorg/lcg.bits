@@ -23,6 +23,24 @@ license: LGPL-2.1-or-later
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
+  # Davix's cmake/modules/buildCurl.cmake applies the bundled-curl CVE patches
+  # in place under CMAKE_SOURCE_DIR/deps/curl and only resets them first when
+  # deps/curl is a git submodule (its reset is guarded by `test -f .git`). bits
+  # builds from a release tarball (no .git, and the CMakeRecipe rsync strips
+  # **/.git), so the patches get applied to the shared SOURCES tree and stick —
+  # the next build re-runs `git apply` on the already-patched files and dies with
+  # "patch does not apply" (setopt.c / socks.c). Reverse the patches here first
+  # (a no-op the first time, before they are applied) so Davix's own forward
+  # git apply always starts from pristine curl sources.
+  local _curl="$SOURCEDIR/deps/curl"
+  if [ -d "$_curl" ]; then
+    for _p in curl-CVE-2023-38545_7.69.0.patch curl-CVE-2022-32221.patch; do
+      if [ -f "$SOURCEDIR/$_p" ]; then
+        patch -R -p1 -f -s -d "$_curl" < "$SOURCEDIR/$_p" >/dev/null 2>&1 || true
+      fi
+    done
+  fi
+
   # libuuid provides uuid/uuid.h, needed by Davix's Azure/S3 backend (AzureIO).
   # Davix's FindUUID needs both vars; point them at the uuid package explicitly
   # (mirrors xrootd.sh). On Linux the shared lib is libuuid.so; the uuid recipe
