@@ -22,22 +22,20 @@ license: LGPL-2.1-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
+# Davix's cmake/modules/buildCurl.cmake applies the bundled-curl CVE patches in
+# place under CMAKE_SOURCE_DIR/deps/curl. To keep that off the shared SOURCES
+# tree we build out-of-source FROM THE PRIVATE rsync'd copy (cwd, '.') rather
+# than from "$SOURCEDIR": then CMAKE_SOURCE_DIR is the copy, and Davix patches
+# the copy, never SOURCES. (This also lets the shared SOURCES tree be mounted
+# read-only.) Binary dir is obj/ — explicit, so no `cd` leaks into later stages.
 function Configure() {
-  # Davix's cmake/modules/buildCurl.cmake applies the bundled-curl CVE patches
-  # in place under CMAKE_SOURCE_DIR/deps/curl and only resets them first when
-  # deps/curl is a git submodule (its reset is guarded by `test -f .git`). bits
-  # builds from a release tarball (no .git, and the CMakeRecipe rsync strips
-  # **/.git), so the patches get applied to the shared SOURCES tree and stick —
-  # the next build re-runs `git apply` on the already-patched files and dies with
-  # "patch does not apply" (setopt.c / socks.c). Reverse the patches here first
-  # (a no-op the first time, before they are applied) so Davix's own forward
-  # git apply always starts from pristine curl sources.
-  local _curl="$SOURCEDIR/deps/curl"
-  if [ -d "$_curl" ]; then
+  # Reset the bundled-curl patch targets in the copy so Davix's forward git apply
+  # starts pristine (no-op the first time; reverts a prior apply on an
+  # incremental rebuild, since buildCurl.cmake's own reset needs a .git submodule
+  # which the tarball lacks).
+  if [ -d deps/curl ]; then
     for _p in curl-CVE-2023-38545_7.69.0.patch curl-CVE-2022-32221.patch; do
-      if [ -f "$SOURCEDIR/$_p" ]; then
-        patch -R -p1 -f -s -d "$_curl" < "$SOURCEDIR/$_p" >/dev/null 2>&1 || true
-      fi
+      [ -f "$_p" ] && patch -R -p1 -f -s -d deps/curl < "$_p" >/dev/null 2>&1 || true
     done
   fi
 
@@ -47,7 +45,7 @@ function Configure() {
   # ships only a static lib on macOS.
   local libuuid_ext=so
   [[ $ARCHITECTURE == osx* ]] && libuuid_ext=a
-  cmake "${SOURCEDIR}" \
+  cmake -S . -B obj \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -59,3 +57,5 @@ function Configure() {
     -DDAVIX_TESTS=OFF \
     -DEMBEDDED_RAPIDJSON=ON
 }
+function Make()        { cmake --build obj -- ${JOBS:+-j$JOBS}; }
+function MakeInstall() { cmake --install obj; }
