@@ -18,7 +18,7 @@ build_requires:
 MODULE_OPTIONS="--bin --lib --cmake --pkgconfig"
 ##############################
 function Configure() {
-  cmake $SOURCEDIR                          \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD"                          \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -G Ninja                            \
       -DENABLE_WS=OFF                     \

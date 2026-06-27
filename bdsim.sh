@@ -32,7 +32,7 @@ function Configure() {
   # in the source CMakeLists before configuring. (Sphinx is optional; only warns.)
   sed -i -E 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
     "${SOURCEDIR}/CMakeLists.txt"
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

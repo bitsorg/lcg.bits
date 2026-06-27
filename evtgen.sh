@@ -27,7 +27,7 @@ MODULE_OPTIONS="--bin --lib"
 # failed ("Could not find a package configuration file provided by EvtGen").
 # Flags mirror lcgcmake's evtgen >= 2.0 branch; EvtGen 2.x uses HepMC3.
 function Configure() {
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

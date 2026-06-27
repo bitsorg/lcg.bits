@@ -33,7 +33,7 @@ function Configure() {
   if [ "${ENABLE_CUDA:-OFF}" != "ON" ]; then
     cuda_args+=(-DCMAKE_CUDA_COMPILER=NOTFOUND)
   fi
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

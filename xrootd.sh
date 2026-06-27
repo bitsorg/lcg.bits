@@ -32,7 +32,7 @@ function Configure() {
   # a static lib on macOS.
   local libuuid_ext=so
   [[ $ARCHITECTURE == osx* ]] && libuuid_ext=a
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_INSTALL_LIBDIR=lib \
@@ -56,7 +56,7 @@ function MakeInstall() {
   # Patch all generated cmake_install.cmake files in the build tree before install.
   find . -name 'cmake_install.cmake' \
     -exec sed -i 's/pip install /pip install --no-build-isolation /g' {} +
-  cmake --install .
+  cmake --install "$BITS_CMAKE_BUILD"
 }
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'

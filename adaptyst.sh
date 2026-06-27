@@ -39,7 +39,7 @@ function Configure() {
   #
   # perf is now a system_requirement (no PERF_ROOT exported), so point PERF_DIR
   # at the system prefix where the distro 'perf' lives (/usr/bin/perf).
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

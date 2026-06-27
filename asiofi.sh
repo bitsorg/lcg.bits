@@ -41,7 +41,7 @@ function Configure() {
   # as a *cmake variable* (bits only exports the env var) triggers the dedicated
   # if(OFI_ROOT) block, which runs last and sets PKG_CONFIG_PATH to OFI's own
   # pkgconfig dir, so pkg-config finds libfabric.pc and reports 1.22.0.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

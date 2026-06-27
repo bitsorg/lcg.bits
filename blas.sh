@@ -18,7 +18,7 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_BUILD_TYPE=Release \
@@ -34,8 +34,8 @@ function Make() {
       [ "${_os_ver}" -ge 9 ] 2>/dev/null && _blas_target=HASWELL || _blas_target=NEHALEM ;;
     *) _blas_target="" ;;
   esac
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} \
+  cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} \
     ${_blas_target:+TARGET=${_blas_target}} BIGNUMA=1 NO_AFFINITY=1
-  cmake --build . --target test || true
+  cmake --build "$BITS_CMAKE_BUILD" --target test || true
   unset _blas_target _os_ver
 }

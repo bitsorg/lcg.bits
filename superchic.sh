@@ -21,7 +21,7 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   # SuperChic 5 switched from a plain Fortran makefile to CMake. Flags mirror
   # lcgcmake's superchic build (LHAPDF_DIR, tests off, long Fortran lines).
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

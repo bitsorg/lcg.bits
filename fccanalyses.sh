@@ -41,7 +41,7 @@ function Configure() {
   # -std=c++20 makes the actual compile C++20 (overriding the -std=c++23 from the
   # stack-default CXXFLAGS).
   export CXXFLAGS="${CXXFLAGS} -std=c++20"
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

@@ -31,7 +31,7 @@ function Configure() {
     cuda_opts+=(-DVECGEOM_ENABLE_CUDA=ON)
     [ -n "${CMAKE_CUDA_ARCHITECTURES:-}" ] && cuda_opts+=(-DCMAKE_CUDA_ARCHITECTURES="${CMAKE_CUDA_ARCHITECTURES}")
   fi
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -46,5 +46,5 @@ function Configure() {
 function Make() {
   # Build only library targets; GDML test executables share names with their
   # source subdirectories, so the linker fails with "Is a directory" on GCC 15.
-  cmake --build . --target vecgeom --target vgdml ${JOBS:+-- -j$JOBS}
+  cmake --build "$BITS_CMAKE_BUILD" --target vecgeom --target vgdml ${JOBS:+-- -j$JOBS}
 }

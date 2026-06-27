@@ -26,7 +26,7 @@ function Configure() {
   # DELPHES_ROOT; the delphes modulefile setenv only applies at runtime). Map it
   # so the bundled TrackCovariance headers resolve.
   export DELPHES_DIR="${DELPHES_ROOT}"
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

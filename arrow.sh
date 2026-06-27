@@ -30,7 +30,7 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake "$SOURCEDIR/cpp" \
+  cmake -S "$BITS_CMAKE_SRC/cpp" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -G Ninja \

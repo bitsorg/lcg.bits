@@ -37,7 +37,7 @@ export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
 function Configure() {
   # Sherpa 3.x switched from autotools to CMake. Flags mirror lcgcmake's
   # sherpa>=3 build. C++17 even on a C++20 stack (lcgcmake forces 17 here).
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

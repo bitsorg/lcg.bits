@@ -37,7 +37,7 @@ function Configure() {
   # it falls back to config mode. RAIDA (the AIDA implementation, already a
   # dependency) installs AIDAConfig.cmake under lib/cmake/RAIDA, so point AIDA_DIR
   # there. CLHEP/LCCD stay enabled and are satisfied by the clhep/lccd deps.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

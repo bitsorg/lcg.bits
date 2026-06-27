@@ -39,7 +39,7 @@ esac
 
 # BUILD_SHARED_LIBS=ON is needed for e.g. adding dynamic plugins to clang-tidy.
 # Apache Arrow needs LLVM_ENABLE_RTTI=ON.
-cmake "$SOURCEDIR/llvm" \
+cmake -S "$BITS_CMAKE_SRC/llvm" -B "$BITS_CMAKE_BUILD" \
   -G Ninja \
   -DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;compiler-rt' \
   -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \
@@ -56,7 +56,7 @@ cmake "$SOURCEDIR/llvm" \
   -DBUILD_SHARED_LIBS=OFF \
   -DLIBCXXABI_USE_LLVM_UNWINDER=OFF 
   
-cmake --build . -- ${JOBS:+-j$JOBS} install
+cmake --build "$BITS_CMAKE_BUILD" -- ${JOBS:+-j$JOBS} install
 
 if [[ $PKGVERSION == v18.1.* ]]; then
   SPIRV_TRANSLATOR_VERSION="v18.1.3"
@@ -75,7 +75,7 @@ cmake ../ \
   -DLLVM_INCLUDE_TESTS=OFF \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX:PATH="$INSTALLROOT"
-cmake --build . -- ${JOBS:+-j$JOBS} install
+cmake --build "$BITS_CMAKE_BUILD" -- ${JOBS:+-j$JOBS} install
 popd
 
 case $ARCHITECTURE in

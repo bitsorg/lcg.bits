@@ -19,7 +19,7 @@ license: LicenseRef-MCFM
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -36,11 +36,11 @@ function Make() {
   # which parallelises fine (e.g. vvamp) -- with the full job count. If the
   # 'handyg' target name is ever unavailable, fall back to a fully serial build
   # (the known-good behaviour) rather than failing.
-  if cmake --build . --target handyg -- -j1; then
-    cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
+  if cmake --build "$BITS_CMAKE_BUILD" --target handyg -- -j1; then
+    cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
   else
     echo "bits: 'handyg' target unavailable; falling back to a full serial build" >&2
-    cmake --build . -- ${CMAKE_OPTIONS} -j1
+    cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} -j1
   fi
 }
 function PostInstall() {

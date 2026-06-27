@@ -169,7 +169,7 @@ function Configure() {
 
   unset DYLD_LIBRARY_PATH
 
-  cmake "${SOURCEDIR}"                                                      \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD"                                                      \
     ${CMAKE_GENERATOR:+-G "${CMAKE_GENERATOR}"}                             \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
     -DCMAKE_BUILD_TYPE=Release                                              \

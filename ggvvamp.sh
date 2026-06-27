@@ -26,7 +26,7 @@ function Configure() {
   # R_X86_64_32 against `.debug_info'"). Cap debug to -g1 (no location lists, no
   # var-tracking) for this generated code, where full debug info has no value.
   # -g1 wins over any earlier -g in CXXFLAGS; drop to -g0 if it still overflows.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

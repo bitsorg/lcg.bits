@@ -22,7 +22,7 @@ MODULE_OPTIONS="--bin --lib --cmake"
 function Configure() {
   # The CMake project lives in the cpp/ subdirectory, not the tarball root
   # (mirrors lcgcmake: cmake <SOURCE_DIR>/cpp -DSUPPORT_ROOT=ON).
-  cmake "${SOURCEDIR}/cpp" \
+  cmake -S "$BITS_CMAKE_SRC/cpp" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

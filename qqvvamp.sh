@@ -27,7 +27,7 @@ function Configure() {
   # relocations, and no var-tracking blow-up either) for this generated code,
   # where full local-variable debug info has no value. -g1 wins over any earlier
   # -g in CXXFLAGS; drop to -g0 if a future revision still overflows.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

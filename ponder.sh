@@ -24,7 +24,7 @@ function Configure() {
   # flags had the wrong names (ponder's options are BUILD_TEST,
   # BUILD_TEST_EXAMPLES, BUILD_DOC), so tests were built anyway. Use the correct
   # option names to skip them.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

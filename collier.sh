@@ -18,7 +18,7 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -26,16 +26,16 @@ function Configure() {
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
 function Make() {
-  cmake --build . -j1
+  cmake --build "$BITS_CMAKE_BUILD" -j1
 }
 function MakeInstall() {
-  cmake --install .
+  cmake --install "$BITS_CMAKE_BUILD"
   # Second pass: static variant
-  cmake $SOURCEDIR \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" \
     -DCMAKE_BUILD_TYPE=Release \
     -Dstatic=ON \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-  cmake --build . -j1
-  cmake --install .
+  cmake --build "$BITS_CMAKE_BUILD" -j1
+  cmake --install "$BITS_CMAKE_BUILD"
 }

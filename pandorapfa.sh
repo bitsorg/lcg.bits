@@ -29,7 +29,7 @@ function Configure() {
   # pandorasdk / lccontent / larcontent recipes already use. (Seding the source
   # doesn't work: the superbuild extracts PandoraSDK at build time, after
   # Configure.)
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \

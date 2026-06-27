@@ -33,7 +33,7 @@ function Configure() {
   # find_package(AIDA) resolves via RAIDA's config (the AIDA 3.2.1 package ships
   # no AIDAConfig.cmake); RAIDA installs it under lib/cmake/RAIDA. RAIDA_ROOT is
   # exported transitively via marlin. Same fix as marlin.sh.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

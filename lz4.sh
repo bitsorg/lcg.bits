@@ -23,7 +23,7 @@ MODULE_OPTIONS="--bin --lib --pkgconfig --cmake"
 ##############################
 function Configure() {
   # lz4's CMakeLists.txt is in build/cmake/, not the source root
-  cmake "$SOURCEDIR/build/cmake" \
+  cmake -S "$BITS_CMAKE_SRC/build/cmake" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_INSTALL_LIBDIR=lib \

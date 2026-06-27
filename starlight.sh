@@ -25,7 +25,7 @@ function Configure() {
   # Fortran include files under include/dpmjet/inc/.  The DPMJet 3.0-6 tarball
   # bits builds is a flat set of monolithic .f files with no such headers, so
   # -DENABLE_DPMJET=ON cannot compile.  lcgcmake never enables this combination.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

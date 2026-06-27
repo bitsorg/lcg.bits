@@ -20,7 +20,7 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -31,5 +31,5 @@ function Configure() {
 function Make() {
   # Build only library targets; runtime tests fail on GCC 15 due to
   # ambiguity between fmt::format_to and std::format_to (mp_units 2.5.0 bug)
-  cmake --build . --target mp-units-core --target mp-units-systems ${JOBS:+-- -j$JOBS}
+  cmake --build "$BITS_CMAKE_BUILD" --target mp-units-core --target mp-units-systems ${JOBS:+-- -j$JOBS}
 }

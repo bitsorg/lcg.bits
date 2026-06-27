@@ -50,6 +50,6 @@ function Make() {
 function MakeInstall() {
   : # no-op — Make() already copies lib/ and include/ to INSTALLROOT.
   # (CMakeRecipe's Run() calls MakeInstall, not Install; the base MakeInstall
-  # runs `cmake --install .`, which fails here since this is a plain Makefile
+  # runs `cmake --install "$BITS_CMAKE_BUILD"`, which fails here since this is a plain Makefile
   # project with no cmake_install.cmake.)
 }

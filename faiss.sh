@@ -24,7 +24,7 @@ MODULE_OPTIONS="--bin --lib --cmake"
 function Configure() {
   # CPU-only build (this stack has no CUDA); generic SIMD level for portability.
   # Mirrors lcgcmake's faiss flags.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

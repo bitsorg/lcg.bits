@@ -30,7 +30,7 @@ function Configure() {
   # 2) Fix the OneLOop/QCDLoop download URL: the site dropped the duplicate
   #    'helac-phegas/' path component (helac-phegas.web.cern.ch/tar-files/...).
   sed -i 's|helac-phegas/tar-files|tar-files|g' "$SOURCEDIR/CMakeLists.txt"
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -48,6 +48,6 @@ function Make() {
   # (the C++ process code) in parallel for speed, then run a serial pass that
   # finishes QCDLoop without the race. The serial pass is authoritative, so a
   # genuine error still fails the build.
-  cmake --build . -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} || true
-  cmake --build . -- ${CMAKE_OPTIONS} -j1
+  cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS} || true
+  cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} -j1
 }

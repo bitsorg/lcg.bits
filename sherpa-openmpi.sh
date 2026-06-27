@@ -44,7 +44,7 @@ export OPAL_PREFIX="${OPENMPI_ROOT}"
 function Configure() {
   # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
   # plain sherpa recipe; see sherpa.sh.
-  cmake "${SOURCEDIR}" \
+  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
