@@ -4,6 +4,20 @@ version: "1.42"
 tag: "1.42"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/e2fsprogs-1.42.tar.gz
+prefer_system: ".*"
+prefer_system_check: |
+  # Use the system libuuid when both the header AND the library are present —
+  # e.g. RHEL/Alma libuuid-devel, Debian/Ubuntu uuid-dev. Compile *and link* a
+  # tiny program: a header-only check would wrongly accept hosts that lack the
+  # library, which is precisely the failure this guards against (Davix/xrootd link
+  # -luuid). On macOS there is no separate -luuid (uuid lives in libSystem), so
+  # this fails and bits builds uuid from source, as before.
+  printf '#include <uuid/uuid.h>\nint main(){ uuid_t u; uuid_generate(u); return 0; }\n' | cc -xc - -luuid -o /dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    printf "libuuid not found.\n * On RHEL/Alma-compatible systems install: libuuid libuuid-devel\n * On Debian/Ubuntu-compatible systems install: uuid-dev\n"
+    exit 1
+  fi
+
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
