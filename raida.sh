@@ -27,15 +27,6 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }
-function MakeInstall() {
-  # ilcutil's GENERATE_PACKAGE_CONFIGURATION_FILES emits RAIDALibDeps.cmake via the
-  # legacy export_library_dependencies() command, a NO-OP in CMake 3.30 (CMP0033),
-  # so the file is never generated though the install rule + RAIDAConfig.cmake's
-  # INCLUDE reference it. Stub it empty (legacy link-dep tracking, unused by modern
-  # target-based find_package) so install and find_package(RAIDA/AIDA) succeed.
-  : > "$BITS_CMAKE_BUILD/RAIDALibDeps.cmake"
-  cmake --install "$BITS_CMAKE_BUILD"
-}
 function PostInstall() {
   # RAIDA's generated AIDAConfig.cmake pulls in RAIDAConfig.cmake via
   # INCLUDE("@CMAKE_INSTALL_PREFIX@/RAIDAConfig.cmake"), but the config files are
