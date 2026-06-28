@@ -18,12 +18,6 @@ license: LGPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Prepare() {
-  # TEMP (until bits-recipe-tools v0.0.32 is pinned): keep .git in the copy so the
-  # submodule update in Configure works. The deployed CMakeRecipe (v0.0.31) strips
-  # .git; v0.0.32 keeps it in the framework. Drop this override then.
-  rsync -a --delete --exclude '/bits-build/' "$SOURCEDIR"/ ./
-}
 function Configure() {
   # asiofi vendors FairCMakeModules (under extern/) as a git submodule and falls
   # back to building that bundled copy when find_package(FairCMakeModules) fails.

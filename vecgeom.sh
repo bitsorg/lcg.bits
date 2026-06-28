@@ -23,13 +23,6 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-function Prepare() {
-  # TEMP (until bits-recipe-tools v0.0.32 is pinned): keep .git in the copy. The
-  # deployed CMakeRecipe (v0.0.31) strips it, but VecGeom derives PROJECT_VERSION
-  # from `git describe`; without .git the version is empty and math() at
-  # CMakeLists.txt:791 fails. v0.0.32 keeps .git in the framework; drop this then.
-  rsync -a --delete --exclude '/bits-build/' "$SOURCEDIR"/ ./
-}
 function Configure() {
   # Enable the CUDA backend only under --defaults cuda. ENABLE_CUDA is set
   # (to ON) by defaults-cuda; an unset value is treated as OFF.
