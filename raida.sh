@@ -19,6 +19,12 @@ license: LGPL-2.1-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # TEMP (until bits-recipe-tools v0.0.32 is pinned): build out-of-source in a
+  # SIBLING dir. ilcutil's GENERATE_PACKAGE_CONFIGURATION_FILES install step
+  # cannot find the generated RAIDALibDeps.cmake when the binary dir is nested
+  # inside the source copy (CMakeRecipe v0.0.31). v0.0.32 makes the binary dir a
+  # sibling in the framework; drop this line then.
+  BITS_CMAKE_BUILD="../build"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
