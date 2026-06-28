@@ -25,8 +25,9 @@ function Configure() {
   # submodule dir is empty and the bundle's git step fails ("pathspec
   # extern/FairCMakeModules did not match"). Populate the submodules here, at the
   # commit asiofi v0.5.1 pins, before configuring. (Requires network at configure
-  # time; operate on $SOURCEDIR since the out-of-source cmake reads from there.)
-  git -C "$SOURCEDIR" submodule update --init --recursive
+  # time.) Operate on the private copy ($BITS_CMAKE_SRC, which the framework
+  # rsyncs WITH its .git) — never $SOURCEDIR, which is read-only in the container.
+  git -C "$BITS_CMAKE_SRC" submodule update --init --recursive
 
   # FairCMakeModules' own cmake predates the minimum CMake >= 4 will accept; the
   # env var lets the nested cmake configure with the old policy floor.

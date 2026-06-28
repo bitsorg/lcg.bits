@@ -37,9 +37,15 @@ case $ARCHITECTURE in
   *) echo 'Unknown LLVM target for architecture' >&2; exit 1 ;;
 esac
 
+# Inline recipe (top-level build script): it does NOT go through CMakeRecipe.Run,
+# so it must do its own source copy. SOURCES is mounted read-only in the container,
+# so build from a private rsync'd copy (cwd) into the sibling build/ dir, never
+# from $SOURCEDIR directly. (Keep .git: harmless here, consistent with the rest.)
+rsync -a --delete --exclude '/build' "$SOURCEDIR"/ ./
+
 # BUILD_SHARED_LIBS=ON is needed for e.g. adding dynamic plugins to clang-tidy.
 # Apache Arrow needs LLVM_ENABLE_RTTI=ON.
-cmake -S "$BITS_CMAKE_SRC/llvm" -B "$BITS_CMAKE_BUILD" \
+cmake -S llvm -B build \
   -G Ninja \
   -DLLVM_ENABLE_PROJECTS='clang;clang-tools-extra;compiler-rt' \
   -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi' \
@@ -54,9 +60,9 @@ cmake -S "$BITS_CMAKE_SRC/llvm" -B "$BITS_CMAKE_BUILD" \
   -DLLVM_BUILD_LLVM_DYLIB=ON \
   -DLLVM_ENABLE_RTTI=ON \
   -DBUILD_SHARED_LIBS=OFF \
-  -DLIBCXXABI_USE_LLVM_UNWINDER=OFF 
-  
-cmake --build "$BITS_CMAKE_BUILD" -- ${JOBS:+-j$JOBS} install
+  -DLIBCXXABI_USE_LLVM_UNWINDER=OFF
+
+cmake --build build -- ${JOBS:+-j$JOBS} install
 
 if [[ $PKGVERSION == v18.1.* ]]; then
   SPIRV_TRANSLATOR_VERSION="v18.1.3"
@@ -75,7 +81,7 @@ cmake ../ \
   -DLLVM_INCLUDE_TESTS=OFF \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX:PATH="$INSTALLROOT"
-cmake --build "$BITS_CMAKE_BUILD" -- ${JOBS:+-j$JOBS} install
+cmake --build . -- ${JOBS:+-j$JOBS} install
 popd
 
 case $ARCHITECTURE in
