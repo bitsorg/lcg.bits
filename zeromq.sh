@@ -27,7 +27,9 @@ function Configure() {
       -DCMAKE_INSTALL_PREFIX=$INSTALLROOT
 }
 function Make() {
-   ninja ${JOBS+-j $JOBS} install
+   # Build in the binary dir, not cwd: the out-of-source build tree (build.ninja)
+   # lives under $BITS_CMAKE_BUILD, while cwd is the source copy.
+   ninja -C "$BITS_CMAKE_BUILD" ${JOBS+-j $JOBS} install
 }
 
 function MakeInstall() {
