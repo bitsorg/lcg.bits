@@ -38,6 +38,8 @@ function Configure() {
     -Dlhapdf_ROOT="${LHAPDF_ROOT}"
 }
 function Make() {
-  make ${JOBS:+-j $JOBS} beamfunc-install-data
-make ${JOBS:+-j $JOBS}
+  # Build in the out-of-source binary dir, not cwd (the source copy): geneva
+  # configures with cmake -B "$BITS_CMAKE_BUILD", so the Makefile lives there.
+  make -C "$BITS_CMAKE_BUILD" ${JOBS:+-j $JOBS} beamfunc-install-data
+  make -C "$BITS_CMAKE_BUILD" ${JOBS:+-j $JOBS}
 }

@@ -40,8 +40,10 @@ function Configure() {
   # side (Process/Fortran/cepgen_print.f) defines, so libCepGen.so ends up with
   # undefined references to them. Unwrap that one anonymous-namespace block so
   # the externs regain C linkage. Idempotent (the regex only matches the wrapped
-  # form) and whitespace-tolerant.
-  python3 - "${SOURCEDIR}/CepGen/Process/FortranFactorisedProcess.cpp" <<'PY'
+  # form) and whitespace-tolerant. Patch the build COPY ($BITS_CMAKE_SRC), not the
+  # read-only $SOURCEDIR — the out-of-source build compiles the copy, so patching
+  # $SOURCEDIR would have no effect on what is linked.
+  python3 - "$BITS_CMAKE_SRC/CepGen/Process/FortranFactorisedProcess.cpp" <<'PY'
 import re, sys
 f = sys.argv[1]
 try:
