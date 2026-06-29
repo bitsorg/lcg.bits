@@ -47,12 +47,14 @@ function PostInstall() {
   # MCFM's own cmake install does not expose the library/headers the way
   # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
   # library named 'mcfm' or 'MCFM'). Mirror lcgcmake: install the CXX interface
-  # headers under include/MCFM and the library under BOTH names. PostInstall runs
-  # in the build directory, so search it (and the install lib) for libmcfm.so.
+  # headers under include/MCFM and the library under BOTH names. Search the
+  # out-of-source binary dir ($BITS_CMAKE_BUILD) for libmcfm.so — cwd is the
+  # source copy, not the build dir, and the library lives in the (sibling) binary
+  # dir; read headers from the copy ($BITS_CMAKE_SRC).
   mkdir -p "${INSTALLROOT}/include" "${INSTALLROOT}/lib"
-  [ -d "${SOURCEDIR}/src/Inc/MCFM" ] && cp -rf "${SOURCEDIR}/src/Inc/MCFM" "${INSTALLROOT}/include/"
+  [ -d "$BITS_CMAKE_SRC/src/Inc/MCFM" ] && cp -rf "$BITS_CMAKE_SRC/src/Inc/MCFM" "${INSTALLROOT}/include/"
   local _lib
-  _lib="$(find . "${INSTALLROOT}/lib" -name 'libmcfm.so' -print -quit 2>/dev/null)"
+  _lib="$(find "$BITS_CMAKE_BUILD" "${INSTALLROOT}/lib" -name 'libmcfm.so' -print -quit 2>/dev/null)"
   if [ -n "${_lib}" ]; then
     cp -f "${_lib}" "${INSTALLROOT}/lib/libmcfm.so"
     cp -f "${_lib}" "${INSTALLROOT}/lib/libMCFM.so"
