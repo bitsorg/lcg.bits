@@ -44,7 +44,7 @@ function Configure() {
     -DGEANT4_INSTALL_EXAMPLES=OFF \
     -DGEANT4_BUILD_MULTITHREADED=OFF \
     -DGEANT4_BUILD_TLS_MODEL=global-dynamic \
-    ${CXXSTD:+-DGEANT4_BUILD_CXXSTD="$CXXSTD"}
+    -DGEANT4_BUILD_CXXSTD="${CXXSTD:-20}"
 }
 function PostInstall() {
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'MODEOF'
