@@ -19,5 +19,5 @@ system_requirement_missing: |
     * Then re-run the build.
 system_requirement: "(?!osx)"
 system_requirement_check: |
-  command -v perf >/dev/null 2>&1
+  command -v perf >/dev/null 2>&1 || [ -x /usr/bin/perf ] || [ -x /bin/perf ]
 ---
