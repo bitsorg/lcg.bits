@@ -169,6 +169,21 @@ function Configure() {
 
   unset DYLD_LIBRARY_PATH
 
+  # ROOT's Fortran tools (h2root/g2root) carry Fortran sources and are linked
+  # with the Fortran compiler. They must use a gfortran whose libgfortran /
+  # libstdc++ match the C++ toolchain. The GCC-Toolchain ships no gfortran, so
+  # -Dfortran=ON makes ROOT auto-detect the *system* gfortran. On a host whose
+  # system GCC is newer than the toolchain (e.g. ubuntu2510 = GCC 15) that links
+  # by luck; in an el9 build container the system gfortran is GCC 11 while C++ is
+  # GCC 14, so linking h2root fails with undefined GLIBCXX_3.4.3x / CXXABI_1.3.15
+  # references. Enable Fortran only when a gfortran sits next to the C++ compiler
+  # (same toolchain prefix); otherwise leave it off rather than mix ABIs.
+  FORTRAN_FLAG="-Dfortran=OFF"
+  _cxx_bin="$(command -v "$COMPILER_CXX" 2>/dev/null || true)"
+  if [[ -n "$_cxx_bin" && -x "$(dirname "$_cxx_bin")/gfortran" ]]; then
+    FORTRAN_FLAG="-Dfortran=ON -DCMAKE_Fortran_COMPILER=$(dirname "$_cxx_bin")/gfortran"
+  fi
+
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD"                                                      \
     ${CMAKE_GENERATOR:+-G "${CMAKE_GENERATOR}"}                             \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
@@ -211,7 +226,7 @@ function Configure() {
     -Dexplicitlink=ON                                                       \
     -Dfftw3=ON                                                              \
     -Dfitsio=ON                                                             \
-    -Dfortran=ON                                                            \
+    ${FORTRAN_FLAG}                                                         \
     -Dfreetype=ON                                                           \
     -Dbuiltin_freetype=OFF                                                  \
     -Dgdml=ON                                                               \
