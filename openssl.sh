@@ -34,5 +34,30 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib --root-inc --pkgconfig"
 ##############################
 function Configure() {
-  # platform-conditional: ./Configure darwin64-""-cc ELSE ./config no-shared -fPIC  --prefix=$INSTALLROOT --openssldir=$INSTALLROOT/etc/openssl -I${ZLIB_ROOT}/include -L${ZLIB_ROOT}/lib
+  # OpenSSL uses its own config script, not autotools, so Configure() is
+  # overridden (Make/MakeInstall come from AutoToolsRecipe). Build shared libs
+  # with zlib support; --libdir=lib keeps artefacts under lib (not lib64).
+  # On macOS ./config mis-detects the target, so name it explicitly; on Linux
+  # ./config auto-detects the platform.
+  case $(uname) in
+    Darwin)
+      case $(uname -m) in
+        arm64) _target=darwin64-arm64-cc ;;
+        *)     _target=darwin64-x86_64-cc ;;
+      esac
+      ./Configure "$_target" shared zlib -fPIC \
+        --prefix="$INSTALLROOT" --openssldir="$INSTALLROOT/etc/openssl" --libdir=lib \
+        ${ZLIB_ROOT:+-I${ZLIB_ROOT}/include -L${ZLIB_ROOT}/lib}
+      ;;
+    *)
+      ./config shared zlib -fPIC \
+        --prefix="$INSTALLROOT" --openssldir="$INSTALLROOT/etc/openssl" --libdir=lib \
+        ${ZLIB_ROOT:+-I${ZLIB_ROOT}/include -L${ZLIB_ROOT}/lib}
+      ;;
+  esac
+}
+function MakeInstall() {
+  # install_sw installs libs/headers/binaries without the slow man pages;
+  # install_ssldirs installs the default openssl.cnf and cert directories.
+  make install_sw install_ssldirs
 }
