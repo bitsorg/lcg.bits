@@ -10,9 +10,14 @@ prefer_system_check: |
   # e.g. RHEL/Alma libuuid-devel, Debian/Ubuntu uuid-dev. Compile *and link* a
   # tiny program: a header-only check would wrongly accept hosts that lack the
   # library, which is precisely the failure this guards against (Davix/xrootd link
-  # -luuid). On macOS there is no separate -luuid (uuid lives in libSystem), so
-  # this fails and bits builds uuid from source, as before.
-  printf '#include <uuid/uuid.h>\nint main(){ uuid_t u; uuid_generate(u); return 0; }\n' | cc -xc - -luuid -o /dev/null 2>&1
+  # -luuid). On macOS uuid lives in libSystem (no separate -luuid), so link
+  # without it there; e2fsprogs 1.42 does not build from source on macOS
+  # (Linux-only asm/types.h, dirpaths.h).
+  case $(uname) in
+    Darwin) _uuid_libs="" ;;
+    *)      _uuid_libs="-luuid" ;;
+  esac
+  printf '#include <uuid/uuid.h>\nint main(){ uuid_t u; uuid_generate(u); return 0; }\n' | cc -xc - $_uuid_libs -o /dev/null 2>&1
   if [ $? -ne 0 ]; then
     printf "libuuid not found.\n * On RHEL/Alma-compatible systems install: libuuid libuuid-devel\n * On Debian/Ubuntu-compatible systems install: uuid-dev\n"
     exit 1

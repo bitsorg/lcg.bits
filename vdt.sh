@@ -21,9 +21,17 @@ patches:
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
+  # VDT enables SSE by default and injects -msse, which clang rejects on arm64
+  # ("unsupported option '-msse'"). Disable the x86 ISA options on ARM; VDT then
+  # builds its scalar signatures. (Unknown options are ignored by older VDT.)
+  local _isa=""
+  case "$(uname -m)" in
+    arm64|aarch64) _isa="-DSSE=OFF -DAVX=OFF -DAVX2=OFF -DFMA=OFF" ;;
+  esac
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    ${_isa}
 }
