@@ -4,6 +4,19 @@ version: "1.0"
 tag: "1.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# On macOS use the Homebrew gettext instead of building from source (gnulib's
+# strict iconv probe rejects macOS's system iconv, breaking the libtextstyle
+# build). On Linux prefer_system does not match, so gettext is built as before.
+prefer_system: "osx.*"
+prefer_system_check: |
+  #!/bin/bash -e
+  # Homebrew gettext is keg-only; find its prefix and confirm libintl is usable.
+  prefix=$(brew --prefix gettext 2>/dev/null) || prefix=/opt/homebrew/opt/gettext
+  [ -n "$prefix" ] && [ -d "$prefix" ] || exit 1
+  cc -x c - "-I${prefix}/include" -c -o /dev/null <<\EOF
+  #include <libintl.h>
+  int main(void) { return 0; }
+  EOF
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
