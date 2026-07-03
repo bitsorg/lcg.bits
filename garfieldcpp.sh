@@ -21,15 +21,11 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
-  # macOS: with C++>=17 NeBem uses std::comp_ellint_1/2 instead of GSL, but
-  # libc++ lacks the C++17 special math functions, so Isles.c fails. Force the
-  # GSL code path (GSL is already a dep; Isles.c uses gsl_sf_ellint_Kcomp/Ecomp).
   local _gsl=()
   if bits_is_macos; then
+    # macOS: force the GSL path in NeBem; libc++ lacks the C++17 special math functions std::comp_ellint_*
     _gsl+=(-DGARFIELD_WITH_GSL=ON)
-    # libc++ doesn't transitively include <stdlib.h> like libstdc++, so NeBem
-    # sources (Isles.c, Vector.c) calling exit() without it fail to compile.
-    # Pre-include <stdlib.h> for the whole build (harmless standard C header).
+    # macOS: pre-include <stdlib.h> so NeBem sources calling exit() compile (libc++ doesn't pull it in like libstdc++)
     _gsl+=(-DCMAKE_CXX_FLAGS="-include stdlib.h")
   fi
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \

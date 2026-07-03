@@ -7,8 +7,7 @@ sources:
 requires:
   - zlib
 prefer_system: ".*"
-# macOS sources FreeType from Homebrew (see HomebrewRecipe / `bits brew`); Linux
-# keeps the existing system-package check and the source build below.
+# macOS sources FreeType from Homebrew; Linux keeps the system-package check and the source build below
 homebrew_formula: freetype
 prefer_system_check: |
   #!/bin/bash

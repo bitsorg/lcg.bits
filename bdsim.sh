@@ -10,9 +10,7 @@ requires:
   - ROOT
   - clhep
   - yacc-like
-  # macOS: the parser needs bison >= 2.4, but the system bison (via yacc-like) is
-  # Apple's 2.3. Pull in the bits bison (3.8.2, built from source) on macOS only;
-  # Linux's system bison is recent enough and is unchanged.
+  # macOS: parser needs bison >= 2.4 but system bison is Apple's 2.3; pull in bits bison on macOS only
   - "bison:osx"
 build_requires:
   - bits-recipe-tools
@@ -29,13 +27,8 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # bdsim copies its examples into the build tree at configure time. Built from a
-  # tarball (no .git) it calls copy_examples_no_git(), whose ADD_CUSTOM_COMMAND
-  # (bdsim_macros.cmake) is rejected by CMake >= 3.28 and aborts configure
-  # (CMAKE_POLICY_VERSION_MINIMUM=3.5 does not relax it). We don't need the
-  # examples (BUILD_TESTING=OFF), so neutralise the copy_examples[/_no_git] calls
-  # in the source CMakeLists before configuring. (Sphinx is optional; only warns.)
-  # macOS: BSD sed -i needs a suffix arg, so use perl -i there; Linux keeps sed.
+  # Neutralise copy_examples[/_no_git]() in CMakeLists: its ADD_CUSTOM_COMMAND is rejected by CMake >= 3.28
+  # macOS: BSD sed -i needs a suffix arg, so use perl -i there; Linux keeps sed
   if bits_is_macos; then
     perl -i -pe 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
       "${SOURCEDIR}/CMakeLists.txt"
@@ -43,13 +36,10 @@ function Configure() {
     sed -i -E 's/^[[:space:]]*copy_examples(_no_git)?\(\)/  message(STATUS "bits: examples copy skipped")/' \
       "${SOURCEDIR}/CMakeLists.txt"
   fi
-  # macOS: find_package(BISON 2.4) picks system /usr/bin/bison (Apple's 2.3);
-  # point it at the bits bison 3.8.2 ("bison:osx"). flex has no version floor.
+  # macOS: point find_package(BISON) at bits bison 3.8.2, not system /usr/bin/bison (Apple's 2.3)
   local _bison=()
   bits_is_macos && _bison+=(-DBISON_EXECUTABLE="${BISON_ROOT}/bin/bison")
-  # macOS: with USE_BOOST off, empty BDSBH4DLinkDef.hh is still globbed into
-  # BDSBH4DDict, which rootcling rejects. Enabling USE_BOOST forces C++14 vs ROOT
-  # 6.40's C++17, so instead drop BDSBH4DLinkDef.hh from the LinkDef glob.
+  # macOS: drop empty BDSBH4DLinkDef.hh from the LinkDef glob (rootcling rejects it when USE_BOOST is off)
   if bits_is_macos && ! grep -q 'REMOVE_ITEM linkHeaders' "${SOURCEDIR}/cmake/ROOT.cmake"; then
     perl -i -pe 's{^(\s*file\(GLOB linkHeaders .*)$}{$1\nif(NOT USE_BOOST)\n  list(REMOVE_ITEM linkHeaders \${CMAKE_CURRENT_SOURCE_DIR}/include/BDSBH4DLinkDef.hh)\nendif()}' "${SOURCEDIR}/cmake/ROOT.cmake"
   fi

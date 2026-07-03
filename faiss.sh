@@ -10,8 +10,7 @@ requires:
   - numpy
   - swig
   - packaging
-  # macOS: Apple clang has no OpenMP; faiss does find_package(OpenMP REQUIRED).
-  # Pull in Homebrew's libomp on macOS only (Linux uses GCC's built-in libgomp).
+  # macOS: Apple clang has no OpenMP but faiss requires it; pull in Homebrew libomp on macOS only
   - "libomp:osx"
 build_requires:
   - bits-recipe-tools
@@ -26,9 +25,7 @@ license: MIT
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
-  # macOS: Apple clang has no built-in OpenMP, so FindOpenMP fails. Point it at
-  # Homebrew's keg-only libomp (LIBOMP_ROOT) with the Apple-clang spelling
-  # (-Xclang -fopenmp, not plain -fopenmp).
+  # macOS: FindOpenMP fails on Apple clang, so point it at Homebrew libomp with the Apple-clang spelling (-Xclang -fopenmp)
   local _omp=()
   if bits_is_macos; then
     local _lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"

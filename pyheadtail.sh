@@ -8,8 +8,7 @@ requires:
   - cython
   - h5py
   - scipy
-  # macOS: the Cython extensions are compiled with -fopenmp; Apple clang needs
-  # Homebrew libomp for OpenMP (Linux uses GCC's built-in libgomp).
+  # macOS: Cython extensions compile with -fopenmp; Apple clang needs Homebrew libomp for OpenMP
   - "libomp:osx"
 build_requires:
   - bits-recipe-tools
@@ -23,9 +22,7 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
-# macOS: setup.py hardcodes -fopenmp, which Apple clang rejects. Interpose a compiler
-# wrapper that rewrites it to -Xpreprocessor -fopenmp + libomp include/link, then execs
-# clang. CC/CXX point pip's isolated build at it; LIBOMP_ROOT from the libomp:osx dep.
+# macOS: setup.py hardcodes -fopenmp (Apple clang rejects it); interpose a CC/CXX wrapper rewriting it to -Xpreprocessor -fopenmp + libomp
 if bits_is_macos; then
   _ph_lomp="${LIBOMP_ROOT:-$(brew --prefix libomp 2>/dev/null)}"
   _ph_wrap="$(mktemp -d)"

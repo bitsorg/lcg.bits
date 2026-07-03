@@ -10,17 +10,14 @@ requires:
   - yoda
   - fastjet
   - fjcontrib
-  # Rivet 4 builds its Python bindings with SWIG (lcgcmake passes SWIG_LIB).
+  # Rivet 4 builds its Python bindings with SWIG
   - swig
-  # macOS: hdf5 is transitive via YODA (libYODA references @rpath/libhdf5.*.dylib).
-  # Declaring it exports HDF5_ROOT so the recipe can bake an rpath into pyext core.so
-  # (else the build-time import test can't load it). osx-gated so Linux's hash is unchanged.
+  # macOS: hdf5 is transitive via YODA; declaring it exports HDF5_ROOT so we can bake an rpath into pyext core.so
   - "hdf5:osx"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-  # Cython regenerates the pyext C++ from .pyx; the shipped sources use CPython
-  # internals removed in Python 3.12+.
+  # Cython regenerates pyext C++ from .pyx; shipped sources use CPython internals removed in Python 3.12+
   - cython
 license: GPL-3.0-only
 ---

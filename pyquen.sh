@@ -26,9 +26,7 @@ function Prepare() {
 }
 
 function Make() {
-  # macOS: build .dylib (-dynamiclib). PYQUEN references PYTHIA routines absent from
-  # this object; bits_macos_undefined_ldflags allows flat-namespace lazy resolution
-  # (two-level namespace rejects them) and adds -headerpad for install_name_tool.
+  # macOS: build .dylib (-dynamiclib); allow flat-namespace lazy resolution for PYTHIA refs absent from this object
   local _so=so _shared=-shared _undef=
   if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} -O2 -fPIC -c pyquen.f -o pyquen.o

@@ -17,18 +17,14 @@ license: AGPL-3.0-only
 MODULE_OPTIONS="--lib"
 ##############################
 function Configure() {
-  # macOS/libc++: BDB's atomic.h #defines a macro `atomic_init` that clobbers
-  # libc++'s std::atomic_init (via <iostream> -> <atomic>). Every atomic_init in
-  # BDB source is its own macro (never the stdlib one), so rename them all.
+  # macOS/libc++: rename BDB's atomic_init macro so it doesn't clobber libc++'s std::atomic_init
   if bits_is_macos; then
     for _f in $(grep -rl atomic_init src 2>/dev/null); do
       perl -i -pe 's/\batomic_init\b/__db_atomic_init/g' "$_f"
     done
   fi
 
-  # Out-of-tree build from dist/configure. BDB 6.x uses K&R function definitions,
-  # errors under GCC 15's default C23; force C11 and silence the warnings with
-  # -Wno-old-style-definition.
+  # BDB 6.x uses K&R definitions that error under GCC 15's default C23; force C11 and silence with -Wno-old-style-definition
   mkdir -p build_unix
   pushd build_unix
   CFLAGS="-std=gnu11 -Wno-old-style-definition -O2" \

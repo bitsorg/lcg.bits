@@ -26,10 +26,7 @@ function Prepare() {
   rm -f HYDJET++2_1.ZIP
 }
 function Make() {
-  # Plain Makefile: root-config must be on PATH and F77LIBSO must point at the
-  # gfortran shared lib (the Makefile finds gfortran but not its lib path).
-  # -std=legacy -fallow-argument-mismatch lets the nonconforming bundled PYQUEN
-  # Fortran (rank/shape mismatches) compile under gfortran >= 10.
+  # Plain Makefile needs root-config on PATH and F77LIBSO at the gfortran shared lib; -std=legacy lets the bundled PYQUEN Fortran compile
   _libgf=libgfortran.so; bits_is_macos && _libgf=libgfortran.dylib
   # macOS: the Makefile globs a hardcoded BINDIRS for gfortran, missing Homebrew's
   # /opt/homebrew/bin; prepend gfortran's actual directory.

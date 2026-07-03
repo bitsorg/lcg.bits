@@ -20,10 +20,7 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: RapidSim's CMakeLists hardcodes x86 SIMD flags that clang rejects on
-  # arm64; strip them. Also drop -Werror so Apple clang's warnings from ROOT
-  # v6.40 headers don't turn fatal. Patch the build COPY ($BITS_CMAKE_SRC), not
-  # read-only $SOURCEDIR. Linux is untouched (bits_is_macos is false).
+  # macOS: strip hardcoded x86 SIMD flags clang rejects on arm64, and drop -Werror so ROOT v6.40 header warnings aren't fatal
   if bits_is_macos; then
     case "$(uname -m)" in
       arm64 | aarch64)

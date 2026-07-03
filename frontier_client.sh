@@ -32,10 +32,7 @@ function Make() {
       echo "Frontier_Client:   brew install openssl@3   (or re-run bits with --brew)" >&2
       exit 1
     fi
-    # The Makefile auto-selects its macOS dylib path via `[ -f /usr/lib/libc.dylib ]`,
-    # gone on modern macOS, so it falls to the ELF .so path emitting -Wl,-soname
-    # (rejected by macOS ld). Force DYLIBTYPE=dylib; also strip -lrt (no librt on
-    # macOS — clock_gettime is in libSystem).
+    # Makefile's dylib-path autodetect breaks on modern macOS; force DYLIBTYPE=dylib and strip -lrt (no librt on macOS)
     make_extra+=(DYLIBTYPE=dylib)
     # bits' relocate-me.sh rewrites the dylib's bare LC_ID_DYLIB to a long
     # absolute store path; without reserved header padding that rewrite fails, so
@@ -45,9 +42,7 @@ function Make() {
       -e 's/-dynamiclib/-dynamiclib -headerpad_max_install_names/' \
       Makefile
   fi
-  # Frontier_Client's Makefile has no parallel-safe dependency between the
-  # http sub-make (which creates http/.libs) and the top-level libfrontier_client.so
-  # target that needs it.  Force serial build to avoid the race.
+  # Serial build: Makefile has no parallel-safe dep between the http sub-make and libfrontier_client.so
   make dist \
     PACPARSER_DIR="${PACPARSER_ROOT}" \
     EXPAT_DIR="${EXPAT_ROOT}" \

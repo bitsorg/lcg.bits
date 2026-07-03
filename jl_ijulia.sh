@@ -17,8 +17,7 @@ license: MIT
 MODULE_OPTIONS=""
 ##############################
 function Make() {
-  # No source to compile.  Install the IJulia package into INSTALLROOT,
-  # which acts as a Julia depot (registries/, packages/, artifacts/, ...).
+  # No source to compile; install IJulia into INSTALLROOT, which acts as a Julia depot
   export JULIA_DEPOT_PATH="$INSTALLROOT"
   # macOS: IJulia writes its kernelspec to ~/Library/Jupyter outside the sandbox
   # (mkdir EPERM); set JUPYTER_DATA_DIR into INSTALLROOT so it lands in the package.
