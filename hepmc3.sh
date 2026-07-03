@@ -19,6 +19,24 @@ license: LGPL-2.1-only
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
+  # macOS: CMake's find_package(Python) prefers Homebrew's Python over the bits
+  # Python, so HepMC3 builds the bindings for the wrong interpreter and installs
+  # into /opt/homebrew (EPERM). Pin the interpreter to the bits Python and compute
+  # its version from PYTHON_ROOT so the bindings install into INSTALLROOT. Darwin-
+  # gated: on Linux _py is empty and the cmake line is byte-identical to before.
+  local _py=()
+  if [ "$(uname)" = Darwin ]; then
+    local _pyexe="${PYTHON_ROOT}/bin/python3" _pyver _pynodot
+    _pyver=$("$_pyexe" -c 'import sys;print("%d.%d"%sys.version_info[:2])' 2>/dev/null)
+    [ -z "$_pyver" ] && _pyver=$(basename "$(ls -d "${PYTHON_ROOT}"/lib/python3.* 2>/dev/null | head -1)" | sed 's/python//')
+    _pynodot=${_pyver//./}
+    _py+=(
+      -DPython_EXECUTABLE="${_pyexe}"
+      -DPython3_EXECUTABLE="${_pyexe}"
+      -DHEPMC3_Python_SITEARCH${_pynodot}="${INSTALLROOT}/lib/python${_pyver}/site-packages"
+      -DHEPMC3_PYTHON_VERSIONS="${_pyver}"
+    )
+  fi
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -26,5 +44,6 @@ function Configure() {
     -DROOT_DIR="${ROOT_ROOT}" \
     -DHEPMC3_INSTALL_INTERFACES=ON \
     -DHEPMC3_Python_SITEARCH${Python_config_version_twodigit_nodot}=$INSTALLROOT/lib/python${Python_config_version_twodigit}/site-packages \
-    -DHEPMC3_PYTHON_VERSIONS="${Python_config_version_twodigit}"
+    -DHEPMC3_PYTHON_VERSIONS="${Python_config_version_twodigit}" \
+    "${_py[@]}"
 }

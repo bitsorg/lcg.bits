@@ -26,7 +26,8 @@ function Configure() {
   #
   # AutoToolsRecipe's Prepare() rsyncs SOURCEDIR into the build dir (cwd) and
   # ./configure builds *that* copy, so patch the copy under cwd, not SOURCEDIR.
-  find . -path '*utilities/Log.h' -exec sed -i 's/Fatal(NULL,code)/Fatal("",code)/' {} + 2>/dev/null || true
+  # perl -i (not sed -i) so the in-place edit is portable across GNU and BSD sed.
+  find . -path '*utilities/Log.h' -exec perl -i -pe 's/Fatal\(NULL,code\)/Fatal("",code)/' {} + 2>/dev/null || true
   # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee, cepgen and
   # EvtGen 2.x. lcgcmake builds photos++ with exactly one HepMC flavour: passing
   # both --with-hepmc (HepMC2) and --with-hepmc3 did not produce the HepMC3
@@ -36,4 +37,17 @@ function Configure() {
     --with-hepmc3="${HEPMC3_ROOT}" \
     --without-hepmc \
     CFLAGS=-O2 FFLAGS=-O2 F77="${FC:-gfortran}" CXXFLAGS="-O2"
+}
+
+function Make() {
+  # macOS: libPhotosppHepMC3 references HepMC3 symbols resolved at load time when
+  # the consumer (which links HepMC3) pulls it in. Linux's flat namespace allows
+  # such undefined symbols in a shared library; macOS's two-level namespace
+  # rejects them at link. Patch the generated libtool to allow undefined symbols
+  # (dynamic_lookup), matching Linux. Darwin-gated; Linux has no such lines.
+  if [ "$(uname)" = Darwin ]; then
+    find . -name libtool -type f -exec perl -i -pe \
+      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
+  fi
+  make ${JOBS:+-j $JOBS}
 }
