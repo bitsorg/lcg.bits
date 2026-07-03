@@ -16,7 +16,7 @@ requires:
   - HepMC
   - hepmc3
   - tbb
-  - vdt
+  - "vdt:(?!osx)"
   - photoscpp
   - tauolacpp
   - Python
@@ -29,6 +29,7 @@ license: Apache-2.0
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -59,6 +60,22 @@ if pat.search(s):
 else:
     print("cepgen: anonymous-namespace block not found (already patched / upstream changed)")
 PY
+  # macOS: CepGen's subdir include globs make <math.h> resolve to Utils/Math.h on
+  # a case-insensitive FS, so point EXT_HEADERS at the project root. Also drop
+  # -lstdc++fs (in Apple libc++) and link libTauolaFortran (rmarin_) into PhotosTauola.
+  # Patch the build COPY ($BITS_CMAKE_SRC), not read-only $SOURCEDIR.
+  if bits_is_macos; then
+    local _ptw="${BITS_CMAKE_SRC}/CepGenAddOns/PhotosTauolaWrapper/CMakeLists.txt"
+    bits_file_replace "${BITS_CMAKE_SRC}/CepGen/CMakeLists.txt" \
+      'EXT_HEADERS ${core_includes}' 'EXT_HEADERS ${PROJECT_SOURCE_DIR}'
+    bits_strip_token "${BITS_CMAKE_SRC}/CepGen/CMakeLists.txt" \
+      "${BITS_CMAKE_SRC}/CepGenAddOns/MadGraphWrapper/CMakeLists.txt" stdc++fs
+    bits_file_insert_after "${_ptw}" '^find_library\(TAUOLAPP_HEPMC3 ' \
+      'find_library(TAUOLAPP_FORTRAN TauolaFortran HINTS $ENV{TAUOLAPP_DIR} ${TAUOLAPP_DIR} PATH_SUFFIXES lib)'
+    bits_file_replace "${_ptw}" \
+      'list(APPEND EXT_LIBS ${TAUOLAPP} ${TAUOLAPP_HEPMC3})' \
+      'list(APPEND EXT_LIBS ${TAUOLAPP} ${TAUOLAPP_HEPMC3} ${TAUOLAPP_FORTRAN})'
+  fi
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

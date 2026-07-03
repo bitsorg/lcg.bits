@@ -23,10 +23,15 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: gated off. EPOS4's >4 GB static Fortran COMMON exceeds arm64's code
+  # model (no large model in arm64 gfortran), so the libepos/Xepos link fails.
+  # Leaf pkg -> empty pkg; drop this + the Make/MakeInstall/PostInstall gates to port.
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -36,7 +41,19 @@ function Configure() {
     -DFASTSYS="${FASTJET_ROOT}" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 }
+function Make() {
+  # macOS: gated off (see Configure).
+  bits_is_macos && return 0
+  cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
+}
+function MakeInstall() {
+  # macOS: gated off (see Configure).
+  bits_is_macos && return 0
+  cmake --install "$BITS_CMAKE_BUILD"
+}
 function PostInstall() {
+  # macOS: gated off (see Configure) - no build artefacts or runtime env to set.
+  bits_is_macos && return 0
   # Copy data files (excluding source and build artefacts)
   rsync -a \
     --exclude='**/CMakeModules' \

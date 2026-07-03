@@ -15,6 +15,7 @@ license: LGPL-2.1-only
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
@@ -25,7 +26,7 @@ function Configure() {
   # its version from PYTHON_ROOT so the bindings install into INSTALLROOT. Darwin-
   # gated: on Linux _py is empty and the cmake line is byte-identical to before.
   local _py=()
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     local _pyexe="${PYTHON_ROOT}/bin/python3" _pyver _pynodot
     _pyver=$("$_pyexe" -c 'import sys;print("%d.%d"%sys.version_info[:2])' 2>/dev/null)
     [ -z "$_pyver" ] && _pyver=$(basename "$(ls -d "${PYTHON_ROOT}"/lib/python3.* 2>/dev/null | head -1)" | sed 's/python//')

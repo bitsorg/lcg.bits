@@ -15,10 +15,17 @@ license: LicenseRef-MCFM
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+# macOS: not ported. qcdloop needs GCC quadmath/__float128 (no Apple clang
+# arm64) while the std:: CXX_Interface wants libc++, so neither toolchain is
+# clean. Gate off (empty package via the guards below); consumers gate the edge
+# "mcfm:(?!osx)". Remove the guards to resume the port.
+##############################
 function Configure() {
+  bits_is_macos && { mkdir -p "${INSTALLROOT}"; return 0; }
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -28,6 +35,8 @@ function Configure() {
     -Dwith_library=ON
 }
 function Make() {
+  # macOS: gated off (see above).
+  bits_is_macos && return 0
   # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
   # under parallel make, gpl_module.f is compiled before maths_functions.mod has
   # finished being written, giving
@@ -43,7 +52,14 @@ function Make() {
     cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} -j1
   fi
 }
+function MakeInstall() {
+  # macOS: gated off (see above).
+  bits_is_macos && return 0
+  cmake --install "$BITS_CMAKE_BUILD"
+}
 function PostInstall() {
+  # macOS: gated off (see above).
+  bits_is_macos && return 0
   # MCFM's own cmake install does not expose the library/headers the way
   # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
   # library named 'mcfm' or 'MCFM'). Mirror lcgcmake: install the CXX interface

@@ -17,6 +17,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --python"
 ##############################
@@ -29,6 +30,10 @@ function Configure() {
   # and is only required to run APFEL's test suite).
   export SWIG="${SWIG_ROOT}/bin/swig"
   export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+  # macOS: find_package(SWIG) ignores the env vars and swig's compiled-in dir is
+  # the gone build INSTALLROOT, so pass the relocated SWIG_DIR explicitly.
+  local _swig=()
+  bits_is_macos && _swig=(-DSWIG_EXECUTABLE="${SWIG}" -DSWIG_DIR="${SWIG_LIB}")
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -37,5 +42,6 @@ function Configure() {
     -DAPFEL_ENABLE_LHAPDF=ON \
     -DAPFEL_ENABLE_TESTS=OFF \
     -DAPFEL_DOWNLOAD_PDFS=OFF \
-    -DAPFEL_Python_SITEARCH=autoprefix
+    -DAPFEL_Python_SITEARCH=autoprefix \
+    "${_swig[@]}"
 }

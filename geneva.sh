@@ -21,8 +21,14 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
+##############################
+# macOS: Geneva's Python extension is built by setup.py, which invokes Apple
+# clang without -isysroot, so it can't find the SDK's libc++ headers. Export
+# SDKROOT (clang's fallback sysroot) at recipe scope so the Make step picks it up.
+bits_is_macos && export SDKROOT="$(xcrun --show-sdk-path 2>/dev/null)"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \

@@ -15,7 +15,9 @@ requires:
   - ROOT
   - lhapdf
   - libzip
-  - mcfm
+  # mcfm is not yet ported to macOS (qcdloop needs GCC quadmath); gate the edge
+  # so Linux still requires it and osx doesn't. See mcfm.sh.
+  - "mcfm:(?!osx)"
   - hepmc3
   - fastjet
 build_requires:
@@ -26,17 +28,22 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 # Sherpa 3 builds Python bindings with SWIG; lcgcmake passes SWIG/SWIG_LIB to
-# both configure and make, so set them at recipe scope.
+# both configure and make, so set them at recipe scope. bits_swig_lib returns
+# the relocated swiglib on macOS (identical to `swig -swiglib` on Linux).
 export SWIG="${SWIG_ROOT}/bin/swig"
-export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+export SWIG_LIB="$(bits_swig_lib)"
 ##############################
 function Configure() {
   # Sherpa 3.x switched from autotools to CMake. Flags mirror lcgcmake's
   # sherpa>=3 build. C++17 even on a C++20 stack (lcgcmake forces 17 here).
+  # MCFM is gated off on macOS (see mcfm.sh); when its edge is dropped MCFM_ROOT
+  # is unset, so disable it here. On Linux MCFM_ROOT is set -> _mcfm=ON (as before).
+  local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -57,8 +64,8 @@ function Configure() {
     -DSHERPA_ENABLE_BINRELOC=ON \
     -DSHERPA_ENABLE_ANALYSIS=ON \
     -DSHERPA_ENABLE_EWSUD=ON \
-    -DSHERPA_ENABLE_MCFM=ON \
-    -DMCFM_ROOT_DIR="${MCFM_ROOT}" \
+    -DSHERPA_ENABLE_MCFM=$_mcfm \
+    ${MCFM_ROOT:+-DMCFM_ROOT_DIR="${MCFM_ROOT}"} \
     -DSHERPA_ENABLE_HEPMC3=ON \
     -DSHERPA_ENABLE_HEPMC3_ROOT=ON
 }

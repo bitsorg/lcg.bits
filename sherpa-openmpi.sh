@@ -18,7 +18,9 @@ requires:
   - ROOT
   - lhapdf
   - libzip
-  - mcfm
+  # mcfm is not yet ported to macOS (qcdloop needs GCC quadmath); gate the edge
+  # so Linux still requires it and osx doesn't. See mcfm.sh.
+  - "mcfm:(?!osx)"
   - hepmc3
   - fastjet
 build_requires:
@@ -29,11 +31,12 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 export SWIG="${SWIG_ROOT}/bin/swig"
-export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+export SWIG_LIB="$(bits_swig_lib)"
 # Put OpenMPI's compilers on PATH so Sherpa's find_package(MPI) locates mpicxx.
 # PATH alone isn't enough: FindMPI also runs a compile+link test (MPI_*_WORKS),
 # and the relocated mpicc/mpicxx/mpifort wrappers can't find their plugins/config
@@ -43,7 +46,10 @@ export OPAL_PREFIX="${OPENMPI_ROOT}"
 ##############################
 function Configure() {
   # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
-  # plain sherpa recipe; see sherpa.sh.
+  # plain sherpa recipe; see sherpa.sh. MCFM is gated off on macOS (see mcfm.sh);
+  # when its edge is dropped MCFM_ROOT is unset, so disable it. On Linux MCFM_ROOT
+  # is set -> _mcfm=ON (as before).
+  local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -65,8 +71,8 @@ function Configure() {
     -DSHERPA_ENABLE_BINRELOC=ON \
     -DSHERPA_ENABLE_ANALYSIS=ON \
     -DSHERPA_ENABLE_EWSUD=ON \
-    -DSHERPA_ENABLE_MCFM=ON \
-    -DMCFM_ROOT_DIR="${MCFM_ROOT}" \
+    -DSHERPA_ENABLE_MCFM=$_mcfm \
+    ${MCFM_ROOT:+-DMCFM_ROOT_DIR="${MCFM_ROOT}"} \
     -DSHERPA_ENABLE_HEPMC3=ON \
     -DSHERPA_ENABLE_HEPMC3_ROOT=ON
 }

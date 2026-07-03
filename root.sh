@@ -17,7 +17,9 @@ requires:
   - blas
   - zlib
   - libxml2
-  - vdt
+  # macOS: vdt is not built there (Apple clang); gate the edge off on osx. Linux
+  # keeps it. Configure already yields -Dvdt=OFF when VDT_ROOT is unset.
+  - "vdt:(?!osx)"
   - xz
   - cfitsio
   - jsonmcpp
@@ -39,6 +41,7 @@ prepend_path:
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake --pylib"
 ##############################
@@ -56,6 +59,16 @@ function Prepare() {
   # Guard prevents double-patching on reruns.
   if ! grep -q 'bits: direct fallback' cmake/modules/FindDavix.cmake; then
     sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' cmake/modules/FindDavix.cmake
+  fi
+
+  # macOS RTTI fix: cling is built -fno-rtti and Clang (unlike GCC) then emits no
+  # typeinfo for cling::InterpreterCallbacks, so linking rootcling_stage1 fails.
+  # Compile that one TU with -frtti, as cling already does for Exception.cpp.
+  # Patch the rsync'd COPY (cwd); Darwin-gated and guarded against double-patch.
+  _cling_cm="interpreter/cling/lib/Interpreter/CMakeLists.txt"
+  if bits_is_macos && [ -f "${_cling_cm}" ] \
+     && ! grep -q 'bits: InterpreterCallbacks rtti' "${_cling_cm}"; then
+    perl -i -pe 's{^(\s*set_source_files_properties\(Exception\.cpp COMPILE_FLAGS.*\))}{$1\n  # bits: InterpreterCallbacks rtti (Clang -fno-rtti omits typeinfo; GCC keeps it)\n  set_source_files_properties(InterpreterCallbacks.cpp COMPILE_FLAGS "-frtti")}' "${_cling_cm}"
   fi
 }
 function Configure() {
@@ -105,9 +118,12 @@ function Configure() {
   COMPILER_CXX=c++
   case $(uname) in
     Darwin)
-      ENABLE_COCOA="-Dcocoa=ON"
+      # Native Cocoa GUI backend, X11 off, so ROOT doesn't need XQuartz on macOS.
+      ENABLE_COCOA="-Dcocoa=ON -Dx11=OFF"
       COMPILER_CXX=clang++
       COMPILER_CC=clang
+      [[ ! $GSL_ROOT ]] && GSL_ROOT=$(brew --prefix gsl 2>/dev/null) || true
+      [[ ! $LIBPNG_ROOT ]] && LIBPNG_ROOT=$(brew --prefix libpng 2>/dev/null) || true
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
       ;;
   esac
@@ -184,6 +200,16 @@ function Configure() {
     FORTRAN_FLAG="-Dfortran=ON -DCMAKE_Fortran_COMPILER=$(dirname "$_cxx_bin")/gfortran"
   fi
 
+  # Compiler warning flags. Linux/gcc keeps the existing set; on macOS (clang)
+  # drop -fpermissive (unknown to clang) and silence clang's "unknown warning
+  # option" for the gcc -W flags. Darwin-gated; Linux flags are byte-identical.
+  _cxx_extra=" -fpermissive -Wno-stringop-overread -Wno-stringop-overflow -Wno-deprecated-declarations "
+  _c_extra=" -Wno-stringop-overread -Wno-stringop-overflow "
+  if bits_is_macos; then
+    _cxx_extra=" -Wno-deprecated-declarations -Wno-unknown-warning-option "
+    _c_extra=" -Wno-unknown-warning-option "
+  fi
+
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD"                                                      \
     ${CMAKE_GENERATOR:+-G "${CMAKE_GENERATOR}"}                             \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}"                                 \
@@ -191,8 +217,8 @@ function Configure() {
     -DCMAKE_INSTALL_LIBDIR=lib                                              \
     -DCMAKE_CXX_STANDARD="${CMAKE_CXX_STANDARD}"                             \
     -DCMAKE_C_STANDARD=17                                                   \
-    -DCMAKE_CXX_FLAGS=" -fpermissive -Wno-stringop-overread -Wno-stringop-overflow -Wno-deprecated-declarations " \
-    -DCMAKE_C_FLAGS=" -Wno-stringop-overread -Wno-stringop-overflow "       \
+    -DCMAKE_CXX_FLAGS="${_cxx_extra}"                                       \
+    -DCMAKE_C_FLAGS="${_c_extra}"                                           \
     -DCMAKE_CXX_COMPILER="${COMPILER_CXX}"                                   \
     -DCMAKE_C_COMPILER="${COMPILER_CC}"                                      \
     ${ENABLE_COCOA}                                                         \

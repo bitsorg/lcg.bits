@@ -7,6 +7,12 @@ sources:
 requires:
   - zlib
 prefer_system: ".*"
+# macOS: OpenSSL comes from Homebrew's keg-only openssl@3 (Apple ships no system
+# OpenSSL headers). Listing it here puts it in the generated Brewfile so
+# `brew bundle` / `bits --brew` installs it; consumers that need its headers
+# (e.g. Frontier_Client) point at `brew --prefix openssl@3`. No effect on the
+# build logic — `homebrew_formula` is only read by the `bits brew` generator.
+homebrew_formula: openssl@3
 prefer_system_check: |
   #!/bin/bash -e
   case $(uname) in

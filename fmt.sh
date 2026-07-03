@@ -14,6 +14,7 @@ license: MIT
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --cmake --root-inc"
 ##############################
@@ -22,7 +23,7 @@ function Configure() {
   # std::is_floating_point, which the current libc++ rejects as a hard error.
   # The library is fine; only the tests break, and bits does not need them.
   local _fmt_test=""
-  [ "$(uname)" = Darwin ] && _fmt_test="-DFMT_TEST=OFF"
+  bits_is_macos && _fmt_test="-DFMT_TEST=OFF"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
