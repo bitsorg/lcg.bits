@@ -17,35 +17,29 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # Suppress the documentation build entirely.  doc/Manual.pdf is built with
-  # LaTeX (needs cite.sty, which we neither ship nor need at runtime) and was the
-  # only fatal failure; the libraries and the vbfnlo binary build fine.  Two
-  # independent guards so docs are never built or installed, regardless of how
-  # the doc subdir is wired into the generated Makefiles:
-  #   1) drop 'doc' from the top-level (DIST_)SUBDIRS so the recursive `make` and
-  #      `make install` (AutoToolsRecipe.MakeInstall) never descend into it;
-  #   2) belt-and-braces: if doc is still reached (e.g. added via a conditional
-  #      am__append rather than a literal SUBDIRS token), neutralise doc/Makefile
-  #      so every recursive target there is a no-op.
-  # (The old `make -C src/-C utilities` pre-builds were also wrong — they ran
-  #  before lib/utilities existed, hence the spurious "No rule .../libVBFNLO.la"
-  #  and missing .mod/.inc errors; a normal recursive build honours SUBDIRS order.)
-  sed -i -E '/^(DIST_)?SUBDIRS[[:space:]]*=/ s/\bdoc\b//g' Makefile
+  # Suppress the LaTeX doc build (needs cite.sty, not shipped/needed): drop 'doc'
+  # from (DIST_)SUBDIRS, and neutralise doc/Makefile in case it's reached via a
+  # conditional am__append. The libraries and the vbfnlo binary build fine.
+  perl -i -pe 's/\bdoc\b//g if /^(DIST_)?SUBDIRS[[:space:]]*=/' Makefile
   if [ -f doc/Makefile ]; then
     printf '%s\n\t%s\n' \
       'all install install-am install-exec install-data installcheck check clean distclean mostlyclean maintainer-clean dvi pdf ps html info tags ctags:' \
       '@:' > doc/Makefile
   fi
+  # macOS: the VBFNLO shared libraries cross-reference each other's Fortran
+  # routines, resolved at load time; the two-level namespace rejects undefined
+  # symbols at link, so allow them (dynamic_lookup) as Linux's flat namespace does.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }
 function Configure() {
   # Touch the generated header so configure does not fail if it is missing
   cmake -E touch utilities/VBFNLOConfig.h.in 2>/dev/null || \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     mkdir -p utilities && touch utilities/VBFNLOConfig.h.in
   ./configure --prefix="$INSTALLROOT" \
     ${GSL_ROOT:+--with-gsl="$GSL_ROOT"} \

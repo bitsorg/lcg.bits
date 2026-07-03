@@ -13,6 +13,7 @@ license: LicenseRef-PYQUEN
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -25,13 +26,19 @@ function Prepare() {
 }
 
 function Make() {
+  # macOS: build .dylib (-dynamiclib). PYQUEN references PYTHIA routines absent from
+  # this object; bits_macos_undefined_ldflags allows flat-namespace lazy resolution
+  # (two-level namespace rejects them) and adds -headerpad for install_name_tool.
+  local _so=so _shared=-shared _undef=
+  if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} -O2 -fPIC -c pyquen.f -o pyquen.o
-  ${FC:-gfortran} -O2 -shared -o libpyquen.so pyquen.o
+  ${FC:-gfortran} -O2 $_shared $_undef -o libpyquen.$_so pyquen.o
   ${AR:-ar} crs libpyquen.a pyquen.o
 }
 
 function MakeInstall() {
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
-  install -m755 libpyquen.so "$INSTALLROOT/lib/"
+  install -m755 libpyquen.$_so "$INSTALLROOT/lib/"
   install -m644 libpyquen.a "$INSTALLROOT/lib/"
 }

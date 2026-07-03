@@ -25,15 +25,20 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # --disable-relocatable: the relocatable build pulls in gnulib's progreloc.c
-  # which does not compile cleanly under GCC 15 / C23; bits installs to a fixed
-  # prefix so relocation support is not needed.
-  # CFLAGS -std=gnu17: keeps the rest of gnulib compatible with GCC 15.
+  # --disable-relocatable: gnulib progreloc.c breaks under gcc15/C23, and bits
+  # installs to a fixed prefix; -std=gnu17 keeps the rest of gnulib gcc15-clean.
+  # macOS: gnulib's iconv probe wrongly rejects the adequate system iconv,
+  # dropping iconv_ostream_create while .sym still exports it (link error) ->
+  # force am_cv_func_iconv_works=yes.
+  _iconv_works=""
+  bits_is_macos && _iconv_works="am_cv_func_iconv_works=yes"
   ./configure --prefix="$INSTALLROOT" \
+    ${_iconv_works} \
     CFLAGS="${CFLAGS} -std=gnu17" \
     --disable-acl \
     --disable-csharp \

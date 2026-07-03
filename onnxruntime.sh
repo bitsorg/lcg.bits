@@ -22,12 +22,9 @@ license: MIT
 ---
 #!/bin/bash -e
 ##############################
-# PythonRecipe gives us PYTHON_EXE, SITE_PACKAGES and a PYTHONPATH built from
-# every dependency's site-packages (needed: numpy/onnx/packaging/wheel for the
-# wheel build).  We override the build steps below: onnxruntime cannot be
-# `pip install .`-ed, because its setup.py only packages an already-built tree
-# (it needs onnxruntime/capi/build_and_package_info.py and libonnxruntime.so,
-# produced by onnxruntime's own CMake build via tools/ci_build/build.py).
+# PythonRecipe gives PYTHON_EXE/SITE_PACKAGES and a PYTHONPATH from deps' site-
+# packages (numpy/onnx/packaging/wheel). We override the build steps: setup.py
+# only packages an already-built tree, so drive tools/ci_build/build.py instead.
 . $(bits-include PythonRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib --python"
@@ -36,21 +33,23 @@ _ORT_CONFIG="Release"
 _ORT_BUILDDIR="build"
 ##############################
 function Make() {
-  # Drive onnxruntime's build: configure (CMake, fetching abseil/protobuf/onnx/
-  # flatbuffers/re2/...), compile libonnxruntime.so, generate the capi build
-  # info, and build the python wheel.  Run with the bits Python so the wheel
-  # build sees our numpy/packaging/wheel via PYTHONPATH.
+  # Drive onnxruntime's build (CMake configure, compile, capi info, python wheel)
+  # with the bits Python so the wheel sees our deps via PYTHONPATH.
+  # --allow_running_as_root is Linux-only in build.py, so pass it on non-Darwin
+  # only. getconf replaces nproc (which is absent on macOS).
+  local _extra=()
+  [ "$(uname)" != Darwin ] && _extra+=(--allow_running_as_root)
   "${PYTHON_EXE}" tools/ci_build/build.py \
     --build_dir "${_ORT_BUILDDIR}" \
     --config "${_ORT_CONFIG}" \
     --update --build \
-    --parallel "${JOBS:-$(nproc)}" \
+    --parallel "${JOBS:-$(getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)}" \
     --skip_submodule_sync \
     --skip_tests \
     --build_shared_lib \
     --build_wheel \
-    --allow_running_as_root \
     --compile_no_warning_as_error \
+    "${_extra[@]}" \
     --cmake_extra_defines \
       CMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       onnxruntime_BUILD_UNIT_TESTS=OFF \

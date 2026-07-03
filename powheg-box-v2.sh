@@ -15,14 +15,18 @@ license: LicenseRef-POWHEG
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Prepare() {
+  # macOS: not ported — 100+ process Intel/GNU-ld build (-limf, -Wl,--print-map,
+  # per-process fastjet/lhapdf objects) won't compile under Apple clang. Gate off
+  # to an empty package (with Make() guard); remove to finish the port.
+  bits_is_macos && return 0
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
-  # Makefile.lhcb (the LHCb-custom top-level wrapper) is not in the tarball.
-  # Generate one that builds all process subdirectories (tolerating per-process
-  # failures) and installs whatever succeeds.
+  # Makefile.lhcb (LHCb-custom top-level wrapper) is not in the tarball. Generate
+  # one that builds all process subdirs (tolerating failures) and installs successes.
   cat > Makefile.lhcb << 'MKEOF'
 FCOMP   ?= gfortran
 CCOMP   ?= g++
@@ -50,6 +54,8 @@ install:
 MKEOF
 }
 function Make() {
+  # macOS: gated off (see Prepare). Emit empty install root for MakeModule.
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   make ${JOBS:+-j $JOBS} -f Makefile.lhcb \
     FCOMP="${FC:-gfortran}" CCOMP="${CXX}" \
     LHAPDF="${LHAPDF_ROOT}" FASTJET="${FASTJET_ROOT}"

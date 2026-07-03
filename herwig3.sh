@@ -12,7 +12,10 @@ requires:
   - GSL
   - fastjet
   - vbfnlo
-  - openloops
+  # Gated behind the `openloops` flavour (off by default). The Configure body
+  # already wraps --with-openloops in ${OPENLOOPS_ROOT:+...}, so Herwig builds
+  # without it when the flavour is off.
+  - "openloops:(?openloops)"
   - madgraph5amc
   - njet
   - gosam
@@ -29,10 +32,15 @@ env:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # macOS: gated off — Herwig hard-requires ThePEG, itself gated off on macOS, so
+  # produce an empty package. Remove the guards (here, Make, MakeInstall,
+  # PostInstall) to resume once ThePEG works on macOS.
+  bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
   [[ -n "$THEPEG_ROOT" ]] && export LD_LIBRARY_PATH="$THEPEG_ROOT/lib/ThePEG:$LD_LIBRARY_PATH"
 
   # Pre-install a minimal PDF set so configure tests can run
@@ -68,6 +76,7 @@ function Configure() {
     "FFLAGS=$fflags"
 }
 function Make() {
+  bits_is_macos && return 0
   local fflags="-std=legacy"
   [[ "$(uname -m)" == aarch64 ]] && fflags="$fflags -fdefault-integer-8"
   make ${JOBS:+-j $JOBS} all "FFLAGS=$fflags"
@@ -80,6 +89,7 @@ function Make() {
   fi
 }
 function MakeInstall() {
+  bits_is_macos && return 0
   make install LHAPDF_DATA_PATH="$INSTALLROOT/tmppdfsets"
   if [[ -n "$RIVET_ROOT" ]]; then
     make -C MatrixElement/FxFx HERWIGINSTALL="$INSTALLROOT" install
@@ -87,6 +97,7 @@ function MakeInstall() {
   rm -rf "$INSTALLROOT/tmppdfsets"
 }
 function PostInstall() {
+  bits_is_macos && return 0
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
 setenv HERWIG3_ROOT $PKG_ROOT
 EOF

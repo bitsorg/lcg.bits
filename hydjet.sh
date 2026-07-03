@@ -10,6 +10,7 @@ license: LicenseRef-HYDJET
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -25,19 +26,25 @@ function Prepare() {
 function Make() {
   # -std=legacy matches the flag used by lcgcmake; needed for old Fortran-77 code
   local fflags="-std=legacy -O2 -fPIC"
+  # macOS: build .dylib with -dynamiclib; libhydjet references JETSET/PYTHIA routines
+  # in the other lib, so allow flat-namespace lazy resolution (the -headerpad in
+  # bits_macos_undefined_ldflags also reserves Mach-O space for relocate-me.sh).
+  local _so=so _shared=-shared _undef=
+  if bits_is_macos; then _so=dylib; _shared=-dynamiclib; _undef="$(bits_macos_undefined_ldflags)"; fi
   ${FC:-gfortran} $fflags -c hydjet1_8.f -o hydjet.o
-  ${FC:-gfortran} $fflags -shared -o libhydjet.so hydjet.o
+  ${FC:-gfortran} $fflags $_shared $_undef -o libhydjet.$_so hydjet.o
   ${AR:-ar} crs libhydjet.a hydjet.o
 
   ${FC:-gfortran} $fflags -c jetset_73.f -o jetset.o
-  ${FC:-gfortran} $fflags -shared -o libjetset73hydjet.so jetset.o
+  ${FC:-gfortran} $fflags $_shared $_undef -o libjetset73hydjet.$_so jetset.o
   ${AR:-ar} crs libjetset73hydjet.a jetset.o
 }
 
 function MakeInstall() {
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
-  install -m755 libhydjet.so "$INSTALLROOT/lib/"
+  install -m755 libhydjet.$_so "$INSTALLROOT/lib/"
   install -m644 libhydjet.a  "$INSTALLROOT/lib/"
-  install -m755 libjetset73hydjet.so "$INSTALLROOT/lib/"
+  install -m755 libjetset73hydjet.$_so "$INSTALLROOT/lib/"
   install -m644 libjetset73hydjet.a  "$INSTALLROOT/lib/"
 }

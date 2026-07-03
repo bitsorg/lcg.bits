@@ -4,6 +4,31 @@ version: "4.5"
 tag: "4.5"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/sed-4.5.tar.gz
+# macOS: source GNU sed from Homebrew (gnu-sed). It installs the binary as
+# `gsed` (to avoid shadowing BSD sed); the bin alias re-exposes it as `sed` so
+# it matches the Linux package. CLI tool, no ABI concerns. prefer_system gated
+# osx.* so Linux keeps building from source below.
+prefer_system: "osx.*"
+homebrew_formula: gnu-sed
+prefer_system_check: |
+  #!/bin/bash
+  # Only runs on macOS (osx.* gate). Install on demand with `bits --brew`;
+  # otherwise HomebrewRecipe reports the missing formula at build time.
+  if [ "${BITS_BREW:-}" = "1" ] && ! brew --prefix gnu-sed >/dev/null 2>&1; then
+    brew install gnu-sed >&2 || true
+  fi
+  echo "bits_system_replace: gnu_sed"
+prefer_system_replacement_specs:
+  gnu_sed:
+    version: "homebrew"
+    build_requires:
+      - bits-recipe-tools
+    recipe: |
+      #!/bin/bash -e
+      MODULE_OPTIONS="--bin"
+      HOMEBREW_FORMULA=gnu-sed
+      HOMEBREW_BIN_ALIASES="sed=gsed"
+      . $(bits-include HomebrewRecipe)
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

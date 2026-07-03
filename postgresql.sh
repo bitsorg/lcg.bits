@@ -9,6 +9,31 @@ requires:
   - m4
   - pkg_config
   - gettext
+# macOS: source PostgreSQL from Homebrew's keg-only `libpq` (client library:
+# libpq + pg_config + headers + psql). The only consumer is libpqxx, which needs
+# just the client library; libpq's API is backward-compatible, so the brew 18.x
+# client works against the pinned 17.5 server protocol. prefer_system gated osx.*
+# so Linux keeps building the full PostgreSQL from source below.
+prefer_system: "osx.*"
+homebrew_formula: libpq
+prefer_system_check: |
+  #!/bin/bash
+  # Only runs on macOS (osx.* gate). Install on demand with `bits --brew`;
+  # otherwise HomebrewRecipe reports the missing formula at build time.
+  if [ "${BITS_BREW:-}" = "1" ] && ! brew --prefix libpq >/dev/null 2>&1; then
+    brew install libpq >&2 || true
+  fi
+  echo "bits_system_replace: postgresql"
+prefer_system_replacement_specs:
+  postgresql:
+    version: "homebrew"
+    build_requires:
+      - bits-recipe-tools
+    recipe: |
+      #!/bin/bash -e
+      MODULE_OPTIONS="--bin --lib --pkgconfig"
+      HOMEBREW_FORMULA=libpq
+      . $(bits-include HomebrewRecipe)
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

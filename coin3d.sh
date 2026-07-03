@@ -14,9 +14,15 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no
+  # macOS: Coin defaults to an Inventor.framework installed under the system
+  # /Library/Frameworks (mkdir fails), not $INSTALLROOT. --disable-framework
+  # selects the UNIX-style lib/include install a relocatable bits package needs.
+  _fw=""
+  bits_is_macos && _fw="--disable-framework"
+  ./configure --prefix=$INSTALLROOT --enable-debug=no --enable-symbols=no ${_fw}
 }

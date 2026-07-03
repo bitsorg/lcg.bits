@@ -14,6 +14,7 @@ license: GPL-3.0-or-later
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -23,10 +24,9 @@ function Configure() {
     "FC=${FC:-gfortran}" \
     "FFLAGS=-std=legacy -fallow-argument-mismatch" \
     "FCFLAGS=-std=legacy -fallow-argument-mismatch"
-  # ninja-1.2.0/Makefile lists Fortran .mod files as prerequisites of all-am
-  # for installation, but automake --tag=FC only emits rules for .lo object
-  # files — .mod files are produced as silent side effects of FC compilation
-  # and have no explicit make rule.  Add no-op rules so make can resolve them.
+  # ninja-1.2.0/Makefile lists .mod files as all-am prerequisites, but automake
+  # --tag=FC emits rules only for .lo objects (.mod files are silent FC side
+  # effects). Add no-op rules so make can resolve them.
   {
     printf '\nninjago_module.mod: ninjago.lo\n\t@:\n'
     printf '\nquadninjago_module.mod: quadsources/ninjago.lo\n\t@:\n'
@@ -36,5 +36,9 @@ function Configure() {
 }
 
 function Make() {
+  # macOS: golem95's dylibs (libgolem, ...) leave libgfortran runtime symbols
+  # undefined; the bundled libtool left allow_undefined_flag="" so the link
+  # dropped -undefined dynamic_lookup. Patch generated libtool to match Linux.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }

@@ -8,6 +8,29 @@ requires:
   - CMake
   - meson
   - ninja
+# macOS sources pixman from Homebrew (see HomebrewRecipe / `bits brew`); Linux
+# is unaffected — prefer_system is gated to osx.* so the recipe below still
+# builds from source there.
+prefer_system: "osx.*"
+homebrew_formula: pixman
+prefer_system_check: |
+  #!/bin/bash
+  # Only runs on macOS (osx.* gate). Install on demand with `bits --brew`;
+  # otherwise HomebrewRecipe reports the missing formula at build time.
+  if [ "${BITS_BREW:-}" = "1" ] && ! brew --prefix pixman >/dev/null 2>&1; then
+    brew install pixman >&2 || true
+  fi
+  echo "bits_system_replace: pixman"
+prefer_system_replacement_specs:
+  pixman:
+    version: "homebrew"
+    build_requires:
+      - bits-recipe-tools
+    recipe: |
+      #!/bin/bash -e
+      MODULE_OPTIONS="--lib --pkgconfig"
+      HOMEBREW_FORMULA=pixman
+      . $(bits-include HomebrewRecipe)
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -12,6 +12,10 @@ requires:
   - fjcontrib
   # Rivet 4 builds its Python bindings with SWIG (lcgcmake passes SWIG_LIB).
   - swig
+  # macOS: hdf5 is transitive via YODA (libYODA references @rpath/libhdf5.*.dylib).
+  # Declaring it exports HDF5_ROOT so the recipe can bake an rpath into pyext core.so
+  # (else the build-time import test can't load it). osx-gated so Linux's hash is unchanged.
+  - "hdf5:osx"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -23,16 +27,28 @@ license: GPL-3.0-only
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsPython)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# Put the bits Cython on PATH/PYTHONPATH at RECIPE SCOPE (reaches the Make step,
-# not just Configure's subshell) so the pyext is regenerated for Python 3.13.
-bits_enable_cython
-# SWIG and its runtime library directory, as lcgcmake passes to Rivet 4.
+# SWIG + runtime lib dir, as lcgcmake passes to Rivet 4 (relocated on macOS).
 export SWIG="${SWIG_ROOT}/bin/swig"
-export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
+export SWIG_LIB="$(bits_swig_lib)"
+##############################
+if bits_is_macos; then
+  # fastjet-config advertises gcc runtime libs (-lemutls_w/-lgfortran/-lquadmath)
+  # that Apple clang can't find. Add both gcc dirs: the static helper archives and
+  # the libgfortran/libquadmath dylibs.
+  export LDFLAGS="$(bits_macos_relocatable_ldflags) ${LDFLAGS:-}"
+  _gcclib=$(dirname "$(${FC:-gfortran} -print-libgcc-file-name 2>/dev/null)" 2>/dev/null)
+  _fclib=$(dirname "$(${FC:-gfortran} -print-file-name=libgfortran.dylib 2>/dev/null)" 2>/dev/null)
+  [ -n "$_gcclib" ] && [ -d "$_gcclib" ] && export LDFLAGS="-L$_gcclib ${LDFLAGS:-}"
+  [ -n "$_fclib" ] && [ -d "$_fclib" ] && export LDFLAGS="-L$_fclib ${LDFLAGS:-}"
+  # core.so links libhdf5 transitively via YODA but Rivet adds no rpath, so the
+  # build-time `import rivet` can't dlopen it; bake one in (HDF5_ROOT from the
+  # osx-gated require).
+  [ -n "${HDF5_ROOT:-}" ] && export LDFLAGS="-Wl,-rpath,${HDF5_ROOT}/lib ${LDFLAGS:-}"
+fi
 ##############################
 function Configure() {
   (
