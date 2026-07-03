@@ -46,12 +46,6 @@ MODULE_OPTIONS="--bin --lib --cmake --pylib"
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded --exclude '/build/' "${SOURCEDIR}/" ./
 
-  # ROOT's CMakeLists.txt does set(CMAKE_MODULE_PATH ...) which replaces any
-  # -DCMAKE_MODULE_PATH passed on the command line, so we must patch the source.
-  if ! grep -q 'bits: direct fallback' cmake/modules/FindDavix.cmake; then
-    sed -i 's|^find_package(PkgConfig)$|# bits: direct fallback via DAVIX_ROOT cmake var or env var\nif(NOT DAVIX_FOUND AND (DEFINED DAVIX_ROOT OR DEFINED ENV{DAVIX_ROOT}))\n  if(DEFINED DAVIX_ROOT)\n    set(_davix_root ${DAVIX_ROOT})\n  else()\n    set(_davix_root $ENV{DAVIX_ROOT})\n  endif()\n  find_path(DAVIX_INCLUDE_DIR davix/davix.hpp PATHS ${_davix_root}/include NO_DEFAULT_PATH)\n  find_library(DAVIX_LIBRARY NAMES davix PATHS ${_davix_root}/lib ${_davix_root}/lib64 NO_DEFAULT_PATH)\n  if(DAVIX_INCLUDE_DIR AND DAVIX_LIBRARY)\n    set(DAVIX_FOUND TRUE)\n    set(DAVIX_INCLUDE_DIRS ${DAVIX_INCLUDE_DIR})\n    set(DAVIX_LIBRARIES ${DAVIX_LIBRARY})\n    set(DAVIX_LIBRARY ${DAVIX_LIBRARY})\n    message(STATUS "Found Davix via DAVIX_ROOT: ${DAVIX_LIBRARY}")\n  endif()\nendif()\nfind_package(PkgConfig)|' cmake/modules/FindDavix.cmake
-  fi
-
   _cling_cm="interpreter/cling/lib/Interpreter/CMakeLists.txt"
   if bits_is_macos && [ -f "${_cling_cm}" ] \
      && ! grep -q 'bits: InterpreterCallbacks rtti' "${_cling_cm}"; then
@@ -82,13 +76,8 @@ function Configure() {
   # Expose xrootd location via the env var ROOT's cmake actually checks
   [[ -n "${XROOTD_ROOT}" ]] && export XRDSYS="${XROOTD_ROOT}"
 
-  # FindDavix.cmake uses only pkg_check_modules — no cmake-variable fallback.
-  # Locate davix.pc wherever it landed (lib/pkgconfig or lib/*/pkgconfig on
-  # Ubuntu multiarch) and prepend that directory to PKG_CONFIG_PATH.
-  if [[ -n "${DAVIX_ROOT}" ]]; then
-    _davix_pc=$(find "${DAVIX_ROOT}/lib" "${DAVIX_ROOT}/lib64" -name 'davix.pc' -print -quit 2>/dev/null)
-    [[ -n "$_davix_pc" ]] && export PKG_CONFIG_PATH="$(dirname "$_davix_pc")${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
-  fi
+  # Davix is found by ROOT's stock FindDavix via pkg_check_modules; davix.pc is
+  # on PKG_CONFIG_PATH from Davix's init.sh (--pkgconfig), so no shim is needed.
 
   # FindVdt.cmake uses plain find_path/find_library with no hint variables and
   # VDT installs no cmake config or pkg-config files.  Pre-set the exact cache
