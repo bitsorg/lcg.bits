@@ -35,5 +35,6 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=17 \
     -DABSL_PROPAGATE_CXX_STD=ON \
     -Dprotobuf_ABSL_PROVIDER=package \
+    -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON \
     ${ABSL_ROOT:+-Dabsl_ROOT="$ABSL_ROOT"}
 }
