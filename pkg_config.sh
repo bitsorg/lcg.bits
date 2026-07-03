@@ -28,6 +28,11 @@ function Configure() {
   # paths are silently ignored by pkg-config.
   local _triple
   _triple=$(bits_triple)
+  # macOS/Xcode 16 clang promotes -Wint-conversion and implicit function
+  # declarations to hard errors, breaking pkg-config's vendored glib 2.x
+  # (gatomic.c). Downgrade those to warnings so --with-internal-glib compiles.
+  # No effect on Linux/gcc.
+  [ "$(uname)" = Darwin ] && export CFLAGS="${CFLAGS:+$CFLAGS }-Wno-error=int-conversion -Wno-error=implicit-function-declaration"
   ./configure --with-internal-glib --prefix=$INSTALLROOT \
     --with-system-include-path=/usr/include \
     --with-pc-path="/usr/lib/${_triple}/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig"

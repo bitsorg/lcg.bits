@@ -20,8 +20,9 @@ MODULE_OPTIONS="--bin --lib --cmake"
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
   # macOS: cmake SHELL: quoting is required when passing two-token -Xarch_<arch>
-  # flags; without it the second token is treated as a separate argument.
-  sed -i 's|list(APPEND ABSL_RANDOM_RANDEN_COPTS "-Xarch_\${_arch}" "\${_flag}")|list(APPEND ABSL_RANDOM_RANDEN_COPTS "SHELL:-Xarch_${_arch} ${_flag}")|' \
+  # flags; without it the second token is treated as a separate argument. Use
+  # perl (not sed -i) so the in-place edit is portable across GNU and BSD sed.
+  perl -i -pe 's|list\(APPEND ABSL_RANDOM_RANDEN_COPTS "-Xarch_\${_arch}" "\${_flag}"\)|list(APPEND ABSL_RANDOM_RANDEN_COPTS "SHELL:-Xarch_\${_arch} \${_flag}")|' \
     absl/copts/AbseilConfigureCopts.cmake
 }
 function Configure() {
