@@ -7,7 +7,9 @@ sources:
 requires:
   - CMake
   - Boost
-  - libunwind
+  # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on
+  # macOS; gate the requirement so it drops from the osx graph.
+  - "libunwind:(?!osx)"
   - zlib
   - gdb
   # libdw/libelf for the interpret tool -- system_requirement, taken from /usr.
@@ -26,15 +28,12 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # heaptrack's interpret tool needs elfutils (libdw/libelf >= 0.158), which is
-  # taken from the system. Make sure the system pkg-config dirs are searched so
-  # FindElfutils locates the system libdw.pc even when bits has set a
-  # bits-only PKG_CONFIG_PATH. Also expose the system include/lib roots to
-  # CMake's search so find_path/find_library can see /usr.
+  # The interpret tool needs system elfutils (libdw/libelf); add system pkg-config
+  # dirs so FindElfutils sees libdw.pc, and CMAKE_SYSTEM_PREFIX_PATH=/usr below
+  # so find_path/find_library reach /usr despite the bits-only PKG_CONFIG_PATH.
   export PKG_CONFIG_PATH="/usr/lib/x86_64-linux-gnu/pkgconfig:/usr/lib64/pkgconfig:/usr/lib/pkgconfig:${PKG_CONFIG_PATH}"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_SYSTEM_PREFIX_PATH=/usr \
       -DCMAKE_BUILD_TYPE=Release \
     -DHEAPTRACK_BUILD_INTERPRET=ON

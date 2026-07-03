@@ -21,23 +21,18 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
 }
 function PostInstall() {
-  # RAIDA's generated AIDAConfig.cmake pulls in RAIDAConfig.cmake via
-  # INCLUDE("@CMAKE_INSTALL_PREFIX@/RAIDAConfig.cmake"), but the config files are
-  # actually installed under lib/cmake/RAIDA/. The hardcoded prefix path doesn't
-  # exist, so every consumer that does find_package(AIDA) — all of Marlin via
-  # MARLIN_AIDA=ON — fails with "INCLUDE could not find requested file". Repoint
-  # the include at the sibling RAIDAConfig.cmake using CMAKE_CURRENT_LIST_DIR,
-  # which is resolved when the consumer loads the config and is relocation-safe.
+  # AIDAConfig.cmake INCLUDEs RAIDAConfig.cmake via a hardcoded @CMAKE_INSTALL_PREFIX@
+  # path that doesn't exist (configs land in lib/cmake/RAIDA/), breaking find_package(AIDA)
+  # consumers (Marlin). Repoint it at the sibling via relocation-safe CMAKE_CURRENT_LIST_DIR.
   local _aida
   _aida="$(find "${INSTALLROOT}" -name AIDAConfig.cmake -print -quit 2>/dev/null)"
   if [ -n "${_aida}" ]; then
-    sed -i 's#INCLUDE( *"[^"]*/RAIDAConfig.cmake" *)#INCLUDE( "${CMAKE_CURRENT_LIST_DIR}/RAIDAConfig.cmake" )#' "${_aida}"
+    perl -i -pe 's#INCLUDE\( *"[^"]*/RAIDAConfig.cmake" *\)#INCLUDE( "\${CMAKE_CURRENT_LIST_DIR}/RAIDAConfig.cmake" )#' "${_aida}"
   fi
 }

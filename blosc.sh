@@ -27,5 +27,5 @@ function Prepare() {
   # Remove C99 bool typedef that conflicts with C23's built-in bool (GCC 15).
   # The typedef was in c-blosc's shuffle.c; find it regardless of exact path.
   find . -name "shuffle.c" -path "*/c-blosc/*" -exec \
-    sed -i '/typedef.*_Bool.*bool/,/typedef unsigned char bool/d' {} +
+    perl -i -ne 'print unless /typedef.*_Bool.*bool/../typedef unsigned char bool/' {} +
 }

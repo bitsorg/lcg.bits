@@ -6,7 +6,9 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
-  - libunwind
+  # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on
+  # macOS; gate the requirement so it drops from the osx graph.
+  - "libunwind:(?!osx)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -21,7 +23,6 @@ MODULE_OPTIONS="--bin"
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS}" \
     -DCMAKE_CXX_STANDARD=17 \

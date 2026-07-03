@@ -22,10 +22,13 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-    ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-    -DCMAKE_OSX_ARCHITECTURES=x86_64 \
+    `# Build for the native macOS arch. The old hardcoded x86_64 fails on Apple` \
+    `# Silicon: the Fortran compiler targets arm64, so CMake aborts on the` \
+    `# CMAKE_OSX_ARCHITECTURES mismatch. uname -m -> arm64 (AS) / x86_64 (Intel);` \
+    `# ignored by CMake on Linux.` \
+    -DCMAKE_OSX_ARCHITECTURES="$(uname -m)" \
     -DMADX_ONLINE=OFF \
     -DMADX_INSTALL_DOC=OFF
 }

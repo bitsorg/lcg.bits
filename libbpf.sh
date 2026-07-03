@@ -20,7 +20,7 @@ MODULE_OPTIONS="--bin --lib"
 function Make() {
   make ${JOBS:+-j $JOBS} -C src
   make ${JOBS:+-j $JOBS} DESTDIR=$INSTALLROOT -C src install \
-  && sed -i "s@/usr@$INSTALLROOT@" $INSTALLROOT/usr/lib64/pkgconfig/libbpf.pc \
+  && perl -i -pe "s@/usr@$INSTALLROOT@" $INSTALLROOT/usr/lib64/pkgconfig/libbpf.pc \
   && mv -f $INSTALLROOT/usr/lib64 $INSTALLROOT/ \
   && mv -f $INSTALLROOT/usr/include $INSTALLROOT/ \
   && rm -rf $INSTALLROOT/usr

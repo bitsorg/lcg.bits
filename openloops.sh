@@ -73,11 +73,9 @@ OLPATCH
 }
 
 function Make() {
-  # OpenLoops build configuration.  Without the gfortran free-line-length and
-  # $-ok flags the Fortran sources fail to compile under modern gfortran (gcc15)
-  # and ./scons never produces libopenloops.so — which is exactly the failure
-  # consumers (herwig3, sherpa, whizard) hit as "libopenloops.so ... not found".
-  # Mirrors lcgcmake's openloops-213.cfg.
+  # Without the gfortran free-line-length and $-ok flags the Fortran sources fail
+  # to compile under gcc15 and ./scons never produces libopenloops.so. Mirrors
+  # lcgcmake's openloops-213.cfg.
   cat > openloops.cfg <<'CFG'
 [OpenLoops]
 gfortran_f_flags =   -ffree-line-length-none -fdollar-ok
@@ -90,18 +88,18 @@ CFG
   # extra-process compilation, mirroring lcgcmake's default.cfg edits.
   local _cmodel="medium"
   [ "$(uname -m)" = "aarch64" ] && _cmodel="small"
-  sed -i 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS,public/' pyol/config/default.cfg
-  sed -i 's/^compile_extra.*/compile_extra = 1/' pyol/config/default.cfg
-  sed -i "s|^remote_process_url.*|remote_process_url = http://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/openloop-processes/${OL_DATE}/repositories|" pyol/config/default.cfg
-  sed -i "s/^cmodel.*/cmodel = ${_cmodel}/" pyol/config/default.cfg
+  perl -i -pe 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS,public/' pyol/config/default.cfg
+  perl -i -pe 's/^compile_extra.*/compile_extra = 1/' pyol/config/default.cfg
+  perl -i -pe "s|^remote_process_url.*|remote_process_url = http://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/openloop-processes/${OL_DATE}/repositories|" pyol/config/default.cfg
+  perl -i -pe "s/^cmodel.*/cmodel = ${_cmodel}/" pyol/config/default.cfg
 
   # Build the main OpenLoops library (libopenloops.so) first, then the process
   # libraries.  lcgcmake runs ./scons before any libinstall.
   ./scons
   ./openloops libinstall --jobs=${JOBS:-5} ${OL_PUBLIC_PROC} compile_extra=1
-  sed -i 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS/' pyol/config/default.cfg
+  perl -i -pe 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS/' pyol/config/default.cfg
   ./openloops libinstall --jobs=${JOBS:-5} all.coll compile_extra=1
-  sed -i 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS,public/' pyol/config/default.cfg
+  perl -i -pe 's/^process_repositories.*/process_repositories = matrix,powheg,ATLAS,public/' pyol/config/default.cfg
   ./openloops libinstall --jobs=${JOBS:-5} pphtt_nf compile_extra=1
   rm -rf process_obj process_src
 }

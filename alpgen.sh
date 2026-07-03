@@ -18,10 +18,12 @@ MODULE_OPTIONS="--bin --lib"
 function Prepare() {
   local tgz="alpgen_v214.tgz"
   curl -fSL "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/${tgz}" -o "${tgz}"
-  # Auto-detect whether the tarball has a single top-level prefix directory.
-  local prefix
-  prefix=$(tar tzf "${tgz}" | head -1 | cut -d/ -f1)
-  if tar tzf "${tgz}" | grep -q "^${prefix}/"; then
+  # Strip a wrapping dir only if the tarball has exactly one top-level entry.
+  # (The old head -1 heuristic was order-dependent and mis-stripped under macOS
+  # bsdtar, flattening ALPGEN's many top-level dirs and dropping compile.mk.)
+  local ntop
+  ntop=$(tar tzf "${tgz}" | sed -e 's#/.*##' | sort -u | grep -c .)
+  if [ "${ntop}" -eq 1 ]; then
     tar xzf "${tgz}" --strip-components=1
   else
     tar xzf "${tgz}"
@@ -29,15 +31,12 @@ function Prepare() {
   rm -f "${tgz}"
 
   # alpgen.f: ctime() returns 26 chars but declared as char*24; use a literal.
-  find . -name alpgen.f -exec sed -i \
-    -e "s/      character\*24 CTIME,now/      character\*25 now/" \
-    -e "s/^c      now='Day Mon XX hh:mm:ss yyyy'/      now='Day Mon XX hh:mm:ss yyyy'/" \
-    -e "s/^      now=ctime(time())/c      now=ctime(time())/" \
+  find . -name alpgen.f -exec perl -i -pe \
+    "s/      character\*24 CTIME,now/      character\*25 now/; s/^c      now='Day Mon XX hh:mm:ss yyyy'/      now='Day Mon XX hh:mm:ss yyyy'/; s/^      now=ctime(time())/c      now=ctime(time())/" \
     {} \;
   # alputi.f: same char*24 NOW → char*25 (two subroutine variants)
-  find . -name alputi.f -exec sed -i \
-    -e 's/CHARACTER TITLE\*25,BOOK\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,NOW*25/' \
-    -e 's/CHARACTER TITLE\*25,BOOK\*3,SCALE\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,SCALE*3,NOW*25/' \
+  find . -name alputi.f -exec perl -i -pe \
+    's/CHARACTER TITLE\*25,BOOK\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,NOW*25/; s/CHARACTER TITLE\*25,BOOK\*3,SCALE\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,SCALE*3,NOW*25/' \
     {} \;
 }
 
