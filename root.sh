@@ -18,6 +18,7 @@ requires:
   - zlib
   - libxml2
   - "vdt:(?!osx)"
+  - "unuran:osx"
   - xz
   - cfitsio
   - jsonmcpp
@@ -121,11 +122,10 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # < 6.40: use builtin copies; >= 6.40: switch to external packages + curl.
-  # unuran stays builtin — it has no external/system provider and is not a dep,
-  # and with fail-on-missing ROOT can't self-fallback to its bundled copy.
+  # < 6.40: use builtin copies; >= 6.40: switch to external packages + curl
+  # (unuran is provided as an external dep on macOS, where 6.40 is built).
   if _ver_ge "$_root_ver" "6.40.00"; then
-    _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=ON -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
+    _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
   else
     _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
   fi
@@ -243,6 +243,7 @@ function Configure() {
     -Dxml=ON                                                                \
     -Dzlib=ON                                                               \
     ${VDT_ROOT:+-Dvdt=ON}                                                   \
+    ${UNURAN_ROOT:+-DUNURAN_DIR="$UNURAN_ROOT"}                             \
     ${_sofie_flag}                                                          \
     ${_test_flags}
 }
