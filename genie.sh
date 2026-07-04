@@ -6,7 +6,6 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.bz2
 requires:
   - ROOT
-  - ROOTEGPythia6
   - lhapdf
   - pythia6
   - log4cpp
@@ -33,44 +32,6 @@ export ROOTSYS="${ROOT_ROOT}"
 export PATH="${ROOT_ROOT}/bin:$PATH"
 ##############################
 function Configure() {
-  # GENIE 2.12.6 predates Apple Silicon: `root-config --arch` returns
-  # macosxarm64, which none of Make.include's ARCH blocks match, so ObjSuf/SrcSuf
-  # stay empty and dictionary deps collapse to 'Class.' (No rule to make target).
-  # Map it onto the macosx64 block. No-op on Linux.
-  # shellcheck disable=SC2016
-  perl -i -pe 's{\$\(shell root-config --arch\)}{\$(subst macosxarm64,macosx64,\$(shell root-config --arch))}g' \
-    "$GENIE/src/make/Make.include"
-
-  # ROOT >6.30 removed TPythia6/TMCParticle and libEGPythia6, which GENIE 2.12.6
-  # includes and links. The ROOTEGPythia6 package re-provides them; point GENIE's
-  # ROOT include/lib flags at it so TPythia6.h and -lEGPythia6 resolve.
-  # shellcheck disable=SC2016
-  perl -i -pe 's{-I\$\(shell root-config --incdir\)}{-I\$(shell root-config --incdir) -I\$(ROOTEGPYTHIA6_ROOT)/include}g; s{-lMinuit -lGeom -lEG -lEGPythia6 -lGenVector}{-L\$(ROOTEGPYTHIA6_ROOT)/lib -lMinuit -lGeom -lEG -lEGPythia6 -lGenVector}g;' \
-    "$GENIE/src/make/Make.include"
-
-  # GENIE 2.12.6 predates ROOT dropping `using namespace std` from its headers,
-  # so ~184 files use bare std names (string, ostream, ...) that fail under the
-  # C++20 that ROOT 6.40 compiles with. Restore that environment for every TU via
-  # a force-included prelude (and allow the C++17-removed `register` keyword),
-  # fixing it centrally instead of editing each file.
-  cat > "$GENIE/src/make/genie_cxx_prelude.h" <<'PRELUDE'
-#pragma once
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <map>
-#include <set>
-#include <list>
-#include <algorithm>
-#include <cmath>
-using namespace std;
-PRELUDE
-  # shellcheck disable=SC2016
-  perl -i -pe 's{^CXXFLAGS := \$\(ENV_CXXFLAGS\) \$\(CXXFLAGS\)\s*$}{CXXFLAGS := \$(ENV_CXXFLAGS) \$(CXXFLAGS) -Wno-register -include \$(GENIE)/src/make/genie_cxx_prelude.h\n}g' \
-    "$GENIE/src/make/Make.include"
-
   ./configure --prefix="$INSTALLROOT" --enable-lhapdf --enable-validation-tools \
     --enable-test --enable-numi --enable-atmo --enable-nucleon-decay --enable-rwght \
     --enable-pythia6 --enable-mathmore \
