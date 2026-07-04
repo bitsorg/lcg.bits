@@ -122,10 +122,16 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # < 6.40: use builtin copies; >= 6.40: switch to external packages + curl
-  # (unuran is provided as an external dep on macOS, where 6.40 is built).
+  # < 6.40: use builtin copies. >= 6.40 on Linux: switch to external packages +
+  # curl (provided by the LCG stack). >= 6.40 on macOS: those externals aren't
+  # all available and fail-on-missing turns a miss into a fatal error, so keep
+  # ROOT's bundled copies — except unuran, which is an external bits dep here.
   if _ver_ge "$_root_ver" "6.40.00"; then
-    _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
+    if [[ "$(uname)" == Darwin ]]; then
+      _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON -Dcurl=ON"
+    else
+      _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
+    fi
   else
     _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
   fi
