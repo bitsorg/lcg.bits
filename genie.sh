@@ -32,6 +32,14 @@ export ROOTSYS="${ROOT_ROOT}"
 export PATH="${ROOT_ROOT}/bin:$PATH"
 ##############################
 function Configure() {
+  # GENIE 2.12.6 predates Apple Silicon: `root-config --arch` returns
+  # macosxarm64, which none of Make.include's ARCH blocks match, so ObjSuf/SrcSuf
+  # stay empty and dictionary deps collapse to 'Class.' (No rule to make target).
+  # Map it onto the macosx64 block. No-op on Linux.
+  # shellcheck disable=SC2016
+  perl -i -pe 's{\$\(shell root-config --arch\)}{\$(subst macosxarm64,macosx64,\$(shell root-config --arch))}g' \
+    "$GENIE/src/make/Make.include"
+
   ./configure --prefix="$INSTALLROOT" --enable-lhapdf --enable-validation-tools \
     --enable-test --enable-numi --enable-atmo --enable-nucleon-decay --enable-rwght \
     --enable-pythia6 --enable-mathmore \
