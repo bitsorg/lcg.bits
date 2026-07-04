@@ -6,6 +6,7 @@ sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.bz2
 requires:
   - ROOT
+  - ROOTEGPythia6
   - lhapdf
   - pythia6
   - log4cpp
@@ -38,6 +39,13 @@ function Configure() {
   # Map it onto the macosx64 block. No-op on Linux.
   # shellcheck disable=SC2016
   perl -i -pe 's{\$\(shell root-config --arch\)}{\$(subst macosxarm64,macosx64,\$(shell root-config --arch))}g' \
+    "$GENIE/src/make/Make.include"
+
+  # ROOT >6.30 removed TPythia6/TMCParticle and libEGPythia6, which GENIE 2.12.6
+  # includes and links. The ROOTEGPythia6 package re-provides them; point GENIE's
+  # ROOT include/lib flags at it so TPythia6.h and -lEGPythia6 resolve.
+  # shellcheck disable=SC2016
+  perl -i -pe 's{-I\$\(shell root-config --incdir\)}{-I\$(shell root-config --incdir) -I\$(ROOTEGPYTHIA6_ROOT)/include}g; s{-lMinuit -lGeom -lEG -lEGPythia6 -lGenVector}{-L\$(ROOTEGPYTHIA6_ROOT)/lib -lMinuit -lGeom -lEG -lEGPythia6 -lGenVector}g;' \
     "$GENIE/src/make/Make.include"
 
   ./configure --prefix="$INSTALLROOT" --enable-lhapdf --enable-validation-tools \
