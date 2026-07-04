@@ -48,6 +48,29 @@ function Configure() {
   perl -i -pe 's{-I\$\(shell root-config --incdir\)}{-I\$(shell root-config --incdir) -I\$(ROOTEGPYTHIA6_ROOT)/include}g; s{-lMinuit -lGeom -lEG -lEGPythia6 -lGenVector}{-L\$(ROOTEGPYTHIA6_ROOT)/lib -lMinuit -lGeom -lEG -lEGPythia6 -lGenVector}g;' \
     "$GENIE/src/make/Make.include"
 
+  # GENIE 2.12.6 predates ROOT dropping `using namespace std` from its headers,
+  # so ~184 files use bare std names (string, ostream, ...) that fail under the
+  # C++20 that ROOT 6.40 compiles with. Restore that environment for every TU via
+  # a force-included prelude (and allow the C++17-removed `register` keyword),
+  # fixing it centrally instead of editing each file.
+  cat > "$GENIE/src/make/genie_cxx_prelude.h" <<'PRELUDE'
+#pragma once
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <map>
+#include <set>
+#include <list>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+PRELUDE
+  # shellcheck disable=SC2016
+  perl -i -pe 's{^CXXFLAGS := \$\(ENV_CXXFLAGS\) \$\(CXXFLAGS\)\s*$}{CXXFLAGS := \$(ENV_CXXFLAGS) \$(CXXFLAGS) -Wno-register -include \$(GENIE)/src/make/genie_cxx_prelude.h\n}g' \
+    "$GENIE/src/make/Make.include"
+
   ./configure --prefix="$INSTALLROOT" --enable-lhapdf --enable-validation-tools \
     --enable-test --enable-numi --enable-atmo --enable-nucleon-decay --enable-rwght \
     --enable-pythia6 --enable-mathmore \
