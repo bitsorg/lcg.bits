@@ -79,7 +79,7 @@ if [ -e autoconf-archive ]; then
   mkdir build-autoconf-archive
   pushd build-autoconf-archive
     ../autoconf-archive/configure --prefix="$INSTALLROOT"
-    make install
+    make install MAKEINFO=":"
   popd
   export ACLOCAL_PATH=$INSTALLROOT/share/aclocal
 fi
