@@ -22,8 +22,13 @@ prefer_system_check: |
   cc -x c - ${prefix:+"-I$prefix/include"} -c -o /dev/null <<\EOF
   #include <openssl/bio.h>
   #include <openssl/opensslv.h>
-  #if OPENSSL_VERSION_NUMBER < 0x10101000L
-  #error "System OpenSSL too old: need >= 1.1.1"
+  // Require OpenSSL >= 3.0.0. The stack has moved to OpenSSL 3 (e.g. curl 8.18
+  // fails configure with "OpenSSL 3.0.0 or upper required"), so accepting the
+  // 1.1.1 that el8/alma8 ships would take a too-old system copy and break
+  // dependents. On el8 this makes bits build its own OpenSSL 3.x; el9/el10 and
+  // modern Ubuntu already ship >= 3.0 and keep taking it from the system.
+  #if OPENSSL_VERSION_NUMBER < 0x30000000L
+  #error "System OpenSSL too old: need >= 3.0.0"
   #endif
   int main() { }
   EOF
