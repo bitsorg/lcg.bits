@@ -22,7 +22,10 @@ function Prepare() {
   # macOS: cmake SHELL: quoting is required when passing two-token -Xarch_<arch>
   # flags; without it the second token is treated as a separate argument. Use
   # perl (not sed -i) so the in-place edit is portable across GNU and BSD sed.
-  perl -i -pe 's|list\(APPEND ABSL_RANDOM_RANDEN_COPTS "-Xarch_\${_arch}" "\${_flag}"\)|list(APPEND ABSL_RANDOM_RANDEN_COPTS "SHELL:-Xarch_\${_arch} \${_flag}")|' \
+  # NOTE: escape the braces in the PATTERN (\$\{_arch\}). Perl >= 5.32 (in the
+  # el8/el9 build images) makes an unescaped '{' in a regex a FATAL error
+  # ("Unescaped left brace in regex is illegal here"), which aborts the build.
+  perl -i -pe 's|list\(APPEND ABSL_RANDOM_RANDEN_COPTS "-Xarch_\$\{_arch\}" "\$\{_flag\}"\)|list(APPEND ABSL_RANDOM_RANDEN_COPTS "SHELL:-Xarch_\${_arch} \${_flag}")|' \
     absl/copts/AbseilConfigureCopts.cmake
 }
 function Configure() {
