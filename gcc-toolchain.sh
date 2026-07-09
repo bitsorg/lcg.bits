@@ -192,10 +192,18 @@ EOF
   # with libstdc++ compatibility.
   mkdir build-ccache
   pushd build-ccache
+    # Disable ccache's Redis storage backend: it pulls in hiredis, which ccache's
+    # CMake fetches from GitHub via FetchContent when no system hiredis is found.
+    # That live download makes the build non-reproducible and network-dependent
+    # (it failed here with an HTTP 504). A compile cache needs no Redis backend,
+    # so turn it off entirely; HIREDIS_FROM_INTERNET=OFF is a belt-and-suspenders
+    # against any residual fetch path (unknown -D options are harmlessly ignored).
     $BUILDDIR/bootstrap-cmake/bin/cmake -S ../ccache \
         -DENABLE_DOCUMENTATION=OFF                   \
         -DENABLE_TESTING=OFF                         \
         -DSTATIC_LINK=ON                             \
+        -DREDIS_STORAGE_BACKEND=OFF                  \
+        -DHIREDIS_FROM_INTERNET=OFF                  \
         -DCMAKE_INSTALL_PREFIX="$INSTALLROOT/libexec/ccache"
     make ${JOBS:+-j $JOBS} install
     ln -sf ccache $INSTALLROOT/libexec/ccache/bin/gcc
