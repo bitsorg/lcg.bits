@@ -1,7 +1,7 @@
 package: ninja
 description: Ninja small build system with a focus on speed
-version: "1.13.2"
-tag: "1.13.2"
+version: "1.13.0"
+tag: "1.13.0"
 requires:
   - Python
 prefer_system: ".*"
