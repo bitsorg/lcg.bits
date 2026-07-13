@@ -36,7 +36,7 @@ env:
   # source the recipe records it in etc/cxxstd; on the prefer_system path that
   # file is absent, so probe the system g++/c++ directly. No '%' or '"' chars,
   # so bits' env templating leaves the command substitution intact.
-  CXXSTD: "$( f=$GCC_TOOLCHAIN_ROOT/etc/cxxstd; if [ -r $f ]; then cat $f; else c=$(command -v g++ || command -v c++ || echo g++); r=23; for s in 26 23 20 17; do printf 'int main(){}' | $c -std=c++$s -fsyntax-only -x c++ - >/dev/null 2>&1 && { r=$s; break; }; done; echo $r; fi )"
+  CXXSTD: "$( f=$GCC_TOOLCHAIN_ROOT/etc/cxxstd; if [ -r $f ]; then cat $f; else c=$(command -v g++ || command -v c++ || echo g++); r=23; for s in 23 20 17; do printf 'int main(){}' | $c -std=c++$s -fsyntax-only -x c++ - >/dev/null 2>&1 && { r=$s; break; }; done; echo $r; fi )"
 ---
 # Fix syntax highlight
 cat <<EOF
@@ -302,7 +302,7 @@ rm -fr "$INSTALLROOT"/include/sim
 # newest to oldest and keep the first that compiles.
 mkdir -p "$INSTALLROOT/etc"
 _cxxstd=23
-for _s in 26 23 20 17; do
+for _s in 23 20 17; do
   if printf 'int main(){}' | "$INSTALLROOT/bin/g++" -std=c++$_s -fsyntax-only -x c++ - >/dev/null 2>&1; then
     _cxxstd=$_s
     break
