@@ -6,6 +6,7 @@ source: https://github.com/iLCSoft/CED.git
 requires:
   - CMake
   - ilcutil
+  - freeglut     # CED is an OpenGL event display; find_package(GLUT) needs freeglut
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
