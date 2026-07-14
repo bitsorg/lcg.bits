@@ -52,7 +52,9 @@ case $ARCHITECTURE in
     EXTRA_LANGS=',objc,obj-c++'
     MARCH=
   ;;
-  *x86-64)
+  # Match both the aliBuild token (x86-64) and the SFT/el+ubuntu token (x86_64),
+  # anywhere in the arch string, so el9/el10/ubuntu* all set the right --build.
+  *x86-64*|*x86_64*)
     MARCH='x86_64-unknown-linux-gnu'
   ;;
   *)

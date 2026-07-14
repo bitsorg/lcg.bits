@@ -3,7 +3,7 @@ description: OpenJDK Java Development Kit
 version: "17.0.18p8"
 tag: "17.0.18p8"
 sources:
-  - "((?!osx).*x86-64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/openjdk-%(version)s-linux-x64.tar.gz"
+  - "((?!osx).*x86[-_]64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/openjdk-%(version)s-linux-x64.tar.gz"
   - "((?!osx).*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/openjdk-%(version)s-linux-aarch64.tar.gz"
 # macOS: there is no prebuilt OpenJDK tarball for osx here, so source the JDK
 # from Homebrew (openjdk@17, pinned to major 17). prefer_system is gated to

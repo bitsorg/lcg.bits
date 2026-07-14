@@ -31,9 +31,10 @@ case $ARCHITECTURE in
   *) DEFAULT_SYSROOT= ;;
 esac
 case $ARCHITECTURE in
-  *_x86-64) LLVM_TARGETS_TO_BUILD=X86 ;;
-  *_arm64) LLVM_TARGETS_TO_BUILD=AArch64 ;;
-  *_aarch64) LLVM_TARGETS_TO_BUILD=AArch64 ;;
+  # Match both the aliBuild token (x86-64 / arm64) and the SFT/el+ubuntu token
+  # (x86_64 / aarch64), anywhere in the arch string, so el9/el10/ubuntu* all work.
+  *x86-64*|*x86_64*) LLVM_TARGETS_TO_BUILD=X86 ;;
+  *arm64*|*aarch64*) LLVM_TARGETS_TO_BUILD=AArch64 ;;
   *) echo 'Unknown LLVM target for architecture' >&2; exit 1 ;;
 esac
 
