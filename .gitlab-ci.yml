@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2026 CERN
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# lcg.bits — external build trigger for bits-console
+#
+# On a commit to the default branch (including GitLab pull-mirror updates) or a
+# merge request, this fires a DESIGNATED group pipeline in bits-console, which
+# fans out the saved cvmfs-prepub builds. The build configuration itself
+# (packages, platforms, defaults chain, providers, publish/certify) lives in
+# bits-console at:
+#     communities/<BITS_GROUP>/pipelines/<BITS_PIPELINE>.json
+# authored via the console's Build modal → "Save as pipeline". This repo only
+# *fires* that pipeline; it does not define the builds.
+#
+# One-time setup in the GitLab UI:
+#   1. bits-console → Settings → CI/CD → Token Access → add THIS project to the
+#      "CI_JOB_TOKEN allowlist", so this pipeline is permitted to trigger it.
+#   2. If this project is a pull-mirror of GitHub, enable
+#      Settings → Repository → Mirroring → "Trigger pipelines for mirror updates"
+#      so a mirror sync runs this file. (This file must be present on the mirrored
+#      branch, i.e. committed on the GitHub source.)
+#   3. Create the designated pipeline in the console: build the LCG stack in the
+#      Build modal, tick the desired options, and click "Save as pipeline",
+#      naming it to match BITS_PIPELINE below.
+
+stages:
+  - trigger
+
+variables:
+  # Which saved bits-console pipeline to run:
+  #   communities/<BITS_GROUP>/pipelines/<BITS_PIPELINE>.json
+  BITS_GROUP:    "LCG"
+  BITS_PIPELINE: "on-commit"
+  # Optional: restrict the run to a single package (empty = the whole pipeline).
+  BITS_PACKAGE:  ""
+
+# Multi-project trigger into bits-console. The downstream run-group-pipeline job
+# fires because GROUP + PIPELINE are set; it then dispatches one prepub build per
+# enabled entry of the saved pipeline. (Pages/nightly are skipped there for the
+# "pipeline" source.)
+trigger-bits-console:
+  stage: trigger
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  variables:
+    # Forwarded to the downstream bits-console pipeline.
+    GROUP:    "$BITS_GROUP"
+    PIPELINE: "$BITS_PIPELINE"
+    PACKAGE:  "$BITS_PACKAGE"
+  trigger:
+    project: buncic/bits-console
+    branch: main
+    strategy: depend
