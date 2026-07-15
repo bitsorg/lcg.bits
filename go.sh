@@ -59,6 +59,15 @@ prefer_system_replacement_specs:
         # writable path so the go_* recipes' `go install` can write the cache.
         echo 'setenv GOCACHE /tmp/bits-go-build'
       } >> "$_mf"
+# Exported into the build environment of go_* consumers (a dependency's env:
+# block propagates to dependents' builds; a modulefile setenv does not). This is
+# the Linux (from-source) counterpart of the osx prefer_system env above.
+# GO111MODULE=off keeps the GOPATH-style `go install <importpath>` recipes working;
+# GOCACHE redirects Go's build cache off $HOME — its default ~/.cache/go-build is
+# unwritable in the build container ("mkdir /.cache: permission denied").
+env:
+  GO111MODULE: "off"
+  GOCACHE: "/tmp/bits-go-build"
 build_requires:
   - bits-recipe-tools
 license: BSD-3-Clause
@@ -87,5 +96,7 @@ function MakeInstall() {
 function PostInstall() {
   cat >> "$MODULEFILE" <<'EOF'
 setenv GOROOT $env(GO_ROOT)
+setenv GO111MODULE off
+setenv GOCACHE /tmp/bits-go-build
 EOF
 }
