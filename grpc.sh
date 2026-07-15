@@ -19,6 +19,9 @@ prefer_system_check: |
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  # Configure() forces `-G Ninja`; depend on the ninja recipe so the generator is
+  # on PATH (the builder image ships make, not ninja).
+  - ninja
 license: Apache-2.0
 ---
 #!/bin/bash -e
