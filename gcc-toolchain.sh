@@ -167,6 +167,11 @@ rm -f a.out
 # Build a very basic CMake, to compile ccache and nothing else
 # in case we manage, we build ccache
 if [ -e ccache ]; then
+  # ccache is an optional, default-disabled accelerator. Some alisw/gcc-toolchain
+  # tags ship a ccache whose CMake fails ("No SOURCES given to target:
+  # ccache_framework"); that must NOT abort the whole toolchain — gcc itself is
+  # already built and installed above. Build ccache best-effort.
+  if ( set -e
   mkdir -p build-cmake
   pushd build-cmake
   cat > build-flags.cmake <<- EOF
@@ -212,8 +217,7 @@ EOF
     ln -sf ccache $INSTALLROOT/libexec/ccache/bin/g++
     ln -sf ccache $INSTALLROOT/libexec/ccache/bin/cc
     ln -sf ccache $INSTALLROOT/libexec/ccache/bin/c++
-    export PATH=$INSTALLROOT/libexec/ccache/bin:$PATH
-    # Notice how we configure CCACHE to work, but then 
+    # Notice how we configure CCACHE to work, but then
     # disable so that users need to export CCACHE_DISABLE=false
     # to actually have it working.
     mkdir -p $INSTALLROOT/libexec/ccache/etc
@@ -222,6 +226,11 @@ cache_dir=$WORK_DIR/TMP/ccache/$ARCHITECTURE
 disable=true
 EOF
   popd
+  ); then
+    export PATH=$INSTALLROOT/libexec/ccache/bin:$PATH
+  else
+    echo "WARNING: ccache build failed — continuing without it (optional accelerator, disabled by default)." >&2
+  fi
 fi
 
 # We rebuild mpfr, gmp, isl to be used with gdb. We do so because
