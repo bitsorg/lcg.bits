@@ -1,7 +1,8 @@
 package: unuran
 description: UNU.RAN universal non-uniform random number generators
 version: "1.11.0"
-tag: "1.11.0"
+source: https://github.com/unuran/unuran
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

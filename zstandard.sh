@@ -1,7 +1,8 @@
 package: zstandard
 description: zstandard Python bindings for Zstandard compression
 version: "0.23.0"
-tag: "0.23.0"
+source: https://github.com/indygreg/python-zstandard
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

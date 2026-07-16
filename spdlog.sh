@@ -1,7 +1,8 @@
 package: spdlog
 description: spdlog fast C++ logging library, header-only or compiled
 version: "1.15.0"
-tag: "1.15.0"
+source: https://github.com/gabime/spdlog
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

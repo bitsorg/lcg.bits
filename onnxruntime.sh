@@ -1,7 +1,8 @@
 package: onnxruntime
 description: ONNX Runtime cross-platform ML model inference engine
 version: "1.24.4"
-tag: "1.24.4"
+source: https://github.com/microsoft/onnxruntime
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

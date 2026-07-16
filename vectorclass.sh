@@ -1,7 +1,8 @@
 package: vectorclass
 description: Agner Fog's Vector Class Library for SIMD programming
 version: "2.01.02"
-tag: "2.01.02"
+source: https://github.com/vectorclass/version2
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

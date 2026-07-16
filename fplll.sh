@@ -1,7 +1,8 @@
 package: fplll
 description: fplll lattice reduction algorithms library
 version: "5.4.4"
-tag: "5.4.4"
+source: https://github.com/fplll/fplll
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

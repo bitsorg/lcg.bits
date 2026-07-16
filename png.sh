@@ -1,7 +1,8 @@
 package: png
 description: libpng official PNG reference library
 version: "1.6.55"
-tag: "1.6.55"
+source: https://github.com/glennrp/libpng
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/lib%(name)s-%(version)s.tar.gz
 requires:

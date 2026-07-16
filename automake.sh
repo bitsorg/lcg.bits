@@ -1,7 +1,8 @@
 package: automake
 description: GNU Automake Makefile generator
 version: "1.18.1"
-tag: "1.18.1"
+source: https://git.savannah.gnu.org/git/automake.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

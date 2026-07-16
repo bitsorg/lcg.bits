@@ -1,7 +1,8 @@
 package: caio
 description: caio async I/O file operations for Linux
 version: "0.9.25"
-tag: "0.9.25"
+source: https://github.com/mosquito/caio
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

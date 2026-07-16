@@ -1,7 +1,8 @@
 package: gnu_sed
 description: GNU sed stream editor
 version: "4.5"
-tag: "4.5"
+source: https://git.savannah.gnu.org/git/sed.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/sed-4.5.tar.gz
 # macOS: source GNU sed from Homebrew (gnu-sed). It installs the binary as

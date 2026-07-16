@@ -1,7 +1,8 @@
 package: panel
 description: Panel high-level app and dashboarding for Python
 version: "1.1.0"
-tag: "1.1.0"
+source: https://github.com/holoviz/panel
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

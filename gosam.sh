@@ -1,7 +1,8 @@
 package: gosam
 description: GoSam automated one-loop amplitude generator
 version: "2.1.2"
-tag: "2.1.2"
+source: https://github.com/gudrunhe/gosam
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/gosam-2.1.2.tar.gz
 requires:

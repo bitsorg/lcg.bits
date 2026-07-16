@@ -1,7 +1,8 @@
 package: pyeda
 description: PyEDA Boolean algebra and digital logic toolkit
 version: "0.29.0"
-tag: "0.29.0"
+source: https://github.com/cjdrake/pyeda
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

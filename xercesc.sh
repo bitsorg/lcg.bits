@@ -1,7 +1,8 @@
 package: XercesC
 description: Apache Xerces-C++ XML parser library
 version: "3.3.0"
-tag: "3.3.0"
+source: https://github.com/apache/xerces-c
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xerces-c-3.3.0.tar.gz
 requires:

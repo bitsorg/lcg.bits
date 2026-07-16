@@ -1,7 +1,8 @@
 package: setuptools
 description: setuptools Python packaging, build and distribution library
 version: "80.10.2"
-tag: "80.10.2"
+source: https://github.com/pypa/setuptools
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

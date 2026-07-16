@@ -1,7 +1,8 @@
 package: logilabcommon
 description: logilab-common utility modules for Python (logilab)
 version: "1.8.1"
-tag: "1.8.1"
+source: https://github.com/logilab/logilab-common
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/logilab-common-1.8.1.tar.gz
 requires:

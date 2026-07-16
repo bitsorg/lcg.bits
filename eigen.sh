@@ -1,7 +1,8 @@
 package: eigen
 description: eigen header-only C++ template library for linear algebra
 version: "3.4.1"
-tag: "3.4.1"
+source: https://gitlab.com/libeigen/eigen
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

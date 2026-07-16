@@ -1,7 +1,8 @@
 package: feynhiggs
 description: FeynHiggs program for MSSM Higgs mass calculations
 version: "2.10.2"
-tag: "2.10.2"
+source: https://github.com/feynhiggs/feynhiggs
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/FeynHiggs-2.10.2.tar.gz
 build_requires:

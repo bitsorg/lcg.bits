@@ -1,7 +1,8 @@
 package: kokkos
 description: Kokkos performance portability programming model
 version: "4.7.01"
-tag: "4.7.01"
+source: https://github.com/kokkos/kokkos
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

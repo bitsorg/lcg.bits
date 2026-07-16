@@ -1,7 +1,8 @@
 package: ocaml
 description: OCaml functional programming language compiler and standard library
 version: "4.14.2"
-tag: "4.14.2"
+source: https://github.com/ocaml/ocaml
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: source OCaml from Homebrew (formula ocaml). prefer_system gated osx.*

@@ -1,7 +1,8 @@
 package: bison
 description: GNU Bison LALR/GLR parser generator
 version: "3.8.2"
-tag: "3.8.2"
+source: https://git.savannah.gnu.org/git/bison.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

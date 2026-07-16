@@ -1,7 +1,8 @@
 package: libtool
 description: GNU Libtool shared library support script
 version: "2.4.6"
-tag: "2.4.6"
+source: https://git.savannah.gnu.org/git/libtool.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: source libtool from Homebrew (libtool) — GNU libtool; brew installs it g-prefixed (glibtool/glibtoolize). prefer_system gated

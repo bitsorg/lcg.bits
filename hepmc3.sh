@@ -1,7 +1,8 @@
 package: hepmc3
 description: HepMC3 Monte Carlo event record library
 version: "3.3.1"
-tag: "3.3.1"
+source: https://gitlab.cern.ch/hepmc/HepMC3
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC3-%(version)s.tar.gz
 requires:

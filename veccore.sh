@@ -1,7 +1,8 @@
 package: veccore
 description: VecCore C++ header-only SIMD abstraction library (CERN)
 version: "0.8.2"
-tag: "0.8.2"
+source: https://github.com/root-project/veccore
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/VecCore-0.8.2.tar.gz
 requires:

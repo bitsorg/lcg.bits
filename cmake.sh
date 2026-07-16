@@ -1,7 +1,8 @@
 package: CMake
 description: Cross-platform build system generator
 version: "3.30.6"
-tag: "3.30.6"
+source: https://gitlab.kitware.com/cmake/cmake
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cmake-3.30.6.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: GitCondDB
 description: Git-based conditions/calibration database library
 version: "0.2.2"
-tag: "0.2.2"
+source: https://gitlab.cern.ch/lhcb/GitCondDB
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: OpenSSL
 description: OpenSSL toolkit for TLS/SSL and general cryptography
 version: "3.0.19"
-tag: "3.0.19"
+source: https://github.com/openssl/openssl
+tag: "openssl-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/openssl-3.0.19.tar.gz
 requires:

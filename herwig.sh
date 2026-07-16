@@ -1,7 +1,8 @@
 package: herwig
 description: Herwig Monte Carlo event generator for high-energy collisions
 version: "6.521.2"
-tag: "6.521.2"
+source: https://github.com/Herwig/Herwig
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/herwig-6.521.2-src.tgz
 build_requires:

@@ -1,7 +1,8 @@
 package: shapely
 description: Shapely geometric objects manipulation for Python
 version: "2.0.5"
-tag: "2.0.5"
+source: https://github.com/shapely/shapely
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/Shapely-2.0.5.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: libarchive
 description: Multi-format archive and compression library
 version: "3.8.7"
-tag: "3.8.7"
+source: https://github.com/libarchive/libarchive
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

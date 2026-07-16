@@ -1,7 +1,8 @@
 package: ultralytics_thop
 description: ultralytics-thop FLOPs/params counting for neural networks
 version: "2.0.14"
-tag: "2.0.14"
+source: https://github.com/ultralytics/thop
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

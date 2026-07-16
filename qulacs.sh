@@ -1,7 +1,8 @@
 package: qulacs
 description: Qulacs fast quantum circuit simulator for Python
 version: "0.6.4.1"
-tag: "0.6.4.1"
+source: https://github.com/qulacs/qulacs
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

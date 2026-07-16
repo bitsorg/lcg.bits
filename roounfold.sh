@@ -1,7 +1,8 @@
 package: RooUnfold
 description: RooUnfold unfolding framework for HEP distributions
 version: "3.0.5"
-tag: "3.0.5"
+source: https://gitlab.cern.ch/RooUnfold/RooUnfold
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

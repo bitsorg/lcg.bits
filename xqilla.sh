@@ -1,7 +1,8 @@
 package: xqilla
 description: XQilla XQuery and XPath 2.0 library
 version: "2.3.4"
-tag: "2.3.4"
+source: https://github.com/xqilla/xqilla
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/XQilla-2.3.4.tar.gz
 requires:

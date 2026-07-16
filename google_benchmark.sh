@@ -1,7 +1,8 @@
 package: google_benchmark
 description: Google Benchmark C++ micro-benchmarking library
 version: "1.9.5"
-tag: "1.9.5"
+source: https://github.com/google/benchmark
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

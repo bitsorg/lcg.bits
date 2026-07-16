@@ -1,7 +1,8 @@
 package: qcachegrind
 description: QCachegrind GUI front-end for Cachegrind/Callgrind profiler
 version: "20.12.1"
-tag: "20.12.1"
+source: https://github.com/KDE/kcachegrind
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/kcachegrind-20.12.1.tar.gz
 requires:

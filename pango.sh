@@ -1,7 +1,8 @@
 package: pango
 description: Pango library for text layout and rendering
 version: "1.48.9"
-tag: "1.48.9"
+source: https://gitlab.gnome.org/GNOME/pango
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

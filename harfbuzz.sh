@@ -1,7 +1,8 @@
 package: harfbuzz
 description: HarfBuzz OpenType text shaping engine
 version: "2.7.4"
-tag: "2.7.4"
+source: https://github.com/harfbuzz/harfbuzz
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

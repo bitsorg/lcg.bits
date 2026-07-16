@@ -1,7 +1,8 @@
 package: libdb
 description: Oracle Berkeley DB embedded key-value database library
 version: "6.2.23"
-tag: "6.2.23"
+source: https://github.com/berkeleydb/libdb
+tag: "db-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/db-6.2.23.tar.gz
 build_requires:

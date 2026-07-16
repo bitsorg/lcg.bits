@@ -1,7 +1,8 @@
 package: gflags
 description: Google gflags C++ command-line flag parsing library
 version: "2.2.2"
-tag: "2.2.2"
+source: https://github.com/gflags/gflags
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

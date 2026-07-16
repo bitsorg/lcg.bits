@@ -1,7 +1,8 @@
 package: looptools
 description: LoopTools library for Passarino-Veltman one-loop integrals
 version: "2.15"
-tag: "2.15"
+source: https://github.com/tkluyver/looptools
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/LoopTools-2.15.tar.gz
 build_requires:

@@ -1,7 +1,8 @@
 package: mistral_common
 description: mistral-common common utilities for Mistral models
 version: "1.8.5"
-tag: "1.8.5"
+source: https://github.com/mistralai/mistral-common
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

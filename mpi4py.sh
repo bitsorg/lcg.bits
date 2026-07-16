@@ -1,7 +1,8 @@
 package: mpi4py
 description: mpi4py MPI for Python bindings
 version: "4.0.3"
-tag: "4.0.3"
+source: https://github.com/mpi4py/mpi4py
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: kkmcee
 description: KKMC-ee Monte Carlo generator for e+e- annihilation
 version: "5.01.00"
-tag: "5.01.00"
+source: https://github.com/KrakowHEPSoft/KKMCee
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:

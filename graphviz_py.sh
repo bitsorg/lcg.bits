@@ -1,7 +1,8 @@
 package: graphviz_py
 description: graphviz Python interface to Graphviz graph-drawing
 version: "0.20.1"
-tag: "0.20.1"
+source: https://github.com/xflr6/graphviz
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pygraphviz-0.20.1.zip
 requires:

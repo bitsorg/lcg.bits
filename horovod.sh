@@ -1,7 +1,8 @@
 package: horovod
 description: Horovod distributed deep learning training framework
 version: "0.28.1"
-tag: "0.28.1"
+source: https://github.com/horovod/horovod
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: m2crypto
 description: M2Crypto Python wrapper for OpenSSL providing crypto and SSL toolkit
 version: "0.45.1"
-tag: "0.45.1"
+source: https://gitlab.com/m2crypto/m2crypto
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

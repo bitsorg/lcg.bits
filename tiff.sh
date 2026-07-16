@@ -1,7 +1,8 @@
 package: tiff
 description: LibTIFF library for TIFF image file format
 version: "4.7.0"
-tag: "4.7.0"
+source: https://gitlab.com/libtiff/libtiff
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

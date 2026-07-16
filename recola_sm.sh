@@ -1,7 +1,8 @@
 package: recola_SM
 description: RECOLA Standard Model process library
 version: "2.2.3"
-tag: "2.2.3"
+source: https://github.com/recola/recola
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/recola_SM_2.2.3.tar.gz
 requires:

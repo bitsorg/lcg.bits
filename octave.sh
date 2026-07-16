@@ -1,7 +1,8 @@
 package: octave
 description: GNU Octave high-level language for numerical computation
 version: "10.3.0"
-tag: "10.3.0"
+source: https://github.com/gnu-octave/octave
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

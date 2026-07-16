@@ -1,7 +1,8 @@
 package: webio_jupyter_extension
 description: WebIO Jupyter extension for interactive web I/O
 version: "0.1.0"
-tag: "0.1.0"
+source: https://github.com/JuliaGizmos/WebIO.jl
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

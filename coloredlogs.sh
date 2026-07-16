@@ -1,7 +1,8 @@
 package: coloredlogs
 description: coloredlogs colored terminal log output for Python's logging
 version: "15.0.1"
-tag: "15.0.1"
+source: https://github.com/xolox/python-coloredlogs
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

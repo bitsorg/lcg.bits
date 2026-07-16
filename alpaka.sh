@@ -1,7 +1,8 @@
 package: alpaka
 description: Alpaka abstraction library for parallel kernel acceleration
 version: "2.1.1"
-tag: "2.1.1"
+source: https://github.com/alpaka-group/alpaka
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

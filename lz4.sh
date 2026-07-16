@@ -1,7 +1,8 @@
 package: lz4
 description: LZ4 extremely fast lossless compression library
 version: "1.10.0"
-tag: "1.10.0"
+source: https://github.com/lz4/lz4
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 prefer_system: osx.*

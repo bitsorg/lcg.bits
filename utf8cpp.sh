@@ -1,7 +1,8 @@
 package: utf8cpp
 description: UTF8-CPP header-only C++ library for UTF-8 string handling
 version: "3.2.3"
-tag: "3.2.3"
+source: https://github.com/nemtrif/utfcpp
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

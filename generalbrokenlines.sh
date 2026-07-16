@@ -1,7 +1,8 @@
 package: generalbrokenlines
 description: General Broken Lines track fit library
 version: "04.00.03"
-tag: "04.00.03"
+source: https://gitlab.desy.de/claus.kleinwort/general-broken-lines
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

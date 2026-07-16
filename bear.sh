@@ -1,7 +1,8 @@
 package: bear
 description: Bear tool that generates a compile_commands.json database
 version: "3.1.5"
-tag: "3.1.5"
+source: https://github.com/rizsotto/Bear
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

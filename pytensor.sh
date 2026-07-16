@@ -1,7 +1,8 @@
 package: pytensor
 description: PyTensor library for tensor computations (Theano successor)
 version: "2.35.1"
-tag: "2.35.1"
+source: https://github.com/pymc-devs/pytensor
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

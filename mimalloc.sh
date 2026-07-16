@@ -1,7 +1,8 @@
 package: mimalloc
 description: mimalloc compact high-performance memory allocator (Microsoft)
 version: "3.2.6"
-tag: "3.2.6"
+source: https://github.com/microsoft/mimalloc
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

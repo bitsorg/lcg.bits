@@ -1,7 +1,8 @@
 package: bcrypt
 description: bcrypt password hashing library for Python
 version: "5.0.0"
-tag: "5.0.0"
+source: https://github.com/pyca/bcrypt
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

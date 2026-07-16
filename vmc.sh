@@ -1,7 +1,8 @@
 package: vmc
 description: VMC (Virtual Monte Carlo) interface library
 version: "2.0"
-tag: "2.0"
+source: https://github.com/vmc-project/vmc
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

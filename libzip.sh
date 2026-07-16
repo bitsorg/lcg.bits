@@ -1,7 +1,8 @@
 package: libzip
 description: libzip library for reading, creating and modifying ZIP archives
 version: "1.9.2"
-tag: "1.9.2"
+source: https://github.com/nih-at/libzip
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

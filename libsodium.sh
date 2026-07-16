@@ -1,7 +1,8 @@
 package: libsodium
 description: libsodium modern cryptography library (NaCl fork)
 version: "1.0.21"
-tag: "1.0.21"
+source: https://github.com/jedisct1/libsodium
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

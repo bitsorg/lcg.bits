@@ -1,7 +1,8 @@
 package: sollya
 description: Sollya environment for safe floating-point code development
 version: "8.0"
-tag: "8.0"
+source: https://gitlab.com/metalibm-dev/sollya
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:

@@ -1,7 +1,8 @@
 package: gnuplot
 description: Gnuplot portable interactive data and function plotting utility
 version: "6.0.4"
-tag: "6.0.4"
+source: https://github.com/gnuplot/gnuplot
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
   # optional:

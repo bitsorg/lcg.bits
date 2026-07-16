@@ -1,7 +1,8 @@
 package: hadoop_xrootd
 description: XRootD plugin for Hadoop distributed filesystem
 version: "1.0.7"
-tag: "1.0.7"
+source: https://github.com/cerndb/hadoop-xrootd
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hadoop-xrootd-v1.0.7.tar.gz
 requires:

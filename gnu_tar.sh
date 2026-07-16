@@ -1,7 +1,8 @@
 package: gnu_tar
 description: GNU tar archiving utility
 version: "1.30"
-tag: "1.30"
+source: https://git.savannah.gnu.org/git/tar.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tar-1.30.tar.gz
 # macOS: source GNU tar from Homebrew (gnu-tar). It installs the binary as

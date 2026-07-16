@@ -1,7 +1,8 @@
 package: xxHash
 description: xxHash extremely fast non-cryptographic hash algorithm
 version: "0.8.2"
-tag: "0.8.2"
+source: https://github.com/Cyan4973/xxHash
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

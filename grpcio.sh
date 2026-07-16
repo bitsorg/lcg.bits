@@ -1,7 +1,8 @@
 package: grpcio
 description: grpcio gRPC Python implementation
 version: "1.73.0"
-tag: "1.73.0"
+source: https://github.com/grpc/grpc
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

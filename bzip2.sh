@@ -1,7 +1,8 @@
 package: bzip2
 description: bzip2 high-quality block-sorting data compression library
 version: "1.0.6"
-tag: "1.0.6"
+source: https://sourceware.org/git/bzip2.git
+tag: "bzip2-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

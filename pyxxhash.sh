@@ -1,7 +1,8 @@
 package: pyxxhash
 description: pyxxhash Python bindings for xxHash
 version: "3.5.0"
-tag: "3.5.0"
+source: https://github.com/ifduyue/python-xxhash
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/xxhash-3.5.0.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: vgm
 description: VGM (Virtual Geometry Model) detector geometry conversion
 version: "5.3"
-tag: "5.3"
+source: https://github.com/vmc-project/vgm
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

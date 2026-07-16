@@ -1,7 +1,8 @@
 package: recola_SM_ATGC_WARSAW
 description: RECOLA aTGC/Warsaw basis process library for RECOLA
 version: "2.2.4"
-tag: "2.2.4"
+source: https://github.com/recola/recola
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/SM_ATGC_WARSAW_2.2.4.tar.gz
 requires:

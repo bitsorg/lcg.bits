@@ -1,7 +1,8 @@
 package: apfel
 description: APFEL parton distribution function evolution library
 version: "3.1.0"
-tag: "3.1.0"
+source: https://github.com/scarrazza/apfel
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:

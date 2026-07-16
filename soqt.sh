@@ -1,7 +1,8 @@
 package: soqt
 description: SoQt Qt widget for OpenInventor/Coin3D
 version: "1.5.0"
-tag: "1.5.0"
+source: https://github.com/coin3d/soqt
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/SoQt-1.5.0.tar.gz
 requires:

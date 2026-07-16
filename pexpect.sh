@@ -1,7 +1,8 @@
 package: pexpect
 description: Pexpect controlling interactive console applications
 version: "4.9.0"
-tag: "4.9.0"
+source: https://github.com/pexpect/pexpect
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

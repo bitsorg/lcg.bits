@@ -1,7 +1,8 @@
 package: ginac
 description: GiNaC open framework for symbolic computation
 version: "1.8.7"
-tag: "1.8.7"
+source: https://www.ginac.de/ginac.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:

@@ -1,7 +1,8 @@
 package: photoscpp
 description: PHOTOS++ C++ version of PHOTOS radiative corrections
 version: "3.64"
-tag: "3.64"
+source: https://gitlab.cern.ch/photospp/photospp
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/PHOTOS.3.64-LHC.tar.gz
 requires:

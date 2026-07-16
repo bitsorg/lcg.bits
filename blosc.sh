@@ -1,7 +1,8 @@
 package: blosc
 description: Python-Blosc high-performance compressor bindings
 version: "1.11.4"
-tag: "1.11.4"
+source: https://github.com/Blosc/python-blosc
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

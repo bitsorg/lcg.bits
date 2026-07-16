@@ -1,8 +1,9 @@
 package: EDM4hep
 description: Event Data Model for High Energy Physics (Key4hep framework)
 version: "1.0"
+source: https://github.com/key4hep/EDM4hep
 mem_per_job: 1500
-tag: "1.0"
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

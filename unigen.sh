@@ -1,7 +1,8 @@
 package: unigen
 description: UniGen universal Monte Carlo event format and library
 version: "2.2"
-tag: "2.2"
+source: https://github.com/FairRootGroup/UniGen
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

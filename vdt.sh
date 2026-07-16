@@ -1,7 +1,8 @@
 package: vdt
 description: VDT vectorised math functions (CERN)
 version: "0.4.4"
-tag: "0.4.4"
+source: https://github.com/dpiparo/vdt
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

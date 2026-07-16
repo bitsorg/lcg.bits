@@ -1,7 +1,8 @@
 package: mctester
 description: MC-TESTER toolkit for comparisons of Monte Carlo generators
 version: "1.25.1"
-tag: "1.25.1"
+source: https://gitlab.cern.ch/MCTester/MCTester
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MC-TESTER-1.25.1.tar.gz
 requires:

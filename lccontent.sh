@@ -1,7 +1,8 @@
 package: lccontent
 description: LCContent Pandora reconstruction algorithms for linear colliders
 version: "03.02.00"
-tag: "03.02.00"
+source: https://github.com/PandoraPFA/LCContent
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: suitesparse
 description: SuiteSparse sparse matrix algorithms collection
 version: "5.10.1"
-tag: "5.10.1"
+source: https://github.com/DrTimothyAldenDavis/SuiteSparse
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

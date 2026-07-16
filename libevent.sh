@@ -1,7 +1,8 @@
 package: libevent
 description: libevent asynchronous event notification library
 version: "2.1.11"
-tag: "2.1.11"
+source: https://github.com/libevent/libevent
+tag: "release-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

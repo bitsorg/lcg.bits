@@ -1,9 +1,10 @@
 package: acts
 description: ACTS track reconstruction framework for HEP experiments
 version: "26.0.0"
+source: https://github.com/acts-project/acts
 mem_per_job: 2500
 mem_utilisation: 0.85
-tag: "26.0.0"
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: evtgen
 description: EvtGen Monte Carlo generator for B/D meson decays
 version: "2.2.1"
-tag: "R02-02-01"
+source: https://gitlab.cern.ch/evtgen/evtgen
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/evtgen-%(tag)s.tar.gz
 requires:

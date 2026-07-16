@@ -1,7 +1,8 @@
 package: libedit
 description: libedit command-line editing library
 version: "3.1"
-tag: "3.1"
+source: https://github.com/troglobit/editline
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

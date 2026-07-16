@@ -1,7 +1,8 @@
 package: professor
 description: Professor Monte Carlo generator tuning tool
 version: "2.5.6"
-tag: "2.5.6"
+source: https://github.com/Professor2/Professor
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:

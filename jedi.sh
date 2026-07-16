@@ -1,7 +1,8 @@
 package: jedi
 description: Jedi autocompletion and static analysis library for Python
 version: "0.19.1"
-tag: "0.19.1"
+source: https://github.com/davidhalter/jedi
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

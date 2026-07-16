@@ -1,8 +1,9 @@
 package: rivet
 description: Rivet Monte Carlo analysis toolkit
 version: "4.1.2"
+source: https://github.com/rivet-team/rivet
 mem_per_job: 1500
-tag: "4.1.2"
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Rivet-4.1.2.tar.bz2
 requires:

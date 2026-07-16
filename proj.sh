@@ -1,7 +1,8 @@
 package: proj
 description: PROJ cartographic projections and coordinate transformations
 version: "9.6.0"
-tag: "9.6.0"
+source: https://github.com/OSGeo/proj.4
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

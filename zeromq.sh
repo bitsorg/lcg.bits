@@ -2,7 +2,8 @@ package: zeromq
 license: MPL-2.0
 description: ZeroMQ high-performance asynchronous messaging library
 version: "4.3.5"
-tag: "4.3.5"
+source: https://github.com/zeromq/libzmq
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

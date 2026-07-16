@@ -1,8 +1,9 @@
 package: herwig3
 description: Herwig 7 general-purpose Monte Carlo event generator
 version: "7.3.0"
+source: https://github.com/Herwig/Herwig
 mem_per_job: 1500
-tag: "7.3.0"
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/Herwig-7.3.0.tar.bz2
 requires:

@@ -1,7 +1,8 @@
 package: rust
 description: Rust systems programming language toolchain
 version: "1.94.1"
-tag: "1.94.1"
+source: https://github.com/rust-lang/rust
+tag: "%(version)s"
 sources:
   - "((?!osx).*x86[-_]64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-x86_64-unknown-linux-gnu.tar.gz"
   - "((?!osx).*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s-aarch64-unknown-linux-gnu.tar.gz"

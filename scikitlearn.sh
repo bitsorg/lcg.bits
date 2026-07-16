@@ -1,7 +1,8 @@
 package: scikitlearn
 description: scikit-learn machine learning library for Python
 version: "1.8.0"
-tag: "1.8.0"
+source: https://github.com/scikit-learn/scikit-learn
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit-learn-1.8.0.tar.gz
 requires:

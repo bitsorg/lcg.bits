@@ -1,7 +1,8 @@
 package: simdjson
 description: simdjson JSON parser using SIMD instructions
 version: "3.1.1"
-tag: "3.1.1"
+source: https://github.com/simdjson/simdjson
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

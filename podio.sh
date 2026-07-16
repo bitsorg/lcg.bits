@@ -1,8 +1,9 @@
 package: podio
 description: Plain Old Data I/O library for HEP event data models
 version: "01.07"
+source: https://github.com/AIDASoft/podio
 mem_per_job: 1500
-tag: "01.07"
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

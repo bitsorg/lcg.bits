@@ -1,7 +1,8 @@
 package: larcontent
 description: LArContent Pandora reconstruction algorithms for LAr-TPC
 version: "04.11.02"
-tag: "04.11.02"
+source: https://github.com/PandoraPFA/LArContent
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

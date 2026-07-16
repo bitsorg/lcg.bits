@@ -1,7 +1,8 @@
 package: Frontier_Client
 description: Frontier conditions/calibration data access client
 version: "2.10.2"
-tag: "2.10.2"
+source: https://github.com/fermitools/frontier
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/frontier_client__2.10.2__src.tar.gz
 requires:

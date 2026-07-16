@@ -1,7 +1,8 @@
 package: libpqxx
 description: libpqxx official C++ client API for PostgreSQL
 version: "7.10.1"
-tag: "7.10.1"
+source: https://github.com/jtv/libpqxx
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.zip
 requires:

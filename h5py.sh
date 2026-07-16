@@ -1,7 +1,8 @@
 package: h5py
 description: h5py Pythonic interface to HDF5 binary data format
 version: "3.13.0"
-tag: "3.13.0"
+source: https://github.com/h5py/h5py
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

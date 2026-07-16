@@ -1,7 +1,8 @@
 package: swig
 description: SWIG interface compiler connecting C/C++ with scripting languages
 version: "4.4.0"
-tag: "4.4.0"
+source: https://github.com/swig/swig
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

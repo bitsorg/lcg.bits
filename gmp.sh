@@ -1,7 +1,8 @@
 package: gmp
 description: GNU Multiple Precision arithmetic library
 version: "6.2.1"
-tag: "6.2.1"
+source: https://gmplib.org/repo/gmp/
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

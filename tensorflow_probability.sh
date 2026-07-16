@@ -1,7 +1,8 @@
 package: tensorflow_probability
 description: TensorFlow Probability probabilistic deep learning library
 version: "0.25.0"
-tag: "0.25.0"
+source: https://github.com/tensorflow/probability
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tensorflow-probability-0.25.0.tar.gz
 requires:

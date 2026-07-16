@@ -1,7 +1,8 @@
 package: pacparser
 description: pacparser library to parse proxy auto-config (PAC) files
 version: "1.4.3"
-tag: "1.4.3"
+source: https://github.com/manugarg/pacparser
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

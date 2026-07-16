@@ -1,7 +1,8 @@
 package: lxml
 description: lxml powerful and fast XML and HTML processing library
 version: "5.3.1"
-tag: "5.3.1"
+source: https://github.com/lxml/lxml
+tag: "lxml-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

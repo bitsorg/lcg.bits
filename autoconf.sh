@@ -1,7 +1,8 @@
 package: autoconf
 description: GNU Autoconf portable build-system configuration tool
 version: "2.73"
-tag: "2.73"
+source: https://git.savannah.gnu.org/git/autoconf.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

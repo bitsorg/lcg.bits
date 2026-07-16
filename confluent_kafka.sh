@@ -1,7 +1,8 @@
 package: confluent_kafka
 description: confluent-kafka high-performance Apache Kafka Python client
 version: "2.11.0"
-tag: "2.11.0"
+source: https://github.com/confluentinc/confluent-kafka-python
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

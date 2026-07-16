@@ -1,7 +1,8 @@
 package: graphviz
 description: Graphviz graph visualization software
 version: "12.2.1"
-tag: "12.2.1"
+source: https://gitlab.com/graphviz/graphviz
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

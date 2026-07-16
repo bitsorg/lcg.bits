@@ -1,7 +1,8 @@
 package: pandorasdk
 description: PandoraSDK software development kit for Pandora algorithms
 version: "03.04.02"
-tag: "03.04.02"
+source: https://github.com/PandoraPFA/PandoraSDK
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

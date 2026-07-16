@@ -1,7 +1,8 @@
 package: mlpack
 description: mlpack fast and flexible C++ machine learning library
 version: "4.6.2"
-tag: "4.6.2"
+source: https://github.com/mlpack/mlpack
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: HepPDT
 description: HEP Particle Data Table library for particle properties
 version: "2.06.01"
-tag: "2.06.01"
+source: https://github.com/fermitools/heppdt
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

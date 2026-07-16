@@ -1,7 +1,8 @@
 package: lcov
 description: LCOV graphical front-end for GCC code coverage (HTML reports)
 version: "1.14"
-tag: "1.14"
+source: https://github.com/linux-test-project/lcov
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: armadillo
 description: Armadillo C++ linear algebra library with MATLAB-like API
 version: "11.4.2"
-tag: "11.4.2"
+source: https://gitlab.com/conradsnicta/armadillo-code
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.xz
 requires:

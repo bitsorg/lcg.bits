@@ -1,7 +1,8 @@
 package: jsonmcpp
 description: jsonmcpp JSON manipulation C++ library
 version: "3.12.0"
-tag: "3.12.0"
+source: https://github.com/nlohmann/json
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/json-3.12.0.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: pandoramonitoring
 description: PandoraMonitoring ROOT-based visualization for Pandora
 version: "03.06.00"
-tag: "03.06.00"
+source: https://github.com/PandoraPFA/PandoraMonitoring
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

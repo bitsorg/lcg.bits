@@ -1,7 +1,8 @@
 package: openmpi
 description: OpenMPI high-performance Message Passing Interface implementation
 version: "4.1.8"
-tag: "4.1.8"
+source: https://github.com/open-mpi/ompi
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

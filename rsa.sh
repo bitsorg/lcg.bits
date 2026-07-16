@@ -1,7 +1,8 @@
 package: rsa
 description: rsa pure-Python RSA cryptography implementation
 version: "4.0"
-tag: "4.0"
+source: https://github.com/sybrenstuvel/python-rsa
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

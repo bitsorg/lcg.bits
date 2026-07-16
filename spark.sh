@@ -1,7 +1,8 @@
 package: spark
 description: Apache Spark unified analytics engine for large-scale data
 version: "4.1.1"
-tag: "4.1.1"
+source: https://github.com/apache/spark
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/spark-4.1.1-bin-hadoop3.tgz
 requires:

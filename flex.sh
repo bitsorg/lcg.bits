@@ -1,7 +1,8 @@
 package: flex
 description: flex fast lexical analyser generator
 version: "2.6.4"
-tag: "2.6.4"
+source: https://github.com/westes/flex
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

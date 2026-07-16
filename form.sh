@@ -1,7 +1,8 @@
 package: FORM
 description: FORM symbolic manipulation system for Feynman diagram calculations
 version: "4.3.1"
-tag: "4.3.1"
+source: https://github.com/vermaseren/form
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/FORM-v4.3.1.tar.gz
 build_requires:

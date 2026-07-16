@@ -1,7 +1,8 @@
 package: mpfr
 description: GNU MPFR multiple-precision floating-point library
 version: "4.2.1"
-tag: "4.2.1"
+source: https://gitlab.inria.fr/mpfr/mpfr
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

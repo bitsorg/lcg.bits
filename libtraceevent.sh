@@ -1,7 +1,8 @@
 package: libtraceevent
 description: Linux kernel trace event parsing library
 version: "1.8.4"
-tag: "1.8.4"
+source: https://git.kernel.org/pub/scm/libs/libtrace/libtraceevent.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

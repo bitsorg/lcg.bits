@@ -1,7 +1,8 @@
 package: LCIO
 description: Linear Collider I/O event data model and persistence library
 version: "02.23.01"
-tag: "02.23.01"
+source: https://github.com/iLCSoft/LCIO
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

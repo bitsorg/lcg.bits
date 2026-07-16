@@ -1,7 +1,8 @@
 package: cppgsl
 description: Microsoft C++ Guidelines Support Library (GSL) headers
 version: "4.2.0"
-tag: "4.2.0"
+source: https://github.com/microsoft/GSL
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

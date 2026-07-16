@@ -1,7 +1,8 @@
 package: pixman
 description: Pixman low-level pixel manipulation library
 version: "0.46.0"
-tag: "0.46.0"
+source: https://gitlab.freedesktop.org/pixman/pixman
+tag: "pixman-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

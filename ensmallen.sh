@@ -1,7 +1,8 @@
 package: ensmallen
 description: Ensmallen C++ header-only numerical optimization library
 version: "3.11.0"
-tag: "3.11.0"
+source: https://github.com/mlpack/ensmallen
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

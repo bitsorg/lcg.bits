@@ -1,7 +1,8 @@
 package: fontconfig
 description: Fontconfig font configuration and customization library
 version: "2.14.2"
-tag: "2.14.2"
+source: https://gitlab.freedesktop.org/fontconfig/fontconfig
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

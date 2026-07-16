@@ -1,7 +1,8 @@
 package: cx_oracle
 description: cx_Oracle Python interface to Oracle Database
 version: "8.3.0"
-tag: "8.3.0"
+source: https://github.com/oracle/python-cx_Oracle
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cx_Oracle-8.3.0.tar.gz
 requires:

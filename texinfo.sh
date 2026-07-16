@@ -1,7 +1,8 @@
 package: texinfo
 description: GNU Texinfo documentation system
 version: "7.2"
-tag: "7.2"
+source: https://git.savannah.gnu.org/git/texinfo.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: source texinfo from Homebrew (texinfo) — GNU texinfo (makeinfo) build/doc tool. prefer_system gated

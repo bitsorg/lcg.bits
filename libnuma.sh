@@ -1,7 +1,8 @@
 package: libnuma
 description: libnuma NUMA memory policy and scheduling library
 version: "2.0.19"
-tag: "2.0.19"
+source: https://github.com/numactl/numactl
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/numactl-2.0.19.tar.gz
 build_requires:

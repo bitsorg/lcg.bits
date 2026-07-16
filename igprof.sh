@@ -1,7 +1,8 @@
 package: igprof
 description: IgProf performance and memory profiler
 version: "5.9.18"
-tag: "5.9.18"
+source: https://github.com/igprof/igprof
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

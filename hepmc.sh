@@ -1,7 +1,8 @@
 package: HepMC
 description: HepMC Monte Carlo event record (version 2)
 version: "2.06.11"
-tag: "2.06.11"
+source: https://gitlab.cern.ch/hepmc/HepMC
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/HepMC-2.06.11.tar.gz
 requires:

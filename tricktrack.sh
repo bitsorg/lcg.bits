@@ -1,7 +1,8 @@
 package: tricktrack
 description: TrickTrack cellular automaton track seeding library
 version: "1.0.9"
-tag: "1.0.9"
+source: https://github.com/HSF/TrickTrack
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/TrickTrack-1.0.9.tar.gz
 requires:

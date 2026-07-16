@@ -1,7 +1,8 @@
 package: meson
 description: Meson fast and user-friendly software build system
 version: "1.11.1"
-tag: "1.11.1"
+source: https://github.com/mesonbuild/meson
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

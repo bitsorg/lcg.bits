@@ -1,7 +1,8 @@
 package: scikitimage
 description: scikit-image image processing algorithms for Python
 version: "0.25.2"
-tag: "0.25.2"
+source: https://github.com/scikit-image/scikit-image
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/scikit-image-0.25.2.tar.gz
 requires:

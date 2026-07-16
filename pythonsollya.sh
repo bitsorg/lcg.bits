@@ -1,7 +1,8 @@
 package: pythonsollya
 description: Python-Sollya Python interface to the Sollya library
 version: "0.3"
-tag: "0.3"
+source: https://gitlab.com/metalibm-dev/pythonsollya
+tag: "v%(version)s"
 sources:
   # For versions < 0.4.0 the hosted tarball is pythonsollya-<ver>.tgz (the
   # "release-…tar.gz" naming only applies to >= 0.4.0-alpha0), per lcgcmake.

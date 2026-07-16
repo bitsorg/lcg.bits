@@ -1,7 +1,8 @@
 package: glog
 description: Google glog C++ application-level logging library
 version: "0.4.0"
-tag: "0.4.0"
+source: https://github.com/google/glog
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

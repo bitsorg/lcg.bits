@@ -1,7 +1,8 @@
 package: ofi
 description: OFI (libfabric) high-performance fabric communication interface
 version: "1.22.0"
-tag: "1.22.0"
+source: https://github.com/ofiwg/libfabric
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libfabric-1.22.0.tar.bz2
 build_requires:

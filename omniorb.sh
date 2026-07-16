@@ -1,7 +1,8 @@
 package: omniorb
 description: omniORB portable CORBA ORB for C++
 version: "4.3.2"
-tag: "4.3.2"
+source: https://sourceforge.net/p/omniorb/code/
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/omniORB-4.3.2.tar.bz2
 requires:

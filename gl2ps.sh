@@ -1,7 +1,8 @@
 package: gl2ps
 description: GL2PS OpenGL to PostScript/SVG/PDF rendering library
 version: "1.4.2"
-tag: "1.4.2"
+source: https://gitlab.onelab.info/gl2ps/gl2ps
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:

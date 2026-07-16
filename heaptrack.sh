@@ -1,7 +1,8 @@
 package: heaptrack
 description: Heaptrack heap memory profiler
 version: "1.5.0"
-tag: "1.5.0"
+source: https://github.com/KDE/heaptrack
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/heaptrack-v1.5.0.tar.gz
 requires:

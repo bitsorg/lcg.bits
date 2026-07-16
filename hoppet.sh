@@ -1,7 +1,8 @@
 package: hoppet
 description: HOPPET higher-order perturbative parton evolution toolkit
 version: "1.2.0"
-tag: "1.2.0"
+source: https://github.com/hoppet-code/hoppet
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tgz
 build_requires:

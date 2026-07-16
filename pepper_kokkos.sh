@@ -1,7 +1,8 @@
 package: pepper_kokkos
 description: PEPPER track reconstruction package with Kokkos backend
 version: "1.8.0"
-tag: "1.8.0"
+source: https://gitlab.com/spice-mc/pepper
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/pepper-1.8.0-kokkos.tar.gz
 requires:

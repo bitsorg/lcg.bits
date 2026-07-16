@@ -1,7 +1,8 @@
 package: tensorflow_model_optimization
 description: TensorFlow Model Optimization toolkit
 version: "0.8.0"
-tag: "0.8.0"
+source: https://github.com/tensorflow/model-optimization
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/model-optimization-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: maven
 description: Apache Maven project management and comprehension tool
 version: "3.8.5"
-tag: "3.8.5"
+source: https://github.com/apache/maven
+tag: "maven-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-maven-3.8.5-bin.tar.gz
 requires:

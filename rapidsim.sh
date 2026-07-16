@@ -1,7 +1,8 @@
 package: rapidsim
 description: RapidSim fast Monte Carlo simulation for heavy-flavour decays
 version: "1.4.4"
-tag: "1.4.4"
+source: https://github.com/gcowan/RapidSim
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/RapidSim-1.4.4.tar.gz
 requires:

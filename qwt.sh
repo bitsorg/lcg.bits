@@ -1,7 +1,8 @@
 package: qwt
 description: Qt Widgets for Technical Applications (Qwt)
 version: "6.0.1"
-tag: "6.0.1"
+source: https://github.com/uwerat/qwt
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
 requires:

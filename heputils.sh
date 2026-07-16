@@ -1,7 +1,8 @@
 package: heputils
 description: heputils HEP utility functions for Python
 version: "1.4.0"
-tag: "1.4.0"
+source: https://bitbucket.org/andybuckley/heputils
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:

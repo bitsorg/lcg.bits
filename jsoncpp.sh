@@ -1,7 +1,8 @@
 package: jsoncpp
 description: JsonCpp JSON parser and generator for C++
 version: "1.9.3"
-tag: "1.9.3"
+source: https://github.com/open-source-parsers/jsoncpp
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.zip
 requires:

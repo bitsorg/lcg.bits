@@ -1,7 +1,8 @@
 package: glib
 description: GLib core utility library for GNOME (strings, collections, mainloop)
 version: "2.86.5"
-tag: "2.86.5"
+source: https://gitlab.gnome.org/GNOME/glib
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.xz
 requires:

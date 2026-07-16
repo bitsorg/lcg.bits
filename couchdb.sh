@@ -1,7 +1,8 @@
 package: CouchDB
 description: CouchDB Python client library
 version: "1.2"
-tag: "1.2"
+source: https://github.com/apache/couchdb
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: utf8proc
 description: utf8proc C library for processing and validating UTF-8 text
 version: "2.10.0"
-tag: "2.10.0"
+source: https://github.com/JuliaStrings/utf8proc
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

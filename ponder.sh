@@ -1,7 +1,8 @@
 package: ponder
 description: Ponder tool for documenting pandas DataFrames
 version: "2.1.1"
-tag: "2.1.1"
+source: https://github.com/billyquith/ponder
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

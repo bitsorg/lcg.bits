@@ -1,7 +1,8 @@
 package: SIO
 description: Simple sequential binary I/O library (Key4hep)
 version: "00.02"
-tag: "00.02"
+source: https://github.com/iLCSoft/SIO
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

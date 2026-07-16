@@ -1,7 +1,8 @@
 package: hepmcanalysis
 description: HepMCAnalysis generator-level analysis tools using HepMC
 version: "3.4.14"
-tag: "3.4.14"
+source: https://gitlab.desy.de/claus.kleinwort/hepmcanalysistool
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/HepMCAnalysis-00-03-04-14.tgz
 requires:

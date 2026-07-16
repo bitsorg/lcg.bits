@@ -1,7 +1,8 @@
 package: Qt5
 description: Qt5 cross-platform application and UI framework
 version: "5.15.15"
-tag: "5.15.15"
+source: https://code.qt.io/cgit/qt/qt5.git/
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qt-everywhere-opensource-src-5.15.15.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: guinea_pig
 description: Guinea Pig beam-beam interaction simulation program
 version: "1.2.2"
-tag: "1.2.2"
+source: https://gitlab.cern.ch/clic-software/guinea-pig
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:

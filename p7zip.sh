@@ -1,7 +1,8 @@
 package: p7zip
 description: p7zip port of 7-Zip archiver for POSIX systems
 version: "16.02"
-tag: "16.02"
+source: https://github.com/p7zip-project/p7zip
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/p7zip_16.02_src_all.tar.bz2
 build_requires:

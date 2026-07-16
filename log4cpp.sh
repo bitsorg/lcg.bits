@@ -1,7 +1,8 @@
 package: log4cpp
 description: Log4cpp flexible C++ logging library (port of Log4j)
 version: "1.1.4"
-tag: "1.1.4"
+source: https://github.com/log4cpp/log4cpp
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: libxml2
 description: GNOME XML parsing library
 version: "2.10.4"
-tag: "2.10.4"
+source: https://gitlab.gnome.org/GNOME/libxml2
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 prefer_system: ".*"

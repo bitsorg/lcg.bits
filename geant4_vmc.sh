@@ -1,8 +1,9 @@
 package: geant4_vmc
 description: Geant4 VMC (Virtual Monte Carlo) interface library
 version: "6.7.1"
+source: https://github.com/vmc-project/geant4_vmc
 mem_per_job: 1024
-tag: "6.7.1"
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

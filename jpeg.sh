@@ -1,7 +1,8 @@
 package: jpeg
 description: libjpeg JPEG image compression/decompression library (IJG)
 version: "3.1.3"
-tag: "3.1.3"
+source: https://github.com/LuaDist/libjpeg
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/libjpeg-turbo-3.1.3.tar.gz
 requires:

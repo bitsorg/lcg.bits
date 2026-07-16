@@ -1,7 +1,8 @@
 package: pip
 description: pip the Python package installer
 version: "23.3.1"
-tag: "23.3.1"
+source: https://github.com/pypa/pip
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

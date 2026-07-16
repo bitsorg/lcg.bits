@@ -1,7 +1,8 @@
 package: aidatt
 description: AI-Driven Tracking toolkit for Key4hep
 version: "00.12"
-tag: "00.12"
+source: https://github.com/iLCSoft/aidaTT
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

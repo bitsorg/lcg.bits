@@ -1,7 +1,8 @@
 package: pytables
 description: PyTables HDF5 tables package for managing large datasets
 version: "3.10.2"
-tag: "3.10.2"
+source: https://github.com/PyTables/PyTables
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tables-3.10.2.tar.gz
 requires:

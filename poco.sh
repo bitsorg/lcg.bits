@@ -1,7 +1,8 @@
 package: poco
 description: POCO C++ portable networking and application framework
 version: "1.14.1"
-tag: "1.14.1"
+source: https://github.com/pocoproject/poco
+tag: "poco-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

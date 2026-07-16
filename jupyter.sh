@@ -1,7 +1,8 @@
 package: jupyter
 description: Jupyter metapackage for Jupyter notebook and client
 version: "1.0.0"
-tag: "1.0.0"
+source: https://github.com/jupyter/jupyter
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: uuid
 description: libuuid universally unique identifier library
 version: "1.42"
-tag: "1.42"
+source: https://github.com/util-linux/util-linux
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/e2fsprogs-1.42.tar.gz
 prefer_system: ".*"

@@ -1,7 +1,8 @@
 package: pycairo
 description: Pycairo Python bindings for the Cairo library
 version: "1.28.0"
-tag: "1.28.0"
+source: https://github.com/pygobject/pycairo
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

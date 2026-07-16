@@ -1,7 +1,8 @@
 package: git
 description: Git distributed version control system
 version: "2.49.0"
-tag: "2.49.0"
+source: https://github.com/git/git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

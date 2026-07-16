@@ -1,7 +1,8 @@
 package: cereal
 description: Cereal C++11 header-only serialization library
 version: "1.3.2"
-tag: "1.3.2"
+source: https://github.com/USCiLab/cereal
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

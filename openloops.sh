@@ -1,7 +1,8 @@
 package: openloops
 description: OpenLoops automated one-loop amplitude generator
 version: "2.1.4.250729"
-tag: "2.1.4.250729"
+source: https://github.com/openloops/openloops
+tag: "v%(version)s"
 sources:
   # Upstream tarball is named after the base version (2.1.4); the trailing
   # ".250729" in our version string is the process-repository date used below.

@@ -1,7 +1,8 @@
 package: pythran
 description: Pythran ahead-of-time compiler for Python scientific code
 version: "0.17.0"
-tag: "0.17.0"
+source: https://github.com/serge-sans-paille/pythran
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

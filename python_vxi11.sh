@@ -1,7 +1,8 @@
 package: python_vxi11
 description: python-vxi11 VXI-11 instrument control via Python
 version: "0.9"
-tag: "0.9"
+source: https://github.com/python-ivi/python-vxi11
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/python-vxi11-0.9.tar.gz
 requires:

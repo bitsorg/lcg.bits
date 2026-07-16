@@ -1,7 +1,8 @@
 package: giflib
 description: GIF image format library
 version: "5.2.2"
-tag: "5.2.2"
+source: https://gitlab.com/oskarriv/giflib
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: source the GIF codec from Homebrew (giflib) — a stable leaf image

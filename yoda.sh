@@ -1,7 +1,8 @@
 package: yoda
 description: YODA (Yet more Objects for Data Analysis) histogram library
 version: "2.1.2"
-tag: "2.1.2"
+source: https://github.com/hepcedar/yoda
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/YODA-2.1.2.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: pyjson5
 description: PyJSON5 JSON5 encoder/decoder for Python
 version: "0.9.6"
-tag: "0.9.6"
+source: https://github.com/Kijewski/pyjson5
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/json5-0.9.6.tar.gz
 requires:

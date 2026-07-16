@@ -1,7 +1,8 @@
 package: re2
 description: RE2 fast, safe regular expression library
 version: "2023.11.01"
-tag: "2023.11.01"
+source: https://github.com/google/re2
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: double_conversion
 description: double-conversion fast binary-decimal floating-point conversions
 version: "3.1.5"
-tag: "3.1.5"
+source: https://github.com/google/double-conversion
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/double-conversion-3.1.5.tar.gz
 requires:

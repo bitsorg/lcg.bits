@@ -1,7 +1,8 @@
 package: julia
 description: Julia high-performance dynamic programming language
 version: "1.11.6"
-tag: "1.11.6"
+source: https://github.com/JuliaLang/julia
+tag: "v%(version)s"
 sources:
   # Linux-only prebuilt tarball (x86-64). Gated to non-osx so macOS does not
   # grab the wrong-OS/arch binary; macOS sources Julia from Homebrew below.

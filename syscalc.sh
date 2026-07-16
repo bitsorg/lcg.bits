@@ -1,7 +1,8 @@
 package: syscalc
 description: SysCalc tool for computing PDF and scale uncertainties
 version: "1.1.7"
-tag: "1.1.7"
+source: https://github.com/syscalc/syscalc
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sysCalc-1.1.7.tar.gz
 requires:

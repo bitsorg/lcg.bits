@@ -1,7 +1,8 @@
 package: cluestering
 description: CLUE (Clustering by Local Outlier Elimination) algorithm library
 version: "2.10.0"
-tag: "2.10.0"
+source: https://github.com/cms-patatrack/CLUEstering
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: pcre
 description: PCRE Perl Compatible Regular Expressions library (version 1)
 version: "8.43"
-tag: "8.43"
+source: https://github.com/PCRE2Project/pcre2
+tag: "pcre2-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:

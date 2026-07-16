@@ -1,7 +1,8 @@
 package: lwtnn
 description: lwtnn lightweight neural-network inference library (C++)
 version: "2.13"
-tag: "2.13"
+source: https://github.com/lwtnn/lwtnn
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

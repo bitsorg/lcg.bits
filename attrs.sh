@@ -1,7 +1,8 @@
 package: attrs
 description: attrs Python classes without boilerplate
 version: "25.1.0"
-tag: "25.1.0"
+source: https://github.com/python-attrs/attrs
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

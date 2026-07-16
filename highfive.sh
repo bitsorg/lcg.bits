@@ -1,7 +1,8 @@
 package: highfive
 description: HighFive header-only C++ HDF5 interface library
 version: "2.10.1"
-tag: "2.10.1"
+source: https://github.com/BlueBrain/HighFive
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/HighFive-2.10.1.tar.gz
 requires:

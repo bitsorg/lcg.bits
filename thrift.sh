@@ -1,7 +1,8 @@
 package: thrift
 description: Apache Thrift scalable cross-language RPC framework
 version: "0.16.0"
-tag: "0.16.0"
+source: https://github.com/apache/thrift
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

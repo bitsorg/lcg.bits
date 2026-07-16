@@ -1,7 +1,8 @@
 package: libffi
 description: libffi portable foreign function interface library
 version: "3.4.2"
-tag: "3.4.2"
+source: https://github.com/libffi/libffi
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: libffi 3.4.2's aarch64 sysv.S fails on Apple's assembler ("invalid CFI

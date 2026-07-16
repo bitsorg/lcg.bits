@@ -1,7 +1,8 @@
 package: gettext
 description: GNU gettext internationalisation and localisation library
 version: "1.0"
-tag: "1.0"
+source: https://git.savannah.gnu.org/git/gettext.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # On macOS use the Homebrew gettext instead of building from source (gnulib's

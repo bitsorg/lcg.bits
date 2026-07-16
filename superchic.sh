@@ -1,7 +1,8 @@
 package: superchic
 description: SuperChic Monte Carlo generator for central exclusive processes
 version: "5.6.1"
-tag: "5.6.1"
+source: https://github.com/superchic/superchic
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/superchic-v5.6.1.tar.gz
 requires:

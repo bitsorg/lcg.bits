@@ -1,7 +1,8 @@
 package: mold
 description: mold modern high-speed linker for ELF
 version: "2.40.4"
-tag: "2.40.4"
+source: https://github.com/rui314/mold
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

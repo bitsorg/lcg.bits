@@ -1,7 +1,8 @@
 package: ipyparallel
 description: ipyparallel interactive parallel computing with Jupyter
 version: "9.0.0"
-tag: "9.0.0"
+source: https://github.com/ipython/ipyparallel
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

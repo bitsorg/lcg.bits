@@ -1,7 +1,8 @@
 package: gperftools
 description: "Google Performance Tools: heap profiler, CPU profiler, tcmalloc"
 version: "2.18.1"
-tag: "2.18.1"
+source: https://github.com/gperftools/gperftools
+tag: "gperftools-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

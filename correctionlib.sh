@@ -1,7 +1,8 @@
 package: correctionlib
 description: correctionlib schema-based correction evaluation library
 version: "2.8.0"
-tag: "2.8.0"
+source: https://github.com/cms-nanoAOD/correctionlib
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

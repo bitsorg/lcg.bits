@@ -1,7 +1,8 @@
 package: cppzmq
 description: cppzmq header-only C++ ZeroMQ bindings
 version: "4.8.1"
-tag: "4.8.1"
+source: https://github.com/zeromq/cppzmq
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

@@ -1,7 +1,8 @@
 package: libunwind
 description: libunwind portable stack unwinding library
 version: "1.5.0"
-tag: "1.5.0"
+source: https://github.com/libunwind/libunwind
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: do NOT build the GNU/nongnu libunwind (it does not target macOS; its

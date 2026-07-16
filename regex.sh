@@ -1,7 +1,8 @@
 package: regex
 description: Alternative Python regular expression module with advanced features
 version: "2023.5.5"
-tag: "2023.5.5"
+source: https://github.com/mrabarnett/mrab-regex
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

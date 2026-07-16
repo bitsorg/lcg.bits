@@ -1,7 +1,8 @@
 package: tauola
 description: TAUOLA Monte Carlo generator for tau lepton decays
 version: "28.121.2"
-tag: "28.121.2"
+source: https://github.com/Malexandra-de/Tauolapp
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/tauola-28.121.2-src.tgz
 requires:
