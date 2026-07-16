@@ -47,7 +47,6 @@ unset CFLAGS
 
 echo "Building GCC because no compatible version was found on the system. To skip this step, install GCC 4.8 or 4.9, or 5.X (with the exception of 5.0 to 5.2). Make sure you have gfortran installed too."
 
-USE_GOLD=
 case $ARCHITECTURE in
   osx*)
     EXTRA_LANGS=',objc,obj-c++'
@@ -92,7 +91,6 @@ mkdir build-binutils
 pushd build-binutils
   ../binutils/configure --prefix="$INSTALLROOT"                \
                         ${MARCH:+--build=$MARCH --host=$MARCH} \
-                        ${USE_GOLD:+--enable-gold=yes}         \
                         --enable-ld=default                    \
                         --enable-lto                           \
                         --enable-plugins                       \
@@ -137,11 +135,10 @@ pushd build-gcc
                    ${MARCH:+--build=$MARCH --host=$MARCH}           \
                    --enable-languages="c,c++,fortran${EXTRA_LANGS}" \
                    --disable-multilib                               \
-                   ${USE_GOLD:+--enable-gold=yes}                   \
                    --enable-ld=default                              \
                    --enable-lto                                     \
                    --disable-nls
-  make ${JOBS+-j $JOBS} bootstrap-lean MAKEINFO=":"
+  make ${JOBS:+-j$JOBS} bootstrap-lean MAKEINFO=":"
   make install MAKEINFO=":"
   hash -r
 
@@ -192,7 +189,7 @@ EOF
                                --no-qt-gui                        \
                                --init=build-flags.cmake           \
                                ${JOBS:+--parallel=$JOBS}
-    make ${JOBS+-j $JOBS}
+    make ${JOBS:+-j$JOBS}
     make install/strip
   popd
 
@@ -276,7 +273,7 @@ pushd build-mpc
   ../mpc/configure --prefix="$INSTALLROOT/libexec/extra"    \
                    --disable-shared                         \
                    --with-gmp="$INSTALLROOT/libexec/extra"  \
-                   --with-mpft="$INSTALLROOT/libexec/extra" \
+                   --with-mpfr="$INSTALLROOT/libexec/extra" \
                    --enable-static
   make ${JOBS:+-j$JOBS} MAKEINFO=":"
   make install MAKEINFO=":"

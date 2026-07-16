@@ -5,7 +5,7 @@ source: https://github.com/cern-fts/davix
 mem_per_job: 1024
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/davix-0.8.10.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/davix-%(version)s.tar.gz
 requires:
   - CMake
   - Boost

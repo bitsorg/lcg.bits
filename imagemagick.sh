@@ -4,7 +4,7 @@ version: "7.0.8.7"
 source: https://github.com/ImageMagick/ImageMagick
 tag: "%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ImageMagick-7.0.8.7.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/ImageMagick-%(version)s.tar.gz
 requires:
   - fftw
   - graphviz

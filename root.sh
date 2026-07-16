@@ -269,6 +269,7 @@ EOF
 
   # Make some CMake files used by other projects relocatable
   sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
+  find "$INSTALLROOT" -name '*.cmake.deleteme' -delete   # drop sed backups (don't ship them)
 
   rm -vf "$INSTALLROOT/LICENSE"
 

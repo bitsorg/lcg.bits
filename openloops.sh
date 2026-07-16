@@ -20,10 +20,7 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# Derived from the version string "2.1.4.250729":
-#   OL_VER  = 2.1.4   (source/tarball version)
-#   OL_DATE = 250729  (process-repository snapshot date)
-OL_VER="${PKGVERSION%.*}"
+# OL_DATE = process-repository snapshot date (last dotted field of PKGVERSION).
 OL_DATE="${PKGVERSION##*.}"
 
 # Full public process list installed by the first libinstall pass (mirrors
