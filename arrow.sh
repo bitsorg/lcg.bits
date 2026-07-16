@@ -1,8 +1,9 @@
 package: arrow
 description: Apache Arrow cross-language columnar in-memory data format
 version: "23.0.1"
-source: https://github.com/apache/arrow
-tag: "apache-arrow-%(version)s"
+# git build disabled: needs submodule/monorepo (or non-git SCM) handling in the build body first.
+# source: https://github.com/apache/arrow
+# tag: "apache-arrow-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-%(name)s-%(version)s.tar.gz
 requires:

@@ -1,8 +1,9 @@
 package: hive
 description: Apache Hive data warehouse for Hadoop
 version: "1.1.1"
-source: https://github.com/apache/hive
-tag: "rel/release-%(version)s"
+# git build disabled: needs submodule/monorepo (or non-git SCM) handling in the build body first.
+# source: https://github.com/apache/hive
+# tag: "rel/release-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-hive-1.1.1-bin.tar.gz
 requires:
