@@ -1,7 +1,7 @@
 package: blas
 description: Basic Linear Algebra Subprograms reference implementation
 version: "0.3.32"
-source: https://github.com/Reference-LAPACK/lapack
+source: https://github.com/xianyi/OpenBLAS.git
 tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/OpenBLAS-0.3.32.tar.gz

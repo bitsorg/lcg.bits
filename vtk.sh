@@ -1,10 +1,9 @@
 package: VTK
 description: Visualization Toolkit (VTK) for 3D graphics and data visualization
 version: "9.5.0"
-source: https://gitlab.kitware.com/vtk/vtk
 mem_per_job: 2048
 mem_utilisation: 0.85
-tag: "v%(version)s"
+tag: "9.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

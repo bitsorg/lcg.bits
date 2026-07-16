@@ -1,8 +1,7 @@
 package: CppUnit
 description: CppUnit C++ unit testing framework (port of JUnit)
 version: "1.15.1"
-source: https://github.com/Stephane/svn2git-cppunit
-tag: "v%(version)s"
+tag: "1.15.1"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/cppunit-1.15.1.tar.gz
 build_requires:

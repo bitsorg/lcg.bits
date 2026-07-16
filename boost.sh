@@ -1,9 +1,8 @@
 package: Boost
 description: Boost C++ portable peer-reviewed libraries
 version: "1.90.0"
-source: https://github.com/boostorg/boost
 mem_per_job: 1024
-tag: "boost-%(version)s"
+tag: "1.90.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/boost_1_90_0.tar.gz
 requires:

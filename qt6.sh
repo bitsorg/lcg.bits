@@ -1,9 +1,8 @@
 package: Qt6
 description: Qt6 cross-platform application and UI framework
 version: "6.8.3"
-source: https://code.qt.io/cgit/qt/qt6.git/
 mem_per_job: 1500
-tag: "v%(version)s"
+tag: "6.8.3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/qt-everywhere-src-6.8.3.tar.xz
 requires:
