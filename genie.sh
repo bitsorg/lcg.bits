@@ -1,7 +1,8 @@
 package: GENIE
 description: Comprehensive Monte Carlo neutrino event generator
 version: "2.12.6"
-tag: "2.12.6"
+source: https://github.com/GENIE-MC/Generator
+tag: "R-2-12-6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.bz2
 requires:

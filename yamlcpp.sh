@@ -1,7 +1,8 @@
 package: yamlcpp
 description: yaml-cpp YAML parser and emitter library for C++
 version: "0.6.3"
-tag: "0.6.3"
+source: https://github.com/jbeder/yaml-cpp
+tag: "yaml-cpp-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/yaml-cpp-0.6.3.tar.gz
 requires:

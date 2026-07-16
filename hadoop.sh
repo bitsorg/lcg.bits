@@ -1,7 +1,8 @@
 package: hadoop
 description: Apache Hadoop distributed storage and MapReduce framework
 version: "3.3.6"
-tag: "3.3.6"
+source: https://github.com/apache/hadoop
+tag: "rel/release-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hadoop-3.3.6-src.tar.gz
 requires:

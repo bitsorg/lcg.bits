@@ -1,7 +1,8 @@
 package: go_liner
 description: liner Go readline-like library for command-line input
 version: "6f820f8"
-tag: "6f820f8"
+source: https://github.com/peterh/liner
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

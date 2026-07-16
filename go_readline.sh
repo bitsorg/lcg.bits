@@ -1,7 +1,8 @@
 package: go_readline
 description: readline Go bindings for the GNU readline library
 version: "2972be2"
-tag: "2972be2"
+source: https://github.com/chzyer/readline
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

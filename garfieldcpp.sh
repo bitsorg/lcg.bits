@@ -1,7 +1,8 @@
 package: GarfieldCPP
 description: Garfield++ toolkit for detailed simulation of gaseous particle detectors
 version: "78fe1bd3"
-tag: "78fe1bd3"
+source: https://gitlab.cern.ch/garfield/garfieldpp
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/garfieldpp-%(version)s.tar.gz
 requires:

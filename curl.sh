@@ -1,7 +1,8 @@
 package: curl
 description: Command-line tool and library for URL data transfer
 version: "8.18.0"
-tag: "8.18.0"
+source: https://github.com/curl/curl
+tag: "curl-8_18_0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

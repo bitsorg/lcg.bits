@@ -1,7 +1,8 @@
 package: gdb
 description: GNU Debugger for C, C++, Fortran, and other languages
 version: "17.2"
-tag: "17.2"
+source: https://sourceware.org/git/binutils-gdb.git
+tag: "gdb-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

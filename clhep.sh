@@ -1,7 +1,8 @@
 package: clhep
 description: Class Library for High Energy Physics
 version: "2.4.7.2"
-tag: "2.4.7.2"
+source: https://gitlab.cern.ch/CLHEP/CLHEP
+tag: "CLHEP_2_4_7_2"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:

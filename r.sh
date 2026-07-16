@@ -1,7 +1,8 @@
 package: R
 description: R statistical computing language and environment
 version: "4.5.0"
-tag: "4.5.0"
+source: https://svn.r-project.org/R/
+tag: "R-4-5-0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

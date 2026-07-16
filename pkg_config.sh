@@ -1,7 +1,8 @@
 package: pkg_config
 description: pkg-config helper tool for querying library compile/link flags
 version: "0.29.2"
-tag: "0.29.2"
+source: https://gitlab.freedesktop.org/pkg-config/pkg-config
+tag: "pkg-config-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/pkg-config-0.29.2.tar.gz
 build_requires:

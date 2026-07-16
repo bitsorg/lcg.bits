@@ -1,7 +1,8 @@
 package: gophernotes
 description: Gophernotes Go kernel for Jupyter notebooks
 version: "7c3ca4e"
-tag: "7c3ca4e"
+source: https://github.com/gopherdata/gophernotes
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

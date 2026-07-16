@@ -1,7 +1,8 @@
 package: hbase
 description: Apache HBase distributed column-oriented database
 version: "1.2.0"
-tag: "1.2.0"
+source: https://github.com/apache/hbase
+tag: "rel/%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hbase-1.2.0-bin.tar.gz
 requires:

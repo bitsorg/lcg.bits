@@ -1,7 +1,8 @@
 package: go_demangle
 description: go-demangle Go symbol demangling library and c++filt tool
 version: "5e5cf60"
-tag: "5e5cf60"
+source: https://github.com/ianlancetaylor/demangle
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

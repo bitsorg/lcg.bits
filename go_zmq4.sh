@@ -1,7 +1,8 @@
 package: go_zmq4
 description: zmq4 Go ZeroMQ (ZMQ4) bindings
 version: "7a493a6"
-tag: "7a493a6"
+source: https://github.com/go-zeromq/zmq4
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

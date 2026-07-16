@@ -1,7 +1,8 @@
 package: freetype
 description: FreeType scalable font rendering engine
 version: "2.14.3"
-tag: "2.14.3"
+source: https://gitlab.freedesktop.org/freetype/freetype
+tag: "VER-2-14-3"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

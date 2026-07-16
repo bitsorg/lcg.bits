@@ -1,7 +1,8 @@
 package: go.uuid
 description: go.uuid Go UUID generation and parsing library
 version: "b2ce238"
-tag: "b2ce238"
+source: https://github.com/satori/go.uuid
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

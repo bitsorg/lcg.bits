@@ -1,7 +1,8 @@
 package: gomacro
 description: Gomacro Go interpreter with generics/macro support
 version: "c9f381e"
-tag: "c9f381e"
+source: https://github.com/cosmos72/gomacro
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
