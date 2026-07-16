@@ -1,7 +1,8 @@
 package: rapidyaml
 description: ryml (rapidyaml) fast C++ YAML parser and emitter
 version: "0.7.0"
-tag: "0.7.0"
+source: https://github.com/biojppm/rapidyaml.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/rapidyaml-0.7.0-src.tgz
 requires:

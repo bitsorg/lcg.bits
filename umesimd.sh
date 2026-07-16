@@ -1,7 +1,8 @@
 package: umesimd
 description: "UME::SIMD explicit SIMD vector programming library"
 version: "0.8.1"
-tag: "0.8.1"
+source: https://github.com/edanor/umesimd.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:

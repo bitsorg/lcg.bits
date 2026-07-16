@@ -1,7 +1,8 @@
 package: AIDA
 description: Abstract Interfaces for Data Analysis (HEP histogram/tree interface)
 version: "3.2.1"
-tag: "3.2.1"
+source: https://github.com/bitslcg/AIDA.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/aida-3.2.1-src.tar.gz
 requires:

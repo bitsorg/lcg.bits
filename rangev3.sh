@@ -1,7 +1,8 @@
 package: rangev3
 description: range-v3 library extending C++11/14 with ranges and views
 version: "0.12.0"
-tag: "0.12.0"
+source: https://github.com/ericniebler/range-v3.git
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 requires:

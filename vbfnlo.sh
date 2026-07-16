@@ -1,7 +1,8 @@
 package: vbfnlo
 description: VBFNLO NLO Monte Carlo generator for vector boson fusion and associated processes
 version: "3.0"
-tag: "3.0"
+source: https://github.com/vbfnlo/vbfnlo.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tgz
 requires:

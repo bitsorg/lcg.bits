@@ -1,7 +1,8 @@
 package: cairo
 description: Cairo 2D vector graphics library with multiple backends
 version: "1.18.4"
-tag: "1.18.4"
+source: https://anongit.freedesktop.org/git/cairo.git
+tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

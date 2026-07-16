@@ -1,7 +1,8 @@
 package: Catch2
 description: Modern C++ unit-testing framework
 version: "3.7.1"
-tag: "3.7.1"
+source: https://github.com/catchorg/Catch2
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

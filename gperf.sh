@@ -1,7 +1,8 @@
 package: gperf
 description: GNU gperf perfect hash function generator
 version: "3.1"
-tag: "3.1"
+source: https://github.com/bitslcg/gperf.git
+tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 prefer_system: ".*"
