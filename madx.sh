@@ -12,6 +12,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+acknowledgment: "MAD-X — Copyright CERN. Distributed under the MIT License."
 ---
 #!/bin/bash -e
 ##############################

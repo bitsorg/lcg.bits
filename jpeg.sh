@@ -33,6 +33,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: IJG
+acknowledgment: "This software is based in part on the work of the Independent JPEG Group."
 ---
 #!/bin/bash -e
 ##############################

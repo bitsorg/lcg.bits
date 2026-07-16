@@ -10,6 +10,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+acknowledgment: "PHOTOS++ — Copyright (c) the PHOTOS++ authors. Distributed under the MIT License."
 ---
 #!/bin/bash -e
 ##############################
