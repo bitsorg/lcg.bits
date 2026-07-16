@@ -1,4 +1,5 @@
 package: GCC-Toolchain
+license: GPL-3.0-or-later WITH GCC-exception-3.1
 version: "%(tag_basename)s"
 tag: v14.2.0-alice2
 source: https://github.com/alisw/gcc-toolchain

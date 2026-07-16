@@ -11,7 +11,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-MAD-X
+license: MIT
 ---
 #!/bin/bash -e
 ##############################

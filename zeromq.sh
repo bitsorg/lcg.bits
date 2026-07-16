@@ -1,4 +1,5 @@
 package: zeromq
+license: MPL-2.0
 description: ZeroMQ high-performance asynchronous messaging library
 version: "4.3.5"
 tag: "4.3.5"

@@ -43,7 +43,7 @@ prefer_system_replacement_specs:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: GPL-2.0-only
+license: LGPL-2.1-only
 ---
 #!/bin/bash -e
 ##############################

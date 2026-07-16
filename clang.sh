@@ -1,4 +1,5 @@
 package: Clang
+license: Apache-2.0 WITH LLVM-exception
 version: "v20.1.7"
 tag: "llvmorg-20.1.7-alice2"
 source: https://github.com/alisw/llvm-project-reduced

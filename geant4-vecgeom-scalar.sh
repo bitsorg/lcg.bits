@@ -16,7 +16,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-Geant4
+license: Geant4-SL-1.0
 ---
 #!/bin/bash -e
 ##############################

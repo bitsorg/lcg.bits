@@ -7,7 +7,7 @@ sources:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-bzip2
+license: bzip2-1.0.6
 patches:
   - bzip2-1.0.6.patch
 ---

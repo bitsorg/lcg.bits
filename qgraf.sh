@@ -8,6 +8,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-QGRAF
+# QGRAF is all-rights-reserved (academic-use only); build-time dependency of
+# gosam/herwig3/whizard. Excluded from public CVMFS via the flag below.
+redistributable: false
 ---
 #!/bin/bash -e
 ##############################

@@ -9,7 +9,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-PHOTOS++
+license: MIT
 ---
 #!/bin/bash -e
 ##############################
