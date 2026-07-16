@@ -10,12 +10,9 @@ requires:
   - pkg_config
   - Boost
   - yacc-like
-# macOS: source Thrift from Homebrew. brew thrift is 0.23.0 vs the pinned 0.16.0
-# — a notable jump, and the only consumer (arrow) links libthrift — but Arrow
-# uses Thrift only for Parquet metadata (a stable interface) and supports a wide
-# Thrift range, and brew offers no older versioned formula. prefer_system gated
-# osx.* so Linux keeps building 0.16.0 from source below. If arrow fails to link
-# against 0.23, revisit (e.g. keep thrift from source on macOS).
+# macOS: source Thrift from Homebrew (0.23.0 vs pinned 0.16.0; no older formula). The only
+# consumer, Arrow, uses Thrift for stable Parquet metadata and supports a wide range.
+# prefer_system gated osx.* so Linux builds 0.16.0 from source; revisit if Arrow won't link.
 prefer_system: "osx.*"
 homebrew_formula: thrift
 prefer_system_check: |

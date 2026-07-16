@@ -20,10 +20,9 @@ license: LicenseRef-gnuplot
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # --without-qt: gnuplot has no declared Qt dep; auto-building the Qt terminal
-  # against host/Homebrew Qt6 is non-reproducible and breaks on macOS (C++17).
-  # --with-texdir: redirect LaTeX files into INSTALLROOT (system texmf is RO).
-  # macOS: use builtin line-editing — the BSD editline shim lacks rl_getc.
+  # --without-qt: no declared Qt dep; auto-building the Qt terminal against host
+  # Qt6 is non-reproducible and breaks on macOS. --with-texdir: keep LaTeX in
+  # INSTALLROOT (system texmf is RO). macOS: builtin line-editing (editline lacks rl_getc).
   _readline=""
   bits_is_macos && _readline="--with-readline=builtin"
   ./configure --prefix="$INSTALLROOT" \

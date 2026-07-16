@@ -7,10 +7,9 @@ sources:
   # Linux-only prebuilt tarball (x86-64). Gated to non-osx so macOS does not
   # grab the wrong-OS/arch binary; macOS sources Julia from Homebrew below.
   - "((?!osx).*)https://lcgpackages.web.cern.ch/tarFiles/sources/julia-%(version)s-linux-x86_64.tar.gz"
-# macOS: source Julia from Homebrew (formula julia). prefer_system gated osx.*
-# so Linux keeps unpacking the prebuilt tarball above. julia self-locates its
-# stdlib/sysimage from the real binary path, so the bin/lib/share symlinks
-# HomebrewRecipe creates are sufficient.
+# macOS: source Julia from Homebrew (formula julia). prefer_system gated osx.* so
+# Linux keeps unpacking the tarball above; julia self-locates its stdlib/sysimage
+# from the real binary path, so HomebrewRecipe's bin/lib/share symlinks suffice.
 prefer_system: "osx.*"
 homebrew_formula: julia
 prefer_system_check: |

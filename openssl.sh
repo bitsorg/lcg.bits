@@ -9,10 +9,8 @@ requires:
   - zlib
 prefer_system: ".*"
 # macOS: OpenSSL comes from Homebrew's keg-only openssl@3 (Apple ships no system
-# OpenSSL headers). Listing it here puts it in the generated Brewfile so
-# `brew bundle` / `bits --brew` installs it; consumers that need its headers
-# (e.g. Frontier_Client) point at `brew --prefix openssl@3`. No effect on the
-# build logic — `homebrew_formula` is only read by the `bits brew` generator.
+# headers). Listing it puts it in the generated Brewfile so bits --brew installs it;
+# consumers point at `brew --prefix openssl@3`. Read only by the bits brew generator.
 homebrew_formula: openssl@3
 prefer_system_check: |
   #!/bin/bash -e
@@ -46,11 +44,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib --root-inc --pkgconfig"
 ##############################
 function Configure() {
-  # OpenSSL uses its own config script, not autotools, so Configure() is
-  # overridden (Make/MakeInstall come from AutoToolsRecipe). Build shared libs
-  # with zlib support; --libdir=lib keeps artefacts under lib (not lib64).
-  # On macOS ./config mis-detects the target, so name it explicitly; on Linux
-  # ./config auto-detects the platform.
+  # OpenSSL uses its own config script, not autotools, so Configure() is overridden
+  # (Make/MakeInstall come from AutoToolsRecipe). Build shared libs with zlib;
+  # --libdir=lib. macOS: name the target explicitly (./config mis-detects); Linux auto.
   case $(uname) in
     Darwin)
       case $(uname -m) in

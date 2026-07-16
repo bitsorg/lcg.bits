@@ -5,10 +5,9 @@ source: https://github.com/ocaml/ocaml
 tag: "%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
-# macOS: source OCaml from Homebrew (formula ocaml). prefer_system gated osx.*
-# so Linux keeps building 4.14.2 from source below. NOTE: Homebrew ships OCaml
-# 5.x, a major version above the pinned 4.14.2 — its only consumer (whizard) may
-# need attention if its O'Mega/OCaml code is not 5.x-compatible.
+# macOS: source OCaml from Homebrew (formula ocaml). prefer_system gated osx.* so
+# Linux keeps building 4.14.2 from source below. NOTE: brew ships OCaml 5.x (a major
+# above the pinned 4.14.2) - its consumer whizard may need attention.
 prefer_system: "osx.*"
 homebrew_formula: ocaml
 prefer_system_check: |

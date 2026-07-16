@@ -22,11 +22,9 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# EvtGen >= 2.0 ships a CMake build that installs EvtGenConfig.cmake, which the
-# key4hep packages need (k4gen, k4simdelphes call find_package(EvtGen)). The old
-# 1.7.0 autotools build installed no CMake config, so those find_package calls
-# failed ("Could not find a package configuration file provided by EvtGen").
-# Flags mirror lcgcmake's evtgen >= 2.0 branch; EvtGen 2.x uses HepMC3.
+# EvtGen >= 2.0 ships a CMake build installing EvtGenConfig.cmake, needed by
+# key4hep packages that find_package(EvtGen) (the old 1.7.0 autotools build
+# installed none). Flags mirror lcgcmake's evtgen >= 2.0 branch; 2.x uses HepMC3.
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

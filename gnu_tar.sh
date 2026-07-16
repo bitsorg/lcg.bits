@@ -5,10 +5,9 @@ source: https://git.savannah.gnu.org/git/tar.git
 tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/tar-1.30.tar.gz
-# macOS: source GNU tar from Homebrew (gnu-tar). It installs the binary as
-# `gtar` (to avoid shadowing BSD tar); the bin alias re-exposes it as `tar` so
-# it matches the Linux package. prefer_system is gated osx.* so Linux keeps
-# building from source below.
+# macOS: source GNU tar from Homebrew (gnu-tar). It installs as `gtar` (avoids
+# shadowing BSD tar); the bin alias re-exposes it as `tar` to match Linux.
+# osx.* gate so Linux keeps building from source below.
 prefer_system: "osx.*"
 homebrew_formula: gnu-tar
 prefer_system_check: |

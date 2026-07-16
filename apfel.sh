@@ -23,12 +23,9 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --python"
 ##############################
 function Configure() {
-  # APFEL >= 3.1.0 switched from autotools to CMake (the old AutoTools recipe
-  # ran ./configure, which no longer exists -> "./configure: No such file or
-  # directory"). Mirror lcgcmake LCG_109: CMake with the Python (SWIG) wrapper
-  # and LHAPDF enabled. SWIG/SWIG_LIB must be visible for the python bindings.
-  # Tests and the build-time PDF download are disabled (the latter needs network
-  # and is only required to run APFEL's test suite).
+  # APFEL >= 3.1.0 switched from autotools to CMake (no more ./configure).
+  # SWIG/SWIG_LIB must be visible for the python bindings; tests and the PDF
+  # download are off (the latter needs network, only used by the test suite).
   export SWIG="${SWIG_ROOT}/bin/swig"
   export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
   # macOS: find_package(SWIG) ignores the env vars and swig's compiled-in dir is

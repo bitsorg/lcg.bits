@@ -26,13 +26,9 @@ license: BSD-3-Clause
 ##############################
 MODULE_OPTIONS="--bin"
 ##############################
-# CMake must be built with its own bootstrap script: it cannot be configured
-# with `cmake` (none exists yet — that is precisely what we are building, hence
-# the "cmake: command not found" failure from the default CMakeRecipe steps).
-# Override the build steps to bootstrap + make. We build out-of-source from
-# $SOURCEDIR inside the recipe's build/ dir, so Prepare is a no-op (this also
-# avoids the copied-source headers colliding with build/Source on the include
-# path, as noted in CMakeRecipe).
+# CMake must be built with its own bootstrap script (no `cmake` exists yet), so
+# override the build steps to bootstrap + make. Build out-of-source from
+# $SOURCEDIR so Prepare is a no-op (avoids copied headers colliding with build/).
 function Prepare() { :; }
 
 function Configure() {

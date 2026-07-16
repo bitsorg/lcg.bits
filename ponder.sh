@@ -20,11 +20,9 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # The bundled pondertest/egtest targets fail to build under gcc 15; this stack
-  # only needs the library. The previous -DPONDER_BUILD_TEST/-DPONDER_BUILD_DOC
-  # flags had the wrong names (ponder's options are BUILD_TEST,
-  # BUILD_TEST_EXAMPLES, BUILD_DOC), so tests were built anyway. Use the correct
-  # option names to skip them.
+  # ponder's bundled tests fail under gcc 15 and we only need the library. The earlier
+  # -DPONDER_BUILD_TEST/_DOC flags had wrong names; use ponder's real options
+  # (BUILD_TEST, BUILD_TEST_EXAMPLES, BUILD_DOC) to actually skip them.
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

@@ -19,10 +19,9 @@ license: LicenseRef-MCFM
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# macOS: not ported. qcdloop needs GCC quadmath/__float128 (no Apple clang
-# arm64) while the std:: CXX_Interface wants libc++, so neither toolchain is
-# clean. Gate off (empty package via the guards below); consumers gate the edge
-# "mcfm:(?!osx)". Remove the guards to resume the port.
+# macOS: not ported. qcdloop needs GCC quadmath/__float128 (no Apple clang arm64)
+# while std:: CXX_Interface wants libc++, so neither toolchain is clean. Gate off
+# (empty package); consumers gate "mcfm:(?!osx)". Remove the guards to resume.
 ##############################
 function Configure() {
   bits_is_macos && { mkdir -p "${INSTALLROOT}"; return 0; }
@@ -37,14 +36,9 @@ function Configure() {
 function Make() {
   # macOS: gated off (see above).
   bits_is_macos && return 0
-  # handyG (a CMake sub-project of MCFM) has a missing Fortran-module dependency:
-  # under parallel make, gpl_module.f is compiled before maths_functions.mod has
-  # finished being written, giving
-  #   File 'build/maths_functions.mod' ... is not a GNU Fortran module file
-  # Build only handyG (and its bundled qd) serially, then the rest of MCFM --
-  # which parallelises fine (e.g. vvamp) -- with the full job count. If the
-  # 'handyg' target name is ever unavailable, fall back to a fully serial build
-  # (the known-good behaviour) rather than failing.
+  # handyG (a CMake sub-project) has a Fortran-module race: under parallel make,
+  # gpl_module.f compiles before maths_functions.mod is written. Build handyG (+qd)
+  # serially, then the rest with full -j; if 'handyg' is unavailable, build serially.
   if cmake --build "$BITS_CMAKE_BUILD" --target handyg -- -j1; then
     cmake --build "$BITS_CMAKE_BUILD" -- ${CMAKE_OPTIONS} ${JOBS:+-j$JOBS}
   else
@@ -60,13 +54,9 @@ function MakeInstall() {
 function PostInstall() {
   # macOS: gated off (see above).
   bits_is_macos && return 0
-  # MCFM's own cmake install does not expose the library/headers the way
-  # consumers expect (Sherpa's FindMCFM searches for MCFM/CXX_Interface.h and a
-  # library named 'mcfm' or 'MCFM'). Mirror lcgcmake: install the CXX interface
-  # headers under include/MCFM and the library under BOTH names. Search the
-  # out-of-source binary dir ($BITS_CMAKE_BUILD) for libmcfm.so — cwd is the
-  # source copy, not the build dir, and the library lives in the (sibling) binary
-  # dir; read headers from the copy ($BITS_CMAKE_SRC).
+  # MCFM's cmake install doesn't expose the lib/headers as consumers expect (Sherpa's
+  # FindMCFM wants MCFM/CXX_Interface.h and a lib named mcfm/MCFM). Install headers
+  # under include/MCFM and the lib under both names; libmcfm.so is in $BITS_CMAKE_BUILD, headers in $BITS_CMAKE_SRC.
   mkdir -p "${INSTALLROOT}/include" "${INSTALLROOT}/lib"
   [ -d "$BITS_CMAKE_SRC/src/Inc/MCFM" ] && cp -rf "$BITS_CMAKE_SRC/src/Inc/MCFM" "${INSTALLROOT}/include/"
   local _lib

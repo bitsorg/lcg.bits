@@ -9,10 +9,8 @@ license: Apache-2.0
 ---
 #!/bin/bash -e
 ##############################
-# condor is expected to be present on the system.
-# This recipe verifies it is available and exports
-# CONDOR_ROOT for downstream packages; it does not
-# build or install condor itself.
+# condor is expected to be present on the system. This recipe verifies it and
+# exports CONDOR_ROOT for downstream packages; it does not build condor itself.
 ##############################
 . $(bits-include ModuleRecipe)
 

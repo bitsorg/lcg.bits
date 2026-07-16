@@ -13,11 +13,9 @@ requires:
   - fontconfig
   - meson
   - ninja
-# macOS: source cairo from Homebrew (1.18.4, exact pinned version). Building
-# from source pulls a vendored glib subproject that fails (pcre2.h not found),
-# and cairo is a stable 2D-graphics lib sitting on the freetype/fontconfig/
-# pixman/libpng already taken from Homebrew. prefer_system gated osx.* so Linux
-# keeps building from source below.
+# macOS: source cairo from Homebrew (1.18.4, exact pinned version). Building from
+# source pulls a vendored glib subproject that fails (pcre2.h not found).
+# osx.* gate keeps Linux building from source below.
 prefer_system: "osx.*"
 homebrew_formula: cairo
 prefer_system_check: |

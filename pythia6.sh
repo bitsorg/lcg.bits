@@ -23,13 +23,9 @@ function Prepare() {
 
 function Make() {
   local fflags="-std=legacy -fallow-argument-mismatch -O2 -fPIC"
-  # macOS shared libraries are .dylib built with -dynamiclib. PYTHIA6 references
-  # external PDF routines (structm_, pdfset_, ...) not in this object; macOS's
-  # two-level namespace rejects such undefined symbols in a dylib whereas Linux's
-  # flat namespace allows them, so allow flat-namespace lazy resolution.
-  # -headerpad_max_install_names reserves Mach-O header space so bits'
-  # relocate-me.sh can rewrite the LC_ID_DYLIB install name via install_name_tool
-  # (else the post-build relocate step fails).
+  # macOS: PYTHIA6's dylib references external PDF routines (structm_, pdfset_, ...) not in
+  # the object, which the two-level namespace rejects, so allow flat-namespace lazy
+  # resolution. -headerpad_max_install_names reserves header space for bits' relocation.
   local _so=so _shared=-shared _undef=
   if [ "$(uname)" = Darwin ]; then
     _so=dylib; _shared=-dynamiclib

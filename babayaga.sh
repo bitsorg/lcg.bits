@@ -17,18 +17,14 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# babayaga's Makefile builds a bundled recola/COLLIER via a *nested* CMake whose
-# cmake_minimum_required() predates the floor CMake >= 4 accepts, so the nested
-# configure fails ("Compatibility with CMake < 3.5 has been removed"). A
-# top-level -D cannot reach the nested cmake, but the CMAKE_POLICY_VERSION_MINIMUM
-# environment variable is honoured by every cmake invocation (CMake 3.31+), so
-# export it for the whole build.
+# babayaga's nested CMake (bundled recola/COLLIER) predates the CMake >= 4 policy
+# floor, so it fails. A top-level -D can't reach it; export
+# CMAKE_POLICY_VERSION_MINIMUM, which every cmake invocation honours.
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 ##############################
 function MakeInstall() {
   mkdir -p "$INSTALLROOT/bin"
-  # MakeRecipe builds out-of-source: Prepare() rsyncs $SOURCEDIR into the build
-  # directory and make runs there, so the linked executable is in the build dir
+  # MakeRecipe builds out-of-source, so the linked executable is in the build dir
   # (cwd), not $SOURCEDIR. Locate it in the build tree.
   local bin
   bin=$(find . -maxdepth 3 -name babayaga-fcc -type f | head -1)

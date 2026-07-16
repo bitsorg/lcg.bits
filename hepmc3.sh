@@ -21,11 +21,9 @@ license: LGPL-2.1-only
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
-  # macOS: CMake's find_package(Python) prefers Homebrew's Python over the bits
-  # Python, so HepMC3 builds the bindings for the wrong interpreter and installs
-  # into /opt/homebrew (EPERM). Pin the interpreter to the bits Python and compute
-  # its version from PYTHON_ROOT so the bindings install into INSTALLROOT. Darwin-
-  # gated: on Linux _py is empty and the cmake line is byte-identical to before.
+  # macOS: CMake's find_package(Python) prefers Homebrew's Python, so HepMC3 builds
+  # bindings for the wrong interpreter and installs into /opt/homebrew (EPERM). Pin
+  # the interpreter to the bits Python (version from PYTHON_ROOT). Linux: _py empty.
   local _py=()
   if bits_is_macos; then
     local _pyexe="${PYTHON_ROOT}/bin/python3" _pyver _pynodot

@@ -3,13 +3,9 @@ version: "%(tag_basename)s"
 tag: v1.0
 build_requires:
   - "GCC-Toolchain:(?!osx)"
-# On Linux the toolchain (incl. gfortran) comes from GCC-Toolchain above. On
-# macOS GCC-Toolchain is osx-disabled, so the build relies on the system
-# toolchain: the Xcode Command Line Tools (clang + SDK) for C/C++, and a
-# system/Homebrew gfortran for Fortran (macOS ships none). Declare these a
-# system_requirement on osx only: when both are present the package is taken
-# from the system (the body below is not run); when either is missing the build
-# stops up front with an actionable message instead of failing deep in a build.
+# On macOS GCC-Toolchain is osx-disabled, so the build relies on the system toolchain:
+# Xcode Command Line Tools (clang) plus a system/Homebrew gfortran (macOS ships none).
+# Declare these a system_requirement on osx only, so a miss stops up front with a message.
 system_requirement: "osx"
 system_requirement_check: |
   # Xcode Command Line Tools installed, and clang/SDK actually compile.

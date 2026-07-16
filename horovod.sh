@@ -31,10 +31,9 @@ patches:
 MODULE_OPTIONS="--bin --python"
 ##############################
 function Configure() {
-  # third_party/gloo's cmake_minimum_required(VERSION 2.8.x) hard-errors under
-  # CMake 4. Set the policy floor via the env var (honoured process-wide, incl.
-  # add_subdirectory(gloo)); horovod's setup.py does not forward CMAKE_ARGS to
-  # its internal cmake, so the env var is the only thing that reaches gloo.
+  # third_party/gloo's cmake_minimum_required(2.8) hard-errors under CMake 4. Set
+  # the policy floor via env var (honoured process-wide, incl. gloo); horovod's
+  # setup.py doesn't forward CMAKE_ARGS to its internal cmake, so env is the only path.
   export CMAKE_POLICY_VERSION_MINIMUM=3.5
 
   # Point horovod's internal cmake at the bits openmpi so FindMPI succeeds.

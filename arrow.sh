@@ -23,10 +23,8 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-  # Configure() forces `-G Ninja`; the builder image ships make but not ninja, so
-  # depend on the ninja recipe to put the generator on PATH (else CMake fails with
-  # "unable to find a build program corresponding to Ninja", which then cascades
-  # into spurious "CMAKE_C_COMPILER not set" errors).
+  # Configure() forces `-G Ninja` but the builder image lacks ninja, so depend on
+  # the ninja recipe to put the generator on PATH (else CMake can't find Ninja).
   - ninja
 license: Apache-2.0
 ---

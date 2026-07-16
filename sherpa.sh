@@ -40,10 +40,9 @@ export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(bits_swig_lib)"
 ##############################
 function Configure() {
-  # Sherpa 3.x switched from autotools to CMake. Flags mirror lcgcmake's
-  # sherpa>=3 build. C++17 even on a C++20 stack (lcgcmake forces 17 here).
-  # MCFM is gated off on macOS (see mcfm.sh); when its edge is dropped MCFM_ROOT
-  # is unset, so disable it here. On Linux MCFM_ROOT is set -> _mcfm=ON (as before).
+  # Sherpa 3.x switched autotools->CMake; flags mirror lcgcmake's sherpa>=3 (C++17 even on
+  # a C++20 stack). MCFM is gated off on macOS, so disable it when MCFM_ROOT is unset; on
+  # Linux MCFM_ROOT is set -> _mcfm=ON.
   local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

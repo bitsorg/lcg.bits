@@ -70,10 +70,9 @@ MODULE_OPTIONS="--bin --python"
 ##############################
 function MakeInstall() {
   mkdir -p "${SITE_PACKAGES}"
-  # With pip build isolation, the overlay build env fails to provide a working
-  # backend ("BackendUnavailable: Cannot import 'setuptools.build_meta'").
-  # pytools is pure Python; install with --no-build-isolation so pip uses the
-  # bits Python's own setuptools/wheel (both present in the base env).
+  # With pip build isolation the overlay env lacks a backend ("BackendUnavailable:
+  # setuptools.build_meta"); pytools is pure Python, so --no-build-isolation reuses the
+  # bits Python's own setuptools/wheel.
   "${PYTHON_EXE}" -m pip install \
     --no-deps --no-build-isolation --ignore-installed \
     --root=/ --prefix="${INSTALLROOT}" \

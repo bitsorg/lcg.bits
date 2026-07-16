@@ -31,9 +31,8 @@ function Configure() {
     -DPANDORA_MONITORING=ON \
     -DCMAKE_MODULE_PATH="${PANDORAPFA_ROOT}/cmakemodules" \
     -DCMAKE_CXX_FLAGS="-Wno-error"
-  # PandoraPFA's PANDORA_GENERATE_PACKAGE_CONFIGURATION_FILES uses the legacy
-  # export_library_dependencies(), which writes <PKG>LibDeps.cmake relative to
-  # cmake's working directory (the source copy in the out-of-source layout), while
-  # the generated install rule expects it in the binary dir. Move it there.
+  # PandoraPFA's config-file macro uses legacy export_library_dependencies(), which
+  # writes <PKG>LibDeps.cmake in cmake's working dir (the source copy) while the
+  # install rule expects it in the binary dir. Move it there.
   cp "$BITS_CMAKE_SRC"/*LibDeps.cmake "$BITS_CMAKE_BUILD"/ 2>/dev/null || true
 }

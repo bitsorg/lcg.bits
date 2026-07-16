@@ -33,13 +33,9 @@ license: MIT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # This recipe extracts process tarballs and writes generated sources back into
-  # the tree, so it must operate on the private rsync'd copy (cwd, $PWD), never
-  # the shared read-only SOURCES tree. The default CMakeRecipe Prepare has already
-  # copied the source here.
-  # Translate the lcgcmake macros that were copied in verbatim:
-  #   ${gen_url}                      -> the LCG MCGenerators source mirror
-  #   <compilebox_08.11_author>       -> ATLASOTF-08-11 (the LCG author tag)
+  # Extracts process tarballs and writes generated sources back, so operate on the
+  # private rsync'd copy ($PWD), never read-only SOURCES. gen_url is the LCG
+  # MCGenerators mirror; author=ATLASOTF-08-11 (the LCG author tag).
   local gen_url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
   local author="ATLASOTF-08-11"
   wget "${gen_url}/compilebox-processes-${author}.tar.gz" \

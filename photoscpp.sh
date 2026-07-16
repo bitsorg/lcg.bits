@@ -20,21 +20,13 @@ acknowledgment: "MIT License - Copyright (c) [year] PHOTOS++ authors."
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Log.h's convenience overload does `Fatal(NULL,code)`, calling
-  # Fatal(std::string text, ...). Constructing std::string from NULL is the
-  # deleted basic_string(nullptr_t) overload in C++23, so any consumer that
-  # instantiates it (e.g. kkmcee's ROOT dictionary) fails to compile. Pass an
-  # empty string instead. (The char* Assert(...,NULL) default is unaffected.)
-  #
-  # AutoToolsRecipe's Prepare() rsyncs SOURCEDIR into the build dir (cwd) and
-  # ./configure builds *that* copy, so patch the copy under cwd, not SOURCEDIR.
-  # perl -i (not sed -i) so the in-place edit is portable across GNU and BSD sed.
+  # Log.h's `Fatal(NULL,code)` builds std::string from NULL (deleted nullptr_t overload
+  # in C++23), breaking consumers like kkmcee's dictionary; pass an empty string instead.
+  # Patch the build copy under cwd (Prepare rsyncs SOURCEDIR there); perl -i for portability.
   find . -path '*utilities/Log.h' -exec perl -i -pe 's/Fatal\(NULL,code\)/Fatal("",code)/' {} + 2>/dev/null || true
-  # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee, cepgen and
-  # EvtGen 2.x. lcgcmake builds photos++ with exactly one HepMC flavour: passing
-  # both --with-hepmc (HepMC2) and --with-hepmc3 did not produce the HepMC3
-  # interface library, so consumers could not find libPhotosppHepMC3. Mirror
-  # lcgcmake's modern config: --with-hepmc3 + --without-hepmc.
+  # Build against HepMC3 only (libPhotosppHepMC3), required by kkmcee/cepgen/EvtGen 2.x.
+  # photos++ supports one HepMC flavour, so use --with-hepmc3 + --without-hepmc
+  # (passing both dropped the HepMC3 interface lib).
   ./configure --prefix="${INSTALLROOT}" \
     --with-hepmc3="${HEPMC3_ROOT}" \
     --without-hepmc \
@@ -42,11 +34,9 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: libPhotosppHepMC3 references HepMC3 symbols resolved at load time when
-  # the consumer (which links HepMC3) pulls it in. Linux's flat namespace allows
-  # such undefined symbols in a shared library; macOS's two-level namespace
-  # rejects them at link. Patch the generated libtool to allow undefined symbols
-  # (dynamic_lookup), matching Linux. Darwin-gated; Linux has no such lines.
+  # macOS: libPhotosppHepMC3 leaves HepMC3 symbols undefined (resolved at load time by the
+  # consumer). macOS's two-level namespace rejects that at link, so patch libtool to allow
+  # undefined symbols (dynamic_lookup). Darwin-gated; Linux has no such lines.
   if [ "$(uname)" = Darwin ]; then
     find . -name libtool -type f -exec perl -i -pe \
       's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +

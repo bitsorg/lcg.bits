@@ -26,20 +26,17 @@ patches:
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
-# python-sollya's Makefile (driven by the pip build) defaults to PYTHON=python2
-# (hence "python2: Permission denied") and needs the sollya/mpfi/mpfr/gmp
-# locations. lcgcmake passes these explicitly on the make line; export them so
-# the build uses Python 3 and finds the libraries.
+# python-sollya's Makefile defaults to PYTHON=python2 ("python2: Permission denied") and
+# needs the sollya/mpfi/mpfr/gmp locations; export them so the build uses Python 3 and
+# finds the libraries.
 export PYTHON="${PYTHON_ROOT}/bin/python"
 export SOLLYA_DIR="${SOLLYA_ROOT}"
 export MPFI_DIR="${MPFI_ROOT}"
 [ -n "${MPFR_ROOT}" ] && export MPFR_DIR="${MPFR_ROOT}"
 [ -n "${GMP_ROOT}" ]  && export GMP_DIR="${GMP_ROOT}"
-# The *_DIR vars only reach the Makefile's CPPFLAGS; the actual cython->C
-# compile is driven by pip/setup.py and never sees them, so it fails with
-# "sollya.h: No such file or directory". CPATH/LIBRARY_PATH are honoured by
-# every gcc/cpp invocation regardless of build system, so the cython step finds
-# the headers and libraries.
+# The *_DIR vars reach only the Makefile's CPPFLAGS, not pip/setup.py's cython->C compile
+# ("sollya.h: No such file or directory"); CPATH/LIBRARY_PATH are honoured by every gcc
+# invocation, so the cython step finds the headers and libraries.
 export CPATH="${SOLLYA_ROOT}/include:${MPFI_ROOT}/include${MPFR_ROOT:+:${MPFR_ROOT}/include}${GMP_ROOT:+:${GMP_ROOT}/include}${CPATH:+:${CPATH}}"
 export LIBRARY_PATH="${SOLLYA_ROOT}/lib:${MPFI_ROOT}/lib${MPFR_ROOT:+:${MPFR_ROOT}/lib}${GMP_ROOT:+:${GMP_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 ##############################

@@ -3,10 +3,8 @@ description: elfutils libdw/libelf (used from the system; bits never builds it)
 version: "system"
 license: GPL-2.0-or-later
 # elfutils (libdw/libelf) is taken from the system -- bits never builds it.
-# heaptrack's interpret tool needs libdw >= 0.158 and finds it through the
-# system compiler/pkg-config search paths. Declaring it as a system_requirement
-# turns a cryptic mid-build "Could NOT find Elfutils (missing LIBDW_LIBRARIES
-# LIBDW_INCLUDE_DIR)" cmake failure into an upfront, actionable message.
+# heaptrack needs libdw >= 0.158; declaring it a system_requirement turns a
+# cryptic mid-build "Could NOT find Elfutils" cmake failure into an upfront message.
 system_requirement_missing: |
   System elfutils development files (libdw) not found.
     * Install the system elfutils development package, e.g.

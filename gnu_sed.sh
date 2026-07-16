@@ -5,10 +5,9 @@ source: https://git.savannah.gnu.org/git/sed.git
 tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/sed-4.5.tar.gz
-# macOS: source GNU sed from Homebrew (gnu-sed). It installs the binary as
-# `gsed` (to avoid shadowing BSD sed); the bin alias re-exposes it as `sed` so
-# it matches the Linux package. CLI tool, no ABI concerns. prefer_system gated
-# osx.* so Linux keeps building from source below.
+# macOS: source GNU sed from Homebrew (gnu-sed). It installs as `gsed` (avoids
+# shadowing BSD sed); the bin alias re-exposes it as `sed` to match Linux.
+# osx.* gate so Linux keeps building from source below.
 prefer_system: "osx.*"
 homebrew_formula: gnu-sed
 prefer_system_check: |

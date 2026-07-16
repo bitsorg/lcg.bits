@@ -5,13 +5,9 @@ source: https://github.com/libunwind/libunwind
 tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
-# macOS: do NOT build the GNU/nongnu libunwind (it does not target macOS; its
-# arm64 sysv asm also fails). macOS ships its own libunwind in the SDK
-# (<libunwind.h>) and the system libraries, so use that. (Homebrew's libunwind
-# formula is Linux-only — `requirements: linux`, no macOS bottle — so it is not
-# an option here.) prefer_system is gated osx.*; with no replacement spec, bits
-# treats libunwind as a system package on macOS and consumers resolve it from
-# the default SDK paths. Linux keeps building from source below.
+# macOS: do NOT build GNU/nongnu libunwind (doesn't target macOS; arm64 asm fails).
+# macOS ships its own in the SDK, so use that (Homebrew's formula is Linux-only).
+# prefer_system gated osx.* with no replacement spec; Linux keeps building below.
 prefer_system: "osx.*"
 prefer_system_check: |
   #!/bin/bash

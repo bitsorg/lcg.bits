@@ -46,10 +46,9 @@ function PostInstall() {
       [[ ! -e python ]] && ln -nfs "$(basename "$d")" python
     done
   popd
-  # Bootstrap setuptools and wheel into the Python installation itself.
-  # Since Python 3.12, ensurepip no longer bundles setuptools; without it
-  # any pip call using build isolation (the default) cannot find the
-  # setuptools build backend — e.g. XRootD's cmake_install.cmake.
+  # Bootstrap setuptools and wheel into the Python install: since 3.12 ensurepip no
+  # longer bundles setuptools, so any pip call using build isolation can't find the
+  # setuptools build backend (e.g. XRootD's cmake_install.cmake).
   preload="setuptools wheel hatchling hatch-vcs hatch-fancy-pypi-readme flit flit_core pytest pytest_cov PyYAML"
   env LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"  $INSTALLROOT/bin/python3 -m pip install --upgrade $preload
 }

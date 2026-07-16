@@ -31,11 +31,9 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # --disable-relocatable: gnulib progreloc.c breaks under gcc15/C23, and bits
-  # installs to a fixed prefix; -std=gnu17 keeps the rest of gnulib gcc15-clean.
-  # macOS: gnulib's iconv probe wrongly rejects the adequate system iconv,
-  # dropping iconv_ostream_create while .sym still exports it (link error) ->
-  # force am_cv_func_iconv_works=yes.
+  # --disable-relocatable: gnulib progreloc.c breaks under gcc15/C23 (bits uses a
+  # fixed prefix); -std=gnu17 keeps gnulib gcc15-clean. macOS: gnulib's iconv probe
+  # wrongly rejects system iconv (link error), so force am_cv_func_iconv_works=yes.
   _iconv_works=""
   bits_is_macos && _iconv_works="am_cv_func_iconv_works=yes"
   ./configure --prefix="$INSTALLROOT" \

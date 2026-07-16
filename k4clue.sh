@@ -21,14 +21,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # k4Clue's CMakeLists unconditionally adds src/k4clueCUDA and enables the CUDA
-  # language whenever it detects nvcc on PATH (check_language(CUDA)). nvcc is on
-  # PATH in this stack, so the CUDA wrapper target compiles the Gaudi algorithm
-  # with nvcc, which under CUDA 12.4 fails on Gaudi's std::format usage
-  # ("namespace std has no member format"). The CPU/alpaka target builds fine.
-  # Build the CUDA backend only under --defaults cuda (ENABLE_CUDA=ON); otherwise
-  # pre-seed CMAKE_CUDA_COMPILER=NOTFOUND so check_language() is skipped and the
-  # CUDA subdirectory builds nothing.
+  # k4Clue's CMakeLists enables CUDA whenever nvcc is on PATH, then compiles the
+  # Gaudi algorithm with nvcc - which under CUDA 12.4 fails on Gaudi's std::format.
+  # Build CUDA only under --defaults cuda (ENABLE_CUDA=ON); else pre-seed CMAKE_CUDA_COMPILER=NOTFOUND to skip check_language().
   local cuda_args=()
   if [ "${ENABLE_CUDA:-OFF}" != "ON" ]; then
     cuda_args+=(-DCMAKE_CUDA_COMPILER=NOTFOUND)

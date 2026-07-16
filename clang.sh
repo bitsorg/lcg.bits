@@ -39,10 +39,9 @@ case $ARCHITECTURE in
   *) echo 'Unknown LLVM target for architecture' >&2; exit 1 ;;
 esac
 
-# Inline recipe (top-level build script): it does NOT go through CMakeRecipe.Run,
-# so it must do its own source copy. SOURCES is mounted read-only in the container,
-# so build from a private rsync'd copy (cwd) into the sibling build/ dir, never
-# from $SOURCEDIR directly. (Keep .git: harmless here, consistent with the rest.)
+# Inline recipe (not via CMakeRecipe.Run), so it does its own source copy: SOURCES
+# is read-only, so build from a private rsync'd copy (cwd) into build/, never
+# from $SOURCEDIR directly.
 rsync -a --delete --exclude '/build' "$SOURCEDIR"/ ./
 
 # BUILD_SHARED_LIBS=ON is needed for e.g. adding dynamic plugins to clang-tidy.
@@ -101,10 +100,8 @@ case $ARCHITECTURE in
     ln -sf "$(xcrun --show-sdk-path)/usr/include/c++" "$INSTALLROOT/include/c++" ;;
 esac
 
-# We do not want to have the clang executables in path
-# to avoid issues with system clang on macOS.
-# We **MUST NOT** add bin-safe to the build path. Runtime
-# path is fine.
+# Keep clang executables out of PATH to avoid clashing with system clang on macOS.
+# MUST NOT add bin-safe to the build path; runtime path is fine.
 mkdir "$INSTALLROOT/bin-safe"
 mv "$INSTALLROOT"/bin/clang* "$INSTALLROOT/bin-safe/"
 mv "$INSTALLROOT"/bin/llvm-spirv* "$INSTALLROOT/bin-safe/" # Install llvm-spirv tool

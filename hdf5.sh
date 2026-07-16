@@ -2,7 +2,7 @@ package: hdf5
 description: HDF5 hierarchical data format library for large datasets
 version: "1.14.6"
 source: https://github.com/HDFGroup/hdf5
-tag: "hdf5-1_14_6"
+tag: "hdf5-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:

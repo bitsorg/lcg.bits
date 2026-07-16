@@ -11,12 +11,9 @@ requires:
   - fontconfig
   - png
   - gettext
-# macOS: source Graphviz from Homebrew. (The previous prefer_system: ".*" had an
-# empty prefer_system_check, so it always fell back to a from-source build,
-# which fails on the current macOS SDK.) Graphviz is a stable tool+lib; brew has
-# it and bundles its deps. prefer_system gated osx.* so Linux keeps building
-# from source below. NOTE: brew graphviz is 15.x vs pinned 12.2.1 (the dot CLI /
-# libcgraph API consumers use is stable across these).
+# macOS: source Graphviz from Homebrew - a from-source build fails on the current
+# macOS SDK, and brew bundles its many deps. prefer_system gated osx.* so Linux
+# keeps building from source below (brew is 15.x vs pinned 12.2.1; API is stable).
 prefer_system: "osx.*"
 homebrew_formula: graphviz
 prefer_system_check: |

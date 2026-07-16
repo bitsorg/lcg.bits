@@ -38,10 +38,9 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: configure's ARCH=Darwin falls through to legacy FC=g77/CC=gcc; gcc is
-  # clang, and the `$(CC) -M file.F` dep rule makes clang infer Fortran and fail.
-  # Point FC and CC at gfortran, and rewrite Makeshared.subdir's ELF shared-link
-  # (-shared -Wl,-soname) to Mach-O. Idempotent via the grep guard.
+  # macOS: configure's ARCH=Darwin picks legacy FC=g77/CC=gcc, and clang's `-M file.F` dep
+  # rule fails on Fortran. Point FC/CC at gfortran and rewrite Makeshared.subdir's ELF
+  # shared-link to Mach-O (idempotent via the grep guard).
   local _cc=()
   if bits_is_macos; then
     # Rewrite Makeshared.subdir's ELF shared-link (-shared -Wl,-soname, which

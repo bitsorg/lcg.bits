@@ -19,9 +19,8 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin"
 ##############################
 function Configure() {
-  # --prefix was empty, so `make install` wrote to the host root (/bin, /share)
-  # and failed with permission errors; install into the package prefix instead.
-  # --enable-relocatable keeps bison finding its data dir relative to the binary.
-  # Pass CC only when it is actually set (an empty CC= broke autodetection).
+  # Empty --prefix made `make install` write to the host root and fail; install
+  # into the package prefix. --enable-relocatable keeps bison finding its data dir
+  # relative to the binary. Pass CC only when set (empty CC= broke autodetection).
   ./configure --prefix="$INSTALLROOT" --enable-relocatable ${CC:+CC="$CC"}
 }

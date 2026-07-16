@@ -15,11 +15,8 @@ requires:
   - libxml2
   # optional:
   # - pango
-# macOS: source ImageMagick from Homebrew. It's a heavy tool+lib suite pulling in
-# many delegate libraries (png/jpeg/tiff/freetype/webp/...) that is painful to
-# build against the current macOS SDK; brew bundles them all. brew imagemagick is
-# 7.1.x (same major as the pinned 7.0.8.7, so MagickCore/MagickWand API stays
-# compatible) and has no consumers in the stack, so version drift is irrelevant.
+# macOS: source ImageMagick from Homebrew - a heavy tool+lib suite with many
+# delegate libs, painful to build on the current macOS SDK; brew bundles them all.
 # prefer_system gated osx.* so Linux keeps building 7.0.8.7 from source below.
 prefer_system: "osx.*"
 homebrew_formula: imagemagick

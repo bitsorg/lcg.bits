@@ -20,11 +20,9 @@ license: GPL-3.0-only
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Build against HepMC3 only (libTauolaCppHepMC3 / TAUOLAPP_HEPMC3), required by
-  # cepgen's PhotosTauola wrapper and EvtGen 2.x. lcgcmake builds tauola++ with
-  # exactly one HepMC flavour: passing both --with-hepmc (HepMC2) and
-  # --with-hepmc3 did not produce the HepMC3 interface library. Mirror lcgcmake's
-  # modern config: --with-hepmc3 + --without-hepmc.
+  # Build against HepMC3 only (libTauolaCppHepMC3), required by cepgen's PhotosTauola and
+  # EvtGen 2.x. tauola++ supports one HepMC flavour, so use --with-hepmc3 + --without-hepmc
+  # (passing both dropped the HepMC3 interface lib).
   ./configure --prefix=$INSTALLROOT \
     --with-pic \
     --with-tau-spinner \
@@ -34,11 +32,9 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: libTauolaFortran references Fortran routines defined in a sibling
-  # TAUOLA library, resolved at load time. Linux's flat namespace allows such
-  # undefined symbols in a shared library; macOS's two-level namespace rejects
-  # them at link. Patch the generated libtool to allow undefined symbols
-  # (dynamic_lookup), matching Linux. Darwin-gated; Linux has no such lines.
+  # macOS: libTauolaFortran leaves sibling-library Fortran routines undefined (resolved at
+  # load time), which the two-level namespace rejects at link; patch libtool to allow
+  # undefined symbols (dynamic_lookup). Darwin-gated; Linux has no such lines.
   if [ "$(uname)" = Darwin ]; then
     find . -name libtool -type f -exec perl -i -pe \
       's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +

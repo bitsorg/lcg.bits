@@ -2,13 +2,9 @@ package: go
 description: Go programming language toolchain (pre-built binary distribution)
 version: "1.12.5"
 tag: "1.12.5"
-# macOS: Go 1.12.5 predates Apple Silicon (no darwin-arm64 build), and the
-# Linux tarball below cannot run on macOS ("cannot execute binary file"). Source
-# a modern Go from Homebrew instead and expose its SDK as GOROOT under
-# $INSTALLROOT, so the existing GOPATH-style go_* recipes (GOROOT=$GO_ROOT,
-# `go install <importpath>`) keep working. The module forces GO111MODULE=off so
-# modern Go still uses GOPATH/legacy mode. prefer_system gated osx.*; Linux keeps
-# the pinned 1.12.5 binary below.
+# macOS: Go 1.12.5 has no darwin-arm64 build and the Linux tarball below can't
+# run on macOS, so source a modern Go from Homebrew and expose its SDK as GOROOT
+# under $INSTALLROOT; GO111MODULE=off keeps the GOPATH-style go_* recipes working.
 prefer_system: "osx.*"
 homebrew_formula: go
 prefer_system_check: |
@@ -22,11 +18,9 @@ prefer_system_check: |
 prefer_system_replacement_specs:
   go:
     version: "homebrew"
-    # Exported into the build environment of go_* consumers (a dependency's
-    # env: block propagates to dependents' builds; modulefile setenv does not).
-    # GO111MODULE=off keeps the GOPATH-style `go install <importpath>` recipes
-    # working under modern Go; GOCACHE moves Go's build cache out of the home
-    # dir (~/Library/Caches/go-build is outside the build sandbox).
+    # Exported into go_* consumers' build env (a dep's env: propagates; modulefile
+    # setenv does not). GO111MODULE=off keeps GOPATH-style go_* working; GOCACHE
+    # moves Go's cache out of ~/Library/Caches (outside the build sandbox).
     env:
       GO111MODULE: "off"
       GOCACHE: "/tmp/bits-go-build"
@@ -59,12 +53,9 @@ prefer_system_replacement_specs:
         # writable path so the go_* recipes' `go install` can write the cache.
         echo 'setenv GOCACHE /tmp/bits-go-build'
       } >> "$_mf"
-# Exported into the build environment of go_* consumers (a dependency's env:
-# block propagates to dependents' builds; a modulefile setenv does not). This is
-# the Linux (from-source) counterpart of the osx prefer_system env above.
-# GO111MODULE=off keeps the GOPATH-style `go install <importpath>` recipes working;
-# GOCACHE redirects Go's build cache off $HOME — its default ~/.cache/go-build is
-# unwritable in the build container ("mkdir /.cache: permission denied").
+# Exported into go_* consumers' build env (Linux counterpart of the osx
+# prefer_system env). GO111MODULE=off keeps GOPATH-style go_* working; GOCACHE
+# redirects Go's build cache off $HOME (default ~/.cache/go-build is unwritable).
 env:
   GO111MODULE: "off"
   GOCACHE: "/tmp/bits-go-build"

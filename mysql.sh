@@ -15,11 +15,9 @@ requires:
   - lz4
   - zeromq
   - msgpackc
-# macOS: source the MySQL client from Homebrew's keg-only `mysql-client`
-# (provides mysql_config + libmysqlclient + headers). The only consumer that
-# links it is conddbmysql; the client library ABI is backward-compatible, so the
-# brew 9.x client works against the pinned 10.11 MariaDB server protocol.
-# prefer_system gated osx.* so Linux keeps building MariaDB from source below.
+# macOS: source the MySQL client from Homebrew's keg-only mysql-client (mysql_config
+# + libmysqlclient + headers). Its one consumer (conddbmysql) links an ABI-compatible
+# client, so brew 9.x works. prefer_system gated osx.* so Linux builds MariaDB below.
 prefer_system: "osx.*"
 homebrew_formula: mysql-client
 prefer_system_check: |

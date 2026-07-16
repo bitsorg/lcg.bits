@@ -1,8 +1,7 @@
 package: Gaudi
 description: Gaudi software framework for HEP data processing applications
-# v40r4 (lcgcmake master's Gaudi) rather than the LCG_109 v40r2: the key4hep
-# packages this stack tracks (k4simgeant4 main, k4reccalorimeter pre18, ...) are
-# HEAD-dev and are built against v40r4 upstream. v40r2 fails to compile them
+# v40r4 (lcgcmake master) not LCG_109 v40r2: the HEAD-dev key4hep packages this
+# stack tracks are built against v40r4 upstream, and v40r2 fails to compile them
 # under gcc15 (IInterface cast<> template / Property.h operator=).
 version: "v40r4"
 mem_per_job: 1500
@@ -32,11 +31,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 patches:
-  # The GaudiToolbox patch (sh->bash for the generated env.sh/run + confdb2
-  # output_files) is only needed and only applies for v40r2: v40r4 already
-  # generates those scripts with #!/usr/bin/env bash and changed the surrounding
-  # layout so the patch no longer applies. Gate it on the version so a build that
-  # pins Gaudi back to v40r2 still gets it.
+  # The GaudiToolbox patch (sh->bash for generated scripts) is only needed and only
+  # applies for v40r2; v40r4 already uses #!/usr/bin/env bash. Gate it on the
+  # version so a build pinned back to v40r2 still gets it.
   - "gaudi-GaudiToolbox.cmake.patch:version=v40r2"
   - gaudi-merge_confdb2_parts.patch
 ---

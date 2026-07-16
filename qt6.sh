@@ -13,10 +13,9 @@ requires:
   - nodejs
   - zlib
   - ninja
-# macOS: source Qt6 from Homebrew (formula qt, currently 6.11.x). prefer_system
-# gated osx.* so Linux keeps building 6.8.3 from source below. NOTE: Homebrew qt
-# is a few minor versions ahead of the pinned 6.8.3 — qwt/soqt (its consumers)
-# may need attention if a Qt6 API they use changed.
+# macOS: source Qt6 from Homebrew (formula qt). prefer_system gated osx.* so Linux keeps
+# building 6.8.3 from source below. brew qt runs a few minors ahead, so its consumers
+# (qwt/soqt) may need attention if a Qt6 API changed.
 prefer_system: "osx.*"
 homebrew_formula: qt
 prefer_system_check: |

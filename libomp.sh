@@ -35,8 +35,8 @@ license: Apache-2.0
 . $(bits-include ModuleRecipe)
 ##############################
 # Non-osx: libomp is never required here (consumers gate it "libomp:osx"; GCC
-# provides libgomp). Emit an empty module so the recipe is valid on all
-# architectures without building anything.
+# provides libgomp). Emit an empty module so the recipe is valid everywhere
+# without building anything.
 MODULE_OPTIONS="--lib"
 function Build() {
   mkdir -p "$INSTALLROOT"

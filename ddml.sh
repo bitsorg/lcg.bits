@@ -22,10 +22,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # DDML's CMake does find_package(MPI). OpenMPI is a dependency, but cmake's
-  # FindMPI locates the wrappers via mpicxx on PATH, which bits doesn't add by
-  # default -> "Could NOT find MPI (missing: MPI_CXX_FOUND)". Put OpenMPI's bin
-  # on PATH and set OPAL_PREFIX (its runtime root), mirroring lcgcmake.
+  # DDML's find_package(MPI) locates wrappers via mpicxx on PATH, which bits
+  # doesn't add -> "Could NOT find MPI". Put OpenMPI's bin on PATH and set
+  # OPAL_PREFIX (its runtime root).
   export PATH="${OPENMPI_ROOT}/bin:${PATH}"
   export OPAL_PREFIX="${OPENMPI_ROOT}"
   # PyTorch ships its CMake config inside the pip site-packages tree; point

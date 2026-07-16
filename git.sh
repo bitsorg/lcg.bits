@@ -8,10 +8,9 @@ sources:
 requires:
   - curl
   - expat
-# macOS: source Git from Homebrew. Git is a standalone CLI tool (nothing in the
-# stack links libgit), so version drift is irrelevant; brew git is 2.54.x vs the
-# pinned 2.49.0 (same major). prefer_system gated osx.* leaves the Linux
-# from-source build untouched.
+# macOS: source Git from Homebrew. It's a standalone CLI (nothing links libgit),
+# so version drift is irrelevant (brew 2.54.x vs pinned 2.49.0). osx.* gate leaves
+# the Linux from-source build untouched.
 prefer_system: "osx.*"
 homebrew_formula: git
 prefer_system_check: |

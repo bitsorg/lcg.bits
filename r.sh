@@ -9,12 +9,9 @@ sources:
 requires:
   - fribidi
   - readline
-# macOS: source R from Homebrew. R is a large statistical environment pulling in
-# a long chain of dependencies (cairo, openblas, tcl-tk, pcre2, xz, fontconfig,
-# X11 libs, a Fortran compiler...) that is painful to build against the current
-# macOS SDK; brew's `r` formula bundles them all. brew r is 4.6.0 vs the pinned
-# 4.5.0 (one minor), and the only consumer (rpy2) works across R 4.x. prefer_system
-# gated osx.* so Linux keeps building 4.5.0 from source below.
+# macOS: source R from Homebrew -- its long dependency chain (cairo, openblas, tcl-tk, ...)
+# is painful to build against the macOS SDK, and the only consumer (rpy2) works across
+# R 4.x. prefer_system gated osx.* so Linux keeps building the pinned 4.5.0 from source.
 prefer_system: "osx.*"
 homebrew_formula: r
 prefer_system_check: |

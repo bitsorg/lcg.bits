@@ -25,9 +25,8 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   # PyTorch ships its CMake config inside the pip site-packages tree; point
-  # find_package(Torch) at the real dir. The modulefile Torch_DIR doesn't reach
-  # the build env, and a <prefix>/share/cmake symlink breaks Caffe2Targets'
-  # prefix derivation (it would look for the libs under <prefix>/lib).
+  # find_package(Torch) there. The modulefile Torch_DIR doesn't reach the build env,
+  # and a share/cmake symlink breaks Caffe2Targets' prefix derivation.
   _pyver=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])')
   export Torch_DIR="${TORCH_ROOT}/lib/${_pyver}/site-packages/torch/share/cmake/Torch"
   # find_package(AIDA) resolves via RAIDA's config (the AIDA 3.2.1 package ships

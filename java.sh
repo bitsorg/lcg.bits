@@ -5,11 +5,9 @@ tag: "17.0.18p8"
 sources:
   - "((?!osx).*x86[-_]64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/openjdk-%(version)s-linux-x64.tar.gz"
   - "((?!osx).*aarch64.*)https://lcgpackages.web.cern.ch/tarFiles/sources/openjdk-%(version)s-linux-aarch64.tar.gz"
-# macOS: there is no prebuilt OpenJDK tarball for osx here, so source the JDK
-# from Homebrew (openjdk@17, pinned to major 17). prefer_system is gated to
-# osx.* so Linux keeps unpacking the prebuilt tarball above. The bin/java
-# symlink resolves to the real keg path, so the JDK self-locates its home;
-# maven/ant only need java on PATH (--bin).
+# macOS: no prebuilt OpenJDK tarball for osx, so source the JDK from Homebrew
+# (openjdk@17). prefer_system gated osx.* so Linux keeps unpacking the tarball
+# above; the bin/java symlink resolves to the real keg so the JDK self-locates.
 prefer_system: "osx.*"
 homebrew_formula: openjdk@17
 prefer_system_check: |

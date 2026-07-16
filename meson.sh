@@ -26,14 +26,9 @@ function MakeInstall() {
 }
 
 function PostInstall() {
-  # pip installs bin/meson with the bits Python shebang, but that interpreter's
-  # sys.path does not include MESON_ROOT's site-packages.  The module file sets
-  # PYTHONPATH, but bits only sources init.sh (not the module file) when building
-  # dependent packages, so mesonbuild is never importable.
-  #
-  # Replace the pip-installed script with a self-contained shell wrapper that
-  # computes its own prefix and adds mesonbuild's site-packages to PYTHONPATH
-  # before invoking Python.  This requires no changes in callers or MesonRecipe.
+  # pip installs bin/meson with the bits Python shebang, but that interpreter lacks
+  # MESON_ROOT's site-packages and bits only sources init.sh (not the module file)
+  # for dependents, so mesonbuild is unimportable. Replace it with a PYTHONPATH-setting wrapper.
   cat > "${INSTALLROOT}/bin/meson" <<'EOF'
 #!/bin/sh
 _dir="$(cd "$(dirname "$0")/.." && pwd)"

@@ -25,18 +25,9 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # MARLIN_AIDA must stay ON: the installed MarlinConfig.h does
-  # `#cmakedefine MARLIN_AIDA`, and marlin/AIDAProcessor.h gates the whole
-  # AIDAProcessor class on that macro. Building Marlin with AIDA OFF compiles the
-  # class out for EVERY downstream consumer (clupatra, conformaltracking,
-  # ildperformance, lcfivertex, marlinkinfitprocessors, marlinreco,
-  # marlintrkprocessors, overlay), which then fail to compile with
-  # "'AIDAProcessor' has not been declared; did you mean 'AIDAProcessor_h'?".
-  #
-  # Marlin does a plain FIND_PACKAGE(AIDA); there is no FindAIDA.cmake module so
-  # it falls back to config mode. RAIDA (the AIDA implementation, already a
-  # dependency) installs AIDAConfig.cmake under lib/cmake/RAIDA, so point AIDA_DIR
-  # there. CLHEP/LCCD stay enabled and are satisfied by the clhep/lccd deps.
+  # MARLIN_AIDA must stay ON: MarlinConfig.h does `#cmakedefine MARLIN_AIDA` and
+  # AIDAProcessor.h gates the class on it, so AIDA OFF compiles it out for every
+  # consumer. Marlin's FIND_PACKAGE(AIDA) uses config mode - point AIDA_DIR at RAIDA's AIDAConfig.cmake.
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

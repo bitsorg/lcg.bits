@@ -28,16 +28,13 @@ license: GPL-3.0-or-later
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# professor's Makefile probes `python -c 'import Cython; print(Cython.__version__)'`
-# and aborts ("Incompatible Cython NONE found") when Cython is not importable;
-# its build also imports numpy.  bits exposes each dependency's $*_ROOT but not
-# its Python site-packages, so put every dependency's site-packages on PYTHONPATH
-# at recipe scope (applies to both Configure and Make).
+# professor's Makefile imports Cython (aborting if absent) and numpy, but bits exposes
+# each dep's $*_ROOT and not its site-packages; put every dep's site-packages on
+# PYTHONPATH at recipe scope (both Configure and Make).
 bits_pythonpath_from_deps
-# professor's Makefile forms the C++ standard flag as `-std=$(CXXSTD)`, but bits
-# exports CXXSTD as a bare number (e.g. 23, for -DCMAKE_CXX_STANDARD), so g++
-# sees the invalid `-std=23`. Hand professor the `c++NN` token its Makefile
-# expects (this matches the c++23 that ROOT, a dependency, is built with).
+# professor's Makefile builds the flag as `-std=$(CXXSTD)`, but bits exports CXXSTD as a
+# bare number (e.g. 23), yielding an invalid `-std=23`; hand it the `c++NN` token instead
+# (matches the c++23 that its ROOT dependency uses).
 export CXXSTD="c++${CXXSTD:-17}"
 ##############################
 function Configure() {

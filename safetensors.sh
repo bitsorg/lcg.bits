@@ -4,10 +4,7 @@ version: "0.7.0"
 tag: "0.7.0"
 requires:
   - Python
-  # optional:
-  # - tensorflow
-  # - torch
-  # - numpy
+  # optional: tensorflow, torch, numpy
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

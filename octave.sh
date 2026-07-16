@@ -13,11 +13,9 @@ requires:
   - texinfo
 # - readline
   - fftw
-# macOS: source Octave from Homebrew (formula octave). Octave-from-source on
-# macOS is a long, fragile build (SIP/DYLD rpath, Qt GUI, qhull, suitesparse,
-# the .oct compiler, ...); its only consumer (octavekernel) just needs the
-# binary. prefer_system gated osx.* so Linux keeps building 10.3.0 from source.
-# NOTE: Homebrew octave is 11.x (ahead of the pinned 10.3.0).
+# macOS: source Octave from Homebrew (formula octave). Octave-from-source on macOS
+# is a long, fragile build; its one consumer (octavekernel) just needs the binary.
+# prefer_system gated osx.* so Linux keeps building 10.3.0 (brew is 11.x) from source.
 prefer_system: "osx.*"
 homebrew_formula: octave
 prefer_system_check: |

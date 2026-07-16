@@ -21,13 +21,9 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function SetBuildEnv() {
   _SetBuildEnvBase
-  # After linking the Gaudi component libraries, the build runs genconf, which
-  # dlopens SimG4Components; that triggers Geant4 static initialisers
-  # (G4NuclideTable) which abort ("G4ENSDFSTATEDATA environment variable must be
-  # set") unless the Geant4 data env vars are present. Geant4's runtime
-  # modulefile sets them but that does not reach the build env, so source
-  # Geant4's own environment script (installed with GEANT4_INSTALL_DATA=ON). Fall
-  # back to setting G4ENSDFSTATEDATA directly if the script is absent.
+  # genconf dlopens SimG4Components, triggering Geant4 static initialisers that
+  # abort unless the Geant4 data env vars are set - and its runtime modulefile
+  # doesn't reach the build env. Source Geant4's env script, else set G4ENSDFSTATEDATA.
   if [ -f "${GEANT4_ROOT}/bin/geant4.sh" ]; then
     . "${GEANT4_ROOT}/bin/geant4.sh" || true
   fi

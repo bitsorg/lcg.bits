@@ -10,12 +10,9 @@ requires:
   - jsonmcpp
   - grpc
   - spdlog
-# macOS: source Bear from Homebrew. Bear is a standalone CLI tool that generates
-# compile_commands.json (no consumers in the stack), and building it from source
-# drags in grpc/protobuf codegen + an spdlog/fmt version match that breaks on the
-# current macOS toolchain. brew bear is 4.1.4 vs the pinned 3.1.5 — fine for a CLI
-# tool with no library consumers. prefer_system gated osx.* so Linux keeps
-# building 3.1.5 from source below.
+# macOS: source Bear from Homebrew. It's a standalone CLI (no consumers), and
+# building from source breaks on the macOS toolchain (grpc/protobuf, spdlog/fmt).
+# brew's 4.1.4 vs pinned 3.1.5 is fine; osx.* gate keeps Linux on the source build.
 prefer_system: "osx.*"
 homebrew_formula: bear
 prefer_system_check: |

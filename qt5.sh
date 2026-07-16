@@ -7,11 +7,9 @@ sources:
 requires:
   - Python
   - fontconfig
-# macOS: source Qt5 from Homebrew (qt@5, 5.15.x, keg-only). Building Qt5 from
-# source on arm64 macOS fails (configure cannot detect Desktop OpenGL, and the
-# bundled QtWebEngine/Chromium is unbuildable). prefer_system gated osx.* so
-# Linux keeps building from source below. NOTE: Homebrew qt@5 omits QtWebEngine,
-# so pyqtwebengine is disabled on macOS.
+# macOS: source Qt5 from Homebrew (qt@5, keg-only); building from source on arm64 fails
+# (no Desktop OpenGL, unbuildable QtWebEngine). prefer_system gated osx.* so Linux builds
+# from source below. brew qt@5 omits QtWebEngine, so pyqtwebengine is disabled on macOS.
 prefer_system: "osx.*"
 homebrew_formula: qt@5
 prefer_system_check: |

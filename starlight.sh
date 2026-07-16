@@ -20,16 +20,9 @@ license: LicenseRef-STARLIGHT
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Built standalone (DPMJet disabled), matching lcgcmake's Starlight recipe.
-  # starlight r330's optional DPMJet interface (dpmjet/dpmjetint.f) does
-  # INCLUDE 'inc/dtflka' and expects the modern DPMJET-III layout with separate
-  # Fortran include files under include/dpmjet/inc/.  The DPMJet 3.0-6 tarball
-  # bits builds is a flat set of monolithic .f files with no such headers, so
-  # -DENABLE_DPMJET=ON cannot compile.  lcgcmake never enables this combination.
-  # macOS: CMakeLists adds -Werror, clobbering our flags; strip it (patch the
-  # build COPY, not read-only $SOURCEDIR) so Apple clang's C++-VLA warnings stay
-  # warnings. Also add -Wno-vla-cxx-extension and allow undefined HepMC3:: symbols
-  # in libStarlib (hepmc3writer.cpp) via dynamic_lookup.
+  # Built standalone (DPMJet disabled): r330's DPMJet interface needs the modern DPMJET-III
+  # layout, but bits' flat DPMJet 3.0-6 .f files can't compile it. macOS: strip CMakeLists'
+  # -Werror (patch the build copy), add -Wno-vla-cxx-extension + dynamic_lookup for HepMC3.
   local _cxx="-Wno-array-parameter -Wno-unused-but-set-variable -Wno-unknown-warning-option"
   local _lf=""
   if bits_is_macos; then

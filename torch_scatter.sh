@@ -20,13 +20,9 @@ MODULE_OPTIONS="--bin --python"
 ##############################
 function MakeInstall() {
   mkdir -p "${SITE_PACKAGES}"
-  # torch_scatter compiles a C++/CUDA extension and its setup.py imports torch at
-  # build time.  Two adjustments vs the default pip install:
-  #  * --no-build-isolation, so pip uses the bits build env (where torch lives)
-  #    instead of a fresh overlay that lacks torch ("ModuleNotFoundError: No
-  #    module named 'torch'").
-  #  * add every dependency's site-packages (torch, sympy, numpy) to PYTHONPATH —
-  #    the build env exposes $*_ROOT but not site-packages.
+  # torch_scatter builds a C++ extension whose setup.py imports torch. Use
+  # --no-build-isolation so pip sees the bits env's torch (else "No module named 'torch'"),
+  # and add each dep's site-packages (torch, sympy, numpy) to PYTHONPATH ($*_ROOT isn't enough).
   local _r _sp
   for _r in $(env | grep -E '^[A-Za-z][A-Za-z0-9_]*_ROOT=' | cut -d= -f1); do
     _sp="${!_r}/lib/python${PYTHON_MAJOR_MINOR}/site-packages"

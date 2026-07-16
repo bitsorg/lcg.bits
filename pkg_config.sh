@@ -21,19 +21,14 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # Determine the multiarch triple so the compiled-in PC_PATH includes the
-  # Ubuntu multiarch pkgconfig directory (e.g. /usr/lib/x86_64-linux-gnu/pkgconfig).
-  # Without this, bits-built pkg-config silently misses .pc files installed by
-  # system packages (those built with prefer_system), forcing every recipe that
-  # depends on a system package to carry ad hoc PKG_CONFIG_PATH workarounds.
-  # /usr/lib64/pkgconfig is added for RHEL/CentOS compatibility; non-existent
-  # paths are silently ignored by pkg-config.
+  # Add the Ubuntu multiarch (and RHEL lib64) pkgconfig dirs to the compiled-in PC_PATH,
+  # so bits-built pkg-config finds .pc files from system packages instead of every consumer
+  # carrying ad hoc PKG_CONFIG_PATH. Non-existent paths are ignored.
   local _triple
   _triple=$(bits_triple)
-  # macOS/Xcode 16 clang promotes -Wint-conversion and implicit function
-  # declarations to hard errors, breaking pkg-config's vendored glib 2.x
-  # (gatomic.c). Downgrade those to warnings so --with-internal-glib compiles.
-  # No effect on Linux/gcc.
+  # macOS/Xcode 16 clang turns -Wint-conversion and implicit function declarations into hard
+  # errors, breaking pkg-config's vendored glib; downgrade them so --with-internal-glib
+  # compiles. No effect on Linux/gcc.
   bits_is_macos && export CFLAGS="${CFLAGS:+$CFLAGS }-Wno-error=int-conversion -Wno-error=implicit-function-declaration"
   ./configure --with-internal-glib --prefix=$INSTALLROOT \
     --with-system-include-path=/usr/include \

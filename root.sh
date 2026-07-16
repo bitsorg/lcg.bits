@@ -122,10 +122,9 @@ function Configure() {
     unset _pyver _rv _sp
   fi
 
-  # < 6.40: use builtin copies. >= 6.40 on Linux: switch to external packages +
-  # curl (provided by the LCG stack). >= 6.40 on macOS: those externals aren't
-  # all available and fail-on-missing turns a miss into a fatal error, so keep
-  # ROOT's bundled copies — except unuran, which is an external bits dep here.
+  # <6.40: builtin copies. >=6.40 Linux: external packages + curl from the LCG stack.
+  # >=6.40 macOS: those externals aren't all available (fail-on-missing is fatal), so keep
+  # ROOT's bundled copies -- except unuran, an external bits dep here.
   if _ver_ge "$_root_ver" "6.40.00"; then
     if [[ "$(uname)" == Darwin ]]; then
       _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON -Dcurl=ON"

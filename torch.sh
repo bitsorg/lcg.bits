@@ -29,12 +29,9 @@ MODULE_OPTIONS="--bin --python"
 ##############################
 function MakeInstall() {
   mkdir -p "${SITE_PACKAGES}"
-  # The default PyPI torch Linux wheel is CUDA-enabled: importing it preloads
-  # libcudart/libcublasLt and hard-fails on a CPU-only host (and pulls the
-  # nvidia-* packages bits does not provide).  This stack is CPU-only (no cuda
-  # package; cuda is optional/commented in the torch_* recipes), so install the
-  # CPU build from PyTorch's CPU index.  "==${PKGVERSION}" matches the
-  # "${PKGVERSION}+cpu" local-version wheel published there (PEP 440).
+  # The default PyPI torch Linux wheel is CUDA-enabled and hard-fails on a CPU-only host
+  # (and pulls nvidia-* packages bits lacks); this stack is CPU-only, so install the CPU
+  # build from PyTorch's CPU index. "==${PKGVERSION}" matches the "+cpu" local-version wheel.
   "${PYTHON_EXE}" -m pip install \
     --no-deps --ignore-installed \
     --root=/ --prefix="${INSTALLROOT}" \
@@ -47,16 +44,9 @@ function MakeInstall() {
   fi
 }
 function PostInstall() {
-  # PyTorch ships its CMake config (TorchConfig.cmake + the Caffe2 configs it
-  # pulls in) inside the pip site-packages tree, not under <prefix>/{lib,share}/
-  # cmake. Consumers must point find_package(Torch) directly at that dir via
-  # Torch_DIR (see the torch consumer recipes), because:
-  #   * a dependency's modulefile setenv does NOT reach a consumer's *build* env;
-  #   * a symlink under <prefix>/share/cmake makes find_package locate the config
-  #     but breaks Caffe2Targets.cmake, which derives its install prefix by going
-  #     UP from the cmake dir and would then look for the libs under <prefix>/lib
-  #     instead of the real .../site-packages/torch/lib.
-  # Expose Torch_DIR via the modulefile here for runtime `module load` use.
+  # PyTorch ships its CMake config (TorchConfig/Caffe2) inside the pip site-packages tree,
+  # not <prefix>/*/cmake; consumers must point find_package(Torch) there via Torch_DIR (a
+  # dep modulefile setenv doesn't reach their build env, and a symlink breaks Caffe2Targets).
   PYVER=$(python3 -c 'import sys; print("python%d.%d" % sys.version_info[:2])' 2>/dev/null || echo python3)
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << MODEOF
 setenv Torch_DIR \$PKG_ROOT/lib/${PYVER}/site-packages/torch/share/cmake/Torch

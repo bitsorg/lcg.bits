@@ -14,11 +14,9 @@ sources:
 requires:
   - CMake
   - Clang
-# macOS: IWYU builds against a specific LLVM via find_package(LLVM), but the
-# system Apple clang ships no LLVMConfig.cmake. Source IWYU from Homebrew
-# (include-what-you-use, built against brew llvm) instead — it's a standalone
-# CLI tool with no consumers. prefer_system gated osx.* so Linux keeps building
-# 0.24 against the bits Clang below.
+# macOS: IWYU builds against a specific LLVM via find_package(LLVM), but Apple
+# clang ships no LLVMConfig.cmake. Source IWYU from Homebrew (built against brew
+# llvm) instead - standalone CLI, no consumers. Linux keeps building 0.24 below.
 prefer_system: "osx.*"
 homebrew_formula: include-what-you-use
 prefer_system_check: |

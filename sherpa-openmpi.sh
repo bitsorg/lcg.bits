@@ -37,18 +37,16 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 export SWIG="${SWIG_ROOT}/bin/swig"
 export SWIG_LIB="$(bits_swig_lib)"
-# Put OpenMPI's compilers on PATH so Sherpa's find_package(MPI) locates mpicxx.
-# PATH alone isn't enough: FindMPI also runs a compile+link test (MPI_*_WORKS),
-# and the relocated mpicc/mpicxx/mpifort wrappers can't find their plugins/config
-# without OPAL_PREFIX, so the test fails ("Could NOT find MPI ... MPI_*_WORKS").
+# Put OpenMPI's compilers on PATH so find_package(MPI) finds mpicxx. FindMPI also runs a
+# compile+link test (MPI_*_WORKS); the relocated wrappers need OPAL_PREFIX to find their
+# plugins/config, or the test fails ("Could NOT find MPI").
 export PATH="${OPENMPI_ROOT}/bin:${PATH}"
 export OPAL_PREFIX="${OPENMPI_ROOT}"
 ##############################
 function Configure() {
-  # Sherpa 3 (CMake) with the MPI backend enabled. Otherwise identical to the
-  # plain sherpa recipe; see sherpa.sh. MCFM is gated off on macOS (see mcfm.sh);
-  # when its edge is dropped MCFM_ROOT is unset, so disable it. On Linux MCFM_ROOT
-  # is set -> _mcfm=ON (as before).
+  # Sherpa 3 (CMake) with the MPI backend; otherwise identical to the plain sherpa recipe.
+  # MCFM is gated off on macOS, so when MCFM_ROOT is unset disable it; on Linux MCFM_ROOT
+  # is set -> _mcfm=ON.
   local _mcfm=OFF; [ -n "${MCFM_ROOT:-}" ] && _mcfm=ON
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \

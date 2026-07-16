@@ -32,11 +32,9 @@ prefer_system_check: |
   EOF
 env:
   CCACHE_CONFIGPATH: "$GCC_TOOLCHAIN_ROOT/etc/ccache.conf"
-  # Highest C++ standard this compiler supports, exported as a bare number for
-  # downstream recipes (e.g. -DCMAKE_CXX_STANDARD=$CXXSTD). When built from
-  # source the recipe records it in etc/cxxstd; on the prefer_system path that
-  # file is absent, so probe the system g++/c++ directly. No '%' or '"' chars,
-  # so bits' env templating leaves the command substitution intact.
+  # Highest C++ standard this compiler supports, as a bare number for downstream
+  # recipes (-DCMAKE_CXX_STANDARD=$CXXSTD). Source builds record it in etc/cxxstd;
+  # on prefer_system that's absent, so probe g++/c++ directly. No '%' or '"' chars.
   CXXSTD: "$( f=$GCC_TOOLCHAIN_ROOT/etc/cxxstd; if [ -r $f ]; then cat $f; else c=$(command -v g++ || command -v c++ || echo g++); r=23; for s in 23 20 17; do printf 'int main(){}' | $c -std=c++$s -fsyntax-only -x c++ - >/dev/null 2>&1 && { r=$s; break; }; done; echo $r; fi )"
 ---
 # Fix syntax highlight
@@ -64,13 +62,9 @@ esac
 
 rsync -a --exclude='**/.git' --delete --delete-excluded "$SOURCEDIR/" ./
 
-# The C++17 ISL test files use isl::id(ctx,name,user_ptr) and .try_user<T>()/
-# .user<T>(), which are only declared in isl/cpp.h under __cplusplus>=201703L.
-# GCC's top-level bootstrap pins CXX to -std=c++14, but these check_PROGRAMS
-# get compiled during `all`, so they fail to find the C++17-only API. They are
-# self-tests and irrelevant to the produced compiler, so strip their references
-# from Makefile.am and the pre-generated Makefile.in (so autoreconf is not
-# required). See bits-build isl_test_cpp17 failure.
+# The ISL C++17 self-tests need the C++17-only isl/cpp.h API, but GCC's bootstrap
+# pins CXX to -std=c++14, so they fail during `all`. They're irrelevant to the
+# produced compiler, so strip their refs from Makefile.am/.in (avoids autoreconf).
 for _isl_mk in gcc/isl/Makefile.am gcc/isl/Makefile.in; do
   [[ -f "$_isl_mk" ]] && sed -i '/isl_test_cpp17/d' "$_isl_mk" || true
 done
@@ -165,10 +159,9 @@ rm -f a.out
 # Build a very basic CMake, to compile ccache and nothing else
 # in case we manage, we build ccache
 if [ -e ccache ]; then
-  # ccache is an optional, default-disabled accelerator. Some alisw/gcc-toolchain
-  # tags ship a ccache whose CMake fails ("No SOURCES given to target:
-  # ccache_framework"); that must NOT abort the whole toolchain — gcc itself is
-  # already built and installed above. Build ccache best-effort.
+  # ccache is an optional, default-disabled accelerator. Some tags ship a ccache
+  # whose CMake fails, which must NOT abort the whole toolchain (gcc is already
+  # built above). Build ccache best-effort.
   if ( set -e
   mkdir -p build-cmake
   pushd build-cmake
@@ -197,12 +190,9 @@ EOF
   # with libstdc++ compatibility.
   mkdir build-ccache
   pushd build-ccache
-    # Disable ccache's Redis storage backend: it pulls in hiredis, which ccache's
-    # CMake fetches from GitHub via FetchContent when no system hiredis is found.
-    # That live download makes the build non-reproducible and network-dependent
-    # (it failed here with an HTTP 504). A compile cache needs no Redis backend,
-    # so turn it off entirely; HIREDIS_FROM_INTERNET=OFF is a belt-and-suspenders
-    # against any residual fetch path (unknown -D options are harmlessly ignored).
+    # Disable ccache's Redis backend: it pulls in hiredis, which ccache's CMake
+    # fetches from GitHub via FetchContent (non-reproducible, network-dependent).
+    # A compile cache needs no Redis; HIREDIS_FROM_INTERNET=OFF guards residual fetch.
     $BUILDDIR/bootstrap-cmake/bin/cmake -S ../ccache \
         -DENABLE_DOCUMENTATION=OFF                   \
         -DENABLE_TESTING=OFF                         \
@@ -305,10 +295,9 @@ rm -fr "$INSTALLROOT"/include/sim
 # http://ewontfix.com/12/
 # https://sources.gentoo.org/cgi-bin/viewvc.cgi/gentoo-x86/eclass/toolchain.eclass?view=markup&sortby=log#l1524
 
-# Record the highest C++ standard the freshly built compiler accepts, so the
-# package environment can export CXXSTD to downstream recipes (single source of
-# truth, instead of hardcoding -std/CXXSTD in the defaults profile). Probe from
-# newest to oldest and keep the first that compiles.
+# Record the highest C++ standard the freshly built compiler accepts, so the env
+# can export CXXSTD to downstream recipes (single source of truth). Probe newest
+# to oldest and keep the first that compiles.
 mkdir -p "$INSTALLROOT/etc"
 _cxxstd=23
 for _s in 23 20 17; do

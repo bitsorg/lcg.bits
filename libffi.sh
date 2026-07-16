@@ -5,10 +5,9 @@ source: https://github.com/libffi/libffi
 tag: "v%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
-# macOS: libffi 3.4.2's aarch64 sysv.S fails on Apple's assembler ("invalid CFI
-# advance_loc expression"), so source it from Homebrew (libffi) instead — a very
-# stable, low-level system library (macOS even ships one in the SDK). Gated
-# osx.* so Linux keeps building from source below.
+# macOS: libffi 3.4.2's aarch64 sysv.S fails on Apple's assembler, so source it
+# from Homebrew (libffi) - a very stable low-level lib (the SDK even ships one).
+# Gated osx.* so Linux keeps building from source below.
 prefer_system: "osx.*"
 homebrew_formula: libffi
 prefer_system_check: |

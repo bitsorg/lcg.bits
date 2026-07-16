@@ -7,9 +7,8 @@ mkdir -p $INSTALLROOT/bin
 # Install the bits-include launcher into bin/.
 install $SOURCEDIR/bits-* $INSTALLROOT/bin
 # Install every recipe-tool helper (top-level regular files) into the package
-# root so recipes can source them via `bits-include <Name>`.  Iterating over all
-# files instead of matching a name pattern (e.g. *Recipe) means new helpers such
-# as BitsArch are picked up automatically without editing this recipe.
+# root so recipes can source them via `bits-include <Name>`. Iterating over all
+# files (not a name pattern) picks up new helpers without editing this recipe.
 for _f in "$SOURCEDIR"/*; do
   [ -f "$_f" ] || continue
   case "$(basename "$_f")" in

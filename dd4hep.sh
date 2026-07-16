@@ -14,9 +14,8 @@ requires:
   - pytest
   - LCIO
   - tbb
-  # Geant4 is required for the DDG4 simulation component. Without it DD4hep does
-  # not build/install DDG4, so every downstream key4hep package that does
-  # find_package(DD4hep COMPONENTS ... DDG4) fails with
+  # Geant4 is required for the DDG4 simulation component; without it DD4hep skips
+  # DDG4 and downstream key4hep packages fail with
   # "Did not find required component: DDG4" (k4geo, k4mljettagger, ...).
   - Geant4
   # EDM4hep / HepMC3 I/O backends, enabled in the LCG key4hep stack.
@@ -53,11 +52,6 @@ function Configure() {
     -DDD4HEP_BUILD_EXAMPLES=OFF \
     -DBUILD_DOCS=OFF
 }
-# NOTE: DD4HEP_USE_EDM4HEP is intentionally OFF. DD4hep v01-35's EDM4hep I/O
-# (DDG4/edm4hep, DDDigi) targets an older podio API -- against this stack's podio
-# it fails to compile ("no matching function for podio::GenericParameters::
-# getKeys<int>()", "edm4hep_read_frame_t(std::unique_ptr<podio::ROOTFrameData>)").
-# The DDG4 simulation component that downstream key4hep packages need (k4geo etc.)
-# does not depend on DD4hep's EDM4hep reader, so we drop that backend rather than
-# fail the whole build. Re-enabling it requires aligning the DD4hep and podio
-# versions (newer DD4hep, or the podio that v01-35 expects).
+# NOTE: DD4HEP_USE_EDM4HEP is intentionally OFF: v01-35's EDM4hep I/O targets an
+# older podio API and fails to compile against this stack's podio. DDG4 (needed
+# downstream) doesn't use that reader; re-enabling needs aligned DD4hep/podio.

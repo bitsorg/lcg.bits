@@ -34,16 +34,9 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # gcc15 fix: CepGen wraps the extern "C" declarations of its Fortran COMMON
-  # blocks (ktkin_, kincuts_, genparams_, evtkin_, constants_) in an anonymous
-  # namespace. Under gcc15 that gives them internal C++ linkage
-  # ((anonymous namespace)::ktkin_) instead of the plain C symbols the Fortran
-  # side (Process/Fortran/cepgen_print.f) defines, so libCepGen.so ends up with
-  # undefined references to them. Unwrap that one anonymous-namespace block so
-  # the externs regain C linkage. Idempotent (the regex only matches the wrapped
-  # form) and whitespace-tolerant. Patch the build COPY ($BITS_CMAKE_SRC), not the
-  # read-only $SOURCEDIR — the out-of-source build compiles the copy, so patching
-  # $SOURCEDIR would have no effect on what is linked.
+  # gcc15 fix: CepGen wraps its Fortran COMMON-block extern "C" decls in an
+  # anonymous namespace, giving them internal linkage so libCepGen.so has undefined
+  # refs. Unwrap that block (idempotent). Patch the build COPY, not $SOURCEDIR.
   python3 - "$BITS_CMAKE_SRC/CepGen/Process/FortranFactorisedProcess.cpp" <<'PY'
 import re, sys
 f = sys.argv[1]
@@ -60,10 +53,9 @@ if pat.search(s):
 else:
     print("cepgen: anonymous-namespace block not found (already patched / upstream changed)")
 PY
-  # macOS: CepGen's subdir include globs make <math.h> resolve to Utils/Math.h on
-  # a case-insensitive FS, so point EXT_HEADERS at the project root. Also drop
-  # -lstdc++fs (in Apple libc++) and link libTauolaFortran (rmarin_) into PhotosTauola.
-  # Patch the build COPY ($BITS_CMAKE_SRC), not read-only $SOURCEDIR.
+  # macOS: subdir include globs make <math.h> resolve to Utils/Math.h on a
+  # case-insensitive FS, so point EXT_HEADERS at the project root. Also drop
+  # -lstdc++fs (in Apple libc++) and link libTauolaFortran into PhotosTauola.
   if bits_is_macos; then
     local _ptw="${BITS_CMAKE_SRC}/CepGenAddOns/PhotosTauolaWrapper/CMakeLists.txt"
     bits_file_replace "${BITS_CMAKE_SRC}/CepGen/CMakeLists.txt" \

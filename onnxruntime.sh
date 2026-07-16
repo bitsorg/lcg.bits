@@ -34,10 +34,9 @@ _ORT_CONFIG="Release"
 _ORT_BUILDDIR="build"
 ##############################
 function Make() {
-  # Drive onnxruntime's build (CMake configure, compile, capi info, python wheel)
-  # with the bits Python so the wheel sees our deps via PYTHONPATH.
-  # --allow_running_as_root is Linux-only in build.py, so pass it on non-Darwin
-  # only. getconf replaces nproc (which is absent on macOS).
+  # Drive onnxruntime's build with the bits Python so the wheel sees our deps via
+  # PYTHONPATH. --allow_running_as_root is Linux-only in build.py, so pass it on
+  # non-Darwin only; getconf replaces nproc (absent on macOS).
   local _extra=()
   [ "$(uname)" != Darwin ] && _extra+=(--allow_running_as_root)
   "${PYTHON_EXE}" tools/ci_build/build.py \
