@@ -90,6 +90,7 @@ pushd build-binutils
                         --enable-plugins                       \
                         --enable-threads                       \
                         --enable-gprofng=no                    \
+                        --disable-werror                       \
                         --disable-nls
   make ${JOBS:+-j$JOBS} MAKEINFO=":"
   make install MAKEINFO=":"
@@ -123,14 +124,32 @@ popd
 [ -d isl ] && (cd isl && autoreconf -ivf)
 [ -d cloog ] && (cd cloog && autoreconf -ivf)
 
+# GCC <=14 ships a libsanitizer that references `struct termio`, which modern
+# glibc has removed — the sanitizer library then fails to compile (incomplete
+# type). Probe the build glibc and disable libsanitizer ONLY when termio is gone,
+# so sanitizers are kept on older distros and the compiler still builds on the
+# newest ones (GCC 15 fixed this upstream). Best-effort: if the probe compiler is
+# missing we leave libsanitizer enabled.
+LIBSAN_FLAG=
+if command -v "${CC:-gcc}" >/dev/null 2>&1 &&
+   ! printf '#include <sys/ioctl.h>\n#include <termios.h>\nint main(){return (int)sizeof(struct termio);}\n' \
+     | "${CC:-gcc}" -x c - -o /dev/null >/dev/null 2>&1; then
+  echo "[toolchain] system glibc has no 'struct termio' -> configuring GCC with --disable-libsanitizer"
+  LIBSAN_FLAG=--disable-libsanitizer
+fi
+
 mkdir build-gcc
 pushd build-gcc
+  # --disable-werror: newer host compilers emit more warnings; a bootstrap must
+  # not turn them into fatal errors (mirrors binutils above).
   ../gcc/configure --prefix="$INSTALLROOT"                          \
                    ${MARCH:+--build=$MARCH --host=$MARCH}           \
                    --enable-languages="c,c++,fortran${EXTRA_LANGS}" \
                    --disable-multilib                               \
                    --enable-ld=default                              \
                    --enable-lto                                     \
+                   --disable-werror                                 \
+                   ${LIBSAN_FLAG}                                   \
                    --disable-nls
   make ${JOBS:+-j$JOBS} bootstrap-lean MAKEINFO=":"
   make install MAKEINFO=":"
