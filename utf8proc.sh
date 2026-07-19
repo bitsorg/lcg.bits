@@ -19,8 +19,12 @@ license: MIT
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
+  # utf8proc's CMakeLists uses GNUInstallDirs, which resolves to lib64 on el9/el10
+  # and drops libutf8proc.so there; poco (and the stack convention — utf8cpp,
+  # pcre2, and ~two dozen other recipes) expect it in lib. Pin libdir to lib.
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DBUILD_SHARED_LIBS=ON
 }
