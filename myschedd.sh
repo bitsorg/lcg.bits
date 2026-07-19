@@ -18,18 +18,15 @@ license: Apache-2.0
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  # go 1.12.5 builds in GOPATH mode, and myschedd imports its own
-  # gitlab.cern.ch/batch-team/myschedd/cmd package, so the source must sit at
-  # $GOPATH/src/<import-path> for the self-import to resolve. The unpacked
-  # tarball is a bare directory, so stage it into a throwaway GOPATH and build
-  # from there (GO111MODULE=off keeps 1.12 in classic GOPATH mode).
-  local ip="gitlab.cern.ch/batch-team/myschedd"
-  local out="$PWD/myschedd" gp
-  gp="$(mktemp -d)"
-  export GOPATH="$gp" GO111MODULE=off
-  mkdir -p "$GOPATH/src/$(dirname "$ip")"
-  cp -a "$PWD" "$GOPATH/src/$ip"
-  ( cd "$GOPATH/src/$ip" && GODEBUG=netdns=cgo go build -o "$out" )
+  # myschedd is a Go modules project (go.mod/go.sum) with third-party deps and no
+  # vendored tree, so it builds in module mode — GOPATH mode cannot resolve the
+  # deps. go 1.12 resolves modules by direct VCS fetch, so this needs network:
+  # github.com plus gitlab.cern.ch (negotiate, wtfis — both anonymously
+  # readable); go.sum verifies integrity. Point the module cache at a writable
+  # throwaway GOPATH, since the toolchain's own GOPATH may be read-only.
+  export GO111MODULE=on
+  export GOPATH="$(mktemp -d)"
+  GODEBUG=netdns=cgo go build -o myschedd
 }
 
 function MakeInstall() {
