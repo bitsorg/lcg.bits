@@ -20,17 +20,19 @@ license: BSD-3-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # macOS: gflags writes ~/.cmake/packages/gflags (user package registry) at
-  # install, outside the sandbox, so install fails. The registry isn't needed
-  # (consumers find gflags via CMAKE_PREFIX_PATH), so disable both registrations.
-  local _gflags_noreg=()
-  bits_is_macos && _gflags_noreg=(-DREGISTER_INSTALL_PREFIX=OFF -DREGISTER_BUILD_PREFIX=OFF)
+  # gflags writes ~/.cmake/packages/gflags (the CMake user package registry) at
+  # install time. In the build sandbox HOME is unset, so this resolves to
+  # //.cmake/packages/gflags and the install fails ("cannot create directory").
+  # The registry isn't needed (consumers find gflags via CMAKE_PREFIX_PATH), so
+  # disable it on every platform (previously macOS-only, but el9/el10 hit the
+  # same empty-HOME failure).
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-    "${_gflags_noreg[@]}" \
+    -DREGISTER_INSTALL_PREFIX=OFF \
+    -DREGISTER_BUILD_DIR=OFF \
     -DBUILD_SHARED_LIBS=ON \
     -DBUILD_STATIC_LIBS=ON \
     -DBUILD_gflags_LIB=ON
