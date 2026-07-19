@@ -26,13 +26,14 @@ function Configure() { :; }
 function Make() {
   cmake -E make_directory $INSTALLROOT/bin $INSTALLROOT/pkg $INSTALLROOT/src/github.com/cosmos72/gomacro/
   cmake -E copy_directory $SOURCEDIR $INSTALLROOT/src/github.com/cosmos72/gomacro/
-  if bits_is_macos; then
-    # macOS Go runs GOPATH mode and defaults to ~/go; point GOPATH at INSTALLROOT plus the go_* dep roots
-    export GOROOT="${GO_ROOT}"
-    export GOPATH="${INSTALLROOT}${GO_LINER_ROOT:+:${GO_LINER_ROOT}}${GO_RUNEWIDTH_ROOT:+:${GO_RUNEWIDTH_ROOT}}"
-    ( cd "$INSTALLROOT/src/github.com/cosmos72/gomacro/" && PATH="${GO_ROOT}/bin:${PATH}" go install )
-  else
-    cmake -E chdir $INSTALLROOT/src/github.com/cosmos72/gomacro/ go install
-  fi
+  # gomacro builds in classic GOPATH mode (it self-imports
+  # github.com/cosmos72/gomacro/cmd), so GOPATH must contain INSTALLROOT — where
+  # the source tree is staged — plus the go_* dependency roots. Set it on every
+  # platform: previously only the macOS branch did, so the Linux build fell back
+  # to the default GOPATH and could not resolve the self-import.
+  export GOROOT="${GO_ROOT}"
+  export GOPATH="${INSTALLROOT}${GO_LINER_ROOT:+:${GO_LINER_ROOT}}${GO_RUNEWIDTH_ROOT:+:${GO_RUNEWIDTH_ROOT}}"
+  export GO111MODULE=off
+  ( cd "$INSTALLROOT/src/github.com/cosmos72/gomacro/" && PATH="${GO_ROOT}/bin:${PATH}" go install )
 }
 function MakeInstall() { :; }
