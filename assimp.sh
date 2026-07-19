@@ -23,6 +23,7 @@ function Configure() {
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS="-Wno-tautological-compare -Wno-sizeof-pointer-memaccess" \
+    -DASSIMP_WARNINGS_AS_ERRORS=OFF \
     -DCMAKE_CXX_STANDARD=17 \
     -DBUILD_SHARED_LIBS=1 \
     -DASSIMP_BUILD_TESTS=OFF \
