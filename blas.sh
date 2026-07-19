@@ -23,6 +23,7 @@ function Configure() {
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     -DBUILD_SHARED_LIBS=ON
 }
 function Make() {

@@ -50,7 +50,11 @@ function Make() {
   # headers are present. Anchor on -DGPU_BLAS (may sit in indented ifeq blocks).
   find . -name "*.mk" -print0 | xargs -0 perl -i -pe 's/ *-DGPU_BLAS//g'
   local _inc="${MPFR_ROOT:+-I${MPFR_ROOT}/include} ${GMP_ROOT:+-I${GMP_ROOT}/include}"
-  local _libs="-L${INSTALLROOT}/lib ${MPFR_ROOT:+-L${MPFR_ROOT}/lib} ${GMP_ROOT:+-L${GMP_ROOT}/lib}"
+  # -L$PWD/lib: SuiteSparse builds libsuitesparseconfig into the source tree's
+  # lib/ first and the modules link -lsuitesparseconfig from there; our LDFLAGS
+  # override would otherwise drop that internal search path (cannot find
+  # -lsuitesparseconfig). INSTALLROOT/lib is empty until the install step.
+  local _libs="-L${INSTALLROOT}/lib -L$PWD/lib ${MPFR_ROOT:+-L${MPFR_ROOT}/lib} ${GMP_ROOT:+-L${GMP_ROOT}/lib}"
   local _blas="${BLAS_ROOT:+-L${BLAS_ROOT}/lib} -lopenblas"
   make ${JOBS:+-j $JOBS} ${CC:+CC=$CC} ${_inc:+CFLAGS="$_inc"} ${_libs:+LDFLAGS="$_libs"}
   make ${JOBS:+-j $JOBS} install ${CC:+CC=$CC} ${_inc:+CFLAGS="$_inc"} ${_libs:+LDFLAGS="$_libs"} \
