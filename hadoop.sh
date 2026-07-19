@@ -10,6 +10,7 @@ requires:
   - CMake
   - maven
   - protobuf
+  - java
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -25,10 +26,11 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() { :; }
 function Make() {
-  # HadoopJNI.cmake requires JAVA_HOME to locate jni.h; Maven itself works
-  # without it (finds java via PATH) but the internal cmake call does not.
-  [ -z "$JAVA_HOME" ] && \
-    export JAVA_HOME="$(readlink -f /usr/bin/java | xargs dirname | xargs dirname)"
+  # Maven needs a real JDK and HadoopJNI.cmake needs JAVA_HOME to locate jni.h.
+  # Use the bits java package (JAVA_ROOT): there is no system /usr/bin/java on
+  # el9/el10, so the old derivation left JAVA_HOME=/usr (not a JDK) and Maven
+  # aborted ("JAVA_HOME is not defined correctly").
+  export JAVA_HOME="${JAVA_HOME:-${JAVA_ROOT}}"
   mvn package -Pdist -DskipTests -Dmaven.javadoc.skip=true
   mvn -f hadoop-client-modules/hadoop-client/pom.xml install -Dgpg.skip=true dependency:copy-dependencies
   cmake -E copy_directory hadoop-dist/target/hadoop-3.3.6 $INSTALLROOT \
