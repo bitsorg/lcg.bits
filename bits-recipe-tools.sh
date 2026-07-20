@@ -1,5 +1,6 @@
 package: bits-recipe-tools
 version: "0.0.32"
+license: GPL-3.0-or-later
 tag: "v0.0.32"
 source: https://github.com/bitsorg/bits-recipe-tools
 ---

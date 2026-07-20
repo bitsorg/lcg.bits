@@ -10,7 +10,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-redistributable: false
 ---
 #!/bin/bash -e
 ##############################

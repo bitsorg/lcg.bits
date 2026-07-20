@@ -1,5 +1,8 @@
 package: Toolchain
 version: "%(tag_basename)s"
+# System shim: probes/wraps host-provided components; nothing of the
+# wrapped software itself is built or redistributed (2026-07-20 ruling).
+license: NOASSERTION
 tag: v1.0
 build_requires:
   - "GCC-Toolchain:(?!osx)"

@@ -41,7 +41,7 @@ prefer_system_replacement_specs:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-ImageMagick
+license: ImageMagick
 ---
 #!/bin/bash -e
 ##############################

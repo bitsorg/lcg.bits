@@ -12,6 +12,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-GuineaPig
+# likely redistributable (CERN) — pending author verification (2026-07-20 license ruling): build and private-store reuse are
+# fine, but this package must never be laid into a public CVMFS tree.
+redistributable: false
 ---
 #!/bin/bash -e
 ##############################

@@ -16,6 +16,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-KKMC-ee
+# CPC Program Library non-profit licence — no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
+# fine, but this package must never be laid into a public CVMFS tree.
+redistributable: false
 patches:
   - kkmcee-5.01.00.patch
 ---

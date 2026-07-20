@@ -10,7 +10,7 @@ sources:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-gnuplot
+license: gnuplot
 ---
 #!/bin/bash -e
 ##############################

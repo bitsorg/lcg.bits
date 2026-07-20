@@ -10,6 +10,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-Ampt
+# academic-use licence with no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
+# fine, but this package must never be laid into a public CVMFS tree.
+redistributable: false
 patches:
   - ampt-2.26t9b_atlas.patch
 ---

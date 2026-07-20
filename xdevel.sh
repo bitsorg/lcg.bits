@@ -1,5 +1,8 @@
 package: Xdevel
 version: "1.0"
+# System shim: probes/wraps host-provided components; nothing of the
+# wrapped software itself is built or redistributed (2026-07-20 ruling).
+license: NOASSERTION
 system_requirement_missing: |
   Please install X development packages on your system.
    * On RHEL-compatible systems you probably need: libX11-devel libXpm-devel libXext-devel libXft-devel
