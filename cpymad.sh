@@ -13,7 +13,10 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-MAD-X
+# cpymad itself is Apache-2.0; the linked MAD-X was verified MIT / open source
+# under CERN copyright by the 2026-07-16 license review (see madx.sh), retiring
+# the old LicenseRef-MAD-X restriction.
+license: Apache-2.0
 acknowledgment: "MAD-X is CERN Copyright - MIT License."
 ---
 #!/bin/bash -e
