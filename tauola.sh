@@ -14,7 +14,7 @@ build_requires:
 license: LicenseRef-TAUOLA
 # CPC Program Library non-profit licence — no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
-redistributable: false
+redistributable: none
 patches:
   - tauola-28.121.2.patch
 ---

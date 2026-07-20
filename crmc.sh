@@ -13,7 +13,7 @@ build_requires:
 license: LicenseRef-CRMC
 # possibly open source — treat as external until the license is verified (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
-redistributable: false
+redistributable: none
 patches:
   - crmc-2.0.1p5.patch
 ---

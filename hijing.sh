@@ -10,7 +10,7 @@ build_requires:
 license: LicenseRef-HIJING
 # academic-use licence with no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
-redistributable: false
+redistributable: none
 patches:
   - hijing-1.383bs.2.patch
 ---

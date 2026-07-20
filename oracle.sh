@@ -10,7 +10,7 @@ build_requires:
 license: LicenseRef-Oracle
 # Oracle Instant Client (OTN): handled as an external dependency, not bundled with the stack (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
-redistributable: false
+redistributable: none
 ---
 #!/bin/bash -e
 ##############################

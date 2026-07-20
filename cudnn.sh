@@ -12,7 +12,7 @@ build_requires:
 license: LicenseRef-NVIDIA-cuDNN
 # NVIDIA cuDNN EULA: only permitted runtime files are redistributable, the full package is not (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
-redistributable: false
+redistributable: none
 ---
 #!/bin/bash -e
 ##############################
