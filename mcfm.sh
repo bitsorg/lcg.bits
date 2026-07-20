@@ -28,13 +28,25 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   bits_is_macos && { mkdir -p "${INSTALLROOT}"; return 0; }
+  # Linux: mcfm links libLHAPDF.so, which was built with the GCC-Toolchain (GCC 14)
+  # and therefore references GLIBCXX_3.4.3x / CXXABI_1.3.15. Put the toolchain's
+  # libstdc++ on the link line, else ld resolves against the older EL9 system one
+  # and fails with "undefined reference to std::ios_base_library_init()@GLIBCXX_3.4.32"
+  # / "__cxa_call_terminate@CXXABI_1.3.15" when linking mcfm and libmcfm.so.
+  # lib64 first, then lib, to cover either multilib layout.
+  local _ld=()
+  if [ -n "${GCC_TOOLCHAIN_ROOT:-}" ]; then
+    _ld+=(-DCMAKE_EXE_LINKER_FLAGS="-L${GCC_TOOLCHAIN_ROOT}/lib64 -L${GCC_TOOLCHAIN_ROOT}/lib")
+    _ld+=(-DCMAKE_SHARED_LINKER_FLAGS="-L${GCC_TOOLCHAIN_ROOT}/lib64 -L${GCC_TOOLCHAIN_ROOT}/lib")
+  fi
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
     -Duse_internal_lhapdf=OFF \
     -Dlhapdf_include_path="${LHAPDF_ROOT}/include" \
-    -Dwith_library=ON
+    -Dwith_library=ON \
+    "${_ld[@]}"
 }
 function Make() {
   # macOS: gated off (see above).
