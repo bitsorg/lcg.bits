@@ -21,6 +21,10 @@ requires:
   - pythia8
   - qqvvamp
   - recola
+  # Listed explicitly (not just transitively via recola) because the process
+  # sub-builds read RECOLASM_*_ROOT_DIR from these packages' roots.
+  - recola_SM
+  - recola_SM_ATGC_WARSAW
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -31,6 +35,13 @@ license: MIT
 . $(bits-include CMakeRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
+##############################
+# Each process is a nested ExternalProject, i.e. a separate cmake run that inherits
+# the environment but not the outer cache — so these must be env vars, not -D flags
+# (lcgcmake sets the same three via LCGPackage_Add ENVIRONMENT).
+export PHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}"
+export RECOLASM_ROOT_DIR="${RECOLA_SM_ROOT}"
+export RECOLASM_ATGC_WARSAW_ROOT_DIR="${RECOLA_SM_ATGC_WARSAW_ROOT}"
 ##############################
 function Configure() {
   # No-op: the tarball has no top-level CMakeLists.txt (the project lives in
