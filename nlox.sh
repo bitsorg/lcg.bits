@@ -1,7 +1,10 @@
 package: nlox
 description: NLox one-loop matrix element provider library
-version: "1.2.2.atlas7"
-tag: "1.2.2.atlas7"
+# atlas7's bundled QCDLoop external stopped configuring (its extracted source
+# no longer matches the sed-on-makefile step); atlas9 is the current drop in
+# the same MCGeneratorsTarFiles directory.
+version: "1.2.2.atlas9"
+tag: "1.2.2.atlas9"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
 requires:
