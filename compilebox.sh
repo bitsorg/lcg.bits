@@ -32,13 +32,21 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function Configure() {
+  # No-op: the tarball has no top-level CMakeLists.txt (the project lives in
+  # COMPILEBOX/), and Make() below runs its own cmake once the process tarball is
+  # unpacked. The inherited CMakeRecipe Configure would just fail on src/.
+  true
+}
 function Make() {
   # Extracts process tarballs and writes generated sources back, so operate on the
   # private rsync'd copy ($PWD), never read-only SOURCES. gen_url is the LCG
   # MCGenerators mirror; author=ATLASOTF-08-11 (the LCG author tag).
   local gen_url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
   local author="ATLASOTF-08-11"
-  wget "${gen_url}/compilebox-processes-${author}.tar.gz" \
+  # curl, not wget: the builder images ship curl (alpgen's Prepare relies on it)
+  # but do not guarantee wget.
+  curl -fSLO "${gen_url}/compilebox-processes-${author}.tar.gz" \
   && tar xvf "compilebox-processes-${author}.tar.gz" -C "$PWD/COMPILEBOX/" \
   && cmake -DCMAKE_BUILD_TYPE=Release -DLOCAL_SOURCE="$PWD/COMPILEBOX/compilebox-processes-${author}" -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" -DDESTINATION="$PWD/COMPILEBOX_PROCESSES/" -DCMAKE_CXX_STANDARD=17 "$PWD/COMPILEBOX" \
   && cp "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-V2/zlibdummy.c" "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-RES/zlibdummy.c"
