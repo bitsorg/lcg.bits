@@ -41,6 +41,10 @@ function Prepare() {
   find . -name alputi.f -exec perl -i -pe \
     's/CHARACTER TITLE\*25,BOOK\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,NOW*25/; s/CHARACTER TITLE\*25,BOOK\*3,SCALE\*3,NOW\*24/CHARACTER TITLE*25,BOOK*3,SCALE*3,NOW*25/' \
     {} \;
+  # The default target's 'pack' rule typesets DOCS/alpdoc with pdflatex, which the
+  # build containers don't ship (it only worked on the old native Ubuntu host). The
+  # manual is not installed either way, so blank out the pdflatex recipe lines.
+  find . -name Makefile -exec perl -i -pe 's/^\t.*pdflatex.*$/\ttrue/' {} \;
 }
 
 function Make() {

@@ -27,11 +27,16 @@ function Configure() {
   # SWIG/SWIG_LIB must be visible for the python bindings; tests and the PDF
   # download are off (the latter needs network, only used by the test suite).
   export SWIG="${SWIG_ROOT}/bin/swig"
-  export SWIG_LIB="$(${SWIG_ROOT}/bin/swig -swiglib 2>/dev/null)"
-  # macOS: find_package(SWIG) ignores the env vars and swig's compiled-in dir is
-  # the gone build INSTALLROOT, so pass the relocated SWIG_DIR explicitly.
-  local _swig=()
-  bits_is_macos && _swig=(-DSWIG_EXECUTABLE="${SWIG}" -DSWIG_DIR="${SWIG_LIB}")
+  # `swig -swiglib` reports the build INSTALLROOT, which no longer exists after
+  # relocation — on every platform, not just macOS (it only showed up on Linux once
+  # the el9 container stopped supplying a system swig). Prefer the relocated tree,
+  # falling back to the binary for a system swig.
+  local _swiglib
+  _swiglib=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
+  _swiglib="${_swiglib:-$("${SWIG}" -swiglib 2>/dev/null)}"
+  export SWIG_LIB="${_swiglib%/}"
+  # find_package(SWIG) ignores the env vars, so hand it the same paths explicitly.
+  local _swig=(-DSWIG_EXECUTABLE="${SWIG}" -DSWIG_DIR="${SWIG_LIB}")
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

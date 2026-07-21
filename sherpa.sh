@@ -34,10 +34,14 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib"
 ##############################
 # Sherpa 3 builds Python bindings with SWIG; lcgcmake passes SWIG/SWIG_LIB to
-# both configure and make, so set them at recipe scope. bits_swig_lib returns
-# the relocated swiglib on macOS (identical to `swig -swiglib` on Linux).
+# both configure and make, so set them at recipe scope. Prefer the relocated tree
+# for SWIG_LIB: `swig -swiglib` reports the gone build INSTALLROOT on Linux too (it
+# surfaced once the el9 container stopped supplying a system swig); keep it as the
+# fallback for a system swig, whose compiled-in path is correct.
 export SWIG="${SWIG_ROOT}/bin/swig"
-export SWIG_LIB="$(bits_swig_lib)"
+SWIG_LIB="$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)"
+export SWIG_LIB="${SWIG_LIB:-$("${SWIG}" -swiglib 2>/dev/null)}"
+export SWIG_LIB="${SWIG_LIB%/}"
 ##############################
 function Configure() {
   # Sherpa 3.x switched autotools->CMake; flags mirror lcgcmake's sherpa>=3 (C++17 even on
