@@ -1,48 +1,22 @@
 package: git
-description: Git distributed version control system
-version: "2.49.0"
-source: https://github.com/git/git
-tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
-requires:
-  - curl
-  - expat
-# macOS: source Git from Homebrew. It's a standalone CLI (nothing links libgit),
-# so version drift is irrelevant (brew 2.54.x vs pinned 2.49.0). osx.* gate leaves
-# the Linux from-source build untouched.
-prefer_system: "osx.*"
-homebrew_formula: git
-prefer_system_check: |
-  #!/bin/bash
-  # Only runs on macOS (osx.* gate). Install on demand with `bits --brew`;
-  # otherwise HomebrewRecipe reports the missing formula at build time.
-  if [ "${BITS_BREW:-}" = "1" ] && ! brew --prefix git >/dev/null 2>&1; then
-    brew install git >&2 || true
-  fi
-  echo "bits_system_replace: git"
-prefer_system_replacement_specs:
-  git:
-    version: "homebrew"
-    build_requires:
-      - bits-recipe-tools
-    recipe: |
-      #!/bin/bash -e
-      MODULE_OPTIONS="--bin"
-      HOMEBREW_FORMULA=git
-      . $(bits-include HomebrewRecipe)
-build_requires:
-  - bits-recipe-tools
-  - "GCC-Toolchain:(?!osx)"
-license: GPL-2.0-only
+description: Git distributed version control system (used from the system; git must be on PATH)
+version: "system"
+# System shim: probes/wraps host-provided components; nothing of the
+# wrapped software itself is built or redistributed (2026-07-20 ruling).
+# Git is a prerequisite for bits itself (recipe checkout, source fetches), so
+# any host that can run bits already has it — building it from source is
+# pointless and only dragged curl/OpenSSL licence baggage into every stack.
+# Taken from the system on ALL platforms; the build aborts with the message
+# below in the (pathological) case it is missing.
+license: NOASSERTION
+system_requirement_missing: |
+  System git not found: 'git' is not on PATH.
+    * git is a prerequisite for bits itself, so it should already be present
+      on any build host. Install it with e.g.
+        RHEL/Alma:  dnf install git
+        Ubuntu:     apt install git
+        macOS:      xcode-select --install   (or: brew install git)
+system_requirement: ".*"
+system_requirement_check: |
+  command -v git >/dev/null 2>&1
 ---
-#!/bin/bash -e
-##############################
-. $(bits-include AutoToolsRecipe)
-##############################
-MODULE_OPTIONS="--bin --lib"
-##############################
-function Configure() {
-  make configure
-  ./configure --prefix=$INSTALLROOT --with-openssl --with-curl --with-expat --with-tcltk
-}
