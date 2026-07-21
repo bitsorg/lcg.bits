@@ -49,6 +49,35 @@ function Configure() {
   # unpacked. The inherited CMakeRecipe Configure would just fail on src/.
   true
 }
+function _SanitiseQCDLoop() {
+  # qcdloop.fnal.gov repacked QCDLoop-<ver>.tar.gz on macOS (June 2026): an AppleDouble
+  # entry (._QCDLoop-<ver>) now sits NEXT TO QCDLoop-<ver>/. With two top-level entries
+  # FetchContent stops stripping the top dir, so GETQCDLOOP's ff/ql globs come back empty
+  # ("No SOURCES given to target: qcdloop"). Same upstream bug as nlox.sh.
+  # Repack each requested version with a single top-level dir and point the macro at the
+  # local copy. Every step is best-effort: on failure the upstream URL is left untouched.
+  local _mod="$PWD/COMPILEBOX/cmake/Modules/COMPILEBOX.cmake" _dir="$PWD/qcdloop-clean"
+  local _vers _v _top _ok=0
+  [ -f "$_mod" ] || return 0
+  # || true: a no-match grep would abort the recipe under `set -e -o pipefail`.
+  _vers=$( { grep -rhoE 'GETQCDLOOP\( *[0-9][0-9.]*' "$PWD/COMPILEBOX_PROCESSES" "$PWD/COMPILEBOX" 2>/dev/null \
+             || true; } | grep -oE '[0-9][0-9.]*' | sort -u || true)
+  [ -n "$_vers" ] || { echo "NOTE: no GETQCDLOOP() call found — leaving the upstream URL" >&2; return 0; }
+  mkdir -p "$_dir"
+  for _v in $_vers; do
+    curl -fSL --retry 3 "https://qcdloop.fnal.gov/QCDLoop-${_v}.tar.gz" -o "$_dir/orig.tar.gz" || continue
+    rm -rf "$_dir/x" && mkdir -p "$_dir/x"
+    tar -xzf "$_dir/orig.tar.gz" -C "$_dir/x" --exclude='._*' --exclude='.DS_Store' || continue
+    _top=$(cd "$_dir/x" && ls -1 | head -1)
+    [ -n "$_top" ] || continue
+    tar -czf "$_dir/QCDLoop-${_v}-clean.tar.gz" -C "$_dir/x" "$_top" && _ok=1
+  done
+  [ "$_ok" = 1 ] || { echo "WARNING: QCDLoop sanitise failed — leaving the upstream URL" >&2; return 0; }
+  # Rewrite only the URL; ${ver} stays literal so the macro still resolves per process.
+  BITS_QLDIR="$_dir" perl -i -pe \
+    's|https://qcdloop\.fnal\.gov/QCDLoop-\$\{ver\}\.tar\.gz|file://$ENV{BITS_QLDIR}/QCDLoop-\${ver}-clean.tar.gz|g' \
+    "$_mod"
+}
 function Make() {
   # Extracts process tarballs and writes generated sources back, so operate on the
   # private rsync'd copy ($PWD), never read-only SOURCES. gen_url is the LCG
@@ -61,6 +90,7 @@ function Make() {
   && tar xvf "compilebox-processes-${author}.tar.gz" -C "$PWD/COMPILEBOX/" \
   && cmake -DCMAKE_BUILD_TYPE=Release -DLOCAL_SOURCE="$PWD/COMPILEBOX/compilebox-processes-${author}" -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" -DDESTINATION="$PWD/COMPILEBOX_PROCESSES/" -DCMAKE_CXX_STANDARD=17 "$PWD/COMPILEBOX" \
   && cp "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-V2/zlibdummy.c" "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-RES/zlibdummy.c"
+  _SanitiseQCDLoop
   make ${JOBS:+-j $JOBS}
   make install
 }
