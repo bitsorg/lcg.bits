@@ -1,6 +1,6 @@
 package: xxHash
 description: xxHash extremely fast non-cryptographic hash algorithm
-version: "0.8.2"
+version: "0.8.3"
 source: https://github.com/Cyan4973/xxHash
 tag: "v%(version)s"
 sources:

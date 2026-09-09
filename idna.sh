@@ -1,7 +1,7 @@
 package: idna
 description: IDNA internationalized domain names support for Python
-version: "3.10"
-tag: "3.10"
+version: "3.18"
+tag: "3.18"
 requires:
   - Python
 build_requires:

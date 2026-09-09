@@ -1,7 +1,7 @@
 package: pydantic_core
 description: pydantic-core Rust-backed core for Pydantic v2
-version: "2.41.5"
-tag: "2.41.5"
+version: "2.46.3"
+tag: "2.46.3"
 requires:
   - Python
   - typing_extensions

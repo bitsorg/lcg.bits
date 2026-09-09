@@ -1,7 +1,7 @@
 package: control
 description: Python Control Systems Library
-version: "0.9.1"
-tag: "0.9.1"
+version: "0.10.2"
+tag: "0.10.2"
 requires:
   - Python
   - numpy

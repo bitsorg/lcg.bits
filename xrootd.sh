@@ -1,6 +1,6 @@
 package: xrootd
 description: XRootD high-performance, fault-tolerant access to data
-version: "5.9.1"
+version: "6.0.3"
 source: https://github.com/xrootd/xrootd
 mem_per_job: 1024
 tag: "v%(version)s"

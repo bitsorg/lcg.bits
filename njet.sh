@@ -1,6 +1,6 @@
 package: njet
 description: NJet multi-parton one-loop matrix element library
-version: "2.1.1"
+version: "2.1.1p1"
 source: https://bitbucket.org/njet/njet
 tag: "v%(version)s"
 sources:

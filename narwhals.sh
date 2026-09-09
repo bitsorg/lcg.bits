@@ -1,7 +1,7 @@
 package: narwhals
 description: narwhals lightweight dataframe compatibility layer
-version: "1.9.4"
-tag: "1.9.4"
+version: "2.20.0"
+tag: "2.20.0"
 requires:
   - Python
   - executing

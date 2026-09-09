@@ -1,7 +1,7 @@
 package: matplotlib
 description: Matplotlib comprehensive 2D plotting library for Python
-version: "3.10.8"
-tag: "3.10.8"
+version: "3.11.0"
+tag: "3.11.0"
 requires:
   - Python
   - numpy

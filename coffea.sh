@@ -1,7 +1,7 @@
 package: coffea
 description: Coffea Columnar Object Framework For Effective Analysis
-version: "2025.12.0"
-tag: "2025.12.0"
+version: "2026.5.0"
+tag: "2026.5.0"
 requires:
   - bokeh
   - dask

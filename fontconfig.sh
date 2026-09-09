@@ -1,6 +1,6 @@
 package: fontconfig
 description: Fontconfig font configuration and customization library
-version: "2.14.2"
+version: "2.17.1"
 source: https://gitlab.freedesktop.org/fontconfig/fontconfig
 tag: "%(version)s"
 sources:

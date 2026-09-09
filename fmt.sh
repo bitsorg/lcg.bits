@@ -1,6 +1,6 @@
 package: fmt
 description: Modern C++ string formatting library ({fmt})
-version: "10.2.1"
+version: "12.1.0"
 source: https://github.com/fmtlib/fmt
 tag: "%(version)s"
 sources:

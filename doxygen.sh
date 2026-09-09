@@ -1,8 +1,8 @@
 package: doxygen
 description: Doxygen documentation generator from annotated C++ sources
-version: "1.16.1"
+version: "1.17.0"
 source: https://github.com/doxygen/doxygen
-tag: "Release_1_16_1"
+tag: "Release_1_17_0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.src.tar.gz
 requires:
@@ -12,7 +12,7 @@ requires:
   - xapian
 # macOS: source Doxygen from Homebrew (formula doxygen) — a standalone CLI doc
 # tool with no consumers, so version drift is irrelevant. prefer_system gated
-# osx.* so Linux keeps building 1.16.1 from source below.
+# osx.* so Linux keeps building 1.17.0 from source below.
 prefer_system: "osx.*"
 homebrew_formula: doxygen
 prefer_system_check: |

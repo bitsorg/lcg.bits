@@ -1,6 +1,6 @@
 package: libzip
 description: libzip library for reading, creating and modifying ZIP archives
-version: "1.9.2"
+version: "1.11.4"
 source: https://github.com/nih-at/libzip
 tag: "v%(version)s"
 sources:
