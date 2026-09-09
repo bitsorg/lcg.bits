@@ -1,6 +1,6 @@
 package: onnx
 description: ONNX Open Neural Network Exchange format library
-version: "1.16.0"
+version: "1.21.0"
 source: https://github.com/onnx/onnx
 tag: "v%(version)s"
 sources:
@@ -16,8 +16,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-patches:
-  - onnx-1.16.0.patch
 ---
 #!/bin/bash -e
 # onnx's setup.py never passes CMAKE_PREFIX_PATH, so cmake 3.27+ (CMP0144) can't

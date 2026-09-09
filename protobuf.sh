@@ -1,11 +1,11 @@
 package: protobuf
 description: Google Protocol Buffers serialization library
-version: "5.28.3"
+version: "7.34.1"
 source: https://github.com/protocolbuffers/protobuf
 mem_per_job: 1500
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-all-5.28.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-all-7.34.1.tar.gz
 requires:
   - CMake
   - Python
@@ -15,8 +15,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
-patches:
-  - protobuf-5.28.3.patch
 ---
 #!/bin/bash -e
 ##############################
