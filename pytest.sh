@@ -1,7 +1,7 @@
 package: pytest
 description: pytest simple and powerful Python testing framework
-version: "9.0.2"
-tag: "9.0.2"
+version: "9.0.3"
+tag: "9.0.3"
 requires:
   - Python
   - py

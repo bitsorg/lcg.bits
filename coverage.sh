@@ -1,7 +1,7 @@
 package: coverage
 description: coverage.py code coverage measurement for Python
-version: "7.13.5"
-tag: "7.13.5"
+version: "7.14.1"
+tag: "7.14.1"
 requires:
   - Python
 build_requires:

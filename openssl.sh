@@ -1,6 +1,6 @@
 package: OpenSSL
 description: OpenSSL toolkit for TLS/SSL and general cryptography
-version: "3.0.19"
+version: "3.0.21"
 source: https://github.com/openssl/openssl
 tag: "openssl-%(version)s"
 sources:
