@@ -20,7 +20,8 @@ license: LicenseRef-EPOS4
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
 patches:
-  - epos4-4.0.3.atlas1.patch
+  - "epos4-4.0.3.atlas1.patch:version=4.0.3.atlas1"
+  - "epos4-4.0.3.atlas3.patch:version=4.0.3.atlas3"
 ---
 #!/bin/bash -e
 ##############################

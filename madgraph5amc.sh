@@ -1,9 +1,9 @@
 package: madgraph5amc
 description: MadGraph5_aMC@NLO automated leading and next-to-leading order generator
-version: "3.3.1.atlas1"
-tag: "3.3.1.atlas1"
+version: "3.6.4.atlas2"
+tag: "3.6.4.atlas2"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MG5_aMC_v3.3.1.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/MG5_aMC_v3.6.4.tar.gz
 requires:
   - Python
   - syscalc
@@ -13,7 +13,8 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
 patches:
-  - madgraph5amc-3.3.1.atlas1.patch
+  - "madgraph5amc-3.6.4.atlas2.patch:version=3.6.4.atlas2"
+  - "madgraph5amc-3.5.11.atlas16.patch:version=3.5.11.atlas16"
 ---
 #!/bin/bash -e
 ##############################

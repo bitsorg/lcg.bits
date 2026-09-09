@@ -12,7 +12,8 @@ license: LicenseRef-HIJING
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
 patches:
-  - hijing-1.383bs.2.patch
+  - "hijing-1.383bs.2.patch:version=1.383bs.2"
+  - "hijing-1.383bs.2.atlas20260625.patch:version=1.383bs.2.atlas20260625"
 ---
 #!/bin/bash -e
 ##############################
