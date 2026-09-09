@@ -1,6 +1,6 @@
 package: tauolacpp
 description: TAUOLA++ C++ version of TAUOLA tau decay generator
-version: "1.1.9"
+version: "1.1.9.atlas1"
 source: https://github.com/Malexandra-de/Tauolapp
 tag: "v%(version)s"
 sources:
@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-only
+patches:
+  - "tauola++-1.1.9.atlas1.patch"
 ---
 #!/bin/bash -e
 ##############################

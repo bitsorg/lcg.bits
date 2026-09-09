@@ -1,11 +1,11 @@
 package: compilebox
 description: Compilebox online compiler sandbox service
-version: "08.11"
-tag: "08.11"
+version: "08.12"
+tag: "08.12"
 sources:
-  # The hosted tarball is named by the LCG "author" tag (ATLASOTF-08-11), not the
-  # bare version (lcgcmake: author=ATLASOTF-08-11).
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-ATLASOTF-08-11.tar.gz
+  # The hosted tarball is named by the LCG "author" tag (ATLASOTF-08-12), not the
+  # bare version (lcgcmake: author=ATLASOTF-08-12).
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-ATLASOTF-08-12.tar.gz
 requires:
   - CMake
   - GSL

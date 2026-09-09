@@ -1,12 +1,12 @@
 package: sherpa-openmpi
 description: Sherpa Monte Carlo event generator built with OpenMPI
-version: "3.0.3.openmpi3"
+version: "3.0.4.openmpi3"
 mem_per_job: 1500
-tag: "3.0.3.openmpi3"
+tag: "3.0.4.openmpi3"
 sources:
   # ".openmpi3" is a build label, not part of the upstream filename — same
   # source tarball as the regular sherpa recipe; MPI is enabled at build time.
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.4.tar.gz
 requires:
   - CMake
   - Python

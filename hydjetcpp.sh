@@ -11,6 +11,8 @@ license: LicenseRef-HYDJET++
 # academic-use licence with no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
+patches:
+  - "hydjet++-2.1.patch"
 ---
 #!/bin/bash -e
 ##############################

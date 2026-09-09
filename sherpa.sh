@@ -1,11 +1,11 @@
 package: sherpa
 description: Sherpa multi-purpose Monte Carlo event generator
-version: "3.0.3"
+version: "3.0.4"
 source: https://gitlab.com/sherpa-team/sherpa
 mem_per_job: 1500
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.4.tar.gz
 requires:
   - CMake
   - Python

@@ -1,0 +1,76 @@
+--- src/utilities/Log.h.orig	2025-05-01 15:40:07.278989628 +0200
++++ src/utilities/Log.h	2025-05-01 15:41:20.040718285 +0200
+@@ -75,7 +75,7 @@
+ 	/** Terminates the program with added default message or 'text'.
+             It can be suppressed by Log::IgnoreFatal(); */
+ 	static void Fatal(string text, unsigned short int code=0);
+-	static void Fatal(unsigned short int code=0)                            { Fatal(NULL,code);       }
++        static void Fatal(unsigned short int code = 0) { Fatal("", code); }
+ 
+ 	/** Redirects output to log. Redirection can be done for a block of code
+ 	    or for one function only. Redirection can be turned off by using
+From db76e3b622365c27da7cc0d908b61c7b75d76df5 Mon Sep 17 00:00:00 2001
+From: Andrii Verbytskyi <andrii.verbytskyi@cern.ch>
+Date: Thu, 5 Jun 2025 09:02:29 +0000
+Subject: [PATCH] Amend the logic of createHistoryEntry for HepMC3
+
+---
+ src/eventRecordInterfaces/PhotosHepMC3Particle.cxx | 14 ++++++++++----
+ src/photosCInterfaces/Photos.cxx                   |  6 +++---
+ 2 files changed, 13 insertions(+), 7 deletions(-)
+
+diff --git a/src/eventRecordInterfaces/PhotosHepMC3Particle.cxx b/src/eventRecordInterfaces/PhotosHepMC3Particle.cxx
+index 796c370..c1f75a4 100644
+--- src/eventRecordInterfaces/PhotosHepMC3Particle.cxx
++++ src/eventRecordInterfaces/PhotosHepMC3Particle.cxx
+@@ -2,6 +2,7 @@
+ #include "HepMC3/GenVertex.h"
+ #include "HepMC3/GenParticle.h"
+ #include "HepMC3/Print.h"
++#include "HepMC3/Attribute.h"
+ #include "PhotosHepMC3Particle.h"
+ #include "Log.h"
+ #include "Photos.h"
+@@ -295,10 +296,15 @@ void PhotosHepMC3Particle::createHistoryEntry(){
+     Log::Warning()<<"PhotosHepMC3Particle::createHistoryEntry(): particle without production vertex."<<endl;
+     return;
+   }
+-
+-  GenParticlePtr part = make_shared<GenParticle>(*m_particle);
+-  part->set_status(Photos::historyEntriesStatus);
+-  m_particle->production_vertex()->add_particle_out(part);
++  if (Photos::historyEntriesStatus == 0) {
++    auto val = std::make_shared<VectorDoubleAttribute>(std::vector<double>{m_particle->momentum().px(),m_particle->momentum().py(),m_particle->momentum().pz(),m_particle->momentum().m(),m_particle->momentum().e()});
++    if (m_particle->attribute<VectorDoubleAttribute>("original_momentum")) Log::Warning()<<"PhotosHepMC3Particle::createHistoryEntry(): overwriting original_momentum attribute."<<endl;
++    m_particle->add_attribute("original_momentum", val);
++  } else {
++    GenParticlePtr part = make_shared<GenParticle>(*m_particle);
++    part->set_status(Photos::historyEntriesStatus);
++    m_particle->production_vertex()->add_particle_out(part);
++  }
+ }
+ 
+ void PhotosHepMC3Particle::createSelfDecayVertex(PhotosParticle *out)
+diff --git a/src/photosCInterfaces/Photos.cxx b/src/photosCInterfaces/Photos.cxx
+index f8ab7d9..008d0b7 100644
+--- src/photosCInterfaces/Photos.cxx
++++ src/photosCInterfaces/Photos.cxx
+@@ -342,12 +342,12 @@ bool Photos::IPHQRK_setQarknoEmission(int MODCOR, int PDGID)
+ 
+ void Photos::createHistoryEntries(bool flag, int status)
+ {
+-  if(status<3)
++  if(status < 3 && status != 0)
+   {
+-    Log::Warning()<<"Photos::createHistoryEntries: status must be >=3"<<endl;
++    Log::Warning()<<"Photos::createHistoryEntries: status must be 0 or >=3"<<endl;
+     return;
+   }
+-
++  if (status == 0) Log::Info()<<"Photos::createHistoryEntries: status = 0 means the original particle momentum will be saved as an attribute (HepMC3 only)."<<endl;
+   isCreateHistoryEntries = flag;
+   historyEntriesStatus   = status;
+   ignoreParticlesOfStatus(status);
+-- 
+2.47.1
+

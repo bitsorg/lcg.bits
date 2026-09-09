@@ -1,6 +1,6 @@
 package: herwig3
 description: Herwig 7 general-purpose Monte Carlo event generator
-version: "7.3.0"
+version: "7.3.0p1"
 source: https://github.com/Herwig/Herwig
 mem_per_job: 1500
 tag: "v%(version)s"
@@ -29,6 +29,8 @@ build_requires:
 license: GPL-3.0-or-later
 env:
   HERWIG3_ROOT: "$HERWIG3_ROOT"
+patches:
+  - "herwig3-7.3.0p1.patch"
 ---
 #!/bin/bash -e
 ##############################

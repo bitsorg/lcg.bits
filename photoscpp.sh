@@ -1,6 +1,6 @@
 package: photoscpp
 description: PHOTOS++ C++ version of PHOTOS radiative corrections
-version: "3.64"
+version: "3.64.atlas1"
 source: https://gitlab.cern.ch/photospp/photospp
 tag: "v%(version)s"
 sources:
@@ -12,6 +12,8 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: MIT
 acknowledgment: "MIT License - Copyright (c) [year] PHOTOS++ authors."
+patches:
+  - "photos++-3.64.atlas1.patch"
 ---
 #!/bin/bash -e
 ##############################
