@@ -12,19 +12,26 @@ build_requires:
 prefer_system: .*
 prefer_system_check: |
   set -e
+  # Minimum __GNUC__ floor from the requested version, parsed arithmetically
+  # (v15.2.0-alice1 -> 150200) so a NEW gcc never needs an edit here — a new
+  # compiler arrives only as a defaults-gccNN overriding the tag. Unparseable
+  # or "unavailable" falls back to the historical 7.3 floor.
+  _req=${REQUESTED_VERSION#v}
+  _maj=${_req%%.*}; _rest=${_req#*.}; _min=${_rest%%.*}
+  case $_maj in ''|*[!0-9]*) _maj=0 ;; esac
+  case $_min in ''|*[!0-9]*) _min=0 ;; esac
+  if [ "$_maj" -eq 0 ]; then MIN_GCC_VERSION=70300; else MIN_GCC_VERSION=$(( _maj*10000 + _min*100 )); fi
+  # Probe the compiler the build will actually use: an explicit $CC, else the
+  # container's $GCC_VERSION-suffixed binaries (gcc-15 ...), else the plain names.
+  # With no container and no axis CC this is the historical plain-gcc check.
+  _cc=${CC:-${GCC_VERSION:+gcc-$GCC_VERSION}};       _cc=${_cc:-gcc}
+  _cxx=${CXX:-${GCC_VERSION:+g++-$GCC_VERSION}};      _cxx=${_cxx:-g++}
+  _fc=${FC:-${GCC_VERSION:+gfortran-$GCC_VERSION}};   _fc=${_fc:-gfortran}
   which make || { echo "make missing"; exit 1; }
-  which gfortran || { echo "gfortran missing"; exit 1; }
-  case $REQUESTED_VERSION in
-    v15*) MIN_GCC_VERSION=150200 ;;
-    v14*) MIN_GCC_VERSION=140200 ;;
-    v13*) MIN_GCC_VERSION=130200 ;;
-    v12*) MIN_GCC_VERSION=120100 ;;
-    v10*) MIN_GCC_VERSION=100200 ;;
-    *) MIN_GCC_VERSION=70300 ;;
-  esac
-  which gcc
-  test -f "$(dirname "$(which gcc)")/c++"
-  gcc -xc++ - -c -o /dev/null << EOF
+  command -v "$_fc"  >/dev/null || { echo "$_fc missing"; exit 1; }
+  command -v "$_cc"  >/dev/null || { echo "$_cc missing"; exit 1; }
+  command -v "$_cxx" >/dev/null || { echo "$_cxx missing"; exit 1; }
+  "$_cxx" -xc++ - -c -o /dev/null << EOF
   #define GCCVER ((__GNUC__ * 10000)+(__GNUC_MINOR__ * 100)+(__GNUC_PATCHLEVEL__))
   #if (GCCVER < $MIN_GCC_VERSION)
   #error "System's GCC cannot be used: we need at least ($MIN_GCC_VERSION/1e4), while we intend to go for GCC $REQUESTED_VERSION. We'll compile our own version."
