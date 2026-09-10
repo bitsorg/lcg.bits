@@ -2,7 +2,7 @@ package: madx
 description: MAD-X accelerator optics design and tracking code
 version: "master"
 source: https://github.com/MethodicalAcceleratorDesign/MAD-X
-tag: "v%(version)s"
+tag: "%(version)s"
 requires:
   - CMake
   - zlib
