@@ -1,6 +1,6 @@
 package: madx
 description: MAD-X accelerator optics design and tracking code
-version: "5.09.00"
+version: "master"
 source: https://github.com/MethodicalAcceleratorDesign/MAD-X
 tag: "v%(version)s"
 requires:
