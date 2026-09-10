@@ -26,10 +26,14 @@ function Configure() {
   true
 }
 function Make() {
-  case $(uname) in
-    Darwin) TOOLSET=clang ;;
-    *) TOOLSET=gcc ;;
-  esac
+  # Compiler family by signal, not OS: the clang axis sets CXX=clang++ and tags
+  # the arch -clang; the gcc axis leaves CXX unset. uname (Darwin => Apple clang)
+  # is only the last-resort fallback, so a clang-on-Linux build uses clang too.
+  if [[ "${CXX:-}" == *clang* || "${ARCHITECTURE:-}" == *-clang* || "$(uname)" == Darwin ]]; then
+    TOOLSET=clang
+  else
+    TOOLSET=gcc
+  fi
 
   # Pass Python to bootstrap so it writes the correct 'using python' jam
   # entry into project-config.jam and b2 builds boost_python.

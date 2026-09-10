@@ -87,16 +87,17 @@ function Configure() {
     _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
   fi
 
-  # Platform and compiler settings — use system cc/c++ on Linux, Xcode clang on macOS.
+  # Compiler: honor the axis's $CC/$CXX (the clang axis sets them to clang/clang++
+  # on Linux too), falling back to cc/c++. Avoids assuming Linux == gcc.
   ENABLE_COCOA=""
-  COMPILER_CC=cc
-  COMPILER_CXX=c++
+  COMPILER_CC="${CC:-cc}"
+  COMPILER_CXX="${CXX:-c++}"
   case $(uname) in
     Darwin)
       # Native Cocoa GUI backend, X11 off, so ROOT doesn't need XQuartz on macOS.
       ENABLE_COCOA="-Dcocoa=ON -Dx11=OFF"
-      COMPILER_CXX=clang++
-      COMPILER_CC=clang
+      COMPILER_CC="${CC:-clang}"
+      COMPILER_CXX="${CXX:-clang++}"
       [[ ! $GSL_ROOT ]] && GSL_ROOT=$(brew --prefix gsl 2>/dev/null) || true
       [[ ! $LIBPNG_ROOT ]] && LIBPNG_ROOT=$(brew --prefix libpng 2>/dev/null) || true
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
