@@ -9,6 +9,11 @@ prepend_path:
 build_requires:
   - "autotools:(slc6|slc7)"
   - yacc-like
+# own_hash: the built compiler is invariant to the community defaults, so its
+# identity hash excludes defaults-release -> one certified build is reused across
+# communities from the S3 cache (see ADR-0012). The axis still differentiates via
+# the tag override below. Only the compiler; its bootstrap deps are system reqs.
+own_hash: true
 prefer_system: .*
 prefer_system_check: |
   set -e
