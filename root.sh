@@ -18,7 +18,7 @@ requires:
   - zlib
   - libxml2
   - "vdt:(?!osx)"
-  - "unuran:osx"
+  - unuran
   - xz
   - cfitsio
   - jsonmcpp
