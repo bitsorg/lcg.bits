@@ -1,10 +1,10 @@
 package: recola
 description: RECOLA recursive one-loop amplitude generator
-version: "2.3.0"
+version: "2.2.4.atlas1"
 mem_per_job: 1024
-tag: "2.3.0"
+tag: "2.2.4.atlas1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/recola2-2.3.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/recola2-2.2.4.tar.gz
 requires:
   - CMake
   - collier
@@ -13,6 +13,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
+patches:
+  - recola-2.2.4.atlas1.patch
 ---
 #!/bin/bash -e
 ##############################
