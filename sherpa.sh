@@ -38,9 +38,10 @@ MODULE_OPTIONS="--bin --lib"
 # for SWIG_LIB: `swig -swiglib` reports the gone build INSTALLROOT on Linux too (it
 # surfaced once the el9 container stopped supplying a system swig); keep it as the
 # fallback for a system swig, whose compiled-in path is correct.
-export SWIG="${SWIG_ROOT}/bin/swig"
+export SWIG="${SWIG_ROOT:+${SWIG_ROOT}/bin/swig}"
+export SWIG="${SWIG:-$(command -v swig || true)}"
 SWIG_LIB="$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)"
-export SWIG_LIB="${SWIG_LIB:-$("${SWIG}" -swiglib 2>/dev/null)}"
+export SWIG_LIB="${SWIG_LIB:-$("${SWIG}" -swiglib 2>/dev/null || true)}"
 export SWIG_LIB="${SWIG_LIB%/}"
 ##############################
 function Configure() {
