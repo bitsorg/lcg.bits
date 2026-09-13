@@ -1,10 +1,10 @@
 package: thep8i
 description: TheP8I Herwig/Pythia8 interface for combined parton shower models
-version: "2.0.4"
+version: "2.0.6"
 source: https://gitlab.com/uniceh-public/TheP8I
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TheP8I-2.0.4.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/TheP8I-2.0.6.tar.gz
 requires:
   - thepeg
   - pythia8
