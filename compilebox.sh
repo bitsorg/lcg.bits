@@ -38,10 +38,12 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 # Each process is a nested ExternalProject, i.e. a separate cmake run that inherits
 # the environment but not the outer cache — so these must be env vars, not -D flags
-# (lcgcmake sets the same three via LCGPackage_Add ENVIRONMENT).
+# (photos++/recola mirror lcgcmake's three LCGPackage_Add ENVIRONMENT vars; looptools
+# is added because its Find module only locates libooptools via LOOPTOOLS_ROOT_DIR).
 export PHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}"
 export RECOLASM_ROOT_DIR="${RECOLA_SM_ROOT}"
 export RECOLASM_ATGC_WARSAW_ROOT_DIR="${RECOLA_SM_ATGC_WARSAW_ROOT}"
+export LOOPTOOLS_ROOT_DIR="${LOOPTOOLS_ROOT}"
 ##############################
 function Configure() {
   # No-op: the tarball has no top-level CMakeLists.txt (the project lives in
