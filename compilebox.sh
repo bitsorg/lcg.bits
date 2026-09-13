@@ -1,11 +1,11 @@
 package: compilebox
 description: Compilebox online compiler sandbox service
-version: "08.12"
-tag: "08.12"
+version: "08.14"
+tag: "08.14"
 sources:
-  # The hosted tarball is named by the LCG "author" tag (ATLASOTF-08-12), not the
-  # bare version (lcgcmake: author=ATLASOTF-08-12).
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-ATLASOTF-08-12.tar.gz
+  # The hosted tarball is named by the LCG "author" tag (ATLASOTF-08-14), not the
+  # bare version (lcgcmake: author=ATLASOTF-08-14).
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-ATLASOTF-08-14.tar.gz
 requires:
   - CMake
   - GSL
@@ -81,9 +81,9 @@ function _SanitiseQCDLoop() {
 function Make() {
   # Extracts process tarballs and writes generated sources back, so operate on the
   # private rsync'd copy ($PWD), never read-only SOURCES. gen_url is the LCG
-  # MCGenerators mirror; author=ATLASOTF-08-11 (the LCG author tag).
+  # MCGenerators mirror; author=ATLASOTF-08-14 (the LCG author tag).
   local gen_url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
-  local author="ATLASOTF-08-11"
+  local author="ATLASOTF-08-14"
   # curl, not wget: the builder images ship curl (alpgen's Prepare relies on it)
   # but do not guarantee wget.
   curl -fSLO "${gen_url}/compilebox-processes-${author}.tar.gz" \
