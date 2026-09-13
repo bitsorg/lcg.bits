@@ -12,7 +12,7 @@ license: LicenseRef-HYDJET++
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
 patches:
-  - "hydjet++-2.1.patch"
+  - "hydjet++-2.1.patch:strip=0"
 ---
 #!/bin/bash -e
 ##############################

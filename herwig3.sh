@@ -30,7 +30,7 @@ license: GPL-3.0-or-later
 env:
   HERWIG3_ROOT: "$HERWIG3_ROOT"
 patches:
-  - "herwig3-7.3.0p1.patch"
+  - "herwig3-7.3.0p1.patch:strip=0"
 ---
 #!/bin/bash -e
 ##############################

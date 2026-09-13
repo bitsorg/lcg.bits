@@ -13,7 +13,7 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-only
 patches:
-  - "tauola++-1.1.9.atlas1.patch"
+  - "tauola++-1.1.9.atlas1.patch:strip=0"
 ---
 #!/bin/bash -e
 ##############################

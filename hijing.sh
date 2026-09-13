@@ -13,7 +13,7 @@ license: LicenseRef-HIJING
 redistributable: none
 patches:
   - "hijing-1.383bs.2.patch:version=1.383bs.2"
-  - "hijing-1.383bs.2.atlas20260625.patch:version=1.383bs.2.atlas20260625"
+  - "hijing-1.383bs.2.atlas20260625.patch:version=1.383bs.2.atlas20260625 && strip=0"
 ---
 #!/bin/bash -e
 ##############################

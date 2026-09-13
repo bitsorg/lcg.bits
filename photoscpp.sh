@@ -13,7 +13,7 @@ build_requires:
 license: MIT
 acknowledgment: "MIT License - Copyright (c) [year] PHOTOS++ authors."
 patches:
-  - "photos++-3.64.atlas1.patch"
+  - "photos++-3.64.atlas1.patch:strip=0"
 ---
 #!/bin/bash -e
 ##############################

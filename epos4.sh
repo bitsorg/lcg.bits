@@ -21,7 +21,7 @@ license: LicenseRef-EPOS4
 redistributable: none
 patches:
   - "epos4-4.0.3.atlas1.patch:version=4.0.3.atlas1"
-  - "epos4-4.0.3.atlas3.patch:version=4.0.3.atlas3"
+  - "epos4-4.0.3.atlas3.patch:version=4.0.3.atlas3 && strip=0"
 ---
 #!/bin/bash -e
 ##############################
