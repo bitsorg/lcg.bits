@@ -10,6 +10,7 @@ requires:
   - Geant4
   - GSL
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0

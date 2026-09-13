@@ -11,6 +11,7 @@ requires:
   - looptools
   - feynhiggs
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later

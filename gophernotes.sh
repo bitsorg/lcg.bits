@@ -15,6 +15,7 @@ requires:
   - go_runewidth
   - gomacro
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause

@@ -14,6 +14,7 @@ requires:
   # macOS: Apple clang has no OpenMP but faiss requires it; pull in Homebrew libomp on macOS only
   - "libomp:osx"
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
