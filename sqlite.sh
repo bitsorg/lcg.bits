@@ -4,7 +4,10 @@ version: "3320300"
 tag: "3320300"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/sqlite-autoconf-3320300.tar.gz
-prefer_system: ".*"
+# Build sqlite as a real LCG external on Linux: ATLAS find_package(SQLite3) via
+# AtlasLCG needs SQLITE_LCGROOT from the lcg-view, and a system /usr/include
+# passed as -isystem breaks libstdc++ #include_next <stdlib.h>. Keep system on osx.
+prefer_system: "osx.*"
 prefer_system_check: |
   printf '#include <sqlite3.h>\nint main(){}\n' | cc -xc - -lsqlite3 -o /dev/null;
   if [ $? -ne 0 ]; then printf "SQLite not found.\n * On RHEL-compatible systems: sqlite sqlite-devel\n * On Ubuntu-compatible systems: libsqlite3-0 libsqlite3-dev\n"; exit 1; fi
