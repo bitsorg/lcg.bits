@@ -19,7 +19,7 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS}
+  make ${JOBS:+-j $JOBS} MOREFLAGS=-fPIC CC=$CC
   make ${JOBS:+-j $JOBS} install PREFIX=$INSTALLROOT CC=$CC
 }
 function MakeInstall() { true; }
