@@ -20,9 +20,9 @@ license: LGPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --inc --pkgconfig"
 ##############################
 function Configure() {
-  # macOS: bits gmp's include/ isn't on configure's search path (AC_CHECK_HEADER
-  # only checks default paths + CPPFLAGS), so point --with-gmp at the bits gmp.
-  _with_gmp=""
-  bits_is_macos && _with_gmp="--with-gmp=${GMP_ROOT}"
-  ./configure --prefix="$INSTALLROOT" ${_with_gmp}
+  # gmp is a bits dependency, but AC_CHECK_HEADER only searches default paths +
+  # CPPFLAGS and bits gmp's include/ is on neither (it was only found before via a
+  # system gmp on the build host; a clean container has none). Point --with-gmp at
+  # the bits gmp on every platform.
+  ./configure --prefix="$INSTALLROOT" --with-gmp="${GMP_ROOT}"
 }
