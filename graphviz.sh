@@ -46,5 +46,7 @@ license: EPL-1.0
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
 function Configure() {
-  ./configure --prefix $INSTALLROOT
+  ./configure --prefix $INSTALLROOT --disable-perl --disable-tcl --disable-python \ 
+--disable-lua --disable-guile --disable-php --disable-ruby \
+--disable-java --disable-r --disable-sharp --disable-io --disable-ocaml
 }
