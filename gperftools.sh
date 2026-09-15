@@ -19,7 +19,7 @@ license: BSD-3-Clause
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin"
+MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
