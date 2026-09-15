@@ -6,7 +6,6 @@ tag: "gperftools-%(version)s"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
-  - CMake
   # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on
   # macOS; gate the requirement so it drops from the osx graph.
   - "libunwind:(?!osx)"
@@ -17,17 +16,14 @@ license: BSD-3-Clause
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include CMakeRecipe)
+# gperftools' CMake support is incomplete (compiles but installs no headers/libs),
+# so use its native autotools build like lcgcmake/LCG does -- this installs
+# libtcmalloc/libprofiler + gperftools/*.h into $INSTALLROOT.
+. $(bits-include AutoToolsRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
-      -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
-      -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS}" \
-    -DCMAKE_CXX_STANDARD=17 \
-    -Dgperftools_enable_frame_pointers=ON \
-    -Dgperftools_enable_libunwind=ON \
-    -Dgperftools_enable_large_alloc_report=ON
+  $SOURCEDIR/configure --prefix=$INSTALLROOT CXX=$CXX \
+    --enable-frame-pointers
 }
