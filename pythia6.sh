@@ -1,7 +1,7 @@
 package: pythia6
-description: Pythia 6 Monte Carlo event generator (legacy Fortran version).
-  Standard LCG 429.2 (author source pythia-6.4.28.f) with an enlarged
-  HEPEVT common block (NMXHEP=200000), matching heptools dev-generators/lhcb.
+description: Pythia 6 Monte Carlo event generator (legacy Fortran version)
+# Standard LCG 429.2 (author source pythia-6.4.28.f) with an enlarged HEPEVT
+# common block (NMXHEP=200000), matching heptools dev-generators / lhcbsetup.
 version: "429.2"
 tag: "429.2"
 build_requires:
