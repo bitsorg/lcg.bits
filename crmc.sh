@@ -15,7 +15,9 @@ license: LicenseRef-CRMC
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
 patches:
-  - crmc-2.0.1p5.patch
+  # Version-gated: base p5 (-p1, a/ prefix) vs LHCb p6 (-p0). Same crmc 2.0.1 tarball.
+  - "crmc-2.0.1p5.patch:version=2.0.1p5"
+  - "crmc-2.0.1p6.lhcb.patch:version=2.0.1p6.lhcb && strip=0"
 ---
 #!/bin/bash -e
 ##############################

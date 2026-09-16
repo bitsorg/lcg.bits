@@ -15,6 +15,7 @@ license: GPL-3.0-or-later
 patches:
   - "madgraph5amc-3.6.4.atlas2.patch:version=3.6.4.atlas2 && strip=0"
   - "madgraph5amc-3.5.11.atlas16.patch:version=3.5.11.atlas16 && strip=0"
+  - "madgraph5amc-3.5.9.atlas13.patch:version=3.5.9.atlas13 && strip=0"   # LHCb
 ---
 #!/bin/bash -e
 ##############################

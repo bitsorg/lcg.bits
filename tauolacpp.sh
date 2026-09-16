@@ -13,7 +13,9 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-only
 patches:
-  - "tauola++-1.1.9.atlas1.patch:strip=0"
+  # Version-gated: ATLAS vs LHCb source patches to the same TAUOLA 1.1.9 tarball.
+  - "tauola++-1.1.9.atlas1.patch:version=1.1.9.atlas1 && strip=0"
+  - "tauola++-1.1.9.lhcb.patch:version=1.1.9.lhcb && strip=0"
 ---
 #!/bin/bash -e
 ##############################

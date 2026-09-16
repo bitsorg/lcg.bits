@@ -13,7 +13,9 @@ build_requires:
 license: MIT
 acknowledgment: "MIT License - Copyright (c) [year] PHOTOS++ authors."
 patches:
-  - "photos++-3.64.atlas1.patch:strip=0"
+  # Version-gated: ATLAS vs LHCb source patches to the same PHOTOS 3.64 tarball.
+  - "photos++-3.64.atlas1.patch:version=3.64.atlas1 && strip=0"
+  - "photos++-3.64.lhcb.patch:version=3.64.lhcb && strip=0"
 ---
 #!/bin/bash -e
 ##############################
