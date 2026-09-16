@@ -12,13 +12,12 @@ requires:
   - Boost
   - Python
   - pytest
+  # DDG4 / IO backends. A group overlay can drop these via `disable:` (LHCb does,
+  # for its minimal DD4hep); the Configure() flags below follow dependency-root
+  # presence, so a disabled backend turns its -DDD4HEP_USE_* OFF automatically.
   - LCIO
   - tbb
-  # Geant4 is required for the DDG4 simulation component; without it DD4hep skips
-  # DDG4 and downstream key4hep packages fail with
-  # "Did not find required component: DDG4" (k4geo, k4mljettagger, ...).
   - Geant4
-  # EDM4hep / HepMC3 I/O backends, enabled in the LCG key4hep stack.
   - EDM4hep
   - hepmc3
   # optional:
@@ -44,10 +43,10 @@ function Configure() {
     -DDD4HEP_USE_XERCESC=ON \
     -DXERCESC_ROOT_DIR="${XERCESC_ROOT}" \
     -DROOTSYS="${ROOT_ROOT}" \
-    -DDD4HEP_USE_GEANT4=ON \
-    -DDD4HEP_USE_LCIO=ON \
+    -DDD4HEP_USE_GEANT4=$([ -n "$GEANT4_ROOT" ] && echo ON || echo OFF) \
+    -DDD4HEP_USE_LCIO=$([ -n "$LCIO_ROOT" ] && echo ON || echo OFF) \
     -DDD4HEP_USE_TBB=ON \
-    -DDD4HEP_USE_HEPMC3=ON \
+    -DDD4HEP_USE_HEPMC3=$([ -n "$HEPMC3_ROOT" ] && echo ON || echo OFF) \
     -DDD4HEP_LOAD_ASSIMP=OFF \
     -DDD4HEP_BUILD_EXAMPLES=OFF \
     -DBUILD_DOCS=OFF
