@@ -28,10 +28,8 @@ function Configure() {
   # download are off (the latter needs network, only used by the test suite).
   export SWIG="${SWIG_ROOT:+${SWIG_ROOT}/bin/swig}"
   export SWIG="${SWIG:-$(command -v swig || true)}"
-  # `swig -swiglib` reports the build INSTALLROOT, which no longer exists after
-  # relocation — on every platform, not just macOS (it only showed up on Linux once
-  # the el9 container stopped supplying a system swig). Prefer the relocated tree,
-  # falling back to the binary for a system swig.
+  # `swig -swiglib` reports the gone build INSTALLROOT after relocation (on Linux
+  # too, once the el9 container dropped its system swig); prefer the relocated tree.
   local _swiglib
   _swiglib=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
   _swiglib="${_swiglib:-$("${SWIG}" -swiglib 2>/dev/null || true)}"

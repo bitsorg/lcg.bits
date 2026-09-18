@@ -27,13 +27,9 @@ function Configure() {
     "$BITS_CMAKE_SRC/CMakeLists.txt"
   # 2) Fix the OneLOop/QCDLoop download URL: site dropped the duplicate 'helac-phegas/'.
   perl -i -pe 's|helac-phegas/tar-files|tar-files|g' "$BITS_CMAKE_SRC/CMakeLists.txt"
-  # 3) qcdloop.fnal.gov/QCDLoop-1.98.tar.gz was repacked on macOS (June 2026):
-  #    it now has an AppleDouble entry (._QCDLoop-1.98) NEXT TO QCDLoop-1.98/.
-  #    With two top-level entries CMake's ExternalProject no longer strips the
-  #    top directory, so its CONFIGURE_COMMAND (sed on 'makefile') fails with
-  #    "can't read makefile". Download once, drop the junk, repack with the
-  #    single top-level dir, and point the ExternalProject at the sanitised
-  #    local copy (robust whether or not upstream fixes the packing).
+  # 3) macOS QCDLoop-1.98.tar.gz carries an AppleDouble entry (._QCDLoop-1.98) that
+  #    stops ExternalProject stripping the top dir (its sed CONFIGURE_COMMAND then
+  #    fails). Repack with a single top dir and point ExternalProject at the local copy.
   _qcd_tar="${PWD}/QCDLoop-1.98-clean.tar.gz"
   if curl -fSL --retry 3 https://qcdloop.fnal.gov/QCDLoop-1.98.tar.gz -o "${PWD}/QCDLoop-1.98-orig.tar.gz"; then
     rm -rf "${PWD}/qcdloop-clean" && mkdir -p "${PWD}/qcdloop-clean"

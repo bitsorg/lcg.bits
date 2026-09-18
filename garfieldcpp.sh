@@ -31,11 +31,9 @@ function Configure() {
     # macOS: pre-include <stdlib.h> so NeBem sources calling exit() compile (libc++ doesn't pull it in like libstdc++)
     _gsl+=(-DCMAKE_CXX_FLAGS="-include stdlib.h")
   elif [ -n "${GCC_TOOLCHAIN_ROOT:-}" ]; then
-    # Linux: Garfield's Tests/ link full executables against ROOT, which was built
-    # with the GCC-Toolchain (GCC 14). Put the toolchain's libstdc++ on the link
-    # line so ld resolves the newer GLIBCXX_3.4.3x / CXXABI_1.3.15 symbols instead
-    # of falling back to the older EL9 system libstdc++ (undefined-reference link
-    # failure). lib64 first, then lib, for either multilib layout.
+    # Linux: Garfield's Tests/ link against GCC-Toolchain-built ROOT, so put the
+    # toolchain's libstdc++ on the link line or ld falls back to the older system one
+    # (undefined-reference failure). lib64 then lib for either multilib layout.
     _extra+=(-DCMAKE_EXE_LINKER_FLAGS="-L${GCC_TOOLCHAIN_ROOT}/lib64 -L${GCC_TOOLCHAIN_ROOT}/lib")
   fi
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \

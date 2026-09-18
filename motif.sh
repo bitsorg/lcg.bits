@@ -24,10 +24,9 @@ function Configure() {
   # Legacy X11/K&R C: gcc15 defaults to C23 and errors on K&R decls, bad pointers,
   # and implicit funcs. Build gnu17 -fcommon and downgrade those errors to warnings.
   #
-  # -L$FLEX_ROOT/lib: the wml tools (wmluiltok) are flex scanners whose main comes
-  # from libfl. AC_PROG_LEX only sets LEXLIB=-lfl if it can link -lfl, and bits'
-  # libfl lives under FLEX_ROOT/lib (not a default path). Without this, LEXLIB is
-  # empty and the tool links with no main ("undefined reference to `main'").
+  # -L$FLEX_ROOT/lib: the wml flex scanners need libfl's main, but AC_PROG_LEX only
+  # sets LEXLIB=-lfl if it can link it, and bits' libfl isn't on a default path
+  # (otherwise the tool links with no main).
   ./configure --disable-printing --prefix "$INSTALLROOT" \
     CFLAGS="${CFLAGS:-} -std=gnu17 -fcommon -Wno-error -Wno-incompatible-pointer-types -Wno-implicit-function-declaration" \
     LDFLAGS="${LDFLAGS:-} ${FLEX_ROOT:+-L${FLEX_ROOT}/lib}"

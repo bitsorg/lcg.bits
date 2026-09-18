@@ -22,18 +22,14 @@ redistributable: none
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# macOS: not ported. qcdloop needs GCC quadmath/__float128 (no Apple clang arm64)
-# while std:: CXX_Interface wants libc++, so neither toolchain is clean. Gate off
-# (empty package); consumers gate "mcfm:(?!osx)". Remove the guards to resume.
+# macOS: not ported (qcdloop needs GCC quadmath vs libc++ for CXX_Interface). Gated
+# off to an empty package; consumers gate "mcfm:(?!osx)".
 ##############################
 function Configure() {
   bits_is_macos && { mkdir -p "${INSTALLROOT}"; return 0; }
-  # Linux: mcfm links libLHAPDF.so, which was built with the GCC-Toolchain (GCC 14)
-  # and therefore references GLIBCXX_3.4.3x / CXXABI_1.3.15. Put the toolchain's
-  # libstdc++ on the link line, else ld resolves against the older EL9 system one
-  # and fails with "undefined reference to std::ios_base_library_init()@GLIBCXX_3.4.32"
-  # / "__cxa_call_terminate@CXXABI_1.3.15" when linking mcfm and libmcfm.so.
-  # lib64 first, then lib, to cover either multilib layout.
+  # mcfm links GCC-Toolchain-built libLHAPDF.so (newer GLIBCXX/CXXABI), so put the
+  # toolchain's libstdc++ on the link line or ld resolves against the older system one
+  # (undefined-reference link failure). lib64 then lib for either multilib layout.
   local _ld=()
   if [ -n "${GCC_TOOLCHAIN_ROOT:-}" ]; then
     _ld+=(-DCMAKE_EXE_LINKER_FLAGS="-L${GCC_TOOLCHAIN_ROOT}/lib64 -L${GCC_TOOLCHAIN_ROOT}/lib")

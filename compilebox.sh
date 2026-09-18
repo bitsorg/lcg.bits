@@ -36,28 +36,22 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# Each process is a nested ExternalProject, i.e. a separate cmake run that inherits
-# the environment but not the outer cache — so these must be env vars, not -D flags
-# (photos++/recola mirror lcgcmake's three LCGPackage_Add ENVIRONMENT vars; looptools
-# is added because its Find module only locates libooptools via LOOPTOOLS_ROOT_DIR).
+# Each process is a nested ExternalProject (separate cmake run, no outer cache), so
+# these must be env vars, not -D flags (mirrors lcgcmake's ENVIRONMENT vars).
 export PHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}"
 export RECOLASM_ROOT_DIR="${RECOLA_SM_ROOT}"
 export RECOLASM_ATGC_WARSAW_ROOT_DIR="${RECOLA_SM_ATGC_WARSAW_ROOT}"
 export LOOPTOOLS_ROOT_DIR="${LOOPTOOLS_ROOT}"
 ##############################
 function Configure() {
-  # No-op: the tarball has no top-level CMakeLists.txt (the project lives in
-  # COMPILEBOX/), and Make() below runs its own cmake once the process tarball is
-  # unpacked. The inherited CMakeRecipe Configure would just fail on src/.
+  # No-op: no top-level CMakeLists.txt (project is in COMPILEBOX/); Make() runs its
+  # own cmake after unpacking the process tarball.
   true
 }
 function _SanitiseQCDLoop() {
-  # qcdloop.fnal.gov repacked QCDLoop-<ver>.tar.gz on macOS (June 2026): an AppleDouble
-  # entry (._QCDLoop-<ver>) now sits NEXT TO QCDLoop-<ver>/. With two top-level entries
-  # FetchContent stops stripping the top dir, so GETQCDLOOP's ff/ql globs come back empty
-  # ("No SOURCES given to target: qcdloop"). Same upstream bug as nlox.sh.
-  # Repack each requested version with a single top-level dir and point the macro at the
-  # local copy. Every step is best-effort: on failure the upstream URL is left untouched.
+  # macOS QCDLoop tarballs carry an AppleDouble entry (._QCDLoop-*) that breaks
+  # FetchContent's top-dir strip. Repack each requested version with a single top dir
+  # and point the macro at it; best-effort (same bug as nlox.sh).
   local _mod="$PWD/COMPILEBOX/cmake/Modules/COMPILEBOX.cmake" _dir="$PWD/qcdloop-clean"
   local _vers _v _top _ok=0
   [ -f "$_mod" ] || return 0
@@ -86,8 +80,7 @@ function Make() {
   # MCGenerators mirror; author=ATLASOTF-08-14 (the LCG author tag).
   local gen_url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
   local author="ATLASOTF-08-14"
-  # curl, not wget: the builder images ship curl (alpgen's Prepare relies on it)
-  # but do not guarantee wget.
+  # curl (builder images ship it; wget not guaranteed).
   curl -fSLO "${gen_url}/compilebox-processes-${author}.tar.gz" \
   && tar xvf "compilebox-processes-${author}.tar.gz" -C "$PWD/COMPILEBOX/" \
   && cmake -DCMAKE_BUILD_TYPE=Release -DLOCAL_SOURCE="$PWD/COMPILEBOX/compilebox-processes-${author}" -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" -DDESTINATION="$PWD/COMPILEBOX_PROCESSES/" -DCMAKE_CXX_STANDARD=17 "$PWD/COMPILEBOX" \
