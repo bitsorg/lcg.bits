@@ -1,12 +1,18 @@
 package: bits-recipe-tools
 version: "0.0.32"
 license: GPL-3.0-or-later
-tag: "v0.0.32"
+tag: "main"
 source: https://github.com/bitsorg/bits-recipe-tools
 ---
 mkdir -p $INSTALLROOT/bin
 # Install the bits-include launcher into bin/.
 install $SOURCEDIR/bits-* $INSTALLROOT/bin
+# Fortran g77 shim under scripts/ (NOT bin/, so it is not on every package's
+# PATH). FortranRecipe prepends scripts/ to PATH for Fortran generator recipes.
+if [ -f "$SOURCEDIR/scripts/g77" ]; then
+  mkdir -p $INSTALLROOT/scripts
+  install "$SOURCEDIR/scripts/g77" $INSTALLROOT/scripts
+fi
 # Install every recipe-tool helper (top-level regular files) into the package
 # root so recipes can source them via `bits-include <Name>`. Iterating over all
 # files (not a name pattern) picks up new helpers without editing this recipe.
