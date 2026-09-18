@@ -28,12 +28,7 @@ function Configure() {
   # download are off (the latter needs network, only used by the test suite).
   export SWIG="${SWIG_ROOT:+${SWIG_ROOT}/bin/swig}"
   export SWIG="${SWIG:-$(command -v swig || true)}"
-  # `swig -swiglib` reports the gone build INSTALLROOT after relocation (on Linux
-  # too, once the el9 container dropped its system swig); prefer the relocated tree.
-  local _swiglib
-  _swiglib=$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)
-  _swiglib="${_swiglib:-$("${SWIG}" -swiglib 2>/dev/null || true)}"
-  export SWIG_LIB="${_swiglib%/}"
+  export SWIG_LIB="$(bits_swig_lib)"
   # find_package(SWIG) ignores the env vars, so hand it the same paths explicitly.
   local _swig=(-DSWIG_EXECUTABLE="${SWIG}" -DSWIG_DIR="${SWIG_LIB}")
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \

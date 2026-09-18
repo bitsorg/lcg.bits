@@ -38,9 +38,7 @@ MODULE_OPTIONS="--bin --lib"
 # Linux too), with the binary as the system-swig fallback.
 export SWIG="${SWIG_ROOT:+${SWIG_ROOT}/bin/swig}"
 export SWIG="${SWIG:-$(command -v swig || true)}"
-SWIG_LIB="$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)"
-export SWIG_LIB="${SWIG_LIB:-$("${SWIG}" -swiglib 2>/dev/null || true)}"
-export SWIG_LIB="${SWIG_LIB%/}"
+export SWIG_LIB="$(bits_swig_lib)"
 ##############################
 function Configure() {
   # Sherpa 3.x switched autotools->CMake; flags mirror lcgcmake's sherpa>=3 (C++17 even on

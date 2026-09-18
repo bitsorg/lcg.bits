@@ -40,9 +40,7 @@ MODULE_OPTIONS="--bin --lib"
 # system swig); fall back to the binary for a system swig. Mirrors sherpa.sh.
 export SWIG="${SWIG_ROOT:+${SWIG_ROOT}/bin/swig}"
 export SWIG="${SWIG:-$(command -v swig || true)}"
-SWIG_LIB="$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)"
-export SWIG_LIB="${SWIG_LIB:-$("${SWIG}" -swiglib 2>/dev/null || true)}"
-export SWIG_LIB="${SWIG_LIB%/}"
+export SWIG_LIB="$(bits_swig_lib)"
 # Put OpenMPI's compilers on PATH so find_package(MPI) finds mpicxx. FindMPI also runs a
 # compile+link test (MPI_*_WORKS); the relocated wrappers need OPAL_PREFIX to find their
 # plugins/config, or the test fails ("Could NOT find MPI").
