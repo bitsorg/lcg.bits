@@ -17,24 +17,18 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsMacOS)
+. $(bits-include FortranRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
+# photos' link line is `-o $@ -shared` (no -Wl,-soname): it needs an APPEND, not
+# the dylib REPLACE, so disable the framework dylib and do the append in Make().
+BITS_MACOS_DYLIB=
 ##############################
 function Configure() {
-  # g77 (GNU Fortran 77) was retired; modern GCC provides gfortran instead.
-  export F77=${FC:-gfortran}
-  # Patch configure before running it so the generated Makeshared.subdir
-  # already references gfortran rather than the hardcoded g77.
-  grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
-    xargs perl -i -pe "s/\bg77\b/${F77}/g"
   ./configure --lcgplatform=${BITS_PLATFORM:-linux} --userfflags=-fno-automatic --enable-shared
 }
 
 function Make() {
-  # Belt-and-suspenders: replace any g77 remaining in generated build files.
-  grep -rl "g77" . | grep -Ev '\.(f|F|f90|F90|for|FOR)$' | \
-    xargs perl -i -pe "s/\bg77\b/${F77}/g"
   # macOS: the `-shared` link leaves libgfortran symbols undefined, which the
   # two-level namespace rejects. Add -undefined dynamic_lookup (+ headerpad).
   bits_is_macos && bits_file_sub Makeshared.subdir '-o \$\@ -shared\s*$' \

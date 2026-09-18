@@ -20,6 +20,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -36,12 +37,8 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: libTauolaFortran leaves sibling-library Fortran routines undefined (resolved at
-  # load time), which the two-level namespace rejects at link; patch libtool to allow
-  # undefined symbols (dynamic_lookup). Darwin-gated; Linux has no such lines.
-  if [ "$(uname)" = Darwin ]; then
-    find . -name libtool -type f -exec perl -i -pe \
-      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
-  fi
+  # macOS: libTauolaFortran leaves sibling-library Fortran routines undefined
+  # (resolved at load time); let the generated libtool emit dylibs with them.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }

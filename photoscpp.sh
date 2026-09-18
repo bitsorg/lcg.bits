@@ -20,6 +20,7 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -38,12 +39,8 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: libPhotosppHepMC3 leaves HepMC3 symbols undefined (resolved at load time by the
-  # consumer). macOS's two-level namespace rejects that at link, so patch libtool to allow
-  # undefined symbols (dynamic_lookup). Darwin-gated; Linux has no such lines.
-  if [ "$(uname)" = Darwin ]; then
-    find . -name libtool -type f -exec perl -i -pe \
-      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
-  fi
+  # macOS: libPhotosppHepMC3 leaves HepMC3 symbols undefined (resolved at load
+  # time by the consumer); let the generated libtool emit dylibs with them.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }

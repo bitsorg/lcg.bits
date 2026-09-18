@@ -15,6 +15,7 @@ redistributable: none
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -32,9 +33,9 @@ function Make() {
   # the object, which the two-level namespace rejects, so allow flat-namespace lazy
   # resolution. -headerpad_max_install_names reserves header space for bits' relocation.
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     _so=dylib; _shared=-dynamiclib
-    _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"
+    _undef="$(bits_macos_undefined_ldflags)"
   fi
   # LCG "hepevt=200000": enlarge the HEPEVT common block (default NMXHEP=4000)
   # so high-multiplicity events fit, matching lcgcmake's hepevt.inc mechanism.
@@ -45,7 +46,7 @@ function Make() {
 }
 
 function MakeInstall() {
-  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
   install -m755 libpythia6.$_so "$INSTALLROOT/lib/"
   install -m644 libpythia6.a  "$INSTALLROOT/lib/"
