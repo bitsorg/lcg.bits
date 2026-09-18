@@ -2,7 +2,7 @@ package: GCC-Toolchain
 license: GPL-3.0-or-later WITH GCC-exception-3.1
 version: "%(tag_basename)s"
 tag: v14.2.0-alice2
-source: https://github.com/alisw/gcc-toolchain
+source: https://gitlab.cern.ch/bits/gcc-toolchain
 prepend_path:
   "LD_LIBRARY_PATH": "$GCC_TOOLCHAIN_ROOT/lib64"
   "PATH": "$GCC_TOOLCHAIN_ROOT/libexec/bin"
