@@ -11,6 +11,8 @@ build_requires:
   - "Python"
   - curl
   - ninja
+own_hash: true
+
 env:
   LLVM_ROOT: "$CLANG_ROOT" # needed by LLVMAlt
 prefer_system: (osx.*)
