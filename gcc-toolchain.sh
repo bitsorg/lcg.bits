@@ -17,6 +17,16 @@ own_hash: true
 prefer_system: .*
 prefer_system_check: |
   set -e
+  # Reproducibility: inside a bits build container, never accept the image's
+  # native compiler — build our own so every platform in a container uses the
+  # identical GCC (e.g. el10 ships gcc14 natively; without this the gcc14 axis on
+  # el10 would take the system compiler and skip the build). The fingerprint file
+  # exists ONLY in bits-containers images, so native/host builds are unaffected
+  # and keep using the system compiler for speed.
+  if [ -f /opt/bits/container-fingerprint.hash ]; then
+    echo "bits build container — building GCC-Toolchain from source (image-independent compiler)"
+    exit 1
+  fi
   # Minimum __GNUC__ floor from the requested version, parsed arithmetically
   # (v15.2.0-alice1 -> 150200) so a NEW gcc never needs an edit here — a new
   # compiler arrives only as a defaults-gccNN overriding the tag. Unparseable
