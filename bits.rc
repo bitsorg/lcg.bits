@@ -1,9 +1,0 @@
-[bits]
-  organisation=LCG
-
-[LCG]
-  pkg_prefix=VO_LCG
-  sw_dir=../sw
-  repo_dir=.
-  search_path=common
-  
