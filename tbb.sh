@@ -19,10 +19,17 @@ prefer_system_check: |
 MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
+  # Always RelWithDebInfo. A full-Debug oneTBB installs libtbb_debug.so (oneTBB
+  # hard-sets CMAKE_DEBUG_POSTFIX=_debug for the Debug config), which name-based
+  # finders — ROOT's bundled FindTBB, plain -ltbb — cannot locate. ATLAS never
+  # hits this because it builds externals -opt (RelWithDebInfo), never -O0 Debug;
+  # we pin RelWithDebInfo so tbb ships libtbb.so WITH debug info in EVERY flavour,
+  # including the testbed -dbg axis. Safe against a debug consumer's NDEBUG/
+  # TBB_USE_DEBUG mismatch only because oneTBB 2021+ has a unified ABI.
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_INSTALL_LIBDIR=lib \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
-      -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE:-Release}" \
+      -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DTBB_TEST=OFF
 }
