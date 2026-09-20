@@ -7,6 +7,7 @@ version: "4.5.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
+  - curl
   - fribidi
   - readline
 # macOS: source R from Homebrew -- its long dependency chain (cairo, openblas, tcl-tk, ...)

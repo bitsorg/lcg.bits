@@ -21,6 +21,7 @@ MODULE_OPTIONS="--bin --lib --root-inc"
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
+      -DCMAKE_INSTALL_LIBDIR=lib \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE:-Release}" \
     -DTBB_TEST=OFF
