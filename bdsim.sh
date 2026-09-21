@@ -40,6 +40,11 @@ function Configure() {
   # macOS: point find_package(BISON) at bits bison 3.8.2, not system /usr/bin/bison (Apple's 2.3)
   local _bison=()
   bits_is_macos && _bison+=(-DBISON_EXECUTABLE="${BISON_ROOT}/bin/bison")
+  # Boost.System is header-only since 1.69 and bits Boost 1.91 ships no boost_system
+  # component; bdsim uses only header-only Boost (histogram/format/variant), so drop
+  # the compiled component from the find_package request.
+  perl -i -pe 's/find_package\(Boost (\S+) REQUIRED COMPONENTS system\)/find_package(Boost $1 REQUIRED)/' \
+    "${BITS_CMAKE_SRC}/cmake/Boost.cmake"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
