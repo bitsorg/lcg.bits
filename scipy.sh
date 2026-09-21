@@ -1,7 +1,7 @@
 package: scipy
 description: SciPy scientific and technical computing library for Python
-version: "1.17.1"
-tag: "1.17.1"
+version: "1.18.1"
+tag: "1.18.1"
 requires:
   - Python
   - numpy

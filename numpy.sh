@@ -1,7 +1,7 @@
 package: numpy
 description: NumPy fundamental package for array computing in Python
-version: "2.4.4"
-tag: "2.4.4"
+version: "2.5.3"
+tag: "2.5.3"
 requires:
   - Python
 build_requires:

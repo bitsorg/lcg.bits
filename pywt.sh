@@ -34,10 +34,14 @@ function MakeInstall() {
     _sp="${!_r}/lib/python${PYTHON_MAJOR_MINOR}/site-packages"
     [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
   done
-  "${PYTHON_EXE}" -m pip install \
-    --no-deps --no-build-isolation --ignore-installed \
-    --root=/ --prefix="${INSTALLROOT}" \
-    "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"
+  if ! "${PYTHON_EXE}" -m pip install \
+       --no-deps --no-build-isolation --ignore-installed -v \
+       --root=/ --prefix="${INSTALLROOT}" \
+       "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"; then
+    echo "=== DIAG: meson-log(s) (temporary, remove once diagnosed) ===" >&2
+    find /tmp -name meson-log.txt -newermt '-10 min' -exec cat {} + >&2 2>/dev/null || true
+    return 1
+  fi
   if [ -z "$(ls -A "${SITE_PACKAGES}" 2>/dev/null)" ]; then
     echo "pywt: pip exited 0 but ${SITE_PACKAGES} is empty" >&2
     return 1
