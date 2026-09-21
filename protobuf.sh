@@ -37,19 +37,3 @@ function Configure() {
     -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON \
     ${ABSL_ROOT:+-Dabsl_ROOT="$ABSL_ROOT"}
 }
-
-function PostInstall() {
-  # protobuf's CMake bakes absolute INSTALLROOT paths into its .pc files, which
-  # break consumers after relocation. Make them relative to the .pc location so
-  # they are correct regardless of where the package lands.
-  local pc
-  for pc in "${INSTALLROOT}"/lib/pkgconfig/*.pc; do
-    [ -e "$pc" ] || continue
-    sed -i \
-      -e 's|^prefix=.*|prefix=${pcfiledir}/../..|' \
-      -e 's|^exec_prefix=.*|exec_prefix=${prefix}|' \
-      -e 's|^libdir=.*|libdir=${prefix}/lib|' \
-      -e 's|^includedir=.*|includedir=${prefix}/include|' \
-      "$pc"
-  done
-}
