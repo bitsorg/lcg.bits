@@ -47,7 +47,12 @@ MODULE_OPTIONS="--bin --lib"
 function Configure() {
   # readline is now a system dependency (see readline.sh): the bits build is
   # gone, so we use the OS readline, which R's configure finds in the default
-  # /usr search paths. No READLINE_ROOT / CPPFLAGS / LDFLAGS overrides needed.
+  # /usr search paths. No readline overrides needed.
+  # curl is found only via curl-config, whose baked prefix is the pre-relocate
+  # INSTALLROOT path and is absent at R's build time. Point R at curl's
+  # relocated root explicitly (house idiom: <DEP>_ROOT).
+  export CPPFLAGS="${CURL_ROOT:+-I${CURL_ROOT}/include }${CPPFLAGS:-}"
+  export LDFLAGS="${CURL_ROOT:+-L${CURL_ROOT}/lib -L${CURL_ROOT}/lib64 }${LDFLAGS:-}"
   ./configure --prefix=$INSTALLROOT --disable-R-framework --enable-R-shlib \
     --without-x --with-cairo --with-libpng --with-libtiff --with-jpeglib \
     --with-readline
