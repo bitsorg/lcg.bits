@@ -37,12 +37,22 @@ function MakeInstall() {
   # TEMP DIAGNOSTIC — capture the real-round meson failure (remove once diagnosed)
   echo "DIAG cython=$(command -v cython) [$(cython --version 2>&1)]" >&2
   echo "DIAG PYTHONPATH=$PYTHONPATH" >&2
+  # Replicate meson's cython sanity check directly — this is the failing step.
+  { _dt="$(mktemp -d)"; printf 'print("hi")\n' > "$_dt/s.pyx"
+    echo "DIAG direct-cython:" >&2
+    cython -3 "$_dt/s.pyx" -o "$_dt/s.c" >&2 2>&1; echo "DIAG direct-cython rc=$?" >&2
+    rm -rf "$_dt"; } || true
+  # Persistent meson build dir so the log survives pip/meson-python cleanup.
+  local _mb="${BUILDDIR:-/tmp}/pywt-diag-meson"; rm -rf "$_mb"
   if ! "${PYTHON_EXE}" -m pip install \
-       --no-deps --no-build-isolation --ignore-installed --no-clean -v \
+       --no-deps --no-build-isolation --ignore-installed \
+       --config-settings=build-dir="$_mb" \
        --root=/ --prefix="${INSTALLROOT}" \
        "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"; then
-    echo "===== DIAG meson-log(s) =====" >&2
-    find /tmp -name meson-log.txt -newermt '-15 min' -exec cat {} + >&2 2>/dev/null || true
+    echo "===== DIAG meson-log =====" >&2
+    cat "$_mb"/meson-logs/meson-log.txt >&2 2>/dev/null \
+      || find /tmp -name meson-log.txt -newermt '-15 min' -exec cat {} + >&2 2>/dev/null \
+      || echo "DIAG: no meson-log found" >&2
     return 1
   fi
   if [ -z "$(ls -A "${SITE_PACKAGES}" 2>/dev/null)" ]; then
