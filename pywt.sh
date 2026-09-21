@@ -34,27 +34,16 @@ function MakeInstall() {
     _sp="${!_r}/lib/python${PYTHON_MAJOR_MINOR}/site-packages"
     [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
   done
-  # TEMP DIAGNOSTIC — capture the real-round meson failure (remove once diagnosed)
-  echo "DIAG cython=$(command -v cython) [$(cython --version 2>&1)]" >&2
-  echo "DIAG PYTHONPATH=$PYTHONPATH" >&2
-  # Replicate meson's cython sanity check directly — this is the failing step.
-  { _dt="$(mktemp -d)"; printf 'print("hi")\n' > "$_dt/s.pyx"
-    echo "DIAG direct-cython:" >&2
-    cython -3 "$_dt/s.pyx" -o "$_dt/s.c" >&2 2>&1; echo "DIAG direct-cython rc=$?" >&2
-    rm -rf "$_dt"; } || true
-  # Persistent meson build dir so the log survives pip/meson-python cleanup.
-  local _mb="${BUILDDIR:-/tmp}/pywt-diag-meson"; rm -rf "$_mb"
-  if ! "${PYTHON_EXE}" -m pip install \
-       --no-deps --no-build-isolation --ignore-installed \
-       --config-settings=build-dir="$_mb" \
-       --root=/ --prefix="${INSTALLROOT}" \
-       "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"; then
-    echo "===== DIAG meson-log =====" >&2
-    cat "$_mb"/meson-logs/meson-log.txt >&2 2>/dev/null \
-      || find /tmp -name meson-log.txt -newermt '-15 min' -exec cat {} + >&2 2>/dev/null \
-      || echo "DIAG: no meson-log found" >&2
-    return 1
-  fi
+  # meson runs a Cython sanity check that compiles a program #include-ing Python.h
+  # BEFORE it resolves the Python dependency, so it does not add Python's include
+  # dir. Put it on CPATH so that compile finds Python.h.
+  local _pyinc
+  _pyinc="$("${PYTHON_EXE}" -c 'import sysconfig; print(sysconfig.get_path("include"))')"
+  [ -d "${_pyinc}" ] && export CPATH="${_pyinc}${CPATH:+:${CPATH}}"
+  "${PYTHON_EXE}" -m pip install \
+    --no-deps --no-build-isolation --ignore-installed \
+    --root=/ --prefix="${INSTALLROOT}" \
+    "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"
   if [ -z "$(ls -A "${SITE_PACKAGES}" 2>/dev/null)" ]; then
     echo "pywt: pip exited 0 but ${SITE_PACKAGES} is empty" >&2
     return 1
