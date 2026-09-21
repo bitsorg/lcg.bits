@@ -34,10 +34,17 @@ function MakeInstall() {
     _sp="${!_r}/lib/python${PYTHON_MAJOR_MINOR}/site-packages"
     [ -d "${_sp}" ] && export PYTHONPATH="${_sp}${PYTHONPATH:+:${PYTHONPATH}}"
   done
-  "${PYTHON_EXE}" -m pip install \
-    --no-deps --no-build-isolation --ignore-installed \
-    --root=/ --prefix="${INSTALLROOT}" \
-    "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"
+  # TEMP DIAGNOSTIC — capture the real-round meson failure (remove once diagnosed)
+  echo "DIAG cython=$(command -v cython) [$(cython --version 2>&1)]" >&2
+  echo "DIAG PYTHONPATH=$PYTHONPATH" >&2
+  if ! "${PYTHON_EXE}" -m pip install \
+       --no-deps --no-build-isolation --ignore-installed --no-clean -v \
+       --root=/ --prefix="${INSTALLROOT}" \
+       "${PYPI_NAME:-${PKGNAME}}==${PKGVERSION}"; then
+    echo "===== DIAG meson-log(s) =====" >&2
+    find /tmp -name meson-log.txt -newermt '-15 min' -exec cat {} + >&2 2>/dev/null || true
+    return 1
+  fi
   if [ -z "$(ls -A "${SITE_PACKAGES}" 2>/dev/null)" ]; then
     echo "pywt: pip exited 0 but ${SITE_PACKAGES} is empty" >&2
     return 1
