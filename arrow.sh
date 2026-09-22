@@ -58,6 +58,14 @@ EOF
     chmod +x "$_wrap"
     _extra+=(-DCMAKE_LIBTOOL="$_wrap")
   fi
+  # arrow ships pre-generated flatbuffers headers that bake an exact
+  # FLATBUFFERS_VERSION static_assert; we build against bits flatbuffers
+  # ($FLATBUFFERS_ROOT), so regenerate them or the compile fails with
+  # "Non-compatible flatbuffers version included".
+  if [ -x "${FLATBUFFERS_ROOT:-}/bin/flatc" ]; then
+    "$FLATBUFFERS_ROOT/bin/flatc" --cpp --scoped-enums \
+        -o "$BITS_CMAKE_SRC/cpp/src/generated" "$BITS_CMAKE_SRC"/format/*.fbs
+  fi
   cmake -S "$BITS_CMAKE_SRC/cpp" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
