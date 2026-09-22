@@ -17,6 +17,12 @@ build_requires:
 license: BSD-3-Clause
 ---
 #!/bin/bash -e
+# Store-identity bump (2026-09-22): the stored protobuf artifact predates the
+# self-relative .pc/.cmake relocation fix, and reuse does not re-relocate on
+# overlay, so its pkg-config files kept dead INSTALLROOT paths (broke bear via
+# grpc). The no-op below moves the recipe hash to force a corrected rebuild.
+# Drop on the next store rebaseline.
+: "bits-store-identity-2026-09-22"
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
