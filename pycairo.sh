@@ -34,4 +34,12 @@ export LIBRARY_PATH="${CAIRO_ROOT:+${CAIRO_ROOT}/lib}${LIBRARY_PATH:+:${LIBRARY_
 ##############################
 MODULE_OPTIONS="--bin --python"
 ##############################
+# meson runs a Cython sanity check that #includes Python.h before it resolves
+# the Python dependency, so Python's include dir is not on the search path. Put
+# CPython's versioned header dir (include/python<maj.min>) on CPATH. Per-recipe
+# stopgap until Python advertises this on CPATH for all consumers.
+_pyabi="${PYTHON_ROOT}/include/python${PYTHON_MAJOR_MINOR}"
+[ -d "${_pyabi}" ] && export CPATH="${_pyabi}${CPATH:+:${CPATH}}"
+unset _pyabi
+##############################
 
