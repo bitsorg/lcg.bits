@@ -59,12 +59,16 @@ EOF
     _extra+=(-DCMAKE_LIBTOOL="$_wrap")
   fi
   # arrow ships pre-generated flatbuffers headers that bake an exact
-  # FLATBUFFERS_VERSION static_assert; we build against bits flatbuffers
-  # ($FLATBUFFERS_ROOT), so regenerate them or the compile fails with
-  # "Non-compatible flatbuffers version included".
+  # FLATBUFFERS_VERSION static_assert; against bits flatbuffers ($FLATBUFFERS_ROOT)
+  # the compile fails ("Non-compatible flatbuffers version included"), so
+  # regenerate them with our flatc. NO --scoped-enums: arrow's C++ uses prefixed
+  # enum names (MetadataVersion_V5), not enum class. Regenerate the whole schema
+  # set, including feather.fbs (which lives in cpp/src/arrow/ipc, not format/);
+  # -I format resolves the cross-schema includes.
   if [ -x "${FLATBUFFERS_ROOT:-}/bin/flatc" ]; then
-    "$FLATBUFFERS_ROOT/bin/flatc" --cpp --scoped-enums \
-        -o "$BITS_CMAKE_SRC/cpp/src/generated" "$BITS_CMAKE_SRC"/format/*.fbs
+    _fbs=$(find "$BITS_CMAKE_SRC/format" "$BITS_CMAKE_SRC/cpp/src/arrow/ipc" -name '*.fbs')
+    "$FLATBUFFERS_ROOT/bin/flatc" --cpp -o "$BITS_CMAKE_SRC/cpp/src/generated" \
+        -I "$BITS_CMAKE_SRC/format" $_fbs
   fi
   cmake -S "$BITS_CMAKE_SRC/cpp" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
