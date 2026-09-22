@@ -5,6 +5,7 @@ tag: "fcc1.0.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.bz2
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-BabaYaga
