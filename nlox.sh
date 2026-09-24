@@ -41,6 +41,9 @@ function Configure() {
   else
     echo "WARNING: QCDLoop-1.98 pre-download failed — leaving the upstream URL in place" >&2
   fi
+  # 4) tred uses GCC quad-precision literals (0.Q), which strict ISO -std=c++NN
+  #    (from the defaults' CXXFLAGS) rejects; re-enable just those suffixes.
+  export CXXFLAGS="${CXXFLAGS:-} -fext-numeric-literals"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
