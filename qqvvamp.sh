@@ -22,13 +22,15 @@ redistributable: none
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
-  # qqvvamp is one huge machine-generated TU; under -dbg full '-g' overflows the 32-bit
-  # relocation range (.debug_info) and the link dies "relocation truncated to fit". Cap
-  # debug at -g1 (wins over earlier -g); drop to -g0 if a future revision still overflows.
+  # ~3000 machine-generated TUs, each instantiated in three precisions (CLN, quad,
+  # double). Release would add -O3 after the stack's -O2 and the recipe kept -g1:
+  # build at -O2 without debug info (useless for generated code; full -g also
+  # overflowed the 32-bit relocations of the .debug_* sections).
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_CXX_FLAGS="${CXXFLAGS:-} -g1" \
+    -DCMAKE_CXX_FLAGS="${CXXFLAGS:-} -g0" \
+    -DCMAKE_CXX_FLAGS_RELEASE="-O2 -DNDEBUG" \
     -DGiNaC_DIR="${GINAC_ROOT}"
 }
