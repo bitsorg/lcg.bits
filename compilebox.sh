@@ -80,6 +80,13 @@ function Make() {
   # MCGenerators mirror; author=ATLASOTF-08-14 (the LCG author tag).
   local gen_url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
   local author="ATLASOTF-08-14"
+  # The nested process builds read CXXFLAGS from the env. GoSam's quadninja uses
+  # __float128 literals (0.Q, 1.iQ): GNU dialect, same level as the stack's -std.
+  # Drop -g: a single cc1plus reached 52 GB on the generated amplitude sources, and
+  # debug info is their largest memory cost (and of no use for generated code).
+  CXXFLAGS="${CXXFLAGS:-}"; CXXFLAGS="${CXXFLAGS//-std=c++/-std=gnu++}"
+  CXXFLAGS=" $CXXFLAGS "; CXXFLAGS="${CXXFLAGS// -g / }"
+  CXXFLAGS="${CXXFLAGS# }"; export CXXFLAGS="${CXXFLAGS% }"
   # curl (builder images ship it; wget not guaranteed).
   curl -fSLO "${gen_url}/compilebox-processes-${author}.tar.gz" \
   && tar xvf "compilebox-processes-${author}.tar.gz" -C "$PWD/COMPILEBOX/" \
