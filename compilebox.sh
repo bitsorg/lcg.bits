@@ -58,7 +58,7 @@ COMPILEBOX_GEN_URL="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGenerator
 COMPILEBOX_AUTHOR="ATLASOTF-08-14"
 # Optimisation for the huge machine-generated one-function sources (see
 # _LimitGeneratedOpt): -O2 on ttJ_MiNNLO's pentagon_gg.cpp needs > 6.8 GB.
-COMPILEBOX_GENERATED_OPT="${COMPILEBOX_GENERATED_OPT:--O1}"
+COMPILEBOX_GENERATED_OPT="${COMPILEBOX_GENERATED_OPT:--O0}"   # -O1 was still OOM-killed
 ##############################
 function _LimitGeneratedOpt() {
   # ttJ_MiNNLO's two-loop virtuals #include 1-4 MB Maple-generated single
