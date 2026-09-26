@@ -1,7 +1,7 @@
 package: kaldet
 description: KalDet Kalman-filter detector model for ILC
-version: "01.14.01"
-tag: "v01-14-01"
+version: "01.15"
+tag: "v01-15"
 source: https://github.com/iLCSoft/KalDet.git
 requires:
   - CMake
