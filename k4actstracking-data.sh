@@ -19,7 +19,7 @@ sources:
 enforce_checksums: true
 build_requires:
   - bits-recipe-tools
-license: NOASSERTION
+license: Apache-2.0
 ---
 #!/bin/bash -e
 dest="$INSTALLROOT/share/k4ActsTracking/data"
