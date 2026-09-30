@@ -7,7 +7,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: BSD-2-Clause AND Public Domain
+license: BSD-2-Clause AND Unlicense
 ---
 #!/bin/bash -e
 ##############################

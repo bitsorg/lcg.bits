@@ -8,7 +8,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: PSFL
+license: PSF-2.0
 ---
 #!/bin/bash -e
 ##############################

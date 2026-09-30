@@ -16,7 +16,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: Geant4-SL-1.0
+license: LicenseRef-Geant4-SL-1.0
 acknowledgment: "Includes software developed by Members of the Geant4 Collaboration (http://cern.ch/geant4)."
 prepend_path:
   ROOT_INCLUDE_PATH:

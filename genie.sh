@@ -15,7 +15,9 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LGPL-2.1-only
+license: GPL-3.0-only
+# GENIE: GPLv3 for small-scale academic use plus the MCnet guidelines; the GENIE
+# Collaboration reserves rights for community-wide frameworks (copyright.genie-mc.org).
 ---
 #!/bin/bash -e
 ##############################
