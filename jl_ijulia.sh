@@ -19,12 +19,9 @@ MODULE_OPTIONS=""
 function Make() {
   # No source to compile; install IJulia into INSTALLROOT, which acts as a Julia depot
   export JULIA_DEPOT_PATH="$INSTALLROOT"
-  # IJulia installs its Jupyter kernelspec into the Jupyter data dir, which
-  # defaults to ~/.local/share/jupyter on Linux (and ~/Library/Jupyter on macOS).
-  # The build sandbox has HOME unset, so on Linux that resolves to /.local and
-  # mkdir fails (EACCES); macOS writes outside the sandbox (EPERM). Point
-  # JUPYTER_DATA_DIR into INSTALLROOT on every platform so the kernelspec lands in
-  # the package; PostInstall adds JUPYTER_PATH so Jupyter finds it at runtime.
+  # IJulia's Jupyter kernelspec defaults to ~/.local/share/jupyter, but the build
+  # sandbox has HOME unset (mkdir fails). Point JUPYTER_DATA_DIR into INSTALLROOT so
+  # it lands in the package; PostInstall adds JUPYTER_PATH for runtime discovery.
   export JUPYTER_DATA_DIR="$INSTALLROOT/share/jupyter"
   mkdir -p "$JUPYTER_DATA_DIR"
   julia -e '

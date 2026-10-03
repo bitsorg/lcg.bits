@@ -1,7 +1,7 @@
 package: ROOT
 description: CERN ROOT data analysis framework
-version: "v6.38.00"
-tag: "v6-38-00"
+version: "v6.40.02"
+tag: "v6-40-02"
 source: https://github.com/root-project/root.git
 mem_per_job: 1500
 requires:
@@ -18,7 +18,7 @@ requires:
   - zlib
   - libxml2
   - "vdt:(?!osx)"
-  - "unuran:osx"
+  - unuran
   - xz
   - cfitsio
   - jsonmcpp
@@ -26,10 +26,16 @@ requires:
   - protobuf
   - jpeg
   - tiff
+  - "giflib:(?!osx)"
+  - "lz4:(?!osx)"
+  - "pcre:(?!osx)"
+  - "xxHash:(?!osx)"
+  - "zstd:(?!osx)"
+  - "ftgl:(?!osx)"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LGPL-2.1-only
+license: LGPL-2.1-or-later
 env:
   ROOTSYS: "$ROOT_ROOT"
 prepend_path:
@@ -87,16 +93,17 @@ function Configure() {
     _vdt_lib=$(find "${VDT_ROOT}/lib" "${VDT_ROOT}/lib64" \( -name 'libvdt.so' -o -name 'libvdt.dylib' \) -print -quit 2>/dev/null)
   fi
 
-  # Platform and compiler settings — use system cc/c++ on Linux, Xcode clang on macOS.
+  # Compiler: honor the axis's $CC/$CXX (the clang axis sets them to clang/clang++
+  # on Linux too), falling back to cc/c++. Avoids assuming Linux == gcc.
   ENABLE_COCOA=""
-  COMPILER_CC=cc
-  COMPILER_CXX=c++
+  COMPILER_CC="${CC:-cc}"
+  COMPILER_CXX="${CXX:-c++}"
   case $(uname) in
     Darwin)
       # Native Cocoa GUI backend, X11 off, so ROOT doesn't need XQuartz on macOS.
       ENABLE_COCOA="-Dcocoa=ON -Dx11=OFF"
-      COMPILER_CXX=clang++
-      COMPILER_CC=clang
+      COMPILER_CC="${CC:-clang}"
+      COMPILER_CXX="${CXX:-clang++}"
       [[ ! $GSL_ROOT ]] && GSL_ROOT=$(brew --prefix gsl 2>/dev/null) || true
       [[ ! $LIBPNG_ROOT ]] && LIBPNG_ROOT=$(brew --prefix libpng 2>/dev/null) || true
       [[ ! $OPENSSL_ROOT ]] && OPENSSL_ROOT=$(brew --prefix openssl@3 2>/dev/null) || true
@@ -129,7 +136,7 @@ function Configure() {
     if [[ "$(uname)" == Darwin ]]; then
       _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON -Dcurl=ON"
     else
-      _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=OFF -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
+      _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=ON -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
     fi
   else
     _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"

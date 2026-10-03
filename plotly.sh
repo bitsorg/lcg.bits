@@ -1,7 +1,7 @@
 package: plotly
 description: Plotly interactive graphing library for Python
-version: "5.16.1"
-tag: "5.16.1"
+version: "6.7.0"
+tag: "6.7.0"
 requires:
   - Python
   - six

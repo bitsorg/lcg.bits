@@ -21,9 +21,13 @@ patches:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsMacOS)
+. $(bits-include FortranRecipe)
 ##############################
 MODULE_OPTIONS="--bin --lib"
+# tauola's Makeshared.subdir spells the link line specifically; keep that exact
+# pattern rather than the FortranRecipe default. (Its ARCH redirect in Prepare
+# already selects gfortran; the g77 shim stays inert.)
+BITS_MACOS_DYLIB_PATTERN='-shared -Wl,-soname,\$\(notdir \$\@\)'
 ##############################
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
@@ -41,15 +45,10 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: configure's ARCH=Darwin picks legacy FC=g77/CC=gcc, and clang's `-M file.F` dep
-  # rule fails on Fortran. Point FC/CC at gfortran and rewrite Makeshared.subdir's ELF
-  # shared-link to Mach-O (idempotent via the grep guard).
+  # macOS: configure's ARCH=Darwin picks legacy FC=g77/CC=gcc, and clang's `-M file.F`
+  # dep rule fails on Fortran, so point FC/CC at gfortran (below).
   local _cc=()
   if bits_is_macos; then
-    # Rewrite Makeshared.subdir's ELF shared-link (-shared -Wl,-soname, which
-    # Apple ld rejects) to Mach-O (-dynamiclib + dynamic_lookup + headerpad).
-    bits_file_sub Makeshared.subdir '-shared -Wl,-soname,\$\(notdir \$\@\)' \
-      '-dynamiclib -Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names'
     # clang infers Fortran for .F and fails the `$(CC) -M` dep step; point CC at
     # gfortran (-ffixed-line-length-132 to match the source layout).
     _cc=(FC=gfortran "CC=gfortran -ffixed-line-length-132")

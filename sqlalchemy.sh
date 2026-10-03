@@ -1,7 +1,7 @@
 package: sqlalchemy
 description: SQLAlchemy SQL toolkit and object-relational mapper
-version: "2.0.48"
-tag: "2.0.48"
+version: "2.0.50"
+tag: "2.0.50"
 requires:
   - Python
   - typing_extensions

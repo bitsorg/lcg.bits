@@ -1,0 +1,2465 @@
+diff --no-dereference -ruN PLUGIN/__init__.py PLUGIN/__init__.py
+--- PLUGIN/__init__.py	2025-09-19 12:11:03.000000000 +0200
++++ PLUGIN/__init__.py	2026-08-27 20:16:52.112015193 +0200
+@@ -0,0 +1,5 @@
++import os
++
++root_path = os.path.split(os.path.dirname(os.path.realpath( __file__ )))[0]
++
++__path__ = [ root_path , '/cvmfs/atlas.cern.ch/repo/sw/Generators/madgraph/models/latest/PLUGIN' ]
+diff --no-dereference -ruN Template/Common/bin/internal/dmtcp_condor_driver.sh Template/Common/bin/internal/dmtcp_condor_driver.sh
+--- Template/Common/bin/internal/dmtcp_condor_driver.sh	1970-01-01 01:00:00.000000000 +0100
++++ Template/Common/bin/internal/dmtcp_condor_driver.sh	2026-08-27 20:16:52.112015193 +0200
+@@ -0,0 +1,84 @@
++#!/bin/bash
++
++export PATH="$DMTCP_PATH/bin:$PATH"
++export LD_LIBRARY_PATH="$DMTCP_PATH/lib:$LD_LIBRARY_PATH"
++
++# Check if shared directory is set
++if [ -z "${SHARED_DIR+x}" ]; then
++    out="/dev/null"
++    echo "$(date) - Shared disk disabled" | tee -a $out
++    export DMTCP_CHECKPOINT_DIR="$PWD/dmtcp_$CONDOR_ID"
++else
++    if [ -d "$SHARED_DIR" ]; then
++        out="$SHARED_DIR/condor_$CONDOR_ID.out"
++        echo "$(date) - Shared disk enabled" | tee -a $out
++        export DMTCP_CHECKPOINT_DIR="$SHARED_DIR/dmtcp_$CONDOR_ID"
++        cd "$SHARED_DIR"
++    else
++        exit 0
++    fi
++fi
++
++tarCounter=0
++while [[ (-f MadLoop5_resources.tar.gz) && (! -f MadLoop5_resources/HelConfigs.dat) && ($tarCounter < 10) ]]; do
++    if [[ $tarCounter > 0 ]]; then
++	sleep 2s
++    fi
++    tar -xzf MadLoop5_resources.tar.gz >/dev/null 2>&1
++    tarCounter=$[$tarCounter+1]
++done
++
++if [[ (-e MadLoop5_resources.tar.gz) && (! -e MadLoop5_resources/HelConfigs.dat) ]]; then
++    echo "Cannot untar and unzip file `pwd`/MadLoop5_resources.tar.gz." > log.txt
++    exit
++fi
++
++mkdir -p "$DMTCP_CHECKPOINT_DIR"
++if compgen -G "G*" > /dev/null; then
++    cd G* || exit 1
++fi
++
++dmtcp_coordinator -i 86400 --daemon --exit-on-last -p 0 --port-file "$DMTCP_CHECKPOINT_DIR/dmtcp.port" 1>/dev/null 2>&1
++export DMTCP_COORD_HOST=$(hostname)
++export DMTCP_COORD_PORT=$(cat "$DMTCP_CHECKPOINT_DIR/dmtcp.port")
++
++timeout() {
++    echo "$(date) - Approaching walltime. Creating checkpoint..." | tee -a $out
++    if [[ -e "$DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh" ]]; then
++        mv $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script_prev.sh
++    fi
++    script -qfc "dmtcp_command -bcheckpoint" | tee -a $out 2>&1
++    count=0
++    while [ ! -e "$DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh" ] && [ $count -lt 10 ]; do
++        echo "$(date) - Waiting for checkpoint..." | tee -a $out
++        sleep 20
++        ((count++))
++    done
++    if [ $count -eq 10 ]; then
++        mv $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script_prev.sh $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh
++        echo "$(date) - Checkpoint creation failed. Requeuing..." | tee -a $out
++    else
++        rm $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script_prev.sh
++        echo "$(date) - Checkpoint created. Requeuing..." | tee -a $out
++    fi
++    script -qfc "dmtcp_command --quit" | tee -a $out 2>&1
++    sleep 10
++    exit 85
++}
++
++# Trap signals
++trap "timeout" SIGTERM
++
++if [[ -e "$DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh" ]]; then
++    echo "$(date) - Resuming from checkpoint. Restart: ${CONDOR_RESTART_COUNT}" | tee -a $out
++    script -qfc "/bin/bash $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh \
++        -d $DMTCP_CHECKPOINT_DIR -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT" | tee -a $out 2>&1 &
++else
++    export EXECUTE="dmtcp_launch --allow-file-overwrite $@"
++    script -qfc "$EXECUTE" | tee -a $out 2>&1 &
++fi
++
++wait
++
++echo "$(date) - Exit" | tee -a $out
++exit 0
+diff --no-dereference -ruN Template/Common/bin/internal/dmtcp_condor_preexec.sh Template/Common/bin/internal/dmtcp_condor_preexec.sh
+--- Template/Common/bin/internal/dmtcp_condor_preexec.sh	1970-01-01 01:00:00.000000000 +0100
++++ Template/Common/bin/internal/dmtcp_condor_preexec.sh	2026-08-27 20:16:52.113015212 +0200
+@@ -0,0 +1,7 @@
++DAGMANPATH=$1
++DAGMANFLOW=$2
++
++DAGMANJOBID="$(condor_q -nobatch -autoformat ClusterId \
++  -const "regexp(\"${DAGMANFLOW}\", Arguments) && regexp(\"condor_dagman\", Cmd)" | head -n1)"
++
++mkdir -p $DAGMANPATH/dmtcp_$DAGMANJOBID
+diff --no-dereference -ruN Template/Common/bin/internal/dmtcp_slurm_driver.sh Template/Common/bin/internal/dmtcp_slurm_driver.sh
+--- Template/Common/bin/internal/dmtcp_slurm_driver.sh	1970-01-01 01:00:00.000000000 +0100
++++ Template/Common/bin/internal/dmtcp_slurm_driver.sh	2026-08-27 20:16:52.127015468 +0200
+@@ -0,0 +1,85 @@
++#!/bin/bash
++
++# setup ATLAS environment and LCG release
++if [[ -z ${ATLAS_LOCAL_ROOT_BASE+x} ]]; then
++    export ATLAS_LOCAL_ROOT_BASE=/cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase
++fi
++source ${ATLAS_LOCAL_ROOT_BASE}/user/atlasLocalSetup.sh
++
++if [[ -z ${SETUP_ENV+x} ]]; then
++    lsetup "views LCG_109a_ATLAS_13 x86_64-el9-gcc15-opt"
++else
++    eval "$SETUP_ENV"
++fi
++
++
++export PATH="$DMTCP_PATH/bin:$PATH"
++export LD_LIBRARY_PATH="$DMTCP_PATH/lib:$LD_LIBRARY_PATH"
++
++count=0
++while [ -d "$RUN_DIR/dmtcp_fail" ] && [ $count -lt 10 ]; do
++    echo "$(date) - Waiting for $RUN_DIR/dmtcp_fail to disappear..."
++    sleep 20
++    ((count++))
++done
++
++export DMTCP_CHECKPOINT_DIR="$RUN_DIR/dmtcp_$SLURM_JOB_ID"
++mkdir -p "$DMTCP_CHECKPOINT_DIR"
++
++dmtcp_coordinator -i 14400 --daemon --exit-on-last -p 0 --port-file "$DMTCP_CHECKPOINT_DIR/dmtcp.port" 1>/dev/null 2>&1
++export DMTCP_COORD_HOST=$(hostname)
++export DMTCP_COORD_PORT=$(cat "$DMTCP_CHECKPOINT_DIR/dmtcp.port")
++
++timeout() {
++    echo "$(date) - Approaching walltime. Creating checkpoint..."
++    if [[ -e "$DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh" ]]; then
++        mv $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script_prev.sh
++    fi
++    script -qfc "dmtcp_command -bcheckpoint"
++    count=0
++    while [ ! -e "$DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh" ] && [ $count -lt 10 ]; do
++        echo "$(date) - Waiting for checkpoint..."
++        sleep 20
++        ((count++))
++    done
++    if [ $count -eq 10 ]; then
++        mv $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script_prev.sh $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh
++        echo "$(date) - Checkpoint creation failed. Requeuing..."
++    else
++        rm $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script_prev.sh
++        echo "$(date) - Checkpoint created. Requeuing..."
++    fi
++    script -qfc "dmtcp_command --quit"
++    sleep 2
++    scontrol requeue $SLURM_JOB_ID
++    sleep 10
++    exit 85
++}
++
++# Trap signals
++trap "timeout" USR1
++
++if [[ -e "$DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh" ]]; then
++    echo "$(date) - Resuming from checkpoint. Restart: ${SLURM_RESTART_COUNT}"
++    script -qfc "srun /bin/bash $DMTCP_CHECKPOINT_DIR/dmtcp_restart_script.sh -h $DMTCP_COORD_HOST -p $DMTCP_COORD_PORT" &
++else
++    export EXECUTE="srun dmtcp_launch --allow-file-overwrite $@"
++    script -qfc "$EXECUTE" &
++fi
++
++wait
++
++echo "$(date) - Calculation finished. Cleanup..."
++
++link="$DMTCP_CHECKPOINT_DIR"
++
++while [ -L "$link" ]; do
++    next=$(readlink "$link")
++    rm "$link"
++    link="$next"
++done
++
++rm -r "$link"
++
++echo "$(date) - Exit"
++exit 0
+diff --no-dereference -ruN Template/NLO/SubProcesses/ajob_template Template/NLO/SubProcesses/ajob_template
+--- Template/NLO/SubProcesses/ajob_template	2025-09-19 12:11:03.000000000 +0200
++++ Template/NLO/SubProcesses/ajob_template	2026-08-27 20:16:52.113015212 +0200
+@@ -50,7 +50,13 @@
+ 	    j=G$run_mode$i\_$runnumber
+ 	fi
+     fi
+-    cd $j
++
++    #Check whether we are in the process dir (DMTCP)
++    LEVEL_UP=0
++    if [[ -d $j ]] ; then
++        cd $j
++        LEVEL_UP=1
++    fi
+     
+     if  [[ -e res.dat ]] ; then
+ 	rm -f res.dat
+@@ -106,6 +112,8 @@
+     cp -f log.txt log_MINT$integration_step.txt  >/dev/null 2>&1
+     cp -f res.dat res_$integration_step.dat  >/dev/null 2>&1
+     exit $status
+-    cd ..
++    if [[ $LEVEL_UP == 1 ]] ; then
++        cd ..
++    fi
+ done
+ exit $status
+diff --no-dereference -ruN Template/NLO/SubProcesses/handling_lhe_events.f Template/NLO/SubProcesses/handling_lhe_events.f
+--- Template/NLO/SubProcesses/handling_lhe_events.f	2025-09-19 12:11:03.000000000 +0200
++++ Template/NLO/SubProcesses/handling_lhe_events.f	2026-08-27 20:16:52.124015413 +0200
+@@ -136,7 +136,7 @@
+      #                         muF2_id_str,QES_id_str
+       character*10 MonteCarlo
+       character*100 path
+-      character*250 buffer,buffer_lc,buffer2
++      character*1000 buffer,buffer_lc,buffer2
+       integer event_id
+       common /c_event_id/ event_id
+       integer n_orderstags,oo,tag
+diff --no-dereference -ruN bin/.compile.py bin/.compile.py
+--- bin/.compile.py	2025-09-19 12:11:03.000000000 +0200
++++ bin/.compile.py	2026-08-27 20:16:52.113015212 +0200
+@@ -26,7 +26,7 @@
+ root_path = os.path.split(os.path.dirname(os.path.realpath( __file__ )))[0]
+ sys.path.append(root_path)
+ 
+-from madgraph import MG5DIR
++from madgraph import MG5DIR, MadGraph5Error
+ import madgraph.iolibs.import_v4 as import_v4
+ import madgraph.interface.master_interface as interface
+ import models.import_ufo as import_ufo
+@@ -65,10 +65,14 @@
+         if self.autorun:
+             self.make_UFO_pkl()
+             self.make_v4_pkl()
+-            self.make_stdHep()
++            try:
++                self.make_stdHep()
++            except MadGraph5Error:
++                print("WARNING: StdHep failed to compile. This forbids to run NLO+PS with PY6 and Herwig6.")
+             self.make_CutTools()
+             self.make_IREGI()
+-            self.install_package(ext_programs)
++            if ext_programs:
++                self.install_package(ext_programs)
+             self.test_output_LO()
+             self.test_output_NLO()
+             self.precompilation(debug=True)
+@@ -176,7 +180,7 @@
+             text = text.replace(base,compiler)
+         open(path, 'w').writelines(text)
+ 
+-        misc.compile(cwd = os.path.join(MG5DIR, 'vendor', 'StdHEP'))
++        misc.compile(cwd = os.path.join(MG5DIR, 'vendor', 'StdHEP'), nb_core=-1)
+ 
+     @staticmethod
+     def make_CutTools():
+@@ -198,7 +202,7 @@
+             text = text.replace(base,compiler)
+         open(path, 'w').writelines(text)
+ 
+-        misc.compile(cwd = os.path.join(MG5DIR, 'vendor', 'CutTools'))
++        misc.compile(cwd = os.path.join(MG5DIR, 'vendor', 'CutTools'), nb_core=-1)
+ 
+     @staticmethod
+     def make_IREGI():
+@@ -282,7 +286,7 @@
+                     open(name,'w').write('\n'.join(lines))
+                     mod = False
+ 
+-        misc.compile(cwd = os.path.join(iregi_path,'src'))        
++        misc.compile(cwd = os.path.join(iregi_path,'src'), nb_core=-1)
+ 
+     def install_package(self, programs=[]):
+         print("installing external package")
+diff --no-dereference -ruN bin/mg5_aMC bin/mg5_aMC
+--- bin/mg5_aMC	2025-09-19 12:11:03.000000000 +0200
++++ bin/mg5_aMC	2026-08-27 20:16:52.113015212 +0200
+@@ -161,12 +161,13 @@
+     if not os.path.exists(os.path.join(root_path, 'PLUGIN', options.plugin)):
+         try:
+             __import__('MG5aMC_PLUGIN.%s' % options.plugin)
++            plugin = sys.modules['MG5aMC_PLUGIN.%s' % options.plugin]
+         except:
+             print( "ERROR: %s is not present in the PLUGIN directory. Please install it first" % options.plugin)
+-
++            sys.exit()
+     else:
+         __import__('PLUGIN.%s' % options.plugin)
+-    plugin = sys.modules['PLUGIN.%s' % options.plugin]
++        plugin = sys.modules['PLUGIN.%s' % options.plugin]
+     if not plugin.new_interface:
+         logging.warning("Plugin: %s do not define dedicated interface and should be used without the --mode options" % options.plugin)
+         sys.exit()
+diff --no-dereference -ruN input/.mg5_configuration_default.txt input/.mg5_configuration_default.txt
+--- input/.mg5_configuration_default.txt	2025-09-19 12:11:03.000000000 +0200
++++ input/.mg5_configuration_default.txt	2026-08-27 20:16:52.127015468 +0200
+@@ -87,10 +87,15 @@
+ # thepeg_path = 
+ # hepmc_path = 
+ 
++#! DMTCP path.
++#!  Defines the path to the DMTCP installation directory (i.e. the
++#!  one containing the lib, bin and include directories) .
++# dmtcp =
++
+ #! Control when MG5 checks if he is up-to-date.
+ #! Enter the number of day between two check (0 means never)
+ #! A question is always asked before any update
+-# auto_update = 7
++auto_update = 0
+ 
+ ################################################################################
+ #  INFO FOR MADEVENT / aMC@NLO 
+@@ -101,22 +106,31 @@
+ 
+ #! Allow/Forbid the automatic opening of the web browser  (on the status page)
+ #!  when launching MadEvent [True/False]
+-# automatic_html_opening = True
++automatic_html_opening = False
+ #! allow notification of finished job in the notification center (Mac Only)
+-# notification_center = True
++notification_center = False
+ 
+ 
+ #! Default Running mode 
+ #!  0: single machine/ 1: cluster / 2: multicore
+ # run_mode = 2
+ 
++#! Checkpointing
++# checkpointing = True # useful for very long jobs
++
+ #! Cluster Type [pbs|sge|condor|lsf|ge|slurm|htcaas|htcaas2] Use for cluster run only
+ #!  And cluster queue (or partition for slurm)
+ #!  And size of the cluster (some part of the code can adapt splitting accordingly)
+ # cluster_type = condor
+ # cluster_queue = madgraph
+ # cluster_size = 150 
++
++#! Advanced cluster settings
+ # cluster_walltime =  # time in minute for slurm and second for condor (not supported for other scheduller)
++# cluster_requirement = x86_64-v4 # selected microarchitecture for checkpointing consistency
++# cluster_vacatetime = 120 # time in seconds for checkpoint creation before the job removal/requeuing
++# enforce_shared_disk = True # enforce shared disk I/O (this setting is currently only relevant for Condor)
++# setup_env = "lsetup 'views LCG_109a_ATLAS_13 x86_64-el9-gcc15-opt'" # setup the environment
+ 
+ #! Path to a node directory to avoid direct writing on the central disk
+ #!  Note that condor clusters avoid direct writing by default (therefore this
+@@ -170,8 +184,8 @@
+ 
+ #! lhapdf-config --can be specify differently depending of your python version
+ #!  If None: try to find one available on the system
+-# lhapdf_py2 = lhapdf-config
+-# lhapdf_py3 = lhapdf-config
++lhapdf_py2 = @lhapdf@
++lhapdf_py3 = @lhapdf@
+ 
+ #! fastjet-config
+ #!  If None: try to find one available on the system
+@@ -211,24 +225,24 @@
+ #! Set the Ninja directory containing ninja's library
+ #! if '' or None: disabling ninja 
+ #! if ninja=/PATH/TO/ninja/lib: use that specific installation path for ninja 
+-# ninja = ./HEPTools/lib
++ninja = @ninja@
+ 
+ #! Set the COLLIER directory containing COLLIER's library
+ #! if '' or None: disabling COLLIER 
+ #! if ninja=/PATH/TO/ninja/lib: use that specific installation path for COLLIER
+ # Note that it is necessary that you have generated a static library for COLLIER
+-# collier = ./HEPTools/lib 
++collier = @collier@
+ 
+ #! Set how MadLoop dependencies (such as CutTools) should be handled
+ #!  > external : ML5 places a link to the MG5_aMC-wide libraries
+ #!  > internal : ML5 copies all dependencies in the output so that it is independent
+ #!  > environment_paths : ML5 searches for the dependencies in your environment path
+-# output_dependencies = external
++output_dependencies = external
+ 
+ #! SysCalc PATH
+ #! Path to the directory containing syscalc executables
+ #! relative path start from main directory
+-# syscalc_path = ./SysCalc
++syscalc_path = @syscalc@
+ 
+ #! Absolute paths to the config script in the bin directory of PineAPPL
+ #! (to generate PDF-independent fast-interpolation grids).
+diff --no-dereference -ruN input/mg5_configuration.txt input/mg5_configuration.txt
+--- input/mg5_configuration.txt	2025-09-19 12:11:11.000000000 +0200
++++ input/mg5_configuration.txt	2026-08-27 20:16:52.114015230 +0200
+@@ -90,7 +90,7 @@
+ #! Control when MG5 checks if he is up-to-date.
+ #! Enter the number of day between two check (0 means never)
+ #! A question is always asked before any update
+-# auto_update = 7
++auto_update = 0
+ 
+ ################################################################################
+ #  INFO FOR MADEVENT / aMC@NLO 
+@@ -101,9 +101,9 @@
+ 
+ #! Allow/Forbid the automatic opening of the web browser  (on the status page)
+ #!  when launching MadEvent [True/False]
+-# automatic_html_opening = True
++automatic_html_opening = False
+ #! allow notification of finished job in the notification center (Mac Only)
+-# notification_center = True
++notification_center = False
+ 
+ 
+ #! Default Running mode 
+@@ -170,8 +170,8 @@
+ 
+ #! lhapdf-config --can be specify differently depending of your python version
+ #!  If None: try to find one available on the system
+-# lhapdf_py2 = lhapdf-config
+-# lhapdf_py3 = lhapdf-config
++lhapdf_py2 = @lhapdf@
++lhapdf_py3 = @lhapdf@
+ 
+ #! fastjet-config
+ #!  If None: try to find one available on the system
+@@ -211,24 +211,24 @@
+ #! Set the Ninja directory containing ninja's library
+ #! if '' or None: disabling ninja 
+ #! if ninja=/PATH/TO/ninja/lib: use that specific installation path for ninja 
+-# ninja = ./HEPTools/lib
++ninja = @ninja@
+ 
+ #! Set the COLLIER directory containing COLLIER's library
+ #! if '' or None: disabling COLLIER 
+ #! if ninja=/PATH/TO/ninja/lib: use that specific installation path for COLLIER
+ # Note that it is necessary that you have generated a static library for COLLIER
+-# collier = ./HEPTools/lib 
++collier = @collier@
+ 
+ #! Set how MadLoop dependencies (such as CutTools) should be handled
+ #!  > external : ML5 places a link to the MG5_aMC-wide libraries
+ #!  > internal : ML5 copies all dependencies in the output so that it is independent
+ #!  > environment_paths : ML5 searches for the dependencies in your environment path
+-# output_dependencies = external
++output_dependencies = external
+ 
+ #! SysCalc PATH
+ #! Path to the directory containing syscalc executables
+ #! relative path start from main directory
+-# syscalc_path = ./SysCalc
++syscalc_path = @syscalc@
+ 
+ #! Absolute paths to the config script in the bin directory of PineAPPL
+ #! (to generate PDF-independent fast-interpolation grids).
+diff --no-dereference -ruN madgraph/interface/amcatnlo_run_interface.py madgraph/interface/amcatnlo_run_interface.py
+--- madgraph/interface/amcatnlo_run_interface.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/interface/amcatnlo_run_interface.py	2026-08-27 20:16:52.129015504 +0200
+@@ -1779,8 +1779,12 @@
+ 
+         if '+' in mode:
+             mode = mode.split('+')[0]
+-        self.compile(mode, options) 
+-        evt_file = self.run(mode, options)
++        self.compile(mode, options)
++        try:
++            evt_file = self.run(mode, options)
++        except cluster.CheckpointExit as e:
++            logger.info(str(e))
++            return
+         
+         if self.run_card['nevents'] == 0 and not mode in ['LO', 'NLO']:
+             logger.info('No event file generated: grids have been set-up with a '\
+@@ -1932,9 +1936,19 @@
+             # loop over the integration steps. After every step, check
+             # if we have the required accuracy. If this is the case,
+             # stop running, else do another step.
++            continue_step = options.get('continue_step')
+             while True:
+                 integration_step=integration_step+1
+-                self.run_all_jobs(jobs_to_run,integration_step)
++                if continue_step is not None and integration_step < continue_step:
++                    continue
++                if continue_step is not None and integration_step == continue_step:
++                    # Load checkpoint job IDs and wait for them to finish.
++                    self.cluster.load_jobs_from_disk()
++                    self.cluster.submitted = len(self.cluster.submitted_ids)
++                    run_type = 'Fixed order integration step %s' % integration_step
++                    self.wait_for_complete(run_type)
++                else:
++                    self.run_all_jobs(jobs_to_run,integration_step)
+                 self.collect_log_files(jobs_to_run,integration_step)
+                 jobs_to_run,jobs_to_collect=self.collect_the_results(options,req_acc,jobs_to_run, \
+                                   jobs_to_collect,integration_step,mode,mode_dict[mode])
+@@ -1997,11 +2011,21 @@
+ 
+ 
+             # Main loop over the three MINT generation steps:
++            continue_step = options.get('continue_step')
+             for mint_step, status in enumerate(mcatnlo_status):
+                 if options['only_generation'] and mint_step < 2:
+                     continue
++                if continue_step is not None and mint_step < continue_step:
++                    continue
+                 self.update_status(status, level='parton')
+-                self.run_all_jobs(jobs_to_run,mint_step,fixed_order=False)
++                if continue_step is not None and mint_step == continue_step:
++                    # Load checkpoint job IDs and wait for them to finish.
++                    self.cluster.load_jobs_from_disk()
++                    self.cluster.submitted = len(self.cluster.submitted_ids)
++                    run_type = 'MINT step %s' % mint_step
++                    self.wait_for_complete(run_type)
++                else:
++                    self.run_all_jobs(jobs_to_run,mint_step,fixed_order=False)
+                 self.collect_log_files(jobs_to_run,mint_step)
+                 jobs_to_run,jobs_to_collect=self.collect_the_results(options,req_acc,jobs_to_run, \
+                                 jobs_to_collect,mint_step,mode,mode_dict[mode],fixed_order=False)
+@@ -3135,6 +3159,8 @@
+              o.  Remove the G* (or born_G* or all_G*) only when NOT doing only_generation or reweight_only."""
+         if options['reweightonly']:
+             return
++        if options.get('continue_step') is not None:
++            return
+         if not options['only_generation']:
+             self.update_status('Cleaning previous results', level=None)
+         for dir in p_dirs:
+@@ -4876,6 +4902,8 @@
+                       starttime=starttime, level='parton', update_results=True)
+         try:
+             self.cluster.wait(self.me_dir, update_status)
++        except cluster.CheckpointExit:
++            raise
+         except:
+             self.cluster.remove()
+             raise
+@@ -4983,6 +5011,12 @@
+             input_files.append(pjoin(cwd, os.path.pardir, 'leshouche_info.dat'))
+             input_files.append(pjoin(cwd, os.path.pardir, 'orderstags_glob.dat'))
+             input_files.append(args[0])
++            open('%s.rwgt' % os.path.basename(args[0]), "a").close()
++            open('reweight_xsec_events.output', "a").close()
++            open('scale_pdf_dependence.dat', "a").close()
++            input_files.append('%s.rwgt' % os.path.basename(args[0]))
++            input_files.append('reweight_xsec_events.output')
++            input_files.append('scale_pdf_dependence.dat')
+             output_files.append('%s.rwgt' % os.path.basename(args[0]))
+             output_files.append('reweight_xsec_events.output')
+             output_files.append('scale_pdf_dependence.dat')
+@@ -5817,6 +5851,9 @@
+                             help="Run the reweight module (reweighting by different model parameters)")
+ _launch_parser.add_option("-M", "--madspin", default=False, dest='do_madspin', action='store_true',
+                             help="Run the madspin package")
++_launch_parser.add_option("--continue-step", default=None, type='int', dest='continue_step',
++                            help="Continue the calculation from a given integration step (0-3). " +
++                                 "Requires checkpoint_jobs.txt in the current directory.")
+ 
+ 
+ 
+diff --no-dereference -ruN madgraph/interface/common_run_interface.py madgraph/interface/common_run_interface.py
+--- madgraph/interface/common_run_interface.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/interface/common_run_interface.py	2026-08-27 20:16:52.130015523 +0200
+@@ -657,6 +657,7 @@
+                        'syscalc_path': './SysCalc',
+                        'rivet_path': None,
+                        'yoda_path': None,
++                       'dmtcp': None,
+                        'lhapdf': 'lhapdf-config',
+                        'lhapdf_py2': None,
+                        'lhapdf_py3': None,
+@@ -670,7 +671,9 @@
+                        'fortran_compiler':None,
+                        'cpp_compiler': None,
+                        'auto_update':7,
++                       'checkpointing': False,
+                        'cluster_type': 'condor',
++                       'cluster_vacatetime': '120',
+                        'cluster_status_update': (600, 30),
+                        'cluster_nb_retry':1,
+                        'cluster_local_path': None,
+@@ -749,6 +752,14 @@
+         else:
+             self.ninitial = self.proc_characteristics['ninitial']
+ 
++        if self.options['checkpointing'] and \
++         ('dmtcp' not in self.options or not self.options['dmtcp']):
++            if MADEVENT and 'mg5_path' in self.options and self.options['mg5_path']:
++                self.options['dmtcp'] = pjoin(self.options['mg5_path'], 'HEPTools', 'DMTCP')
++            else:
++                from madgraph import MG5DIR
++                self.options['dmtcp'] = pjoin(MG5DIR, 'HEPTools', 'DMTCP')
++
+     def make_make_all_html_results(self, folder_names = [], jobs=[], get_attr=None):
+         return sum_html.make_all_html_results(self, folder_names, jobs, get_attr)
+ 
+@@ -3521,7 +3532,7 @@
+                 raise self.InvalidCmd('run_mode should be 0, 1 or 2.')
+             self.cluster_mode = int(args[1])
+             self.options['run_mode'] =  self.cluster_mode
+-        elif args[0] in  ['cluster_type', 'cluster_queue', 'cluster_temp_path']:
++        elif args[0] in  ['cluster_type', 'cluster_queue', 'cluster_temp_path', 'cluster_vacatetime']:
+             if args[1] == 'None':
+                 args[1] = None
+             self.options[args[0]] = args[1]
+@@ -3587,6 +3598,8 @@
+                 to_do = False
+             if to_do and args[1] != 'None':
+                 self.options['lhapdf'] = args[1]
++        elif args[0] == 'setup_env':
++            self.options[args[0]] = ' '.join(a for a in args[1:] if not a.startswith('--')).strip()
+         elif args[0] in self.options:
+             if args[1] in ['None','True','False']:
+                 self.options[args[0]] = ast.literal_eval(args[1])
+diff --no-dereference -ruN madgraph/interface/loop_interface.py madgraph/interface/loop_interface.py
+--- madgraph/interface/loop_interface.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/interface/loop_interface.py	2026-08-27 20:16:52.116015266 +0200
+@@ -25,7 +25,7 @@
+ import sys
+ 
+ import madgraph
+-from madgraph import MG4DIR, MG5DIR, MadGraph5Error
++from madgraph import MG4DIR, MG5DIR, MadGraph5Error, ReadWrite
+ import madgraph.interface.madgraph_interface as mg_interface
+ import madgraph.interface.extended_cmd as cmd
+ import madgraph.interface.launch_ext_program as launch_ext
+@@ -523,6 +523,9 @@
+             return
+             #raise SkipTest
+         
++        if not ReadWrite:
++            return
++
+         logger.info("First output using loop matrix-elements has been detected. Now asking for loop reduction:", '$MG:BOLD')
+         to_install = self.ask('install', '0',  ask_class=AskLoopInstaller, timeout=300, 
+                               path_msg=' ')
+diff --no-dereference -ruN madgraph/interface/madgraph_interface.py madgraph/interface/madgraph_interface.py
+--- madgraph/interface/madgraph_interface.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/interface/madgraph_interface.py	2026-08-27 20:16:52.131015541 +0200
+@@ -2624,7 +2624,8 @@
+                 return self.list_completion(text, [str(i) for i in range(3)] + ['default'])
+             elif args[1] == 'cluster_type':
+                 return self.list_completion(text, list(cluster.from_name.keys()) + ['default'])
+-            elif args[1] in ['cluster_queue', 'cluster_walltime']:
++            elif args[1] in ['cluster_queue', 'cluster_walltime',\
++                             'cluster_requirement', 'cluster_vacatetime']:
+                 return []
+             elif args[1] == 'automatic_html_opening':
+                 return self.list_completion(text, ['False', 'True', 'default'])
+@@ -2915,7 +2916,8 @@
+     # The targets below are installed using the HEPToolsInstaller.py script
+     _advanced_install_opts = ['pythia8','zlib','boost','lhapdf6','lhapdf5','collier',
+                               'hepmc','mg5amc_py8_interface','ninja','oneloop','MadAnalysis5',
+-                              'yoda', 'rivet', 'fastjet', 'fjcontrib', 'contur', 'cmake', 'eMELA']
++                              'yoda', 'rivet', 'fastjet', 'fjcontrib', 'contur', 'cmake', 'eMELA',
++                              'DMTCP']
+ 
+     _install_opts.extend(_advanced_install_opts)
+ 
+@@ -2970,16 +2972,22 @@
+                        'f2py_compiler_py2':None,
+                        'f2py_compiler_py3':None,
+                        'cpp_compiler':None,
++                       'checkpointing': False,
+                        'cluster_type': 'condor',
+                        'cluster_queue': None,
+                        'cluster_status_update': (600, 30),
+                        'cluster_walltime': None,
++                       'cluster_requirement': None,
++                       'setup_env': None,
++                       'cluster_vacatetime': '120',
++                       'enforce_shared_disk': False,
+                        'fastjet':'fastjet-config',
+                        'eMELA':'eMELA-config',
+                        'golem':'auto',
+                        'samurai':None,
+                        'ninja':'./HEPTools/lib',
+                        'collier':'./HEPTools/lib',
++                       'dmtcp': None,
+                        'lhapdf':'lhapdf-config',
+                        'pineappl':'pineappl',
+                        'lhapdf_py2': None,
+@@ -6522,7 +6530,7 @@
+                 return self.do_install('%s --source=%s' % (' '.join(args), othersource), 
+                                        paths, additional_options) 
+             else:
+-                if 'xxx' in advertisements[name][0]:
++                if name in advertisements and 'xxx' in advertisements[name][0]:
+                     logger.warning("Program not yet released. Please try later")
+                 else:
+                     raise Exception("Online server are corrupted. No tarball available for %s" % name)
+@@ -7698,7 +7706,9 @@
+                             if '_path' in key and os.path.basename(self.options[key]) == 'None':
+                                 continue
+                             to_define[key] = self.options[key]
+-                        elif key in ['cluster_queue', 'cluster_walltime'] and self.options[key] is None:
++                        elif key in ['cluster_queue', 'cluster_walltime',\
++                                     'cluster_requirement', 'cluster_vacatetime', 'setup_env']\
++                                     and self.options[key] is None:
+                             to_define[key] = self.options[key]
+     
+                 if '--all' in args:
+@@ -8086,8 +8096,11 @@
+             self.options[args[0]] = tmp
+         elif args[0] in ['zerowidth_tchannel']:
+             self.options[args[0]] = banner_module.ConfigFile.format_variable(args[1], bool, args[0])
+-        elif args[0] in ['cluster_queue', 'cluster_walltime']:
++        elif args[0] in ['cluster_queue', 'cluster_walltime', 'checkpointing',\
++                         'cluster_requirement', 'cluster_vacatetime', 'enforce_shared_disk']:
+             self.options[args[0]] = args[1].strip()
++        elif args[0] == 'setup_env':
++            self.options[args[0]] = ' '.join(a for a in args[1:] if not a.startswith('--')).strip()
+         elif args[0] in ['low_mem_multicore_nlo_generation']:	    
+             if six.PY3 and self.options['OLP'] != 'MadLoop':
+                 raise self.InvalidCmd('Not possible to set \"low_mem_multicore_nlo_generation\" for an OLP different of MadLoop when running  python3')
+diff --no-dereference -ruN madgraph/various/banner.py madgraph/various/banner.py
+--- madgraph/various/banner.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/various/banner.py	2026-08-27 20:16:52.119015321 +0200
+@@ -5433,7 +5433,7 @@
+         # for lepton-lepton collisions, ignore 'pdlabel' and 'lhaid'
+         if abs(self['lpp1'])!=1 or abs(self['lpp2'])!=1:
+             if self['lpp1'] == 1 or self['lpp2']==1:
+-                raise InvalidRunCard('Process like Deep Inelastic scattering not supported at NLO accuracy.')
++                logger.critical("Such type of computation are normally forbidden within the official version of MG5aMC. Use at your own risk. The authors of MG5aMC will not provide any support on such run and the result of such run might not be reproducible in the version of the code supporting officially such computation.")
+ 
+             if abs(self['lpp1']) == abs(self['lpp2']) in [3,4]:
+                 # for dressed lepton collisions, check that the lhaid is a valid one
+diff --no-dereference -ruN madgraph/various/cluster.py madgraph/various/cluster.py
+--- madgraph/various/cluster.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/various/cluster.py	2026-08-27 20:16:52.132015559 +0200
+@@ -21,6 +21,7 @@
+ import inspect
+ import sys
+ import six
++import tempfile
+ from six.moves import range
+ from six.moves import input
+ 
+@@ -49,6 +50,9 @@
+ class NotImplemented(MadGraph5Error):
+     pass
+ 
++class CheckpointExit(Exception):
++    pass
++
+ 
+ multiple_try = misc.multiple_try
+ pjoin = os.path.join
+@@ -60,12 +64,12 @@
+         def deco_f_interupt(self, *args, **opt):
+             try:
+                 return f(self, *args, **opt)
++            except CheckpointExit:
++                raise
+             except error:
+-                try:
+-                    self.remove(*args, **opt)
+-                except Exception:
+-                    pass
+-                raise error
++                raise CheckpointExit(
++                    'Ctrl+C received. Jobs are still running on the cluster.\n'
++                    'Use --continue-step to resume.')
+         return deco_f_interupt
+     return deco_interupt
+ 
+@@ -97,6 +101,7 @@
+     """Basic Class for all cluster type submission"""
+     name = 'mother class'
+     identifier_length = 14
++    badstatus = ''
+ 
+     def __init__(self,*args, **opts):
+         """Init the cluster"""
+@@ -108,6 +113,11 @@
+         self.submitted_exes = [] #HTCaaS
+         self.submitted_args = [] #HTCaaS
+ 
++        if MADEVENT:
++            self.run_dir = LOCALDIR
++        else:
++            self.run_dir = MG5DIR
++
+         if 'cluster_queue' in opts:
+             self.cluster_queue = opts['cluster_queue']
+         else:
+@@ -116,6 +126,9 @@
+             self.temp_dir = opts['cluster_temp_path']
+         else:
+             self.temp_dir = None
++        self.checkpointing = False
++        if 'checkpointing' in opts:
++            self.checkpointing = opts['checkpointing']
+         self.options = {'cluster_status_update': (600, 30)}
+         for key,value in opts.items():
+             self.options[key] = value
+@@ -249,6 +262,7 @@
+                 self.submitted_ids.remove(pid)
+             else:
+                 fail += 1
++                self.badstatus = status
+ 
+         return idle, run, self.finish, fail
+ 
+@@ -310,18 +324,29 @@
+         if self.options['cluster_type'] == 'htcaas2':
+             me_dir = self.metasubmit(self)
+ 
++        old_idle = -1
++
+         while 1: 
+             old_mode = mode
+             nb_iter += 1
+             idle, run, finish, fail = self.control(me_dir)
++            if self.submitted_ids:
++                self.save_jobs_to_disk()
+             if nb_job:
+                 if  idle + run + finish + fail != nb_job:
+                     nb_job = idle + run + finish + fail
+                     nb_iter = 1 # since some packet finish prevent to pass in long waiting mode
++                    old_idle = -1
+             else:
+                 nb_job = idle + run + finish + fail
++
++            if old_idle == -1: old_idle = nb_job
++            if self.checkpointing and old_idle < idle and not nb_short:
++                nb_iter = 1 # reset iterator when the job is requeued
++            old_idle = idle
++
+             if fail:
+-                raise ClusterManagmentError('Some Jobs are in a Hold/... state. Please try to investigate or contact the IT team')
++                raise ClusterManagmentError(f'Some Jobs are in a {self.badstatus} state. Please try to investigate or contact the IT team')
+             if idle + run == 0:
+                 #time.sleep(20) #security to ensure that the file are really written on the disk
+                 logger.info('All jobs finished')
+@@ -376,6 +401,28 @@
+         self.submitted_ids = []
+         self.id_to_packet = {}
+         
++    def save_jobs_to_disk(self, path=None):
++        """Save submitted_ids to checkpoint_jobs.txt in the current (or given) directory."""
++        if path is None:
++            path = os.getcwd()
++        filepath = pjoin(path, 'checkpoint_jobs.txt')
++        with open(filepath, 'w') as f:
++            for job_id in self.submitted_ids:
++                f.write('%s\n' % job_id)
++        logger.debug('Checkpoint: %d job IDs saved to %s' % (len(self.submitted_ids), filepath))
++
++    def load_jobs_from_disk(self, path=None):
++        """Load job IDs from checkpoint_jobs.txt into self.submitted_ids."""
++        if path is None:
++            path = os.getcwd()
++        filepath = pjoin(path, 'checkpoint_jobs.txt')
++        if not os.path.exists(filepath):
++            raise ClusterManagmentError(
++                'Checkpoint file not found: %s\nRun cannot continue.' % filepath)
++        with open(filepath, 'r') as f:
++            self.submitted_ids = [line.strip() for line in f if line.strip()]
++        logger.debug('Checkpoint: loaded %d job IDs from %s' % (len(self.submitted_ids), filepath))
++
+     def check_termination(self, job_id):
+         """Check the termination of the jobs with job_id and relaunch it if needed."""
+         
+@@ -401,6 +448,45 @@
+         else:
+             time_check = 0
+ 
++        # resubmit if checkpoint dir is present
++        if self.checkpointing and os.path.exists(f'{self.run_dir}/dmtcp_fail'):
++            if self.nb_retry < 0:
++                logger.critical('''Fail to run correctly job %s.
++                with option: %s
++                failed checkpointing''' % (job_id, args))
++                input('press enter to continue.')
++                return 'done'
++            elif self.nb_retry == 0:
++                logger.critical('''Fail to run correctly job %s.
++                with option: %s
++                failed checkpointing
++                Stopping all runs.''' % (job_id, args))
++                self.remove()
++                return 'done'
++            elif args['nb_submit'] >= self.nb_retry:
++                logger.critical('''Fail to run correctly job %s.
++                with option: %s
++                failed checkpointing
++                Fails %s times
++                No resubmition. ''' % (job_id, args, args['nb_submit']))
++                self.remove()
++                return 'done'
++            else:
++                args['nb_submit'] += 1
++                logger.warning('resubmit job (for the %s times)' % args['nb_submit'])
++                del self.retry_args[job_id]
++                self.submitted_ids.remove(job_id)
++                if 'time_check' in args:
++                    del args['time_check']
++                if job_id in self.id_to_packet:
++                    self.id_to_packet[job_id].remove_one()
++                    args['packet_member'] = self.id_to_packet[job_id]
++                    del self.id_to_packet[job_id]
++                    self.cluster_submit(**args)
++                else:
++                    self.submit2(**args)
++                return 'resubmit'
++
+         for path in args['required_output']:
+             if args['cwd']:
+                 path = pjoin(args['cwd'], path)
+@@ -897,46 +983,100 @@
+                   error = %(stderr)s
+                   log = %(log)s
+                   %(argument)s
+-                  environment = CONDOR_ID=$(Cluster).$(Process)
++                  environment = CONDOR_ID=$(DAGManJobId); CONDOR_RESTART_COUNT=$(RETRY); SHARED_DIR=%(cwd)s; DMTCP_PATH=%(dmtcp_path)s
+                   Universe = vanilla
+                   notification = Error
+                   Initialdir = %(cwd)s
+                   %(requirement)s
++                  %(walltime)s
++                  %(vacatetime)s
+                   getenv=True
+                   queue 1
+                """
+         
++        requirement = []
++
+         if self.cluster_queue not in ['None', None]:
+-            requirement = 'Requirements = %s=?=True' % self.cluster_queue
+-        else:
+-            requirement = ''
++            requirement.append('+JobFlavour = "%s"' % self.cluster_queue)
++
++        if 'cluster_requirement' in self.options and self.options['cluster_requirement']\
++            and self.options['cluster_requirement'] != 'None':
++            microarch = self.options['cluster_requirement']
++            requirement.append(f'Requirements = TARGET.Microarch=="{microarch}"')
+ 
++        requirement = '\n'.join(requirement)
+         if 'cluster_walltime' in self.options and self.options['cluster_walltime']\
+               and self.options['cluster_walltime'] != 'None':
+-            requirement+='\n MaxRuntime =  %s' % self.options['cluster_walltime'] 
++            walltime = '+MaxRuntime =  %s' % self.options['cluster_walltime']
++        else:
++            walltime = ''
+ 
+         if cwd is None:
+             cwd = os.getcwd()
+         if stdout is None:
+             stdout = '/dev/null'
+         if stderr is None:
+-            stderr = '/dev/null'
++            stderr = 'condor_$(DAGManJobId).err'
+         if log is None:
+-            log = '/dev/null'
++            log = 'condor_$(DAGManJobId).log'
+         if not os.path.exists(prog):
+             prog = os.path.join(cwd, prog)
++        if self.checkpointing:
++            argument = [prog] + argument
+         if argument:
+             argument = 'Arguments = %s' % ' '.join(argument)
+         else:
+             argument = ''
+         
+ 
+-        dico = {'prog': prog, 'cwd': cwd, 'stdout': stdout, 
++        dico = {'prog': prog, 'cwd': cwd, 'dmtcp_path': '', 'stdout': stdout,
+                 'stderr': stderr,'log': log,'argument': argument,
+-                'requirement': requirement}
++                'requirement': requirement, 'walltime': walltime, 'vacatetime': ''}
++
++        if self.checkpointing:
++
++            if MADEVENT:
++                wrapper = pjoin(LOCALDIR,'bin','internal','dmtcp_condor_driver.sh')
++            else:
++                wrapper = pjoin(MG5DIR,'Template','Common','bin','internal','dmtcp_condor_driver.sh')
++
++            dico['prog'] = wrapper
++            dico['argument'] = argument
++
++            if not 'dmtcp' in self.options or not self.options['dmtcp']\
++                or self.options['dmtcp'] == 'None':
++                raise ClusterManagmentError('checkpointing selected, but DMTCP path not set')
++
++            if os.path.exists(pjoin(self.options['dmtcp'], 'bin'))\
++                and os.path.exists(pjoin(self.options['dmtcp'], 'lib')):
++                dico['dmtcp_path'] = self.options['dmtcp']
++            else:
++                raise ClusterManagmentError(f'DMTCP path {self.options["dmtcp"]} does not exist or DMTCP not istalled.')
++
++            if 'cluster_vacatetime' in self.options and self.options['cluster_vacatetime']\
++                and self.options['cluster_vacatetime'] != 'None':
++                vacatetime = self.options['cluster_vacatetime']
++                dico['vacatetime'] = f'+JobMaxVacateTime = {vacatetime}'
++
++            with tempfile.NamedTemporaryFile(mode='w', dir=cwd, delete=False) as submit_file:
++                submit_file.write((text % dico))
++                submit_filename = submit_file.name
++
++            with tempfile.NamedTemporaryFile(mode='w', dir=cwd, delete=False) as dag_file:
++                dag_text = f'JOB job {submit_filename}\n'
++                dag_text += 'RETRY job 100 UNLESS-EXIT 0\n'
++
++                dag_file.write(dag_text)
++                dag_filename = dag_file.name
++
++            command = ['condor_submit_dag', dag_filename]
++            text = """"""
++
++        else:
++            command = ['condor_submit']
+ 
+         #open('submit_condor','w').write(text % dico)
+-        a = misc.Popen(['condor_submit'], stdout=subprocess.PIPE,
++        a = misc.Popen(command, stdout=subprocess.PIPE,
+                        stdin=subprocess.PIPE)
+         output, _ = a.communicate((text % dico).encode())
+         #output = a.stdout.read()
+@@ -965,8 +1105,13 @@
+         
+         if not required_output and output_files:
+             required_output = output_files
+-        
+-        if (input_files == [] == output_files):
++
++        enforce_shared_disk = False
++        if 'enforce_shared_disk' in self.options and self.options['enforce_shared_disk']\
++            and self.options['enforce_shared_disk'] != 'None':
++            enforce_shared_disk = True
++
++        if (input_files == [] == output_files) or enforce_shared_disk:
+             return self.submit(prog, argument, cwd, stdout, stderr, log, 
+                                required_output=required_output, nb_submit=nb_submit)
+         
+@@ -975,33 +1120,52 @@
+                   error = %(stderr)s
+                   log = %(log)s
+                   %(argument)s
++                  environment = CONDOR_ID=$(DAGManJobId); CONDOR_RESTART_COUNT=$(RETRY); DMTCP_PATH=%(dmtcp_path)s; INITIAL_DIR=%(cwd)s
++                  %(spool_on_evict)s
+                   should_transfer_files = YES
+                   when_to_transfer_output = ON_EXIT
+                   transfer_input_files = %(input_files)s
+                   %(output_files)s
++                  max_transfer_output_mb = -1
+                   Universe = vanilla
+                   notification = Error
+                   Initialdir = %(cwd)s
+                   %(requirement)s
++                  %(walltime)s
++                  %(vacatetime)s
+                   getenv=True
+                   queue 1
+                """
+         
++        requirement = []
++
+         if self.cluster_queue not in ['None', None]:
+-            requirement = 'Requirements = %s=?=True' % self.cluster_queue
++            requirement.append('+JobFlavour = "%s"' % self.cluster_queue)
++
++        if 'cluster_requirement' in self.options and self.options['cluster_requirement']\
++            and self.options['cluster_requirement'] != 'None':
++            microarch = self.options['cluster_requirement']
++            requirement.append(f'Requirements = TARGET.Microarch=="{microarch}"')
++
++        requirement = '\n'.join(requirement)
++        if 'cluster_walltime' in self.options and self.options['cluster_walltime']\
++              and self.options['cluster_walltime'] != 'None':
++            walltime = '+MaxRuntime =  %s' % self.options['cluster_walltime']
+         else:
+-            requirement = ''
++            walltime = ''
+ 
+         if cwd is None:
+             cwd = os.getcwd()
+         if stdout is None:
+-            stdout = '/dev/null'
++            stdout = 'condor_$(DAGManJobId)_$(restart_count).out'
+         if stderr is None:
+-            stderr = '/dev/null'
++            stderr = 'condor_$(DAGManJobId).err'
+         if log is None:
+-            log = '/dev/null'
++            log = 'condor_$(DAGManJobId).log'
+         if not os.path.exists(prog):
+             prog = os.path.join(cwd, prog)
++        if self.checkpointing:
++            argument = [prog] + argument
+         if argument:
+             argument = 'Arguments = %s' % ' '.join([str(a) for a in argument])
+         else:
+@@ -1009,7 +1173,7 @@
+         # input/output file treatment
+         if input_files:
+             input_files = ','.join(input_files)
+-        else: 
++        else:
+             input_files = ''
+         if output_files:
+             output_files = 'transfer_output_files = %s' % ','.join(output_files)
+@@ -1018,13 +1182,63 @@
+         
+         
+ 
+-        dico = {'prog': prog, 'cwd': cwd, 'stdout': stdout, 
++        dico = {'prog': prog, 'cwd': cwd, 'dmtcp_path': '', 'stdout': stdout,
+                 'stderr': stderr,'log': log,'argument': argument,
+                 'requirement': requirement, 'input_files':input_files, 
+-                'output_files':output_files}
++                'output_files':output_files, 'walltime': walltime, 'vacatetime': '',
++                'spool_on_evict': ''}
++
++        if self.checkpointing:
++
++            if MADEVENT:
++                preexec = pjoin(LOCALDIR,'bin','internal','dmtcp_condor_preexec.sh')
++                wrapper = pjoin(LOCALDIR,'bin','internal','dmtcp_condor_driver.sh')
++            else:
++                preexec = pjoin(MG5DIR,'Template','Common','bin','internal','dmtcp_condor_preexec.sh')
++                wrapper = pjoin(MG5DIR,'Template','Common','bin','internal','dmtcp_condor_driver.sh')
++
++            dico['prog'] = wrapper
++            dico['argument'] = argument
++            dico['input_files'] += ',dmtcp_$(DAGManJobId)'
++            dico['output_files'] += ',dmtcp_$(DAGManJobId)'
++            dico['spool_on_evict'] = '+SpoolOnEvict = False'
++
++            if not 'dmtcp' in self.options or not self.options['dmtcp']\
++                or self.options['dmtcp'] == 'None':
++                raise ClusterManagmentError('checkpointing selected, but DMTCP path not set')
++
++            if os.path.exists(pjoin(self.options['dmtcp'], 'bin'))\
++                and os.path.exists(pjoin(self.options['dmtcp'], 'lib')):
++                dico['dmtcp_path'] = self.options['dmtcp']
++            else:
++                raise ClusterManagmentError(f'DMTCP path {self.options["dmtcp"]} does not exist or DMTCP not istalled.')
++
++            if 'cluster_vacatetime' in self.options and self.options['cluster_vacatetime']\
++                and self.options['cluster_vacatetime'] != 'None':
++                vacatetime = self.options['cluster_vacatetime']
++                dico['vacatetime'] = f'+JobMaxVacateTime = {vacatetime}'
++
++            with tempfile.NamedTemporaryFile(mode="w", dir=cwd, delete=False) as submit_file:
++                submit_file.write((text % dico))
++                submit_filename = submit_file.name
++
++            with tempfile.NamedTemporaryFile(mode="w", dir=cwd, delete=False) as dag_file:
++                dag_text = f'JOB job {submit_filename}\n'
++                dag_text += f'SCRIPT PRE job /bin/bash {preexec} {cwd} {dag_file.name}\n'
++                dag_text += 'RETRY job 100 UNLESS-EXIT 0\n'
++                dag_text += 'VARS job restart_count="$(RETRY)"\n'
++
++                dag_file.write(dag_text)
++                dag_filename = dag_file.name
++
++            command = ['condor_submit_dag', dag_filename]
++            text = """"""
++
++        else:
++            command = ['condor_submit']
+ 
+         #open('submit_condor','w').write(text % dico)
+-        a = subprocess.Popen(['condor_submit'], stdout=subprocess.PIPE,
++        a = subprocess.Popen(command, stdout=subprocess.PIPE,
+                              stdin=subprocess.PIPE)
+         output, _ = a.communicate((text % dico).encode())
+         #output = a.stdout.read()
+@@ -1102,6 +1316,7 @@
+                     run += 1
+                 elif status != 'C':
+                     fail += 1
++                    self.badstatus = status
+ 
+         for id in list(self.submitted_ids):
+             if id not in ongoing:
+@@ -1119,9 +1334,11 @@
+         
+         if not self.submitted_ids:
+             return
+-        cmd = "condor_rm %s" % ' '.join(self.submitted_ids)
+-        
+-        status = misc.Popen([cmd], shell=True, stdout=open(os.devnull,'w'))
++        for i in range(0, len(self.submitted_ids), 100):
++            cmd = "condor_rm %s" % ' '.join(self.submitted_ids[i:i+100])
++            status = misc.Popen([cmd], shell=True, stdout=open(os.devnull,'w'))
++            time.sleep(5)
++
+         self.submitted_ids = []
+         
+ class PBSCluster(Cluster):
+@@ -1245,6 +1462,7 @@
+                         idle += 1
+                 else:
+                     fail += 1
++                    self.badstatus = status2
+ 
+         if status.returncode != 0 and status.returncode is not None:
+             raise ClusterManagmentError('server fails in someway (errorcode %s)' % status.returncode)
+@@ -1404,6 +1622,7 @@
+                     logger.debug(line)
+                     fail += 1
+                     finished.remove(id)
++                    self.badstatus = status
+ 
+         for id in finished:
+             self.check_termination(id)
+@@ -1660,6 +1879,7 @@
+                         run += 1
+                     if statusflag == 'sh':
+                         fail += 1
++                        self.badstatus = statusflag
+         for id in list(self.submitted_ids):
+             if id not in ongoing:
+                 self.check_termination(id)
+@@ -1694,7 +1914,7 @@
+     name = 'slurm'
+     job_id = 'SLURM_JOBID'
+     idle_tag = ['Q','PD','S','CF']
+-    running_tag = ['R', 'CG']
++    running_tag = ['R', 'CG', 'SI']
+     complete_tag = ['C']
+     identifier_length = 8
+ 
+@@ -1723,12 +1943,43 @@
+         if log is None:
+             log = '/dev/null'
+ 
+-        
+-        command = ['sbatch', '-o', stdout,
+-                   '-J', me_dir, 
+-                   '-e', stderr, prog] + argument
+ 
++        if self.checkpointing:
++
++            if MADEVENT:
++                wrapper = pjoin(LOCALDIR,'bin','internal','dmtcp_slurm_driver.sh')
++            else:
++                wrapper = pjoin(MG5DIR,'Template','Common','bin','internal','dmtcp_slurm_driver.sh')
++            argument_dmtcp = [prog] + argument
+ 
++            command = ['sbatch',
++                       '-J', me_dir, wrapper] + argument_dmtcp
++
++            command.insert(1, '--open-mode')
++            command.insert(2, 'append')
++
++            if not 'dmtcp' in self.options or not self.options['dmtcp']\
++                or self.options['dmtcp'] == 'None':
++                raise ClusterManagmentError('checkpointing selected, but DMTCP path not set')
++
++            if not os.path.exists(pjoin(self.options['dmtcp'], 'bin'))\
++                or not os.path.exists(pjoin(self.options['dmtcp'], 'lib')):
++                raise ClusterManagmentError(f'DMTCP path {self.options["dmtcp"]} does not exist or DMTCP not istalled.')
++
++            if 'cluster_requirement' in self.options and self.options['cluster_requirement']\
++                and self.options['cluster_requirement'] != 'None':
++                command.insert(1, '-C')
++                command.insert(2, self.options['cluster_requirement'])
++
++            if 'cluster_vacatetime' in self.options and self.options['cluster_vacatetime']\
++                and self.options['cluster_vacatetime'] != 'None':
++                command.insert(1, '--signal')
++                command.insert(2, 'B:USR1@'+self.options['cluster_vacatetime'])
++
++        else:
++            command = ['sbatch', '-o', stdout,
++                       '-J', me_dir,
++                       '-e', stderr, prog] + argument
+ 
+         if self.cluster_queue and self.cluster_queue != 'None':
+                 command.insert(1, '-p')
+@@ -1740,15 +1991,27 @@
+                 command.insert(2, self.options['cluster_walltime'])            
+             
+ 
++        jobenv = os.environ.copy()
++        if MADEVENT: jobenv['RUN_DIR'] = LOCALDIR
++        else: jobenv['RUN_DIR'] = MG5DIR
++        if self.checkpointing:
++            jobenv['DMTCP_PATH'] = self.options['dmtcp']
++            if 'setup_env' in self.options and self.options['setup_env'] and self.options['setup_env'] != 'None':
++                jobenv['SETUP_ENV'] = self.options['setup_env']
+ 
+         a = misc.Popen(command, stdout=subprocess.PIPE, 
+                                       stderr=subprocess.STDOUT,
+-                                      stdin=subprocess.PIPE, cwd=cwd)
++                                      stdin=subprocess.PIPE, cwd=cwd, env=jobenv)
+ 
+         output = a.communicate()
+         output_arr = output[0].decode(errors='ignore').split(' ')
+         id = output_arr[3].rstrip()
+ 
++        if self.checkpointing and os.path.exists(f'{self.run_dir}/dmtcp_fail'):
++            target = os.readlink(f'{self.run_dir}/dmtcp_fail')
++            os.unlink(f'{self.run_dir}/dmtcp_fail')
++            os.symlink(target, f'{self.run_dir}/dmtcp_{id}')
++
+         if not id.isdigit():
+             id = re.findall(r'Submitted batch job ([\d\.]+)', ' '.join(output_arr))
+             
+@@ -1809,22 +2072,37 @@
+                 elif status in self.running_tag:
+                     run += 1
+                 elif status in self.complete_tag:
++                    if self.checkpointing and os.path.exists(f'{self.run_dir}/dmtcp_{id}'):
++                        os.symlink(f'{self.run_dir}/dmtcp_{id}', f'{self.run_dir}/dmtcp_fail')
+                     status = self.check_termination(id)
+                     if status == 'wait':
+                         run += 1
+                     elif status == 'resubmit':
+                         idle += 1                    
++                    elif self.checkpointing and os.path.exists(f'{self.run_dir}/dmtcp_fail'):
++                        target = os.readlink(f'{self.run_dir}/dmtcp_fail')
++                        os.unlink(f'{self.run_dir}/dmtcp_fail')
++                        os.symlink(target, f'{self.run_dir}/dmtcp_{id}_fail')
++                        logger.info(f'Checkpoints stored at {self.run_dir}/dmtcp_{id}_fail')
+                 else:
+                     fail += 1
++                    self.badstatus = status
+         
+         #control other finished job
+         for id in list(self.submitted_ids):
+             if id not in ongoing:
++                if self.checkpointing and os.path.exists(f'{self.run_dir}/dmtcp_{id}'):
++                    os.symlink(f'{self.run_dir}/dmtcp_{id}', f'{self.run_dir}/dmtcp_fail')
+                 status = self.check_termination(id)
+                 if status == 'wait':
+                     run += 1
+                 elif status == 'resubmit':
+                     idle += 1
++                elif self.checkpointing and os.path.exists(f'{self.run_dir}/dmtcp_fail'):
++                    target = os.readlink(f'{self.run_dir}/dmtcp_fail')
++                    os.unlink(f'{self.run_dir}/dmtcp_fail')
++                    os.symlink(target, f'{self.run_dir}/dmtcp_{id}_fail')
++                    logger.info(f'Checkpoints stored at {self.run_dir}/dmtcp_{id}_fail')
+                     
+         
+         return idle, run, self.submitted - (idle+run+fail), fail
+@@ -1989,6 +2267,7 @@
+                     idle +=1
+             else:
+                 fail += 1 
++                self.badstatus = status2
+ 
+         return idle, run, self.submitted - (idle+run+fail), fail
+ 
+@@ -2207,6 +2486,7 @@
+                     idle +=1
+             else:
+                 fail += 1
++                self.badstatus = status2
+ 
+         return idle, run, self.submitted - (idle+run+fail), fail
+ 
+diff --no-dereference -ruN madgraph/various/misc.py madgraph/various/misc.py
+--- madgraph/various/misc.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/various/misc.py	2026-08-27 20:16:52.120015339 +0200
+@@ -528,6 +528,8 @@
+     try:
+         if nb_core > 1:
+             cmd.append('-j%s' % nb_core)
++        if nb_core < 0:
++            cmd.append('-j1')
+         cmd += arg
+         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, 
+                              stderr=subprocess.STDOUT, cwd=cwd, **opt)
+@@ -964,6 +966,9 @@
+                     # raise a more meaningfull error message
+                     raise Exception('%s fails with no such file or directory' \
+                                                                            % arg)            
++                # Checkpoint, requeued automatically
++                elif error.errno == 85:
++                    logger.info('%s created a checkpoint' % arg)
+                 else:
+                     raise
+         return deco_f
+diff --no-dereference -ruN madgraph/various/systematics.py madgraph/various/systematics.py
+--- madgraph/various/systematics.py	2025-09-19 12:11:03.000000000 +0200
++++ madgraph/various/systematics.py	2026-08-27 20:16:52.125015431 +0200
+@@ -273,8 +273,8 @@
+             elif p.lhapdfID == self.orig_pdf:
+                 self.orig_pdf = p
+                 break
+-            else:  
+-                self.orig_pdf = lhapdf.mkPDF(self.orig_pdf)
++        else:  
++            self.orig_pdf = lhapdf.mkPDF(self.orig_pdf)
+         if not self.b1 == 0 == self.b2 and not isEVA and not isEVAxDIS: 
+             self.log( "# Events generated with PDF: %s (%s)" %(self.orig_pdf.set().name,self.orig_pdf.lhapdfID ))
+         elif isEVAxDIS:
+diff --no-dereference -ruN models/loop_sm/restrict_c_mass.dat models/loop_sm/restrict_c_mass.dat
+--- models/loop_sm/restrict_c_mass.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_c_mass.dat	2026-08-27 20:16:52.120015339 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,20 +22,20 @@
+ Block MASS 
+     4 1.550000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 1.550000e+00 # ymc 
+     5 4.700000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_ckm.dat models/loop_sm/restrict_ckm.dat
+--- models/loop_sm/restrict_ckm.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_ckm.dat	2026-08-27 20:16:52.120015339 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,30 +22,30 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+ ## INFORMATION FOR WOLFENSTEIN
+ ###################################
+ Block Wolfenstein 
+-    1 2.253000e-01 # lamWS 
+-    2 8.080000e-01 # AWS 
+-    3 1.320000e-01 # rhoWS 
+-    4 3.410000e-01 # etaWS 
++    1 2.257000e-01 # lamWS
++    2 8.140000e-01 # AWS
++    3 1.350000e-01 # rhoWS
++    4 3.490000e-01 # etaWS
+ 
+ ###################################
+ ## INFORMATION FOR YUKAWA
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_ckm_c_mass.dat models/loop_sm/restrict_ckm_c_mass.dat
+--- models/loop_sm/restrict_ckm_c_mass.dat	1970-01-01 01:00:00.000000000 +0100
++++ models/loop_sm/restrict_ckm_c_mass.dat	2026-08-27 20:16:52.120015339 +0200
+@@ -0,0 +1,59 @@
++######################################################################
++## PARAM_CARD AUTOMATICALY GENERATED BY THE UFO  #####################
++######################################################################
++
++###################################
++### INFORMATION FOR LOOP
++####################################
++Block loop
++  1 9.118800e+01 # MU_R
++
++###################################
++## INFORMATION FOR SMINPUTS
++###################################
++Block SMINPUTS
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
++
++###################################
++## INFORMATION FOR MASS
++###################################
++Block MASS
++    4 1.550000e+00 # MC
++    5 4.700000e+00 # MB
++    6 1.725000e+02 # MT
++   11 0.000000e+00 # Me
++   13 0.000000e+00 # MM
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
++   25 1.250000e+02 # MH
++
++###################################
++## INFORMATION FOR DECAY
++###################################
++DECAY   6 1.32000000E+00
++DECAY  15 0.000000e+00
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
++DECAY  25 6.38233934e-03
++
++###################################
++## INFORMATION FOR WOLFENSTEIN
++###################################
++Block Wolfenstein
++    1 2.257000e-01 # lamWS
++    2 8.140000e-01 # AWS
++    3 1.350000e-01 # rhoWS
++    4 3.490000e-01 # etaWS
++
++###################################
++## INFORMATION FOR YUKAWA
++###################################
++Block YUKAWA
++    4 1.550000e+00 # ymc
++    5 4.700000e+00 # ymb
++    6 1.725000e+02 # ymt
++   11 0.000000e+00 # yme
++   13 0.000000e+00 # ymm
++   15 1.777000e+00 # ymtau
+diff --no-dereference -ruN models/loop_sm/restrict_default.dat models/loop_sm/restrict_default.dat
+--- models/loop_sm/restrict_default.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_default.dat	2026-08-27 20:16:52.120015339 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,20 +22,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_lepton_masses.dat models/loop_sm/restrict_lepton_masses.dat
+--- models/loop_sm/restrict_lepton_masses.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_lepton_masses.dat	2026-08-27 20:16:52.120015339 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,20 +22,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 5.110000e-04 # Me 
+    13 1.056600e-01 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 2.270000e-12
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 5.110000e-04 # yme
+    13 1.056600e-01 # ymm
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_no_b_mass.dat models/loop_sm/restrict_no_b_mass.dat
+--- models/loop_sm/restrict_no_b_mass.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_no_b_mass.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,20 +22,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 0.000000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 0.000000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_no_masses.dat models/loop_sm/restrict_no_masses.dat
+--- models/loop_sm/restrict_no_masses.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_no_masses.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,20 +22,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 0.000000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 0.000000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 0.000000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 0.000000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_no_tau_mass.dat models/loop_sm/restrict_no_tau_mass.dat
+--- models/loop_sm/restrict_no_tau_mass.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_no_tau_mass.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,20 +22,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 0.000000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 0.000000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_no_widths.dat models/loop_sm/restrict_no_widths.dat
+--- models/loop_sm/restrict_no_widths.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_no_widths.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -22,7 +22,7 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 1.777000e+00 # MTA 
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_parallel_test.dat models/loop_sm/restrict_parallel_test.dat
+--- models/loop_sm/restrict_parallel_test.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_parallel_test.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -22,7 +22,7 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.620000e+00 # MB 
+-    6 1.743000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 1.777000e+00 # MTA 
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.6200000e+00 # ymb 
+-    6 1.743000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/loop_sm/restrict_test.dat models/loop_sm/restrict_test.dat
+--- models/loop_sm/restrict_test.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_test.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -22,7 +22,7 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 1.777000e+00 # MTA 
+diff --no-dereference -ruN models/loop_sm/restrict_zeromass_ckm.dat models/loop_sm/restrict_zeromass_ckm.dat
+--- models/loop_sm/restrict_zeromass_ckm.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/loop_sm/restrict_zeromass_ckm.dat	2026-08-27 20:16:52.121015358 +0200
+@@ -12,9 +12,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -22,30 +22,30 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 0.000000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 0.000000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+ ## INFORMATION FOR WOLFENSTEIN
+ ###################################
+ Block Wolfenstein 
+-    1 2.253000e-01 # lamWS 
+-    2 8.080000e-01 # AWS 
+-    3 1.320000e-01 # rhoWS 
+-    4 3.410000e-01 # etaWS 
++    1 2.257000e-01 # lamWS
++    2 8.140000e-01 # AWS
++    3 1.350000e-01 # rhoWS
++    4 3.490000e-01 # etaWS
+ 
+ ###################################
+ ## INFORMATION FOR YUKAWA
+@@ -53,7 +53,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 0.000000e+00 # ymb 
+-    6 1.730000e+02 # ymt 
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 0.000000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_c_mass.dat models/sm/restrict_c_mass.dat
+--- models/sm/restrict_c_mass.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_c_mass.dat	2026-08-27 20:16:52.122015376 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,20 +16,20 @@
+ Block MASS 
+     4 1.550000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 1.550000e+00 # ymc 
+     5 4.700000e+00 # ymb
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_ckm.dat models/sm/restrict_ckm.dat
+--- models/sm/restrict_ckm.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_ckm.dat	2026-08-27 20:16:52.122015376 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,30 +16,30 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+ ## INFORMATION FOR WOLFENSTEIN
+ ###################################
+ Block Wolfenstein 
+-    1 2.253000e-01 # lamWS 
+-    2 8.080000e-01 # AWS 
+-    3 1.320000e-01 # rhoWS 
+-    4 3.410000e-01 # etaWS 
++    1 2.257000e-01 # lamWS
++    2 8.140000e-01 # AWS
++    3 1.350000e-01 # rhoWS
++    4 3.490000e-01 # etaWS
+ 
+ ###################################
+ ## INFORMATION FOR YUKAWA
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_default.dat models/sm/restrict_default.dat
+--- models/sm/restrict_default.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_default.dat	2026-08-27 20:16:52.122015376 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,20 +16,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_lepton_masses.dat models/sm/restrict_lepton_masses.dat
+--- models/sm/restrict_lepton_masses.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_lepton_masses.dat	2026-08-27 20:16:52.122015376 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,20 +16,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 5.110000e-04 # Me 
+    13 1.056600e-01 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 2.270000e-12
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03 
+ 
+ ###################################
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 5.110000e-04 # yme
+    13 1.056600e-01 # ymm
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_no_b_mass.dat models/sm/restrict_no_b_mass.dat
+--- models/sm/restrict_no_b_mass.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_no_b_mass.dat	2026-08-27 20:16:52.122015376 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,20 +16,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 0.000000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+-   15 1.777000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   15 1.776820e+00 # MTA
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 0.000000e+00 # ymb 
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 1.777000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_no_masses.dat models/sm/restrict_no_masses.dat
+--- models/sm/restrict_no_masses.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_no_masses.dat	2026-08-27 20:16:52.122015376 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,20 +16,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 0.000000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 0.000000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.320000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 0.000000e+00 # ymb 
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 0.000000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_no_tau_mass.dat models/sm/restrict_no_tau_mass.dat
+--- models/sm/restrict_no_tau_mass.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_no_tau_mass.dat	2026-08-27 20:16:52.123015395 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,20 +16,20 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 0.000000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 4.700000e+00 # ymb
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 0.000000e+00 # ymtau 
+diff --no-dereference -ruN models/sm/restrict_no_widths.dat models/sm/restrict_no_widths.dat
+--- models/sm/restrict_no_widths.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_no_widths.dat	2026-08-27 20:16:52.123015395 +0200
+@@ -16,7 +16,7 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 4.700000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 1.777000e+00 # MTA 
+diff --no-dereference -ruN models/sm/restrict_zeromass_ckm.dat models/sm/restrict_zeromass_ckm.dat
+--- models/sm/restrict_zeromass_ckm.dat	2025-09-19 12:11:03.000000000 +0200
++++ models/sm/restrict_zeromass_ckm.dat	2026-08-27 20:16:52.123015395 +0200
+@@ -6,9 +6,9 @@
+ ## INFORMATION FOR SMINPUTS
+ ###################################
+ Block SMINPUTS 
+-    1 1.325070e+02 # aEWM1 
+-    2 1.166390e-05 # Gf 
+-    3 1.180000e-01 # aS 
++    1 1.32348905e+02 # aEWM1
++    2 1.16637000e-05 # Gf
++    3 1.18400000e-01 # aS
+ 
+ ###################################
+ ## INFORMATION FOR MASS
+@@ -16,30 +16,30 @@
+ Block MASS 
+     4 0.000000e+00 # MC 
+     5 0.000000e+00 # MB 
+-    6 1.730000e+02 # MT 
++    6 1.725000e+02 # MT
+    11 0.000000e+00 # Me 
+    13 0.000000e+00 # MM 
+    15 0.000000e+00 # MTA 
+-   23 9.118800e+01 # MZ 
++   23 9.118760e+01 # MZ
+    25 1.250000e+02 # MH 
+ 
+ ###################################
+ ## INFORMATION FOR DECAY
+ ###################################
+-DECAY   6 1.491500E+00
++DECAY   6 1.32000000E+00
+ DECAY  15 0.000000e+00
+-DECAY  23 2.441404e+00 
+-DECAY  24 2.047600e+00 
++DECAY  23 2.49520000e+00
++DECAY  24 2.085000e+00
+ DECAY  25 6.38233934e-03
+ 
+ ###################################
+ ## INFORMATION FOR WOLFENSTEIN
+ ###################################
+ Block Wolfenstein 
+-    1 2.253000e-01 # lamWS 
+-    2 8.080000e-01 # AWS 
+-    3 1.320000e-01 # rhoWS 
+-    4 3.410000e-01 # etaWS 
++    1 2.257000e-01 # lamWS
++    2 8.140000e-01 # AWS
++    3 1.350000e-01 # rhoWS
++    4 3.490000e-01 # etaWS
+ 
+ ###################################
+ ## INFORMATION FOR YUKAWA
+@@ -47,7 +47,7 @@
+ Block YUKAWA 
+     4 0.000000e+00 # ymc 
+     5 0.000000e+00 # ymb 
+-    6 1.730000e+02 # ymt
++    6 1.725000e+02 # ymt
+    11 0.000000e+00 # yme 
+    13 0.000000e+00 # ymm 
+    15 0.000000e+00 # ymtau 
+diff --no-dereference -ruN tests/acceptance_tests/test_cmd.py tests/acceptance_tests/test_cmd.py
+--- tests/acceptance_tests/test_cmd.py	2025-09-19 12:11:03.000000000 +0200
++++ tests/acceptance_tests/test_cmd.py	2026-08-27 20:16:52.123015395 +0200
+@@ -167,7 +167,11 @@
+                     'td_path': './td', 
+                     'delphes_path': './Delphes', 
+                     'default_unset_couplings': 99,
++                    'checkpointing': False,
+                     'cluster_type': 'condor', 
++                    'cluster_requirement': None,
++                    'cluster_vacatetime': '120',
++                    'enforce_shared_disk': False,
+                     'cluster_status_update': (600, 30),
+                     'madanalysis_path': './MadAnalysis', 
+                     'cluster_temp_path': None, 
+@@ -183,6 +187,7 @@
+                     'complex_mass_scheme': False,
+                     'gauge': 'unitary',
+                     'output_dependencies': 'external',
++                    'dmtcp': None,
+                     'lhapdf': 'lhapdf-config',
+                     'lhapdf_py2': None,
+                     'lhapdf_py3': None,  
+diff --no-dereference -ruN vendor/CutTools/makefile vendor/CutTools/makefile
+--- vendor/CutTools/makefile	2025-09-19 12:11:04.000000000 +0200
++++ vendor/CutTools/makefile	2026-08-27 20:16:52.124015413 +0200
+@@ -9,7 +9,7 @@
+ ifeq ($(wildcard ../make_opts), ../make_opts)
+   include ../make_opts
+ else
+-  FFLAGS = 
++  FFLAGS = -std=legacy
+   FC=gfortran
+ endif
+ 
+diff --no-dereference -ruN vendor/IREGI/src/makefile_ML5_lib vendor/IREGI/src/makefile_ML5_lib
+--- vendor/IREGI/src/makefile_ML5_lib	2025-09-19 12:11:04.000000000 +0200
++++ vendor/IREGI/src/makefile_ML5_lib	2026-08-27 20:16:52.124015413 +0200
+@@ -5,7 +5,7 @@
+ FFDIR=$(qcdlooppath)/ff
+ onelooppath=$(PWD)/oneloop
+ #FFLAGS=-O -g -ggdb -fno-automatic -fbounds-check -I$(onelooppath) # -fbounds-check is very useful in checking mermory error,-g is for debuging,-ggdb is for debuging special in gdb
+-FFLAGS=-O -g -fPIC -I$(onelooppath)
++FFLAGS=-O -g -fPIC -I$(onelooppath) -std=legacy
+ obj= global.o funlib.o linear_algebra.o kinematics.o matrices.o matrix_base.o cmatrix_base.o mis_warp.o special_fun.o pave_reduce.o cpave_reduce.o si_reduce.o csi_reduce.o ti_reduce.o cti_reduce.o gti_reduce.o binary_tree.o IREGI4ML5_interface.o avh_olo_foriregi.o
+ olomod= avh_olo_foriregi.mod avh_olo_foriregi_dp_box.mod    avh_olo_foriregi_dp_olog.mod   avh_olo_foriregi_units.mod \
+         avh_olo_foriregi_dp.mod        avh_olo_foriregi_dp_boxc.mod   avh_olo_foriregi_dp_prec.mod   avh_olo_foriregi_version.mod \

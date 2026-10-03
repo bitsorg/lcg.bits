@@ -1,7 +1,7 @@
 package: scikit_hep
 description: Scikit-HEP metapackage for HEP Python tools
-version: "2026.2.1"
-tag: "2026.2.1"
+version: "2026.5.1"
+tag: "2026.5.1"
 requires:
   - Python
   - awkward

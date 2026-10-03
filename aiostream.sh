@@ -7,7 +7,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: GPLv3
+license: GPL-3.0-only
 ---
 #!/bin/bash -e
 ##############################

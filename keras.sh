@@ -1,7 +1,7 @@
 package: keras
 description: Keras deep learning API for Python
-version: "3.11.3"
-tag: "3.11.3"
+version: "3.14.0"
+tag: "3.14.0"
 requires:
   - Python
   - PyYAML

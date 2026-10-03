@@ -1,0 +1,33 @@
+--- Makefile.orig	2012-02-15 14:59:44.000000000 +0100
++++ Makefile	2018-06-14 11:23:07.863828487 +0200
+@@ -31,21 +31,21 @@
+ F77LIBSO      = $(shell gfortran -print-file-name=libgfortran.so)
+ ALTF77LIBSO   = $(shell g77 -print-file-name=libg2c.so)
+ 
+-F77FLAGS      = -fPIC
++F77FLAGS      = -fPIC -std=legacy
+ F77OPT        = $(OPT)
+ CXXOUT        = -o # keep whitespace after "-o"
+ 
+ #Set fortran compiler 
+ EXIST = $(strip $(foreach dir,$(BINDIRS),$(wildcard $(dir)/$(PRIMARYF77) ) ) )
+-ifeq ($(EXIST),)
+-F77 = $(ALTF77)
+-F77LIBSO = $(ALTF77LIBSO)
+-EXIST = $(strip $(foreach dir,$(BINDIRS),$(wildcard $(dir)/$(ALTF77) ) ))
+-endif
++#ifeq ($(EXIST),)
++#F77 = $(ALTF77)
++#F77LIBSO = $(ALTF77LIBSO)
++#EXIST = $(strip $(foreach dir,$(BINDIRS),$(wildcard $(dir)/$(ALTF77) ) ))
++#endif
+ #Alt 
+-ifeq ($(EXIST),)
+-$(error Fortran compiler not found. Either $(PRIMARYF77) or $(ALTF77) should be present)
+-endif
++#ifeq ($(EXIST),)
++#$(error Fortran compiler not found. Either $(PRIMARYF77) or $(ALTF77) should be present)
++#endif
+ 
+ LIBS          = $(ROOTLIBS) $(SYSLIBS) -lEG 
+ GLIBS         = $(ROOTGLIBS) $(SYSLIBS)

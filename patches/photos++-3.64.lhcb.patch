@@ -1,0 +1,25 @@
+--- src/utilities/Log.h.orig	2025-05-01 15:40:07.278989628 +0200
++++ src/utilities/Log.h	2025-05-01 15:41:20.040718285 +0200
+@@ -75,7 +75,7 @@
+ 	/** Terminates the program with added default message or 'text'.
+             It can be suppressed by Log::IgnoreFatal(); */
+ 	static void Fatal(string text, unsigned short int code=0);
+-	static void Fatal(unsigned short int code=0)                            { Fatal(NULL,code);       }
++        static void Fatal(unsigned short int code = 0) { Fatal("", code); }
+ 
+ 	/** Redirects output to log. Redirection can be done for a block of code
+ 	    or for one function only. Redirection can be turned off by using
+--- src/eventRecordInterfaces/PhotosHEPEVTEvent.cxx~	2015-01-23 17:58:46.000000000 +0100
++++ src/eventRecordInterfaces/PhotosHEPEVTEvent.cxx	2025-11-28 10:20:09.002076505 +0100
+@@ -3,3 +3,3 @@
+ 
+-const static int fortranNMXHEP = 10000;
++const static int fortranNMXHEP = 200000;
+ 
+--- src/photos-C/photosC.h~	2015-03-04 10:15:11.000000000 +0100
++++ src/photos-C/photosC.h	2025-11-28 10:19:01.254194431 +0100
+@@ -6,3 +6,3 @@
+ 
+-const static int NMXHEP = 10000;
++const static int NMXHEP = 200000;
+ const static double PI    = 3.14159265358979324;

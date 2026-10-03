@@ -1,7 +1,7 @@
 package: numba
 description: Numba JIT compiler for numerical Python (LLVM-based)
-version: "0.63.0rc1"
-tag: "0.63.0rc1"
+version: "0.65.1"
+tag: "0.65.1"
 requires:
   - Python
   - numpy

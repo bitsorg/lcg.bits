@@ -1,6 +1,6 @@
 package: fjcontrib
 description: FastJet contrib package collection of add-on jet tools
-version: "1.101"
+version: "1.102"
 source: https://github.com/fjcontrib/fjcontrib.git
 tag: "%(version)s"
 sources:

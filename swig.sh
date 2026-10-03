@@ -9,7 +9,7 @@ requires:
   - pcre2
   - Python
   - Boost
-prefer_system: ".*"
+prefer_system: "osx.*"
 # macOS: source swig from Homebrew (build-time generator; consumers need only the
 # `swig` binary). brew swig 4.4.1 vs pinned 4.4.0 is compatible; listing it here
 # adds it to the Brewfile for `bits --brew`.

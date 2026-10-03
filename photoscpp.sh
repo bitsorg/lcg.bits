@@ -1,6 +1,6 @@
 package: photoscpp
 description: PHOTOS++ C++ version of PHOTOS radiative corrections
-version: "3.64"
+version: "3.64.atlas1"
 source: https://gitlab.cern.ch/photospp/photospp
 tag: "v%(version)s"
 sources:
@@ -12,10 +12,15 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
 license: MIT
 acknowledgment: "MIT License - Copyright (c) [year] PHOTOS++ authors."
+patches:
+  # Version-gated: ATLAS vs LHCb source patches to the same PHOTOS 3.64 tarball.
+  - "photos++-3.64.atlas1.patch:version=3.64.atlas1 && strip=0"
+  - "photos++-3.64.lhcb.patch:version=3.64.lhcb && strip=0"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -34,12 +39,8 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: libPhotosppHepMC3 leaves HepMC3 symbols undefined (resolved at load time by the
-  # consumer). macOS's two-level namespace rejects that at link, so patch libtool to allow
-  # undefined symbols (dynamic_lookup). Darwin-gated; Linux has no such lines.
-  if [ "$(uname)" = Darwin ]; then
-    find . -name libtool -type f -exec perl -i -pe \
-      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
-  fi
+  # macOS: libPhotosppHepMC3 leaves HepMC3 symbols undefined (resolved at load
+  # time by the consumer); let the generated libtool emit dylibs with them.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }

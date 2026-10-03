@@ -1,7 +1,7 @@
 package: mplhep
 description: mplhep Matplotlib style sheets and helpers for HEP publications
-version: "1.0.0"
-tag: "1.0.0"
+version: "1.1.0"
+tag: "1.1.0"
 requires:
   - Python
   - uhi

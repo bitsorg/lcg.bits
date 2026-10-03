@@ -1,6 +1,6 @@
 package: lxml
 description: lxml powerful and fast XML and HTML processing library
-version: "5.3.1"
+version: "6.1.0"
 source: https://github.com/lxml/lxml
 tag: "lxml-%(version)s"
 sources:

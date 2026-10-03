@@ -1,0 +1,11 @@
+--- MatrixElement/Matchbox/Matching/ShowerApproximation.h.orig	2023-06-02 16:43:47.462555108 +0200
++++ MatrixElement/Matchbox/Matching/ShowerApproximation.h	2023-06-02 16:44:56.368269080 +0200
+@@ -144,7 +144,7 @@
+   /**
+    * Return true, if this matching is capable of spin correlations.
+    */
+-  virtual bool hasSpinCorrelations() const { return false; }
++  virtual bool hasSpinCorrelations() const { return true; }
+ 
+ public:
+ 

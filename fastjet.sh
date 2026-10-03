@@ -1,6 +1,6 @@
 package: fastjet
 description: FastJet package for jet finding in particle physics
-version: "3.5.0"
+version: "3.5.1"
 source: https://github.com/fastjet/fastjet
 tag: "v%(version)s"
 sources:

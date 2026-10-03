@@ -18,11 +18,12 @@ requires:
   # - libuv
   # - sympy
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
 patches:
-  - horovod-0.28.1.patch
+  - "horovod-0.28.1.patch:strip=0"
 ---
 #!/bin/bash -e
 ##############################

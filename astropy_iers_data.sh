@@ -1,7 +1,7 @@
 package: astropy_iers_data
 description: Astropy IERS data tables for time and coordinate transforms
-version: "0.2024.10.21.0.33.21"
-tag: "0.2024.10.21.0.33.21"
+version: "0.2026.5.25.1.14.13"
+tag: "0.2026.5.25.1.14.13"
 requires:
   - Python
 build_requires:

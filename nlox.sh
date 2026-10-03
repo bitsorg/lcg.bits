@@ -27,13 +27,9 @@ function Configure() {
     "$BITS_CMAKE_SRC/CMakeLists.txt"
   # 2) Fix the OneLOop/QCDLoop download URL: site dropped the duplicate 'helac-phegas/'.
   perl -i -pe 's|helac-phegas/tar-files|tar-files|g' "$BITS_CMAKE_SRC/CMakeLists.txt"
-  # 3) qcdloop.fnal.gov/QCDLoop-1.98.tar.gz was repacked on macOS (June 2026):
-  #    it now has an AppleDouble entry (._QCDLoop-1.98) NEXT TO QCDLoop-1.98/.
-  #    With two top-level entries CMake's ExternalProject no longer strips the
-  #    top directory, so its CONFIGURE_COMMAND (sed on 'makefile') fails with
-  #    "can't read makefile". Download once, drop the junk, repack with the
-  #    single top-level dir, and point the ExternalProject at the sanitised
-  #    local copy (robust whether or not upstream fixes the packing).
+  # 3) macOS QCDLoop-1.98.tar.gz carries an AppleDouble entry (._QCDLoop-1.98) that
+  #    stops ExternalProject stripping the top dir (its sed CONFIGURE_COMMAND then
+  #    fails). Repack with a single top dir and point ExternalProject at the local copy.
   _qcd_tar="${PWD}/QCDLoop-1.98-clean.tar.gz"
   if curl -fSL --retry 3 https://qcdloop.fnal.gov/QCDLoop-1.98.tar.gz -o "${PWD}/QCDLoop-1.98-orig.tar.gz"; then
     rm -rf "${PWD}/qcdloop-clean" && mkdir -p "${PWD}/qcdloop-clean"
@@ -45,6 +41,9 @@ function Configure() {
   else
     echo "WARNING: QCDLoop-1.98 pre-download failed — leaving the upstream URL in place" >&2
   fi
+  # 4) tred needs the GNU dialect for __float128 (0.Q literals, std::abs overload),
+  #    which strict ISO -std=c++NN from the defaults' CXXFLAGS disables; same level.
+  export CXXFLAGS="${CXXFLAGS//-std=c++/-std=gnu++}"
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \

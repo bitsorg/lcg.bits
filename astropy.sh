@@ -1,7 +1,7 @@
 package: astropy
 description: Astropy community Python package for astronomy
-version: "6.1.4"
-tag: "6.1.4"
+version: "7.2.0"
+tag: "7.2.0"
 requires:
   - Python
   - numpy

@@ -1,6 +1,6 @@
 package: grpcio
 description: grpcio gRPC Python implementation
-version: "1.73.0"
+version: "1.80.0"
 source: https://github.com/grpc/grpc
 tag: "v%(version)s"
 sources:
@@ -12,8 +12,6 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
-patches:
-  - grpcio-1.73.0.patch
 ---
 #!/bin/bash -e
 export CXX="${CXX:-g++}"

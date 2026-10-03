@@ -13,6 +13,7 @@ requires:
   - automake
   - libtool
 build_requires:
+  - CMake
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-KKMC-ee

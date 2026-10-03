@@ -1,7 +1,7 @@
 package: memray
 description: memray memory profiler for Python
-version: "1.19.2"
-tag: "1.19.2"
+version: "1.19.3"
+tag: "1.19.3"
 requires:
   - Python
   # libunwind is Linux-oriented (GNU stack unwinding) and is disabled on

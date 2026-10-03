@@ -1,6 +1,6 @@
 package: nanomsg
 description: nanomsg high-performance messaging library
-version: "1.1.5"
+version: "1.2.2"
 source: https://github.com/nanomsg/nanomsg
 tag: "%(version)s"
 sources:

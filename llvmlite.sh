@@ -1,7 +1,7 @@
 package: llvmlite
 description: llvmlite lightweight LLVM Python bindings for numba
-version: "0.46.0rc1"
-tag: "0.46.0rc1"
+version: "0.47.0"
+tag: "0.47.0"
 requires:
   - Python
   - wheel

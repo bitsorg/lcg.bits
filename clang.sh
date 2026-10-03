@@ -2,7 +2,7 @@ package: Clang
 license: Apache-2.0 WITH LLVM-exception
 version: "v20.1.7"
 tag: "llvmorg-20.1.7-alice2"
-source: https://github.com/alisw/llvm-project-reduced
+source: https://gitlab.cern.ch/bits/clang
 mem_per_job: 1280
 requires:
   - CMake
@@ -11,6 +11,8 @@ build_requires:
   - "Python"
   - curl
   - ninja
+own_hash: true
+
 env:
   LLVM_ROOT: "$CLANG_ROOT" # needed by LLVMAlt
 # own_hash: the built compiler is invariant to the community defaults, so its

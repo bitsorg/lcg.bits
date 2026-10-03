@@ -1,7 +1,7 @@
 package: sip
 description: SIP tool for creating Python bindings for C/C++ libraries
-version: "6.8.3"
-tag: "6.8.3"
+version: "6.15.3"
+tag: "6.15.3"
 requires:
   - Python
 build_requires:

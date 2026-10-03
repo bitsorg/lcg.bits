@@ -23,7 +23,11 @@ patches:
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
+  # project(recola Fortran C CXX) resolves Fortran first, without the C compiler's
+  # directory as a hint, so CMake's name order finds the system /usr/bin/f95 before
+  # the toolchain's gfortran — and recola_SM's .mod files (GCC 15) won't load.
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
+      -DCMAKE_Fortran_COMPILER="$(command -v gfortran)" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \

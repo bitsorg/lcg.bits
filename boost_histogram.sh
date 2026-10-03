@@ -1,7 +1,7 @@
 package: boost_histogram
 description: boost-histogram fast C++ backed Python histogramming
-version: "1.7.1"
-tag: "1.7.1"
+version: "1.7.2"
+tag: "1.7.2"
 requires:
   - Python
   - numpy

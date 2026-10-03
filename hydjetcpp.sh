@@ -7,10 +7,12 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: LicenseRef-HYDJET++
+license: LicenseRef-HYDJETpp
 # academic-use licence with no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
+patches:
+  - "hydjet++-2.1.patch:strip=0"
 ---
 #!/bin/bash -e
 ##############################

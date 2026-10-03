@@ -1,7 +1,7 @@
 package: jax
 description: JAX NumPy on accelerators with autograd and JIT (Google)
-version: "0.9.2"
-tag: "0.9.2"
+version: "0.10.1"
+tag: "0.10.1"
 requires:
   - Python
   - numpy

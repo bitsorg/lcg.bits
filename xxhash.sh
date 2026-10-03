@@ -1,6 +1,6 @@
 package: xxHash
 description: xxHash extremely fast non-cryptographic hash algorithm
-version: "0.8.2"
+version: "0.8.3"
 source: https://github.com/Cyan4973/xxHash
 tag: "v%(version)s"
 sources:
@@ -19,7 +19,8 @@ license: BSD-2-Clause
 MODULE_OPTIONS="--bin --lib"
 ##############################
 function Make() {
-  make ${JOBS:+-j $JOBS}
-  make ${JOBS:+-j $JOBS} install PREFIX=$INSTALLROOT CC=$CC
+  make ${JOBS:+-j $JOBS} MOREFLAGS=-fPIC
 }
-function MakeInstall() { true; }
+function MakeInstall() {
+  make ${JOBS:+-j $JOBS} install PREFIX=$INSTALLROOT
+}

@@ -1,6 +1,6 @@
 package: zstandard
 description: zstandard Python bindings for Zstandard compression
-version: "0.23.0"
+version: "0.25.0"
 source: https://github.com/indygreg/python-zstandard
 tag: "v%(version)s"
 sources:

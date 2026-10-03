@@ -1,7 +1,9 @@
 package: pythia6
 description: Pythia 6 Monte Carlo event generator (legacy Fortran version)
-version: "6.4.28.snd"
-tag: "6.4.28.snd"
+# Standard LCG 429.2 (author source pythia-6.4.28.f) with an enlarged HEPEVT
+# common block (NMXHEP=200000), matching heptools dev-generators / lhcbsetup.
+version: "429.2"
+tag: "429.2"
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -13,6 +15,7 @@ redistributable: none
 #!/bin/bash -e
 ##############################
 . $(bits-include MakeRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--lib"
 ##############################
@@ -30,17 +33,20 @@ function Make() {
   # the object, which the two-level namespace rejects, so allow flat-namespace lazy
   # resolution. -headerpad_max_install_names reserves header space for bits' relocation.
   local _so=so _shared=-shared _undef=
-  if [ "$(uname)" = Darwin ]; then
+  if bits_is_macos; then
     _so=dylib; _shared=-dynamiclib
-    _undef="-Wl,-undefined,dynamic_lookup -Wl,-headerpad_max_install_names"
+    _undef="$(bits_macos_undefined_ldflags)"
   fi
+  # LCG "hepevt=200000": enlarge the HEPEVT common block (default NMXHEP=4000)
+  # so high-multiplicity events fit, matching lcgcmake's hepevt.inc mechanism.
+  sed -i -E 's/(NMXHEP[[:space:]]*=[[:space:]]*)4000/\1200000/g' pythia6.f
   ${FC:-gfortran} $fflags -c pythia6.f -o pythia6.o
   ${FC:-gfortran} $fflags $_shared $_undef -o libpythia6.$_so pythia6.o
   ${AR:-ar} crs libpythia6.a pythia6.o
 }
 
 function MakeInstall() {
-  local _so=so; [ "$(uname)" = Darwin ] && _so=dylib
+  local _so=so; bits_is_macos && _so=dylib
   install -dm755 "$INSTALLROOT/lib"
   install -m755 libpythia6.$_so "$INSTALLROOT/lib/"
   install -m644 libpythia6.a  "$INSTALLROOT/lib/"

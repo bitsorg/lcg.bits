@@ -1,12 +1,12 @@
 package: sherpa-openmpi
 description: Sherpa Monte Carlo event generator built with OpenMPI
-version: "3.0.3.openmpi3"
+version: "3.0.4.openmpi3"
 mem_per_job: 1500
-tag: "3.0.3.openmpi3"
+tag: "3.0.4.openmpi3"
 sources:
   # ".openmpi3" is a build label, not part of the upstream filename — same
   # source tarball as the regular sherpa recipe; MPI is enabled at build time.
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/sherpa-v3.0.4.tar.gz
 requires:
   - CMake
   - Python
@@ -38,10 +38,9 @@ MODULE_OPTIONS="--bin --lib"
 # SWIG_LIB: prefer the relocated tree, since `swig -swiglib` reports the gone build
 # INSTALLROOT on Linux too (surfaced once the el9 container stopped supplying a
 # system swig); fall back to the binary for a system swig. Mirrors sherpa.sh.
-export SWIG="${SWIG_ROOT}/bin/swig"
-SWIG_LIB="$(ls -d "${SWIG_ROOT}"/share/swig/*/ 2>/dev/null | head -1)"
-export SWIG_LIB="${SWIG_LIB:-$("${SWIG}" -swiglib 2>/dev/null)}"
-export SWIG_LIB="${SWIG_LIB%/}"
+export SWIG="${SWIG_ROOT:+${SWIG_ROOT}/bin/swig}"
+export SWIG="${SWIG:-$(command -v swig || true)}"
+export SWIG_LIB="$(bits_swig_lib)"
 # Put OpenMPI's compilers on PATH so find_package(MPI) finds mpicxx. FindMPI also runs a
 # compile+link test (MPI_*_WORKS); the relocated wrappers need OPAL_PREFIX to find their
 # plugins/config, or the test fails ("Could NOT find MPI").

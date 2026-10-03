@@ -1,0 +1,114 @@
+--- tauola-fortran/tauola-modified/tauola.f.orig	2016-10-26 12:13:04.000000001 +0200
++++ tauola-fortran/tauola-modified/tauola.f	2016-10-26 12:13:27.000000001 +0200
+@@ -1856,7 +1856,7 @@
+         write(*,*) 'problem in 2-scalars current FF2PIRHO=',FF2PIRHO
+         stop
+        ENDIF
+-      ELSEIF (IVER.EQ.0) THEN ! cleo
++      ELSEIF (IVER.EQ.0.OR.IVER.EQ.-1) THEN   ! cleo - modified to allow IVER=-1 for Cleo isospin intricate in the 3pi case (original: IVER.EQ.0)
+         DO K=1,4
+          HADCUR(K)=QQ(k)* sqrt(fpirho(sqrt(pksd)))
+         ENDDO
+@@ -2071,7 +2071,7 @@
+        COEFc(5,7)=-SQRT(2.0/3.0)
+ 
+       ENDIF
+-      IF (IVER.EQ.0.OR.J.NE.0) THEN   ! so far rchl only for 3pi modes
++      IF (IVER.EQ.0.OR.IVER.EQ.-1.OR.J.NE.0) THEN ! so far rchl only for 3pi modes - also for Cleo isospin intricate (original: IVER.EQ.0)
+        COEF=COEFc(I,J)
+       ELSEIF (IVER.EQ.1) THEN
+        COEF=COEFrr(I,J)
+@@ -2084,6 +2084,7 @@
+ 
+       SUBROUTINE INIRChL(IVERI)
+ C routine to set version no for the currents physics initialization
++C IVER=-1 TAUOLA cleo isospin intricate (3pi mode only)
+ C IVER=0  TAUOLA cleo
+ C IVER=1  TAUOLA RChL
+ 
+@@ -2102,6 +2103,7 @@
+ 
+       SUBROUTINE INIRChLget(I)
+ C routine to get version no for the currents physics initialization
++C IVER=-1 TAUOLA cleo isospin intricate (3pi mode only)
+ C IVER=0  TAUOLA cleo
+ C IVER=1  TAUOLA RChL
+       COMMON /IPChT/ IVER
+@@ -3808,7 +3810,7 @@
+        DWAPI0=SQRT(2.0)
+ 
+       ENDIF
+-       IF (IVER.EQ.0.OR.MNUM.NE.0) THEN ! so far rchl only for 3pi modes
++      IF (IVER.EQ.0.OR.IVER.EQ.-1.OR.MNUM.NE.0) THEN ! so far rchl only for 3pi modes - also for Cleo isospin intricate (original: IVER.EQ.0)
+          FPI=FPIc
+         ELSEIF (IVER.EQ.1) THEN
+          FPI=GETFPIRPT(1) ! GET  defined in in ffwid3pi.f  of RChL-currents
+--- tauola-fortran/tauola-modified/f3pi.f.orig	2016-10-26 12:12:48.000000001 +0200
++++ tauola-fortran/tauola-modified/f3pi.f	2016-10-26 12:13:15.000000001 +0200
+@@ -44,6 +44,7 @@
+       CHARACTER*(*) CRNAME
+       PARAMETER(    CRNAME = 'F3PI' )
+ *
++      INTEGER JAA,IVER ! For Cleo isospin intricate
+       INTEGER IFIRST,IDK
+       REAL MRO,GRO,MRP,GRP,MF2,GF2,MF0,GF0,MSG,GSG
+       REAL M1,M2,M3,M1SQ,M2SQ,M3SQ,MPIZ,MPIC
+@@ -101,7 +102,17 @@
+ C     PKORB is set up to remember what flavor of 3pi it gave to KORALB,
+ C     since KORALB doesnt bother to remember!!
+       R = PKORB(4,11)
+-      IF (R.EQ.0.) THEN
++      
++      CALL INIRChLget(IVER)  ! For Cleo isospin intricate
++      CALL CH3PIGET(JAA)     ! For Cleo isospin intricate
++                             
++      IF (JAA.EQ.1) THEN     ! For Cleo isospin intricate
++        IF (IVER.EQ.-1) THEN ! For Cleo isospin intricate
++          R=1                ! For Cleo isospin intricate
++        END IF               ! For Cleo isospin intricate
++      END IF                 ! For Cleo isospin intricate
++
++      IF (R.EQ.0) THEN
+ C it is 2pi0pi-
+         IDK = 1
+         M1 = MPIZ
+--- tauola-fortran/tauola-modified/formf.f.orig	2016-10-26 14:04:50.000000001 +0200
++++ tauola-fortran/tauola-modified/formf.f	2016-10-26 14:05:35.000000001 +0200
+@@ -116,7 +116,7 @@
+ C       FORMRO = F3PI(1,QQ,S1,SDWA)
+ C       FORMA1 = FA1A1P(QQ)
+ C       FORM1 = FORMA1*FORMRO
+-      IF (IVER.EQ.0) THEN
++        IF (IVER.EQ.0.OR.IVER.EQ.-1) THEN ! modified for Cleo isospin intricate (original: IVER.EQ.0)
+         FORM1 = F3PI(1,QQ,S1,SDWA)
+       ELSE
+         FORM1 = F3PI_RCHT(1,QQ,S1,SDWA)
+@@ -194,7 +194,7 @@
+ C       FORMA1 = FA1A1P(QQ)
+ C       FORM2 = FORMA1*FORMRO
+ C       FORM2 = F3PI(2,QQ,S1,SDWA)
+-      IF (IVER.EQ.0) THEN
++      IF (IVER.EQ.0.OR.IVER.EQ.-1) THEN ! modified for Cleo isospin intricate (original: IVER.EQ.0)
+        FORM2 = F3PI(2,QQ,S1,SDWA)
+       ELSE
+        FORM2 = F3PI_RCHT(2,QQ,S1,SDWA)
+@@ -352,7 +352,7 @@
+ C       FORMRO = F3PI(3,QQ,S1,SDWA)
+ C       FORMA1 = FA1A1P(QQ)
+ C       FORM3 = FORMA1*FORMRO
+-      IF (IVER.EQ.0) THEN
++      IF (IVER.EQ.0.OR.IVER.EQ.-1) THEN ! modified for Cleo isospin intricate (original: IVER.EQ.0)
+         FORM3 = F3PI(3,QQ,S1,SDWA)
+       ELSE
+         FORM3 = (0.,0.)
+--- include/Tauola/TauolaHEPEVTEvent.h.orig	2020-03-27 09:43:39.044675595 +0100
++++ include/Tauola/TauolaHEPEVTEvent.h	2020-03-27 09:43:48.180691429 +0100
+@@ -31,7 +31,7 @@
+ #ifdef USE_HEPEVT_INTERFACE
+ 
+ // Change this value to match HEPEVT size
+-const int NMXHEP = 10000;
++const int NMXHEP = 200000;
+ 
+ extern "C" struct {
+   int    nevhep;            // serial number

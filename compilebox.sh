@@ -1,11 +1,14 @@
 package: compilebox
 description: Compilebox online compiler sandbox service
-version: "08.11"
-tag: "08.11"
+version: "08.14"
+tag: "08.14"
+# ~100 nested process builds share $JOBS; cap it so their largest
+# compiles fit in the build container's memory.
+mem_per_job: 3 GiB
 sources:
-  # The hosted tarball is named by the LCG "author" tag (ATLASOTF-08-11), not the
-  # bare version (lcgcmake: author=ATLASOTF-08-11).
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-ATLASOTF-08-11.tar.gz
+  # The hosted tarball is named by the LCG "author" tag (ATLASOTF-08-14), not the
+  # bare version (lcgcmake: author=ATLASOTF-08-14).
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/compilebox-ATLASOTF-08-14.tar.gz
 requires:
   - CMake
   - GSL
@@ -36,26 +39,43 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
-# Each process is a nested ExternalProject, i.e. a separate cmake run that inherits
-# the environment but not the outer cache — so these must be env vars, not -D flags
-# (lcgcmake sets the same three via LCGPackage_Add ENVIRONMENT).
+# Each process is a nested ExternalProject (separate cmake run, no outer cache), so
+# these must be env vars, not -D flags (mirrors lcgcmake's ENVIRONMENT vars).
 export PHOTOSPP_ROOT_DIR="${PHOTOSCPP_ROOT}"
 export RECOLASM_ROOT_DIR="${RECOLA_SM_ROOT}"
 export RECOLASM_ATGC_WARSAW_ROOT_DIR="${RECOLA_SM_ATGC_WARSAW_ROOT}"
+export LOOPTOOLS_ROOT_DIR="${LOOPTOOLS_ROOT}"
 ##############################
-function Configure() {
-  # No-op: the tarball has no top-level CMakeLists.txt (the project lives in
-  # COMPILEBOX/), and Make() below runs its own cmake once the process tarball is
-  # unpacked. The inherited CMakeRecipe Configure would just fail on src/.
-  true
+# The nested process builds read CXXFLAGS from the env. GoSam's quadninja uses
+# __float128 literals (0.Q, 1.iQ): GNU dialect, same level as the stack's -std.
+# Drop -g: debug info on the generated amplitude sources is their largest memory
+# cost (one cc1plus reached 52 GB) and of no use for generated code.
+CXXFLAGS="${CXXFLAGS:-}"; CXXFLAGS="${CXXFLAGS//-std=c++/-std=gnu++}"
+CXXFLAGS=" $CXXFLAGS "; CXXFLAGS="${CXXFLAGS// -g / }"
+CXXFLAGS="${CXXFLAGS# }"; export CXXFLAGS="${CXXFLAGS% }"
+# LCG MCGenerators mirror; the process tarball is named by the LCG author tag.
+COMPILEBOX_GEN_URL="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
+COMPILEBOX_AUTHOR="ATLASOTF-08-14"
+# Optimisation for the huge machine-generated one-function sources (see
+# _LimitGeneratedOpt): -O2 on ttJ_MiNNLO's pentagon_gg.cpp needs > 6.8 GB.
+COMPILEBOX_GENERATED_OPT="${COMPILEBOX_GENERATED_OPT:--O0}"   # -O1 was still OOM-killed
+##############################
+function _LimitGeneratedOpt() {
+  # ttJ_MiNNLO's two-loop virtuals #include 1-4 MB Maple-generated single
+  # functions (auto/penta_*.cpp, auto/remainder_*.cpp). Compile just those at
+  # $COMPILEBOX_GENERATED_OPT; source COMPILE_OPTIONS come last, so they win.
+  local _cm="$PWD/COMPILEBOX/POWHEG-BOX-V2/ttJ_MiNNLO/CMakeLists.txt" _f _list=""
+  [ -f "$_cm" ] || { echo "WARNING: $_cm not found — not limiting optimisation" >&2; return 0; }
+  for _f in pentagon_gg pentagon_qq RemainingDiags_gg RemainingDiags_qq; do
+    _list="${_list} \${PROCESS_DIR}/Virtuals/${_f}.cpp"
+  done
+  printf '\n# bits: huge generated sources at reduced optimisation (compilebox.sh)\nset_source_files_properties(%s PROPERTIES COMPILE_OPTIONS "%s")\n' \
+    "${_list# }" "${COMPILEBOX_GENERATED_OPT}" >> "$_cm"
 }
 function _SanitiseQCDLoop() {
-  # qcdloop.fnal.gov repacked QCDLoop-<ver>.tar.gz on macOS (June 2026): an AppleDouble
-  # entry (._QCDLoop-<ver>) now sits NEXT TO QCDLoop-<ver>/. With two top-level entries
-  # FetchContent stops stripping the top dir, so GETQCDLOOP's ff/ql globs come back empty
-  # ("No SOURCES given to target: qcdloop"). Same upstream bug as nlox.sh.
-  # Repack each requested version with a single top-level dir and point the macro at the
-  # local copy. Every step is best-effort: on failure the upstream URL is left untouched.
+  # macOS QCDLoop tarballs carry an AppleDouble entry (._QCDLoop-*) that breaks
+  # FetchContent's top-dir strip. Repack each requested version with a single top dir
+  # and point the macro at it; best-effort (same bug as nlox.sh).
   local _mod="$PWD/COMPILEBOX/cmake/Modules/COMPILEBOX.cmake" _dir="$PWD/qcdloop-clean"
   local _vers _v _top _ok=0
   [ -f "$_mod" ] || return 0
@@ -78,20 +98,28 @@ function _SanitiseQCDLoop() {
     's|https://qcdloop\.fnal\.gov/QCDLoop-\$\{ver\}\.tar\.gz|file://$ENV{BITS_QLDIR}/QCDLoop-\${ver}-clean.tar.gz|g' \
     "$_mod"
 }
-function Make() {
-  # Extracts process tarballs and writes generated sources back, so operate on the
-  # private rsync'd copy ($PWD), never read-only SOURCES. gen_url is the LCG
-  # MCGenerators mirror; author=ATLASOTF-08-11 (the LCG author tag).
-  local gen_url="https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
-  local author="ATLASOTF-08-11"
-  # curl, not wget: the builder images ship curl (alpgen's Prepare relies on it)
-  # but do not guarantee wget.
-  curl -fSLO "${gen_url}/compilebox-processes-${author}.tar.gz" \
-  && tar xvf "compilebox-processes-${author}.tar.gz" -C "$PWD/COMPILEBOX/" \
-  && cmake -DCMAKE_BUILD_TYPE=Release -DLOCAL_SOURCE="$PWD/COMPILEBOX/compilebox-processes-${author}" -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" -DDESTINATION="$PWD/COMPILEBOX_PROCESSES/" -DCMAKE_CXX_STANDARD=17 "$PWD/COMPILEBOX" \
-  && cp "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-V2/zlibdummy.c" "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-RES/zlibdummy.c"
-  _SanitiseQCDLoop
-  make ${JOBS:+-j $JOBS}
-  make install
+function Prepare() {
+  # Private writable copy (the process builds write generated sources back),
+  # then the process tarball; curl because builder images ship it (wget: not always).
+  rsync -a --delete "${SOURCEDIR}"/ ./
+  curl -fSLO "${COMPILEBOX_GEN_URL}/compilebox-processes-${COMPILEBOX_AUTHOR}.tar.gz"
+  tar xf "compilebox-processes-${COMPILEBOX_AUTHOR}.tar.gz" -C "$PWD/COMPILEBOX/"
+  _LimitGeneratedOpt
 }
-function MakeInstall() { true; }  # install folded into Make()
+function Configure() {
+  # No top-level CMakeLists.txt: the project is COMPILEBOX/. Configuring copies the
+  # process sources into COMPILEBOX_PROCESSES/, which the two fix-ups below need.
+  cmake -S "$PWD/COMPILEBOX" -B "$BITS_CMAKE_BUILD" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX="$INSTALLROOT" \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DLOCAL_SOURCE="$PWD/COMPILEBOX/compilebox-processes-${COMPILEBOX_AUTHOR}" \
+    -DDESTINATION="$PWD/COMPILEBOX_PROCESSES/"
+  cp "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-V2/zlibdummy.c" \
+     "$PWD/COMPILEBOX_PROCESSES/POWHEG-BOX-RES/zlibdummy.c"
+  _SanitiseQCDLoop
+}
+function Make() {
+  cmake --build "$BITS_CMAKE_BUILD" -- ${JOBS:+-j$JOBS}
+}
+# MakeInstall: the CMakeRecipe default (cmake --install "$BITS_CMAKE_BUILD").

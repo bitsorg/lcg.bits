@@ -1,7 +1,7 @@
 package: fsspec_xrootd
 description: fsspec-xrootd XRootD filesystem interface for fsspec
-version: "0.5.1"
-tag: "0.5.1"
+version: "0.5.5"
+tag: "0.5.5"
 requires:
   - Python
   - fsspec

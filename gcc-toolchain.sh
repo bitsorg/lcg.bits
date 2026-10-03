@@ -2,29 +2,51 @@ package: GCC-Toolchain
 license: GPL-3.0-or-later WITH GCC-exception-3.1
 version: "%(tag_basename)s"
 tag: v14.2.0-alice2
-source: https://github.com/alisw/gcc-toolchain
+source: https://gitlab.cern.ch/bits/gcc-toolchain
 prepend_path:
   "LD_LIBRARY_PATH": "$GCC_TOOLCHAIN_ROOT/lib64"
   "PATH": "$GCC_TOOLCHAIN_ROOT/libexec/bin"
 build_requires:
   - "autotools:(slc6|slc7)"
   - yacc-like
+# own_hash: the built compiler is invariant to the community defaults, so its
+# identity hash excludes defaults-release -> one certified build is reused across
+# communities from the S3 cache (see ADR-0012). The axis still differentiates via
+# the tag override below. Only the compiler; its bootstrap deps are system reqs.
+own_hash: true
 prefer_system: .*
 prefer_system_check: |
   set -e
+  # Reproducibility: inside a bits build container, never accept the image's
+  # native compiler — build our own so every platform in a container uses the
+  # identical GCC (e.g. el10 ships gcc14 natively; without this the gcc14 axis on
+  # el10 would take the system compiler and skip the build). The fingerprint file
+  # exists ONLY in bits-containers images, so native/host builds are unaffected
+  # and keep using the system compiler for speed.
+  if [ -f /opt/bits/container-fingerprint.hash ]; then
+    echo "bits build container — building GCC-Toolchain from source (image-independent compiler)"
+    exit 1
+  fi
+  # Minimum __GNUC__ floor from the requested version, parsed arithmetically
+  # (v15.2.0-alice1 -> 150200) so a NEW gcc never needs an edit here — a new
+  # compiler arrives only as a defaults-gccNN overriding the tag. Unparseable
+  # or "unavailable" falls back to the historical 7.3 floor.
+  _req=${REQUESTED_VERSION#v}
+  _maj=${_req%%.*}; _rest=${_req#*.}; _min=${_rest%%.*}
+  case $_maj in ''|*[!0-9]*) _maj=0 ;; esac
+  case $_min in ''|*[!0-9]*) _min=0 ;; esac
+  if [ "$_maj" -eq 0 ]; then MIN_GCC_VERSION=70300; else MIN_GCC_VERSION=$(( _maj*10000 + _min*100 )); fi
+  # Probe the compiler the build will actually use: an explicit $CC, else the
+  # container's $GCC_VERSION-suffixed binaries (gcc-15 ...), else the plain names.
+  # With no container and no axis CC this is the historical plain-gcc check.
+  _cc=${CC:-${GCC_VERSION:+gcc-$GCC_VERSION}};       _cc=${_cc:-gcc}
+  _cxx=${CXX:-${GCC_VERSION:+g++-$GCC_VERSION}};      _cxx=${_cxx:-g++}
+  _fc=${FC:-${GCC_VERSION:+gfortran-$GCC_VERSION}};   _fc=${_fc:-gfortran}
   which make || { echo "make missing"; exit 1; }
-  which gfortran || { echo "gfortran missing"; exit 1; }
-  case $REQUESTED_VERSION in
-    v15*) MIN_GCC_VERSION=150200 ;;
-    v14*) MIN_GCC_VERSION=140200 ;;
-    v13*) MIN_GCC_VERSION=130200 ;;
-    v12*) MIN_GCC_VERSION=120100 ;;
-    v10*) MIN_GCC_VERSION=100200 ;;
-    *) MIN_GCC_VERSION=70300 ;;
-  esac
-  which gcc
-  test -f "$(dirname "$(which gcc)")/c++"
-  gcc -xc++ - -c -o /dev/null << EOF
+  command -v "$_fc"  >/dev/null || { echo "$_fc missing"; exit 1; }
+  command -v "$_cc"  >/dev/null || { echo "$_cc missing"; exit 1; }
+  command -v "$_cxx" >/dev/null || { echo "$_cxx missing"; exit 1; }
+  "$_cxx" -xc++ - -c -o /dev/null << EOF
   #define GCCVER ((__GNUC__ * 10000)+(__GNUC_MINOR__ * 100)+(__GNUC_PATCHLEVEL__))
   #if (GCCVER < $MIN_GCC_VERSION)
   #error "System's GCC cannot be used: we need at least ($MIN_GCC_VERSION/1e4), while we intend to go for GCC $REQUESTED_VERSION. We'll compile our own version."

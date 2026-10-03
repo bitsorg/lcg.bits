@@ -1,7 +1,7 @@
 package: absl
 description: Abseil common C++ library collection (Google)
-version: "20240722.1"
-tag: "20240722.1"
+version: "20250512.2"
+tag: "20250512.2"
 sources:
   - https://github.com/abseil/abseil-cpp/archive/refs/tags/%(version)s.tar.gz
 requires:

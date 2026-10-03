@@ -1,11 +1,11 @@
 package: Geant4
 description: Geant4 Monte Carlo particle transport simulation toolkit
-version: "11.4.0"
+version: "11.4.1"
 source: https://github.com/Geant4/geant4
 mem_per_job: 1500
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4.11.4.0.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/geant4.11.4.1.tar.gz
 requires:
   - CMake
   - XercesC
@@ -16,7 +16,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
-license: Geant4-SL-1.0
+license: LicenseRef-Geant4-SL-1.0
 acknowledgment: "Includes software developed by Members of the Geant4 Collaboration (http://cern.ch/geant4)."
 prepend_path:
   ROOT_INCLUDE_PATH:

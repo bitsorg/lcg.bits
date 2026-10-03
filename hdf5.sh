@@ -9,6 +9,7 @@ requires:
   - zlib
 build_requires:
   - bits-recipe-tools
+  - CMake
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
 ---

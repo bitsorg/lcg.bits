@@ -1,7 +1,7 @@
 package: pydantic
 description: Pydantic data validation using Python type annotations
-version: "2.12.5"
-tag: "2.12.5"
+version: "2.13.3"
+tag: "2.13.3"
 requires:
   - Python
   - cython

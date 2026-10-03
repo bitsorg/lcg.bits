@@ -1,9 +1,9 @@
 package: protobufpy
 description: protobuf Python runtime for Protocol Buffers
-version: "5.28.3"
-tag: "5.28.3"
+version: "7.34.1"
+tag: "7.34.1"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-5.28.3.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-7.34.1.tar.gz
 requires:
   - Python
 build_requires:

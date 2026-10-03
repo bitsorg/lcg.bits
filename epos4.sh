@@ -20,7 +20,8 @@ license: LicenseRef-EPOS4
 # fine, but this package must never be laid into a public CVMFS tree.
 redistributable: none
 patches:
-  - epos4-4.0.3.atlas1.patch
+  - "epos4-4.0.3.atlas1.patch:version=4.0.3.atlas1"
+  - "epos4-4.0.3.atlas3.patch:version=4.0.3.atlas3 && strip=0"
 ---
 #!/bin/bash -e
 ##############################
@@ -34,10 +35,9 @@ function Configure() {
   # model (no large model in arm64 gfortran), so the libepos/Xepos link fails.
   # Leaf pkg -> empty pkg; drop this + the Make/MakeInstall/PostInstall gates to port.
   bits_is_macos && { mkdir -p "$INSTALLROOT"; return 0; }
-  # Linux: Xepos links against ROOT and HepMC3, both built with the GCC-Toolchain
-  # (GCC 14). Put the toolchain's libstdc++ on the link line so ld resolves the
-  # newer GLIBCXX_3.4.3x / CXXABI_1.3.15 symbols instead of the older EL9 system
-  # one (undefined-reference link failure). Same fix as garfieldcpp.
+  # Linux: Xepos links against GCC-Toolchain-built ROOT/HepMC3, so put the toolchain's
+  # libstdc++ on the link line or ld falls back to the older system one
+  # (undefined-reference failure; same fix as garfieldcpp).
   local _extra=()
   [ -n "${GCC_TOOLCHAIN_ROOT:-}" ] && \
     _extra+=(-DCMAKE_EXE_LINKER_FLAGS="-L${GCC_TOOLCHAIN_ROOT}/lib64 -L${GCC_TOOLCHAIN_ROOT}/lib")

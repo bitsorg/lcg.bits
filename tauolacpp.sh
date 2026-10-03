@@ -1,6 +1,6 @@
 package: tauolacpp
 description: TAUOLA++ C++ version of TAUOLA tau decay generator
-version: "1.1.9"
+version: "1.1.9.atlas1"
 source: https://github.com/Malexandra-de/Tauolapp
 tag: "v%(version)s"
 sources:
@@ -12,10 +12,15 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-only
+patches:
+  # Version-gated: ATLAS vs LHCb source patches to the same TAUOLA 1.1.9 tarball.
+  - "tauola++-1.1.9.atlas1.patch:version=1.1.9.atlas1 && strip=0"
+  - "tauola++-1.1.9.lhcb.patch:version=1.1.9.lhcb && strip=0"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
+. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -32,12 +37,8 @@ function Configure() {
 }
 
 function Make() {
-  # macOS: libTauolaFortran leaves sibling-library Fortran routines undefined (resolved at
-  # load time), which the two-level namespace rejects at link; patch libtool to allow
-  # undefined symbols (dynamic_lookup). Darwin-gated; Linux has no such lines.
-  if [ "$(uname)" = Darwin ]; then
-    find . -name libtool -type f -exec perl -i -pe \
-      's/^allow_undefined_flag=""\s*$/allow_undefined_flag="-undefined dynamic_lookup"/' {} +
-  fi
+  # macOS: libTauolaFortran leaves sibling-library Fortran routines undefined
+  # (resolved at load time); let the generated libtool emit dylibs with them.
+  bits_patch_libtool_undefined
   make ${JOBS:+-j $JOBS}
 }

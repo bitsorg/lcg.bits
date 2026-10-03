@@ -1,10 +1,10 @@
 package: njet
 description: NJet multi-parton one-loop matrix element library
-version: "2.1.1"
+version: "2.1.1p1"
 source: https://bitbucket.org/njet/njet
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-%(version)s.tar.gz
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles/%(name)s-2.1.1.tar.gz
 requires:
   - qd
 build_requires:
