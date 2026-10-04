@@ -40,7 +40,7 @@ Any `package:` name in this repository can be built directly. Package names are 
 | `LCG_110` | The LCG 110 release recipes. |
 | `devel` | Older development branch; not used by the default builds. |
 
-There are no `dev3` or `dev4` branches yet, so the `stacks.bits` `dev3`/`dev4` profiles cannot be built until they exist.
+The `stacks.bits` `dev3`/`dev4` nightly profiles need no branch of their own: they build the release branch's recipes with a few packages pinned to development heads or fixed tags.
 
 The branch is chosen by the `release` variable that `stacks.bits` declares in `defaults-release.sh`:
 
@@ -52,7 +52,7 @@ overrides:
     tag: "%(release)s"     # the lcg.bits branch to clone
 ```
 
-Pass the release on the command line, `--set release=LCG_110`. That is the convention every stacks-based community follows, so packages hash identically across groups and are reused from the binary store instead of rebuilt. The same value also names the `{release}` level of the CVMFS path (`/cvmfs/bits.cern.ch/lcg/releases/LCG_110/…`); `main` drops that level. A new release is a new branch here named after it (`LCG_<NNN>`). Without `--set`, `bits` takes the release from a `release:` in the chosen profiles (`dev3`, `dev4`), else from the branch of the `stacks.bits` checkout (`LCG_110-patches` gives `LCG_110`), else `main`; the branch must exist here.
+Pass the release on the command line, `--set release=LCG_110`. That is the convention every stacks-based community follows, so packages hash identically across groups and are reused from the binary store instead of rebuilt. The same value also names the `{release}` level of the CVMFS path (`/cvmfs/bits.cern.ch/lcg/releases/LCG_110/…`); `main` drops that level. A new release is a new branch here named after it (`LCG_<NNN>`). Without `--set`, `bits` takes the release from a `release:` in the chosen profiles, else from the branch of the `stacks.bits` checkout (`LCG_110-patches` gives `LCG_110`), else `main`; the branch must exist here.
 
 ### Editing recipes
 
