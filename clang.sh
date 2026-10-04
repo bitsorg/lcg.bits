@@ -11,6 +11,11 @@ build_requires:
   - "Python"
   - curl
   - ninja
+# The LLVM/libclang package for consumers that need it (the compiler selected by
+# defaults-clang is Clang-Toolchain). Its build ignores the defaults' flags and
+# build type (flags unset, Release), so own_hash leaves defaults-release out of its
+# hash and drops -opt/-dbg from its store arch. All dependencies stay tracked: the
+# output depends on them (e.g. CMake export files, Python scripts).
 own_hash: true
 
 env:
