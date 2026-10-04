@@ -11,17 +11,15 @@ build_requires:
   - "Python"
   - curl
   - ninja
+# The LLVM/libclang package for consumers that need it (the compiler selected by
+# defaults-clang is Clang-Toolchain). Its build ignores the defaults' flags and
+# build type (flags unset, Release), so own_hash leaves defaults-release out of its
+# hash and drops -opt/-dbg from its store arch. All dependencies stay tracked: the
+# output depends on them (e.g. CMake export files, Python scripts).
 own_hash: true
 
 env:
   LLVM_ROOT: "$CLANG_ROOT" # needed by LLVMAlt
-# own_hash: the built compiler is invariant to the community defaults, so its
-# identity hash excludes defaults-release -> one certified build is reused across
-# communities from the S3 cache (see ADR-0012). The clang axis stays distinct from
-# gcc via this recipe's own tag/source and the -clang append_arch; build-type
-# (-opt/-dbg) is dropped from an own_hash package's store arch, so one Clang build
-# serves every build type too.
-own_hash: true
 prefer_system: (osx.*)
 prefer_system_check: |
   brew --prefix llvm@18 && test -d $(brew --prefix llvm@18)
