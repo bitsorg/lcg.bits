@@ -11,7 +11,6 @@ requires:
   - Boost
   - Python
   - numpy
-  - flatbuffers
   - thrift
   - brotli
   - double_conversion
@@ -58,18 +57,8 @@ EOF
     chmod +x "$_wrap"
     _extra+=(-DCMAKE_LIBTOOL="$_wrap")
   fi
-  # arrow ships pre-generated flatbuffers headers that bake an exact
-  # FLATBUFFERS_VERSION static_assert; against bits flatbuffers ($FLATBUFFERS_ROOT)
-  # the compile fails ("Non-compatible flatbuffers version included"), so
-  # regenerate them with our flatc. NO --scoped-enums: arrow's C++ uses prefixed
-  # enum names (MetadataVersion_V5), not enum class. Regenerate the whole schema
-  # set, including feather.fbs (which lives in cpp/src/arrow/ipc, not format/);
-  # -I format resolves the cross-schema includes.
-  if [ -x "${FLATBUFFERS_ROOT:-}/bin/flatc" ]; then
-    _fbs=$(find "$BITS_CMAKE_SRC/format" "$BITS_CMAKE_SRC/cpp/src/arrow/ipc" -name '*.fbs')
-    "$FLATBUFFERS_ROOT/bin/flatc" --cpp -o "$BITS_CMAKE_SRC/cpp/src/generated" \
-        -I "$BITS_CMAKE_SRC/format" $_fbs
-  fi
+  # flatbuffers is arrow's own bundled copy (cpp/thirdparty), matching its
+  # shipped generated headers: no external flatbuffers or flatc.
   cmake -S "$BITS_CMAKE_SRC/cpp" -B "$BITS_CMAKE_BUILD" \
     -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
@@ -80,7 +69,6 @@ EOF
     -DARROW_BUILD_TESTS=OFF \
     ${BOOST_ROOT:+-DBOOST_ROOT="$BOOST_ROOT"} \
     ${PYTHON_ROOT:+-DPYTHON_EXECUTABLE="$PYTHON_ROOT/bin/python3"} \
-    ${FLATBUFFERS_ROOT:+-DFlatbuffers_ROOT="$FLATBUFFERS_ROOT"} \
     ${RAPIDJSON_ROOT:+-DRapidJSON_ROOT="$RAPIDJSON_ROOT"} \
     ${LZ4_ROOT:+-DLZ4_ROOT="$LZ4_ROOT"} \
     ${SNAPPY_ROOT:+-DSnappy_ROOT="$SNAPPY_ROOT"} \
