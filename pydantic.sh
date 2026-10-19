@@ -4,10 +4,10 @@ version: "2.13.3"
 tag: "2.13.3"
 requires:
   - Python
-  - cython
+  - pydantic_core
+  - annotated_types
   - typing_extensions
-  - mypy
-  - hypothesis
+  - typing_inspection
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
