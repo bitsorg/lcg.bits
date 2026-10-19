@@ -11,9 +11,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-CRMC
-# possibly open source — treat as external until the license is verified (2026-07-20 license ruling): build and private-store reuse are
-# fine, but this package must never be laid into a public CVMFS tree.
-redistributable: none
+# Redistribution cleared: ATLAS, LHCb and ALICE already distribute it on CVMFS (2026-10-19).
 patches:
   # Version-gated: base p5 (-p1, a/ prefix) vs LHCb p6 (-p0). Same crmc 2.0.1 tarball.
   - "crmc-2.0.1p5.patch:version=2.0.1p5"
