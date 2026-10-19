@@ -23,9 +23,12 @@ function Configure() {
   # Strip other python installations from PATH to avoid contamination
   export PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=':' '!/python/ {print}' | sed 's/:$//')
 
+  # python3 finds its libpython wherever it is installed; NODIST keeps the flag
+  # out of LDFLAGS and python3-config, so extensions and embedders do not get it.
   $SOURCEDIR/configure --prefix="$INSTALLROOT" \
     --enable-shared \
     --with-ensurepip=install \
+    LDFLAGS_NODIST='-Wl,-rpath,\$$ORIGIN/../lib' \
     ${Python_config_options} \
     ${Python_config_flags} \
     CXX=$CXX CC=$CC
@@ -46,9 +49,11 @@ function PostInstall() {
       [[ ! -e python ]] && ln -nfs "$(basename "$d")" python
     done
   popd
-  # Bootstrap setuptools and wheel into the Python install: since 3.12 ensurepip no
-  # longer bundles setuptools, so any pip call using build isolation can't find the
-  # setuptools build backend (e.g. XRootD's cmake_install.cmake).
-  preload="setuptools wheel hatchling hatch-vcs hatch-fancy-pypi-readme flit flit_core pytest pytest_cov PyYAML"
-  env LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"  $INSTALLROOT/bin/python3 -m pip install --upgrade $preload
+  # Build backends pip needs without build isolation (ensurepip has no setuptools
+  # since 3.12), pinned for a reproducible Python: the recipes' versions where
+  # there is one. pytest comes from its own recipe.
+  preload="setuptools==80.10.2 wheel==0.45.1 hatchling==1.28.0 hatch-vcs==0.5.0
+           hatch-fancy-pypi-readme==25.1.0 flit==4.1.0 flit_core==4.1.0 PyYAML==6.0.2"
+  env LD_LIBRARY_PATH="${INSTALLROOT}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}" \
+    "$INSTALLROOT/bin/python3" -m pip install $preload
 }
