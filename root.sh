@@ -269,8 +269,10 @@ function PostInstall() {
 # Specify additional plugin search paths via the environment variable ROOT_PLUGIN_PATH.
 # Plugins in $ROOT_PLUGIN_PATH have priority.
 Unix.*.Root.PluginPath: $(ROOT_PLUGIN_PATH):$(ROOTSYS)/etc/plugins:
-Unix.*.Root.DynamicPath: .:$(ROOT_DYN_PATH):
 EOF
+  # $ROOT_DYN_PATH (set by the modulefile), then ROOT's own lib dir: ROOT also
+  # finds its libraries without the modulefile.
+  echo "Unix.*.Root.DynamicPath: .:\$(ROOT_DYN_PATH):$INSTALLROOT/lib:" >> system.rootrc.0
   mv system.rootrc.0 "$INSTALLROOT/etc/system.rootrc"
 
   # Make some CMake files used by other projects relocatable
