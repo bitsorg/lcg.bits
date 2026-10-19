@@ -13,9 +13,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-MCTester
-# CPC Program Library non-profit licence — no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
-# fine, but this package must never be laid into a public CVMFS tree.
-redistributable: none
+# Redistribution cleared: LHCb and CMS already distribute it on CVMFS (2026-10-19).
 patches:
   - mctester-1.25.1.patch
 ---

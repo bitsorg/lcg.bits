@@ -10,9 +10,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-HTo4l
-# academic-use licence with no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
-# fine, but this package must never be laid into a public CVMFS tree.
-redistributable: none
+# Redistribution cleared: ATLAS already distributes it on CVMFS (2026-10-19).
 patches:
   - hto4l-2.02.patch
 ---

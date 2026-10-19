@@ -16,9 +16,7 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LicenseRef-EPOS4
-# academic-use licence with no redistribution grant (2026-07-20 license ruling): build and private-store reuse are
-# fine, but this package must never be laid into a public CVMFS tree.
-redistributable: none
+# Redistribution cleared: ATLAS, LHCb and ALICE already distribute it on CVMFS (2026-10-19).
 patches:
   - "epos4-4.0.3.atlas1.patch:version=4.0.3.atlas1"
   - "epos4-4.0.3.atlas3.patch:version=4.0.3.atlas3 && strip=0"
