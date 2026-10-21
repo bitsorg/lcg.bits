@@ -35,7 +35,7 @@ function Make() {
   # $(shell lhapdf-config ...) expansions never run — those can produce a bare
   # -I that consumes the hardcoded -c flag, turning compiles into link steps.
   local _inc="-I../include${LHAPDF_ROOT:+ -I${LHAPDF_ROOT}/include}"
-  local _libs="${LHAPDF_ROOT:+$("${LHAPDF_ROOT}/bin/lhapdf-config" --ldflags)}"
+  local _libs="${LHAPDF_ROOT:+$("${LHAPDF_ROOT}/bin/lhapdf-config" --libs)}"
   # macOS: sys_calc links Fortran objects with clang++ but doesn't know where
   # Homebrew gcc's libgfortran lives; ask the Fortran compiler for its directory
   # and add -L for it.
