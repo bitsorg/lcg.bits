@@ -22,12 +22,12 @@ MODULE_OPTIONS="--bin --lib"
 ##############################
 function Configure() {
   # Built standalone (DPMJet disabled): r330's DPMJet interface needs the modern DPMJET-III
-  # layout, but bits' flat DPMJet 3.0-6 .f files can't compile it. macOS: strip CMakeLists'
-  # -Werror (patch the build copy), add -Wno-vla-cxx-extension + dynamic_lookup for HepMC3.
+  # layout, which bits' flat DPMJet 3.0-6 can't compile. Strip CMakeLists' -Werror (the
+  # build copy; newer compilers warn on older revisions); macOS adds dynamic_lookup for HepMC3.
   local _cxx="-Wno-array-parameter -Wno-unused-but-set-variable -Wno-unknown-warning-option"
   local _lf=""
+  bits_strip_token "${BITS_CMAKE_SRC}/CMakeLists.txt" -Werror
   if bits_is_macos; then
-    bits_strip_token "${BITS_CMAKE_SRC}/CMakeLists.txt" -Werror
     _cxx="$_cxx -Wno-vla-cxx-extension"
     _lf=$(bits_macos_undefined_ldflags)
   fi
