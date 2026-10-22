@@ -40,6 +40,10 @@ function Make() {
   # non-Darwin only; getconf replaces nproc (absent on macOS).
   local _extra=()
   [ "$(uname)" != Darwin ] && _extra+=(--allow_running_as_root)
+  # GCC 15 no longer pulls <cstdint> in through other headers; before 1.24 (LHCb's
+  # 1.23) semver.h relies on that, as lcgcmake's onnxruntime-1.23.2.patch fixes.
+  local _sv=onnxruntime/core/common/semver.h
+  grep -q '<cstdint>' "$_sv" || perl -0pi -e 's/#pragma once\n/#pragma once\n#include <cstdint>\n/' "$_sv"
   "${PYTHON_EXE}" tools/ci_build/build.py \
     --build_dir "${_ORT_BUILDDIR}" \
     --config "${_ORT_CONFIG}" \
