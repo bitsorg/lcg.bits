@@ -29,9 +29,12 @@ license: GPL-3.0-or-later
 MODULE_OPTIONS="--bin --lib --pysite"
 ##############################
 function Configure() {
-  # Remove every generated pyext source so make re-runs Cython for all of them
-  # (configure's "force rebuild" only touches core.pyx, leaving the rest stale).
-  rm -f pyext/yoda/*.cpp pyext/yoda/*.h
+  # Remove every Cython-generated pyext source (one with its .pyx) so make re-runs
+  # Cython for all; YODA 1.9's hand-written errors.cpp has no .pyx and stays.
+  local _f
+  for _f in pyext/yoda/*.cpp pyext/yoda/*.h; do
+    if [[ -f ${_f%.*}.pyx ]]; then rm -f "$_f"; fi
+  done
   # macOS: build.py's g++ -shared links the pyext .so with no header pad, so bits'
   # relocation install_name_tool overflows silently; pass the pad via CXXFLAGS.
   # -Wno-register is needed for the Cython-generated C++.
