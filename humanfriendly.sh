@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/humanfriendly@%(version)s
 patches:
   - humanfriendly-10.0.patch
 ---

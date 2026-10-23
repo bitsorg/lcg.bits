@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/jedi@%(version)s
 patches:
   - jedi-0.19.1.patch
 ---

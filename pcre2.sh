@@ -13,6 +13,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - cpe:2.3:a:pcre:pcre2:%(version)s
 ---
 #!/bin/bash -e
 ##############################

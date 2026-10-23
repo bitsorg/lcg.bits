@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
+references:
+  - pkg:pypi/logilab-common@%(version)s
 ---
 #!/bin/bash -e
 ##############################

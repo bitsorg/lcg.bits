@@ -16,6 +16,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - cpe:2.3:a:harfbuzz_project:harfbuzz:%(version)s
 ---
 #!/bin/bash -e
 ##############################

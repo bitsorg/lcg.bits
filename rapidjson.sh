@@ -33,6 +33,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - cpe:2.3:a:tencent:rapidjson:%(version)s
 patches:
   - rapidjson-1.1.0.patch
 ---

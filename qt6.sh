@@ -41,6 +41,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+references:
+  - cpe:2.3:a:qt:qt:%(version)s
 patches:
   - Qt6-6.8.3.patch
 ---

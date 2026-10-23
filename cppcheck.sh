@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-only
+references:
+  - cpe:2.3:a:cppchecksolutions:cppcheck:%(version)s
 patches:
   - cppcheck-2.20.0.patch
 ---

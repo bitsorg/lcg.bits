@@ -38,6 +38,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: FTL OR GPL-2.0-or-later
+references:
+  - cpe:2.3:a:freetype:freetype:%(version)s
 ---
 #!/bin/bash -e
 ##############################

@@ -36,6 +36,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
+references:
+  - cpe:2.3:a:cern:root:%(version)s
+  - cpe:2.3:a:root:root:%(version)s
 env:
   ROOTSYS: "$ROOT_ROOT"
 prepend_path:

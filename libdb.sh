@@ -9,6 +9,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: AGPL-3.0-only
+references:
+  - cpe:2.3:a:oracle:berkeley_db:%(version)s
 ---
 #!/bin/bash -e
 ##############################

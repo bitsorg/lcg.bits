@@ -17,6 +17,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/spey@%(version)s
 patches:
   - spey-0.2.5.patch
 ---

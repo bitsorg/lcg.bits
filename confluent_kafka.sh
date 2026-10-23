@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/confluent-kafka@%(version)s
 ---
 #!/bin/bash -e
 export CFLAGS="-I${LIBRDKAFKA_ROOT}/include ${CFLAGS:-}"

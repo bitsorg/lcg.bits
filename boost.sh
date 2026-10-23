@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSL-1.0
+references:
+  - cpe:2.3:a:boost:boost:%(version)s
 ---
 #!/bin/bash -e
 ##############################

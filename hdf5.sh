@@ -12,6 +12,8 @@ build_requires:
   - CMake
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - cpe:2.3:a:hdfgroup:hdf5:%(version)s
 ---
 #!/bin/bash -e
 ##############################

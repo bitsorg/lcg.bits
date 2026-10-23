@@ -38,6 +38,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: PostgreSQL
+references:
+  - cpe:2.3:a:postgresql:postgresql:%(version)s
 ---
 #!/bin/bash -e
 ##############################

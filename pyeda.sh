@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
+references:
+  - pkg:pypi/pyeda@%(version)s
 ---
 #!/bin/bash -e
 ##############################

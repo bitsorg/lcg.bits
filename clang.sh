@@ -1,5 +1,8 @@
 package: Clang
 license: Apache-2.0 WITH LLVM-exception
+references:
+  - cpe:2.3:a:llvm:clang:%(version)s
+  - cpe:2.3:a:llvm:llvm:%(version)s
 version: "v20.1.7"
 tag: "llvmorg-20.1.7-alice2"
 source: https://gitlab.cern.ch/bits/clang

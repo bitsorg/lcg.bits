@@ -16,6 +16,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: blessing
+# SQLite's version 3320300 is 3.32.3 upstream: keep the CPE in step with it.
+references:
+  - cpe:2.3:a:sqlite:sqlite:3.32.3
 ---
 #!/bin/bash -e
 ##############################

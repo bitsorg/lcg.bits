@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-2-Clause
+references:
+  - pkg:pypi/m2crypto@%(version)s
 ---
 #!/bin/bash -e
 ##############################

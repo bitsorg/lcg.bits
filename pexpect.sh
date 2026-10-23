@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: ISC
+references:
+  - pkg:pypi/pexpect@%(version)s
 patches:
   - pexpect-4.9.0.patch
 ---

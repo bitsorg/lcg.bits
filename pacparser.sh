@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
+references:
+  - cpe:2.3:a:pacparser_project:pacparser:%(version)s
 patches:
   - pacparser-1.4.3.patch
 ---

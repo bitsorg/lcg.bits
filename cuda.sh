@@ -2,6 +2,8 @@ package: cuda
 description: NVIDIA CUDA toolkit (used from the system; nvcc must be on PATH)
 version: "12.4"
 license: LicenseRef-NVIDIA-CUDA
+references:
+  - cpe:2.3:a:nvidia:cuda_toolkit:%(version)s
 # Binaries redistributed, as CMS and LCG do on CVMFS; sources stay private (NVIDIA EULA).
 redistributable: binaries
 # CUDA is always taken from the system -- bits never builds it; the build aborts

@@ -11,6 +11,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - cpe:2.3:a:c-ares:c-ares:%(version)s
+  - cpe:2.3:a:c-ares_project:c-ares:%(version)s
 ---
 #!/bin/bash -e
 ##############################

@@ -24,6 +24,8 @@ build_requires:
   # on PATH (the builder image ships make, not ninja).
   - ninja
 license: Apache-2.0
+references:
+  - cpe:2.3:a:grpc:grpc:%(version)s
 ---
 #!/bin/bash -e
 ##############################

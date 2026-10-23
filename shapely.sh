@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - pkg:pypi/shapely@%(version)s
 patches:
   - shapely-2.0.5.patch
 ---

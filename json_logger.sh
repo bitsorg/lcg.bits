@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/python-json-logger@%(version)s
 ---
 #!/bin/bash -e
 ##############################

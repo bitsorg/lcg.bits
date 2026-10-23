@@ -19,6 +19,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/tensorflow-probability@%(version)s
 patches:
   - tensorflow_probability-0.25.0.patch
 ---

@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - cpe:2.3:a:google:protobuf:%(version)s
 ---
 #!/bin/bash -e
 # Store-identity bump (2026-09-22): the stored protobuf artifact predates the

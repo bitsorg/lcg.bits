@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT OR Apache-2.0
+references:
+  - cpe:2.3:a:rust-lang:rust:%(version)s
 ---
 #!/bin/bash -e
 ##############################

@@ -42,6 +42,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-only
+references:
+  - cpe:2.3:a:mariadb:mariadb:%(version)s
 ---
 #!/bin/bash -e
 ##############################

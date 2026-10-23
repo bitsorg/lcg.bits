@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/pypng@%(version)s
 patches:
   - pypng-0.20220715.0.patch
 ---

@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0 OR BSD-3-Clause
+references:
+  - pkg:pypi/python-dateutil@%(version)s
 ---
 #!/bin/bash -e
 ##############################

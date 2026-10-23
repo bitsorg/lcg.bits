@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - cpe:2.3:a:yaml-cpp_project:yaml-cpp:%(version)s
 ---
 #!/bin/bash -e
 ##############################

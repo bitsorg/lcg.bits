@@ -14,6 +14,8 @@ build_requires:
   # bison so it's first on PATH for the YACC step.
   - "bison:osx"
 license: MIT
+references:
+  - cpe:2.3:a:xkbcommon:libxkbcommon:%(version)s
 ---
 #!/bin/bash -e
 ##############################

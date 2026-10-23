@@ -9,6 +9,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: bzip2-1.0.6
+references:
+  - cpe:2.3:a:bzip:bzip2:%(version)s
 acknowledgment: "bzip2 — Copyright (C) 1996-2010 Julian R Seward."
 patches:
   - bzip2-1.0.6.patch

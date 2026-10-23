@@ -32,6 +32,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - pkg:pypi/jupyter@%(version)s
 patches:
   - jupyter-1.0.0.patch
 ---

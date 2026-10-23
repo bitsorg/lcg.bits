@@ -37,6 +37,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - cpe:2.3:a:apache:thrift:%(version)s
 patches:
   - thrift-0.16.0.patch
 ---

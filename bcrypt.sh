@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/bcrypt@%(version)s
 ---
 #!/bin/bash -e
 export CC="${CC:-cc}"

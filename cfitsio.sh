@@ -9,6 +9,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: CFITSIO
+references:
+  - cpe:2.3:a:nasa:cfitsio:%(version)s
 acknowledgment: "Includes CFITSIO software developed by NASA/HEASARC."
 ---
 #!/bin/bash -e
