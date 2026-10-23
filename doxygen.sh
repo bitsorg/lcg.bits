@@ -37,6 +37,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
+references:
+  - cpe:2.3:a:doxygen:doxygen:%(version)s
 ---
 #!/bin/bash -e
 ##############################

@@ -17,6 +17,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
+references:
+  - cpe:2.3:a:gnome:glib:%(version)s
 ---
 #!/bin/bash -e
 ##############################

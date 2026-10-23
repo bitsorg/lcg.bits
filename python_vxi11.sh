@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-or-later
+references:
+  - pkg:pypi/python-vxi11@%(version)s
 patches:
   - python_vxi11-0.9.patch
 ---

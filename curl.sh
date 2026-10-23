@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: curl
+references:
+  - cpe:2.3:a:haxx:curl:%(version)s
 ---
 #!/bin/bash -e
 ##############################

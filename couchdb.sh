@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/couchdb@%(version)s
 patches:
   - CouchDB-1.2.patch
 ---

@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/qulacs@%(version)s
 patches:
   - qulacs-0.6.4.1.patch
 ---

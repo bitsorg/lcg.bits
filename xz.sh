@@ -9,6 +9,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: 0BSD AND GPL-2.0-or-later
+references:
+  - cpe:2.3:a:tukaani:xz:%(version)s
 ---
 #!/bin/bash -e
 ##############################

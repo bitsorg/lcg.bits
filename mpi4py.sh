@@ -13,6 +13,8 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
   - cython
 license: BSD-2-Clause
+references:
+  - pkg:pypi/mpi4py@%(version)s
 ---
 #!/bin/bash -e
 ##############################

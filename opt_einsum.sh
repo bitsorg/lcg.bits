@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/opt-einsum@%(version)s
 patches:
   - opt_einsum-3.3.0.patch
 ---

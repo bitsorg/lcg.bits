@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/coloredlogs@%(version)s
 patches:
   - coloredlogs-15.0.1.patch
 ---

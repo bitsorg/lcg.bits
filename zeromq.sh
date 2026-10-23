@@ -1,5 +1,7 @@
 package: zeromq
 license: MPL-2.0
+references:
+  - cpe:2.3:a:zeromq:libzmq:%(version)s
 description: ZeroMQ high-performance asynchronous messaging library
 version: "4.3.5"
 source: https://github.com/zeromq/libzmq

@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/graphviz@%(version)s
 ---
 #!/bin/bash -e
 ##############################

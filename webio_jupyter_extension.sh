@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/webio-jupyter-extension@%(version)s
 patches:
   - webio_jupyter_extension-0.1.0.patch
 ---

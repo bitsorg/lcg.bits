@@ -62,6 +62,8 @@ env:
 build_requires:
   - bits-recipe-tools
 license: BSD-3-Clause
+references:
+  - cpe:2.3:a:golang:go:%(version)s
 ---
 #!/bin/bash -e
 ##############################

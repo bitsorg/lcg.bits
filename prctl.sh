@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only
+references:
+  - pkg:pypi/python-prctl@%(version)s
 ---
 #!/bin/bash -e
 ##############################

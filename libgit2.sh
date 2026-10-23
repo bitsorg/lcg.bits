@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-only WITH GCC-exception-2.0
+references:
+  - cpe:2.3:a:libgit2:libgit2:%(version)s
 ---
 #!/bin/bash -e
 ##############################

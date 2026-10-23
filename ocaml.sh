@@ -32,6 +32,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
+references:
+  - cpe:2.3:a:ocaml:ocaml:%(version)s
 ---
 #!/bin/bash -e
 ##############################

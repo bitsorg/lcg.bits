@@ -11,6 +11,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-only OR BSD-2-Clause
+references:
+  - cpe:2.3:a:libbpf_project:libbpf:%(version)s
 ---
 #!/bin/bash -e
 ##############################

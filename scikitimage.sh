@@ -23,6 +23,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - pkg:pypi/scikit-image@%(version)s
 ---
 #!/bin/bash -e
 ##############################

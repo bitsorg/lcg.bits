@@ -9,6 +9,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-or-later
+references:
+  - cpe:2.3:a:7-zip:p7zip:%(version)s
 patches:
   - p7zip-16.02.patch
 ---

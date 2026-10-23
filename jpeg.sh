@@ -34,6 +34,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: IJG
+references:
+  - cpe:2.3:a:libjpeg-turbo:libjpeg-turbo:%(version)s
 acknowledgment: "Based in part on the work of the Independent JPEG Group."
 ---
 #!/bin/bash -e

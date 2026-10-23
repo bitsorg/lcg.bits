@@ -9,6 +9,8 @@ requires:
 build_requires:
   - bits-recipe-tools
 license: Apache-2.0
+references:
+  - cpe:2.3:a:apache:ant:%(version)s
 ---
 #!/bin/bash -e
 ##############################

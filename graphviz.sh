@@ -38,6 +38,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: EPL-1.0
+references:
+  - cpe:2.3:a:graphviz:graphviz:%(version)s
 ---
 #!/bin/bash -e
 ##############################

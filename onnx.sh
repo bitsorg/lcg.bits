@@ -17,6 +17,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/onnx@%(version)s
 ---
 #!/bin/bash -e
 # onnx's setup.py never passes CMAKE_PREFIX_PATH, so cmake 3.27+ (CMP0144) can't

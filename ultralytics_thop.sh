@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/ultralytics-thop@%(version)s
 patches:
   - ultralytics_thop-2.0.14.patch
 ---

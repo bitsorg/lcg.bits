@@ -17,6 +17,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - pkg:pypi/h5py@%(version)s
 ---
 #!/bin/bash -e
 export HDF5_DIR="${HDF5_ROOT}"

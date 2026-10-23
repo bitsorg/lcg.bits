@@ -21,6 +21,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/mistral-common@%(version)s
 patches:
   - mistral_common-1.8.5.patch
 ---

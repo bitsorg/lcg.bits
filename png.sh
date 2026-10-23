@@ -34,6 +34,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Libpng
+references:
+  - cpe:2.3:a:libpng:libpng:%(version)s
 ---
 #!/bin/bash -e
 ##############################

@@ -15,6 +15,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - cpe:2.3:a:apache:hadoop:%(version)s
 patches:
   - hadoop-3.3.6.patch
 ---

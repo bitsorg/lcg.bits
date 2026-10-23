@@ -26,6 +26,8 @@ build_requires:
   # the ninja recipe to put the generator on PATH (else CMake can't find Ninja).
   - ninja
 license: Apache-2.0
+references:
+  - cpe:2.3:a:apache:arrow:%(version)s
 ---
 #!/bin/bash -e
 ##############################

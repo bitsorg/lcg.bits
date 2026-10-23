@@ -14,6 +14,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
+references:
+  - pkg:pypi/scikit-build@%(version)s
 ---
 #!/bin/bash -e
 ##############################

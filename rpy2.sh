@@ -16,6 +16,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-2.0-or-later
+references:
+  - pkg:pypi/rpy2@%(version)s
 ---
 #!/bin/bash -e
 export LDFLAGS="-L${PCRE_ROOT}/lib -L${XZ_ROOT}/lib ${LDFLAGS:-}"

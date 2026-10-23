@@ -22,6 +22,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+references:
+  - pkg:pypi/horovod@%(version)s
 patches:
   - horovod-0.28.1.patch
 ---

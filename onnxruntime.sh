@@ -21,6 +21,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+references:
+  - pkg:pypi/onnxruntime@%(version)s
 ---
 #!/bin/bash -e
 ##############################

@@ -13,6 +13,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Zlib
+references:
+  - cpe:2.3:a:zlib:zlib:%(version)s
 ---
 #!/bin/bash -e
 ##############################

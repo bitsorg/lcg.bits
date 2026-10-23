@@ -14,6 +14,8 @@ build_requires:
   - "GCC-Toolchain:(?!osx)"
   - bits-recipe-tools
 license: MIT
+references:
+  - cpe:2.3:a:xmlsoft:libxslt:%(version)s
 ---
 #!/bin/bash -e
 ##############################

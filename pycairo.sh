@@ -13,6 +13,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: LGPL-2.1-only OR MPL-1.1
+references:
+  - pkg:pypi/pycairo@%(version)s
 ---
 #!/bin/bash -e
 # Collect PKG_CONFIG_PATH from every bits *_ROOT so cairo.pc's transitive Requires
