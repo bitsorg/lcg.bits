@@ -1,6 +1,6 @@
 package: p7zip
 description: p7zip port of 7-Zip archiver for POSIX systems
-version: "16.02"
+version: "18.0"
 source: https://github.com/p7zip-project/p7zip
 tag: "v%(version)s"
 sources:

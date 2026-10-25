@@ -1,7 +1,7 @@
 package: pynacl
 description: PyNaCl Python binding to libsodium (NaCl)
-version: "1.5.0"
-tag: "1.5.0"
+version: "1.6.2"
+tag: "1.6.2"
 requires:
   - Python
   - six

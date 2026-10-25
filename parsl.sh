@@ -1,7 +1,7 @@
 package: parsl
 description: Parsl parallel scripting library for Python
-version: "1.2.0"
-tag: "1.2.0"
+version: "2026.01.05"
+tag: "2026.01.05"
 requires:
   - typeguard
   - ipyparallel

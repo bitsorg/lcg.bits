@@ -1,7 +1,7 @@
 package: redis
 description: redis-py Python client for Redis
-version: "4.3.3"
-tag: "4.3.3"
+version: "4.4.4"
+tag: "4.4.4"
 requires:
   - Python
   - async_timeout

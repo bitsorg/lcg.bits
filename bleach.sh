@@ -1,7 +1,7 @@
 package: bleach
 description: Bleach allowed-list-based HTML sanitization library
-version: "3.3.1"
-tag: "3.3.1"
+version: "6.4.0"
+tag: "6.4.0"
 requires:
   - Python
   - html5lib

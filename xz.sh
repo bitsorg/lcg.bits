@@ -1,10 +1,11 @@
 package: xz
 description: XZ Utils lossless data compression (LZMA/XZ format)
-version: "5.8.2"
+version: "5.8.3"
 source: https://github.com/tukaani-project/xz
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# bits upgrade: no tarball of 5.8.3, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

@@ -1,6 +1,6 @@
 package: libuv
 description: libuv cross-platform asynchronous I/O library
-version: "1.44.2"
+version: "1.48.0"
 source: https://github.com/libuv/libuv
 tag: "v%(version)s"
 sources:

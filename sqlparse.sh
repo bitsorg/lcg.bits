@@ -1,7 +1,7 @@
 package: sqlparse
 description: sqlparse non-validating SQL parser for Python
-version: "0.5.3"
-tag: "0.5.3"
+version: "0.6.0"
+tag: "0.6.0"
 requires:
   - Python
 build_requires:

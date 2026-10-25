@@ -1,7 +1,7 @@
 package: cryptography
 description: "cryptography Python package: cryptographic primitives"
-version: "46.0.3"
-tag: "46.0.3"
+version: "50.0.0"
+tag: "50.0.0"
 requires:
   - Python
   - asn1crypto

@@ -1,6 +1,6 @@
 package: gnu_tar
 description: GNU tar archiving utility
-version: "1.30"
+version: "1.35"
 source: https://git.savannah.gnu.org/git/tar.git
 tag: "v%(version)s"
 sources:

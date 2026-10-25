@@ -1,7 +1,7 @@
 package: transformers
 description: Hugging Face Transformers state-of-the-art NLP models
-version: "4.57.3"
-tag: "4.57.3"
+version: "5.10.0"
+tag: "5.10.0"
 requires:
   - Python
   - tokenizers

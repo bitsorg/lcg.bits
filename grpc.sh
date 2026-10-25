@@ -1,6 +1,6 @@
 package: grpc
 description: gRPC high-performance open-source universal RPC framework
-version: "1.80.0"
+version: "1.83.1"
 source: https://github.com/grpc/grpc
 mem_per_job: 1500
 tag: "v%(version)s"

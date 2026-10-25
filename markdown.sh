@@ -1,7 +1,7 @@
 package: markdown
 description: Markdown Python implementation of Markdown
-version: "3.7"
-tag: "3.7"
+version: "3.8.1"
+tag: "3.8.1"
 requires:
   - Python
 build_requires:

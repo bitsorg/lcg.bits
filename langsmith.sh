@@ -1,7 +1,7 @@
 package: langsmith
 description: LangSmith platform client for LLM observability
-version: "0.2.10"
-tag: "0.2.10"
+version: "0.8.18"
+tag: "0.8.18"
 requires:
   - Python
   - pydantic

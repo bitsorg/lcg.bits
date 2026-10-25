@@ -1,7 +1,7 @@
 package: filelock
 description: filelock platform-independent file locking for Python
-version: "3.16.1"
-tag: "3.16.1"
+version: "3.20.3"
+tag: "3.20.3"
 requires:
   - Python
 build_requires:

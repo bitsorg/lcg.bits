@@ -8,6 +8,7 @@ sources:
 requires:
   - CMake
   - jsonmcpp
+  - fmt
   - grpc
   - spdlog
 # macOS: source Bear from Homebrew. It's a standalone CLI (no consumers), and

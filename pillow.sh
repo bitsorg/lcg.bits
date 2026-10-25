@@ -1,7 +1,7 @@
 package: pillow
 description: Pillow the friendly PIL (Python Imaging Library) fork
-version: "12.2.0"
-tag: "12.2.0"
+version: "13.0.0"
+tag: "13.0.0"
 requires:
   - Python
   - freetype

@@ -1,10 +1,11 @@
 package: netcdfc
 description: NetCDF-C library for array-oriented scientific data
-version: "4.9.3"
+version: "4.10.1"
 source: https://github.com/Unidata/netcdf-c
 tag: "v%(version)s"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/netcdf-c-4.9.3.tar.gz
+  - https://downloads.unidata.ucar.edu/netcdf-c/%(version)s/netcdf-c-%(version)s.tar.gz
+# - https://lcgpackages.web.cern.ch/tarFiles/sources/netcdf-c-4.9.3.tar.gz
 requires:
   - curl
   - zlib

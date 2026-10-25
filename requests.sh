@@ -1,7 +1,7 @@
 package: requests
 description: Requests elegant HTTP library for Python
-version: "2.32.3"
-tag: "2.32.3"
+version: "2.33.0"
+tag: "2.33.0"
 requires:
   - Python
   - charset_normalizer

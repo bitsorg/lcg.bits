@@ -1,10 +1,10 @@
 package: libevent
 description: libevent asynchronous event notification library
-version: "2.1.11"
+version: "2.1.13"
 source: https://github.com/libevent/libevent
-tag: "release-%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+tag: "release-%(version)s-stable"
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -32,5 +32,6 @@ function Configure() {
            ac_cv_func_timerfd_create=no \
            ac_cv_func_port_create=no ac_cv_header_port_h=no
   fi
+  [ -e configure ] || [ ! -e configure.ac ] || autoreconf -fi   # a git checkout has no generated configure
   ./configure --prefix $INSTALLROOT
 }

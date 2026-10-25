@@ -1,7 +1,7 @@
 package: PyJWT
 description: PyJWT JSON Web Token implementation for Python
-version: "2.8.0"
-tag: "2.8.0"
+version: "2.15.0"
+tag: "2.15.0"
 requires:
   - Python
 build_requires:

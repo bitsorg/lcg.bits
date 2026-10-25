@@ -1,7 +1,7 @@
 package: virtualenv
 description: virtualenv tool to create isolated Python environments
-version: "20.28.0"
-tag: "20.28.0"
+version: "21.14.9"
+tag: "21.14.9"
 requires:
   - Python
   - appdirs

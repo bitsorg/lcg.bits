@@ -1,7 +1,7 @@
 package: pcre2
 description: PCRE2 Perl-compatible regular expressions library (v2)
-version: "10.42"
-tag: "10.42"
+version: "10.48"
+tag: "10.48"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 prefer_system: ".*"

@@ -1,7 +1,7 @@
 package: starlette
 description: Starlette lightweight async web framework for Python
-version: "0.48.0"
-tag: "0.48.0"
+version: "1.3.1"
+tag: "1.3.1"
 requires:
   - Python
   - anyio

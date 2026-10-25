@@ -1,7 +1,7 @@
 package: fsspec
 description: fsspec filesystem interfaces for Python
-version: "2025.2.0"
-tag: "2025.2.0"
+version: "2026.6.0"
+tag: "2026.6.0"
 requires:
   - Python
   - panel

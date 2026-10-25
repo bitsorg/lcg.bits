@@ -1,7 +1,7 @@
 package: aiohttp
 description: aiohttp async HTTP client/server framework for asyncio
-version: "3.11.11"
-tag: "3.11.11"
+version: "3.14.4"
+tag: "3.14.4"
 requires:
   - Python
   - aiosignal

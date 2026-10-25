@@ -1,7 +1,7 @@
 package: msgpack
 description: msgpack MessagePack serializer for Python
-version: "1.0.5"
-tag: "1.0.5"
+version: "1.2.1"
+tag: "1.2.1"
 requires:
   - Python
 build_requires:

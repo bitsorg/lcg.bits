@@ -1,7 +1,7 @@
 package: oauthlib
 description: OAuthlib framework-agnostic OAuth 1 and 2 library
-version: "3.2.2"
-tag: "3.2.2"
+version: "4.0.0"
+tag: "4.0.0"
 requires:
   - Python
   - cryptography

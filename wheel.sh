@@ -1,7 +1,7 @@
 package: wheel
 description: wheel Python built-package format (PEP 427)
-version: "0.45.1"
-tag: "0.45.1"
+version: "0.46.2"
+tag: "0.46.2"
 requires:
   - Python
 build_requires:

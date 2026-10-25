@@ -1,7 +1,7 @@
 package: torch
 description: PyTorch open-source machine learning framework
-version: "2.11.0"
-tag: "2.11.0"
+version: "2.13.0"
+tag: "2.13.0"
 requires:
   - Python
   - PyYAML

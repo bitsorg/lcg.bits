@@ -1,7 +1,7 @@
 package: werkzeug
 description: Werkzeug WSGI web application library for Python
-version: "3.1.3"
-tag: "3.1.3"
+version: "3.1.9"
+tag: "3.1.9"
 requires:
   - Python
   - MarkupSafe

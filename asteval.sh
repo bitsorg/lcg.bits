@@ -1,7 +1,7 @@
 package: asteval
 description: asteval safe mathematical expression evaluator for Python
-version: "0.9.31"
-tag: "0.9.31"
+version: "1.0.9"
+tag: "1.0.9"
 requires:
   - Python
 build_requires:

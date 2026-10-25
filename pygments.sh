@@ -1,7 +1,7 @@
 package: pygments
 description: Pygments generic syntax highlighter for Python
-version: "2.18.0"
-tag: "2.18.0"
+version: "2.20.0"
+tag: "2.20.0"
 requires:
   - Python
 build_requires:

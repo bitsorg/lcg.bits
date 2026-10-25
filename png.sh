@@ -1,10 +1,11 @@
 package: png
 description: libpng official PNG reference library
-version: "1.6.55"
+version: "1.6.57"
 source: https://github.com/glennrp/libpng
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/lib%(name)s-%(version)s.tar.gz
+# bits upgrade: no tarball of 1.6.57, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/lib%(name)s-%(version)s.tar.gz
 requires:
   - zlib
 # macOS sources libpng from Homebrew (see HomebrewRecipe / `bits brew`); Linux

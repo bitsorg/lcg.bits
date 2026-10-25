@@ -1,7 +1,7 @@
 package: jupyter_core
 description: jupyter_core base package for Jupyter projects
-version: "5.7.2"
-tag: "5.7.2"
+version: "5.8.1"
+tag: "5.8.1"
 requires:
   - Python
   - traitlets

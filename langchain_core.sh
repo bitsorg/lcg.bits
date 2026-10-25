@@ -1,7 +1,7 @@
 package: langchain_core
 description: LangChain core abstractions and primitives
-version: "0.3.29"
-tag: "0.3.29"
+version: "1.2.22"
+tag: "1.2.22"
 requires:
   - Python
   - langsmith

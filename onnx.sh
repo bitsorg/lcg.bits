@@ -1,10 +1,11 @@
 package: onnx
 description: ONNX Open Neural Network Exchange format library
-version: "1.21.0"
+version: "1.22.0"
 source: https://github.com/onnx/onnx
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# bits upgrade: no tarball of 1.22.0, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - absl
@@ -14,6 +15,7 @@ requires:
   - six
 build_requires:
   - CMake
+  - scikit_build_core
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
@@ -40,8 +42,4 @@ MODULE_OPTIONS="--bin --python"
 ##############################
 function Prepare() {
   rsync -av --delete --exclude '**/.git' --delete-excluded "${SOURCEDIR}"/ ./
-  # setup.py asserts that .pyi stubs were generated even when
-  # ONNX_GEN_PB_TYPE_STUBS=OFF skips protoc-gen-mypy.  Remove the assertion
-  # so the wheel builds without the google-protobuf Python package.
-  perl -i -pe 's/assert.*No generated python stubs found.*/pass  # stubs disabled/' setup.py
 }

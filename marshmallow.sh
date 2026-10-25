@@ -1,7 +1,7 @@
 package: marshmallow
 description: marshmallow object serialization and deserialization library
-version: "3.16.0"
-tag: "3.16.0"
+version: "3.26.2"
+tag: "3.26.2"
 requires:
   - Python
   - packaging

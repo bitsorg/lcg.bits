@@ -1,7 +1,7 @@
 package: python_dotenv
 description: python-dotenv reads .env files into os.environ
-version: "1.0.1"
-tag: "1.0.1"
+version: "1.2.2"
+tag: "1.2.2"
 requires:
   - Python
 build_requires:

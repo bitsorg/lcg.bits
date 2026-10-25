@@ -1,7 +1,7 @@
 package: nbconvert
 description: nbconvert converts Jupyter notebooks to other formats
-version: "7.16.4"
-tag: "7.16.4"
+version: "7.17.2"
+tag: "7.17.2"
 requires:
   - Python
   - mistune
