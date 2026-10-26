@@ -1,6 +1,7 @@
 package: gdb
 description: GNU Debugger for C, C++, Fortran, and other languages
 version: "17.2"
+sbom: tool
 # git build disabled: needs submodule/monorepo (or non-git SCM) handling in the build body first.
 # source: https://sourceware.org/git/binutils-gdb.git
 # tag: "gdb-%(version)s"

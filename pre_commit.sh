@@ -1,6 +1,7 @@
 package: pre_commit
 description: pre-commit framework for managing git pre-commit hooks
 version: "3.8.0"
+sbom: tool
 tag: "3.8.0"
 requires:
   - Python

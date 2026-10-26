@@ -1,6 +1,7 @@
 package: patchelf
 description: PatchELF utility to patch ELF binary rpath/interpreter
 version: "0.12"
+sbom: tool
 source: https://github.com/NixOS/patchelf
 tag: "%(version)s"
 sources:

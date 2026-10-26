@@ -1,6 +1,7 @@
 package: pylint
 description: Pylint Python static code analysis tool
 version: "4.0.5"
+sbom: tool
 tag: "4.0.5"
 requires:
   - Python

@@ -1,6 +1,7 @@
 package: flake8
 description: Flake8 Python code style, lint and complexity checker
 version: "7.3.0"
+sbom: tool
 tag: "7.3.0"
 requires:
   - Python

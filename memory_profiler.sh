@@ -1,6 +1,7 @@
 package: memory_profiler
 description: memory-profiler monitor memory usage of Python programs
 version: "0.61.0"
+sbom: tool
 tag: "0.61.0"
 requires:
   - Python

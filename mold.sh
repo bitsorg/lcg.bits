@@ -1,6 +1,7 @@
 package: mold
 description: mold modern high-speed linker for ELF
 version: "2.40.4"
+sbom: tool
 source: https://github.com/rui314/mold
 tag: "v%(version)s"
 sources:

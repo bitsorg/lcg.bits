@@ -1,6 +1,7 @@
 package: sphinx
 description: Sphinx Python documentation generator
 version: "8.1.3"
+sbom: tool
 tag: "8.1.3"
 requires:
   - Python

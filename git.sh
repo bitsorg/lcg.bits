@@ -1,6 +1,7 @@
 package: git
 description: Git distributed version control system (used from the system; git must be on PATH)
 version: "system"
+sbom: tool
 # System shim: probes/wraps host-provided components; nothing of the
 # wrapped software itself is built or redistributed (2026-07-20 ruling).
 # Git is a prerequisite for bits itself (recipe checkout, source fetches), so

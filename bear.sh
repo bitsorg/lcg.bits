@@ -1,6 +1,7 @@
 package: bear
 description: Bear tool that generates a compile_commands.json database
 version: "3.1.5"
+sbom: tool
 source: https://github.com/rizsotto/Bear
 tag: "%(version)s"
 sources:

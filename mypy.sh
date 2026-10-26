@@ -1,6 +1,7 @@
 package: mypy
 description: mypy optional static type checker for Python
 version: "1.19.1"
+sbom: tool
 tag: "1.19.1"
 requires:
   - Python

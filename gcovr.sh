@@ -1,6 +1,7 @@
 package: gcovr
 description: gcovr Gcov coverage reports generator
 version: "7.2"
+sbom: tool
 tag: "7.2"
 requires:
   - Python

@@ -1,6 +1,7 @@
 package: bison
 description: GNU Bison LALR/GLR parser generator
 version: "3.8.2"
+sbom: tool
 source: https://git.savannah.gnu.org/git/bison.git
 tag: "v%(version)s"
 sources:

@@ -1,6 +1,7 @@
 package: qcachegrind
 description: QCachegrind GUI front-end for Cachegrind/Callgrind profiler
 version: "20.12.1"
+sbom: tool
 source: https://github.com/KDE/kcachegrind
 tag: "v%(version)s"
 sources:

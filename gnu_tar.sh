@@ -1,6 +1,7 @@
 package: gnu_tar
 description: GNU tar archiving utility
 version: "1.35"
+sbom: tool
 source: https://git.savannah.gnu.org/git/tar.git
 tag: "v%(version)s"
 sources:

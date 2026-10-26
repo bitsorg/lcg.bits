@@ -3,6 +3,7 @@ description: Adaptyst performance profiling framework (CERN)
 # Adaptyst has no release tarball on the LCG mirror (adaptyst-HEAD.tar.gz 404s);
 # under dev4 (HEAD) track the upstream git default branch.
 version: "main"
+sbom: tool
 tag: "main"
 source: https://github.com/Adaptyst/Adaptyst.git
 requires:

@@ -1,6 +1,7 @@
 package: flake8_builtins
 description: flake8-builtins check for use of Python builtins as names
 version: "3.1.0"
+sbom: tool
 tag: "3.1.0"
 requires:
   - Python

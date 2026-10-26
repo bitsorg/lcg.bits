@@ -1,6 +1,7 @@
 package: memray
 description: memray memory profiler for Python
 version: "1.19.3"
+sbom: tool
 tag: "1.19.3"
 requires:
   - Python

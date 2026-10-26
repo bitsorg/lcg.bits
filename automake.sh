@@ -1,6 +1,7 @@
 package: automake
 description: GNU Automake Makefile generator
 version: "1.18.1"
+sbom: tool
 source: https://git.savannah.gnu.org/git/automake.git
 tag: "v%(version)s"
 sources:

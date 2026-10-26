@@ -1,6 +1,7 @@
 package: black
 description: Black uncompromising Python code formatter
 version: "26.10.1"
+sbom: tool
 tag: "26.10.1"
 requires:
   - Python

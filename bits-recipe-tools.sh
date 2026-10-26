@@ -1,5 +1,6 @@
 package: bits-recipe-tools
 version: "0.0.35"
+sbom: tool
 license: GPL-3.0-or-later
 tag: "v%(version)s"
 source: https://github.com/bitsorg/bits-recipe-tools

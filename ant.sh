@@ -1,6 +1,7 @@
 package: ant
 description: Apache Ant Java build tool (pre-built binary distribution)
 version: "1.10.18"
+sbom: tool
 tag: "1.10.18"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/apache-ant-1.10.7-bin.tar.gz

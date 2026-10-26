@@ -1,6 +1,7 @@
 package: swig
 description: SWIG interface compiler connecting C/C++ with scripting languages
 version: "4.4.0"
+sbom: tool
 source: https://github.com/swig/swig
 tag: "v%(version)s"
 sources:

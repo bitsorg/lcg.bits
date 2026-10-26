@@ -1,6 +1,7 @@
 package: condor
 description: HTCondor workload management system — taken from the system
 version: "system"
+sbom: tool
 tag: "system"
 build_requires:
   - bits-recipe-tools

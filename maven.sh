@@ -1,6 +1,7 @@
 package: maven
 description: Apache Maven project management and comprehension tool
 version: "3.8.5"
+sbom: tool
 source: https://github.com/apache/maven
 tag: "maven-%(version)s"
 sources:

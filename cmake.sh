@@ -1,6 +1,7 @@
 package: CMake
 description: Cross-platform build system generator
 version: "3.30.6"
+sbom: tool
 source: https://gitlab.kitware.com/cmake/cmake
 tag: "v%(version)s"
 sources:

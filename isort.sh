@@ -1,6 +1,7 @@
 package: isort
 description: isort Python utility to sort imports alphabetically
 version: "5.12.0"
+sbom: tool
 tag: "5.12.0"
 requires:
   - Python
