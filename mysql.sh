@@ -1,7 +1,7 @@
 package: mysql
 description: MySQL relational database server and client libraries
-version: "11.4.10"
-tag: "11.4.10"
+version: "11.4.13"
+tag: "11.4.13"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/mariadb-10.11.16.tar.gz
 requires:

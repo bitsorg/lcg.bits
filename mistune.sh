@@ -1,7 +1,7 @@
 package: mistune
 description: Mistune fast Markdown parser in pure Python
-version: "3.3.0"
-tag: "3.3.0"
+version: "3.3.3"
+tag: "3.3.3"
 requires:
   - Python
 build_requires:

@@ -1,10 +1,11 @@
 package: Python
 description: CPython interpreter and standard library
-version: "3.13.11"
+version: "3.13.16"
 source: https://github.com/python/cpython
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
+# bits upgrade: no tarball of 3.13.16, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tgz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
@@ -22,6 +23,7 @@ MODULE_OPTIONS="--bin --lib --python"
 PYTHON_MAJOR_MINOR=$(echo "$PKGVERSION" | cut -d. -f1,2)
 ##############################
 function Configure() {
+  [ -e configure ] || [ ! -e configure.ac ] || autoreconf -fi   # a git checkout has no generated configure
   # Strip other python installations from PATH to avoid contamination
   export PATH=$(echo "$PATH" | awk -v RS=':' -v ORS=':' '!/python/ {print}' | sed 's/:$//')
 

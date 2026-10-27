@@ -1,7 +1,7 @@
 package: notebook
 description: Jupyter Notebook web application for interactive computing
-version: "7.5.6"
-tag: "7.5.6"
+version: "7.6.3"
+tag: "7.6.3"
 requires:
   - Python
   - Jinja2
