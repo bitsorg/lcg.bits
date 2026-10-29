@@ -89,8 +89,6 @@ See [Licence compliance and redistribution policy](https://github.com/bitsorg/bi
 
 Builds, platforms and the defaults chain are configured in [bits-console](https://gitlab.cern.ch/buncic/bits-console), which builds, publishes and certifies the LCG stack. Nightly builds and builds on each push to a branch of this repository are set up there as schedules (see steps 4 and 5 of [Phase 4 of the bits workflow guide](https://github.com/bitsorg/bits/blob/main/docs/WORKFLOWS.md#phase-4--ci-build-and-cvmfs-publication-via-bits-console)); a build on a push goes to the binary store only, and is neither certified nor published.
 
-[`.gitlab-ci.yml`](.gitlab-ci.yml) is an older trigger: on a commit to the GitLab mirror it asks bits-console to run a saved pipeline file, `communities/LCG/pipelines/on-commit.json`, which no longer exists, so it does nothing useful and can be removed.
-
 ## More information
 
 - Communities built on this pool: [key4hep.bits](https://github.com/bitsorg/key4hep.bits), [ship.bits](https://github.com/bitsorg/ship.bits), [lhcb.bits](https://github.com/bitsorg/lhcb.bits), [atlas.bits](https://github.com/bitsorg/atlas.bits), [testbed.bits](https://github.com/bitsorg/testbed.bits); [bits-providers](https://github.com/bitsorg/bits-providers): the provider registry
