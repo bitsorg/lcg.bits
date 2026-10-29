@@ -16,17 +16,17 @@ testbed.bits ┘
 
 ## Getting started
 
-Users normally do not clone `lcg.bits` directly. You do not build from this directory: it has no `defaults-release.sh`, so a build here would get none of the stack's compiler, C++ standard or build-type settings. Build from `stacks.bits` (or from your community's repository) and `bits` fetches the right `lcg.bits` branch for you. Install `bits` as described in the [bits README](https://github.com/bitsorg/bits#installation), then:
+Users normally do not clone `lcg.bits` directly. You do not build from this directory: it has no `defaults-release.sh`, so a build here would get none of the stack's compiler, C++ standard or build-type settings. Build from `stacks.bits` (or from your community's repository) and `bits` fetches the right `lcg.bits` branch for you. Install `bits` and prepare the machine as described in [Installation & Prerequisites](https://github.com/bitsorg/bits/blob/main/docs/USERGUIDE.md#2-installation--prerequisites) in the bits user guide (the platforms the LCG CI builds, whose binaries are reused, are listed in the [stacks.bits README](https://github.com/bitsorg/stacks.bits#prerequisites)), then:
 
 ```bash
 bits init stacks.bits && cd stacks.bits     # or: git clone -b LCG_110 https://github.com/bitsorg/stacks.bits
-bits use build --architecture x86_64-el9 --defaults gcc14::opt --set release=LCG_110
+bits use build --docker --architecture x86_64-el9 --defaults gcc14::opt --set release=LCG_110
 bits build --dry-run ROOT                   # what would be reused and what built
 bits build ROOT                             # one package and its dependencies
 bits enter ROOT/latest                      # shell with ROOT loaded; `exit` to leave
 ```
 
-`bits build externals` builds all externals and `bits build generators` the MC generators. `bits q` lists what was built (add `-a <arch>` to `bits q`/`bits enter` if several architectures are installed in the work directory). Check the machine with `bits doctor`. To build elsewhere, `export BITS_WORK_DIR=/path/to/sw`.
+`--docker` builds in the platform's builder image; on a machine of the same platform `bits enter` then works here. Without it, bits builds with this machine's compilers and system packages, and reuses nothing the CI built. `bits build externals` builds all externals and `bits build generators` the MC generators. `bits q` lists what was built (add `-a <arch>` to `bits q`/`bits enter` if several architectures are installed in the work directory). Check the machine with `bits doctor`. To build elsewhere, `export BITS_WORK_DIR=/path/to/sw`.
 
 Any `package:` name in this repository can be built directly. Package names are the `package:` field of the recipe (`ROOT`, `Geant4`, `GCC-Toolchain`, `pythia8`), not necessarily the file name. The [stacks.bits README](https://github.com/bitsorg/stacks.bits#composing-profiles) explains the `--defaults` axes (compiler, build type, CUDA, release line) and the CVMFS layout.
 
@@ -38,6 +38,7 @@ Any `package:` name in this repository can be built directly. Package names are 
 |---|---|
 | `main` | Trunk. Used when no release is chosen (`release` = `main`). |
 | `LCG_110` | The LCG 110 release recipes. |
+| `LCG_110b` | LCG 110 with security upgrades of some packages. |
 | `devel` | Older development branch; not used by the default builds. |
 
 The `stacks.bits` `dev3`/`dev4` nightly profiles need no branch of their own: they build the release branch's recipes with a few packages pinned to development heads or fixed tags.
@@ -86,7 +87,9 @@ See [Licence compliance and redistribution policy](https://github.com/bitsorg/bi
 
 ### CI and publishing
 
-[`.gitlab-ci.yml`](.gitlab-ci.yml) does not define builds. On a commit to the default branch (or a merge request) of the GitLab mirror it triggers the saved bits-console pipeline `communities/LCG/pipelines/on-commit.json`, which builds, publishes and certifies the configured LCG stack. Builds, platforms and the defaults chain are configured in [bits-console](https://gitlab.cern.ch/buncic/bits-console).
+Builds, platforms and the defaults chain are configured in [bits-console](https://gitlab.cern.ch/buncic/bits-console), which builds, publishes and certifies the LCG stack. Nightly builds and builds on each push to a branch of this repository are set up there as schedules (see steps 4 and 5 of [Phase 4 of the bits workflow guide](https://github.com/bitsorg/bits/blob/main/docs/WORKFLOWS.md#phase-4--ci-build-and-cvmfs-publication-via-bits-console)); a build on a push goes to the binary store only, and is neither certified nor published.
+
+[`.gitlab-ci.yml`](.gitlab-ci.yml) is an older trigger: on a commit to the GitLab mirror it asks bits-console to run a saved pipeline file, `communities/LCG/pipelines/on-commit.json`, which no longer exists, so it does nothing useful and can be removed.
 
 ## More information
 
