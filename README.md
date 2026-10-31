@@ -20,13 +20,14 @@ Users normally do not clone `lcg.bits` directly. You do not build from this dire
 
 ```bash
 bits init stacks.bits && cd stacks.bits     # or: git clone -b LCG_110 https://github.com/bitsorg/stacks.bits
-bits use build --docker --architecture x86_64-el9 --defaults gcc14::opt --set release=LCG_110
+bits use --architecture x86_64-el9 --defaults gcc14::opt
+bits use build --docker --set release=LCG_110
 bits build --dry-run ROOT                   # what would be reused and what built
 bits build ROOT                             # one package and its dependencies
 bits enter ROOT/latest                      # shell with ROOT loaded; `exit` to leave
 ```
 
-`--docker` builds in the platform's builder image; on a machine of the same platform `bits enter` then works here. Without it, bits builds with this machine's compilers and system packages, and reuses nothing the CI built. `bits build externals` builds all externals and `bits build generators` the MC generators. `bits q` lists what was built (add `-a <arch>` to `bits q`/`bits enter` if several architectures are installed in the work directory). Check the machine with `bits doctor`. To build elsewhere, `export BITS_WORK_DIR=/path/to/sw`.
+`--docker` builds in the platform's builder image; on a machine of the same platform `bits enter` then works here. Without it, bits builds with this machine's compilers and system packages, and reuses nothing the CI built. `bits build externals` builds all externals and `bits build generators` the MC generators. `bits q` lists what was built. Check the machine with `bits doctor`. To build elsewhere, `export BITS_WORK_DIR=/path/to/sw`.
 
 Any `package:` name in this repository can be built directly. Package names are the `package:` field of the recipe (`ROOT`, `Geant4`, `GCC-Toolchain`, `pythia8`), not necessarily the file name. The [stacks.bits README](https://github.com/bitsorg/stacks.bits#composing-profiles) explains the `--defaults` axes (compiler, build type, CUDA, release line) and the CVMFS layout.
 
