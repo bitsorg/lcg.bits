@@ -1,0 +1,7 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -79,3 +79,3 @@
+ option(DD4HEP_USE_LCIO          "Build lcio extensions"                         OFF)
+-option(DD4HEP_USE_GEANT4_UNITS  "Build using Geant4 units throughout"           OFF)
++option(DD4HEP_USE_GEANT4_UNITS  "Build using Geant4 units throughout"           ON)
+ option(DD4HEP_USE_EDM4HEP       "Build edm4hep extensions"                      OFF)

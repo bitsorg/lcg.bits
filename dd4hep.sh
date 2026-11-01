@@ -25,6 +25,10 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+patches:
+  # Geant4 units (mm = 1), which LHCb's Detector requires: on where the defaults
+  # set the dd4hep_geant4_units variable (defaults-lhcb), as LCG's LHCb layer does.
+  - "DD4hep-geant4-units.patch:(?dd4hep_geant4_units)"
 license: LGPL-3.0-only
 ---
 #!/bin/bash -e
