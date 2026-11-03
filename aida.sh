@@ -18,7 +18,10 @@ license: LGPL-2.1-or-later
 ##############################
 MODULE_OPTIONS="--inc"
 ##############################
-function Make() {
-  mkdir -p $INSTALLROOT/include   
-  cp -r $SOURCEDIR/cpp/AIDA $INSTALLROOT/include/
+function MakeInstall() {
+  # FindAIDA looks for AIDA/AIDA.h under src/cpp. bits strips the top level of this
+  # flat tarball (headers at cpp/); a checkout keeps src/cpp. Headers only.
+  local d
+  for d in src/cpp cpp; do [ -d "$d/AIDA" ] && break; done
+  mkdir -p "$INSTALLROOT/src/cpp" && cp -r "$d/AIDA" "$INSTALLROOT/src/cpp/"
 }
