@@ -33,6 +33,12 @@ done
 export CMAKE_ARGS="${CMAKE_ARGS:+$CMAKE_ARGS }-DONNX_GEN_PB_TYPE_STUBS=OFF"
 [ -n "$_pfx" ] && export CMAKE_ARGS="${CMAKE_ARGS:+$CMAKE_ARGS }-DCMAKE_PREFIX_PATH=$_pfx"
 unset _pfx _v _d
+# onnx < 1.18 binds with pybind11 (a build_requires, e.g. LHCb's 1.16): pip puts its
+# CMake config in site-packages, where find_package does not look.
+if _d=$(python3 -c 'import pybind11; print(pybind11.get_cmake_dir())' 2> /dev/null); then
+  export CMAKE_ARGS="$CMAKE_ARGS -Dpybind11_DIR=$_d"
+fi
+unset _d
 ##############################
 . $(bits-include PythonRecipe)
 ##############################
