@@ -18,6 +18,8 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  # meson-python runs ninja from PATH (pip --no-build-isolation)
+  - ninja
 license: BSD-3-Clause
 references:
   - pkg:pypi/scikit-learn@%(version)s
