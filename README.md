@@ -60,7 +60,7 @@ Pass the release on the command line, `--set release=LCG_110`. That is the conve
 - Recipes are YAML headers plus a Bash body; most use the helpers from `bits-recipe-tools` (its recipe is in this repository; project: [bits-recipe-tools](https://github.com/bitsorg/bits-recipe-tools)). See [Writing Recipes with bits-recipe-tools](https://github.com/bitsorg/bits/blob/main/docs/COOKBOOK.md#writing-recipes-with-bits-recipe-tools).
 - Patches applied by recipes are in [`patches/`](patches); the macOS Homebrew system layer is in [`macos/Brewfile`](macos/Brewfile).
 - Release-specific version pins belong in a defaults profile (`stacks.bits` `defaults-dev3.sh`/`defaults-dev4.sh`, or a community overlay), not in a copy of the recipe. See [Override a package version without editing the recipe](https://github.com/bitsorg/bits/blob/main/docs/COOKBOOK.md#override-a-package-version-without-editing-the-recipe).
-- To test a change, push it to a branch and build from `stacks.bits` with `--set release=<branch>`; `bits` clones that branch of `lcg.bits`.
+- To test a change, push it to a branch and build from `stacks.bits` with `--set release=<branch>`; `bits` clones that branch of `lcg.bits`. From `lhcb.bits`, use `--set lcg_branch=<branch>`: `--set release=<branch>` would also need a `stacks.bits` branch of that name, while `lcg_branch` selects only the `lcg.bits` branch.
 - [`scripts/lcg2bits.py`](scripts/lcg2bits.py) is the converter that generated the initial recipes from lcgcmake's `heptools-*.cmake` and `CMakeLists.txt` files.
 
 ### Licence and compliance data
