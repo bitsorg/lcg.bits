@@ -44,7 +44,6 @@ references:
 #!/bin/bash -e
 ##############################
 . $(bits-include AutoToolsRecipe)
-. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
@@ -58,8 +57,8 @@ function PostInstall() {
   # of fontconfig.pc (pango/harfbuzz/cairo) can resolve "Requires: freetype2".
   [ -f "${INSTALLROOT}/lib/pkgconfig/freetype2.pc" ] && return 0
   [ -f "${FREETYPE_ROOT}/lib/pkgconfig/freetype2.pc" ] && return 0  # bits-built: already findable
-  local _triple
-  _triple=$(bits_triple)
+  # Debian's multiarch name; bits_triple asks the bits-built GCC (x86_64-unknown-linux-gnu).
+  local _triple="$(uname -m)-linux-gnu"
   for _dir in "/usr/lib/${_triple}/pkgconfig" "/usr/lib/pkgconfig" "/usr/share/pkgconfig"; do
     if [ -f "${_dir}/freetype2.pc" ]; then
       cp "${_dir}/freetype2.pc" "${INSTALLROOT}/lib/pkgconfig/freetype2.pc"
