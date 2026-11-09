@@ -16,7 +16,6 @@ patches:
 ##############################
 . $(bits-include AutoToolsRecipe)
 . $(bits-include BitsMacOS)
-. $(bits-include BitsArch)
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
@@ -24,8 +23,8 @@ function Configure() {
   # Add the Ubuntu multiarch (and RHEL lib64) pkgconfig dirs to the compiled-in PC_PATH,
   # so bits-built pkg-config finds .pc files from system packages instead of every consumer
   # carrying ad hoc PKG_CONFIG_PATH. Non-existent paths are ignored.
-  local _triple
-  _triple=$(bits_triple)
+  # Debian's multiarch name; bits_triple asks the bits-built GCC (x86_64-unknown-linux-gnu).
+  local _triple="$(uname -m)-linux-gnu"
   # macOS/Xcode 16 clang turns -Wint-conversion and implicit function declarations into hard
   # errors, breaking pkg-config's vendored glib; downgrade them so --with-internal-glib
   # compiles. No effect on Linux/gcc.
