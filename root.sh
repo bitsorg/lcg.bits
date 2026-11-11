@@ -246,7 +246,7 @@ function Configure() {
     -Dsoversion=ON                                                          \
     -Dsqlite=OFF                                                            \
     -Dssl=ON                                                                \
-    -Dtesting="${ROOT_TESTING}"                                               \
+    -Dtesting="${ROOT_TESTING}"                                             \
     -Dtmva-gpu=OFF                                                          \
     -Dtmva-sofie=OFF                                                        \
     -Dunfold=ON                                                             \
@@ -257,6 +257,7 @@ function Configure() {
     -Dxft=ON                                                                \
     -Dxml=ON                                                                \
     -Dzlib=ON                                                               \
+    -Dbuiltin_civetweb=ON                                                   \
     ${VDT_ROOT:+-Dvdt=ON}                                                   \
     ${UNURAN_ROOT:+-DUNURAN_DIR="$UNURAN_ROOT"}                             \
     ${_sofie_flag}                                                          \
