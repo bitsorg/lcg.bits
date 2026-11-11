@@ -3,6 +3,8 @@ description: MarlinML ML-based flavor tagging for ILC
 version: "0.1.0"
 tag: "v0.1.0"
 source: https://gitlab.desy.de/ilcsoft/MarlinMLFlavorTagging.git
+sources:
+  - https://lcgpackages.web.cern.ch/tarFiles/sources/marlinmlflavortagging-%(version)s.tar.gz
 requires:
   - CMake
   - LCIO
