@@ -20,6 +20,9 @@ references:
 MODULE_OPTIONS="--bin --lib --cmake"
 ##############################
 function Configure() {
+  # The git checkout's aclocal.m4 is automake 1.16's and its timestamps are
+  # arbitrary, so make asked for aclocal-1.16: regenerate with the image's own.
+  autoreconf -fi
   ./configure --prefix="$INSTALLROOT" \
     --enable-utf \
     --enable-jit \
