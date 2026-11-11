@@ -1,6 +1,7 @@
 package: gperf
 description: GNU gperf perfect hash function generator
 version: "3.1"
+sbom: tool
 source: https://github.com/bitslcg/gperf.git
 tag: "v%(version)s"
 sources:

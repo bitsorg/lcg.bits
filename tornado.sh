@@ -1,7 +1,7 @@
 package: tornado
 description: Tornado scalable async network library for Python
-version: "6.4.1"
-tag: "6.4.1"
+version: "6.5.9"
+tag: "6.5.9"
 requires:
   - Python
   - certifi

@@ -1,10 +1,11 @@
 package: thrift
 description: Apache Thrift scalable cross-language RPC framework
-version: "0.16.0"
+version: "0.25.0"
 source: https://github.com/apache/thrift
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+source: https://github.com/apache/thrift.git
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - pkg_config
@@ -39,8 +40,8 @@ build_requires:
 license: Apache-2.0
 references:
   - cpe:2.3:a:apache:thrift:%(version)s
-patches:
-  - thrift-0.16.0.patch
+#patches:
+#  - thrift-0.16.0.patch
 ---
 #!/bin/bash -e
 ##############################

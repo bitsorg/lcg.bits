@@ -1,6 +1,7 @@
 package: valgrind
 description: Valgrind dynamic analysis tool for memory and thread errors
 version: "3.27.0"
+sbom: tool
 source: https://github.com/Valgrind/valgrind
 tag: "VALGRIND_3_27_0"
 sources:

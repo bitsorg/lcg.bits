@@ -1,11 +1,10 @@
 package: postgresql
 description: PostgreSQL open-source relational database system
-version: "17.5"
+version: "17.11"
 # git build disabled: needs submodule/monorepo (or non-git SCM) handling in the build body first.
 # source: https://git.postgresql.org/git/postgresql.git
-# tag: "REL_17_5"
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+  - https://ftp.postgresql.org/pub/source/v%(version)s/%(name)s-%(version)s.tar.bz2
 requires:
   - yacc-like
   - m4

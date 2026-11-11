@@ -1,10 +1,11 @@
 package: harfbuzz
 description: HarfBuzz OpenType text shaping engine
-version: "2.7.4"
+version: "12.3.0"
 source: https://github.com/harfbuzz/harfbuzz
 tag: "%(version)s"
+# bits upgrade: no tarball of 12.3.0 in the usual place, upstream's instead
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+  - https://github.com/harfbuzz/harfbuzz/releases/download/%(version)s/harfbuzz-%(version)s.tar.xz
 requires:
   - freetype
   - glib
@@ -13,6 +14,8 @@ requires:
   - pkg_config
   - gettext
 build_requires:
+  - meson
+  - ninja
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
@@ -21,12 +24,12 @@ references:
 ---
 #!/bin/bash -e
 ##############################
-. $(bits-include AutoToolsRecipe)
-. $(bits-include BitsMacOS)
+#. $(bits-include AutoToolsRecipe)
+#. $(bits-include BitsMacOS)
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
-function Configure() {
+function _Configure() {
   # Collect PKG_CONFIG_PATH + LD_LIBRARY_PATH from every bits *_ROOT so transitive
   # deps (pixman, fontconfig) are reachable, not just direct ones. The lib/*/pkgconfig
   # glob covers old multiarch builds (lib/x86_64-linux-gnu) before --libdir=lib.
@@ -53,4 +56,14 @@ function Configure() {
     fi
   fi
   ./configure --prefix="${INSTALLROOT}" ${_cairo} --with-freetype --with-glib
+}
+
+##############################
+. $(bits-include MesonRecipe)
+##############################
+MODULE_OPTIONS="--bin --lib --pkgconfig"
+##############################
+function Configure() {
+  _meson_fixenv
+  meson setup "${MESON_BUILDDIR}" --prefix="${INSTALLROOT}" --libdir=lib ${MESON_EXTRA_OPTIONS}
 }

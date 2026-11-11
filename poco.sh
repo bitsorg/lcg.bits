@@ -1,10 +1,10 @@
 package: poco
 description: POCO C++ portable networking and application framework
-version: "1.14.1"
+version: "1.14.2"
 source: https://github.com/pocoproject/poco
-tag: "poco-%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+tag: "poco-%(version)s-release"
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
   - zlib

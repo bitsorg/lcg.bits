@@ -1,6 +1,6 @@
 package: hadoop
 description: Apache Hadoop distributed storage and MapReduce framework
-version: "3.3.6"
+version: "3.4.2"
 # git build disabled: needs submodule/monorepo (or non-git SCM) handling in the build body first.
 # source: https://github.com/apache/hadoop
 # tag: "rel/release-%(version)s"

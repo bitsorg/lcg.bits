@@ -1,7 +1,7 @@
 package: nltk
 description: NLTK Natural Language Toolkit for Python
-version: "3.8.1"
-tag: "3.8.1"
+version: "3.10.3"
+tag: "3.10.3"
 requires:
   - Python
   - click

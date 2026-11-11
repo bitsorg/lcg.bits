@@ -1,7 +1,7 @@
 package: pypdf
 description: pypdf pure-Python PDF library
-version: "3.11.0"
-tag: "3.11.0"
+version: "6.21.2"
+tag: "6.21.2"
 requires:
   - Python
   - typing_extensions

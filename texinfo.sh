@@ -1,6 +1,7 @@
 package: texinfo
 description: GNU Texinfo documentation system
 version: "7.2"
+sbom: tool
 source: https://git.savannah.gnu.org/git/texinfo.git
 tag: "v%(version)s"
 sources:

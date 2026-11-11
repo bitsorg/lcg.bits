@@ -1,11 +1,12 @@
 package: gdal
 description: GDAL Geospatial Data Abstraction Library Python bindings
-version: "3.10.2"
+version: "3.11.0"
 source: https://github.com/OSGeo/gdal
 mem_per_job: 1500
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# bits upgrade: no tarball of 3.11.0, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - numpy
   - CMake

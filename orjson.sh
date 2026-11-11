@@ -1,7 +1,7 @@
 package: orjson
 description: orjson fast JSON library for Python (Rust-based)
-version: "3.11.4"
-tag: "3.11.4"
+version: "3.11.6"
+tag: "3.11.6"
 requires:
   - Python
 build_requires:

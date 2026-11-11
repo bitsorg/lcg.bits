@@ -1,6 +1,7 @@
 package: ninja
 description: Ninja small build system with a focus on speed
 version: "1.13.2"
+sbom: tool
 tag: "1.13.2"
 requires:
   - Python

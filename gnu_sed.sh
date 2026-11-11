@@ -1,6 +1,7 @@
 package: gnu_sed
 description: GNU sed stream editor
 version: "4.5"
+sbom: tool
 source: https://git.savannah.gnu.org/git/sed.git
 tag: "v%(version)s"
 sources:

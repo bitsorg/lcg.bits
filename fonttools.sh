@@ -1,7 +1,7 @@
 package: fonttools
 description: fonttools library for manipulating font files in Python
-version: "4.40.0"
-tag: "4.40.0"
+version: "4.60.2"
+tag: "4.60.2"
 requires:
   - Python
   - fs

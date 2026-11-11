@@ -1,7 +1,7 @@
 package: mako
 description: Mako fast Python template library
-version: "1.3.5"
-tag: "1.3.5"
+version: "1.4.2"
+tag: "1.4.2"
 requires:
   - Python
   - MarkupSafe

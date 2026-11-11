@@ -1,10 +1,11 @@
 package: imagemagick
 description: ImageMagick software suite for image conversion and editing
-version: "7.0.8.7"
+version: "7.1.2-33"
 source: https://github.com/ImageMagick/ImageMagick
 tag: "%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/ImageMagick-%(version)s.tar.gz
+source: https://github.com/ImageMagick/ImageMagick
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/ImageMagick-%(version)s.tar.gz
 requires:
   - fftw
   - graphviz

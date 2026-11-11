@@ -1,6 +1,7 @@
 package: ruff
 description: Ruff extremely fast Python linter and formatter (Rust-based)
 version: "0.15.17"
+sbom: tool
 tag: "0.15.17"
 requires:
   - rust

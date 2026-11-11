@@ -1,6 +1,7 @@
 package: m4
 description: GNU M4 macro processor
 version: "1.4.21"
+sbom: tool
 source: https://git.savannah.gnu.org/git/m4.git
 tag: "v%(version)s"
 sources:

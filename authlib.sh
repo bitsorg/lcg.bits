@@ -1,7 +1,7 @@
 package: Authlib
 description: Authlib OAuth and OpenID Connect library for Python
-version: "0.15.5"
-tag: "0.15.5"
+version: "1.6.12"
+tag: "1.6.12"
 requires:
   - Python
   - cryptography

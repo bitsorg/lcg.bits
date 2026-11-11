@@ -1,10 +1,11 @@
 package: glib
 description: GLib core utility library for GNOME (strings, collections, mainloop)
-version: "2.86.5"
+version: "2.88.1"
 source: https://gitlab.gnome.org/GNOME/glib
 tag: "%(version)s"
+# bits upgrade: no tarball of 2.88.1 in the usual place, upstream's instead
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.xz
+  - https://download.gnome.org/sources/glib/2.88/glib-%(version)s.tar.xz
 requires:
   - CMake
   - libffi

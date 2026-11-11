@@ -1,5 +1,6 @@
 package: yacc-like
 version: "1.0"
+sbom: tool
 # System shim: probes/wraps host-provided components; nothing of the
 # wrapped software itself is built or redistributed (2026-07-20 ruling).
 license: NOASSERTION

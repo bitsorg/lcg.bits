@@ -1,7 +1,7 @@
 package: langchain_text_splitters
 description: LangChain text splitting utilities
-version: "0.3.5"
-tag: "0.3.5"
+version: "1.1.2"
+tag: "1.1.2"
 requires:
   - Python
   - langchain_core

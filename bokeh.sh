@@ -1,7 +1,7 @@
 package: bokeh
 description: Bokeh interactive visualization library for modern browsers
-version: "3.1.1"
-tag: "3.1.1"
+version: "3.8.2"
+tag: "3.8.2"
 requires:
   - Python
   - PyYAML

@@ -1,7 +1,7 @@
 package: protobuf2
 description: Protocol Buffers v2 serialization library (ATLAS NSW legacy ABI)
-version: "2.5.0"
-tag: "2.5.0"
+version: "5.29.6"
+tag: "5.29.6"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/protobuf-2.5.0.tar.gz
 build_requires:

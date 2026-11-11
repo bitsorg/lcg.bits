@@ -1,7 +1,7 @@
 package: distributed
 description: Distributed Dask's distributed task scheduler
-version: "2025.2.0"
-tag: "2025.2.0"
+version: "2026.1.0"
+tag: "2026.1.0"
 requires:
   - Python
   - PyYAML

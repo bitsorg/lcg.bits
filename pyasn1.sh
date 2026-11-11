@@ -1,7 +1,7 @@
 package: pyasn1
 description: pyasn1 pure-Python ASN.1 library
-version: "0.6.1"
-tag: "0.6.1"
+version: "0.6.4"
+tag: "0.6.4"
 requires:
   - Python
 build_requires:

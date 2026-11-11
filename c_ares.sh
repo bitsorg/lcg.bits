@@ -1,8 +1,8 @@
 package: c_ares
 description: c-ares asynchronous DNS resolver library
-version: "1.34.3"
+version: "1.34.7"
 source: https://github.com/c-ares/c-ares
-tag: "cares-1_34_3"
+tag: "cares-1_34_7"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/c-ares-1.34.3.tar.gz
 requires:

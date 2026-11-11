@@ -1,7 +1,7 @@
 package: langchain_community
 description: LangChain community integrations
-version: "0.3.14"
-tag: "0.3.14"
+version: "0.3.27"
+tag: "0.3.27"
 requires:
   - Python
   - langsmith

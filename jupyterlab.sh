@@ -1,7 +1,7 @@
 package: jupyterlab
 description: JupyterLab next-generation Jupyter web-based interface
-version: "4.4.7"
-tag: "4.4.7"
+version: "4.5.11"
+tag: "4.5.11"
 requires:
   - ipython
   - packaging

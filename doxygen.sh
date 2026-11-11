@@ -1,6 +1,7 @@
 package: doxygen
 description: Doxygen documentation generator from annotated C++ sources
 version: "1.17.0"
+sbom: tool
 source: https://github.com/doxygen/doxygen
 tag: "Release_1_17_0"
 sources:

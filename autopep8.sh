@@ -1,6 +1,7 @@
 package: autopep8
 description: autopep8 automatic PEP 8 Python code formatter
 version: "2.3.1"
+sbom: tool
 tag: "2.3.1"
 requires:
   - Python

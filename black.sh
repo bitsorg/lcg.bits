@@ -1,7 +1,8 @@
 package: black
 description: Black uncompromising Python code formatter
-version: "24.10.0"
-tag: "24.10.0"
+version: "26.10.1"
+sbom: tool
+tag: "26.10.1"
 requires:
   - Python
   - click

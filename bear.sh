@@ -1,6 +1,7 @@
 package: bear
 description: Bear tool that generates a compile_commands.json database
 version: "3.1.5"
+sbom: tool
 source: https://github.com/rizsotto/Bear
 tag: "%(version)s"
 sources:
@@ -8,6 +9,7 @@ sources:
 requires:
   - CMake
   - jsonmcpp
+  - fmt
   - grpc
   - spdlog
 # macOS: source Bear from Homebrew. It's a standalone CLI (no consumers), and

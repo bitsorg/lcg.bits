@@ -1,6 +1,7 @@
 package: sphinx_rtd_theme
 description: sphinx-rtd-theme Read the Docs Sphinx theme
 version: "3.0.2"
+sbom: tool
 tag: "3.0.2"
 requires:
   - Python

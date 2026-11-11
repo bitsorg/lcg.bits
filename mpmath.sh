@@ -1,7 +1,7 @@
 package: mpmath
 description: mpmath Python library for arbitrary-precision arithmetic
-version: "1.2.1"
-tag: "1.2.1"
+version: "1.3.0"
+tag: "1.3.0"
 requires:
   - Python
   - setuptools_scm

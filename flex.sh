@@ -1,6 +1,7 @@
 package: flex
 description: flex fast lexical analyser generator
 version: "2.6.4"
+sbom: tool
 source: https://github.com/westes/flex
 tag: "v%(version)s"
 sources:

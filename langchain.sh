@@ -1,7 +1,7 @@
 package: langchain
 description: LangChain framework for developing LLM-powered applications
-version: "0.3.14"
-tag: "0.3.14"
+version: "1.3.9"
+tag: "1.3.9"
 requires:
   - Python
   - pydantic

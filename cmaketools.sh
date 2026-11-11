@@ -1,6 +1,7 @@
 package: cmaketools
 description: CMakeTools auxiliary scripts for CMake-based builds
 version: "1.9"
+sbom: tool
 source: https://github.com/HSF/cmaketools.git
 tag: "%(version)s"
 sources:

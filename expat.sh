@@ -1,10 +1,11 @@
 package: expat
 description: Expat XML parsing library
-version: "2.7.1"
+version: "2.9.0"
 source: https://github.com/libexpat/libexpat
-tag: "R_2_7_1"
+tag: "R_2_9_0"
+# bits upgrade: no tarball of 2.9.0 in the usual place, upstream's instead
 sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.bz2
+  - https://github.com/libexpat/libexpat/releases/download/R_2_9_0/expat-%(version)s.tar.gz
 prefer_system: ".*"
 prefer_system_check:
 

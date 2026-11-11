@@ -1,6 +1,7 @@
 package: perf
 description: Linux perf performance analysis tool (used from the system on Linux)
 version: "system"
+sbom: tool
 license: GPL-2.0-only
 # perf is the kernel's own tool, tightly coupled to the running kernel, and can't be
 # built here (its compile_perf.sh ships nowhere), so take it from the system. A

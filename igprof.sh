@@ -1,6 +1,7 @@
 package: igprof
 description: IgProf performance and memory profiler
 version: "5.9.18"
+sbom: tool
 source: https://github.com/igprof/igprof
 tag: "v%(version)s"
 sources:

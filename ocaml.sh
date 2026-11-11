@@ -1,10 +1,11 @@
 package: ocaml
 description: OCaml functional programming language compiler and standard library
-version: "4.14.2"
+version: "4.14.3"
 source: https://github.com/ocaml/ocaml
 tag: "%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# bits upgrade: no tarball of 4.14.3, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 # macOS: source OCaml from Homebrew (formula ocaml). prefer_system gated osx.* so
 # Linux keeps building 4.14.2 from source below. NOTE: brew ships OCaml 5.x (a major
 # above the pinned 4.14.2) - its consumer whizard may need attention.

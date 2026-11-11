@@ -1,6 +1,7 @@
 package: pkg_config
 description: pkg-config helper tool for querying library compile/link flags
 version: "0.29.2"
+sbom: tool
 source: https://gitlab.freedesktop.org/pkg-config/pkg-config
 tag: "pkg-config-%(version)s"
 sources:

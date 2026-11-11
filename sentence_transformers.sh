@@ -1,7 +1,7 @@
 package: sentence_transformers
 description: sentence-transformers sentence and text embedding models
-version: "5.1.1"
-tag: "5.1.1"
+version: "5.6.0"
+tag: "5.6.0"
 requires:
   - Python
   - torchvision

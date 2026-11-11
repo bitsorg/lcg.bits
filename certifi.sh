@@ -1,7 +1,7 @@
 package: certifi
 description: Certifi Mozilla CA bundle for Python
-version: "2024.8.30"
-tag: "2024.8.30"
+version: "2026.10.19"
+tag: "2026.10.19"
 requires:
   - Python
 build_requires:

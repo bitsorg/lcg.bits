@@ -1,7 +1,7 @@
 package: go
 description: Go programming language toolchain (pre-built binary distribution)
-version: "1.12.5"
-tag: "1.12.5"
+version: "1.26.9"
+tag: "1.26.9"
 # macOS: Go 1.12.5 has no darwin-arm64 build and the Linux tarball below can't
 # run on macOS, so source a modern Go from Homebrew and expose its SDK as GOROOT
 # under $INSTALLROOT; GO111MODULE=off keeps the GOPATH-style go_* recipes working.
@@ -83,7 +83,7 @@ function MakeInstall() {
   install -dm755 "$INSTALLROOT/bin"
   cp -a bin/. "$INSTALLROOT/bin/"
   # Ship the standard library and tools so users can compile Go programs
-  cp -a pkg src lib "$INSTALLROOT/" 2>/dev/null || true
+  cp -a pkg src lib go.env "$INSTALLROOT/" 2>/dev/null || true
 }
 
 function PostInstall() {

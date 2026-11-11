@@ -1,6 +1,6 @@
 package: hbase
 description: Apache HBase distributed column-oriented database
-version: "1.2.0"
+version: "1.2.6.1"
 source: https://github.com/apache/hbase
 tag: "rel/%(version)s"
 sources:

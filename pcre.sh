@@ -1,10 +1,11 @@
 package: pcre
 description: PCRE Perl Compatible Regular Expressions library (version 1)
-version: "8.43"
-source: https://github.com/PCRE2Project/pcre2
-tag: "pcre2-%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+version: "8.45"
+source: https://github.com/luvit/pcre
+tag: "master"
+#tag: "pcre2-%(version)s"
+#sources:
+#  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"

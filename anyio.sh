@@ -1,7 +1,7 @@
 package: anyio
 description: AnyIO asynchronous networking and concurrency library
-version: "4.6.1"
-tag: "4.6.1"
+version: "4.14.2"
+tag: "4.14.2"
 requires:
   - Python
   - idna

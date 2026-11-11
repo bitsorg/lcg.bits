@@ -1,6 +1,7 @@
 package: pipdeptree
 description: pipdeptree pip dependency tree visualizer
 version: "2.9.0"
+sbom: tool
 tag: "2.9.0"
 requires:
   - Python

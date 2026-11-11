@@ -1,6 +1,7 @@
 package: autoconf
 description: GNU Autoconf portable build-system configuration tool
 version: "2.73"
+sbom: tool
 source: https://git.savannah.gnu.org/git/autoconf.git
 tag: "v%(version)s"
 sources:

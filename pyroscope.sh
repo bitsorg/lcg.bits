@@ -1,6 +1,7 @@
 package: pyroscope
 description: Pyroscope continuous profiling platform
 version: "1.12.0"
+sbom: tool
 tag: "1.12.0"
 build_requires:
   - bits-recipe-tools

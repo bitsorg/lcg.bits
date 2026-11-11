@@ -1,6 +1,7 @@
 package: cppcheck
 description: Static analysis tool for C/C++ code
 version: "2.20.0"
+sbom: tool
 source: https://github.com/danmar/cppcheck
 tag: "%(version)s"
 sources:

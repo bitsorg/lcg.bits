@@ -1,6 +1,7 @@
 package: flake8_bugbear
 description: flake8-bugbear extra opinionated warnings for Flake8
 version: "25.10.21"
+sbom: tool
 tag: "25.10.21"
 requires:
   - Python

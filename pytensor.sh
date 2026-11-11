@@ -1,10 +1,11 @@
 package: pytensor
 description: PyTensor library for tensor computations (Theano successor)
-version: "2.35.1"
+version: "2.36.0"
 source: https://github.com/pymc-devs/pytensor
-tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+tag: "rel-%(version)s"
+# bits upgrade: no tarball of 2.36.0, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - Python
   - cons
@@ -19,8 +20,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: BSD-3-Clause
-patches:
-  - pytensor-2.35.1.patch
+# patches:
+#   - pytensor-2.35.1.patch
 ---
 #!/bin/bash -e
 ##############################

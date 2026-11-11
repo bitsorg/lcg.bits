@@ -1,7 +1,7 @@
 package: jupyter_server
 description: jupyter_server backend server for Jupyter web apps
-version: "2.14.2"
-tag: "2.14.2"
+version: "2.21.0"
+tag: "2.21.0"
 requires:
   - anyio
   - Jinja2

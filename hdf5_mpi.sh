@@ -1,7 +1,7 @@
 package: hdf5_mpi
 description: HDF5 library built with MPI parallel I/O support
-version: "1.14.6"
-tag: "1.14.6"
+version: "2.2.0"
+tag: "2.2.0"
 sources:
   - https://lcgpackages.web.cern.ch/tarFiles/sources/hdf5-1.14.6.tar.gz
 requires:

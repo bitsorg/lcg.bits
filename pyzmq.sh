@@ -1,7 +1,7 @@
 package: pyzmq
 description: PyZMQ Python bindings for ZeroMQ
-version: "26.2.1"
-tag: "26.2.1"
+version: "27.1.0"
+tag: "27.1.0"
 requires:
   - Python
   - zeromq

@@ -1,6 +1,7 @@
 package: heaptrack
 description: Heaptrack heap memory profiler
 version: "1.5.0"
+sbom: tool
 source: https://github.com/KDE/heaptrack
 tag: "v%(version)s"
 sources:

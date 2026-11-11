@@ -1,6 +1,6 @@
 package: hdf5
 description: HDF5 hierarchical data format library for large datasets
-version: "1.14.6"
+version: "2.2.0"
 source: https://github.com/HDFGroup/hdf5
 tag: "hdf5-%(version)s"
 sources:
@@ -32,9 +32,12 @@ function Configure() {
     -DHDF5_BUILD_EXAMPLES=OFF \
     -DHDF5_BUILD_TESTS=OFF \
     -DHDF5_ENABLE_Z_LIB_SUPPORT=ON \
+    -DHDF5_ENABLE_ZLIB_SUPPORT=ON \
     ${ZLIB_ROOT:+-DZLIB_ROOT="${ZLIB_ROOT}"} \
     -DHDF5_INSTALL_LIB_DIR=lib
 }
 function PostInstall() {
+  # HDF5 2.x (CMake) writes its extra libraries as a ;-list; h5cc users (YODA) need spaces
+  sed -i '/Extra libraries:/s/;/ /g' "${INSTALLROOT}/lib/libhdf5.settings"
   printf 'setenv HDF5_ROOT $PKG_ROOT\n' >> "${INSTALLROOT}/etc/modulefiles/${PKGNAME}"
 }

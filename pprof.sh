@@ -1,6 +1,7 @@
 package: pprof
 description: pprof tool for profiling and visualization of Go programs
 version: "54271f7"
+sbom: tool
 source: https://github.com/google/pprof
 tag: "%(version)s"
 sources:

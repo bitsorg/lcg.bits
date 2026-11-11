@@ -1,7 +1,7 @@
 package: soupsieve
 description: soupsieve CSS selector library for Beautiful Soup 4
-version: "2.4.1"
-tag: "2.4.1"
+version: "2.9.0"
+tag: "2.9.0"
 requires:
   - Python
 # - build
