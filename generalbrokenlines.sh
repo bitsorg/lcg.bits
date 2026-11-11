@@ -12,6 +12,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  - mille-sources
 license: LGPL-2.1-or-later
 ---
 #!/bin/bash -e
@@ -23,7 +24,11 @@ MODULE_OPTIONS="--bin --lib --cmake"
 function Configure() {
   # The CMake project lives in the cpp/ subdirectory, not the tarball root
   # (mirrors lcgcmake: cmake <SOURCE_DIR>/cpp -DSUPPORT_ROOT=ON).
+  # Mille: a writable copy of mille-sources, so FetchContent downloads nothing.
+  mkdir -p "$BITS_CMAKE_BUILD" && rm -rf "$BITS_CMAKE_BUILD/mille-src"
+  cp -a "${MILLE_SOURCES_ROOT:?}" "$BITS_CMAKE_BUILD/mille-src" && chmod -R u+w "$BITS_CMAKE_BUILD/mille-src"
   cmake -S "$BITS_CMAKE_SRC/cpp" -B "$BITS_CMAKE_BUILD" \
+      -DFETCHCONTENT_SOURCE_DIR_MILLE="$BITS_CMAKE_BUILD/mille-src" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
     ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
       -DCMAKE_BUILD_TYPE=Release \
