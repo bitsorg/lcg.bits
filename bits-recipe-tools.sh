@@ -1,9 +1,12 @@
 package: bits-recipe-tools
-version: "0.0.35"
+version: "0.0.36"
 sbom: tool
 license: GPL-3.0-or-later
 tag: "v%(version)s"
 source: https://github.com/bitsorg/bits-recipe-tools
+consumer_hash_as:
+  version: "0.0.35"
+  tag: "v0.0.35"
 ---
 mkdir -p $INSTALLROOT/bin
 # Install the bits-include launcher into bin/.
