@@ -1,10 +1,11 @@
 package: tiff
 description: LibTIFF library for TIFF image file format
-version: "4.7.1"
+version: "4.7.2"
 source: https://gitlab.com/libtiff/libtiff
 tag: "v%(version)s"
-sources:
-  - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
+# bits upgrade: no tarball of 4.7.2, built from the git tag
+# sources:
+#   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
 # macOS sources libtiff from Homebrew (see HomebrewRecipe / `bits brew`); Linux

@@ -1,6 +1,6 @@
 package: brotli
 description: Brotli lossless data compression algorithm and Python bindings
-version: "1.0.8"
+version: "1.0.10"
 source: https://github.com/google/brotli
 tag: "v%(version)s"
 # bits upgrade: no tarball of 1.0.8, built from the git tag
