@@ -141,6 +141,7 @@ function Configure() {
     else
       _builtin_flags="-Dbuiltin_ftgl=OFF -Dbuiltin_gif=OFF -Dbuiltin_glew=ON -Dbuiltin_lz4=OFF -Dbuiltin_pcre=OFF -Dbuiltin_unuran=OFF -Dbuiltin_xxhash=OFF -Dbuiltin_zstd=OFF -Dcurl=ON"
     fi
+    _builtin_flags+=" -Dbuiltin_openui5=ON -Dbuiltin_civetweb=ON"
   else
     _builtin_flags="-Dbuiltin_ftgl=ON -Dbuiltin_gif=ON -Dbuiltin_glew=ON -Dbuiltin_lz4=ON -Dbuiltin_pcre=ON -Dbuiltin_unuran=ON -Dbuiltin_xxhash=ON -Dbuiltin_zstd=ON"
   fi
@@ -246,7 +247,7 @@ function Configure() {
     -Dsoversion=ON                                                          \
     -Dsqlite=OFF                                                            \
     -Dssl=ON                                                                \
-    -Dtesting="${ROOT_TESTING}"                                             \
+    -Dtesting="${ROOT_TESTING}"                                               \
     -Dtmva-gpu=OFF                                                          \
     -Dtmva-sofie=OFF                                                        \
     -Dunfold=ON                                                             \
@@ -257,7 +258,6 @@ function Configure() {
     -Dxft=ON                                                                \
     -Dxml=ON                                                                \
     -Dzlib=ON                                                               \
-    -Dbuiltin_civetweb=ON                                                   \
     ${VDT_ROOT:+-Dvdt=ON}                                                   \
     ${UNURAN_ROOT:+-DUNURAN_DIR="$UNURAN_ROOT"}                             \
     ${_sofie_flag}                                                          \
