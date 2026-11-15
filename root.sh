@@ -279,9 +279,11 @@ EOF
   echo "Unix.*.Root.DynamicPath: .:\$(ROOT_DYN_PATH):$INSTALLROOT/lib:" >> system.rootrc.0
   mv system.rootrc.0 "$INSTALLROOT/etc/system.rootrc"
 
-  # Make some CMake files used by other projects relocatable
-  sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') || true
-  find "$INSTALLROOT" -name '*.cmake.deleteme' -delete   # drop sed backups (don't ship them)
+  # Make some CMake files used by other projects relocatable; root-config and
+  # RConfigOptions.h record the build tree too (srcdir, LLVM/clang include dirs).
+  sed -i.deleteme -e "s!$BUILDDIR!$INSTALLROOT!g" $(find "$INSTALLROOT" -name '*.cmake') \
+    "$INSTALLROOT/bin/root-config" "$INSTALLROOT/include/RConfigOptions.h" || true
+  find "$INSTALLROOT" -name '*.deleteme' -delete   # drop sed backups (don't ship them)
 
   rm -vf "$INSTALLROOT/LICENSE"
 
