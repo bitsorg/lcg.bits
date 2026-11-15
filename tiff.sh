@@ -8,6 +8,7 @@ tag: "v%(version)s"
 #   - https://lcgpackages.web.cern.ch/tarFiles/sources/%(name)s-%(version)s.tar.gz
 requires:
   - CMake
+  - jpeg
 # macOS sources libtiff from Homebrew (see HomebrewRecipe / `bits brew`); Linux
 # is unaffected — prefer_system is gated to osx.* so the recipe below still
 # builds from source there.
@@ -44,9 +45,12 @@ references:
 ##############################
 MODULE_OPTIONS="--bin --lib --pkgconfig"
 ##############################
+# 4.7.2 finds libjpeg through libjpeg-turbo's CMake config: the prefix path makes it the
+# stack's jpeg (as ROOT's), not the container's, which names files the image lacks.
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
       -DCMAKE_INSTALL_PREFIX="${INSTALLROOT}" \
       -DCMAKE_BUILD_TYPE=Release \
+      ${CMAKE_PREFIX_PATH:+-DCMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}"} \
     -DCMAKE_INSTALL_LIBDIR=lib
 }
