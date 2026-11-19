@@ -29,7 +29,7 @@ bits enter ROOT/latest                      # shell with ROOT loaded; `exit` to 
 
 `--docker` builds in the platform's builder image; on a machine of the same platform `bits enter` then works here. Without it, bits builds with this machine's compilers and system packages, and reuses nothing the CI built. `bits build externals` builds all externals and `bits build generators` the MC generators. `bits q` lists what was built. Check the machine with `bits doctor`. To build elsewhere, `export BITS_WORK_DIR=/path/to/sw`.
 
-Any `package:` name in this repository can be built directly. Package names are the `package:` field of the recipe (`ROOT`, `Geant4`, `GCC-Toolchain`, `pythia8`), not necessarily the file name. The [stacks.bits README](https://github.com/bitsorg/stacks.bits#composing-profiles) explains the `--defaults` axes (compiler, build type, CUDA, release line) and the CVMFS layout.
+Package recipes live in `recipes/`; patches and other repository files stay at the root. Any `package:` name in this repository can be built directly. Package names are the `package:` field of the recipe (`ROOT`, `Geant4`, `GCC-Toolchain`, `pythia8`), not necessarily the file name. The [stacks.bits README](https://github.com/bitsorg/stacks.bits#composing-profiles) explains the `--defaults` axes (compiler, build type, CUDA, release line) and the CVMFS layout.
 
 ## Notes for LCG users
 

@@ -8,7 +8,7 @@ Parses:
     → LCGPackage_Add blocks with build instructions
   - pyexternals CMakeLists.txt → pip-install recipes
 
-Outputs one .sh file per package into repos/lcg.bits/
+Outputs one .sh file per package into the repository's recipes/ directory.
 """
 
 import re
@@ -17,7 +17,7 @@ import glob
 import textwrap
 
 LCGCMAKE = "/sessions/wonderful-pensive-babbage/mnt/bits/repos/lcgcmake"
-OUTPUT_DIR = "/sessions/wonderful-pensive-babbage/mnt/bits/repos/lcg.bits"
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "recipes")
 GEN_URL = "https://lcgpackages.web.cern.ch/tarFiles/sources"
 GEN_URL_MC = "https://lcgpackages.web.cern.ch/tarFiles/sources/MCGeneratorsTarFiles"
 
