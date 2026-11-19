@@ -8,6 +8,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  - pybind11
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

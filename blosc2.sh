@@ -16,6 +16,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  - cython
 license: BSD-3-Clause
 ---
 #!/bin/bash -e

@@ -8,6 +8,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  - cython
 license: ISC
 ---
 #!/bin/bash -e

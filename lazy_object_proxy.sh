@@ -7,6 +7,7 @@ requires:
 build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
+  - setuptools_scm
 license: BSD-2-Clause
 ---
 #!/bin/bash -e
