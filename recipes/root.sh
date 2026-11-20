@@ -28,7 +28,7 @@ requires:
   - tiff
   - "giflib:(?!osx)"
   - "lz4:(?!osx)"
-  - "pcre:(?!osx)"
+  - "pcre2:(?!osx)"
   - "xxHash:(?!osx)"
   - "zstd:(?!osx)"
   - "ftgl:(?!osx)"
