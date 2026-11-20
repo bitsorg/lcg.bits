@@ -274,9 +274,12 @@ function PostInstall() {
 # Plugins in $ROOT_PLUGIN_PATH have priority.
 Unix.*.Root.PluginPath: $(ROOT_PLUGIN_PATH):$(ROOTSYS)/etc/plugins:
 EOF
-  # $ROOT_DYN_PATH (set by the modulefile), then ROOT's own lib dir: ROOT also
-  # finds its libraries without the modulefile.
-  echo "Unix.*.Root.DynamicPath: .:\$(ROOT_DYN_PATH):$INSTALLROOT/lib:" >> system.rootrc.0
+  # ROOT finds its own libraries without the modulefile. On Linux it also searches
+  # LD_LIBRARY_PATH; macOS strips DYLD_LIBRARY_PATH, so there the modulefile's
+  # ROOT_DYN_PATH is searched first.
+  _dyn=""
+  if [[ "$(uname)" == Darwin ]]; then _dyn='$(ROOT_DYN_PATH):'; fi
+  echo "Unix.*.Root.DynamicPath: .:$_dyn$INSTALLROOT/lib:" >> system.rootrc.0
   mv system.rootrc.0 "$INSTALLROOT/etc/system.rootrc"
 
   # Make some CMake files used by other projects relocatable; root-config and
