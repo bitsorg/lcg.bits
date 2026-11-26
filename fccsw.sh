@@ -12,6 +12,11 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  FCCSW: "$FCCSW_ROOT/share/FCCSW"
+prepend_path:
+  PYTHONPATH:
+    - "$FCCSW_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
@@ -19,3 +24,9 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv FCCSW $PKG_ROOT/share/FCCSW
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
+}

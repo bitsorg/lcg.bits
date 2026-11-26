@@ -19,12 +19,18 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  FCCANALYSES: "$FCCANALYSES_ROOT/python"
+prepend_path:
+  PYTHONPATH:
+    - "$FCCANALYSES_ROOT/python"
+    - "$FCCANALYSES_ROOT/share/examples"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   # FindDelphes.cmake reaches the bundled TrackCovariance headers only via
@@ -39,4 +45,11 @@ function Configure() {
       -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_STANDARD=20 \
     -DWITH_DD4HEP=ON
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv FCCANALYSES $PKG_ROOT/python
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+if {[file isdirectory $PKG_ROOT/share/examples]} { prepend-path PYTHONPATH $PKG_ROOT/share/examples }
+EoF
 }

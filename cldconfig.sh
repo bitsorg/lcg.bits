@@ -16,6 +16,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: MIT
+env:
+  CLDCONFIG: "$CLDCONFIG_ROOT"
 ---
 #!/bin/bash -e
 ##############################
@@ -23,3 +25,8 @@ license: MIT
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv CLDCONFIG $PKG_ROOT
+EoF
+}

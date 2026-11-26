@@ -13,6 +13,9 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: GPL-3.0-or-later
+env:
+  DELPHES: "$DELPHES_ROOT"
+  DELPHES_DIR: "$DELPHES_ROOT"
 ---
 #!/bin/bash -e
 ##############################
@@ -33,5 +36,6 @@ function PostInstall() {
   # bits exports DELPHES_ROOT not DELPHES_DIR, so publish it via the modulefile.
   cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" << 'EOF'
 setenv DELPHES_DIR $PKG_ROOT
+setenv DELPHES $PKG_ROOT
 EOF
 }

@@ -30,12 +30,17 @@ patches:
   # set the dd4hep_geant4_units variable (defaults-lhcb), as LCG's LHCb layer does.
   - "DD4hep-geant4-units.patch:(?dd4hep_geant4_units)"
 license: LGPL-3.0-only
+env:
+  DD4hepINSTALL: "$DD4HEP_ROOT"
+  DD4HEP: "$DD4HEP_ROOT/examples"
+  DD4hep_DIR: "$DD4HEP_ROOT"
+  DD4hep_ROOT: "$DD4HEP_ROOT"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
@@ -58,3 +63,16 @@ function Configure() {
 # NOTE: DD4HEP_USE_EDM4HEP is intentionally OFF: v01-35's EDM4hep I/O targets an
 # older podio API and fails to compile against this stack's podio. DDG4 (needed
 # downstream) doesn't use that reader; re-enabling needs aligned DD4hep/podio.
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv DD4hepINSTALL $PKG_ROOT
+setenv DD4HEP $PKG_ROOT/examples
+setenv DD4hep_DIR $PKG_ROOT
+setenv DD4hep_ROOT $PKG_ROOT
+EoF
+  for _sp in "$INSTALLROOT"/lib*/python*/site-packages; do
+    if [ -d "$_sp" ]; then
+      echo "prepend-path PYTHONPATH \$PKG_ROOT/${_sp#$INSTALLROOT/}" >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
+    fi
+  done
+}

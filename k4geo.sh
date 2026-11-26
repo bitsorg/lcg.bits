@@ -12,12 +12,17 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  LCGEO: "$K4GEO_ROOT/share/k4geo"
+  K4GEO: "$K4GEO_ROOT/share/k4geo"
+  lcgeo_DIR: "$K4GEO_ROOT/share/k4geo"
+  k4geo_DIR: "$K4GEO_ROOT/share/k4geo"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   # The DRC EDM4hep output plugin (Geant4Output2EDM4hep_DRC.cpp) uses a podio Frame
@@ -35,4 +40,12 @@ function Configure() {
     -DINSTALL_COMPACT_FILES=ON \
     -DINSTALL_BEAMPIPE_STL_FILES=ON \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv LCGEO $PKG_ROOT/share/k4geo
+setenv K4GEO $PKG_ROOT/share/k4geo
+setenv lcgeo_DIR $PKG_ROOT/share/k4geo
+setenv k4geo_DIR $PKG_ROOT/share/k4geo
+EoF
 }

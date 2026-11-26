@@ -22,7 +22,7 @@ license: Apache-2.0
 . $(bits-include CMakeRecipe)
 . $(bits-include BitsPython)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function SetBuildEnv() {
   _SetBuildEnvBase
@@ -40,4 +40,11 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}" \
     -DCMAKE_UNITY_BUILD=ON
+}
+function PostInstall() {
+  for _sp in "$INSTALLROOT"/lib*/python*/site-packages; do
+    if [ -d "$_sp" ]; then
+      echo "prepend-path PYTHONPATH \$PKG_ROOT/${_sp#$INSTALLROOT/}" >> "$INSTALLROOT/etc/modulefiles/$PKGNAME"
+    fi
+  done
 }

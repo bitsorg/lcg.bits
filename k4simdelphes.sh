@@ -14,12 +14,17 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  K4SIMDELPHES: "$K4SIMDELPHES_ROOT/share/k4SimDelphes"
+prepend_path:
+  PYTHONPATH:
+    - "$K4SIMDELPHES_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   # Delphes' FindDelphes.cmake needs $DELPHES_DIR (the build env exports
@@ -34,4 +39,10 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DPYTHIA8_ROOT_DIR="${PYTHIA8_ROOT}" \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv K4SIMDELPHES $PKG_ROOT/share/k4SimDelphes
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
 }
