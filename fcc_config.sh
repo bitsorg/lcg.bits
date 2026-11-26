@@ -12,6 +12,8 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  FCCCONFIG: "$FCC_CONFIG_ROOT/share/FCC-config"
 ---
 #!/bin/bash -e
 ##############################
@@ -19,3 +21,8 @@ license: Apache-2.0
 ##############################
 MODULE_OPTIONS="--bin --lib"
 ##############################
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv FCCCONFIG $PKG_ROOT/share/FCC-config
+EoF
+}

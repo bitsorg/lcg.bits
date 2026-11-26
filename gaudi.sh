@@ -36,12 +36,15 @@ patches:
   # version so a build pinned back to v40r2 still gets it.
   - "gaudi-GaudiToolbox.cmake.patch:version=v40r2"
   - gaudi-merge_confdb2_parts.patch
+prepend_path:
+  PYTHONPATH:
+    - "$GAUDI_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib --cmake --python"
+MODULE_OPTIONS="--bin --lib --cmake --python --root-inc"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
@@ -58,4 +61,9 @@ function Configure() {
       -DGAUDI_USE_AIDA=OFF \
       -DGAUDI_USE_GPERFTOOLS=FALSE \
       -DBoost_NO_BOOST_CMAKE=FALSE
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
 }

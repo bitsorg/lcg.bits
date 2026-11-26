@@ -11,12 +11,14 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  K4EDM4HEP2LCIOCONV: "$K4EDM4HEP2LCIOCONV_ROOT/share/k4EDM4hep2LcioConv"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
@@ -26,4 +28,9 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv K4EDM4HEP2LCIOCONV $PKG_ROOT/share/k4EDM4hep2LcioConv
+EoF
 }

@@ -13,12 +13,17 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  K4CLUE: "$K4CLUE_ROOT/share/k4Clue"
+prepend_path:
+  PYTHONPATH:
+    - "$K4CLUE_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   # k4Clue's CMakeLists enables CUDA whenever nvcc is on PATH, then compiles the
@@ -36,4 +41,10 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     "${cuda_args[@]}" \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv K4CLUE $PKG_ROOT/share/k4Clue
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
 }

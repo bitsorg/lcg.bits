@@ -20,13 +20,16 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+prepend_path:
+  PYTHONPATH:
+    - "$K4RECTRACKER_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 . $(bits-include BitsPython)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function SetBuildEnv() {
   _SetBuildEnvBase
@@ -48,4 +51,9 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
 }

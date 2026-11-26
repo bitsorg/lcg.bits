@@ -18,12 +18,17 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  K4GEN: "$K4GEN_ROOT/share/k4Gen"
+prepend_path:
+  PYTHONPATH:
+    - "$K4GEN_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
@@ -34,4 +39,10 @@ function Configure() {
     -DBUILD_TESTING=OFF \
     -DPython_ROOT_DIR="${Python_ROOT}" \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv K4GEN $PKG_ROOT/share/k4Gen
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
 }

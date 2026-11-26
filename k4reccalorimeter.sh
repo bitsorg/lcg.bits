@@ -20,12 +20,17 @@ build_requires:
   - bits-recipe-tools
   - "GCC-Toolchain:(?!osx)"
 license: Apache-2.0
+env:
+  K4RECCALORIMETER: "$K4RECCALORIMETER_ROOT/share/k4RecCalorimeter"
+prepend_path:
+  PYTHONPATH:
+    - "$K4RECCALORIMETER_ROOT/python"
 ---
 #!/bin/bash -e
 ##############################
 . $(bits-include CMakeRecipe)
 ##############################
-MODULE_OPTIONS="--bin --lib"
+MODULE_OPTIONS="--bin --lib --root-inc"
 ##############################
 function Configure() {
   cmake -S "$BITS_CMAKE_SRC" -B "$BITS_CMAKE_BUILD" \
@@ -35,4 +40,10 @@ function Configure() {
     -DCMAKE_CXX_STANDARD=${CXXSTD:-20} \
     -DBUILD_TESTING=OFF \
     -DCMAKE_INTERPROCEDURAL_OPTIMIZATION="${ENABLE_IPO}"
+}
+function PostInstall() {
+  cat >> "$INSTALLROOT/etc/modulefiles/$PKGNAME" <<'EoF'
+setenv K4RECCALORIMETER $PKG_ROOT/share/k4RecCalorimeter
+if {[file isdirectory $PKG_ROOT/python]} { prepend-path PYTHONPATH $PKG_ROOT/python }
+EoF
 }
